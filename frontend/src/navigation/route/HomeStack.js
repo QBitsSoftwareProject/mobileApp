@@ -1,15 +1,16 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import HomeScreen from '../../screens/HomeScreen/HomeScreen';
 import WelcomeScreen from '../../screens/TaskWelcomeScreen/WelcomeScreen';
 
 const stack = createNativeStackNavigator();
 
 const HomeStack = () => {
+
   return (
 
-    <stack.Navigator>
+    <stack.Navigator screenOptions={{ headerStyle: { flex:1,backgroundColor: 'transparent' }, headerShown:false }}>
       
-      <stack.Screen name='WelcomeScreen' component={WelcomeScreen}/>
+      <stack.Screen name='WelcomeScreen' component={WelcomeScreen} />
+      
     </stack.Navigator>
 
   )
