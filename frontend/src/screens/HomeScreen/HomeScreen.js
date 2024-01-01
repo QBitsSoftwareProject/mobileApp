@@ -6,6 +6,7 @@ const HomeScreen = () => {
   return (
     <View>
       <Text style ={styles.Headertxt}>HomeScreen</Text>
+     
     </View>
   )
 }
