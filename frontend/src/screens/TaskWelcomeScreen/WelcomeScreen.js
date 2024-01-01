@@ -6,6 +6,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { getTime } from './GetTime';
 
+
 const WelcomeScreen = () => {
 
   const data={
@@ -24,6 +25,7 @@ const WelcomeScreen = () => {
           <Text style={styles.daytxt}>Day {data.currentDay}</Text>
           <Text style={styles.greetingtxt}>Good {data.dayTime} {data.userName}! </Text>
           <Text style={styles.descriptiontxt}>{data.descrptionTxt}</Text>
+      
       
           <View style={{flex:1,flexDirection:'column',alignItems:'center'}}>
             <TouchableOpacity style={styles.button}>
