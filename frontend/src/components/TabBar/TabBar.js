@@ -20,6 +20,7 @@ const TabBar = () => {
           borderTopLeftRadius: 40,
           borderTopRightRadius: 40,
         },
+        headerShown:false
       }}
     >
       <Tab.Screen name='home' component={HomeStack} options={{tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} screenName={'home'}/>}}/>
