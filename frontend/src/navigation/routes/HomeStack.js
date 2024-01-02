@@ -1,6 +1,5 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import WelcomeScreen from '../../screens/TaskWelcomeScreen/WelcomeScreen';
-
+import HomeScreen from '../../screens/HomeScreen/HomeScreen'
 const stack = createNativeStackNavigator();
 
 const HomeStack = () => {
@@ -9,7 +8,7 @@ const HomeStack = () => {
 
     <stack.Navigator screenOptions={{ headerStyle: { flex:1,backgroundColor: 'transparent' }, headerShown:false }}>
       
-      <stack.Screen name='WelcomeScreen' component={WelcomeScreen} />
+      <stack.Screen name='HomeScreen' component={HomeScreen} />
       
     </stack.Navigator>
 

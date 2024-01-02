@@ -1,11 +1,13 @@
 import { NavigationContainer } from '@react-navigation/native';
-import HomeStack from '../route/HomeStack'
+import React from 'react';
+import TabBar from '../../components/TabBar/TabBar';
+
 
 const NavContainer = () => {
 
   return (
     <NavigationContainer>
-        <HomeStack/>
+      <TabBar/>
     </NavigationContainer>
   )
 }
