@@ -7,7 +7,6 @@ import HeaderSub from '../../components/HeaderSub.js/HeaderSub'
 const SettingScreen = () => {
   return (
     <SafeAreaView>
-      <HeaderSub headLine={'Goals'} subHeadLine={"\"Self-care is how you take your power back.- Lalah Delia\""}/>
       <View style={{marginRight:25,marginLeft:25}}>
         <Text >SettingScreen</Text>
       </View>
