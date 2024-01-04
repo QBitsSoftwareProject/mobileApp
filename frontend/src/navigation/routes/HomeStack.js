@@ -1,5 +1,5 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import WelcomeScreen from '../../screens/TaskWelcomeScreen/WelcomeScreen';
+import TaskStack from './TaskStack';
 
 const stack = createNativeStackNavigator();
 
@@ -9,7 +9,7 @@ const HomeStack = () => {
 
     <stack.Navigator screenOptions={{ headerStyle: { flex:1,backgroundColor: 'transparent' }, headerShown:false }}>
       
-      <stack.Screen name='HomeScreen' component={WelcomeScreen} />
+      <stack.Screen name='HomeScreen' component={TaskStack} />
       
     </stack.Navigator>
 

@@ -7,7 +7,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { getTime } from './GetTime';
 
 
-const WelcomeScreen = () => {
+const WelcomeScreen = ({ navigation }) => {
 
   const data={
     currentDay:"01",
@@ -15,10 +15,14 @@ const WelcomeScreen = () => {
     dayTime:getTime(),
     descrptionTxt:"It's a brand new day, and we're here to help you on your path to a stress-free life.Remember, you're not alone on this journey. We believe in your strength and resilience. Take it one day at a time, and trust the process. Each day brings you closer to a more relaxed and happier you. Stay committed, stay positive, and let's conquer stress together! ",
   };
+
+  const presshandler = ()=>{
+    navigation.navigate('McqScreen');
+  }
   
   return (
     <LinearGradient colors={['#4A90BF', '#00453E']} style={styles.container}>
-      <ImageBackground source={require('../../assets/images/squreBg.png')} style={styles.background}>
+      <ImageBackground source={require('../../../assets/images/squreBg.png')} style={styles.background}>
         <SafeAreaView style={styles.content}>
 
           <Text style={styles.headertxt}>Welcome</Text>
@@ -28,14 +32,16 @@ const WelcomeScreen = () => {
       
       
           <View style={{flex:1,flexDirection:'column',alignItems:'center'}}>
-            <TouchableOpacity style={styles.button}>
+
+            <TouchableOpacity style={styles.button} onPress={presshandler}>
 
               <View style={{flex:1,flexDirection:'row',justifyContent:'center'}}>
                 <Text style={styles.buttontxt}>Next</Text>    
               </View>
-              <Image source={require("../../assets/images/right-arrow.png")} style={styles.icon}/>
+              <Image source={require("../../../assets/images/right-arrow.png")} style={styles.icon}/>
 
             </TouchableOpacity>
+
           </View>
 
         </SafeAreaView>
