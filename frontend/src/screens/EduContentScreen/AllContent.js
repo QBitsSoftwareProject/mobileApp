@@ -1,5 +1,30 @@
-import { StyleSheet } from "react-native";
+import { View, Text,StyleSheet } from "react-native";
+import React, { useEffect } from "react";
+import { SafeAreaView } from "react-native-safe-area-context";
+// import styles from "./style";
 import { Font } from "expo-font";
+
+function AllContent() {
+  useEffect(() => {
+    async function loadFont() {
+      await Font.loadAsync({
+        "Poppins Regular": require("../EduContentScreen/Poppins Regular.ttf"),
+        // Add other font variants if needed (e.g., Poppins-Bold, Poppins-Italic, etc.)
+      });
+    }
+
+    loadFont();
+  }, []);
+
+  return (
+    <SafeAreaView>
+      <View>
+        <Text style={styles.mainHeading}>Featured Resurces</Text>
+        <View></View>
+      </View>
+    </SafeAreaView>
+  );
+}
 
 const styles = StyleSheet.create({
   Container: {
@@ -43,4 +68,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default styles;
+export default AllContent;
