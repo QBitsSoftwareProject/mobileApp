@@ -10,9 +10,9 @@ import VideoContent from "./VideoContent";
 import ArticleContent from "./ArticleContent";
 // sections
 
-// search bar
-import SearchBar from "react-native-dynamic-search-bar";
-// search bar
+// components
+import SearchBarComponent from "../../components/SearchBar/SearchBar";
+// components
 
 const EduContent = () => {
   const [currentView, setCurrentView] = useState("AllContent"); // Initial view
@@ -25,12 +25,8 @@ const EduContent = () => {
     <SafeAreaView>
       <View style={styles.Container}>
         <View>
-          {/* main section */}
-          <SearchBar
-            placeholder="Search..."
-            onPress={() => alert("onPress")}
-            onChangeText={(text) => console.log(text)}
-          />
+          {/* categories */}
+          <SearchBarComponent />
           <View style={styles.NavContainer}>
             <View style={styles.NavBar}>
               <Pressable
@@ -63,7 +59,7 @@ const EduContent = () => {
               </Pressable>
             </View>
           </View>
-          {/* main section */}
+          {/* categories */}
         </View>
         {/* changing view */}
         <View style={styles.Content}>{renderContent(currentView)}</View>

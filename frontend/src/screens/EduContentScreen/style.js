@@ -39,7 +39,6 @@ const styles = StyleSheet.create({
     color: "black",
     marginTop: -30,
     fontSize: 20,
-    fontFamily: "Poppins Regular",
   },
 });
 
