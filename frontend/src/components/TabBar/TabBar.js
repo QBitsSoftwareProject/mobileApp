@@ -41,6 +41,7 @@ const TabBar = () => {
               overflow:isKeyboardVisible ? 'hidden':'visible',
               borderTopLeftRadius: 40,
               borderTopRightRadius: 40,
+              marginTop:32,
             },
             headerShown:false
           }}

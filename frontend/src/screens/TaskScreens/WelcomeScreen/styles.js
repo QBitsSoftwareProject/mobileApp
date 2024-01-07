@@ -12,6 +12,11 @@ const styles = StyleSheet.create({
     paddingLeft:25,
 
   },
+  backbtn:{
+    position:'absolute',
+    marginTop:50,
+    marginLeft:25,
+  },
   headertxt: {
     color: 'white',
     fontSize: 32,

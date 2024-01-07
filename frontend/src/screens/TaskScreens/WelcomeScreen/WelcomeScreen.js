@@ -13,17 +13,25 @@ const WelcomeScreen = ({ navigation }) => {
     currentDay:"01",
     userName:"kovida",
     dayTime:getTime(),
+    isAnswered:false,
     descrptionTxt:"It's a brand new day, and we're here to help you on your path to a stress-free life.Remember, you're not alone on this journey. We believe in your strength and resilience. Take it one day at a time, and trust the process. Each day brings you closer to a more relaxed and happier you. Stay committed, stay positive, and let's conquer stress together! ",
   };
 
   const presshandler = ()=>{
-    navigation.navigate('McqScreen');
+    if(data.isAnswered){
+      navigation.navigate('TaskListScreen');
+    }else
+      navigation.navigate('McqScreen');
   }
   
   return (
     <LinearGradient colors={['#4A90BF', '#00453E']} style={styles.container}>
       <ImageBackground source={require('../../../assets/images/squreBg.png')} style={styles.background}>
         <SafeAreaView style={styles.content}>
+
+          <TouchableOpacity style={styles.backbtn}>
+            <Image source={require('../../../assets/images/BackWhite.png')}  />
+          </TouchableOpacity>
 
           <Text style={styles.headertxt}>Welcome</Text>
           <Text style={styles.daytxt}>Day {data.currentDay}</Text>

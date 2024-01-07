@@ -6,6 +6,39 @@ import AnswerBtns from '../../../../components/AnswerBtns/AnswerBtns'
 import ProgressBar from '../../../../components/ProgressBar/ProgressBar'
 
 
+
+const questions = [
+    { id:1, question:"How long you realized you are stressed ?", type:'mcq'},
+    { id:2, question:"question 2", type:'mcq'},
+    { id:3, question:"question 3", type:'input'},
+    { id:4, question:"question 4", type:'mcq'},
+    { id:5, question:"Who is the most important person to you that you'd like to spend time with right now?", type:'input'},
+    
+
+] 
+
+const buttons = {
+    1: [
+        { id: 1, text: 'About a week' },
+        { id: 2, text: 'About a month' },
+        { id: 3, text: 'More than month' },
+        { id: 4, text: 'Not sure' },
+    ],
+    2: [
+        { id: 1, text: 'Button 5' },
+        { id: 2, text: 'Button 6' },
+        { id: 3, text: 'Button 7' },
+        { id: 4, text: 'Button 8' },
+    ],
+    4: [
+        { id: 1, text: 'Button 9' },
+        { id: 2, text: 'Button 10' },
+        { id: 3, text: 'Button 11' },
+        { id: 4, text: 'Button 12' },
+    ],
+};
+
+
 const McqScreen = ({navigation}) => {
     const [selectedButtonIndex, setSelectedButtonIndex] = useState(null);
     const [qNumber,setQNumber] = useState(1)
@@ -20,6 +53,8 @@ const McqScreen = ({navigation}) => {
                 setQNumber((prevQNumber) => prevQNumber + 1);
                 setSelectedButtonIndex(null);
             }
+        }else{
+            navigation.navigate('TaskListScreen')
         }
     };
 
@@ -95,33 +130,3 @@ const McqScreen = ({navigation}) => {
 
 export default McqScreen
 
-const questions = [
-    { id:1, question:"How long you realized you are stressed ?", type:'mcq'},
-    { id:2, question:"question 2", type:'mcq'},
-    { id:3, question:"question 3", type:'input'},
-    { id:4, question:"question 4", type:'mcq'},
-    { id:5, question:"Who is the most important person to you that you'd like to spend time with right now?", type:'input'},
-    
-
-] 
-
-const buttons = {
-    1: [
-        { id: 1, text: 'About a week' },
-        { id: 2, text: 'About a month' },
-        { id: 3, text: 'More than month' },
-        { id: 4, text: 'Not sure' },
-    ],
-    2: [
-        { id: 1, text: 'Button 5' },
-        { id: 2, text: 'Button 6' },
-        { id: 3, text: 'Button 7' },
-        { id: 4, text: 'Button 8' },
-    ],
-    4: [
-        { id: 1, text: 'Button 9' },
-        { id: 2, text: 'Button 10' },
-        { id: 3, text: 'Button 11' },
-        { id: 4, text: 'Button 12' },
-    ],
-};
