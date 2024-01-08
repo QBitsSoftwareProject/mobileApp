@@ -32,7 +32,6 @@ const styles = StyleSheet.create({
   Content: {
     backgroundColor: "#4A90BF",
     width: "100%",
-    height: 300,
     marginTop: 120,
   },
   mainHeading: {

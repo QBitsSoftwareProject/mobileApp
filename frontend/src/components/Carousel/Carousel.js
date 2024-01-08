@@ -14,6 +14,8 @@ const Carousel = () => {
       <FlatList
         data={carouselData}
         renderItem={({ item }) => <CarouselItem item={item} />}
+        horizontal
+        showsHorizontalScrollIndicator
       />
     </View>
   );

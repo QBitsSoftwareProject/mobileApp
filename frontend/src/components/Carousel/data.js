@@ -17,7 +17,7 @@ export default [
     title: "Follow along yoga and exercises",
     description:
       "Watch proffesionals on how to do yoga and preform relaxing exercises",
-    image: require("../../../src/assets/images/carousel/meditation.jpg"),
+    image: require("../../../src/assets/images/carousel/music.jpg"),
   },
   //   {
   //     id: "4",
