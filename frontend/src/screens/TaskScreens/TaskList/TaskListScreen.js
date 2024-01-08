@@ -11,7 +11,7 @@ const images ={
 }
 
 const taskList = [
-  {id:1, headText:'Take today meditation', subText:'Heal yourself', completeness:'complete', icon:images.meditation},
+  {id:1, headText:'Take today meditation', subText:'Heal yourself', completeness:'incomplete', icon:images.meditation},
   {id:2, headText:'Time to write your thoughts', subText:'collect memories', completeness:'incomplete', icon:images.journal},
   {id:3, headText:'Renew your connections', subText:'say hi', completeness:'complete', icon:images.friends},
   {id:4, headText:'See the story', subText:'Way to understand', completeness:'incomplete', icon:images.story},
@@ -49,7 +49,7 @@ const TaskListScreen = () => {
         renderItem={({ item, index }) => (
 
           <View style={{marginHorizontal:25, marginTop:15, marginBottom:index===taskList.length-1 ? 32 : 0 }} >
-            <TaskCard headText={item.headText} subText={item.subText} completeness={item.completeness} icon={item.icon}/>
+            <TaskCard headText={item.headText} subText={item.subText} completeness={item.completeness} icon={item.icon} taskId={item.id}/>
           </View>
           
         )} 
