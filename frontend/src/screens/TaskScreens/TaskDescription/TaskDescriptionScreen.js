@@ -1,4 +1,4 @@
-import { View, Text, TouchableOpacity, Image, FlatList, ScrollView } from 'react-native'
+import { View, Text, TouchableOpacity, Image, FlatList, ScrollView, ImageBackground } from 'react-native'
 import React, { useState } from 'react'
 import { useNavigation, useRoute } from '@react-navigation/native'
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -85,7 +85,6 @@ const TaskDescriptionScreen = () => {
     <View style={styles.container}>
       <SafeAreaView>
       
-
         <TouchableOpacity style={styles.backBtn} onPress={handleBackPress}>
           <Image source={require('../../../assets/images/backBlack.png')}  />
         </TouchableOpacity>
@@ -97,7 +96,8 @@ const TaskDescriptionScreen = () => {
 
         {/* task step rendering ..................................................................................... */}
 
-        <View style={{height:500}}>
+        <View style={{height:500, alignItems:'center'}}>
+       
         <ScrollView>
           
             <View onLayout={onBoxLayout} >
@@ -146,6 +146,7 @@ const TaskDescriptionScreen = () => {
 
         </View>
       </SafeAreaView>
+      
     </View>
   )
 }
