@@ -5,6 +5,7 @@ import styles from "./style";
 
 // components
 import Carousel from "../../components/Carousel/Carousel";
+import Categories from "../../components/Categories/Categories";
 // components
 
 function AllContent() {
@@ -14,6 +15,10 @@ function AllContent() {
         <Text style={styles.mainHeading}>Featured Resurces</Text>
         <View>
           <Carousel />
+        </View>
+        <Text style={styles.mainHeading2}>Read articles about</Text>
+        <View>
+          <Categories/>
         </View>
       </View>
     </SafeAreaView>

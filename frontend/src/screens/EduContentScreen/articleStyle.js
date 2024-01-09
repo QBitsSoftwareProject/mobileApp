@@ -18,7 +18,6 @@ const styles = StyleSheet.create({
     width: "90%",
     alignItems: "center",
     justifyContent: "space-evenly",
-    borderRadius: 100,
     height: 40,
   },
   NavBarElements: {

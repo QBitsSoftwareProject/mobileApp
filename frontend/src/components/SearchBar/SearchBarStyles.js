@@ -7,7 +7,8 @@ const styles=StyleSheet.create({
           shadowColor:"#282828",
           cancelIconColor:"#fdfdfd",
           backgroundColor:"white",
-          width:'95%'
+          width:'95%',
+          marginTop:10,
     }
 });
 

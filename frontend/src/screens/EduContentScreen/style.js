@@ -3,23 +3,26 @@ import { Font } from "expo-font";
 
 const styles = StyleSheet.create({
   Container: {
-    padding: 10,
     backgroundColor: "#F2F3F5",
     alignItems: "center",
     height: "100%",
   },
   NavContainer: {
     position: "absolute",
+    justifyContent:"center",
     alignItems: "center",
     marginTop: 80,
+    marginLeft:"8%",
   },
   NavBar: {
+    marginLeft: "auto",
+    marginRight: "auto",
+    borderRadius: 100,
     flexDirection: "row",
     backgroundColor: "#4A90BF",
     width: "90%",
     alignItems: "center",
     justifyContent: "space-evenly",
-    borderRadius: 100,
     height: 40,
   },
   NavBarElements: {
@@ -30,13 +33,19 @@ const styles = StyleSheet.create({
     color: "white",
   },
   Content: {
-    backgroundColor: "#4A90BF",
     width: "100%",
     marginTop: 120,
   },
   mainHeading: {
     color: "black",
     marginTop: -30,
+    marginLeft: 10,
+    fontSize: 20,
+  },
+  mainHeading2: {
+    color: "black",
+    marginTop: 20,
+    marginLeft: 10,
     fontSize: 20,
   },
 });

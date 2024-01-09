@@ -19,12 +19,12 @@ export default [
       "Watch proffesionals on how to do yoga and preform relaxing exercises",
     image: require("../../../src/assets/images/carousel/music.jpg"),
   },
-  //   {
-  //     id: "4",
-  //     title: "Daily meditation playlist",
-  //     description: "Daily music to listen while meditating or relaxing",
-  //     image: require("../../../src/assets/images/carousel/meditation.jpg"),
-  //   },
+    {
+      id: "4",
+      title: "Daily meditation playlist",
+      description: "Daily music to listen while meditating or relaxing",
+      image: require("../../../src/assets/images/carousel/meditation.jpg"),
+    },
   //   {
   //     id: "5",
   //     title: "Daily meditation playlist",
