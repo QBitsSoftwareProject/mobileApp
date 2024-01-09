@@ -6,6 +6,7 @@ export default styles = StyleSheet.create({
         minHeight:112,
         padding:15,
         borderRadius:20,
+        elevation:1
     },
     contain:{
         flex:1,

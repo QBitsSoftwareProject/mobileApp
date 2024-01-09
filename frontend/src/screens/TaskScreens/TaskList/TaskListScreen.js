@@ -41,9 +41,11 @@ const TaskListScreen = () => {
 
   return (
     <View style={{flex:1, paddingBottom:85,}}>
+      
       <HeaderSub headLine={'Daily Activities'} subHeadLine={remaining + ' more to complete'} back={'WelcomeScreen'}/>
 
       <View style={{flex:1}}>
+
       <FlatList
         data={sortedTaskList}
         renderItem={({ item, index }) => (

@@ -108,7 +108,7 @@ const TaskDescriptionScreen = () => {
 
               {getTask.map((item,index)=>(
 
-                    <View > 
+                    <View key={index}> 
                       <View style={[styles.stepContainer,]}>
                         <View style={{flexDirection:'column',justifyContent:''}}>
 
