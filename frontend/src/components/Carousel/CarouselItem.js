@@ -8,7 +8,7 @@ import {
 } from "react-native";
 import styles from "./CarouselStyles";
 
-function CarouselItem({ item }) {
+ function CarouselItem({ item }) {
   const width = Dimensions.get("window").width;
   return (
     <View style={[styles.carouselContainer, { width }]}>

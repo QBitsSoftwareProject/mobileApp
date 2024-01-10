@@ -3,7 +3,7 @@ import React from "react";
 import styles from "./CarouselStyles";
 
 // enter data here
-import carouselData from "./data";
+import carouselData from "./CarouselData";
 // enter data here
 
 import CarouselItem from "./CarouselItem";
