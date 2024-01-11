@@ -96,9 +96,9 @@ const TaskDescriptionScreen = () => {
 
         {/* task step rendering ..................................................................................... */}
 
-        <View style={{height:500, alignItems:'center'}}>
+        <View style={{height:500, alignItems:'center'}} >
        
-        <ScrollView>
+        <ScrollView >
           
             <View onLayout={onBoxLayout} >
 
@@ -128,20 +128,20 @@ const TaskDescriptionScreen = () => {
 
             </View>
 
-        </ScrollView>
+        
 
 
-      {/* btn ......................................................................................................................... */}
+        {/* btn ......................................................................................................................... */}
 
-      {completeness==='incomplete' && (
-        <View style={{flexDirection:'row',justifyContent:'center', marginVertical:32}}>
+        {completeness==='incomplete' && (
+          <View style={{flexDirection:'row',justifyContent:'center', marginVertical:32}}>
 
-          <TouchableOpacity style={styles.btn}>
-            <Text style={styles.btnText}>Start</Text>
-          </TouchableOpacity>
+            <TouchableOpacity style={styles.btn}>
+              <Text style={styles.btnText}>Start</Text>
+            </TouchableOpacity>
 
-        </View>
-      )}
+          </View>
+        )}</ScrollView>
           
 
         </View>
