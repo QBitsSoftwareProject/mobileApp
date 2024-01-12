@@ -50,7 +50,8 @@ const styles = StyleSheet.create({
   wrapper: {
     height:250,
     marginTop:25,
-   
+    justifyContent:'center',
+    
   },
   slide: {
     slide:200,
@@ -59,6 +60,7 @@ const styles = StyleSheet.create({
     marginRight:15,
     overflow:'hidden',
     borderRadius:20,
+   
   },
   image: {
     height: 200, // Adjust height according to your preference

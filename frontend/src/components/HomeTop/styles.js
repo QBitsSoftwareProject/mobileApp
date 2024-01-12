@@ -2,7 +2,7 @@ import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
     contains:{
-        height:240,
+        height:250,
         borderBottomRightRadius:80,
         zIndex:100
     },
@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
     backImg:{
         paddingRight:25,
         paddingLeft:25,
-        height:240,
+        height:250,
        
     },
     profileFrame:{
