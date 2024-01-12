@@ -1,10 +1,11 @@
 import { View, Text } from 'react-native'
 import React from 'react'
+import styles from './articleStyle'
 
 const ArticleContent = () => {
   return (
     <View>
-      <Text>ArticleContent</Text>
+        <Text class>Read articles from</Text>
     </View>
   )
 }

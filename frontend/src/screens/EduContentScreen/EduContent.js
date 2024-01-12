@@ -25,7 +25,7 @@ const EduContent = () => {
     <SafeAreaView>
       <View style={styles.Container}>
         <ScrollView>
-          <View style={{ zIndex: 100}}>
+          <View style={{ zIndex: 100 }}>
             {/* categories */}
             <SearchBarComponent />
             <View style={styles.NavContainer}>
@@ -35,28 +35,60 @@ const EduContent = () => {
                   style={styles.NavBarElements}
                   android_ripple={{ borderless: true, radius: 50 }}
                 >
-                  <Text style={styles.NavBarElements_current}>All</Text>
+                  <Text
+                    style={
+                      currentView == "AllContent"
+                        ? styles.NavBarElements_current
+                        : null
+                    }
+                  >
+                    All
+                  </Text>
                 </Pressable>
                 <Pressable
                   onPress={() => changeView("ArticleContent")}
                   style={styles.NavBarElements}
                   android_ripple={{ borderless: true, radius: 50 }}
                 >
-                  <Text>Articles</Text>
+                  <Text
+                    style={
+                      currentView == "ArticleContent"
+                        ? styles.NavBarElements_current
+                        : null
+                    }
+                  >
+                    Articles
+                  </Text>
                 </Pressable>
                 <Pressable
                   onPress={() => changeView("VideoContent")}
                   style={styles.NavBarElements}
                   android_ripple={{ borderless: true, radius: 50 }}
                 >
-                  <Text>Videos</Text>
+                  <Text
+                    style={
+                      currentView == "VideoContent"
+                        ? styles.NavBarElements_current
+                        : null
+                    }
+                  >
+                    Videos
+                  </Text>
                 </Pressable>
                 <Pressable
                   onPress={() => changeView("AudioContent")}
                   style={styles.NavBarElements}
                   android_ripple={{ borderless: true, radius: 50 }}
                 >
-                  <Text>Audios</Text>
+                  <Text
+                    style={
+                      currentView == "AudioContent"
+                        ? styles.NavBarElements_current
+                        : null
+                    }
+                  >
+                    Audios
+                  </Text>
                 </Pressable>
               </View>
             </View>
