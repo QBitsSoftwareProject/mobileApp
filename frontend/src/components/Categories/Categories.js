@@ -14,7 +14,7 @@ export default function Categories() {
     <View style={categoryStyles.Container}>
       <FlatList
         data={CategoryTypes}
-        style={{ display: "flex",flexDirection:"column",borderColor:"black",borderWidth:2 ,width:scr_width}}
+        style={{ display: "flex",flexDirection:"column",width:scr_width}}
         horizontal
         renderItem={({ item }) => {
           return <CategoryItem item={item} />;

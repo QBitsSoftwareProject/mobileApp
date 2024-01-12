@@ -2,9 +2,8 @@ import { PixelRatio, StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
   Container: {
-    marginTop: 10,
-    height: 1000,
-    backgroundColor: "orange",
+    marginTop: 40,
+    height:"auto",
     display: "flex",
     flex: 1,
     alignContent: "center",
@@ -12,9 +11,8 @@ const styles = StyleSheet.create({
     justifyContent: "space-around",
   },
   CategoryItem: {
-    width: 70,
-    height: 70,
-    marginBottom: 10,
+    width: 67,
+    height: 67,
     borderRadius: "1000" / PixelRatio.get(),
     backgroundColor: "white",
     alignItems: "center",

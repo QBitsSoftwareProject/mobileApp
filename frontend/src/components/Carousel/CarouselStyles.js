@@ -3,7 +3,7 @@ import { StyleSheet } from "react-native";
 const styles = StyleSheet.create({
   container: {
     marginTop: 15,
-    height: 315,
+    height: 370,
     width: "100%",
     borderRadius: 20,
   },
@@ -11,9 +11,10 @@ const styles = StyleSheet.create({
     display:"flex",
     justifyContent: "space-evenly",
     borderRadius: 20,
+    marginHorizontal:10,
   },
   imgContainer: {
-    height: 300,
+    height: 270,
   },
   image: {
     flex:1,
