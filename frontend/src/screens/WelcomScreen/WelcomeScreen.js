@@ -3,6 +3,7 @@ import React from 'react'
 import { LinearGradient } from 'expo-linear-gradient'
 import styles from './styles'
 import Swiper from 'react-native-swiper'
+import { useNavigation } from '@react-navigation/native'
 
 const quotes = [
     "Remember, your mental health matters take a moment to breathe, reflect, and prioritize your inner peace.",
@@ -13,6 +14,18 @@ const quotes = [
 const WelcomeScreen = () => {
     const frameWidth = Dimensions.get("window").width * 0.8
     const frameHeight = Dimensions.get("window").height * 0.8
+
+    const navigation = useNavigation();
+
+    const handleLogin = ()=>{
+        navigation.navigate("LoginScreen");
+    }
+    const handleGuest = ()=>{
+        navigation.navigate('TabBar')
+    }
+    const handleSingUp = ()=>{
+        navigation.navigate('SelectionScreen')
+    }
 
   return (
     <LinearGradient colors={['#49B1F7', '#00453E']} style={{flex:1}}>
@@ -37,16 +50,16 @@ const WelcomeScreen = () => {
             </View>
 
             <View style={styles.btnBox}>
-                <TouchableOpacity style={[styles.btn, {backgroundColor:'#45B4FF'}]}>
+                <TouchableOpacity style={[styles.btn, {backgroundColor:'#45B4FF'}]} onPress={handleSingUp}>
                     <Text style={styles.btnText}>Sign Up</Text>
                 </TouchableOpacity>
 
-                <TouchableOpacity style={[styles.btn, {backgroundColor:'#4ABFB4'}]}>
+                <TouchableOpacity style={[styles.btn, {backgroundColor:'#4ABFB4'}]} onPress={handleLogin}>
                     <Text style={styles.btnText}>Login</Text>
                 </TouchableOpacity>
             </View>
             
-            <TouchableOpacity>
+            <TouchableOpacity onPress={handleGuest}>
                 <Text style={styles.guestText}>Use as a guest</Text>
             </TouchableOpacity>
 
