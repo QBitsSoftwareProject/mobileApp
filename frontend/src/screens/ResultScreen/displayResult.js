@@ -2,6 +2,7 @@ import React , { useState, useEffect } from "react";
 import {getMark} from './getStressLevel';
 import styles from './resultStyle';
 import HeaderSub from "../../components/HeaderSub.js/HeaderSub";
+import TabBar from "../../components/TabBar/TabBar";
 
 import {
   View,
@@ -21,9 +22,9 @@ const DisplayResultScreen = ({ route }) => {
 
 
         useEffect(() => {
-            const {allmarks} = route.params;
-            const StressLevelMark = getMark(allmarks);
-            setStressLevel(StressLevelMark);
+            const {stresslevel} = route.params;
+            console.log('dd',stresslevel);
+            setStressLevel(stresslevel);
             
         },[route.params]);
 
@@ -101,6 +102,10 @@ const DisplayResultScreen = ({ route }) => {
 
 
     </View>
+
+    <View style={{ position: 'absolute', top:900, left: 0, right: 0 }}>
+        <TabBar/>
+      </View>
 
       
     </View>

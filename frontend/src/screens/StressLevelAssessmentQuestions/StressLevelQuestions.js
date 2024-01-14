@@ -4,7 +4,9 @@ import RadioButton from './optionfetch';
 import { useNavigation } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import DisplayResultScreen from '../ResultScreen/displayResult';
-// import NavContainer from '../../navigation/navigationContainer/NavContainer';
+import TabBar from "../../components/TabBar/TabBar";
+import { getMark } from "../ResultScreen/getStressLevel";
+import { submitToDatabase } from "./sendMarkToDB.js";
 
 import {
   View,
@@ -30,6 +32,7 @@ const Question = ({navigation}) => {
   const [isLoadingImage, setIsLoadingImage] = useState(false);
   const [mark,setMark] = useState('');
   const [submit, setSubmit] = useState(false);
+  const [stressLevel , setStressLevel] = useState('');
   
   useEffect(() => {
     const fetchQuestionIds = async () => {
@@ -107,6 +110,9 @@ const Question = ({navigation}) => {
       
       console.log(currentQuestionIndex);
 
+      
+
+
       setTimeout(() => {
         setIsLoadingImage(false);
       }, 500); // Delay for one second (500 milliseconds)
@@ -134,7 +140,7 @@ const Question = ({navigation}) => {
 
   const Stack = createStackNavigator();
 
-
+  const id1 = '214224J';
 
   const handleSubmitButton = () => {
     if (selectedOption) {
@@ -148,9 +154,16 @@ const Question = ({navigation}) => {
       
       
       console.log(currentQuestionIndex);
+
+      const totMark = getMark(allMarks) + selectedOptionMark;
+      
+       console.log('tot mark is',totMark);
+       setStressLevel(totMark);
+
+       submitToDatabase(totMark, id1);
       
       navigation.navigate('DisplayResultScreen', {
-        allmarks: [...allMarks, selectedOptionMark],
+        stresslevel: [totMark],
       });
 
        
@@ -163,6 +176,7 @@ const Question = ({navigation}) => {
       setCurrentQuestionIndex((prevIndex) => prevIndex - 1);
       setIsLoadingImage(true);
       allMarks.pop();
+      console.log
 
       setTimeout(() => {
         setIsLoadingImage(false);
@@ -216,10 +230,11 @@ const Question = ({navigation}) => {
       
       }
 
-       
-        {/* <View style={{ flex: 1 }}>
-        <NavContainer />
-      </View>     */}
+      <View style={{ position: 'absolute', top:900, left: 0, right: 0 }}>
+        <TabBar/>
+      </View>
+
+  
         
       
     </SafeAreaView>
