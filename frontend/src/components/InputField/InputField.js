@@ -30,6 +30,7 @@ const InputField = (props) => {
                     borderWidth:1,
                     borderColor:'rgba(151,157,172,0.6)'
                 }}
+                onChangeText={props.onChangeText}
                 />
         </View>
     </View>
