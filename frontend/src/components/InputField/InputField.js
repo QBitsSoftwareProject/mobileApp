@@ -18,19 +18,22 @@ const InputField = (props) => {
         </View>
         
 
-        <View style={{flexDirection:'row'}}>
+        <View style={{flex:1,}}>
             <TextInput 
                 placeholder={props.placeHolder}
                 style={{
                     backgroundColor:'white',
-                    height:50,
+                    height:props.type==='textField' ? 150:50,
                     width:'100%',
                     padding:10,
                     borderRadius:10,
                     borderWidth:1,
-                    borderColor:'rgba(151,157,172,0.6)'
+                    borderColor:'rgba(151,157,172,0.6)',
+                    textAlignVertical:props.type==='textField' ? 'top': 'center'
                 }}
                 onChangeText={props.onChangeText}
+                multiline={props.type==='textField' ? true:false}
+               
                 />
         </View>
     </View>

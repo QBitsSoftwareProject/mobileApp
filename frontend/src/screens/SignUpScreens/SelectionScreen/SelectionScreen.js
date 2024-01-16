@@ -12,6 +12,9 @@ const SelectionScreen = () => {
     const handleUser = ()=>{
         navigation.navigate('UserRegScreen')
     }
+    const handleDoctor = ()=>{
+        navigation.navigate('DoctorRegScreen')
+    }
 
   return (
     <View style={styles.conatiner}>
@@ -26,7 +29,7 @@ const SelectionScreen = () => {
                 <Text style={styles.btnText}>Regular Person</Text>
             </TouchableOpacity>
 
-            <TouchableOpacity style={styles.selectBtn}>
+            <TouchableOpacity style={styles.selectBtn} onPress={handleDoctor}>
                 <Text style={styles.btnText}>Doctor</Text>
             </TouchableOpacity>
         </View>
