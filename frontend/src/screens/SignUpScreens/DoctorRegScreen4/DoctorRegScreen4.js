@@ -3,6 +3,8 @@ import React, { useEffect, useState } from 'react'
 import styles from './styles'
 import { useNavigation } from '@react-navigation/native'
 import InputField from '../../../components/InputField/InputField'
+import { CheckBox } from 'react-native-elements'
+import FilePicker from '../../../components/GetImages/FilePicker'
 
 const DoctorRegScreen4 = () => {
     const navigation = useNavigation()
@@ -10,7 +12,10 @@ const DoctorRegScreen4 = () => {
 
     const [screenPadding, setScreenPadding] = useState(0)
     const [bio, setBio] = useState('')
-    const [isEmpty, setIsEmpty] = useState(false)
+    const [unCheckedColor, setUnCheckedColor] = useState('#5C677D');
+
+    const [isEmpty, setIsEmpty] = useState(false);
+    const [isChecked, setIsChecked] = useState(false);
 
     useEffect(() => {
         const keyboardDidShowListener = Keyboard.addListener(
@@ -47,6 +52,10 @@ const DoctorRegScreen4 = () => {
           bio.trim() === ''
         ){
           setIsEmpty(true)
+
+        }else if(!isChecked){
+          setUnCheckedColor('#E82519')
+          setIsEmpty(false)
         }
         else{
           setIsEmpty(false)
@@ -66,11 +75,34 @@ const DoctorRegScreen4 = () => {
               <View style={{alignItems:'left'}}>
                 <Text style={styles.headerText}>Please fill the following form with correct details.</Text>
                 <Text style={styles.subText}>Additional Details</Text>
+                
+                <FilePicker/>
 
-
-                  <InputField placeHolder={'Describe your qualification.(max words 300)'} label={'Educational Qualifications :'} onChangeText={setBio} type={'textField'}/>
+                <InputField placeHolder={'Describe your expertise and approach. \n(max words 300)'} label={'Brief Bio :'} onChangeText={setBio} type={'textField'}/>
                   
               </View>
+
+              <View style={{marginBottom:32}}>
+              <Text style={styles.privacyText}>Privacy and Policies</Text>
+
+              <TouchableOpacity>
+                <Text style={styles.privacyLink}>Click here to view our Privacy Policy for more information.</Text>
+              </TouchableOpacity>
+            </View>
+
+            <View>
+              <CheckBox  
+                checked={isChecked} 
+                onPress={() => setIsChecked(!isChecked)} 
+                uncheckedColor={unCheckedColor}
+                checkedColor='#4ABFB4'
+                size={25}
+                containerStyle={{padding:0, margin:0,backgroundColor:'transparent', }}
+                title={'I acknowledge that I have read, understood, and agree to abide by the this app Privacy Policy and Terms of Service.'}
+                textStyle={styles.agreemetnText}
+               
+              />
+            </View>
   
               {isEmpty && (
                  <View style={{alignItems:'center',marginTop:15}}>
