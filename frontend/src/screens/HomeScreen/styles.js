@@ -3,7 +3,7 @@ import { StyleSheet } from 'react-native'
 
 const styles = StyleSheet.create({
   Headertxt : {
-    color:'red',
+    color:'black',
     fontSize: 32,
     fontWeight:"600",
     textAlign:'center',
