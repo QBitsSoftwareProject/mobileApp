@@ -3,6 +3,10 @@ import {getMark} from './getStressLevel';
 import styles from './resultStyle';
 import HeaderSub from "../../components/HeaderSub.js/HeaderSub";
 import TabBar from "../../components/TabBar/TabBar";
+import { createStackNavigator } from '@react-navigation/stack';
+import { useNavigation } from '@react-navigation/native';
+import stresslevelhistory from '../StressLevelHistory/stresslevelhistory';
+
 
 import {
   View,
@@ -16,15 +20,19 @@ import {
 } from "react-native";
 
 
-const DisplayResultScreen = ({ route }) => {
+const DisplayResultScreen = ({ route ,navigation}) => {
 
     const [StressLevel, setStressLevel] = useState('');
+    const [userID, setUserId] = useState('');
 
 
         useEffect(() => {
             const {stresslevel} = route.params;
+            const {userId} = route.params;
             console.log('dd',stresslevel);
+            console.log('user id',userId);
             setStressLevel(stresslevel);
+            setUserId(userId);
             
         },[route.params]);
 
@@ -42,6 +50,15 @@ const DisplayResultScreen = ({ route }) => {
         }
         else{
           level = 'high';
+        }
+
+        const Stack = createStackNavigator();
+
+        const handleHistorybutton = () => {
+
+          navigation.navigate('StressLevelHistoryScreen', {
+             user_id: [userID],
+          });
         }
 
 
@@ -92,7 +109,7 @@ const DisplayResultScreen = ({ route }) => {
 
     <View style={{ flexDirection: 'row', justifyContent: 'center',alignItems: 'center' }}>
 
-    <TouchableOpacity style={styles.historybtn} >
+    <TouchableOpacity style={styles.historybtn} onPress={handleHistorybutton} >
       <Text style ={{ color: 'black', fontSize: 14, marginLeft:50  }}>History</Text>
     </TouchableOpacity>
 

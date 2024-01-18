@@ -7,6 +7,7 @@ import DisplayResultScreen from '../ResultScreen/displayResult';
 import TabBar from "../../components/TabBar/TabBar";
 import { getMark } from "../ResultScreen/getStressLevel";
 import { submitToDatabase } from "./sendMarkToDB.js";
+import axiosInstance from "../../api/axios.js";
 
 import {
   View,
@@ -37,8 +38,8 @@ const Question = ({navigation}) => {
   useEffect(() => {
     const fetchQuestionIds = async () => {
       try {
-        const response = await axios.get('http://192.168.1.26:8070/question/get-all-question-ids');
-        console.log(response.data);
+        const response = await axiosInstance.get('/question/get-all-question-ids');
+        //console.log(response.data);
         setIds(response.data);
       } catch (err) {
         console.log(err);
@@ -62,7 +63,7 @@ const Question = ({navigation}) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`http://192.168.1.26:8070/question/get-question/${id}`);
+        const response = await axiosInstance.get(`/question/get-question/${id}`);
         console.log(response.data);
         setQuestion(response.data);
         const optionTexts = response.data.options.map(option => option.OptionText);
@@ -164,6 +165,7 @@ const Question = ({navigation}) => {
       
       navigation.navigate('DisplayResultScreen', {
         stresslevel: [totMark],
+        userId: [id1]
       });
 
        
