@@ -1,4 +1,4 @@
-import { View, Text, TouchableOpacity, Image, FlatList, ScrollView, ImageBackground } from 'react-native'
+import { View, Text, TouchableOpacity, Image, ScrollView, Dimensions } from 'react-native'
 import React, { useState } from 'react'
 import { useNavigation, useRoute } from '@react-navigation/native'
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -68,6 +68,7 @@ const TaskDescriptionScreen = () => {
   const [boxHeight, setBoxHeight] = useState(0);
   const { taskId, completeness } = route.params
 
+  const screenHeight = Dimensions.get('screen').height;
 
   const task = allTasks.find(step => step.id==taskId)
   const getTask = task ? Object.values(task.steps) : [];
@@ -96,11 +97,11 @@ const TaskDescriptionScreen = () => {
 
         {/* task step rendering ..................................................................................... */}
 
-        <View style={{height:500, alignItems:'center'}} >
+        <View style={{height:532, alignItems:'center', }} >
        
         <ScrollView >
           
-            <View onLayout={onBoxLayout} >
+            <View onLayout={onBoxLayout} style={{paddingTop:32}}>
 
               <View style={{width:55,alignItems:'center', position:'absolute'}}>
                 <View style={[styles.bar,{height:boxHeight}]}></View>

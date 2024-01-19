@@ -25,7 +25,7 @@ export default styles = StyleSheet.create({
         fontWeight:'400',
         color:'#101318',
         maxWidth:200,
-        marginBottom:32
+        
     },
     bar:{
         flexDirection: 'column',
