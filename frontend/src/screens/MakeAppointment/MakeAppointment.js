@@ -1,5 +1,5 @@
+import React from 'react'
 import { View, Text, Image, onPress, TouchableOpacity, ScrollView, FlatList } from 'react-native'
-import React, { useState } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import styles from './styles'
 
@@ -18,18 +18,14 @@ const MakeAppointment = () => {
 	
     return( 
         <ScrollView style={styles.cardBox}>
-           { props.children }	
+          <TouchableOpacity onPress={() => handledatePress(props.date)}>
+            <View style={styles.cardcontainer}>
+              <Text style={styles.date}>{props.date}</Text>
+            </View>
+          </TouchableOpacity> 
         </ScrollView>
     ) 
   }
-
-  const renderDateItem= ( {item} ) => (
-  <TouchableOpacity onPress={() => handledatePress(item.date)}>
-    <DateCard style={styles.cardcontainer}>
-      <Text style={styles.date}>{item.date}</Text>
-    </DateCard>
-  </TouchableOpacity>  
-);   
 
     const timeList = [
       {id:1, time:'5.00PM'},
@@ -39,35 +35,27 @@ const MakeAppointment = () => {
       {id:5, time:'7.00PM'},
       {id:6, time:'7.300PM'},
     ];
-    const splitIndex = Math.floor(timeList.length / 2);
-    const firstHalfTimeList = timeList.slice(0, 3);
-    const secondHalfTimeList = timeList.slice(3,6);
     
     const TimeButton = (props) => { 
-	
-      return( 
-          <View style={styles.Tbutton}>
-             { props.children }	
-          </View>
-      ) 
-    } 
-    const renderTimeItem= ( {item} ) => (
-     <TouchableOpacity onPress={() => handleTimePress(item.time)}>
-          <TimeButton style={styles.Tbutton} onPress={onPress}>
-          <Text style={styles.TbuttonText}>{item.time}</Text>
-          </TimeButton> 
-      </TouchableOpacity>
-    );
+      return(
 
-    const keyExtractor = (item) => item.id;   
-   
+      <TouchableOpacity onPress={() => handleTimePress(props.time)}>
+        <View style={styles.Tbutton}>
+        <Text style={styles.time}>{props.time}</Text>
+        </View> 
+      </TouchableOpacity> 
+      )
+    } 
+  
     return(
-        <SafeAreaView>
+      <ScrollView>
+        <SafeAreaView style={{margin:25}}>
+
             <View>
-             <Text style={styles.title}>Dr. B.M. Weerasinghe.</Text>
+             <Text style={styles.header}>Dr. B.M. Weerasinghe.</Text>
              </View>
                 
-                <View style = {styles.container}>
+                <View style = {styles.boxcontainer}>
                   
                   <View>
                     <Image source={{uri:'https://www.hollywoodreporter.com/wp-content/uploads/2015/01/kit_harrington.jpg?w=3000'}}
@@ -83,39 +71,52 @@ const MakeAppointment = () => {
 
                 </View>
                 
-            
-            <Text style = {styles.header}>About{'\n'}</Text>
+            <Text style = {styles.title}>About{'\n'}</Text>
 
-            <Text style = {styles.headerdescription}>
+            <Text style = {styles.titledescription}>
             Experienced Psychiatrist with 8+ years of experience providing compassionate,
             patient-centered mental health care to a diverse population of adults and adolescents.
             A highly organized and detail-oriented professional who is committed to providing 
             the highest level of care to all patients.
             </Text>
 
-            <Text style = {styles.header}>Select Date{'\n'}</Text>
+            <Text style = {styles.title}>Select Date{'\n'}</Text>
    
-            <FlatList data={dateList} renderItem={renderDateItem} keyExtractor={ (item) => item.toString()} horizontal />
-         
-            <Text style = {styles.header}>Available Time Slot{'\n'}</Text>
+            <FlatList data={dateList} 
+            renderItem={({item}) => {
+              return(
+                <>
+                <DateCard
+                date={item.date}/>
+                </>
+              )
+              
+            }} keyExtractor={ (item, id) => item.id.toString()} horizontal />           
+            
+            <Text style = {styles.title}>Available Time Slot{'\n'}</Text>
 
-            <FlatList data={firstHalfTimeList} 
-            // renderItem={({item, index})=>(
-            //   <renderTimeItem/>
-            //   {index%3==0 && (
-            //     <View></View>
-            //   )}
-            //   )} 
+            <FlatList data={timeList} 
+            renderItem={({item, id}) => {
+              return(
+                <>
+                {item.id%3==0 && (
+                <TimeButton
+                time={item.time}/>
+              )}
+                </>
+              )
+              
+            }} 
 
-            keyExtractor={ (item) => item.toString()} horizontal />
+            keyExtractor={ (item) => item.toString()} vertical/>
 
-            {/* <FlatList data={secondHalfTimeList} renderItem={renderTimeItem} keyExtractor={ (item) => item.toString()} horizontal /> */}
-           
+        
             <TouchableOpacity style={styles.button} onPress={onPress}>
                 <Text style={styles.buttonText}>Make an appointment</Text>
             </TouchableOpacity>
                     
         </SafeAreaView>
+      </ScrollView>
     )
 }
 

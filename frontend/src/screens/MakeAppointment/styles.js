@@ -1,55 +1,50 @@
 import { StyleSheet } from 'react-native'
 
 const styles = StyleSheet.create ({
-  title: {
-    marginLeft:80,
+  header: {
+    marginLeft:64,
     padding:20,
-    fontSize:24,
+    fontSize:28,
+    color:'#40495B',
     fontWeight: "bold",
     },
-  container: {
-    marginHorizontal:15,
-    flexDirection: 'row',
-  },
+  boxcontainer: {
+    flexDirection:'row',
+    justifyContent: 'space-between',
+    alignItems:'center',
+   },
   Image:{
     height:160,
     width:150,
     borderRadius:10,
-    marginBottom:15
   },
   description: {
-    marginLeft:20,
-    marginVertical:35,
     fontSize:14,
+    color:'#5C677D',
     fontWeight: "400",
   },
-  header: {
-    marginLeft:15,
-    marginBottom: -15,
+  title: {
+    marginTop:15,
+    marginBottom:-10,
     fontSize:18,
-    fontWeight: "600",
+    fontWeight: "500",
+    color:'#101318'
   },
-  headerdescription: {
-   marginLeft:15,
+  titledescription: {
    fontSize:14,
    fontWeight: "400",
-   paddingBottom:15,
-   lineHeight:22.5
+   lineHeight:22.5,
+   color:'#5C677D'
   },
   cardBox: {
     width:40,
     height:80,
     marginHorizontal:8,
-    marginVertical:8,
     backgroundColor:"white",
     borderRadius:20,
-    elevation:5,
+    elevation:1,
   },
-  cardcontainer: {
-    flexDirection:'row',
-    justifyContent: 'space-between',
-    padding: 5,
- },
+  
   date: {
     marginHorizontal:8,
     paddingVertical: 10,
@@ -67,10 +62,10 @@ const styles = StyleSheet.create ({
     borderRadius: 15,
     backgroundColor: 'transparent', 
     marginVertical:8,
-    marginHorizontal:13,
+    marginHorizontal:10,
    
   },
-  TbuttonText: {
+  time: {
     color: '#4A90BF', 
     fontSize: 14,
     fontWeight: '600',

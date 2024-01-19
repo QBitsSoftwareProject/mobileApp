@@ -1,5 +1,4 @@
-import { View, Text, TouchableOpacity, Image, FlatList} from 'react-native'
-import React, { useState } from 'react'
+import { Text, FlatList, ScrollView} from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import style from './style'
 import CreateCard from '../../components/Card/CreateCard'
@@ -40,8 +39,8 @@ const docList = [
 ]; 
 
   return (
-   
-    <SafeAreaView>
+  <ScrollView>
+    <SafeAreaView style={{margin:25}}>
       
       <Text style={style.header}>Doctor appointment</Text>
       
@@ -61,11 +60,10 @@ const docList = [
           regno={item.regno}
           hospital={item.hospital}
           />
-      )} 
-      keyExtractor={keyExtractor} />
+      )} />
 
     </SafeAreaView>
-    
+  </ScrollView>   
 
   );
 

@@ -7,10 +7,14 @@ const CreateCard = (props) => {
 	return( 
 		<TouchableOpacity>
 			<View style = {styles.cardBox}>
+				<View style={styles.imageframe}>
+					<Image source={props.image}style={styles.image} /> 
+				</View>
+				
 				<View style = {styles.content}>
-					<View style={styles.imageframe}>
-						<Image source={props.image}style={styles.image} /> 
-					</View>
+					
+
+				<View>
 					<Text style={styles.title}>{props.title}</Text>
 
 					{ props.cardName == "AvailableDoc" && (
@@ -19,6 +23,7 @@ const CreateCard = (props) => {
 							<Text style={styles.description}>REG NO-{props.regno}</Text>
 							<Text style={styles.description}>{props.hospital}</Text>
 						</View>
+					
 					)}
 
 					
@@ -26,9 +31,10 @@ const CreateCard = (props) => {
 						<View>
 							<Text style={styles.description}>Time:{props.time}</Text>
 							<Text style={styles.description}>Date:{props.date}</Text>
-							<Text style={styles.description}>Status:{props.status}</Text>
+							<Text style={styles.statediscript}>Status:{props.status}</Text>
 						</View>	
 					)}
+					</View>
 				
 				</View>
 			</View>
@@ -37,7 +43,6 @@ const CreateCard = (props) => {
 } 
 const styles = StyleSheet.create ({
 	cardBox: {
-	  width:343,
 	  height:112,
 	  padding:20,
 	  backgroundColor:"white",
@@ -45,32 +50,40 @@ const styles = StyleSheet.create ({
 	  elevation: 1,
 	  flexDirection:"row",
 	  alignSelf:"center",
-	  marginBottom:15
+	  marginBottom:15,
+	  justifyContent:'center',
+	  alignItems:'center'
 	  },
 	content: {
-	
 	  flex:1,
-	  color:'#40495B'
+	  flexDirection:'row',
+	  color:'#40495B',
+	  
 	 },
 	title: {
-	
-		
-		fontSize:16,
-		fontWeight: "bold",
+		fontSize:18,
+		fontWeight: "500",
+		color:'#40495B',
+		marginBottom:7,
 		},
 	description: {
-	  
-	  fontSize:14,
+	  fontSize:12,
 	  fontWeight: "400",
-	  color: "#5C677D"
+	  color:'#5C677D'
 		},
+	statediscript:{
+		fontSize:12,
+	  	fontWeight: "400",
+		// color: state == 0 ? "red" : "#5C677D"
+		color:'#0AC112'
+	},
 	imageframe:{
 		height:70,
 		width:70,
 		borderColor:"white",
 		borderWidth:4,
 		borderRadius:50,
-		marginVertical:5,
+		marginRight:20,
 		overflow:"hidden",
 		elevation:2
 	  },
