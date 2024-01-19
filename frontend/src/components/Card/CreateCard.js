@@ -1,8 +1,18 @@
 import { StyleSheet, TouchableOpacity, View, Image, Text } from 'react-native'
 import React from 'react'
-import { SafeAreaView } from 'react-native-safe-area-context'
 
 const CreateCard = (props) => { 
+	let statusTextColor = '#5C677D'; // Default text color
+
+  if (props.cardName === 'AppointmentStatus') {
+    // Customize text color based on the status
+    if (props.status === 'Accepted') {
+      statusTextColor = 'green';
+    } else if (props.status === 'Cancelled' && 'Rejected') {
+      statusTextColor = 'red';
+    }
+  }
+
 	
 	return( 
 		<TouchableOpacity>
@@ -27,11 +37,12 @@ const CreateCard = (props) => {
 					)}
 
 					
-					{ props.cardName == "AppointmentStatus" && (
+					{ props.cardName === "AppointmentStatus" && (
 						<View>
 							<Text style={styles.description}>Time:{props.time}</Text>
 							<Text style={styles.description}>Date:{props.date}</Text>
-							<Text style={styles.statediscript}>Status:{props.status}</Text>
+							<Text style={{...styles.stateDescript, color:statusTextColor}}>Status:{props.status}</Text>
+					
 						</View>	
 					)}
 					</View>
@@ -71,11 +82,10 @@ const styles = StyleSheet.create ({
 	  fontWeight: "400",
 	  color:'#5C677D'
 		},
-	statediscript:{
+	stateDescript:{
 		fontSize:12,
 	  	fontWeight: "400",
-		// color: state == 0 ? "red" : "#5C677D"
-		color:'#0AC112'
+		color:'#5C677D'
 	},
 	imageframe:{
 		height:70,

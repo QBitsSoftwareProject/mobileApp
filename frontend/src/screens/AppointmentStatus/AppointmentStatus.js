@@ -1,4 +1,4 @@
-import { Text, FlatList, ScrollView } from 'react-native'
+import { Text, FlatList, ScrollView ,View} from 'react-native'
 import React, { useState } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import CreateCard from '../../components/Card/CreateCard'
@@ -28,7 +28,7 @@ AppointmentStatus = () => {
       title:'Dr. B.M. Weerasinghe.', 
       time:'05.30 PM.',  
       date:'12/01/2024.' , 
-      status:'Accepted.',
+      status:'Rejected.',
     },
     {id:4, 
       image:require("../../assets/images/kitharringtonhair.jpg"),
@@ -64,7 +64,8 @@ AppointmentStatus = () => {
       
       <Text style={styles.descript2}>Appointment Status.</Text>
 
-      <FlatList data={stateList} 
+      <View style = {{marginBottom:60}}>
+      <FlatList  data={stateList} 
       renderItem={({item}) => (
         <CreateCard 
           image={item.image} 
@@ -73,8 +74,10 @@ AppointmentStatus = () => {
           time={item.time}
           date={item.date}
           status={item.status}
+          
           />
       )} />
+      </View>
       
     </SafeAreaView>
   </ScrollView>

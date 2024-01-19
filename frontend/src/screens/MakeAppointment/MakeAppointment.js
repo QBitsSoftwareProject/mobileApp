@@ -2,6 +2,8 @@ import React from 'react'
 import { View, Text, Image, onPress, TouchableOpacity, ScrollView, FlatList } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import styles from './styles'
+import DateCard from '../../components/DateCard/DateCard'
+import TimeButton from '../../components/TimeButton/TimeButton'
 
 
 const MakeAppointment = () => {
@@ -14,18 +16,6 @@ const MakeAppointment = () => {
     {id:6, date:'22 \n Sat'},
     {id:7, date:'23 \n Sun'}
   ];
-  const DateCard = (props) => { 
-	
-    return( 
-        <ScrollView style={styles.cardBox}>
-          <TouchableOpacity onPress={() => handledatePress(props.date)}>
-            <View style={styles.cardcontainer}>
-              <Text style={styles.date}>{props.date}</Text>
-            </View>
-          </TouchableOpacity> 
-        </ScrollView>
-    ) 
-  }
 
     const timeList = [
       {id:1, time:'5.00PM'},
@@ -36,17 +26,6 @@ const MakeAppointment = () => {
       {id:6, time:'7.300PM'},
     ];
     
-    const TimeButton = (props) => { 
-      return(
-
-      <TouchableOpacity onPress={() => handleTimePress(props.time)}>
-        <View style={styles.Tbutton}>
-        <Text style={styles.time}>{props.time}</Text>
-        </View> 
-      </TouchableOpacity> 
-      )
-    } 
-  
     return(
       <ScrollView>
         <SafeAreaView style={{margin:25}}>
@@ -83,20 +62,17 @@ const MakeAppointment = () => {
             <Text style = {styles.title}>Select Date{'\n'}</Text>
    
             <FlatList data={dateList} 
-            renderItem={({item}) => {
-              return(
-                <>
+            renderItem={({item}) => (
                 <DateCard
                 date={item.date}/>
-                </>
-              )
-              
-            }} keyExtractor={ (item, id) => item.id.toString()} horizontal />           
+            )} 
+            
+            keyExtractor={ (item, index) => item.id.toString()} horizontal />           
             
             <Text style = {styles.title}>Available Time Slot{'\n'}</Text>
 
             <FlatList data={timeList} 
-            renderItem={({item, id}) => {
+            renderItem={({item, index}) => {
               return(
                 <>
                 {item.id%3==0 && (
