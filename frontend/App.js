@@ -1,14 +1,36 @@
 import React, { useState } from 'react';
 import NavContainer from './src/navigation/navigationContainer/NavContainer';
 import { View } from 'react-native';
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { NavigationContainer } from "@react-navigation/native";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
+
+import { AddNewJournal } from './src/screens/AddNewJournalScreen/addNewJournal';
+import {ViewJournal} from './src/screens/ViewJournalScreen/viewJournal';
+
+const Stack = createNativeStackNavigator();
 
 
 export default function App() {
     return (
-        <View style={{flex:1}}>
-            <NavContainer/>
+        // <View style={{flex:1}}>
+        //     <NavContainer/>
            
-        </View>
+        // </View>
+
+        <GestureHandlerRootView style={{ flex: 1 }}>
+    <NavigationContainer>
+      <Stack.Navigator
+        initialRouteName="AddNewJournal"
+        screenOptions={{ headerShown: false }}
+      >
+        <Stack.Screen name="AddNewJournal" component={AddNewJournal} />
+        <Stack.Screen name="ViewJournal" component={ViewJournal} />
+        
+        
+      </Stack.Navigator>
+    </NavigationContainer>
+  </GestureHandlerRootView>
     
     );
   
