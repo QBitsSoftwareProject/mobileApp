@@ -9,8 +9,8 @@ const HeaderSub = (props) => {
       <View style={styles.contains} >
         <ImageBackground source={require("../../assets/images/blueSqures.png")} style={styles.backImg}>
 
-            <TouchableOpacity style={styles.backBtn}> 
-                <Image source={require(('../../assets/images/BackWhite.png'))}/>
+            <TouchableOpacity style={styles.backBtn} onPress={props.BackButton}> 
+                <Image source={require(('../../assets/images/BackWhite.png')) }/>
             </TouchableOpacity>
             
             <Text style={styles.headlineTxt}>{props.headLine}</Text>

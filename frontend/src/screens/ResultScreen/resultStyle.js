@@ -33,8 +33,10 @@ const ResultScreenStyle = StyleSheet.create({
         
         alignSelf:'center',
         fontSize: 16,
-        marginTop:32,
-        marginHorizontal:25
+        marginTop:20,
+        marginHorizontal:25,
+        color:'#101318',
+
 
     },
 
@@ -77,6 +79,21 @@ const ResultScreenStyle = StyleSheet.create({
         backgroundColor: 'white',
         alignItems: 'center', 
         marginHorizontal: 30,
+        
+    },
+
+    doublebtn : {
+        flexDirection: 'row', 
+        justifyContent: 'space-between', 
+        marginTop: 20,
+        paddingVertical: 10,
+        width: 112,
+        height: 40,
+        borderRadius: 20,
+        borderWidth: 2,
+        borderColor: 'white',
+        backgroundColor: 'white',
+        alignItems: 'center', 
         
     }
 

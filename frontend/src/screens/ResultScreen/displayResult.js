@@ -6,6 +6,9 @@ import TabBar from "../../components/TabBar/TabBar";
 import { createStackNavigator } from '@react-navigation/stack';
 import { useNavigation } from '@react-navigation/native';
 import stresslevelhistory from '../StressLevelHistory/stresslevelhistory';
+import { CustomButton } from "./doublebutton";
+import Overlay from './instruction';
+import axiosInstance from "../../api/axios";
 
 
 import {
@@ -20,32 +23,38 @@ import {
 } from "react-native";
 
 
+
 const DisplayResultScreen = ({ route ,navigation}) => {
 
     const [StressLevel, setStressLevel] = useState('');
     const [userID, setUserId] = useState('');
+    const [lastMark,setLastMark] = useState('');
 
+    const { stresslevel, userId } = route.params;
 
-        useEffect(() => {
-            const {stresslevel} = route.params;
-            const {userId} = route.params;
-            console.log('dd',stresslevel);
-            console.log('user id',userId);
-            setStressLevel(stresslevel);
-            setUserId(userId);
-            
-        },[route.params]);
+    useEffect(() => {
+      const extractedUserId = userId;
+
+  setLastMark(stresslevel);
+  setUserId(extractedUserId); // Update the user ID without the array wrapper
+  fetchMark(extractedUserId);
+  console.log(extractedUserId);
+}, [stresslevel, userId]);
+    
+    
 
         useEffect ( () => {
             console.log('Stress Level Mark:', StressLevel);
+           
+            
         },[StressLevel])
 
         let level;
 
-        if(StressLevel >= 0 && StressLevel < 15){
+        if(lastMark >= 0 && lastMark < 15){
           level = 'low';
         }
-        else if(StressLevel >= 15 && StressLevel <= 27){
+        else if(lastMark >= 15 && lastMark <= 27){
           level = 'moderate';
         }
         else{
@@ -57,9 +66,58 @@ const DisplayResultScreen = ({ route ,navigation}) => {
         const handleHistorybutton = () => {
 
           navigation.navigate('StressLevelHistoryScreen', {
-             user_id: [userID],
+             user_id: userID,
+
           });
         }
+
+        const handleTryAgainButton = () =>{
+          navigation.navigate('Question', {
+            
+         });
+
+         navigation.reset({
+          index: 0,
+          routes: [{ name: 'Question' }],
+        });
+
+        }
+
+        //for intro overlay
+
+        const [isOverlayVisible, setOverlayVisible] = useState(false);
+
+        const toggleOverlay = () => {
+        setOverlayVisible(!isOverlayVisible);
+       };
+
+
+       const fetchMark = async (userID) => {
+        // const userid = userID;
+        try {
+          console.log('Fetching mark for userID:', userID);
+          const response = await axiosInstance.get(`/mark/get-mark-by-id/${userID}`);
+          const userData = response.data.filter((item) => item.userid === userID);
+      
+          if (userData.length > 0) {
+            const mostRecentMark = userData[userData.length - 1].mark;
+            console.log('Most Recent Mark:', mostRecentMark);
+            setLastMark(mostRecentMark);
+          } else {
+            console.log('No user data found.');
+          }
+        } catch (err) {
+          console.log('Error fetching mark:', err);
+        }
+      };
+
+      
+    
+        
+
+       
+
+       
 
 
   return (
@@ -68,9 +126,7 @@ const DisplayResultScreen = ({ route ,navigation}) => {
       <HeaderSub headLine = 'Result' subHeadLine = 'understand and manage your stress better.'/>
     </View>
 
-    <TouchableOpacity style={styles.tooglebtn} >
-      <Text style ={{ color: 'black', fontSize: 14, alignSelf: "center" }}>Result</Text>
-    </TouchableOpacity>
+    <CustomButton></CustomButton>
 
     <Text style = {styles.pccText}>
     This numerical assessment reflects your 
@@ -78,9 +134,15 @@ const DisplayResultScreen = ({ route ,navigation}) => {
     Perceived Stress Scale (PSS).
     </Text>
 
-    <TouchableOpacity >
-        <Image source={require("../../assets/images/instruction.png")} style = {styles.instructionimg} />
+    
+      <View>
+      <TouchableOpacity onPress={toggleOverlay}>
+      <Image source={require("../../assets/images/instruction.png")} style = {styles.instructionimg} />
       </TouchableOpacity>
+
+      <Overlay isVisible={isOverlayVisible} onClose={toggleOverlay}  />
+    </View>
+      
 
       <ImageBackground source={require("../../assets/images/resultScreen/resultScreenBack.png")} style = {styles.backgroungimg} >
 
@@ -90,7 +152,7 @@ const DisplayResultScreen = ({ route ,navigation}) => {
 
     <View style = {styles.container}>
       <Text style = {styles.text}>
-      {StressLevel}
+      {lastMark}
       </Text>
     </View>
 
@@ -113,7 +175,7 @@ const DisplayResultScreen = ({ route ,navigation}) => {
       <Text style ={{ color: 'black', fontSize: 14, marginLeft:50  }}>History</Text>
     </TouchableOpacity>
 
-    <TouchableOpacity style={styles.historybtn} >
+    <TouchableOpacity style={styles.historybtn} onPress={handleTryAgainButton} >
       <Text style ={{ color: 'black', fontSize: 14,marginLeft:40  }}>Try Again</Text>
     </TouchableOpacity>
 

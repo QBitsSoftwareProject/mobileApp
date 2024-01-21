@@ -162,10 +162,12 @@ const Question = ({navigation}) => {
        setStressLevel(totMark);
 
        submitToDatabase(totMark, id1);
+
+       Index = 0;
       
       navigation.navigate('DisplayResultScreen', {
         stresslevel: [totMark],
-        userId: [id1]
+        userId: id1
       });
 
        
