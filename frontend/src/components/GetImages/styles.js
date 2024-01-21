@@ -6,9 +6,36 @@ export default styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  title:{
+    fontSize:14,
+    fontWeight:'400',
+    color:'#40495B',
+    marginBottom:7,
+  },
+  imageBtn:{
+    width:170,
+    height:40,
+    backgroundColor:'#45B4FF',
+    justifyContent:'center',
+    alignItems:'center',
+    borderRadius:10
+  },
+  btnText:{
+    fontSize:14,
+    fontWeight:'400',
+    color:'white',
+  },
+  imageContainer:{
+    flexDirection:'row',
+    justifyContent:'center',
+    marginTop:15
+  },
   image: {
     width: 200,
     height: 200,
     marginBottom: 20,
+    width:250,
+    height:270,
+    borderRadius:10,
   },
 });

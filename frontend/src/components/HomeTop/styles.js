@@ -4,7 +4,8 @@ const styles = StyleSheet.create({
     contains:{
         height:250,
         borderBottomRightRadius:80,
-        zIndex:100
+        zIndex:100,
+        
     },
    
     headlineTxt:{
@@ -26,6 +27,7 @@ const styles = StyleSheet.create({
         paddingRight:25,
         paddingLeft:25,
         height:250,
+        
        
     },
     profileFrame:{

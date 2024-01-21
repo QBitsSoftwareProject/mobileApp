@@ -56,7 +56,7 @@ const DoctorRegScreen2 = () => {
         }
         else{
           setIsEmpty(false)
-          navigation.navigate('DoctorRegScreen4') 
+          navigation.navigate('DoctorRegScreen3') 
           
         }
   

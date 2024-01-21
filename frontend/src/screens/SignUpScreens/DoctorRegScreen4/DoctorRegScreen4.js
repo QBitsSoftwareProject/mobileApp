@@ -40,7 +40,7 @@ const DoctorRegScreen4 = () => {
       }, []);
 
       const handleBackPress = ()=>{
-        navigation.navigate('DoctorRegScreen2')
+        navigation.navigate('DoctorRegScreen3')
         
     }
     const handleCancel = ()=>{
