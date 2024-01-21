@@ -1,9 +1,9 @@
 import { StyleSheet, TouchableOpacity, View, Image, Text } from 'react-native'
 import React from 'react'
-import { SafeAreaView } from 'react-native-safe-area-context'
+import { useState } from 'react';
 
-const CreateCard = (props) => { 
-	
+const CreateCard = (props) => {
+
 	return( 
 		<TouchableOpacity>
 			<View style = {styles.cardBox}>
@@ -27,11 +27,17 @@ const CreateCard = (props) => {
 					)}
 
 					
-					{ props.cardName == "AppointmentStatus" && (
+					{ props.cardName === "AppointmentStatus" && (
 						<View>
 							<Text style={styles.description}>Time:{props.time}</Text>
 							<Text style={styles.description}>Date:{props.date}</Text>
-							<Text style={styles.statediscript}>Status:{props.status}</Text>
+							<Text style={
+								[
+									styles.description,
+									props.status === 'Accepted.' && styles.acceptedStatus,
+									props.status === 'Rejected.' && styles.rejectedStatus
+							    ]  
+							}>Status: {props.status}</Text>
 						</View>	
 					)}
 					</View>
@@ -68,15 +74,24 @@ const styles = StyleSheet.create ({
 		},
 	description: {
 	  fontSize:12,
-	  fontWeight: "400",
+	  fontWeight: "500",
 	  color:'#5C677D'
-		},
-	statediscript:{
+	},
+	acceptedStatus: {
 		fontSize:12,
 	  	fontWeight: "400",
-		// color: state == 0 ? "red" : "#5C677D"
-		color:'#0AC112'
-	},
+		color: '#0AC112',
+	  },
+	  rejectedStatus: {
+		fontSize:12,
+	   fontWeight: "400",
+		color: '#E82519',
+	  },
+	//   defaultStatus: {
+	// 	fontSize:12,
+	//   	fontWeight: "400",
+	// 	color:'#5C677D'
+	//   },
 	imageframe:{
 		height:70,
 		width:70,
@@ -95,6 +110,7 @@ const styles = StyleSheet.create ({
 	}
   
   })
+
   
 export default CreateCard
 

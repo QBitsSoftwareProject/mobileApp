@@ -1,10 +1,16 @@
-import React from 'react'
-import { View, Text, Image, onPress, TouchableOpacity, ScrollView, FlatList } from 'react-native'
+import React, { useState } from 'react'
+import { View, Text, Image, ScrollView, FlatList } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import styles from './styles'
+import DateCard from '../../components/DateCard/DateCard'
+import TimeButton from '../../components/TimeButton/TimeButton'
+import PopupMessage from '../../components/Pop-up/Pop-upScreen'
+import RegularButton from '../../components/Button/RegularButton'
 
 
 const MakeAppointment = () => {
+  const [numColumns, setNumColumns] = useState(2);
+
   const dateList = [
     {id:1, date:'17 \n Mon'},
     {id:2, date:'18 \n Tue'},
@@ -14,18 +20,6 @@ const MakeAppointment = () => {
     {id:6, date:'22 \n Sat'},
     {id:7, date:'23 \n Sun'}
   ];
-  const DateCard = (props) => { 
-	
-    return( 
-        <ScrollView style={styles.cardBox}>
-          <TouchableOpacity onPress={() => handledatePress(props.date)}>
-            <View style={styles.cardcontainer}>
-              <Text style={styles.date}>{props.date}</Text>
-            </View>
-          </TouchableOpacity> 
-        </ScrollView>
-    ) 
-  }
 
     const timeList = [
       {id:1, time:'5.00PM'},
@@ -34,19 +28,20 @@ const MakeAppointment = () => {
       {id:4, time:'6.30PM'},
       {id:5, time:'7.00PM'},
       {id:6, time:'7.300PM'},
+      {id:5, time:'7.00PM'},
+      {id:6, time:'7.300PM'},
     ];
-    
-    const TimeButton = (props) => { 
-      return(
 
-      <TouchableOpacity onPress={() => handleTimePress(props.time)}>
-        <View style={styles.Tbutton}>
-        <Text style={styles.time}>{props.time}</Text>
-        </View> 
-      </TouchableOpacity> 
-      )
-    } 
-  
+  const [popupMessage, setPopupMessage] = useState('');
+
+  const showMessage = (message) => {
+    setPopupMessage(message);
+  };
+
+  const closeMessage = () => {
+    setPopupMessage('');
+  };
+    
     return(
       <ScrollView>
         <SafeAreaView style={{margin:25}}>
@@ -83,38 +78,36 @@ const MakeAppointment = () => {
             <Text style = {styles.title}>Select Date{'\n'}</Text>
    
             <FlatList data={dateList} 
-            renderItem={({item}) => {
-              return(
-                <>
+            renderItem={({item}) => (
                 <DateCard
                 date={item.date}/>
-                </>
-              )
-              
-            }} keyExtractor={ (item, id) => item.id.toString()} horizontal />           
+            )} 
+            
+            keyExtractor={ (item, index) => item.id.toString()} horizontal />           
             
             <Text style = {styles.title}>Available Time Slot{'\n'}</Text>
 
             <FlatList data={timeList} 
-            renderItem={({item, id}) => {
-              return(
-                <>
-                {item.id%3==0 && (
-                <TimeButton
-                time={item.time}/>
-              )}
-                </>
-              )
+            numColumns={3}
+              renderItem={({item, index}) => {
+              
+              return <TimeButton
+              time={item.time}/>
               
             }} 
 
             keyExtractor={ (item) => item.toString()} vertical/>
 
-        
-            <TouchableOpacity style={styles.button} onPress={onPress}>
+        <View style={{marginBottom:60}}>
+            {/* <TouchableOpacity style={styles.button} onPress={() => showMessage("Do you confirm")}>
                 <Text style={styles.buttonText}>Make an appointment</Text>
-            </TouchableOpacity>
-                    
+            </TouchableOpacity> */}
+
+            <RegularButton name = {"ghjmnbvcfgyhj"}  ></RegularButton>
+         
+            <PopupMessage message={popupMessage} onClose={closeMessage} />
+        </View>
+           
         </SafeAreaView>
       </ScrollView>
     )

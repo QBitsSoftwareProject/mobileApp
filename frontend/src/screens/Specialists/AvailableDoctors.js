@@ -1,4 +1,4 @@
-import { Text, FlatList, ScrollView} from 'react-native'
+import { Text, FlatList, ScrollView, View} from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import style from './style'
 import CreateCard from '../../components/Card/CreateCard'
@@ -35,6 +35,13 @@ const docList = [
     university:"MBBS, University of Colombo.",
     regno: "234589.",
     hospital: "Anuradhapura Genaral Hospital.",
+  },
+  {id:5, 
+    image:require("../../assets/images/kitharringtonhair.jpg"),
+    title:'Dr. B.M. Weerasinghe.', 
+    university:"MBBS, University of Colombo.",
+    regno: "234589.",
+    hospital: "Anuradhapura Genaral Hospital.",
   }
 ]; 
 
@@ -50,6 +57,7 @@ const docList = [
 
       <Text style={style.descript2}>Available Doctors.</Text>
    
+   <View style={{marginBottom:60}}>
       <FlatList data={docList} 
       renderItem={({item}) => (
         <CreateCard 
@@ -59,8 +67,10 @@ const docList = [
           university={item.university}
           regno={item.regno}
           hospital={item.hospital}
+      
           />
       )} />
+    </View>
 
     </SafeAreaView>
   </ScrollView>   

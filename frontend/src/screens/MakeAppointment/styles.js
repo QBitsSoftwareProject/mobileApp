@@ -62,7 +62,7 @@ const styles = StyleSheet.create ({
     borderRadius: 15,
     backgroundColor: 'transparent', 
     marginVertical:8,
-    marginHorizontal:10,
+    marginHorizontal:8,
    
   },
   time: {
@@ -87,6 +87,11 @@ const styles = StyleSheet.create ({
     fontSize: 16,
     fontWeight: '600'
   },
+popupContainer: {
+  flex: 1,
+  justifyContent: 'center',
+  alignItems: 'center',
+},
 })
 
 
