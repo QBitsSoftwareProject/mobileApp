@@ -7,6 +7,8 @@ import { GestureHandlerRootView } from "react-native-gesture-handler";
 
 import { AddNewJournal } from './src/screens/AddNewJournalScreen/addNewJournal';
 import {ViewJournal} from './src/screens/ViewJournalScreen/viewJournal';
+import {JournalStatistics} from './src/screens/JournalStatisticsScreen/journalStatistics';
+
 
 const Stack = createNativeStackNavigator();
 
@@ -19,13 +21,14 @@ export default function App() {
         // </View>
 
         <GestureHandlerRootView style={{ flex: 1 }}>
-    <NavigationContainer>
+      <NavigationContainer>
       <Stack.Navigator
         initialRouteName="AddNewJournal"
         screenOptions={{ headerShown: false }}
       >
         <Stack.Screen name="AddNewJournal" component={AddNewJournal} />
         <Stack.Screen name="ViewJournal" component={ViewJournal} />
+        <Stack.Screen name="JournalStatistics" component={JournalStatistics}/>
         
         
       </Stack.Navigator>

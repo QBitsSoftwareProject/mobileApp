@@ -8,6 +8,7 @@ import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { AddNewJournal } from '../../screens/AddNewJournalScreen/addNewJournal';
 import {ViewJournal} from '../../screens/ViewJournalScreen/viewJournal';
 import { View } from 'react-native';
+import { JournalStatistics } from '../../screens/JournalStatisticsScreen/journalStatistics';
 
 const Stack = createNativeStackNavigator();
 
@@ -39,6 +40,7 @@ const HomeStack = () => {
       
       <stack.Screen name='AddNewJournalScreen' component={AddNewJournal} />
       <stack.Screen name='ViewJournalScreen' component={ViewJournal} />
+      <stack.Screen name='JournalStatistics' component={JournalStatistics} />
 
       
     </stack.Navigator>

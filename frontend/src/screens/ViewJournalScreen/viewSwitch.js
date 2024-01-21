@@ -1,30 +1,29 @@
 import React, { useState} from 'react';
 import { View, TextInput, TouchableOpacity, Text, StyleSheet, ScrollView,Button} from 'react-native';
 
-export const CustomButton = (props) =>{
+export const CustomButtonView= (props) =>{
    
     
     return(
         <View style={styles.mainButton}>
             
+            {/* createButton */}
             <View style={styles.createButton}>
-            <TouchableOpacity 
+            <TouchableOpacity onPress={props.btnAnalysis}
       
-            style={[styles.createButton,{ backgroundColor: '#5296C5' }]}>
+            style={[styles.analysisButton,{ backgroundColor: 'white' }]}>
 
-            <Text style={styles.buttonText1}>Create</Text>
+            <Text style={styles.buttonText1}>Analysis</Text>
             </TouchableOpacity>
             </View>
 
             
             
-            
+            {/* viewButton */}
             <View style={styles.veiwButton}>
-            <TouchableOpacity onPress={props.btnView}
-
+            <TouchableOpacity 
             
-            
-            style={[styles.veiwButton,{ backgroundColor:'white'}]}>
+            style={[styles.veiwButton,{ backgroundColor:'#5296C5'}]}>
             <Text style={styles.buttonText2}>View</Text>
 
            </TouchableOpacity>
@@ -64,7 +63,7 @@ const styles = StyleSheet.create({
         height:40
 
     },
-    createButton:{
+    analysisButton:{
         flex: 1,
         borderTopLeftRadius:20,
         borderTopRightRadius:20,
@@ -81,19 +80,18 @@ const styles = StyleSheet.create({
         fontSize: 14,
         fontWeight: '500',
         textAlign:'center',
-        color:'white'
+        color:'#5C677D'
+        
       },
 
       buttonText2: {
         fontSize: 14,
         fontWeight: '500',
         textAlign:'center',
-        color:'#5C677D'
+        color:'white'
+        
       },
 
 
+
 });
-
-
-
-
