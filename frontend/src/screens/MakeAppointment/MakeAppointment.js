@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { View, Text, Image, onPress, TouchableOpacity, ScrollView, FlatList } from 'react-native'
+import { View, Text, Image, ScrollView, FlatList } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import styles from './styles'
 import DateCard from '../../components/DateCard/DateCard'
@@ -103,7 +103,7 @@ const MakeAppointment = () => {
                 <Text style={styles.buttonText}>Make an appointment</Text>
             </TouchableOpacity> */}
 
-            <RegularButton name = {"ghjmnbvcfgyhj"}></RegularButton>
+            <RegularButton name = {"ghjmnbvcfgyhj"}  ></RegularButton>
          
             <PopupMessage message={popupMessage} onClose={closeMessage} />
         </View>
