@@ -141,7 +141,7 @@ const Question = ({navigation}) => {
 
   const Stack = createStackNavigator();
 
-  const id1 = '214224J';
+  const id1 = '214224J'
 
   const handleSubmitButton = () => {
     if (selectedOption) {
