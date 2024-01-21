@@ -1,19 +1,9 @@
 import { StyleSheet, TouchableOpacity, View, Image, Text } from 'react-native'
 import React from 'react'
+import { useState } from 'react';
 
-const CreateCard = (props) => { 
-	let statusTextColor = '#5C677D'; // Default text color
+const CreateCard = (props) => {
 
-  if (props.cardName === 'AppointmentStatus') {
-    // Customize text color based on the status
-    if (props.status === 'Accepted') {
-      statusTextColor = 'green';
-    } else if (props.status === 'Cancelled' && 'Rejected') {
-      statusTextColor = 'red';
-    }
-  }
-
-	
 	return( 
 		<TouchableOpacity>
 			<View style = {styles.cardBox}>
@@ -41,8 +31,13 @@ const CreateCard = (props) => {
 						<View>
 							<Text style={styles.description}>Time:{props.time}</Text>
 							<Text style={styles.description}>Date:{props.date}</Text>
-							<Text style={{...styles.stateDescript, color:statusTextColor}}>Status:{props.status}</Text>
-					
+							<Text style={
+								[
+									styles.description,
+									props.status === 'Accepted.' && styles.acceptedStatus,
+									props.status === 'Rejected.' && styles.rejectedStatus
+							    ]  
+							}>Status: {props.status}</Text>
 						</View>	
 					)}
 					</View>
@@ -79,14 +74,24 @@ const styles = StyleSheet.create ({
 		},
 	description: {
 	  fontSize:12,
-	  fontWeight: "400",
+	  fontWeight: "500",
 	  color:'#5C677D'
-		},
-	stateDescript:{
+	},
+	acceptedStatus: {
 		fontSize:12,
 	  	fontWeight: "400",
-		color:'#5C677D'
-	},
+		color: '#0AC112',
+	  },
+	  rejectedStatus: {
+		fontSize:12,
+	   fontWeight: "400",
+		color: '#E82519',
+	  },
+	//   defaultStatus: {
+	// 	fontSize:12,
+	//   	fontWeight: "400",
+	// 	color:'#5C677D'
+	//   },
 	imageframe:{
 		height:70,
 		width:70,
@@ -105,6 +110,7 @@ const styles = StyleSheet.create ({
 	}
   
   })
+
   
 export default CreateCard
 

@@ -35,7 +35,7 @@ AppointmentStatus = () => {
       title:'Dr. B.M. Weerasinghe.', 
       time:'05.30 PM.',  
       date:'12/01/2024.' , 
-      status:'Accepted.',
+      status:'Canceled.',
     },
     {id:5, 
       image:require("../../assets/images/kitharringtonhair.jpg"),
@@ -53,6 +53,7 @@ AppointmentStatus = () => {
     }
   ];
   const[state, setState] = useState(0);
+  
   return (
   <ScrollView>
     <SafeAreaView style={{margin:25}}>
@@ -76,7 +77,8 @@ AppointmentStatus = () => {
           status={item.status}
           
           />
-      )} />
+      )} 
+      />
       </View>
       
     </SafeAreaView>
