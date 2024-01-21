@@ -15,8 +15,8 @@ const HomeStack = () => {
     <stack.Navigator screenOptions={{ headerStyle: { flex:1,backgroundColor: 'transparent' }, headerShown:false }}>
       
       {/* <stack.Screen name='HomeScreen' component={AvailableDoctors} /> */}
-      {/* <stack.Screen name='HomeScreen' component={MakeAppointment} /> */}
-      <stack.Screen name='HomeScreen' component={AppointmentStatus} />
+      <stack.Screen name='HomeScreen' component={MakeAppointment} />
+      {/* <stack.Screen name='HomeScreen' component={AppointmentStatus} /> */}
       {/* <stack.Screen name='HomeScreen' component={App} /> */}
       
       

@@ -1,17 +1,33 @@
-import { View, Text, TouchableOpacity} from 'react-native'
+import { StyleSheet, View, Text, TouchableOpacity} from 'react-native'
 import React from 'react'
 
 const RegularButton = (props) => {
    
     return(
         <View>
-            <TouchableOpacity style={{width:334, height:58, backgroundColor:'#5296C5', borderRadius:10, justifyContent:'center',alignItems:'center'}}
-             onPress={() => {
-             }}>
-                <Text style={{color: '#fff', fontSize:16, fontWeight:500}}>{props.name}</Text>
+            <TouchableOpacity style={styles.button} onPress={(onPress) => {}}>
+                <Text style={styles.buttonText}>{props.name}</Text>
             </TouchableOpacity>
         </View>
     )
 }
+
+const styles = StyleSheet.create ({
+button: {
+    width:250,
+    height:35,
+    backgroundColor: '#4A90BF', 
+    padding: 8,
+    borderRadius: 15,
+    marginVertical:15,
+    alignSelf:'center',
+    alignItems: 'center',
+  },
+  buttonText: {
+    color: 'white', 
+    fontSize: 16,
+    fontWeight: '600'
+  },
+})
 
 export default RegularButton

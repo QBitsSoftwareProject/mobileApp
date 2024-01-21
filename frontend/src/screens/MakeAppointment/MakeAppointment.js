@@ -103,7 +103,7 @@ const MakeAppointment = () => {
                 <Text style={styles.buttonText}>Make an appointment</Text>
             </TouchableOpacity> */}
 
-            <RegularButton name = {"ghjmnbvcfgyhj"}  ></RegularButton>
+            <RegularButton name = {"Make an appointment"} onPress={() => showMessage("Do you confirm")}></RegularButton>
          
             <PopupMessage message={popupMessage} onClose={closeMessage} />
         </View>

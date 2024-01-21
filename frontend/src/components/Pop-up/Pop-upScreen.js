@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, Modal, StyleSheet, TouchableOpacity,Image} from 'react-native';
+import { View, Text, Modal, StyleSheet, TouchableOpacity,Image} from 'react-native'
 
 const PopupMessage = ({ message, onClose, onConfirm, props}) => {
   return (

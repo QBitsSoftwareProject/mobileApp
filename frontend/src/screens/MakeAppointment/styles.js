@@ -72,21 +72,6 @@ const styles = StyleSheet.create ({
     textAlign: 'center',
     paddingVertical:5
   },
-  button: {
-    width:250,
-    height:35,
-    backgroundColor: '#4A90BF', 
-    padding: 8,
-    borderRadius: 15,
-    marginVertical:15,
-    alignSelf:'center',
-    alignItems: 'center',
-  },
-  buttonText: {
-    color: 'white', 
-    fontSize: 16,
-    fontWeight: '600'
-  },
 popupContainer: {
   flex: 1,
   justifyContent: 'center',
