@@ -13,7 +13,7 @@ export const GetMonthAndDate = ({ fulldate,color}) => {
   const month = dateObject.getMonth() + 1; // Adding 1 because getMonth() returns a zero-based index
   const day = dateObject.getDate();
 
-  let monthName = '';
+  let monthName = ''
 
   switch (month) {
     case 1 :
