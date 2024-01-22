@@ -1,7 +1,7 @@
 
 import React, { useState } from "react";
-import { StyleSheet } from 'react-native';
 import { View, Text, TextInput, TouchableOpacity, FlatList, ScrollView } from "react-native";
+import styles from "./JornalStyles";
 
 const emojis = ["😊", "😢", "😡", "😍", "😱", "😐", " 😴" ,"🤒"];
 
