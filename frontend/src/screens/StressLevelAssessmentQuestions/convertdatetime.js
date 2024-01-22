@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 
 
-export const GetMonthAndDate = ({ fulldate }) => {
+export const GetMonthAndDate = ({ fulldate,color}) => {
   const dateObject = new Date(fulldate);
 
   if (isNaN(dateObject.getTime())) {
@@ -81,7 +81,7 @@ export const GetMonthAndDate = ({ fulldate }) => {
   }
 
   return (
-    <View style = {styles.monthdate}>
+    <View style={[styles.monthdate, { backgroundColor: color }]}>
       <Text style={styles.mdtext}>{`${monthName}`}</Text>
       <Text style={styles.mdtext}>{`${day}`}</Text>
     </View>
@@ -91,7 +91,7 @@ export const GetMonthAndDate = ({ fulldate }) => {
 
 const styles = StyleSheet.create({
   monthdate: {
-    backgroundColor:'#4ABFB4',
+    // backgroundColor:'#4ABFB4',
     height:49,
     width:53,
     borderRadius:15,

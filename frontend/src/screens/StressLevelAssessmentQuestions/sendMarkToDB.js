@@ -20,7 +20,7 @@ const formattedTime = currentDate.toLocaleTimeString();
 
       // const response = await axiosInstance.post('/mark/add-mark', payload);
 
-      const response = await fetch('http://172.20.10.6:8070/mark/add-mark', {
+      const response = await fetch('http://10.10.10.75:8070/mark/add-mark', {
         method: 'POST',
         headers: {
           "Content-Type": "application/json"

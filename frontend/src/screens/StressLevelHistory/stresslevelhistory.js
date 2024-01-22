@@ -66,13 +66,15 @@ const HelloWorldScreen = ({route,navigation}) => {
    });
   }
 
-  const renderDateItem = ({ item }) => (
-    <View style={styles.container}>
-      <View style={styles.leftSection}>
-      <View style={styles.verticalbar}></View>
-      <GetMonthAndDate fulldate={item.date} />
-      
-      </View>
+  const renderDateItem = ({ item, index }) => {
+    const colors = ['#4ABFB4', '#4A90BF'];
+
+    return (
+      <View style={styles.container}>
+        <View style={styles.leftSection}>
+          <View style={styles.verticalbar}></View>
+          <GetMonthAndDate fulldate={item.date} color={colors[index % colors.length]} />
+          </View>
       <View style={styles.rightSection}>
         {/* Render individual items for the date */}
         {item.items.map((dataItem, index) => (
@@ -87,13 +89,12 @@ const HelloWorldScreen = ({route,navigation}) => {
             </View>
             40
             </Text>
-            
-          </View>
-        ))}
+            </View>
+          ))}
+        </View>
       </View>
-    </View>
-    
-  );
+    );
+  };
 
   const renderSeparator = () => <View style={styles.separator} />;
 
