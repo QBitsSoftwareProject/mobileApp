@@ -50,7 +50,8 @@ const styles = StyleSheet.create({
         borderBottomRightRadius:20,
         justifyContent:'flex-end',
         alignItems:'flex-end',
-        alignSelf:'flex-end'
+        alignSelf:'flex-end',
+        
         
         
         

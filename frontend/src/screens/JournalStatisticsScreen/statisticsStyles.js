@@ -21,12 +21,47 @@ const styles = StyleSheet.create({
         marginBottom:15
     },
     tittle:{
-        marginTop:57,
+        marginTop:40,
         color:'#2C2E33',
         fontSize:15,
         fontWeight:'400',
+        paddingBottom:10
         
-    }
+    },
+    pns:{
+        flexDirection:'row',
+        marginTop:32,
+        marginLeft:30
+
+    },
+
+    align:{
+    
+    },
+    pnsTitle:{
+        fontSize:11,
+        color:'#5C677D',
+        fontWeight:'400',
+        marginLeft:8,
+        position:'absolute'
+    },
+
+    pns1:{
+        flexDirection:'row',
+        marginTop:-15,
+        marginLeft:150,
+        // alignContent:'center',
+
+    },
+    pns2:{
+        flexDirection:'row',
+        marginTop:-15,
+        marginLeft:270,
+        // alignContent:'center',
+
+    },
+   
+
 
 });
 

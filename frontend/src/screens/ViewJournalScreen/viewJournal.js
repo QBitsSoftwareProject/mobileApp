@@ -22,11 +22,19 @@ export const ViewJournal = ({navigation}) =>{
   }); 
     }
 
+    const handleFlotingPointButton = () =>{
+        navigation.navigate('AddNewJournal',{
+
+        })
+    }
+
 
 
     return(
         <View>
-        <ScrollView>
+        
+
+       
         <SafeAreaView style={styles.container}>
         <Text  style={styles.header} >My Journals</Text>
         <Text style={styles.subHeader}>View your past journals</Text>
@@ -35,22 +43,17 @@ export const ViewJournal = ({navigation}) =>{
 
         <Calendar></Calendar>
 
+
         
         <SwipableList></SwipableList>
-        <SwipableList></SwipableList>
-        <SwipableList></SwipableList>
-        <SwipableList></SwipableList>
-        <SwipableList></SwipableList>
+       
 
-    
+       
 
-
-    </SafeAreaView>
-    </ScrollView>
-    
+    </SafeAreaView>    
 
 
-<FloatingButton></FloatingButton>
+<FloatingButton btnCreate = {handleFlotingPointButton}></FloatingButton>
 </View>
 
 

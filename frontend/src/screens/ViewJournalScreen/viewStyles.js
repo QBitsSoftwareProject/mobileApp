@@ -2,7 +2,7 @@ import {StyleSheet} from "react-native";
 const styles = StyleSheet.create({
 
     container: {
-        flex: 1,
+        // flex: 1,
         margin:25
       },
       header: {
@@ -16,9 +16,7 @@ const styles = StyleSheet.create({
         color: '#101318',
       },
 
-     button:{
-        position:'absolute',
-     }
+ 
 
     });
 

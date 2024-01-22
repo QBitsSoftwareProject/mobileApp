@@ -23,7 +23,7 @@ export default function App() {
         <GestureHandlerRootView style={{ flex: 1 }}>
       <NavigationContainer>
       <Stack.Navigator
-        initialRouteName="AddNewJournal"
+        initialRouteName="ViewJournal"
         screenOptions={{ headerShown: false }}
       >
         <Stack.Screen name="AddNewJournal" component={AddNewJournal} />

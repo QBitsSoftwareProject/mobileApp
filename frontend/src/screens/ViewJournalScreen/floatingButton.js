@@ -2,7 +2,7 @@ import React from "react";
 import { View, Text, StyleSheet,ScrollView, TouchableOpacity, SafeAreaView, TextInput, Button, Image} from "react-native";
 
 
-export const FloatingButton = () =>{
+export const FloatingButton = (props) =>{
 
     const clickHandler = () =>{
         alert('floating button pressed')
@@ -13,7 +13,7 @@ export const FloatingButton = () =>{
        <TouchableOpacity
         style={styles.touchableOpacity}
         
-        onPress={clickHandler}>
+        onPress={props.btnCreate}>
 
             <Image 
             style={styles.floatingbutton}
@@ -34,14 +34,16 @@ const styles = StyleSheet.create({
         alignItems:'flex-end',
         alignSelf:'flex-end',
         right:30,
-        bottom:60
+        marginTop:-70
+        
+        
         
 
     },
     floatingbutton:{
         
         resizeMode:'contain',
-        width:65,
-        height:65
+        width:70,
+        height:70
     }
 })

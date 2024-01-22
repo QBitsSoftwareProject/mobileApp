@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, TextInput, StyleSheet } from 'react-native';
+import { View, TextInput, StyleSheet ,Image,TouchableOpacity} from 'react-native';
 
 
 export const JournalTittle = () => {
@@ -10,10 +10,19 @@ export const JournalTittle = () => {
         <TextInput
           style={styles.input}
           placeholder="Feeling happy today... "
-          
+        
           value={inputTittle}
           onChangeText={(text) => setInputTittle(text)}
+          
         />
+        
+        <View style={styles.edit}>
+            <Image source ={require('../../assets/images/journal/title.png')}/>
+          
+        </View>
+
+        
+        
         
       </View>
       
@@ -35,6 +44,16 @@ export const JournalTittle = () => {
       paddingLeft:25,
       width: 344,
       
+    
+      
     },
+
+    edit:{
+      marginLeft:290,
+      marginTop:-45
+      
+      
+  
+    }
   });
     

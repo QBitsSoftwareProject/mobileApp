@@ -8,7 +8,7 @@ export const CustomButton = (props) =>{
         <View style={styles.mainButton}>
             
             <View style={styles.createButton}>
-            <TouchableOpacity 
+            <TouchableOpacity onPress={props.createButton}
       
             style={[styles.createButton,{ backgroundColor: '#5296C5' }]}>
 
