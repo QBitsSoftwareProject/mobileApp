@@ -9,6 +9,7 @@ import stresslevelhistory from '../StressLevelHistory/stresslevelhistory';
 import { CustomButton } from "./doublebutton";
 import Overlay from './instruction';
 import axiosInstance from "../../api/axios";
+// import encrypt from "../StressLevelAssessmentQuestions/encrypt";
 
 
 import {
@@ -25,6 +26,18 @@ import {
 
 
 const DisplayResultScreen = ({ route ,navigation}) => {
+
+  // const secretKey = 'mysecretkey';
+  // const originalText = 'Hello, World!';
+  
+  // const encryptedData = encrypt(originalText, secretKey);
+  // console.log('Encrypted:', encryptedData);
+
+
+
+
+
+
 
     const [StressLevel, setStressLevel] = useState('');
     const [userID, setUserId] = useState('');
