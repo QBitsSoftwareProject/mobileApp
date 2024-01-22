@@ -22,7 +22,7 @@ export const GetMonthAndDate = ({ fulldate,color}) => {
       break;
 
       case 2 :
-        monthName = 'Feb';
+        monthName = 'Feb'
   
         break;
 
