@@ -6,6 +6,7 @@ export const GetMonthAndDate = ({ fulldate,color}) => {
   const dateObject = new Date(fulldate);
 
   if (isNaN(dateObject.getTime())) {
+
     // Check if the date is valid
     return <Text>Invalid Date</Text>;
   }
@@ -17,7 +18,7 @@ export const GetMonthAndDate = ({ fulldate,color}) => {
 
   switch (month) {
     case 1 :
-      monthName = 'Jan';
+      monthName = 'Jan'
 
       break;
 
@@ -27,52 +28,52 @@ export const GetMonthAndDate = ({ fulldate,color}) => {
         break;
 
       case 3 :
-        monthName = 'Mar';
+        monthName = 'Mar'
     
         break;
 
       case 4 :
-        monthName = 'Apr';
+        monthName = 'Apr'
     
         break;
 
       case 5 :
-        monthName = 'May';
+        monthName = 'May'
     
         break;
 
         case 6 :
-          monthName = 'Jun';
+          monthName = 'Jun'
     
           break;
     
           case 7 :
-            monthName = 'Jul';
+            monthName = 'Jul'
       
             break;
     
           case 8 :
-            monthName = 'Aug';
+            monthName = 'Aug'
         
             break;
     
           case 9 :
-            monthName = 'Sep';
+            monthName = 'Sep'
         
             break;
     
           case 10 :
-            monthName = 'Oct';
+            monthName = 'Oct'
         
             break;
 
             case 11 :
-              monthName = 'Nov';
+              monthName = 'Nov'
           
               break;
 
               case 13 :
-                monthName = 'Dec';
+                monthName = 'Dec'
             
                 break;
     
