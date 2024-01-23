@@ -1,12 +1,11 @@
 import { StyleSheet, TouchableOpacity, View, Image, Text } from 'react-native'
 import React from 'react'
-import { useState } from 'react';
 
 const CreateCard = (props) => {
 
 	return( 
-		<TouchableOpacity>
-			<View style = {styles.cardBox}>
+		<TouchableOpacity style={styles.cardBox}>
+			<View style = {{flexDirection:'row'}}>
 				<View style={styles.imageframe}>
 					<Image source={props.image}style={styles.image} /> 
 				</View>
@@ -34,8 +33,9 @@ const CreateCard = (props) => {
 							<Text style={
 								[
 									styles.description,
-									props.status === 'Accepted.' && styles.acceptedStatus,
-									props.status === 'Rejected.' && styles.rejectedStatus
+									{color:props.status === 'Accepted.' ? '#0AC112' : 
+									       props.status === 'Rejected.' ? '#E82519' : '#5C677D'},
+							
 							    ]  
 							}>Status: {props.status}</Text>
 						</View>	
@@ -77,21 +77,6 @@ const styles = StyleSheet.create ({
 	  fontWeight: "500",
 	  color:'#5C677D'
 	},
-	acceptedStatus: {
-		fontSize:12,
-	  	fontWeight: "400",
-		color: '#0AC112',
-	  },
-	  rejectedStatus: {
-		fontSize:12,
-	   fontWeight: "400",
-		color: '#E82519',
-	  },
-	//   defaultStatus: {
-	// 	fontSize:12,
-	//   	fontWeight: "400",
-	// 	color:'#5C677D'
-	//   },
 	imageframe:{
 		height:70,
 		width:70,

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { View, Text, Modal, StyleSheet, TouchableOpacity,Image} from 'react-native'
+import TransparentButton from '../Button/TransparentButon';
 
 const PopupMessage = ({ message, onClose, onConfirm, props}) => {
   return (
@@ -13,13 +14,10 @@ const PopupMessage = ({ message, onClose, onConfirm, props}) => {
                 style={{width:180, height:180, marginVertical:20}} />
           </View>
          
-          <TouchableOpacity onPress={onConfirm} style={styles.CCButton}>
-              <Text style={styles.CCButtonText}>Confirm</Text>
-            </TouchableOpacity>
-          <TouchableOpacity onPress={onClose} style={styles.CCButton}>
-            <Text style={styles.CCButtonText}>Cancel</Text>
-          </TouchableOpacity>
-         
+          <TransparentButton name = "Confirm"   onPress={onConfirm} />
+   
+          <TransparentButton name="Cancel"   onPress={onClose} />
+
         </View>
       </View>
     </Modal>
@@ -46,23 +44,6 @@ messageText: {
     color:'#40495B',
     textAlign:'center',
     marginBottom: 10,
-  },
-
-  CCButton: {
-    backgroundColor:'transparent',
-    borderWidth:1,
-    borderColor: '#3498db',
-    padding: 10,
-    margin:5,
-    borderRadius: 20,
-    alignItems: 'center',
-  },
-  CCButtonText: {
-    color: '#101318',
-    fontSize:18,
-    fontWeight: '#400',
-    textAlign:'center',
-
   },
 
 })

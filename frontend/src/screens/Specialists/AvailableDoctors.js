@@ -1,8 +1,9 @@
-import { Text, FlatList, ScrollView, View} from 'react-native'
+import { Text, ScrollView, View} from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import style from './style'
 import CreateCard from '../../components/Card/CreateCard'
 import ButtonGroup from '../../components/Button/ButtonGroup'
+import HeaderSub from '../../components/HeaderSub/HeaderSub'
 
 
 const AvailableDoctor = () => {
@@ -46,39 +47,39 @@ const docList = [
 ]; 
 
   return (
-  <ScrollView>
-    <SafeAreaView style={{margin:25}}>
-      
-      <Text style={style.header}>Doctor appointment</Text>
-      
-      <Text style={style.descript1}>Explore and find the perfect specialist.</Text>
-      
-      <ButtonGroup/>
+    <View>
+      <HeaderSub headLine={'Doctor appointment'}  subHeadLine={'Explore and find the perfect specialist.'}/>
+        
+          <SafeAreaView style={{margin:25}}>
+           
+            
+            <ButtonGroup/>
 
-      <Text style={style.descript2}>Available Doctors.</Text>
-   
-   <View style={{marginBottom:60}}>
-      <FlatList data={docList} 
-      renderItem={({item}) => (
-        <CreateCard 
-          image={item.image} 
-          title={item.title}
-          cardName={'AvailableDoc'}
-          university={item.university}
-          regno={item.regno}
-          hospital={item.hospital}
-      
-          />
-      )} />
+            <Text style={style.descript2}>Available Doctors.</Text>
+            <ScrollView> 
+              <View style={{ marginBottom: 60 }}>
+              
+                  {docList.map(( item ) => (
+                    <CreateCard
+                      key={item.id}
+                      image={item.image}
+                      title={item.title}
+                      cardName={'AvailableDoc'}
+                      university={item.university}
+                      regno={item.regno}
+                      hospital={item.hospital}
+                    />
+                  ))}
+                
+              </View>
+            </ScrollView>  
+          </SafeAreaView>
+    
     </View>
+     
 
-    </SafeAreaView>
-  </ScrollView>   
-
-  );
-
-};
-
+    )
+}
 
 
 export default AvailableDoctor;

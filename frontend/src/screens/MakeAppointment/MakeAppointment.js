@@ -28,29 +28,27 @@ const MakeAppointment = () => {
       {id:4, time:'6.30PM'},
       {id:5, time:'7.00PM'},
       {id:6, time:'7.300PM'},
-      {id:5, time:'7.00PM'},
-      {id:6, time:'7.300PM'},
     ];
 
-  const [popupMessage, setPopupMessage] = useState('');
+    const [popupMessage, setPopupMessage] = useState('');
 
-  const showMessage = (message) => {
-    setPopupMessage(message);
-  };
-
-  const closeMessage = () => {
-    setPopupMessage('');
-  };
+    const showMessage = (message) => {
+      setPopupMessage(message);
+    };
+  
+    const closeMessage = () => {
+      setPopupMessage('');
+    };
     
     return(
       <ScrollView>
         <SafeAreaView style={{margin:25}}>
 
-            <View>
-             <Text style={styles.header}>Dr. B.M. Weerasinghe.</Text>
-             </View>
+            <View style={styles.headerBox}>
+                <Text style={styles.header}>Dr. B.M. Weerasinghe</Text>
+            </View>
                 
-                <View style = {styles.boxcontainer}>
+            <View style = {styles.boxcontainer}>
                   
                   <View>
                     <Image source={{uri:'https://www.hollywoodreporter.com/wp-content/uploads/2015/01/kit_harrington.jpg?w=3000'}}
@@ -58,13 +56,12 @@ const MakeAppointment = () => {
                   </View>
                   
                   <View style = {styles.description}>  
-                    <Text>MBBS, University of Colombo.{'\n'} {'\n'}
-                        RED NO - 234589{'\n'}{'\n'}
-                        Anuradhapura Genaral Hospital.{'\n'}
-                    </Text>
+                    <Text style={styles.docDetails}>MBBS, University of Colombo.</Text>
+                    <Text style={styles.docDetails}>MBBS, University of Colombo.</Text>
+                    <Text style={styles.docDetails}>MBBS, University of Colombo.</Text>
                   </View>
 
-                </View>
+            </View>
                 
             <Text style = {styles.title}>About{'\n'}</Text>
 
@@ -76,40 +73,39 @@ const MakeAppointment = () => {
             </Text>
 
             <Text style = {styles.title}>Select Date{'\n'}</Text>
-   
+          
             <FlatList data={dateList} 
             renderItem={({item}) => (
+              <View style={{paddingBottom:10}}>
                 <DateCard
                 date={item.date}/>
+                </View>
             )} 
             
-            keyExtractor={ (item, index) => item.id.toString()} horizontal />           
-            
+             horizontal />           
+          
             <Text style = {styles.title}>Available Time Slot{'\n'}</Text>
 
             <FlatList data={timeList} 
-            numColumns={3}
+              numColumns={3}
               renderItem={({item, index}) => {
-              
-              return <TimeButton
-              time={item.time}/>
+                return <TimeButton
+                time={item.time}/>
               
             }} 
 
-            keyExtractor={ (item) => item.toString()} vertical/>
+            vertical/>
 
         <View style={{marginBottom:60}}>
-            {/* <TouchableOpacity style={styles.button} onPress={() => showMessage("Do you confirm")}>
-                <Text style={styles.buttonText}>Make an appointment</Text>
-            </TouchableOpacity> */}
 
-            <RegularButton name = {"Make an appointment"} onPress={() => showMessage("Do you confirm")}></RegularButton>
+            <RegularButton name = {"Make an appointment"} onPress={() => showMessage("Do you confirm???")}></RegularButton>
          
             <PopupMessage message={popupMessage} onClose={closeMessage} />
         </View>
            
         </SafeAreaView>
       </ScrollView>
+    
     )
 }
 

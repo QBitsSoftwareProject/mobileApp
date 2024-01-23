@@ -1,27 +1,30 @@
 import { StyleSheet } from 'react-native'
 
 const styles = StyleSheet.create ({
+  headerBox:{
+    alignItems:'center',
+    marginBottom:15
+  },
   header: {
-    marginLeft:64,
-    padding:20,
     fontSize:28,
     color:'#40495B',
-    fontWeight: "bold",
+    fontWeight: "700",
     },
   boxcontainer: {
     flexDirection:'row',
     justifyContent: 'space-between',
-    alignItems:'center',
+    
    },
   Image:{
     height:160,
     width:150,
     borderRadius:10,
   },
-  description: {
+  docDetails:{
     fontSize:14,
     color:'#5C677D',
     fontWeight: "400",
+    marginBottom:7,
   },
   title: {
     marginTop:15,

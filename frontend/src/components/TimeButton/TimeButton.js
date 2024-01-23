@@ -3,6 +3,10 @@ import React from 'react'
 import styles from '../../screens/MakeAppointment/styles'
 
 const TimeButton = (props) => { 
+const handleTimePress = ()=>{
+  //pass
+}
+
     return(
 
     <TouchableOpacity onPress={() => handleTimePress(props.time)}>
