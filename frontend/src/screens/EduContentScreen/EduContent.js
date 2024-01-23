@@ -1,13 +1,13 @@
 import { View, Text, Pressable, ScrollView } from "react-native";
 import React, { useState } from "react";
-import styles from "./style";
+import styles from "../EduContentScreen/AllContent/style";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 // sections
-import AllContent from "./AllContent";
-import AudioContent from "./AudioContent";
-import VideoContent from "./VideoContent";
-import ArticleContent from "./ArticleContent";
+import AllContent from "../EduContentScreen/AllContent/AllContent";
+import AudioContent from "../EduContentScreen/AudioContent/AudioContent";
+import VideoContent from "../EduContentScreen/VideoContent/VideoContent";
+import ArticleContent from "../EduContentScreen/ArticleContent/ArticleContent";
 // sections
 
 // components

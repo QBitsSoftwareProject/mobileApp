@@ -4,9 +4,9 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import styles from "./style";
 
 // components
-import Carousel from "../../components/Carousel/Carousel";
-import Categories from "../../components/Categories/Categories";
-import Audios from "../../components/AudioList/Audios";
+import Carousel from "../../../components/Carousel/Carousel";
+import Categories from "../../../components/Categories/Categories";
+import Audios from "../../../components/AudioList/Audios";
 // components
 
 function AllContent() {

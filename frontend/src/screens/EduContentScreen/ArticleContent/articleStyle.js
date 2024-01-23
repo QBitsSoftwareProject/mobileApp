@@ -34,6 +34,38 @@ const styles = StyleSheet.create({
     marginTop: 120,
     alignItems: "center",
   },
+  authorSections: {},
+  authorSection1: {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignContent: "center",
+    paddingHorizontal: 15,
+  },
+  authorSection2: {
+    paddingTop: 50,
+    paddingBottom: 30,
+    borderBottomWidth: 1,
+    borderBottomColor: "#928C8C",
+    display: "flex",
+    justifyContent: "space-evenly",
+    alignItems: "center",
+  },
+  exploreBtn: {
+    backgroundColor: "#4A90BF",
+    paddingHorizontal: 20,
+    paddingVertical: 8,
+    borderRadius: 50,
+  },
+  exploreBtnText: {
+    color: "white",
+    fontWeight: "bold",
+  },
+  articleCategories: {
+    paddingTop:20,
+    display:"flex",
+    alignItems:"center",
+  },
 });
 
 export default styles;
