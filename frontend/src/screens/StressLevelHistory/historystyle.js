@@ -22,7 +22,8 @@ const historystyles = StyleSheet.create({
       },
       rightSection: {
         
-        width:280,
+        
+        width:'70%',
         marginRight:25,
         paddingTop:30,
         
@@ -53,25 +54,26 @@ const historystyles = StyleSheet.create({
     timetext: {
       color: '#5C677D',
       fontSize: 9,
-      fontWeight: 400,
+      fontWeight: '400',
       
-      // marginBottom:5,
+      
     },
 
     stressLvlText: {
       
       color: '#40495B',
       fontSize: 14,
-      fontWeight: 400,
+      fontWeight: '400',
       
     },
 
     
     markText: {
-    paddingLeft:100,
+    
     fontSize:20,
-    marginBottom:-3,
+    // marginBottom:-3,
     color:'#40495B',
+    
     },
 
     verticalbar: {
@@ -81,11 +83,11 @@ const historystyles = StyleSheet.create({
     position: 'absolute',
     left: '42%',
     borderRadius:20,
-    shadowColor:'black',
-    shadowOffset: { width: 2, height: 2 },
-    shadowColor:'black',
-    shadowOpacity: 0.05,
-    shadowRadius: 4,
+    // shadowColor:'black',
+    // shadowOffset: { width: 2, height: 2 },
+    // shadowColor:'black',
+    // shadowOpacity: 0.05,
+    // shadowRadius: 4,
     elevation:1,
     
     },
@@ -95,6 +97,17 @@ const historystyles = StyleSheet.create({
       resizeMode: 'cover',
       // Add styles specific to the ImageBackground component here
     },
+
+    markview : {
+      
+      // alignSelf:'flex-end',
+      // backgroundColor:"red",
+      // alignItems:"flex-end",
+      display:"flex",
+      justifyContent:"flex-end",
+      marginLeft:"38%",
+
+    }
       
   
   });

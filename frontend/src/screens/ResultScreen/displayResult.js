@@ -9,7 +9,7 @@ import stresslevelhistory from '../StressLevelHistory/stresslevelhistory';
 import { CustomButton } from "./doublebutton";
 import Overlay from './instruction';
 import axiosInstance from "../../api/axios";
-// import encrypt from "../StressLevelAssessmentQuestions/encrypt";
+// import { encryptData } from "../StressLevelAssessmentQuestions/encrypt";
 
 
 import {
@@ -49,12 +49,13 @@ const DisplayResultScreen = ({ route ,navigation}) => {
       const extractedUserId = userId;
 
   setLastMark(stresslevel);
-  setUserId(extractedUserId); // Update the user ID without the array wrapper
+  setUserId(extractedUserId); 
   fetchMark(extractedUserId);
   console.log(extractedUserId);
 }, [stresslevel, userId]);
     
-    
+// const encryptText = encryptData({ text: "i am madusha" });
+// console.log('Encrypted Text:', encryptText);
 
         useEffect ( () => {
             console.log('Stress Level Mark:', StressLevel);

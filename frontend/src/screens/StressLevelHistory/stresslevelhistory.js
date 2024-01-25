@@ -84,9 +84,9 @@ const HelloWorldScreen = ({route,navigation}) => {
             <Text style={styles.timetext}>{dataItem.time}</Text>
             
             <Text style={styles.stressLvlText}>Your Stress level 
-            <View style={styles.markview}>
+            <View style={styles.markview}></View>
              <Text style={styles.markText}>{dataItem.mark} / </Text>
-            </View>
+            
             40
             </Text>
             </View>
