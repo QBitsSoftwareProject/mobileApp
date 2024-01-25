@@ -12,11 +12,14 @@ import ProfilePic from "../ProfilePic/ProfilePic";
 
 // data imports
 import Authors from "./Authors.js";
-import ArticleCategories from "./ArticleCategories.js";
-import ArticleCategoryBtn from "./ArticleCategoryBtn.js";
+import ArticleCategories from "./ArticleCategories/ArticleCategories.js";
+import ArticleCategoryBtn from "./ArticleCategories/ArticleCategoryBtn.js";
+import Article from "./Article.js";
+import ArticleData from "./ArticleData.js";
 // data imports
 
 const scr_width = Dimensions.get("window").width;
+const scr_height = Dimensions.get("window").height;
 
 const ArticleContent = () => {
   return (
@@ -45,9 +48,22 @@ const ArticleContent = () => {
           data={ArticleCategories}
           horizontal
           renderItem={({ item }) => {
-            return <ArticleCategoryBtn item={item}/>;
+            return <ArticleCategoryBtn item={item} />;
           }}
         />
+      </View>
+      <View style={styles.articleSection}>
+        <Text style={{ fontSize: 20, fontWeight: "400", padding: 10 }}>
+          Some recent articles
+        </Text>
+        <View>
+          <FlatList
+            data={ArticleData}
+            renderItem={({ item }) => {
+              return <Article item={item} />;
+            }}
+          />
+        </View>
       </View>
     </ScrollView>
   );

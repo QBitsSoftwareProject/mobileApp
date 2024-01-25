@@ -35,60 +35,92 @@ const EduContent = () => {
                   style={styles.NavBarElements}
                   android_ripple={{ borderless: true, radius: 50 }}
                 >
-                  <Text
+                  <View
                     style={
                       currentView == "AllContent"
-                        ? styles.NavBarElements_current
+                        ? styles.NavBarElements_currentBtn
                         : null
                     }
                   >
-                    All
-                  </Text>
+                    <Text
+                      style={
+                        currentView == "AllContent"
+                          ? styles.NavBarElements_currentText
+                          : null
+                      }
+                    >
+                      All
+                    </Text>
+                  </View>
                 </Pressable>
                 <Pressable
                   onPress={() => changeView("ArticleContent")}
                   style={styles.NavBarElements}
                   android_ripple={{ borderless: true, radius: 50 }}
                 >
-                  <Text
+                  <View
                     style={
                       currentView == "ArticleContent"
-                        ? styles.NavBarElements_current
+                        ? styles.NavBarElements_currentBtn
                         : null
                     }
                   >
-                    Articles
-                  </Text>
+                    <Text
+                      style={
+                        currentView == "ArticleContent"
+                          ? styles.NavBarElements_currentText
+                          : null
+                      }
+                    >
+                      Articles
+                    </Text>
+                  </View>
                 </Pressable>
                 <Pressable
                   onPress={() => changeView("VideoContent")}
                   style={styles.NavBarElements}
                   android_ripple={{ borderless: true, radius: 50 }}
                 >
-                  <Text
+                  <View
                     style={
                       currentView == "VideoContent"
-                        ? styles.NavBarElements_current
+                        ? styles.NavBarElements_currentBtn
                         : null
                     }
                   >
-                    Videos
-                  </Text>
+                    <Text
+                      style={
+                        currentView == "VideoContent"
+                          ? styles.NavBarElements_currentText
+                          : null
+                      }
+                    >
+                      Videos
+                    </Text>
+                  </View>
                 </Pressable>
                 <Pressable
                   onPress={() => changeView("AudioContent")}
                   style={styles.NavBarElements}
                   android_ripple={{ borderless: true, radius: 50 }}
                 >
-                  <Text
+                  <View
                     style={
                       currentView == "AudioContent"
-                        ? styles.NavBarElements_current
+                        ? styles.NavBarElements_currentBtn
                         : null
                     }
                   >
-                    Audios
-                  </Text>
+                    <Text
+                      style={
+                        currentView == "AudioContent"
+                          ? styles.NavBarElements_currentText
+                          : null
+                      }
+                    >
+                      Audios
+                    </Text>
+                  </View>
                 </Pressable>
               </View>
             </View>

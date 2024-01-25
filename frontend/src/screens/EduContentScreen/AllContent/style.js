@@ -9,28 +9,36 @@ const styles = StyleSheet.create({
   },
   NavContainer: {
     position: "absolute",
-    justifyContent:"center",
+    justifyContent: "center",
     alignItems: "center",
     marginTop: 80,
     marginLeft:"8%",
   },
   NavBar: {
-    marginLeft: "auto",
-    marginRight: "auto",
     borderRadius: 100,
     flexDirection: "row",
-    backgroundColor: "#4A90BF",
+    backgroundColor: "white",
     width: "90%",
     alignItems: "center",
-    justifyContent: "space-evenly",
+    justifyContent: "space-between",
     height: 40,
   },
   NavBarElements: {
     color: "black",
     fontWeight: "900",
+    textAlign:"center",
+    marginLeft:"auto",
+    marginRight:"auto",
   },
-  NavBarElements_current: {
+  NavBarElements_currentBtn: {
+    backgroundColor: "#4A90BF",
+    padding: 10,
+    borderRadius: 100,
+    width: 100,
+  },
+  NavBarElements_currentText: {
     color: "white",
+    textAlign: "center",
   },
   Content: {
     width: "100%",
