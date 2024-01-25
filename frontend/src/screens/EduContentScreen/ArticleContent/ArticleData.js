@@ -5,6 +5,16 @@ export default [
     author: "Angela stones",
     author_profile: require("../../../assets/images/profilePics/img1.png"),
     thumbnail_loc: require("../../../assets/images/articleThumbnails/meditation_article1.png"),
+    tags: [
+      {
+        id: "1",
+        tag: "health",
+      },
+      {
+        id: "2",
+        tag: "meditation",
+      },
+    ],
   },
   {
     id: "2",
@@ -12,6 +22,16 @@ export default [
     author: "Micheal stark",
     author_profile: require("../../../assets/images/profilePics/img2.png"),
     thumbnail_loc: require("../../../assets/images/articleThumbnails/food_article1.png"),
+    tags: [
+      {
+        id: "1",
+        tag: "health",
+      },
+      {
+        id: "2",
+        tag: "meditation",
+      },
+    ],
   },
   {
     id: "3",
@@ -19,6 +39,16 @@ export default [
     author: "Jeff henderson",
     author_profile: require("../../../assets/images/profilePics/img3.png"),
     thumbnail_loc: require("../../../assets/images/articleThumbnails/puzzle_article1.png"),
+    tags: [
+      {
+        id: "1",
+        tag: "health",
+      },
+      {
+        id: "2",
+        tag: "meditation",
+      },
+    ],
   },
   {
     id: "4",
@@ -26,5 +56,15 @@ export default [
     author: "Andrew huberman",
     author_profile: require("../../../assets/images/profilePics/img4.png"),
     thumbnail_loc: require("../../../assets/images/articleThumbnails/grpTravel_article1.png"),
+    tags: [
+      {
+        id: "1",
+        tag: "health",
+      },
+      {
+        id: "2",
+        tag: "meditation",
+      },
+    ],
   },
 ];

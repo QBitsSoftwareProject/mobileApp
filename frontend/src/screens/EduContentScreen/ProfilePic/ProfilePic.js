@@ -1,6 +1,7 @@
 import { View, Text, TouchableOpacity, Image } from 'react-native'
 import React from 'react'
 import styles from './ProfileStyles'
+import { useNavigation } from "@react-navigation/native";
 
 const ProfilePic = ({item}) => {
   if (!item) {
