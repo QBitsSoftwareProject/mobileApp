@@ -40,6 +40,7 @@ const ArticleContent = () => {
               renderItem={({ item }) => {
                 return <ProfilePic item={item} />;
               }}
+
             />
             <ProfilePic />
           </View>
