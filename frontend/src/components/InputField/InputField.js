@@ -4,7 +4,7 @@ import React from 'react'
 const InputField = (props) => {
   return (
     <View style={{marginBottom:32}}>
-        <View>
+        <View style={{flexDirection:'row', justifyContent:'space-between'}}>
             <Text 
                 style={{
                     fontSize:14,
@@ -15,6 +15,7 @@ const InputField = (props) => {
 
                 {props.label}
             </Text>
+            <Text style={{color:'#E82519'}}>{props.errMsg}</Text>
         </View>
         
 

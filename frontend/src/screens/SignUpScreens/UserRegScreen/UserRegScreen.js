@@ -21,6 +21,7 @@ const UserRegScreen = () => {
 
   const [isEmpty, setIsEmpty] = useState(false);
   const [isChecked, setIsChecked] = useState(false);
+  const [isEmailValid, setIsEmailValid] = useState(true);
   
 
   const screenHeight = Dimensions.get('window').height;
@@ -33,6 +34,11 @@ const UserRegScreen = () => {
     navigation.navigate('WelcomeScreen')
   }
 
+  const validateEmail = (email) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
   const handleSubmit = ()=>{
     if(
       name.trim() === '' ||
@@ -44,8 +50,13 @@ const UserRegScreen = () => {
       country.trim() === ''
     ){
       setIsEmpty(true)
+
     }else if(!isChecked){
       setUnCheckedColor('#E82519')
+      setIsEmpty(false)
+
+    }else if(!validateEmail(email)){
+      setIsEmailValid(false)
       setIsEmpty(false)
     }
     else{
@@ -53,6 +64,8 @@ const UserRegScreen = () => {
       navigation.navigate('TabBar')
     }
   }
+
+  
 
   return (
     <View style={styles.conatiner}>
@@ -67,8 +80,9 @@ const UserRegScreen = () => {
               <Text style={styles.headerText}>Please fill the following form with correct details.</Text>
               
                 <InputField placeHolder={'B.M. Weerasinghe'} label={'Full name / Name with initial :'} onChangeText={setName}/>
-                <InputField placeHolder={'Bimsara Madusha'} label={'User name :'} onChangeText={setUserName}/>
-                <InputField placeHolder={'ex@gmail.com'} label={'Email :'} onChangeText={setEmail}/>
+                <InputField placeHolder={'Bimsara Madusha'} label={'User name :'} onChangeText={setUserName}/>         
+                <InputField placeHolder={'ex@gmail.com'} label={'Email :'} onChangeText={setEmail} errMsg={!isEmailValid ? 'Email is not valid!':''}/>
+ 
                 <InputField placeHolder={'+9412345678'} label={'Contact No :'} onChangeText={setContactNo}/>
                 <InputField placeHolder={'67/1, welona place, kaubedda'} label={'Address :'} onChangeText={setAddress}/>
                 <InputField placeHolder={'Moratuwa'} label={'City :'} onChangeText={setCity}/>
