@@ -22,6 +22,7 @@ const UserRegScreen = () => {
   const [isEmpty, setIsEmpty] = useState(false);
   const [isChecked, setIsChecked] = useState(false);
   const [isEmailValid, setIsEmailValid] = useState(true);
+  const [isPhoneNumValid, setIsPhoneNumValid] = useState(true);
   
 
   const screenHeight = Dimensions.get('window').height;
@@ -37,6 +38,14 @@ const UserRegScreen = () => {
   const validateEmail = (email) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
+  };
+
+  const validatePhoneNumber = (phoneNumber) => {
+    const phoneRegex = /^\+\d{11}$/;
+    return phoneRegex.test(phoneNumber);
+  };
+  const handleCountryChange = (selectedCountry) => {
+    setCountry(selectedCountry); // Update the country state in the main file
   };
 
   const handleSubmit = ()=>{
@@ -59,13 +68,16 @@ const UserRegScreen = () => {
       setIsEmailValid(false)
       setIsEmpty(false)
     }
+    else if(!validatePhoneNumber(contactNo)){
+      setIsPhoneNumValid(false)
+      setIsEmpty(false)
+    }
     else{
       setIsEmpty(false)
       navigation.navigate('TabBar')
     }
   }
 
-  
 
   return (
     <View style={styles.conatiner}>
@@ -83,10 +95,10 @@ const UserRegScreen = () => {
                 <InputField placeHolder={'Bimsara Madusha'} label={'User name :'} onChangeText={setUserName}/>         
                 <InputField placeHolder={'ex@gmail.com'} label={'Email :'} onChangeText={setEmail} errMsg={!isEmailValid ? 'Email is not valid!':''}/>
  
-                <InputField placeHolder={'+9412345678'} label={'Contact No :'} onChangeText={setContactNo}/>
+                <InputField placeHolder={'+9412345678'} label={'Contact No :'} onChangeText={setContactNo} errMsg={!isPhoneNumValid ? 'Phone number is not valid!':''}/>
                 <InputField placeHolder={'67/1, welona place, kaubedda'} label={'Address :'} onChangeText={setAddress}/>
                 <InputField placeHolder={'Moratuwa'} label={'City :'} onChangeText={setCity}/>
-                <InputField placeHolder={'Ex_Sri Lanka'} label={'Country :'} onChangeText={setCountry}/>
+                <InputField placeHolder={'Ex_Sri Lanka'} label={'Country :'} onChangeText={setCountry} searchBox={true} query={country}/>
 
             </View>
 
