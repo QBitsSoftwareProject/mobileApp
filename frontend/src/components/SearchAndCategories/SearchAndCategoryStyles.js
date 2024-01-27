@@ -11,7 +11,7 @@ const styles = StyleSheet.create({
     position: "absolute",
     justifyContent: "center",
     alignItems: "center",
-    marginTop: 80,
+    marginTop: 40,
     marginLeft: "8%",
   },
   NavBar: {

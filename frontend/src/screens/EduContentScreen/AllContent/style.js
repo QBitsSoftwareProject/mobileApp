@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
   },
   mainHeading: {
     color: "black",
-    marginTop: -30,
+    marginTop: 70,
     marginLeft: 10,
     fontSize: 20,
   },

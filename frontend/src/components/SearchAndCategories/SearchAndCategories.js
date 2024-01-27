@@ -1,15 +1,10 @@
-import { View, Text, Pressable, ScrollView } from "react-native";
+import { View, Text, Pressable} from "react-native";
 import React from "react";
 import styles from "./SearchAndCategoryStyles";
 
-// components
-import SearchBarComponent from "../../components/SearchBar/SearchBar";
-// components
-
-const SearchAndCategories = () => {
+const SearchAndCategories = ({ changeView, currentView }) => {
   return (
     <View>
-      <SearchBarComponent />
       <View style={styles.NavContainer}>
         <View style={styles.NavBar}>
           <Pressable

@@ -11,7 +11,11 @@ import ArticleContent from "../EduContentScreen/ArticleContent/ArticleContent";
 // sections
 
 // components
+import SearchBarComponent from "../../components/SearchBar/SearchBar";
 import SearchAndCategories from "../../components/SearchAndCategories/SearchAndCategories";
+import Carousel from "../../components/Carousel/Carousel";
+import Categories from "../../components/Categories/Categories";
+import Audios from "../../components/AudioList/Audios";
 // components
 
 const EduContent = () => {
@@ -26,32 +30,37 @@ const EduContent = () => {
       <View style={styles.Container}>
         <ScrollView>
           <View style={{ zIndex: 100 }}>
-            {/* categories */}
-            <SearchAndCategories />
-            {/* categories */}
+            {/* search and categories */}
+            <SearchBarComponent />
+            <SearchAndCategories
+              changeView={changeView}
+              currentView={currentView}
+            />
+            {/* search and categories */}
           </View>
           {/* changing view */}
-          <View style={styles.Content}>{renderContent(currentView)}</View>
+          <SafeAreaView>
+            <Text style={styles.mainHeading}>Featured Resurces</Text>
+            <View>
+              <Carousel />
+            </View>
+            <Text style={styles.mainHeading2}>Read articles about</Text>
+            <View>
+              <Categories />
+            </View>
+            <Text style={[styles.mainHeading2, { marginTop: 40 }]}>
+              Follow Along
+            </Text>
+            <View>
+              <Audios />
+            </View>
+          </SafeAreaView>
           {/* changing view */}
         </ScrollView>
       </View>
     </SafeAreaView>
   );
-};
 
-const renderContent = (currentView) => {
-  switch (currentView) {
-    case "AllContent":
-      return <AllContent />;
-    case "ArticleContent":
-      return <ArticleContent />;
-    case "VideoContent":
-      return <VideoContent />;
-    case "AudioContent":
-      return <AudioContent />;
-    default:
-      return null;
-  }
 };
 
 export default EduContent;
