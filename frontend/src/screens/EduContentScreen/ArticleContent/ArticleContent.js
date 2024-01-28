@@ -7,7 +7,7 @@ import {
   ScrollView,
   SafeAreaView,
 } from "react-native";
-import React from "react";
+import React, { useState } from "react";
 import styles from "./articleStyle";
 import ProfilePic from "../ProfilePic/ProfilePic";
 
@@ -19,15 +19,26 @@ import Article from "./Article.js";
 import ArticleData from "./ArticleData.js";
 // data imports
 
+// components
+import SearchBarComponent from "../../../components/SearchBar/SearchBar.js";
+import SearchAndCategories from "../../../components/SearchAndCategories/SearchAndCategories.js";
+// components
+
 const scr_width = Dimensions.get("window").width;
 const scr_height = Dimensions.get("window").height;
 
 const ArticleContent = () => {
+  const [currentView, setCurrentView] = useState("ArticleContent"); // Initial view
+
+  const changeView = (viewName) => {
+    setCurrentView(viewName);
+  };
+
   return (
     <SafeAreaView>
-      <View>
+      <View style={styles.Container}>
         <ScrollView>
-          <View style={{ zIndex: 100 }}>
+          <View style={{ zIndex: 100,marginTop:20 }}>
             {/* search and categories */}
             <SearchBarComponent />
             <SearchAndCategories

@@ -3,13 +3,6 @@ import React, { useState } from "react";
 import styles from "../EduContentScreen/AllContent/style";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-// sections
-import AllContent from "../EduContentScreen/AllContent/AllContent";
-import AudioContent from "../EduContentScreen/AudioContent/AudioContent";
-import VideoContent from "../EduContentScreen/VideoContent/VideoContent";
-import ArticleContent from "../EduContentScreen/ArticleContent/ArticleContent";
-// sections
-
 // components
 import SearchBarComponent from "../../components/SearchBar/SearchBar";
 import SearchAndCategories from "../../components/SearchAndCategories/SearchAndCategories";
@@ -17,6 +10,8 @@ import Carousel from "../../components/Carousel/Carousel";
 import Categories from "../../components/Categories/Categories";
 import Audios from "../../components/AudioList/Audios";
 // components
+
+
 
 const EduContent = () => {
   const [currentView, setCurrentView] = useState("AllContent"); // Initial view
@@ -60,7 +55,6 @@ const EduContent = () => {
       </View>
     </SafeAreaView>
   );
-
 };
 
 export default EduContent;

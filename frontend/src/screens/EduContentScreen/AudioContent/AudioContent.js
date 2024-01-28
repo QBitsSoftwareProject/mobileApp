@@ -1,5 +1,5 @@
 import { View, Text, ScrollView } from "react-native";
-import React from "react";
+import React, { useState } from "react";
 
 // components
 import SearchBarComponent from "../../../components/SearchBar/SearchBar";
@@ -7,6 +7,12 @@ import SearchAndCategories from "../../../components/SearchAndCategories/SearchA
 // components
 
 const AudioContent = () => {
+  const [currentView, setCurrentView] = useState("AudioContent"); // Initial view
+
+  const changeView = (viewName) => {
+    setCurrentView(viewName);
+  };
+
   return (
     <ScrollView>
       <View style={{ zIndex: 100 }}>

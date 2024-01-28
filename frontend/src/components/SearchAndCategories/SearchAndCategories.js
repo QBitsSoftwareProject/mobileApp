@@ -1,101 +1,113 @@
-import { View, Text, Pressable} from "react-native";
-import React from "react";
+import { View, Text, Pressable } from "react-native";
+import React, { useState } from "react";
 import styles from "./SearchAndCategoryStyles";
 
-const SearchAndCategories = ({ changeView, currentView }) => {
+// navigation
+import { useNavigation } from "@react-navigation/native";
+// navigation
+
+const SearchAndCategories = ({ currentView }) => {
+  const navigation = useNavigation();
+  const [selectedScreen, setSelectedScreen] = useState(currentView);
+
+  const navigateToScreen = (screenName) => {
+    setSelectedScreen(screenName);
+    navigation.navigate(screenName);
+  };
+
   return (
     <View>
       <View style={styles.NavContainer}>
         <View style={styles.NavBar}>
           <Pressable
-            onPress={() => changeView("AllContent")}
+            onPress={() => navigateToScreen("HomeScreen")}
             style={styles.NavBarElements}
             android_ripple={{ borderless: true, radius: 50 }}
           >
             <View
-              style={
-                currentView == "AllContent"
-                  ? styles.NavBarElements_currentBtn
-                  : null
-              }
+              style={[
+                styles.NavBarElements,
+                selectedScreen === "AllContent" &&
+                  styles.NavBarElements_currentBtn,
+              ]}
             >
               <Text
-                style={
-                  currentView == "AllContent"
-                    ? styles.NavBarElements_currentText
-                    : null
-                }
+                style={[
+                  styles.NavBarElements,
+                  selectedScreen === "AllContent" &&
+                    styles.NavBarElements_currentText,
+                ]}
               >
                 All
               </Text>
             </View>
           </Pressable>
           <Pressable
-            onPress={() => changeView("ArticleContent")}
+            onPress={() => navigateToScreen("ArticleScreen")}
             style={styles.NavBarElements}
             android_ripple={{ borderless: true, radius: 50 }}
           >
             <View
-              style={
-                currentView == "ArticleContent"
-                  ? styles.NavBarElements_currentBtn
-                  : null
-              }
+              style={[
+                styles.NavBarElements,
+                selectedScreen === "ArticleContent" &&
+                  styles.NavBarElements_currentBtn,
+              ]}
             >
               <Text
-                style={
-                  currentView == "ArticleContent"
-                    ? styles.NavBarElements_currentText
-                    : null
-                }
+                style={[
+                  styles.NavBarElements,
+                  selectedScreen === "ArticleContent" &&
+                    styles.NavBarElements_currentText,
+                ]}
               >
-                Articles
+                Article
               </Text>
             </View>
           </Pressable>
           <Pressable
-            onPress={() => changeView("VideoContent")}
+            onPress={() => navigateToScreen("VideoScreen")}
             style={styles.NavBarElements}
             android_ripple={{ borderless: true, radius: 50 }}
           >
             <View
-              style={
-                currentView == "VideoContent"
-                  ? styles.NavBarElements_currentBtn
-                  : null
-              }
+              style={[
+                styles.NavBarElements,
+                selectedScreen === "VideoContent" &&
+                  styles.NavBarElements_currentBtn,
+              ]}
             >
               <Text
-                style={
-                  currentView == "VideoContent"
-                    ? styles.NavBarElements_currentText
-                    : null
-                }
+                style={[
+                  styles.NavBarElements,
+                  selectedScreen === "VideoContent" &&
+                    styles.NavBarElements_currentText,
+                ]}
               >
-                Videos
+                Video
               </Text>
             </View>
           </Pressable>
           <Pressable
-            onPress={() => changeView("AudioContent")}
+            onPress={() => navigateToScreen("AudioScreen")}
             style={styles.NavBarElements}
             android_ripple={{ borderless: true, radius: 50 }}
           >
             <View
-              style={
-                currentView == "AudioContent"
-                  ? styles.NavBarElements_currentBtn
-                  : null
-              }
+              style={[
+                styles.NavBarElements,
+                selectedScreen === "AudioContent" &&
+                  styles.NavBarElements_currentBtn,
+              ]}
             >
               <Text
-                style={
-                  currentView == "AudioContent"
-                    ? styles.NavBarElements_currentText
-                    : null
-                }
+                style={[
+                  styles.NavBarElements,
+                  selectedScreen === "AudioContent" &&
+                    styles.NavBarElements_currentText,
+                ]}
               >
-                Audios
+                Audio
               </Text>
             </View>
           </Pressable>

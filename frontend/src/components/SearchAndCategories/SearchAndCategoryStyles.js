@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
   },
   NavBarElements: {
     color: "black",
-    fontWeight: "900",
+    fontWeight: "700",
     textAlign: "center",
     marginLeft: "auto",
     marginRight: "auto",

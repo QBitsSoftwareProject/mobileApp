@@ -1,5 +1,5 @@
 import { View, Text, SafeAreaView, ScrollView } from "react-native";
-import React from "react";
+import React, { useState } from "react";
 
 // components
 import SearchBarComponent from "../../../components/SearchBar/SearchBar";
@@ -7,6 +7,12 @@ import SearchAndCategories from "../../../components/SearchAndCategories/SearchA
 // components
 
 const VideoContent = () => {
+  const [currentView, setCurrentView] = useState("VideoContent"); // Initial view
+
+  const changeView = (viewName) => {
+    setCurrentView(viewName);
+  };
+
   return (
     <SafeAreaView>
       <ScrollView>

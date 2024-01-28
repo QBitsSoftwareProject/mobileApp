@@ -27,14 +27,9 @@ const styles = StyleSheet.create({
   NavBarElements_current: {
     color: "white",
   },
-  Content: {
-    backgroundColor: "#4A90BF",
-    width: "100%",
-    height: 300,
-    marginTop: 120,
-    alignItems: "center",
+  authorSections: {
+    marginTop:120,
   },
-  authorSections: {},
   authorSection1: {
     display: "flex",
     flexDirection: "row",
