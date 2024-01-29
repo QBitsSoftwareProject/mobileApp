@@ -1,29 +1,39 @@
 import React, {useEffect,useState} from 'react';
-import { Text, View, Image, TouchableOpacity ,ScrollView} from 'react-native';
+import { Text, View, Image, TouchableOpacity ,ScrollView,Dimensions} from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import styles from './MoodInputStyles';
 import back from '../../assets/images/back.png';
 
+
 const MoodInputScreen = () => {
 
   const [optionValue, setOptionValue] = useState('');
+  const [screenHeight, setScreenHeight] = useState('');
 
   const handleOptions = (value) => {
         console.log(value);
         setOptionValue(value);
   }
+  useEffect(() => {
+
+  const windowSize = Dimensions.get('window');
+  const windowHeight = windowSize.height;
+  setScreenHeight(windowHeight);
 
   console.log(optionValue);
+  console.log(windowHeight);
+  })
 
   return (
-    <ScrollView>
-      <SafeAreaView>
+    
+      <SafeAreaView >
         <TouchableOpacity style={styles.backBtn}  >
           <Image source={require('../../assets/images/back.png')} style={styles.backPng} />
         </TouchableOpacity>
 
         <View style={styles.horivontalBar}></View>
-
+        <View style = {{height: screenHeight-282}}>
+        <ScrollView >
         <View style={styles.textArea}>
           <Text style={styles.textOne}>Hey there!</Text>
           <Text style={styles.textOne}>Ready to capture your mood? </Text>
@@ -64,9 +74,10 @@ const MoodInputScreen = () => {
           <Text style = {styles.btnText}>Submit</Text>
         </TouchableOpacity>
 
-
+        </ScrollView>
+        </View>
       </SafeAreaView>
-    </ScrollView>
+    
   );
 };
 

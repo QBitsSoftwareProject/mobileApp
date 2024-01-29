@@ -2,7 +2,7 @@ import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
     backBtn:{
-        marginTop:50,
+        // marginTop:50,
         margin:25
         
     },
@@ -18,11 +18,12 @@ const styles = StyleSheet.create({
         height:10,
         backgroundColor:'#4ABFB4',
         borderRadius:15,
-        alignSelf:'center'
+        alignSelf:'center',
+        marginBottom:32
     },
 
     textArea: {
-        marginTop: 32,
+        // marginTop: 32,
         marginLeft:25,
 
     },
@@ -92,7 +93,7 @@ const styles = StyleSheet.create({
         width:144,
         height:48,
         backgroundColor:'white',
-        marginBottom:60,
+        marginBottom:20,
         alignSelf:'center',
         borderRadius:20,
         borderWidth:1,
