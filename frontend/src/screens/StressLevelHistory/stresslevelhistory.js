@@ -5,14 +5,13 @@ import React, { useState, useEffect } from "react";
 import axiosInstance from '../../api/axios';
 import { GetMonthAndDate } from '../StressLevelAssessmentQuestions/convertdatetime';
 import TabBar from "../../components/TabBar/TabBar";
-import { createStackNavigator } from '@react-navigation/stack';
 import { useNavigation } from '@react-navigation/native';
 
 
 
 
 
-const HelloWorldScreen = ({route,navigation}) => {
+const HelloWorldScreen = ({route}) => {
   const [historyData, setHistoryData] = useState([]);
   const [userID, setUserId] = useState('');
 
@@ -58,7 +57,7 @@ const HelloWorldScreen = ({route,navigation}) => {
     fetchHistoryData(user_id); // Call fetchHistoryData here
   }, [user_id]);
 
-  const Stack = createStackNavigator();
+  const navigation = useNavigation();
 
   const handleBackButton = () =>{
     navigation.navigate('DisplayResultScreen', {

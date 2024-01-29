@@ -1,11 +1,8 @@
 import React , { useState, useEffect } from "react";
-import {getMark} from './getStressLevel';
 import styles from './resultStyle';
 import HeaderSub from "../../components/HeaderSub.js/HeaderSub";
 import TabBar from "../../components/TabBar/TabBar";
-import { createStackNavigator } from '@react-navigation/stack';
 import { useNavigation } from '@react-navigation/native';
-import stresslevelhistory from '../StressLevelHistory/stresslevelhistory';
 import { CustomButton } from "./doublebutton";
 import Overlay from './instruction';
 import axiosInstance from "../../api/axios";
@@ -25,7 +22,7 @@ import {
 
 
 
-const DisplayResultScreen = ({ route ,navigation}) => {
+const DisplayResultScreen = ({ route}) => {
 
   // const secretKey = 'mysecretkey';
   // const originalText = 'Hello, World!';
@@ -75,7 +72,8 @@ const DisplayResultScreen = ({ route ,navigation}) => {
           level = 'high';
         }
 
-        const Stack = createStackNavigator();
+        
+        const navigation = useNavigation();
 
         const handleHistorybutton = () => {
 

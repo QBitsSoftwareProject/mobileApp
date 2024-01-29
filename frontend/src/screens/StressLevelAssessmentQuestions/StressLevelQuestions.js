@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { SafeAreaView } from 'react-native-safe-area-context';
 import RadioButton from './optionfetch';
 import { useNavigation } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
 import DisplayResultScreen from '../ResultScreen/displayResult';
 import TabBar from "../../components/TabBar/TabBar";
 import { getMark } from "../ResultScreen/getStressLevel";
@@ -22,7 +21,7 @@ import { ProgressBar } from 'react-native-paper';
 
 import axios from "axios";
 
-const Question = ({navigation}) => {
+const Question = () => {
   const [options, setOptions] = useState([]);
   const [ids, setIds] = useState([]);
   const [question, setQuestion] = useState('');
@@ -139,7 +138,8 @@ const Question = ({navigation}) => {
 
   
 
-  const Stack = createStackNavigator();
+  
+  const navigation = useNavigation();
 
   const id1 = '214224J';
 
