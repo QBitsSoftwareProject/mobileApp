@@ -82,6 +82,8 @@ const TaskDescriptionScreen = () => {
     setBoxHeight(height);
   };
 
+  const scrollHeight = Dimensions.get('window').height
+
   return (
     <View style={styles.container}>
       <SafeAreaView>
@@ -94,10 +96,10 @@ const TaskDescriptionScreen = () => {
 
         {/* task step rendering ..................................................................................... */}
 
-        <View style={{height:532, alignItems:'center', }} >
+        <View style={{height:scrollHeight-190, alignItems:'center', }} >
        
         <ScrollView >
-          
+
           <View style={styles.headTextBox}>
             <Text style={styles.task}>Task {taskId}</Text>
             <Text style={styles.taskHead}>Take today meditation</Text>
