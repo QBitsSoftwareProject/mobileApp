@@ -42,7 +42,9 @@ const Article = ({ item }) => {
               <Image
                 source={require("../../../assets/images/articleThumbnails/bi_eye-fill.png")}
               />
-              <Text style={{ fontSize: 10, color: "white", fontWeight: 500 }}>
+              <Text
+                style={{ fontSize: 10, color: "white", fontWeight: " 500 " }}
+              >
                 {" "}
                 READ MORE
               </Text>

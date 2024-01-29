@@ -7,7 +7,7 @@ import {
   ScrollView,
   SafeAreaView,
 } from "react-native";
-import React, { useState } from "react";
+import React from "react";
 import styles from "./articleStyle";
 import ProfilePic from "../ProfilePic/ProfilePic";
 
@@ -28,22 +28,15 @@ const scr_width = Dimensions.get("window").width;
 const scr_height = Dimensions.get("window").height;
 
 const ArticleContent = () => {
-  const [currentView, setCurrentView] = useState("ArticleContent"); // Initial view
-
-  const changeView = (viewName) => {
-    setCurrentView(viewName);
-  };
-
   return (
     <SafeAreaView>
-      <View style={styles.Container}>
+      <View>
         <ScrollView>
-          <View style={{ zIndex: 100,marginTop:20 }}>
+          <View style={{ zIndex: 100,marginTop:40 }}>
             {/* search and categories */}
             <SearchBarComponent />
             <SearchAndCategories
-              changeView={changeView}
-              currentView={currentView}
+              currentView={"ArticleScreen"}
             />
             {/* search and categories */}
           </View>

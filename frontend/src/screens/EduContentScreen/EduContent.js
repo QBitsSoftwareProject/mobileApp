@@ -1,5 +1,5 @@
 import { View, Text, Pressable, ScrollView } from "react-native";
-import React, { useState } from "react";
+import React from "react";
 import styles from "../EduContentScreen/AllContent/style";
 import { SafeAreaView } from "react-native-safe-area-context";
 
@@ -14,12 +14,6 @@ import Audios from "../../components/AudioList/Audios";
 
 
 const EduContent = () => {
-  const [currentView, setCurrentView] = useState("AllContent"); // Initial view
-
-  const changeView = (viewName) => {
-    setCurrentView(viewName);
-  };
-
   return (
     <SafeAreaView>
       <View style={styles.Container}>
@@ -28,12 +22,10 @@ const EduContent = () => {
             {/* search and categories */}
             <SearchBarComponent />
             <SearchAndCategories
-              changeView={changeView}
-              currentView={currentView}
+              currentView={"HomeScreen"}
             />
             {/* search and categories */}
           </View>
-          {/* changing view */}
           <SafeAreaView>
             <Text style={styles.mainHeading}>Featured Resurces</Text>
             <View>
@@ -50,7 +42,6 @@ const EduContent = () => {
               <Audios />
             </View>
           </SafeAreaView>
-          {/* changing view */}
         </ScrollView>
       </View>
     </SafeAreaView>

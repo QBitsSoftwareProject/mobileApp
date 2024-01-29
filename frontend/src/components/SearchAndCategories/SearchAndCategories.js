@@ -8,10 +8,8 @@ import { useNavigation } from "@react-navigation/native";
 
 const SearchAndCategories = ({ currentView }) => {
   const navigation = useNavigation();
-  const [selectedScreen, setSelectedScreen] = useState(currentView);
 
   const navigateToScreen = (screenName) => {
-    setSelectedScreen(screenName);
     navigation.navigate(screenName);
   };
 
@@ -27,14 +25,14 @@ const SearchAndCategories = ({ currentView }) => {
             <View
               style={[
                 styles.NavBarElements,
-                selectedScreen === "AllContent" &&
+                currentView === "HomeScreen" &&
                   styles.NavBarElements_currentBtn,
               ]}
             >
               <Text
                 style={[
                   styles.NavBarElements,
-                  selectedScreen === "AllContent" &&
+                  currentView === "HomeScreen" &&
                     styles.NavBarElements_currentText,
                 ]}
               >
@@ -50,14 +48,14 @@ const SearchAndCategories = ({ currentView }) => {
             <View
               style={[
                 styles.NavBarElements,
-                selectedScreen === "ArticleContent" &&
+                currentView === "ArticleScreen" &&
                   styles.NavBarElements_currentBtn,
               ]}
             >
               <Text
                 style={[
                   styles.NavBarElements,
-                  selectedScreen === "ArticleContent" &&
+                  currentView === "ArticleScreen" &&
                     styles.NavBarElements_currentText,
                 ]}
               >
@@ -73,14 +71,14 @@ const SearchAndCategories = ({ currentView }) => {
             <View
               style={[
                 styles.NavBarElements,
-                selectedScreen === "VideoContent" &&
+                currentView === "VideoScreen" &&
                   styles.NavBarElements_currentBtn,
               ]}
             >
               <Text
                 style={[
                   styles.NavBarElements,
-                  selectedScreen === "VideoContent" &&
+                  currentView === "VideoScreen" &&
                     styles.NavBarElements_currentText,
                 ]}
               >
@@ -96,14 +94,14 @@ const SearchAndCategories = ({ currentView }) => {
             <View
               style={[
                 styles.NavBarElements,
-                selectedScreen === "AudioContent" &&
+                currentView === "AudioScreen" &&
                   styles.NavBarElements_currentBtn,
               ]}
             >
               <Text
                 style={[
                   styles.NavBarElements,
-                  selectedScreen === "AudioContent" &&
+                  currentView === "AudioScreen" &&
                     styles.NavBarElements_currentText,
                 ]}
               >
