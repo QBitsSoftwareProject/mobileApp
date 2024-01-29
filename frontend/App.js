@@ -4,7 +4,7 @@ import { View } from 'react-native';
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { NavigationContainer } from "@react-navigation/native";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
-
+import { EditJournal } from './src/screens/EditJournalScreen/edit';
 import { AddNewJournal } from './src/screens/AddNewJournalScreen/addNewJournal';
 import {ViewJournal} from './src/screens/ViewJournalScreen/viewJournal';
 import {JournalStatistics} from './src/screens/JournalStatisticsScreen/journalStatistics';
@@ -29,6 +29,7 @@ export default function App() {
         <Stack.Screen name="AddNewJournal" component={AddNewJournal} />
         <Stack.Screen name="ViewJournal" component={ViewJournal} />
         <Stack.Screen name="JournalStatistics" component={JournalStatistics}/>
+        <Stack.Screen name="EditJournal" component={EditJournal}/>
         
         
       </Stack.Navigator>

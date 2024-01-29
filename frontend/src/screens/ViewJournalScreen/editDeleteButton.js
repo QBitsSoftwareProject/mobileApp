@@ -1,15 +1,21 @@
 import React, { useState} from 'react';
+import { createStackNavigator } from '@react-navigation/stack';
 import { View, TextInput, TouchableOpacity, Text, StyleSheet, ScrollView,Button,Image} from 'react-native';
 
 
 export const EditDeletebutton = (props) =>{
 
-    return(
+    // const handleEdit = (props) => {
+    //     props.editButton;
+    // }
+   
+  return(
         <View style={styles.mainButton}>
             
         {/* EditeButton */}
         <View style={styles.editButton}>
-        <TouchableOpacity onPress={props.btnEdit}
+
+        <TouchableOpacity  onPress={() => props.editFunction(props.itemID)}
   
         style={[styles.editButton,{ backgroundColor: '#D9D9D9;' }]}>
             <Image
@@ -21,7 +27,7 @@ export const EditDeletebutton = (props) =>{
 
         
         
-        {/* viewButton */}
+        {/* deleteButton */}
         <View style={styles.deleteButton}>
         <TouchableOpacity 
         

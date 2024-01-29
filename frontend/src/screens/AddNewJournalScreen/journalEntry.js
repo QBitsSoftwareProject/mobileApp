@@ -41,8 +41,9 @@ export const JournalEntry = () => {
     container: {
       flex: 1,
       color:'white',
-      marginTop:15,
-      marginBottom:32
+      // marginTop:15,
+      marginBottom:32,
+      // backgroundColor:'red'
 
       },
 

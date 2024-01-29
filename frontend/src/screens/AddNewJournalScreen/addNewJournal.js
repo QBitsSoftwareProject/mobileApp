@@ -1,24 +1,24 @@
 import React, {useState} from "react";
 import { View, Text, StyleSheet,ScrollView, TouchableOpacity, SafeAreaView, TextInput, Button, } from "react-native";
 import { EmojiPicker } from "./emoji";
-import styles, { Styles} from "../AddNewJournalScreen/styles";
+import styles from "../AddNewJournalScreen/styles";
 import { CustomButton } from "./switch";
 import { JournalTittle } from "./journalTittle";
 import { JournalEntry } from "./journalEntry";
 import { createStackNavigator } from '@react-navigation/stack';
 import {Overlay} from "./AddNewPopup";
+import TabBar from "../../components/TabBar/TabBar";
+import HeaderSub from "../../components/HeaderSub/HeaderSub";
+
 
 
 
 
 export const AddNewJournal = ({navigation}) =>{
 
-    // const buttonPress = () => {
-    //     // Handle button press logic here
-    //     console.log('Button pressed!');
-    //     alert("your journal is ready");
-    //   };
-    const [isOverlayVisible, setOverlayVisible] = useState(false);
+
+
+const [isOverlayVisible, setOverlayVisible] = useState(false);
 
         const toggleOverlay = () => {
         setOverlayVisible(!isOverlayVisible);
@@ -35,16 +35,22 @@ export const AddNewJournal = ({navigation}) =>{
   
 
     return(
-        <ScrollView>
-        <SafeAreaView style={styles.container}>
+      <View>
+<HeaderSub
+      headLine={"Add New Journal"}
+      subHeadLine={"Wellcome to our mindful haven"}
+/>
+
+<CustomButton btnView={handleViewButton}></CustomButton>
+
+
+        <ScrollView height = {500}>
+   
+       <SafeAreaView style={styles.container}>
 
         
-        <Text style={styles.header}>Add New Journal</Text>
-        <Text style={styles.subHeader}>Wellcome to our mindful haven</Text>
 
 
-
-        <CustomButton btnView={handleViewButton}></CustomButton>
 
         <Text style={styles.Text}>Feeling with...</Text>
 
@@ -70,31 +76,18 @@ export const AddNewJournal = ({navigation}) =>{
       <Overlay isVisible={isOverlayVisible} onClose={toggleOverlay} propbtnfunction={handleViewButton} />
     </View>
 
-        
-
-        
-
-       
+   
 
       </SafeAreaView>
 
       </ScrollView>
 
-       
+<View style={{ position: 'absolute', top:850, left: 0, right: 0 }}>
+<TabBar/>
+</View>
 
-         
+</View>
 
-
-
-            
-
-           
-      
-
-        
-
-  
-      
     );
 
 

@@ -53,17 +53,19 @@ export const EmojiPicker = () =>{
 
 const styles = StyleSheet.create({
     container: {
-      flex: 1,
+      // flex: 1,
       justifyContent: 'center',
       alignItems: 'center',
-      marginBottom:32
+      marginBottom:32,
     //   margin:25
+    // backgroundColor:'red'
     },
     scrollViewContent: {
       flexDirection: 'row',
     },
     emojiButton: {
-      padding: 10,
+      paddingLeft: 10,
+      paddingRight:10
     },
     emoji: {
       fontSize: 40,

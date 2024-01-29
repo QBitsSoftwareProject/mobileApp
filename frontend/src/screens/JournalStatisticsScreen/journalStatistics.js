@@ -1,9 +1,13 @@
 import React, { useState} from 'react';
-import { View, TextInput, TouchableOpacity, Text, StyleSheet, ScrollView,Button,SafeAreaView,Image} from 'react-native';
+import { View, TextInput, TouchableOpacity, Text, StyleSheet, ScrollView,Button,SafeAreaView,Image,} from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { AnalysisSwitch } from './analysSwitch';
 import { JournalCalendar} from './statisticCalender';
-import {Calendar} from './myCalender';
+
+import TabBar from "../../components/TabBar/TabBar";
+import HeaderSub from "../../components/HeaderSub/HeaderSub";
+
+
 import styles, { Styles} from "../JournalStatisticsScreen/statisticsStyles";
 
 
@@ -21,16 +25,32 @@ export const JournalStatistics = ({navigation})=>{
     return(
 
 
-        <ScrollView>
+        
+<View>
+       <HeaderSub
+      headLine={"My Journals"}
+      subHeadLine={"View your past journals"}
+    />
+
+
+    <ScrollView height={500}>
+
+           
+
         <SafeAreaView style={styles.container}>
+            
+            
+                
         <View>
-        <Text style={styles.header}>Health Journal</Text>
+        {/* <Text style={styles.header}>Health Journal</Text> */}
 
         <Image 
             style={styles.img}
             source ={require('../../assets/images/journal/healthJournal.png')}/>
 
             <AnalysisSwitch btnAnalysis={handleJournalButton}></AnalysisSwitch>
+           
+           
 
         <Text style={styles.tittle}>Journal Statistics</Text>
 
@@ -78,7 +98,16 @@ export const JournalStatistics = ({navigation})=>{
         </View>
 
         </SafeAreaView>
+        
+      
+
         </ScrollView>
+        <View style={{ position: 'absolute', top:812, left: 0, right: 0 }}>
+        <TabBar/>
+        </View>
+        </View>
+        
+
 
         
 

@@ -6,6 +6,9 @@ import { CustomButtonView } from "./viewSwitch";
 import { Calendar } from "./calender";
 import { SwipableList} from "./viewInputJournal";
 import { FloatingButton} from "./floatingButton";
+import LinearGradient from 'react-native-linear-gradient';
+import TabBar from "../../components/TabBar/TabBar";
+import HeaderSub from "../../components/HeaderSub/HeaderSub";
 import { createStackNavigator } from '@react-navigation/stack';
 
 
@@ -28,38 +31,53 @@ export const ViewJournal = ({navigation}) =>{
         })
     }
 
+    const handleEditButton = () =>{
+      navigation.navigate('EditJournal',{
+
+      })
+    }
+
 
 
     return(
         <View>
-        
+            <HeaderSub
+      headLine={"My Journals"}
+      subHeadLine={"View your past journals"}
+    />
 
        
         <SafeAreaView style={styles.container}>
-        <Text  style={styles.header} >My Journals</Text>
-        <Text style={styles.subHeader}>View your past journals</Text>
+    
 
+      
         <CustomButtonView btnAnalysis={handleButton}></CustomButtonView>
 
-        <Calendar></Calendar>
+        <View>
+            <Calendar></Calendar>
+            {/* <LinearGradient
+            colors={['rgba(255, 255, 255, 0)', 'rgba(255, 255, 255, 1)']}
+            style={{ flex: 1 }}
+          > */}
+            <SwipableList editFunction = {handleEditButton}></SwipableList>
+            {/* </LinearGradient> */}
 
+        </View>
 
-        
-        <SwipableList></SwipableList>
-       
-
-       
-
-    </SafeAreaView>    
+        </SafeAreaView>    
 
 
 <FloatingButton btnCreate = {handleFlotingPointButton}></FloatingButton>
+
+<View style={{ position: 'absolute', top:844, left: 0, right: 0 }}>
+        <TabBar/>
+      </View>
+
+
 </View>
 
 
-
-
-    );
+ );
 };
 
 

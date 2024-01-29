@@ -3,41 +3,34 @@ const styles = StyleSheet.create({
 
     container: {
         flex: 1,
-        margin:25
+        marginLeft:25,
+        marginRight:25
       },
-      header: {
-        fontSize: 32,
-        color: '#101318',
-        fontWeight:'500',
-        
-        
-      },
-      subHeader:{
-        fontSize:18,
-        marginBottom:67,
-        color: '#101318',
-        fontWeight:'400'
-      },
+      
+   
       Text:{
         color: '#101318',
         fontSize: 18,
-        fontWeight:'500',
+        fontWeight:'400',
         marginBottom:15,
 
  },
  Text1:{
   color: '#101318',
   fontSize: 18,
-  fontWeight:'500',
+  fontWeight:'400',
   marginBottom:15,
+  
 
 },
 Text2:{
   color: '#101318',
   fontSize: 18,
-  fontWeight:'500',
-  marginBottom:10,
-  marginTop:10
+  fontWeight:'400',
+  marginBottom:15,
+  marginTop:6.5,
+  
+  
 
 },
  create: {
@@ -48,8 +41,8 @@ Text2:{
     width:250,
     height:58,
     borderRadius: 75,
-    left:58,
-    marginBottom:100
+    alignSelf:'center',
+    marginBottom:112
     
   },
   createText: {
@@ -58,7 +51,12 @@ Text2:{
     color:'#101318',
     textAlign:'center',
     justifyContent:'center',
+    
   },
+
+
+
+
     
 
       

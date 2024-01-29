@@ -31,9 +31,11 @@ export const JournalTittle = () => {
   
   const styles = StyleSheet.create({
     container: {
-      flex: 1,
+      // flex: 1,
       color:'white',
-      marginBottom:32
+      marginBottom:32,
+      // marginTop:15,
+      // backgroundColor:'red'
 
       
     },

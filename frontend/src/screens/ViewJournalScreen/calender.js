@@ -34,14 +34,11 @@ export const Calendar = () => {
   }, [week]);
 
   return (
-    <SafeAreaView style={{ flex: 1 }}>
-      <View style={styles.container}>
-
-     
-
 
         <View style={styles.picker}>
+          <View>
           <Swiper
+            
             index={1}
             ref={swiper }
             loop={false}
@@ -103,46 +100,23 @@ export const Calendar = () => {
               </View>
             ))}
           </Swiper>
+          </View>
         </View>
-        <View style={{ flex: 1, paddingHorizontal: 16, paddingVertical: 24 }}>
-        <Text style={styles.subtitle}>{value.toDateString()}</Text>
-            </View>
-        </View>
-        
-
-    </SafeAreaView>
+       
+      
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    marginBottom:-750
-    
-    
-  },
-
-  subtitle: {
-    
-    fontSize: 14,
-    fontWeight: '300',
-    color: '#5C677D',
-    marginBottom: 15,
-    marginTop:-880,
-    left:235
-    
-  },
-
 
   picker: {
-    flex: 1,
-    // flexDirection: 'row',
-    alignItems: 'center',
-    paddingVertical:20
-    
+    // flex: 1,
+    flexDirection: 'row',
+    height:80,
+    alignItems:'center',
   },
   item: {
-    flex: 1,
+    // flex: 1,
     height: 80,
     width: 38,
     marginLeft: 8,
@@ -152,6 +126,7 @@ const styles = StyleSheet.create({
     borderColor: 'white',
     flexDirection: 'column',
     alignItems: 'center',
+    
     backgroundColor: 'white',
   },
   itemRow: {

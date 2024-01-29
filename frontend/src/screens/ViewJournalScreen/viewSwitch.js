@@ -7,7 +7,7 @@ export const CustomButtonView= (props) =>{
     return(
         <View style={styles.mainButton}>
             
-            {/* createButton */}
+            {/* analysisButton */}
             <View style={styles.createButton}>
             <TouchableOpacity onPress={props.btnAnalysis}
       

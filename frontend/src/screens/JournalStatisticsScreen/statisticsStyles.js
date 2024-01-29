@@ -18,6 +18,7 @@ const styles = StyleSheet.create({
         borderRadius:200,
         alignSelf:'center',
         marginTop:15,
+        // backgroundColor:'red',
         marginBottom:15
     },
     tittle:{
@@ -31,7 +32,8 @@ const styles = StyleSheet.create({
     pns:{
         flexDirection:'row',
         marginTop:32,
-        marginLeft:30
+        marginLeft:30,
+        
 
     },
 
@@ -60,6 +62,10 @@ const styles = StyleSheet.create({
         // alignContent:'center',
 
     },
+
+    background:{
+        
+    }
    
 
 
