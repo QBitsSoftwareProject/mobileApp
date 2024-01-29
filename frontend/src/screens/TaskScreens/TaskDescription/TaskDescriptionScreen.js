@@ -90,16 +90,18 @@ const TaskDescriptionScreen = () => {
           <Image source={require('../../../assets/images/backBlack.png')}  />
         </TouchableOpacity>
 
-        <View style={styles.headTextBox}>
-          <Text style={styles.task}>Task {taskId}</Text>
-          <Text style={styles.taskHead}>Take today meditation</Text>
-        </View>
+        
 
         {/* task step rendering ..................................................................................... */}
 
         <View style={{height:532, alignItems:'center', }} >
        
         <ScrollView >
+          
+          <View style={styles.headTextBox}>
+            <Text style={styles.task}>Task {taskId}</Text>
+            <Text style={styles.taskHead}>Take today meditation</Text>
+          </View>
           
             <View onLayout={onBoxLayout} style={{paddingTop:32}}>
 

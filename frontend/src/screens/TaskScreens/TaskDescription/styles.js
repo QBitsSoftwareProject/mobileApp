@@ -34,10 +34,10 @@ export default styles = StyleSheet.create({
         borderRadius: 20,
         shadowColor: 'black',
         shadowOffset: {
-            width: 4,
-            height: 2,
+            width: 1,
+            height: 1,
         },
-        shadowOpacity: 0.5,
+        shadowOpacity: 0.05,
         elevation: 1,
     },
 
