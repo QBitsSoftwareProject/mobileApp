@@ -10,14 +10,12 @@ const VideoContent = () => {
   return (
     <SafeAreaView>
       <View>
-        <ScrollView>
-          <View style={{ zIndex: 100, marginTop: 40 }}>
-            {/* search and categories */}
-            <SearchBarComponent />
-            <SearchAndCategories currentView={"VideoScreen"} />
-            {/* search and categories */}
-          </View>
-        </ScrollView>
+        <View style={{ zIndex: 100, marginTop: 40 }}>
+          {/* search and categories */}
+          <SearchBarComponent />
+          <SearchAndCategories currentView={"VideoScreen"} />
+          {/* search and categories */}
+        </View>
       </View>
     </SafeAreaView>
   );

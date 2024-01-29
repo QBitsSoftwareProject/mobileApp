@@ -15,7 +15,6 @@ const HomeStack = () => {
         headerShown: false,
       }}
     >
-      {/* <stack.Screen name='HomeScreen' component={HomeScreen} /> */}
       <stack.Screen name="HomeScreen" component={EduContent} />
       <stack.Screen name="ArticleScreen" component={ArticleContent} />
       <stack.Screen name="VideoScreen" component={VideoContent} />

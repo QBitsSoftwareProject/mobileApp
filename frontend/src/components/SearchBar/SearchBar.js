@@ -1,21 +1,28 @@
-import { View } from "react-native";
+import { Image, Pressable, TextInput, View } from "react-native";
 import React, { Component } from "react";
 import styles from "./SearchBarStyles";
 
-// search bar
-import SearchBar from "react-native-dynamic-search-bar";
-// search bar
+// seach icon
+import search_icon from "../../assets/images/icons/searchBar/search_icon.png"
+// seach icon
+
+// library search bar
+// import SearchBar from "react-native-dynamic-search-bar";
+// library search bar
 
 const SearchBarComponent = () => {
   return (
-    
-    <View>
-      <SearchBar
+    <View style={styles.searchBar}>
+      {/* <SearchBar
         style={styles.searchBar}
         placeholder="Search..."
         onPress={() => alert("onPress")}
         onChangeText={(text) => console.log(text)}
-      />
+      /> */}
+      <TextInput placeholder="Search..." style={{width:"90%"}} />
+      <Pressable>
+        <Image source={search_icon}/>
+      </Pressable>
     </View>
   );
 };

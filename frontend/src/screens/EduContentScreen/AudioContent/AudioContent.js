@@ -1,4 +1,4 @@
-import { View, ScrollView } from "react-native";
+import { View, SafeAreaView, ScrollView, Text } from "react-native";
 import React from "react";
 
 // components
@@ -8,15 +8,18 @@ import SearchAndCategories from "../../../components/SearchAndCategories/SearchA
 
 const AudioContent = () => {
   return (
-    <ScrollView>
-      <View style={{ zIndex: 100 }}>
-        {/* search and categories */}
-        <SearchBarComponent />
-        <SearchAndCategories currentView={"AudioScreen"} />
-        {/* search and categories */}
+    <SafeAreaView>
+      <View>
+        <View style={{ zIndex: 100, marginTop: 40 }}>
+          {/* search and categories */}
+          <SearchBarComponent />
+          <SearchAndCategories currentView={"AudioScreen"} />
+          {/* search and categories */}
+        </View>
       </View>
-    </ScrollView>
+    </SafeAreaView>
   );
 };
 
 export default AudioContent;
+
