@@ -5,7 +5,7 @@ import styles from "../AddNewJournalScreen/styles";
 import { CustomButton } from "./switch";
 import { JournalTittle } from "./journalTittle";
 import { JournalEntry } from "./journalEntry";
-import { createStackNavigator } from '@react-navigation/stack';
+
 import {Overlay} from "./AddNewPopup";
 import TabBar from "../../components/TabBar/TabBar";
 import HeaderSub from "../../components/HeaderSub/HeaderSub";
@@ -16,7 +16,7 @@ import HeaderSub from "../../components/HeaderSub/HeaderSub";
 
 export const AddNewJournal = ({navigation}) =>{
 
-
+      
 
 const [isOverlayVisible, setOverlayVisible] = useState(false);
 
@@ -24,7 +24,7 @@ const [isOverlayVisible, setOverlayVisible] = useState(false);
         setOverlayVisible(!isOverlayVisible);
        };
 
-      const stack = createStackNavigator();
+    
 
       const handleViewButton = () =>{
       navigation.navigate('ViewJournal',{

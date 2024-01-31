@@ -31,11 +31,14 @@ export const ViewJournal = ({navigation}) =>{
         })
     }
 
-    const handleEditButton = () =>{
+    const handleEditButton = (itemID,itemText) =>{
       navigation.navigate('EditJournal',{
+        itemID,
+        itemText,
+        // navigation:navigate,
 
-      })
-    }
+      });
+    };
 
 
 
@@ -55,12 +58,9 @@ export const ViewJournal = ({navigation}) =>{
 
         <View>
             <Calendar></Calendar>
-            {/* <LinearGradient
-            colors={['rgba(255, 255, 255, 0)', 'rgba(255, 255, 255, 1)']}
-            style={{ flex: 1 }}
-          > */}
-            <SwipableList editFunction = {handleEditButton}></SwipableList>
-            {/* </LinearGradient> */}
+          
+            {/* <SwipableList editFunction={(itemID, itemText) => handleEditButton(itemID, itemText)}></SwipableList> */}
+            <SwipableList editFunction={handleEditButton} />
 
         </View>
 

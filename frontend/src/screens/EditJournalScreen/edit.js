@@ -15,10 +15,13 @@ import HeaderSub from "../../components/HeaderSub/HeaderSub";
 
 
 
-export const EditJournal = ({navigation, route,itemID}) =>{
+export const EditJournal = ({navigation, route,}) =>{
+  const stack = createStackNavigator();
+  const {itemID, itemText}=route.params;
 
     
     console.log(itemID);
+    console.log(itemText);
 
 const [isOverlayVisible, setOverlayVisible] = useState(false);
 
@@ -26,7 +29,7 @@ const [isOverlayVisible, setOverlayVisible] = useState(false);
         setOverlayVisible(!isOverlayVisible);
        };
 
-      const stack = createStackNavigator();
+   
 
       const handleViewButton = () =>{
       navigation.navigate('ViewJournal',{
@@ -56,6 +59,7 @@ const [isOverlayVisible, setOverlayVisible] = useState(false);
 
         <Text style={styles.Text}>Feeling with...</Text>
 
+
         <EmojiPicker />
 
         <Text style={styles.Text1}>Journal Tittle</Text>
@@ -64,7 +68,13 @@ const [isOverlayVisible, setOverlayVisible] = useState(false);
 
         <Text style={styles.Text2}>Write your journal</Text>
 
-        <JournalEntry/>
+        <JournalEntry itemtext={itemText}/>
+
+        {/* <Text>{itemID}</Text>
+        <Text>{itemText}</Text> */}
+        
+
+        
 
         {/* <TouchableOpacity style = {styles.create} onPress={toggleOverlay}>
         <Text style={styles.createText}>Create Journal</Text>

@@ -7,21 +7,26 @@ import { SwipeListView } from "react-native-swipe-list-view";
 
 const inputJournals = [
   
-  { id: '1', text: 'Feeling Positive today!🌸. I am grateful for the supportive phone call today, I had with my best friend😊❤️.' },
-  { id: '2', text: 'Woke up feeling grateful for a new day! 🙏 Starting the morning with a warm cup of coffee and the sun streaming through my window🌈❤️.' },
-  { id: '3', text: 'Negative thoughts looming overhead. 🌧️ Battling inner demons and self-critical voices😔' },
-  { id: '8', text: 'Feeling Positive today!🌸. I am grateful for the supportive phone call today, I had with my best friend😊❤️.' },
+  { id: '1', tittle:'Grateful Moments🌸😊❤️', text: 'Feeling Positive today!🌸. I am grateful for the supportive phone call today, I had with my best friend😊❤️.' },
+  { id: '2', tittle: 'A Morning Brew of Coffee and Sunlight ☀️🌈❤️', text: 'Woke up feeling grateful for a new day! 🙏 Starting the morning with a warm cup of coffee and the sun streaming through my window🌈❤️.' },
+  { id: '3', tittle: 'Navigating Inner Storms and Embracing Resilience 🌧️', text: 'Negative thoughts looming overhead. 🌧️ Battling inner demons and self-critical voices😔' },
+  { id: '8', tittle:'Grateful Moments🌸😊❤️', text: 'Feeling Positive today!🌸. I am grateful for the supportive phone call today, I had with my best friend😊❤️.' },
 
-  { id: '4', text: 'Decided to focus on the good stuff❤️ and let go of negativity. Gratitude is the attitude!🌸🌟.' },
-  { id: '5', text: 'Ending the day with gratitude. Thankful for the experiences and lessons today brought. Ready for a restful sleep. 😴💤.' },
-  { id: '6', text: 'Feeling lonely and disconnected. Plans canceled, calls unanswered. 😔 Loneliness creeping in like an unwelcome guest..' },
-  { id: '7', text: 'Negative thoughts looming overhead. 🌧️ Battling inner demons and self-critical voices😔' },
+  { id: '4', tittle: 'Embracing Gratitude as the Key to Happiness 🌸🌟❤️', text: 'Decided to focus on the good stuff❤️ and let go of negativity. Gratitude is the attitude!🌸🌟.' },
+  { id: '5', tittle: 'Reflecting on Today Blessings and Embracing a Peaceful Sleep 😴💤',  text: 'Ending the day with gratitude. Thankful for the experiences and lessons today brought. Ready for a restful sleep. 😴💤.' },
+  { id: '6', tittle: 'A Morning Brew of Coffee and Sunlight ☀️🌈❤️', text: 'Woke up feeling grateful for a new day! 🙏 Starting the morning with a warm cup of coffee and the sun streaming through my window🌈❤️.'},
+  { id: '7', tittle: 'Navigating Inner Storms and Embracing Resilience 🌧️😔', text: 'Negative thoughts looming overhead. 🌧️ Battling inner demons and self-critical voices😔' },
 
 ];
 
 export const SwipableList = (props) => {
 
+  const stack = createStackNavigator();
 
+  const handleEditPress = (itemID,itemTittle, itemText) => {
+    props.editFunction(itemID,itemTittle, itemText);
+    // navigation.navigate('EditJournal', { itemID, itemText });
+  };
 
   const [showButton, setShowButton] = useState(false);
 
@@ -38,16 +43,19 @@ export const SwipableList = (props) => {
   const renderJournalItem = ({ item,index }) => (
       
       <View style={styles.journalItem}>
+        <Text style={styles.journalTittle}>{item.tittle}</Text>
         <Text style={styles.journalText}>{item.text}</Text>
-        <Text style={styles.journalText}>{item.id}</Text>
+        {/* <Text style={styles.journalText}>{item.id}</Text> */}
       </View>
     );
 
     const renderHiddenItem = ({ item, index }, rowMap) => (
       <View style={styles.buttonContainer}>
         <EditDeletebutton 
-        itemID = {item.id}
-        editFunction ={props.editFunction} />
+        item = {item.id}
+        itemText={item.text}
+        itemTittle={item.tittle}
+        editFunction={(itemID,itemTittle, itemText) => handleEditPress(itemID, itemTittle, itemText)} />
       </View>
     );
 
@@ -107,7 +115,18 @@ const styles = StyleSheet.create({
   journalText: {
     color:'#101318',
     fontWeight:'300',
-    lineHeight:25, 
+    lineHeight:25,
+    paddingTop:5, 
     padding:15
   },
+
+  journalTittle:{
+    color:'#101318',
+    fontWeight:'400',
+    lineHeight:20, 
+    paddingTop:5,
+    paddingBottom:5,
+    paddingLeft:15,
+    paddingRight:15
+  }
 });

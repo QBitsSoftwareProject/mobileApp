@@ -5,9 +5,14 @@ import { View, TextInput, TouchableOpacity, Text, StyleSheet, ScrollView,Button,
 
 export const EditDeletebutton = (props) =>{
 
-    // const handleEdit = (props) => {
-    //     props.editButton;
-    // }
+    const stack = createStackNavigator();
+
+    const handleEditPress = () => {
+        console.log('Item ID:', props.item);
+        console.log('Item Text:', props.itemText);
+        // Call the editFunction if needed
+        props.editFunction(props.item, props.itemText);
+      };
    
   return(
         <View style={styles.mainButton}>
@@ -15,7 +20,9 @@ export const EditDeletebutton = (props) =>{
         {/* EditeButton */}
         <View style={styles.editButton}>
 
-        <TouchableOpacity  onPress={() => props.editFunction(props.itemID)}
+        <TouchableOpacity 
+        // onPress={() => props.editFunction(props.itemID)}
+        onPress={handleEditPress}
   
         style={[styles.editButton,{ backgroundColor: '#D9D9D9;' }]}>
             <Image

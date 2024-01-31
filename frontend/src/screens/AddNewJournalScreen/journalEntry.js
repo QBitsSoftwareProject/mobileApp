@@ -1,8 +1,16 @@
 import React, { useState } from 'react';
+import { useRoute } from '@react-navigation/native';
 import { View, TextInput, Text,StyleSheet, TouchableOpacity, Image } from 'react-native';
 
 export const JournalEntry = () => {
-    const [inputJournal, setInputJournal] = useState('');
+
+  const route = useRoute();
+  const { itemID, itemText } = route.params;
+
+  console.log(itemID);
+  console.log(itemText);
+
+    const [inputJournal, setInputJournal] = useState(itemText);
 
     const handleButtonPress = () => {
         // Handle button press logic here
@@ -20,7 +28,7 @@ export const JournalEntry = () => {
           At school..,my class teacher give me a gift.. "
           textAlign='left'
           textAlignVertical='top'
-         
+          multiline={true}
           value={inputJournal}
           onChangeText={(text) => setInputJournal(text)}
 
@@ -58,8 +66,9 @@ export const JournalEntry = () => {
       backgroundColor:'white',
       borderRadius:20,
       width: 344,
-      paddingLeft:25,
+      
       paddingTop:22,
+      paddingHorizontal:25
       
     },
 

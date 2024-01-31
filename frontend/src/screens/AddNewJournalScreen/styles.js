@@ -54,7 +54,11 @@ Text2:{
     
   },
 
-
+  itemText: {
+    color: 'black', // or any color you prefer
+    fontSize: 16, // or any font size you prefer
+    // add any other styles as needed
+  },
 
 
     
