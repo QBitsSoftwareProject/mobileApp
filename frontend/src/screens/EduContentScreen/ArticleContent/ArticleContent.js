@@ -32,12 +32,10 @@ const ArticleContent = () => {
     <SafeAreaView>
       <View>
         <ScrollView>
-          <View style={{ zIndex: 100,marginTop:40 }}>
+          <View style={{ zIndex: 100, marginTop: 40 }}>
             {/* search and categories */}
             <SearchBarComponent />
-            <SearchAndCategories
-              currentView={"ArticleScreen"}
-            />
+            <SearchAndCategories currentView={"ArticleStack"} />
             {/* search and categories */}
           </View>
           <View style={styles.authorSections}>

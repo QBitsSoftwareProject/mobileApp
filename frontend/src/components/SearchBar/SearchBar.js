@@ -13,12 +13,6 @@ import search_icon from "../../assets/images/icons/searchBar/search_icon.png"
 const SearchBarComponent = () => {
   return (
     <View style={styles.searchBar}>
-      {/* <SearchBar
-        style={styles.searchBar}
-        placeholder="Search..."
-        onPress={() => alert("onPress")}
-        onChangeText={(text) => console.log(text)}
-      /> */}
       <TextInput placeholder="Search..." style={{width:"90%"}} />
       <Pressable>
         <Image source={search_icon}/>

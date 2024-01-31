@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
     color: "white",
   },
   authorSections: {
-    marginTop:120,
+    marginTop: 120,
   },
   authorSection1: {
     display: "flex",
@@ -106,13 +106,22 @@ const styles = StyleSheet.create({
     width: 100,
     height: 20,
     backgroundColor: "#F2F3F5",
-    borderRadius:50,
-    margin:5,
-    display:"flex",
-    flexDirection:"row",
-    justifyContent:"center",
-    alignItems:"center",
-    textAlign:"center",
+    borderRadius: 50,
+    margin: 5,
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    textAlign: "center",
+  },
+  authorDetails: {
+    backgroundColor: "#4A90BF",
+    height: 250,
+    paddingTop:"12%",
+    paddingLeft:"5%",
+    width: "100%",
+    borderBottomLeftRadius:40,
+    borderBottomRightRadius:40,
   },
 });
 

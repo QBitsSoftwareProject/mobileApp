@@ -41,21 +41,21 @@ const SearchAndCategories = ({ currentView }) => {
             </View>
           </Pressable>
           <Pressable
-            onPress={() => navigateToScreen("ArticleScreen")}
+            onPress={() => navigateToScreen("ArticleStack")}
             style={styles.NavBarElements}
             android_ripple={{ borderless: true, radius: 50 }}
           >
             <View
               style={[
                 styles.NavBarElements,
-                currentView === "ArticleScreen" &&
+                currentView === "ArticleStack" &&
                   styles.NavBarElements_currentBtn,
               ]}
             >
               <Text
                 style={[
                   styles.NavBarElements,
-                  currentView === "ArticleScreen" &&
+                  currentView === "ArticleStack" &&
                     styles.NavBarElements_currentText,
                 ]}
               >

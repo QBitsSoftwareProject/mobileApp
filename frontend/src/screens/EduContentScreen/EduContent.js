@@ -11,8 +11,6 @@ import Categories from "../../components/Categories/Categories";
 import Audios from "../../components/AudioList/Audios";
 // components
 
-
-
 const EduContent = () => {
   return (
     <SafeAreaView>
