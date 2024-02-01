@@ -20,7 +20,7 @@ const SearchAndCategories = ({ currentView }) => {
           <Pressable
             onPress={() => navigateToScreen("HomeScreen")}
             style={styles.NavBarElements}
-            android_ripple={{ borderless: true, radius: 50 }}
+            android_ripple={{ borderless: true, radius: 50, color: "#7CBDE8" }}
           >
             <View
               style={[
@@ -43,7 +43,7 @@ const SearchAndCategories = ({ currentView }) => {
           <Pressable
             onPress={() => navigateToScreen("ArticleStack")}
             style={styles.NavBarElements}
-            android_ripple={{ borderless: true, radius: 50 }}
+            android_ripple={{ borderless: true, radius: 50, color: "#7CBDE8" }}
           >
             <View
               style={[
@@ -66,7 +66,7 @@ const SearchAndCategories = ({ currentView }) => {
           <Pressable
             onPress={() => navigateToScreen("VideoScreen")}
             style={styles.NavBarElements}
-            android_ripple={{ borderless: true, radius: 50 }}
+            android_ripple={{ borderless: true, radius: 50, color: "#7CBDE8" }}
           >
             <View
               style={[
@@ -89,7 +89,7 @@ const SearchAndCategories = ({ currentView }) => {
           <Pressable
             onPress={() => navigateToScreen("AudioScreen")}
             style={styles.NavBarElements}
-            android_ripple={{ borderless: true, radius: 50 }}
+            android_ripple={{ borderless: true, radius: 50, color: "#7CBDE8" }}
           >
             <View
               style={[
