@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Text, View, TouchableOpacity, Animated, Image, StyleSheet, ImageBackground } from 'react-native';
 
+
 const ExpandableCard = (props) => {
   const [isExpanded, setIsExpanded] = useState(true);
   const heightAnim = useRef(new Animated.Value(0)).current;
@@ -12,7 +13,27 @@ const ExpandableCard = (props) => {
   };
 
   const imglink = props.imgLink;
-  console.log(imglink);
+  // console.log(imglink);
+
+  const methodtype = props.methodType;
+  console.log(methodtype);
+  let mimg;
+  let mtitle;
+
+  if (methodtype === 'music'){
+      mimg = require('../../assets/images/MindRelaxingMethod/mp3.png');
+      mtitle = 'Listen a music'
+  }
+  else if(methodtype === 'story'){
+    mimg = require('../../assets/images/MindRelaxingMethod/story.png');
+    mtitle = 'Read a story'
+  }
+  else{
+    mimg = require('../../assets/images/MindRelaxingMethod/breathing.png');
+    mtitle = 'Breathing exercise'
+  }
+
+  console.log(mimg)
 
   useEffect(() => {
     Animated.timing(heightAnim, {
@@ -41,14 +62,15 @@ const ExpandableCard = (props) => {
           borderBottomRightRadius: isExpanded ? 20 : 0,
           flexDirection: 'row',
           height: 112,
+          marginHorizontal:10
         }}
       >
         <View style={styles.expandImg}>
-          <Image source={require('../../assets/images/MindRelaxingMethod/mp3.png')} />
+          <Image source={mimg} />
         </View>
         <View style={styles.expandTitle}>
           <View style={styles.title}>
-            <Text style={styles.method}>{props.method}</Text>
+            <Text style={styles.method}>{mtitle}</Text>
             <Text style={styles.methodName}>{props.methodname}</Text>
           </View>
           <View style={styles.expandIcon}>
@@ -73,6 +95,7 @@ const ExpandableCard = (props) => {
             borderBottomLeftRadius: 15,
             borderBottomRightRadius: 15,
             marginTop:-15,
+            marginHorizontal:10
           }}
         >
           <View style={{ flexDirection: 'column' }}>
