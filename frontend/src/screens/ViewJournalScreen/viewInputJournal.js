@@ -8,14 +8,14 @@ import { SwipeListView } from "react-native-swipe-list-view";
 const inputJournals = [
   
   { id: '1', tittle:'Grateful Moments🌸😊❤️', text: 'Feeling Positive today!🌸. I am grateful for the supportive phone call today, I had with my best friend😊❤️.' },
-  { id: '2', tittle: 'A Morning Brew of Coffee and Sunlight ☀️🌈❤️', text: 'Woke up feeling grateful for a new day! 🙏 Starting the morning with a warm cup of coffee and the sun streaming through my window🌈❤️.' },
-  { id: '3', tittle: 'Navigating Inner Storms and Embracing Resilience 🌧️', text: 'Negative thoughts looming overhead. 🌧️ Battling inner demons and self-critical voices😔' },
+  { id: '2', tittle: 'A Morning Brew of Coffee☀️🌈❤️', text: 'Woke up feeling grateful for a new day! 🙏 Starting the morning with a warm cup of coffee and the sun streaming through my window🌈❤️.' },
+  { id: '3', tittle: 'Navigating Inner Storms🌧️', text: 'Negative thoughts looming overhead. 🌧️ Battling inner demons and self-critical voices😔' },
   { id: '8', tittle:'Grateful Moments🌸😊❤️', text: 'Feeling Positive today!🌸. I am grateful for the supportive phone call today, I had with my best friend😊❤️.' },
 
-  { id: '4', tittle: 'Embracing Gratitude as the Key to Happiness 🌸🌟❤️', text: 'Decided to focus on the good stuff❤️ and let go of negativity. Gratitude is the attitude!🌸🌟.' },
-  { id: '5', tittle: 'Reflecting on Today Blessings and Embracing a Peaceful Sleep 😴💤',  text: 'Ending the day with gratitude. Thankful for the experiences and lessons today brought. Ready for a restful sleep. 😴💤.' },
-  { id: '6', tittle: 'A Morning Brew of Coffee and Sunlight ☀️🌈❤️', text: 'Woke up feeling grateful for a new day! 🙏 Starting the morning with a warm cup of coffee and the sun streaming through my window🌈❤️.'},
-  { id: '7', tittle: 'Navigating Inner Storms and Embracing Resilience 🌧️😔', text: 'Negative thoughts looming overhead. 🌧️ Battling inner demons and self-critical voices😔' },
+  { id: '4', tittle: 'Embracing Gratitude🌸🌟❤️', text: 'Decided to focus on the good stuff❤️ and let go of negativity. Gratitude is the attitude!🌸🌟.' },
+  { id: '5', tittle: 'Reflecting on Today Blessings😴💤',  text: 'Ending the day with gratitude. Thankful for the experiences and lessons today brought. Ready for a restful sleep. 😴💤.' },
+  { id: '6', tittle: 'A Morning Brew of Coffee☀️🌈❤️', text: 'Woke up feeling grateful for a new day! 🙏 Starting the morning with a warm cup of coffee and the sun streaming through my window🌈❤️.'},
+  { id: '7', tittle: 'Navigating Inner Storms🌧️😔', text: 'Negative thoughts looming overhead. 🌧️ Battling inner demons and self-critical voices😔' },
 
 ];
 
@@ -114,19 +114,23 @@ const styles = StyleSheet.create({
   },
   journalText: {
     color:'#101318',
-    fontWeight:'300',
-    lineHeight:25,
+    fontWeight:'200',
+    lineHeight:20,
     paddingTop:5, 
-    padding:15
+    padding:15,
+    fontSize:13
+
   },
 
   journalTittle:{
     color:'#101318',
-    fontWeight:'400',
+    fontWeight:'300',
     lineHeight:20, 
     paddingTop:5,
     paddingBottom:5,
     paddingLeft:15,
-    paddingRight:15
-  }
+    paddingRight:15,
+    fontSize:14,
+    paddingTop:10
+    }
 });

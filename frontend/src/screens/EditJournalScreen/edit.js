@@ -6,7 +6,7 @@ import { CustomButton } from "../AddNewJournalScreen/switch";
 import { JournalTittle } from "../AddNewJournalScreen/journalTittle";
 import { JournalEntry } from "../AddNewJournalScreen/journalEntry";
 import { createStackNavigator } from '@react-navigation/stack';
-import {Overlay} from "../AddNewJournalScreen/AddNewPopup";
+import {Overlay} from "../EditJournalScreen/editPopup";
 import TabBar from "../../components/TabBar/TabBar";
 import HeaderSub from "../../components/HeaderSub/HeaderSub";
 
@@ -17,10 +17,11 @@ import HeaderSub from "../../components/HeaderSub/HeaderSub";
 
 export const EditJournal = ({navigation, route,}) =>{
   const stack = createStackNavigator();
-  const {itemID, itemText}=route.params;
+  const {itemID, itemTittle, itemText}=route.params;
 
     
     console.log(itemID);
+    console.log(itemTittle);
     console.log(itemText);
 
 const [isOverlayVisible, setOverlayVisible] = useState(false);
@@ -43,7 +44,7 @@ const [isOverlayVisible, setOverlayVisible] = useState(false);
       <View>
 <HeaderSub
       headLine={"Edit Journal"}
-      subHeadLine={"Wellcome to our mindful haven"}
+      subHeadLine={"Edit your journals"}
 />
 
 <CustomButton btnView={handleViewButton}></CustomButton>
@@ -64,7 +65,8 @@ const [isOverlayVisible, setOverlayVisible] = useState(false);
 
         <Text style={styles.Text1}>Journal Tittle</Text>
 
-        <JournalTittle/>
+        <JournalTittle itemTittle={itemTittle}/>
+       
 
         <Text style={styles.Text2}>Write your journal</Text>
 
@@ -82,7 +84,7 @@ const [isOverlayVisible, setOverlayVisible] = useState(false);
 
 <View>
       <TouchableOpacity style={styles.create} onPress={toggleOverlay}>
-      <Text style={styles.createText}>Create Journal</Text>
+      <Text style={styles.createText}>Edit Journal</Text>
       </TouchableOpacity>
 
       <Overlay isVisible={isOverlayVisible} onClose={toggleOverlay} propbtnfunction={handleViewButton} />

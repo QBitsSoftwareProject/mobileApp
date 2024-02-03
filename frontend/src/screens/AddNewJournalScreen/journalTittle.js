@@ -1,16 +1,30 @@
 import React, { useState } from 'react';
+import { useRoute } from '@react-navigation/native';
 import { View, TextInput, StyleSheet ,Image,TouchableOpacity} from 'react-native';
 
 
 export const JournalTittle = () => {
-    const [inputTittle, setInputTittle] = useState('');
+
+
+  
+ 
+
+  const route = useRoute();
+  const { itemID,itemTittle, itemText } = route.params;
+
+  const [inputTittle, setInputTittle] = useState(itemTittle);
+
+  // console.log(itemID);
+  // console.log(itemTittle);
+  // console.log(itemText);
+  
 
     return(
         <View style={styles.container}>
         <TextInput
           style={styles.input}
           placeholder="Feeling happy today... "
-        
+          multiline={true}
           value={inputTittle}
           onChangeText={(text) => setInputTittle(text)}
           
@@ -45,7 +59,10 @@ export const JournalTittle = () => {
       borderRadius:20,
       paddingLeft:25,
       width: 344,
-      
+      paddingHorizontal:35,
+      lineHeight:20,
+      fontSize:14,
+      fontWeight:'200'
     
       
     },

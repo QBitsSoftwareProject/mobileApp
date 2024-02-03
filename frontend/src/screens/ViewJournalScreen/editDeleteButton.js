@@ -9,9 +9,11 @@ export const EditDeletebutton = (props) =>{
 
     const handleEditPress = () => {
         console.log('Item ID:', props.item);
+        console.log('Item Tittle:', props.itemTittle);
         console.log('Item Text:', props.itemText);
+        
         // Call the editFunction if needed
-        props.editFunction(props.item, props.itemText);
+        props.editFunction(props.item,props.itemTittle, props.itemText);
       };
    
   return(

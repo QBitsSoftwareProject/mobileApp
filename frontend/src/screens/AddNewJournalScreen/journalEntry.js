@@ -7,8 +7,8 @@ export const JournalEntry = () => {
   const route = useRoute();
   const { itemID, itemText } = route.params;
 
-  console.log(itemID);
-  console.log(itemText);
+  // console.log(itemID);
+  // console.log(itemText);
 
     const [inputJournal, setInputJournal] = useState(itemText);
 
@@ -58,7 +58,7 @@ export const JournalEntry = () => {
     inputContainer: {
         flexDirection: 'row',
         alignItems: 'flex-start',
-        paddingHorizontal: 10,
+        
       },
 
     input: {
@@ -66,9 +66,11 @@ export const JournalEntry = () => {
       backgroundColor:'white',
       borderRadius:20,
       width: 344,
-      
+      lineHeight:20,
       paddingTop:22,
-      paddingHorizontal:25
+      paddingHorizontal:25,
+      fontSize:13,
+      fontWeight:'200'
       
     },
 

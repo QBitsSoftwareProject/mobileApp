@@ -35,18 +35,18 @@ export const Calendar = () => {
 
   return (
 
-        <View style={styles.picker}>
-          <View>
-          <Swiper
+ <View style={styles.picker}>
+    <View>
+       <Swiper
             
-            index={1}
-            ref={swiper }
-            loop={false}
-            showsPagination={false}
-            onIndexChanged={ind => {
-              if (ind === 1) {
-                return;
-              }
+        index={1}
+        ref={swiper }
+        loop={false}
+        showsPagination={false}
+        onIndexChanged={ind => {
+         if (ind === 1) {
+            return;
+          }
               setTimeout(() => {
                 const newIndex = ind - 1;
                 const newWeek = week + newIndex;

@@ -19,12 +19,11 @@ export const AddNewJournal = ({navigation}) =>{
       
 
 const [isOverlayVisible, setOverlayVisible] = useState(false);
+const [selectedEmojiMarks, setSelectedEmojiMarks] = useState('');
 
         const toggleOverlay = () => {
         setOverlayVisible(!isOverlayVisible);
        };
-
-    
 
       const handleViewButton = () =>{
       navigation.navigate('ViewJournal',{
@@ -32,6 +31,12 @@ const [isOverlayVisible, setOverlayVisible] = useState(false);
     }); 
 
 }
+
+const handleEmojiPress = ({ emoji, mark }) => {
+      setSelectedEmojiMarks((prevMarks) => prevMarks + `${emoji}(${mark})`);
+
+      console.log(mark);
+  };
   
 
     return(
@@ -54,7 +59,7 @@ const [isOverlayVisible, setOverlayVisible] = useState(false);
 
         <Text style={styles.Text}>Feeling with...</Text>
 
-        <EmojiPicker />
+        <EmojiPicker onEmojiPress={handleEmojiPress} />
 
         <Text style={styles.Text1}>Journal Tittle</Text>
 

@@ -31,10 +31,12 @@ export const ViewJournal = ({navigation}) =>{
         })
     }
 
-    const handleEditButton = (itemID,itemText) =>{
+    const handleEditButton = (itemID,itemTittle,itemText) =>{
       navigation.navigate('EditJournal',{
         itemID,
-        itemText,
+        itemTittle,
+        itemText
+        
         // navigation:navigate,
 
       });
