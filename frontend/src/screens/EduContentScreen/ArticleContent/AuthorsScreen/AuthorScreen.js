@@ -14,6 +14,11 @@ import { useNavigation } from "@react-navigation/native";
 import profilePic from "../../../../assets/images/profilePics/img4.png";
 import profilePic2 from "../../../../assets/images/profilePics/img5.jpg";
 import profilePic3 from "../../../../assets/images/profilePics/img3.png";
+import viewIcon from "../../../../assets/images/icons/bi_eye-fill.png";
+
+// components
+import ArticleListItem from "../../../../components/AuthorScreen/ArticleListItem";
+// components
 
 const AuthorScreen = () => {
   const navigation = useNavigation();
@@ -94,33 +99,7 @@ const AuthorScreen = () => {
         </View>
         {/* Article list */}
         <View style={styles.articleList}>
-          <View style={styles.articleListItem}>
-            <View
-              style={{
-                backgroundColor: "orange",
-                display: "flex",
-                justifyContent: "center",
-              }}
-            >
-              <Image
-                source={profilePic2}
-                style={{
-                  borderRadius: 100,
-                  height: 64,
-                  width: 64,
-                }}
-              />
-            </View>
-            <View
-              style={{
-                backgroundColor: "red",
-                display: "flex",
-                justifyContent: "center",
-              }}
-            >
-              <Text>MINDFULLNESS MEDITATION</Text>
-            </View>
-          </View>
+          <ArticleListItem />
         </View>
         {/* Article list */}
       </View>
