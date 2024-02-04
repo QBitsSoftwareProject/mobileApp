@@ -19,18 +19,23 @@ const ExpandableCard = (props) => {
   console.log(methodtype);
   let mimg;
   let mtitle;
+  let ibtn;
 
   if (methodtype === 'music'){
       mimg = require('../../assets/images/MindRelaxingMethod/mp3.png');
       mtitle = 'Listen a music'
+      ibtn = require('../../assets/images/MindRelaxingMethod/mp3playbutton.png');
+      
   }
   else if(methodtype === 'story'){
     mimg = require('../../assets/images/MindRelaxingMethod/story.png');
     mtitle = 'Read a story'
+    ibtn = require('../../assets/images/MindRelaxingMethod/read.png');
   }
   else{
     mimg = require('../../assets/images/MindRelaxingMethod/breathing.png');
     mtitle = 'Breathing exercise'
+    ibtn = require('../../assets/images/MindRelaxingMethod/mp3playbutton.png');
   }
 
   console.log(mimg)
@@ -106,7 +111,7 @@ const ExpandableCard = (props) => {
                   style={styles.contentImage}
                 >
                   <TouchableOpacity>
-                    <Image source={require('../../assets/images/MindRelaxingMethod/mp3playbutton.png')} />
+                    <Image source={ibtn} />
                   </TouchableOpacity>
                 </ImageBackground>
               </View>
