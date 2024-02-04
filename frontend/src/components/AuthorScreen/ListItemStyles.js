@@ -53,7 +53,6 @@ const styles = StyleSheet.create({
     display: "flex",
     paddingHorizontal: 20,
     flexDirection: "row",
-    marginVertical:3,
   },
 });
 

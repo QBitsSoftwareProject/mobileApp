@@ -1,4 +1,4 @@
-import { View, Text, Image, TouchableOpacity } from "react-native";
+import { View, Text, Image } from "react-native";
 import React from "react";
 import styles from "./ListItemStyles";
 
@@ -40,12 +40,10 @@ const ArticleListItem = () => {
           justifyContent: "center",
         }}
       >
-        <TouchableOpacity>
-          <View style={styles.readMoreBtn}>
-            <Image source={viewIcon} />
-            <Text style={{ color: "white", fontSize: 11 }}>READ MORE</Text>
-          </View>
-        </TouchableOpacity>
+        <View style={styles.readMoreBtn}>
+          <Image source={viewIcon} />
+          <Text style={{ color: "white", fontSize: 11 }}>READ MORE</Text>
+        </View>
       </View>
     </View>
   );
