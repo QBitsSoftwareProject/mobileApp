@@ -1,9 +1,9 @@
-import { View, Text, Image } from 'react-native'
-import React from 'react'
-import styles from './ListItemStyles';
+import { View, Text, Image } from "react-native";
+import React from "react";
+import styles from "./ListItemStyles";
 
-import profilePic2 from "../../assets/images/profilePics/img5.jpg"
-import viewIcon from "../../assets/images/icons/bi_eye-fill.png"
+import profilePic2 from "../../assets/images/profilePics/img5.jpg";
+import viewIcon from "../../assets/images/icons/bi_eye-fill.png";
 
 const ArticleListItem = () => {
   return (
@@ -47,6 +47,6 @@ const ArticleListItem = () => {
       </View>
     </View>
   );
-}
+};
 
-export default ArticleListItem
+export default ArticleListItem;
