@@ -7,21 +7,21 @@ import { useNavigation } from "@react-navigation/native";
 // navigation
 
 const ProfilePic = ({ item }) => {
-  
   const navigation = useNavigation();
 
-  const navigateToScreen = (screenName) => {
-    navigation.navigate(screenName);
+  const navigateToScreen = (screenName, data) => {
+    navigation.navigate(screenName, { data });
   };
 
   if (!item) {
     return null;
   }
+
   return (
     <TouchableOpacity
       style={styles.ProfilePic}
       onPress={() => {
-        navigateToScreen("AuthorScreen");
+        navigateToScreen("AuthorScreen", { authorData: item });
       }}
     >
       <View style={{ alignItems: "center" }}>

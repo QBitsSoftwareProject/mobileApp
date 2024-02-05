@@ -5,6 +5,7 @@ import {
   Text,
   Pressable,
   Image,
+  FlatList,
 } from "react-native";
 import React from "react";
 import styles from "../articleStyle";
@@ -20,7 +21,8 @@ import viewIcon from "../../../../assets/images/icons/bi_eye-fill.png";
 import ArticleListItem from "../../../../components/AuthorScreen/ArticleListItem";
 // components
 
-const AuthorScreen = () => {
+const AuthorScreen = ({ route }) => {
+  const authorData = route.params;
   const navigation = useNavigation();
   return (
     <SafeAreaView>
@@ -89,7 +91,7 @@ const AuthorScreen = () => {
           }}
         >
           <Image
-            source={profilePic2}
+            source={authorData.Image}
             style={{
               borderRadius: 100,
               height: 104,
