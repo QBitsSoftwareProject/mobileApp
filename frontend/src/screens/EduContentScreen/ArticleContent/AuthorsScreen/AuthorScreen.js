@@ -91,7 +91,7 @@ const AuthorScreen = ({ route }) => {
           }}
         >
           <Image
-            source={authorData.Image}
+            source={profilePic2}
             style={{
               borderRadius: 100,
               height: 104,
