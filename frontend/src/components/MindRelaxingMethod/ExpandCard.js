@@ -16,7 +16,7 @@ const ExpandableCard = (props) => {
   // console.log(imglink);
 
   const methodtype = props.methodType;
-  console.log(methodtype);
+  // console.log(methodtype);
   let mimg;
   let mtitle;
   let ibtn;
@@ -38,7 +38,7 @@ const ExpandableCard = (props) => {
     ibtn = require('../../assets/images/MindRelaxingMethod/mp3playbutton.png');
   }
 
-  console.log(mimg)
+  // console.log(mimg)
 
   useEffect(() => {
     Animated.timing(heightAnim, {

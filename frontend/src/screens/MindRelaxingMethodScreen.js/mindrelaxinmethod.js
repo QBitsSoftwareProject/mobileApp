@@ -1,11 +1,41 @@
-import React, { useState } from 'react'
+import React, { useState ,useEffect} from 'react'
 import { Text, View ,FlatList,TouchableOpacity, ScrollView} from 'react-native'
 import HeaderSub from '../../components/HeaderSub/HeaderSub'
 import ExpandableCard from '../../components/MindRelaxingMethod/ExpandCard'
 import data from './dummyData';
 import { CustomButton } from '../../components/MindRelaxingMethod/DoubleButton';
+import FetchMethod from './fetchMethods';
+import axios from 'axios';
 
 const Mindrelaxinmethod =() => {
+
+  let yourMark;
+  yourMark = 25;
+  const [Data,setData] = useState([]);
+
+  useEffect (() => {
+
+      const fetchData = async () => {
+      try{
+          let url;
+
+          url = "http://10.10.0.85:8070/method/get-method"
+
+          const response = await axios.get(url);
+          setData(response.data);
+
+      }catch(error){
+          console.log(error);
+      }
+  };
+
+  fetchData();
+
+  console.log(Data)
+     
+  },[])
+
+  const filteredData = Data.filter(item => item.mark === yourMark);
 
      
     return (
@@ -18,15 +48,15 @@ const Mindrelaxinmethod =() => {
 
       <CustomButton></CustomButton>
 
-    {data.map((item, index) => (
-    <ExpandableCard
-      key={item.id}
-      methodname={item.name}
-      contentText={item.description}
-      imgLink={item.img}
-      methodType = {item.mtype}
-    />
-  ))}
+      {filteredData.map((item) => (
+          <ExpandableCard
+            key={item._id}
+            methodname={item.resouceName}
+            contentText={item.discription}
+            imgLink={item.imageURL}
+            methodType={item.methodType}
+          />
+        ))}
 
     <View style = {{justifyContent:'center',alignItems:'center'}}>
       <TouchableOpacity 
