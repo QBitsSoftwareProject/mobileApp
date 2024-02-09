@@ -1,5 +1,5 @@
-import { Text, FlatList, ScrollView ,View} from 'react-native'
-import React, { useState } from 'react'
+import React from 'react'
+import { Text, ScrollView ,View} from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import CreateCard from '../../components/Card/CreateCard'
 import styles from './styles'
@@ -46,35 +46,40 @@ const AppointmentStatus = () => {
       status:'Accepted.',
     }
   ];
-  const[state, setState] = useState(0);
   
   return (
-  <View>
-    <HeaderSub headLine={'Appointment'}  subHeadLine={'Review and manage appointment'}/>
-        <SafeAreaView style={{margin:25}}>
+      <View>
+        
+        <HeaderSub headLine={'Appointment'}  subHeadLine={'Review and manage appointment'} backarrow={"MakeAppointment"}/>
             
-        <ButtonGroup/>
-        
-        <Text style={styles.descript2}>Appointment Status.</Text>
+            <SafeAreaView style={{margin:25}}>
 
-        <View style = {{marginBottom:60,height:500}}>
-          <FlatList  data={stateList} 
-            renderItem={({item}) => (
-            <CreateCard 
-              image={item.image} 
-              title={item.title}
-              cardName={'AppointmentStatus'}
-              time={item.time}
-              date={item.date}
-              status={item.status} />
-                )} 
-            />
-        </View>
+                <ScrollView style={{height:500}}>
+
+                    <ButtonGroup/>
+
+                    <View style={{marginHorizontal:15, marginVertical:15}}>
+                      <Text style={styles.descript2}>Appointment Status.</Text>
+                    </View>
+
+                    <View style={{marginBottom:80}}>
+                      {stateList.map (( item ) => (
+                        <CreateCard 
+                        image={item.image} 
+                        title={item.title}
+                        cardName={'AppointmentStatus'}
+                        time={item.time}
+                        date={item.date}
+                        status={item.status} 
+                        />
+                      ))}     
+                    </View>
+
+                </ScrollView>
+
+            </SafeAreaView>
       
-        
-      </SafeAreaView>
-  
-  </View>
+      </View>
   )
 }
 

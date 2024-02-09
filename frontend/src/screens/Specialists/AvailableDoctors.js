@@ -4,47 +4,57 @@ import style from './style'
 import CreateCard from '../../components/Card/CreateCard'
 import ButtonGroup from '../../components/Button/ButtonGroup'
 import HeaderSub from '../../components/HeaderSub/HeaderSub'
+import { useNavigation } from '@react-navigation/native'
+import SearchBar from '../../components/SearchBar/SearchBar'
+import { useState } from 'react'
 
 
 const AvailableDoctor = () => {
+  const navigation=useNavigation();
 
-const docList = [
-  {id:1, 
-    image:require("../../assets/images/kitharringtonhair.jpg"),
-    title:'Dr. B.M. Weerasinghe.', 
-    university:"MBBS, University of Colombo.",
-    regno: "234589.",
-    hospital: "Anuradhapura Genaral Hospital.",
-  },
-  {id:2, 
-    image:require("../../assets/images/kitharringtonhair.jpg"),
-    title:'Dr. B.M. Weerasinghe.', 
-    university:"MBBS, University of Colombo.",
-    regno: "234589.",
-    hospital: "Anuradhapura Genaral Hospital.",
-  },
-  {id:3, 
-    image:require("../../assets/images/kitharringtonhair.jpg"),
-    title:'Dr. B.M. Weerasinghe.', 
-    university:"MBBS, University of Colombo.",
-    regno: "234589.",
-    hospital: "Anuradhapura Genaral Hospital.",
-  },
-  {id:4, 
-    image:require("../../assets/images/kitharringtonhair.jpg"),
-    title:'Dr. B.M. Weerasinghe.', 
-    university:"MBBS, University of Colombo.",
-    regno: "234589.",
-    hospital: "Anuradhapura Genaral Hospital.",
-  },
-  {id:5, 
-    image:require("../../assets/images/kitharringtonhair.jpg"),
-    title:'Dr. B.M. Weerasinghe.', 
-    university:"MBBS, University of Colombo.",
-    regno: "234589.",
-    hospital: "Anuradhapura Genaral Hospital.",
-  }
-]; 
+  const docList = [
+    {id:1, 
+      image:require("../../assets/images/kitharringtonhair.jpg"),
+      title:'Dr. B.M. Weerasinghe.', 
+      university:"MBBS, University of Colombo.",
+      regno: "234589.",
+      hospital: "Anuradhapura Genaral Hospital.",
+    },
+    {id:2, 
+      image:require("../../assets/images/kitharringtonhair.jpg"),
+      title:'Dr. B.M. Amarasinghe.', 
+      university:"MBBS, University of Colombo.",
+      regno: "234589.",
+      hospital: "Anuradhapura Genaral Hospital.",
+    },
+    {id:3, 
+      image:require("../../assets/images/kitharringtonhair.jpg"),
+      title:'Dr. B.M. Samarasinghe.', 
+      university:"MBBS, University of Colombo.",
+      regno: "234589.",
+      hospital: "Anuradhapura Genaral Hospital.",
+    },
+    {id:4, 
+      image:require("../../assets/images/kitharringtonhair.jpg"),
+      title:'Dr. B.M. Jayasinghe.', 
+      university:"MBBS, University of Colombo.",
+      regno: "234589.",
+      hospital: "Anuradhapura Genaral Hospital.",
+    },
+    {id:5, 
+      image:require("../../assets/images/kitharringtonhair.jpg"),
+      title:'Dr. B.M. Ranasinghe.', 
+      university:"MBBS, University of Colombo.",
+      regno: "234589.",
+      hospital: "Anuradhapura Genaral Hospital.",
+    }
+  ]; 
+
+const pressHandler = () => {
+  navigation.navigate('MakeAppointment')
+};
+
+const { input, setInput } = useState();
 
   return (
     <View>
@@ -52,27 +62,31 @@ const docList = [
         
           <SafeAreaView style={{margin:25}}>
            
-            
-            <ButtonGroup/>
-
-            <Text style={style.descript2}>Available Doctors.</Text>
-            <ScrollView> 
-              <View style={{ marginBottom: 60 }}>
+            <ScrollView style={{height:500}}>   
               
-                  {docList.map(( item ) => (
-                    <CreateCard
-                      key={item.id}
-                      image={item.image}
-                      title={item.title}
-                      cardName={'AvailableDoc'}
-                      university={item.university}
-                      regno={item.regno}
-                      hospital={item.hospital}
-                    />
-                  ))}
-                
+              <ButtonGroup/>
+
+              <SearchBar data={docList} input={input} setInput={setInput}/>
+              
+              <View style={{marginHorizontal:15}}>
+                  <Text style={style.descript2}>Available Doctors.</Text>
               </View>
+  
+              <View style={{ marginBottom: 80}}>
+                {docList.map(( item ) => (
+                  <CreateCard 
+                  key={item.id}
+                  image={item.image}
+                  title={item.title}
+                  cardName={'AvailableDoc'}
+                  university={item.university}
+                  regno={item.regno}
+                  hospital={item.hospital} onPress={pressHandler} />
+                ))}  
+              </View>
+            
             </ScrollView>  
+          
           </SafeAreaView>
     
     </View>

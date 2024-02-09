@@ -4,7 +4,7 @@ import React from 'react'
 const CreateCard = (props) => {
 
 	return( 
-		<TouchableOpacity style={styles.cardBox}>
+		<TouchableOpacity style={styles.cardBox} onPress={props.onPress}>
 			<View style = {{flexDirection:'row'}}>
 				<View style={styles.imageframe}>
 					<Image source={props.image}style={styles.image} /> 

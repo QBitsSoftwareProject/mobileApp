@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
-import { View, Text, Modal, StyleSheet, TouchableOpacity,Image} from 'react-native'
+import React from 'react';
+import { View, Text, Modal, StyleSheet, Image} from 'react-native'
 import TransparentButton from '../Button/TransparentButon';
 
-const PopupMessage = ({ message, onClose, onConfirm, props}) => {
+const PopupMessage = ({ message, onClose, onConfirm}) => {
+  
   return (
     <Modal transparent animationType="slide" visible={!!message}>
       <View style={styles.modalBackground}>

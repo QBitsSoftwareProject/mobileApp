@@ -3,7 +3,7 @@ import { StyleSheet } from 'react-native'
 const styles = StyleSheet.create ({
   headerBox:{
     alignItems:'center',
-    marginBottom:15
+    marginBottom:20,
   },
   header: {
     fontSize:28,
@@ -13,7 +13,7 @@ const styles = StyleSheet.create ({
   boxcontainer: {
     flexDirection:'row',
     justifyContent: 'space-between',
-    
+    marginBottom:20,
    },
   Image:{
     height:160,
@@ -24,11 +24,9 @@ const styles = StyleSheet.create ({
     fontSize:14,
     color:'#5C677D',
     fontWeight: "400",
-    marginBottom:7,
+    marginBottom:20,
   },
   title: {
-    marginTop:15,
-    marginBottom:-10,
     fontSize:18,
     fontWeight: "500",
     color:'#101318'
@@ -36,44 +34,8 @@ const styles = StyleSheet.create ({
   titledescription: {
    fontSize:14,
    fontWeight: "400",
-   lineHeight:22.5,
+   lineHeight:25,
    color:'#5C677D'
-  },
-  cardBox: {
-    width:40,
-    height:80,
-    marginHorizontal:8,
-    backgroundColor:"white",
-    borderRadius:20,
-    elevation:1,
-  },
-  
-  date: {
-    marginHorizontal:8,
-    paddingVertical: 10,
-    textAlign:'center',
-    fontSize:12,
-    fontWeight:'bold',
-    color: '#7D8597',
-    lineHeight:35
-  } ,  
-  Tbutton: {
-    width:100,
-    height:30,
-    borderColor:'#4A90BF',
-    borderWidth: 1,
-    borderRadius: 15,
-    backgroundColor: 'transparent', 
-    marginVertical:8,
-    marginHorizontal:8,
-   
-  },
-  time: {
-    color: '#4A90BF', 
-    fontSize: 14,
-    fontWeight: '600',
-    textAlign: 'center',
-    paddingVertical:5
   },
 popupContainer: {
   flex: 1,

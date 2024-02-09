@@ -1,15 +1,22 @@
-import { View, Text, Image, Touchable, TouchableOpacity, ImageBackground } from 'react-native'
+import { View, Text, Image, TouchableOpacity, ImageBackground } from 'react-native'
 import React from 'react'
-import { SafeAreaView } from 'react-native-safe-area-context'
 import styles from './styles'
+import { useNavigation } from '@react-navigation/native';
+
 
 const HeaderSub = (props) => {
+  const navigation=useNavigation();
+  
+  const goBack = () => {
+    navigation.navigate(props.backarrow)
+  };
+  
   return (
     
       <View style={styles.contains} >
         <ImageBackground source={require("../../assets/images/blueSqures.png")} style={styles.backImg}>
 
-            <TouchableOpacity style={styles.backBtn}> 
+            <TouchableOpacity style={styles.backBtn} onPress={goBack}> 
                 <Image source={require(('../../assets/images/BackWhite.png'))}/>
             </TouchableOpacity>
             
