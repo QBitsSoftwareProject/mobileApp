@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import { View, Text, Image, TouchableOpacity } from "react-native";
 import styles from "./AudioStyles";
 
-import playImg from "../../assets/images/icons/audio_player/play.png";
-import pauseImg from "../../assets/images/icons/audio_player/pause.png";
+import playImg from "../../assets/images/icons/player/play.png";
+import pauseImg from "../../assets/images/icons/player/pause.png";
 
 // sound player
 import SoundPlayer from "react-native-sound-player";
