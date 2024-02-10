@@ -31,7 +31,7 @@ const Mindrelaxinmethod =() => {
 
   fetchData();
 
-  console.log(Data)
+  // console.log(Data)
      
   },[])
 
