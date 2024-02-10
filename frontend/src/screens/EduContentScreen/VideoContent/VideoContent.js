@@ -2,6 +2,10 @@ import {
   View,
   SafeAreaView,
   ScrollView,
+  Text,
+  Image,
+  Pressable,
+  TouchableOpacity,
   FlatList,
 } from "react-native";
 import React from "react";
