@@ -45,7 +45,7 @@ const ArticleContent = () => {
                 <Text style={styles.exploreBtnText}>Explore Authors</Text>
               </TouchableOpacity>
             </View>
-            <View style={[styles.authorSection2]}>
+            <View style={styles.authorSection2}>
               <FlatList
                 data={Authors}
                 style={{ display: "flex", flexDirection: "column" }}

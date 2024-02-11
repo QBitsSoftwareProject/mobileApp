@@ -11,7 +11,7 @@ const Article = ({ item }) => {
           style={{ width: "100%", height: "100%", borderRadius: 7 }}
         />
       </View>
-      <View style={[styles.articleDetails]}>
+      <View style={styles.articleDetails}>
         <View style={{ flex: 1, alignSelf: "stretch", alignItems: "center" }}>
           <Image
             source={item.author_profile}

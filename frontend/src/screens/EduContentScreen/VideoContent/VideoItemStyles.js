@@ -9,6 +9,7 @@ const styles = StyleSheet.create({
   VideoItem: {
     marginLeft: "auto",
     marginRight: "auto",
+    marginBottom:20,
     marginTop: 70,
     backgroundColor: "white",
     height: 190,

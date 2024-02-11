@@ -14,7 +14,9 @@ import playBtn from "../../../assets/images/icons/player/play.png";
 // playbtn
 
 // dependencies
-import VideoPlayer from "react-native-video-player";
+
+import Video from "react-native-video-player";
+
 // dependencies
 
 const VideoItem = ({ item }) => {
@@ -41,13 +43,10 @@ const VideoItem = ({ item }) => {
               position: "absolute",
             }}
           /> */}
-          <VideoPlayer
-            video={{ uri:item.videoLocation }}
-            autoplay={false}
-            defaultMuted={true}
-            videoWidth={1500}
-            videoHeight={1000}
-            thumbnail={item.thumbnail_loc}
+          <Video
+            source={{ uri: item.videoLocation }}
+            style={{ width: 300, height: 200 }}
+            controls={true}
           />
         </View>
         <View style={styles.VideoItemDetails}>
