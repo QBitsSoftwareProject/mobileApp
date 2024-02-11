@@ -29,9 +29,9 @@
     "react-native-sound-player": "^0.13.2",
     "react-native-spinkit": "^1.5.1",
     "react-native-swiper": "^1.6.0",
-    "react-native-video": "^5.2.1",
     "react-native-web": "^0.19.10",
-    "tailwindcss-react-native": "^1.7.10"
+    "tailwindcss-react-native": "^1.7.10",
+    "expo-av": "~13.4.1"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",

@@ -85,6 +85,12 @@ const styles = StyleSheet.create({
     borderColor: "#4A90BF",
     borderWidth: 4,
   },
+  VideoCategories: {
+    width: "100%",
+    paddingHorizontal:10,
+    height: 400,
+    backgroundColor:"orange",
+  },
 });
 
 export default styles;

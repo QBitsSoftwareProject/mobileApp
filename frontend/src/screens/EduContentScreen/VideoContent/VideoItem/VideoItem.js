@@ -5,21 +5,20 @@ import {
   Image,
   SafeAreaView,
 } from "react-native";
-import React from "react";
-
 import styles from "./VideoItemStyles";
 
 // playbtn
-import playBtn from "../../../assets/images/icons/player/play.png";
+import playBtn from "../../../../assets/images/icons/player/play.png";
 // playbtn
 
 // dependencies
-
-import Video from "react-native-video-player";
-
+import { Video } from "expo-av";
+import React from "react";
 // dependencies
 
 const VideoItem = ({ item }) => {
+  // const video = React.useRef(null);
+  // const [status, setStatus] = React.useState();
   return (
     <View>
       {/* video item */}
@@ -31,7 +30,7 @@ const VideoItem = ({ item }) => {
             justifyContent: "center",
           }}
         >
-          {/* <TouchableOpacity style={styles.playBtn}>
+          <TouchableOpacity style={styles.playBtn}>
             <Image source={playBtn} />
           </TouchableOpacity>
           <Image
@@ -42,12 +41,16 @@ const VideoItem = ({ item }) => {
               borderTopRightRadius: 10,
               position: "absolute",
             }}
-          /> */}
-          <Video
-            source={{ uri: item.videoLocation }}
-            style={{ width: 300, height: 200 }}
-            controls={true}
           />
+          {/* <Video
+            ref={video}
+            source={{uri:`${item.videoLocation}`}}
+            style={{flex:1,alignSelf:'stretch'}}
+            useNativeControls
+            resizeMode='contain'
+            isLooping
+            onPlaybackStatusUpdate={setStatus}
+          /> */}
         </View>
         <View style={styles.VideoItemDetails}>
           <View style={styles.details1}>
