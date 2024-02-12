@@ -34,6 +34,14 @@ const styles = StyleSheet.create({
     marginTop: 120,
     alignItems: "center",
   },
+  AudioCategoryContainer: {
+    width: "100%",
+    marginTop: 100,
+    paddingHorizontal:5,
+  },
+  AudioItemContainer: {
+
+  },
 });
 
 export default styles;

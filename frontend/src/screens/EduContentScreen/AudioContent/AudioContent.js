@@ -1,10 +1,17 @@
-import { View, SafeAreaView, ScrollView, Text } from "react-native";
+import { View, SafeAreaView, ScrollView, Text, FlatList } from "react-native";
 import React from "react";
+import styles from "./audioStyle";
 
 // components
 import SearchBarComponent from "../../../components/SearchBar/SearchBar";
 import SearchAndCategories from "../../../components/SearchAndCategories/SearchAndCategories";
+import AudioCategoryItem from "../AudioContent/AudioCategories/AudioCategoryItem";
 // components
+
+// category data
+import AudioCategories from "./AudioCategories/AudioCategories";
+import AudioData from "./AudioData";
+// category data
 
 const AudioContent = () => {
   return (
@@ -16,10 +23,19 @@ const AudioContent = () => {
           <SearchAndCategories currentView={"AudioScreen"} />
           {/* search and categories */}
           {/* audio categories */}
-          <View>
-
+          <View style={styles.AudioCategoryContainer}>
+            <FlatList
+              data={AudioCategories}
+              renderItem={({ item }) => {
+                return <AudioCategoryItem item={item} />;
+              }}
+              horizontal
+            />
           </View>
           {/* audio categories */}
+          {/* audio items */}
+          <View style={styles.AudioItemContainer}></View>
+          {/* audio items */}
         </View>
       </View>
     </SafeAreaView>

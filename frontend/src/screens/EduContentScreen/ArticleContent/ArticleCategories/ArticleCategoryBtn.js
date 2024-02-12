@@ -6,7 +6,7 @@ const ArticleCategoryBtn = ({ item }) => {
   return (
     <TouchableOpacity>
       <View style={styles.categoryBtn}>
-        <Text style={{ textAlign: "center" }}>{item.name} </Text>
+        <Text style={{ textAlign: "center",color:"white" }}>{item.name} </Text>
       </View>
     </TouchableOpacity>
   );
