@@ -15,6 +15,11 @@ const AudioContent = () => {
           <SearchBarComponent />
           <SearchAndCategories currentView={"AudioScreen"} />
           {/* search and categories */}
+          {/* audio categories */}
+          <View>
+
+          </View>
+          {/* audio categories */}
         </View>
       </View>
     </SafeAreaView>
@@ -22,4 +27,3 @@ const AudioContent = () => {
 };
 
 export default AudioContent;
-
