@@ -34,7 +34,7 @@ export default [
   {
     id: "3",
     name: "ATTRACTION MEDITATION",
-    thumbnail_loc: require("../../../assets/images/videoThumbnails/meditation1.png"),
+    thumbnail_loc: require("../../../assets/images/videoThumbnails/exercise1.png"),
     videoLocation: require("../../../assets/videos/categories/meditation/meditation2.mp4"),
     tags: [
       {

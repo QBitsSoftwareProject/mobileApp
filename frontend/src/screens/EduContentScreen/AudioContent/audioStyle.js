@@ -37,10 +37,11 @@ const styles = StyleSheet.create({
   AudioCategoryContainer: {
     width: "100%",
     marginTop: 100,
-    paddingHorizontal:5,
+    paddingHorizontal: 5,
   },
   AudioItemContainer: {
-
+    backgroundColor:"red",
+    marginBottom:100,
   },
 });
 

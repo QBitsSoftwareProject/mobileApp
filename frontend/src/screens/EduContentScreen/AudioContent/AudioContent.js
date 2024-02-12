@@ -6,6 +6,7 @@ import styles from "./audioStyle";
 import SearchBarComponent from "../../../components/SearchBar/SearchBar";
 import SearchAndCategories from "../../../components/SearchAndCategories/SearchAndCategories";
 import AudioCategoryItem from "../AudioContent/AudioCategories/AudioCategoryItem";
+import AudioItem from "../../../components/AudioList/AudioItem";
 // components
 
 // category data
@@ -34,7 +35,14 @@ const AudioContent = () => {
           </View>
           {/* audio categories */}
           {/* audio items */}
-          <View style={styles.AudioItemContainer}></View>
+          <View style={styles.AudioItemContainer}>
+            <FlatList
+              data={AudioData}
+              renderItem={({ item }) => {
+                return <AudioItem item={item} />;
+              }}
+            />
+          </View>
           {/* audio items */}
         </View>
       </View>
