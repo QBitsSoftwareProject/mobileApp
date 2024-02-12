@@ -66,7 +66,7 @@ const ArticleContent = () => {
               }}
             />
           </View>
-          <View style={styles.articleSection}>
+          <View style={[styles.articleSection, { marginBottom: 100 ,marginTop:20}]}>
             <Text style={{ fontSize: 20, fontWeight: "400", padding: 10 }}>
               Some recent articles
             </Text>

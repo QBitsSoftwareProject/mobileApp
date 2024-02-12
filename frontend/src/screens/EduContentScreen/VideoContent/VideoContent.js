@@ -3,12 +3,10 @@ import {
   SafeAreaView,
   ScrollView,
   Text,
-  Image,
-  Pressable,
-  TouchableOpacity,
   FlatList,
+  Dimensions,
 } from "react-native";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./videoStyle";
 
 // components
@@ -24,6 +22,24 @@ import VideoCategoryData from "./VideoCategoryData";
 // data
 
 const VideoContent = () => {
+  const [screenHeight, setScreenHeight] = useState(
+    Dimensions.get("window").height
+  );
+
+  useEffect(() => {
+    const updateDimensions = () => {
+      setScreenHeight(Dimensions.get("window").height);
+    };
+
+    // Listen for changes in screen dimensions
+    Dimensions.addEventListener("change", updateDimensions);
+
+    // Clean up the event listener when the component is unmounted
+    return () => {
+      Dimensions.removeEventListener("change", updateDimensions);
+    };
+  }, []);
+
   return (
     <SafeAreaView>
       <View>
@@ -45,14 +61,19 @@ const VideoContent = () => {
           </View>
           {/* video list */}
           {/* video categories */}
-          <View style={styles.VideoCategories}>
+          <View
+            style={[styles.VideoCategories, {marginBottom:110}]}
+          >
+            <Text style={{ fontSize: 18, margin: 12 }}>
+              Search by Categories
+            </Text>
             <FlatList
-              style={{ backgroundColor: "blue", flex: 1 }}
+              style={{ flex: 1 }}
               data={VideoCategoryData}
               renderItem={({ item }) => {
                 return <VideoCategoryItem item={item} />;
               }}
-              horizontal={false}
+              horizontal
             />
           </View>
           {/* video categories */}

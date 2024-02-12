@@ -1,7 +1,9 @@
+import { PixelRatio, StyleSheet } from "react-native";
+
 const styles = StyleSheet.create({
   categoryItemContainer: {
-    height: 100,
-    width: 100,
+    height: 150,
+    width: 150,
     position: "relative",
     margin: 20,
   },
@@ -9,6 +11,7 @@ const styles = StyleSheet.create({
     position: "absolute",
     width: "100%",
     height: "100%",
+    borderRadius: 7,
   },
   categoryItemText: {
     color: "white",
@@ -19,4 +22,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default VideoCategoryItem;
+export default styles;

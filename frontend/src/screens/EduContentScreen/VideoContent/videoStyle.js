@@ -87,9 +87,7 @@ const styles = StyleSheet.create({
   },
   VideoCategories: {
     width: "100%",
-    paddingHorizontal:10,
-    height: 400,
-    backgroundColor:"orange",
+    paddingHorizontal: 10,
   },
 });
 
