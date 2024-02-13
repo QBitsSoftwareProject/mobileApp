@@ -3,6 +3,7 @@ import HomeScreen from '../../screens/HomeScreen/HomeScreen';
 import MoodAnalysis from '../../screens/MoodAnalysisScreen/SelectMood';
 import AnalysisGraph from '../../screens/AnalysisGraphScreen/AnalysisGraph';
 
+
 const stack = createNativeStackNavigator();
 
 const HomeStack = () => {
@@ -13,9 +14,11 @@ const HomeStack = () => {
       
       <stack.Screen name='MoodAnaysisScreen' component={MoodAnalysis} /> 
       <stack.Screen name='AnalysisGraphScreen' component={AnalysisGraph} /> 
+
    
       
     </stack.Navigator>
+  
 
   )
 }

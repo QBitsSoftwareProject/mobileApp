@@ -1,53 +1,69 @@
-import React from "react";
-import { View } from "react-native";
-import {BarChart} from 'react-native-chart-kit';
+import React, { useEffect, useState } from 'react';
+import { View, StyleSheet, Text } from 'react-native';
 
-const data = {
-    labales: ['Day 1', 'Day 2', 'Day 3', 'Day 4', 'Day 5', 'Day 6', 'Day 7'],
-    datasets:[
-        {
-            data:[3,2,4,5,1,3,2],
-        },
-    ],
+const MoodProgressBars = ({selectedEmoji,barHeight}) => {
+
+
+    console.log(barHeight);
+    console.log(barHeight);
+   
+
+    const[bheight,setBheight] = useState('');
+    useEffect(() => {
+        // Parse the barHeight string to a number
+        const parsedHeight = parseFloat(barHeight);
+        // Check if the parsedHeight is a valid number
+        if (!isNaN(parsedHeight)) {
+            setBheight(parsedHeight);
+        }
+    }, [barHeight])
+
+
+
+
+
+    return (
+        <View style={styles.progressBarsContainer}>
+            <View style={styles.contentContainer}>
+                <Text style={styles.selectedEmoji}>{selectedEmoji}</Text>
+                <View style={[styles.progressBar, {  height: bheight || 0 }]} />
+            </View>
+        </View>
+    );
 };
 
-const ChartComponent = () => {
-    return (
-      <View>
-        <BarChart style={styles.chart}
-          data={data}
-          width={300}
-          height={200}
-          yAxisSuffix=""
-          chartConfig={{
-            backgroundColor: '#ffffff',
-            backgroundGradientFrom: '#ffffff',
-            backgroundGradientTo: '#ffffff',
-            decimalPlaces: 0, // precision for data values
-            color: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`, // color of bars
-            labelColor: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`, // color of labels
-            style: {
-              borderRadius: 16,
-            },
-            propsForDots: {
-              r: '6',
-              strokeWidth: '2',
-              stroke: '#ffa726',
-            },
-          }}
-          verticalLabelRotation={30}
-        />
-      </View>
-    );
-  };
+const styles = StyleSheet.create({
+    
+    progressBarsContainer: {
+       
+        alignSelf: 'center',
+        alignContent: 'center',
+        justifyContent: 'center',
+        // backgroundColor: 'yellow',
+        marginLeft: 25,
+        marginBottom:25,
+        marginTop:-65
+    },
 
-  const styles = {
-    chart:{
-        marginTop:-300,
-        margingBottom:200,
-        justifyContent:'center',
-        alignSelf:'center'
-    }
-  }
-  
-  export default ChartComponent;
+    contentContainer: {
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+
+    progressBar: {
+        backgroundColor: '#4ABFB4', // Changed to a color for better visibility
+        width: '100%', // Adjust the width of the progress bar as needed
+        borderTopLeftRadius: 20, // Adjust the radius as needed
+        borderTopRightRadius: 20,
+         // Adjust the radius as needed
+    },
+
+    selectedEmoji: {
+        fontSize: 22,
+        fontWeight: 'bold',
+        
+ 
+    },
+});
+
+export default MoodProgressBars;

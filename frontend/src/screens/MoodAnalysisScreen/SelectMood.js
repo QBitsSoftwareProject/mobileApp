@@ -3,9 +3,11 @@ import { View, Text, TouchableOpacity, Animated, ScrollView,Image,  } from 'reac
 import HeaderSub from '../../screens/MoodAnalysisScreen/Header';
 import { useNavigation } from '@react-navigation/native';
 
+
 const MoodAnalysis = () => {
 
   const navigation = useNavigation();
+  const [moodIndex, setMoodIndex] = useState('');
 
   const emojis = [
     {  emoji: '😄' , moodText:'Happy', imageSource:require('../../assets/images/analysisMood/happyPicture.png') },
@@ -22,6 +24,8 @@ const MoodAnalysis = () => {
     console.log(`Emoji at index ${index} pressed`);
 
     setSelectedEmoji(emojis[index].emoji);
+    setMoodIndex(index)
+    // console.log(index);
     
   };
 
@@ -36,7 +40,7 @@ const MoodAnalysis = () => {
         const { imageSource} = selectedEmojiObject;
 
         console.log('Selected mood:', moodText);
-        navigation.navigate('AnalysisGraphScreen', { selectedEmoji, moodText,imageSource });
+        navigation.navigate('AnalysisGraphScreen', { selectedEmoji, moodText,imageSource, emojis, moodIndex });
         
       
       } else {
@@ -89,6 +93,7 @@ const MoodAnalysis = () => {
 
   return (
     <View>
+     
       <HeaderSub headLine={'How are you feeling today!'} />
 
       {/* <ScrollView> */}
@@ -125,8 +130,10 @@ const MoodAnalysis = () => {
       <TouchableOpacity style={styles.setMood} onPress={handlePressButton}>
         <Text style={styles.mood}>Set mood</Text>
       </TouchableOpacity>
-     
 
+    
+     
+     
     </View>
   );
 };
