@@ -255,7 +255,7 @@ const styles = StyleSheet.create({
 
   quetext: {
     marginLeft: 22,
-    marginTop: 38,
+    marginTop: 20,
     color: "black",
     fontSize: 16,
   },
