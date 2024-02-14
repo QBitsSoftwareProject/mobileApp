@@ -26,28 +26,28 @@ const AnalysisGraph = () => {
     useEffect(() => {
         if (moodIndex === 1) {
             // Incrementing the happyHeight and updating state
-            setBHeight(prevHeight => prevHeight + 10);
+            setBHeight(prevHeight => prevHeight + 20);
         }
         else if(moodIndex === 2){
-            setSadBHeight(prevHeight => prevHeight + 10);
+            setSadBHeight(prevHeight => prevHeight + 20);
         }
         else if(moodIndex === 3){
-            setAngryHeight(prevHeight => prevHeight + 10);
+            setAngryHeight(prevHeight => prevHeight + 20);
         }
         else if(moodIndex === 4){
-            setSickHeight(prevHeight => prevHeight + 10);
+            setSickHeight(prevHeight => prevHeight + 20);
         }
         else if(moodIndex === 5){
-            setSleepHeight(prevHeight => prevHeight + 10);
+            setSleepHeight(prevHeight => prevHeight + 20);
         }
         else if(moodIndex === 6){
-            setNutralHeight(prevHeight => prevHeight + 10);
+            setNutralHeight(prevHeight => prevHeight + 20);
         }
         else if(moodIndex === 7){
-            setScaredHeight(prevHeight => prevHeight + 10);
+            setScaredHeight(prevHeight => prevHeight + 20);
         }
         else if(moodIndex === 0){
-            setHappyHeight(prevHeight => prevHeight + 10);
+            setHappyHeight(prevHeight => prevHeight + 20);
         }
     }, [moodIndex]);
     console.log(bHeight);
