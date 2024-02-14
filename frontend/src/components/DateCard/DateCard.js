@@ -3,10 +3,15 @@ import React from 'react'
 
 
 const DateCard = (props) => { 
+
+  const handleDatePress = ()=>{
+    //pass
+  }
+  
 	
     return( 
         <ScrollView style={styles.cardBox}>
-          <TouchableOpacity onPress={() => handledatePress(props.date)}>
+          <TouchableOpacity onPress={() => handleDatePress(props.date)}>
             <View style={styles.cardcontainer}>
               <Text style={styles.date}>{props.date}</Text>
             </View>

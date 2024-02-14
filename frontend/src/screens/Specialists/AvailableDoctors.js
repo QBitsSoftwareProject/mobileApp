@@ -12,6 +12,10 @@ import { useState } from 'react'
 const AvailableDoctor = () => {
   const navigation=useNavigation();
 
+  const pressHandler = () => {
+    navigation.navigate('MakeAppointment')
+  };
+
   const docList = [
     {id:1, 
       image:require("../../assets/images/kitharringtonhair.jpg"),
@@ -50,12 +54,6 @@ const AvailableDoctor = () => {
     }
   ]; 
 
-const pressHandler = () => {
-  navigation.navigate('MakeAppointment')
-};
-
-const { input, setInput } = useState();
-
   return (
     <View>
       <HeaderSub headLine={'Doctor appointment'}  subHeadLine={'Explore and find the perfect specialist.'}/>
@@ -66,7 +64,7 @@ const { input, setInput } = useState();
               
               <ButtonGroup/>
 
-              <SearchBar data={docList} input={input} setInput={setInput}/>
+              <SearchBar data={docList} />
               
               <View style={{marginHorizontal:15}}>
                   <Text style={style.descript2}>Available Doctors.</Text>

@@ -50,7 +50,7 @@ const AppointmentStatus = () => {
   return (
       <View>
         
-        <HeaderSub headLine={'Appointment'}  subHeadLine={'Review and manage appointment'} backarrow={"MakeAppointment"}/>
+        <HeaderSub headLine={'Appointment'}  subHeadLine={'Review and manage appointment'} backarrow={"AvailableDoctors"}/>
             
             <SafeAreaView style={{margin:25}}>
 
@@ -65,6 +65,7 @@ const AppointmentStatus = () => {
                     <View style={{marginBottom:80}}>
                       {stateList.map (( item ) => (
                         <CreateCard 
+                        key={item.id}
                         image={item.image} 
                         title={item.title}
                         cardName={'AppointmentStatus'}

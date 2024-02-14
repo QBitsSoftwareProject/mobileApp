@@ -12,7 +12,7 @@ const HomeStack = () => {
 
     <stack.Navigator screenOptions={{ headerStyle: { flex:1,backgroundColor: 'transparent' }, headerShown:false }}>
       
-      <stack.Screen name='AvailableDoctors' component={AppointmentStack} />
+      <stack.Screen name='AppointmentStack' component={AppointmentStack} />
       
       
       
