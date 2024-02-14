@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Text, View, TouchableOpacity, Animated, Image, StyleSheet, ImageBackground } from 'react-native';
+import { Text, View, TouchableOpacity, Animated, Image, StyleSheet, ImageBackground ,Modal} from 'react-native';
+import AudioPlayer from '../../screens/MindRelaxingMethodScreen.js/AudioPlayer';
 
 
 const ExpandableCard = (props) => {
@@ -7,6 +8,9 @@ const ExpandableCard = (props) => {
   const heightAnim = useRef(new Animated.Value(0)).current;
   const [imageHeight, setImageHeight] = useState(0);
   const [textHeight, setTextHeight] = useState(0);
+  const [isVisible, setIsVisible] = useState(false);
+
+  let btnFunction;
 
   const toggleExpand = () => {
     setIsExpanded(!isExpanded);
@@ -25,17 +29,26 @@ const ExpandableCard = (props) => {
       mimg = require('../../assets/images/MindRelaxingMethod/mp3.png');
       mtitle = 'Listen a music'
       ibtn = require('../../assets/images/MindRelaxingMethod/mp3playbutton.png');
+      btnFunction = () => {
+        console.log(props.rUrl);
+        return <AudioPlayer mp3 = {props.rUrl}/>
+        
+      };
       
   }
   else if(methodtype === 'story'){
     mimg = require('../../assets/images/MindRelaxingMethod/story.png');
     mtitle = 'Read a story'
     ibtn = require('../../assets/images/MindRelaxingMethod/read.png');
+    ibtn = require('../../assets/images/MindRelaxingMethod/mp3playbutton.png');
+       
   }
   else{
     mimg = require('../../assets/images/MindRelaxingMethod/breathing.png');
     mtitle = 'Breathing exercise'
     ibtn = require('../../assets/images/MindRelaxingMethod/mp3playbutton.png');
+    ibtn = require('../../assets/images/MindRelaxingMethod/mp3playbutton.png');
+       
   }
 
   // console.log(mimg)
@@ -110,9 +123,9 @@ const ExpandableCard = (props) => {
                   source={{ uri: imglink }}
                   style={styles.contentImage}
                 >
-                  <TouchableOpacity>
-                    <Image source={ibtn} />
-                  </TouchableOpacity>
+                  <TouchableOpacity onPress={btnFunction}>
+  <Image source={ibtn} />
+</TouchableOpacity>
                 </ImageBackground>
               </View>
             </View>
@@ -124,6 +137,8 @@ const ExpandableCard = (props) => {
           </View>
         </Animated.View>
       </View>
+
+      
     </View>
   );
 };

@@ -19,7 +19,7 @@ const Mindrelaxinmethod =() => {
       try{
           let url;
 
-          url = "http://10.10.0.85:8070/method/get-method"
+          url = "http://192.168.8.110:8070/method/get-method"
 
           const response = await axios.get(url);
           setData(response.data);
@@ -55,6 +55,7 @@ const Mindrelaxinmethod =() => {
             contentText={item.discription}
             imgLink={item.imageURL}
             methodType={item.methodType}
+            rUrl = {item.resourceURL}
           />
         ))}
 
