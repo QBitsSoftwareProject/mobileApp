@@ -26,9 +26,10 @@ const [selectedEmojiMarks, setSelectedEmojiMarks] = useState('');
        };
 
       const handleViewButton = () =>{
-      navigation.navigate('ViewJournal',{
+      navigation.navigate('ViewJournal',{ 
 
     }); 
+
 
 }
 
@@ -69,9 +70,7 @@ const handleEmojiPress = ({ emoji, mark }) => {
 
         <JournalEntry/>
 
-        {/* <TouchableOpacity style = {styles.create} onPress={toggleOverlay}>
-        <Text style={styles.createText}>Create Journal</Text>
-        </TouchableOpacity> */}
+ 
 
 <View>
       <TouchableOpacity style={styles.create} onPress={toggleOverlay}>
@@ -87,7 +86,7 @@ const handleEmojiPress = ({ emoji, mark }) => {
 
       </ScrollView>
 
-<View style={{ position: 'absolute', top:850, left: 0, right: 0 }}>
+<View style={{ position: 'absolute', top:900, left: 0, right: 0 }}>
 <TabBar/>
 </View>
 

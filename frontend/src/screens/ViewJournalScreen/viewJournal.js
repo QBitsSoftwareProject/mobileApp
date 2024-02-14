@@ -6,7 +6,7 @@ import { CustomButtonView } from "./viewSwitch";
 import { Calendar } from "./calender";
 import { SwipableList} from "./viewInputJournal";
 import { FloatingButton} from "./floatingButton";
-import LinearGradient from 'react-native-linear-gradient';
+
 import TabBar from "../../components/TabBar/TabBar";
 import HeaderSub from "../../components/HeaderSub/HeaderSub";
 import { createStackNavigator } from '@react-navigation/stack';
@@ -31,11 +31,12 @@ export const ViewJournal = ({navigation}) =>{
         })
     }
 
-    const handleEditButton = (itemID,itemTittle,itemText) =>{
+    const handleEditButton = (itemID,itemTittle,itemText,itemEmoji) =>{
       navigation.navigate('EditJournal',{
         itemID,
         itemTittle,
-        itemText
+        itemText,
+        itemEmoji
         
         // navigation:navigate,
 
@@ -60,9 +61,11 @@ export const ViewJournal = ({navigation}) =>{
 
         <View>
             <Calendar></Calendar>
+
+            
           
             {/* <SwipableList editFunction={(itemID, itemText) => handleEditButton(itemID, itemText)}></SwipableList> */}
-            <SwipableList editFunction={handleEditButton} />
+            <SwipableList editFunction={handleEditButton} style={{ marginTop: 24.5, backgroundColor: 'yellow' } }  />
 
         </View>
 
@@ -71,7 +74,7 @@ export const ViewJournal = ({navigation}) =>{
 
 <FloatingButton btnCreate = {handleFlotingPointButton}></FloatingButton>
 
-<View style={{ position: 'absolute', top:844, left: 0, right: 0 }}>
+<View style={{ position: 'absolute', top:900, left: 0, right: 0 }}>
         <TabBar/>
       </View>
 

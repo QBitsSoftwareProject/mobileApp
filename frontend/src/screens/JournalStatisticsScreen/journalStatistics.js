@@ -33,7 +33,7 @@ export const JournalStatistics = ({navigation})=>{
     />
 
 
-    <ScrollView height={500}>
+    <ScrollView height={600}>
 
            
 
@@ -102,7 +102,7 @@ export const JournalStatistics = ({navigation})=>{
       
 
         </ScrollView>
-        <View style={{ position: 'absolute', top:812, left: 0, right: 0 }}>
+        <View style={{ position: 'absolute', top:900, left: 0, right: 0 }}>
         <TabBar/>
         </View>
         </View>

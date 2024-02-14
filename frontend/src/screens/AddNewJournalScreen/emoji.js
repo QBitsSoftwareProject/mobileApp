@@ -12,9 +12,13 @@ export const EmojiPicker = ({onEmojiPress}) =>{
     const [selectedEmoji, setSelectedEmoji] = useState(null);
 
     const handleEmojiPress = (emoji, mark) => {
+      const selectedEmoji = emojiData.find(item => item.emoji === emoji);  
+      
         setUserInput((prevInput) => prevInput + `${emoji}(${mark})`);
         setSelectedEmoji(emoji);
-        onEmojiPress({ emoji, mark });
+        onEmojiPress({ emoji, mark , category: selectedEmoji? selectedEmoji.category:''});
+
+        console.log(selectedEmoji? selectedEmoji.category: '')
 
         // console.log(mark); 
         // get the marks of emoji
@@ -30,14 +34,14 @@ export const EmojiPicker = ({onEmojiPress}) =>{
 
     const emojiData = [
 
-        { emoji: '😊' , mark: '10 '},
-        { emoji: '😢' , mark: '20 '},
-        { emoji: '😡' , mark: '30 '},
-        { emoji: '😍' , mark: '40 '},
-        { emoji: '😱' , mark: '50 '},
-        { emoji: '😐' , mark: '60 '},
-        { emoji: '😴' , mark: '70 '},
-        { emoji: '🤒' , mark: '80 '}, 
+        { emoji: '😊' , mark: '10 ', category: 'positive'},
+        { emoji: '😢' , mark: '20 ', category: 'negative' },
+        { emoji: '😡' , mark: '30 ', category: 'negative'},
+        { emoji: '😍' , mark: '40 ', category: 'positive'},
+        { emoji: '😱' , mark: '50 ', category: 'negative'},
+        { emoji: '😐' , mark: '60 ', category: 'negative'},
+        { emoji: '😴' , mark: '70 ', category: 'positive'},
+        { emoji: '🤒' , mark: '80 ', category: 'negative'}, 
 
        
     ];
