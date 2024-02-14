@@ -96,7 +96,7 @@ const DoctorRegScreen2 = () => {
 
                   </View> 
 
-                  <InputField placeHolder={'Describe your qualification.(max words 300)'} label={'Educational Qualifications :'} onChangeText={setQualification} type={'textField'}/>
+                  <InputField placeHolder={'ex_B.A. Biochemistry (Hons) - University of Oxford, UK M.B.B.S (Hons) University of Colombo'} label={'Educational Qualifications :'} onChangeText={setQualification} type={'textField'}/>
                   
               </View>
   

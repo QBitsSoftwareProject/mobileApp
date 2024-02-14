@@ -1,75 +1,59 @@
-import React, { useState, useEffect } from 'react';
-import { View, Image, PermissionsAndroid, Text, TouchableOpacity, } from 'react-native';
-import { launchImageLibrary } from 'react-native-image-picker';
+import React, { useEffect, useState } from 'react';
+import { View, Image, Text, TouchableOpacity, Platform, Alert } from 'react-native';
+import * as ImagePicker from 'expo-image-picker';
 import styles from './styles';
 
-const proPic=require('../../assets/images/doc.jpg')
+const proPic = require('../../assets/images/doc.jpg');
 
-const FilePicker = () => {
+const FilePicker = (props) => {
   const [selectedImage, setSelectedImage] = useState(null);
 
-  // useEffect(() => {
-  //   requestStoragePermission();
-  // }, []);
+  useEffect(()=>{
 
-  // const requestStoragePermission = async () => {
-  //   try {
-  //     const granted = await PermissionsAndroid.request(
-  //       PermissionsAndroid.PERMISSIONS.READ_EXTERNAL_STORAGE,
-  //       {
-  //         title: 'Storage Permission',
-  //         message: 'This app needs access to your storage to pick images.',
-  //         buttonNeutral: 'Ask Me Later',
-  //         buttonNegative: 'Cancel',
-  //         buttonPositive: 'OK',
-  //       },
-  //     );
+    if(selectedImage != null){
+      props.selectedImg(selectedImage)
+    }
+    
+  },[selectedImage])
 
-  //     if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-  //       console.log('Storage permission granted');
-  //     } else {
-  //       console.log('Storage permission denied');
-  //     }
-  //   } catch (error) {
-  //     console.error('Error requesting storage permission:', error);
-  //   }
-  // };
-
-  const pickImage = () => {
-    const options = {
-      mediaType: 'photo', // or 'video' or 'mixed'
-      maxWidth: 500,
-      maxHeight: 500,
-      quality: 0.8,
-    };
-
-    launchImageLibrary(options, response => {
-      if (response.didCancel) {
-        console.log('Image picker was canceled');
-      } else if (response.errorCode) {
-        console.error('Image picker error:', response.errorMessage);
-      } else {
-        const selectedUri = response.uri;
-        setSelectedImage(selectedUri);
-        console.log('Selected image URI:', selectedUri);
+  const pickImage = async () => {
+    if (Platform.OS !== 'web') {
+      const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
+      if (status !== 'granted') {
+        Alert.alert('Sorry, we need camera roll permissions to make this work!');
+        return;
       }
+    }
+
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.All,
+      allowsEditing: true,
+      aspect: [4, 3],
+      quality: 1,
     });
+
+    if (!result.canceled) { 
+      setSelectedImage(result.assets[0].uri); 
+    }
   };
 
   return (
-    <View style={{marginBottom:32}}>
+    <View style={{ marginBottom: 32 }}>
       <Text style={styles.title}>Upload a profile picture :</Text>
-      {selectedImage && <Image source={{ uri: selectedImage }} style={styles.image} />}
 
-      <TouchableOpacity style={styles.imageBtn}>
-        <Text style={styles.btnText}>choose Image</Text>
+      <TouchableOpacity style={styles.imageBtn} onPress={pickImage}>
+        <Text style={styles.btnText}>Choose Image</Text>
       </TouchableOpacity>
 
       <View style={styles.imageContainer}>
-        <Image source={proPic} style={styles.image}/>
+        {selectedImage ? (
+          <Image source={{ uri: selectedImage }} style={styles.image} />
+        ) :(
+          <Text style={{color:'#979DAC'}}>{props.errMsg}</Text>
+        )}
       </View>
     </View>
   );
 };
 
-export default FilePicker
+export default FilePicker;

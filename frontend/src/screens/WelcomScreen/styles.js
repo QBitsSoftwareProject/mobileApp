@@ -63,7 +63,8 @@ export default styles = StyleSheet.create({
         fontWeight:'400',
         color:'white',
         textAlign:'center',
-        lineHeight:18
+        lineHeight:18,
+       
     },
     btnBox:{
         width:'100%',

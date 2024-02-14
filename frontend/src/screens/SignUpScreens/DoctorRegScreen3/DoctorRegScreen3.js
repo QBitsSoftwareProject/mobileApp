@@ -10,6 +10,16 @@ const DoctorRegScreen3 = () => {
     const screenHeight = Dimensions.get('window').height;
 
     const [screenPadding, setScreenPadding] = useState(0)
+    const [availableDays, setAvailableDays] = useState([])
+    const [isNext, setIsNext] = useState(false)
+
+    const [availableTimesDay1, setAvailableTimesDay1] = useState([])
+    const [availableTimesDay2, setAvailableTimesDay2] = useState([])
+    const [availableTimesDay3, setAvailableTimesDay3] = useState([])
+    const [availableTimesDay4, setAvailableTimesDay4] = useState([])
+    const [availableTimesDay5, setAvailableTimesDay5] = useState([])
+    const [availableTimesDay6, setAvailableTimesDay6] = useState([])
+    const [availableTimesDay7, setAvailableTimesDay7] = useState([])
 
     useEffect(() => {
         const keyboardDidShowListener = Keyboard.addListener(
@@ -34,14 +44,22 @@ const DoctorRegScreen3 = () => {
       }, []);
 
     const handleBackPress = ()=>{
-        navigation.navigate('DoctorRegScreen2')
+      navigation.navigate('DoctorRegScreen2')
         
     }
 
     const handleNext = ()=>{
-          navigation.navigate('DoctorRegScreen4') 
+        console.log(availableTimesDay1)
+        setIsNext(true)
+        navigation.navigate('DoctorRegScreen4') 
    
     }
+
+    const updateAvailableDays = (day) => {
+      setAvailableDays(prevAvailableDays => [...prevAvailableDays, day]);
+    };
+
+
 
   return (
     <View style={styles.conatiner}>
@@ -56,13 +74,13 @@ const DoctorRegScreen3 = () => {
                 <Text style={styles.headerText}>Please fill the following form with correct details.</Text>
                 <Text style={styles.subText}>Availability and Contact:</Text>
  
-                <SelectionBars headLine={"1. Monday"} timeSlotVisible={true}/>
-                <SelectionBars headLine={"2. Tuesday"} timeSlotVisible={true}/>
-                <SelectionBars headLine={"3. Wednesday"} timeSlotVisible={true}/>
-                <SelectionBars headLine={"4. Thursday"} timeSlotVisible={true}/>
-                <SelectionBars headLine={"5. Friday"} timeSlotVisible={true}/>
-                <SelectionBars headLine={"6. Sturday"} timeSlotVisible={true}/>
-                <SelectionBars headLine={"7. Sunday"} timeSlotVisible={true}/>
+                <SelectionBars num={1} headLine={"Monday"} timeSlotVisible={true} dayBlock={updateAvailableDays} timeBlock={setAvailableTimesDay1}/>
+                <SelectionBars num={2} headLine={"Tuesday"} timeSlotVisible={true} dayBlock={updateAvailableDays} timeBlock={setAvailableTimesDay2}/>
+                <SelectionBars num={3} headLine={"Wednesday"} timeSlotVisible={true} dayBlock={updateAvailableDays} timeBlock={setAvailableTimesDay3}/>
+                <SelectionBars num={4} headLine={"Thursday"} timeSlotVisible={true} dayBlock={updateAvailableDays} timeBlock={setAvailableTimesDay4}/>
+                <SelectionBars num={5} headLine={"Friday"} timeSlotVisible={true} dayBlock={updateAvailableDays} timeBlock={setAvailableTimesDay5}/>
+                <SelectionBars num={6} headLine={"Sturday"} timeSlotVisible={true} dayBlock={updateAvailableDays} timeBlock={setAvailableTimesDay6}/>
+                <SelectionBars num={7} headLine={"Sunday"} timeSlotVisible={true} dayBlock={updateAvailableDays} timeBlock={setAvailableTimesDay7}/>
 
               </View>
   

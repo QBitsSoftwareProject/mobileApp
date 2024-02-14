@@ -15,7 +15,10 @@ const DoctorRegScreen = () => {
     const [address, setAddress] = useState('')
     const [city, setCity] = useState('')
     const [country, setCountry] = useState('')
+
     const [isEmpty, setIsEmpty] = useState(false)
+    const [isEmailValid, setIsEmailValid] = useState(true);
+    const [isPhoneNumValid, setIsPhoneNumValid] = useState(true);
 
     const [screenPadding, setScreenPadding] = useState(0)
 
@@ -47,6 +50,16 @@ const DoctorRegScreen = () => {
         
     }
 
+    const validateEmail = (email) => {
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      return emailRegex.test(email);
+    };
+  
+    const validatePhoneNumber = (phoneNumber) => {
+      const phoneRegex = /^\+\d{11}$/;
+      return phoneRegex.test(phoneNumber);
+    };
+
   
     const handleNext = ()=>{
       if(
@@ -59,6 +72,16 @@ const DoctorRegScreen = () => {
         country.trim() === ''
       ){
         setIsEmpty(true)
+
+      }else if(!validateEmail(email)){
+        setIsEmailValid(false)
+        setIsEmpty(false)
+        setIsPhoneNumValid(true)
+      }
+      else if(!validatePhoneNumber(contactNo)){
+        setIsPhoneNumValid(false)
+        setIsEmailValid(true)
+        setIsEmpty(false)
       }
       else{
         setIsEmpty(false)
@@ -86,11 +109,11 @@ const DoctorRegScreen = () => {
                 
                   <InputField placeHolder={'B.M. Weerasinghe'} label={'Full name / Name with initial :'} onChangeText={setName}/>
                   <InputField placeHolder={'Bimsara Madusha'} label={'User name :'} onChangeText={setUserName}/>
-                  <InputField placeHolder={'ex@gmail.com'} label={'Email :'} onChangeText={setEmail}/>
-                  <InputField placeHolder={'+9412345678'} label={'Contact No :'} onChangeText={setContactNo}/>
-                  <InputField placeHolder={'67/1, welona place, kaubedda'} label={'Address :'} onChangeText={setAddress}/>
+                  <InputField placeHolder={'ex@gmail.com'} label={'Email :'} onChangeText={setEmail} errMsg={!isEmailValid ? 'Email is not valid!':''}/>
+                  <InputField placeHolder={'+9412345678'} label={'Contact No :'} onChangeText={setContactNo} errMsg={!isPhoneNumValid ? 'Phone number is not valid!':''}/>
+                  <InputField placeHolder={'67/1, welona place, kaubedda'} label={'Address :'} onChangeText={setAddress} />
                   <InputField placeHolder={'Moratuwa'} label={'City :'} onChangeText={setCity}/>
-                  <InputField placeHolder={'Ex_Sri Lanka'} label={'Country :'} onChangeText={setCountry}/>
+                  <InputField placeHolder={'Ex_Sri Lanka'} label={'Country :'} onChangeText={setCountry} searchBox={true} query={country}/>
   
               </View>
   

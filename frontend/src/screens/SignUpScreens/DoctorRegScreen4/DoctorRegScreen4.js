@@ -16,6 +16,7 @@ const DoctorRegScreen4 = () => {
 
     const [isEmpty, setIsEmpty] = useState(false);
     const [isChecked, setIsChecked] = useState(false);
+    const [proPic, setProPic] = useState(null);
 
     useEffect(() => {
         const keyboardDidShowListener = Keyboard.addListener(
@@ -32,10 +33,11 @@ const DoctorRegScreen4 = () => {
             setScreenPadding(0)
           }
         )
-
+    
         return () => {
-          keyboardDidShowListener.remove()
-          keyboardDidHideListener.remove()
+          keyboardDidShowListener.remove();
+          keyboardDidHideListener.remove();
+        
         };
       }, []);
 
@@ -49,9 +51,11 @@ const DoctorRegScreen4 = () => {
     
       const handleSubmit = ()=>{
         if(
-          bio.trim() === ''
+          bio.trim() === '' ||
+          proPic == null
         ){
           setIsEmpty(true)
+          
 
         }else if(!isChecked){
           setUnCheckedColor('#E82519')
@@ -59,6 +63,7 @@ const DoctorRegScreen4 = () => {
         }
         else{
           setIsEmpty(false)
+          console.log(proPic)
           navigation.navigate('TabBar')
         }
       }
@@ -76,7 +81,7 @@ const DoctorRegScreen4 = () => {
                 <Text style={styles.headerText}>Please fill the following form with correct details.</Text>
                 <Text style={styles.subText}>Additional Details</Text>
                 
-                <FilePicker/>
+                <FilePicker errMsg={"You have to select an image"} selectedImg={setProPic}/>
 
                 <InputField placeHolder={'Describe your expertise and approach. \n(max words 300)'} label={'Brief Bio :'} onChangeText={setBio} type={'textField'}/>
                   

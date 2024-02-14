@@ -1,5 +1,5 @@
 import { View, Text, Image, Dimensions, TouchableOpacity } from 'react-native'
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { LinearGradient } from 'expo-linear-gradient'
 import styles from './styles'
 import Swiper from 'react-native-swiper'
@@ -16,59 +16,70 @@ const WelcomeScreen = () => {
     const frameHeight = Dimensions.get("window").height * 0.8
 
     const navigation = useNavigation();
+    const [activeIndex, setActiveIndex] = useState(0); 
 
-    const handleLogin = ()=>{
+    // useEffect(() => {
+        
+    //     const intervalId = setInterval(() => {
+    //         setActiveIndex((prevIndex) => (prevIndex + 1) % quotes.length);
+    //     }, 2000); 
+
+        
+    //     return () => clearInterval(intervalId);
+    // }, []);
+
+    const handleLogin = () => {
         navigation.navigate("LoginScreen");
     }
-    const handleGuest = ()=>{
+
+    const handleGuest = () => {
         navigation.navigate('TabBar')
     }
-    const handleSingUp = ()=>{
+
+    const handleSingUp = () => {
         navigation.navigate('SelectionScreen')
     }
 
-  return (
-    <LinearGradient colors={['#49B1F7', '#00453E']} style={{flex:1}}>
-        <Image source={require('../../assets/images/bgSquare.png')} style={styles.bgImage}/>
-        
-        <View style={styles.container}>
-            <View style={[styles.logoFrame, {height:frameHeight, width:frameWidth}]}>
-                <Text style={styles.logoText}>LOGO</Text>
-            </View>
+    return (
+        <LinearGradient colors={['#49B1F7', '#00453E']} style={{ flex: 1 }}>
+            <Image source={require('../../assets/images/bgSquare.png')} style={styles.bgImage} />
 
-            <Text style={styles.headText}>Make a better mindset</Text>
+            <View style={styles.container}>
+                <View style={[styles.logoFrame, { height: frameHeight, width: frameWidth }]}>
+                    <Text style={styles.logoText}>LOGO</Text>
+                </View>
 
-            <View style={{height:250}}>
-                <Swiper style={styles.wrapper} showsButtons={false} paginationStyle={styles.pagination} dotColor='white'>
+                <Text style={styles.headText}>Make a better mindset</Text>
 
-                    {quotes.map((quote, index)=>(
-                        <View key={index} style={styles.slideBox}>
-                            <Text style={styles.quoteText}>{quote}</Text>
-                        </View>
-                    ))}
-                </Swiper>
-            </View>
+                <View style={{ height: 250 }}>
+                    <Swiper style={styles.wrapper} showsButtons={false} paginationStyle={styles.pagination} dotColor='white' index={activeIndex}>
+                        {quotes.map((quote, index) => (
+                            <View key={index} style={styles.slideBox}>
+                                <Text style={styles.quoteText}>{quote}</Text>
+                            </View>
+                        ))}
+                    </Swiper>
+                </View>
 
-            <View style={styles.btnBox}>
-                <TouchableOpacity style={[styles.btn, {backgroundColor:'#45B4FF'}]} onPress={handleSingUp}>
-                    <Text style={styles.btnText}>Sign Up</Text>
+                <View style={styles.btnBox}>
+                    <TouchableOpacity style={[styles.btn, { backgroundColor: '#45B4FF' }]} onPress={handleSingUp}>
+                        <Text style={styles.btnText}>Sign Up</Text>
+                    </TouchableOpacity>
+
+                    <TouchableOpacity style={[styles.btn, { backgroundColor: '#4ABFB4' }]} onPress={handleLogin}>
+                        <Text style={styles.btnText}>Login</Text>
+                    </TouchableOpacity>
+                </View>
+
+                <TouchableOpacity onPress={handleGuest}>
+                    <Text style={styles.guestText}>Use as a guest</Text>
                 </TouchableOpacity>
 
-                <TouchableOpacity style={[styles.btn, {backgroundColor:'#4ABFB4'}]} onPress={handleLogin}>
-                    <Text style={styles.btnText}>Login</Text>
-                </TouchableOpacity>
-            </View>
-            
-            <TouchableOpacity onPress={handleGuest}>
-                <Text style={styles.guestText}>Use as a guest</Text>
-            </TouchableOpacity>
+                <Text style={styles.bottomText}>Please use an earphone</Text>
 
-            <Text style={styles.bottomText}>Please use an earphone</Text>
-            
-        </View>
-    </LinearGradient>
-  
-  )
+            </View>
+        </LinearGradient>
+    )
 }
 
 export default WelcomeScreen

@@ -44,9 +44,6 @@ const UserRegScreen = () => {
     const phoneRegex = /^\+\d{11}$/;
     return phoneRegex.test(phoneNumber);
   };
-  const handleCountryChange = (selectedCountry) => {
-    setCountry(selectedCountry); // Update the country state in the main file
-  };
 
   const handleSubmit = ()=>{
     if(
@@ -70,6 +67,7 @@ const UserRegScreen = () => {
     }
     else if(!validatePhoneNumber(contactNo)){
       setIsPhoneNumValid(false)
+      setIsEmailValid(true)
       setIsEmpty(false)
     }
     else{

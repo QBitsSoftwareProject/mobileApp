@@ -70,7 +70,7 @@ const LoginScreen = () => {
                     
                 )}
                 
-                <TextInput placeholder='@emal' style={styles.inputField} onChangeText={(text)=> setEmail(text)}/>
+                <TextInput placeholder='Email' style={styles.inputField} onChangeText={(text)=> setEmail(text)}/>
                 <TextInput placeholder='Password' style={styles.inputField} onChangeText={(text)=> setPassword(text)}/>
             </View>
             
