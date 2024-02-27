@@ -56,7 +56,7 @@ const AppointmentStatus = () => {
 
                 <ScrollView style={{height:500}}>
 
-                    <ButtonGroup/>
+                    <ButtonGroup type={'status'}/>
 
                     <View style={{marginHorizontal:15, marginVertical:15}}>
                       <Text style={styles.descript2}>Appointment Status.</Text>

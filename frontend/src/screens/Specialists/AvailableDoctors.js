@@ -8,80 +8,112 @@ import { useNavigation } from '@react-navigation/native'
 import SearchBar from '../../components/SearchBar/SearchBar'
 import { useState } from 'react'
 
+const docList = [
+  {id:1, 
+    image:require("../../assets/images/kitharringtonhair.jpg"),
+    title:'Dr. B.M. Weerasinghe.', 
+    university:"MBBS, University of Colombo.",
+    regno: "234589.",
+    hospital: "Anuradhapura Genaral Hospital.",
+  },
+  {id:2, 
+    image:require("../../assets/images/kitharringtonhair.jpg"),
+    title:'Dr. B.M. Amarasinghe.', 
+    university:"MBBS, University of Colombo.",
+    regno: "234589.",
+    hospital: "Anuradhapura Genaral Hospital.",
+  },
+  {id:3, 
+    image:require("../../assets/images/kitharringtonhair.jpg"),
+    title:'Dr. B.M. Samarasinghe.', 
+    university:"MBBS, University of Colombo.",
+    regno: "234589.",
+    hospital: "Anuradhapura Genaral Hospital.",
+  },
+  {id:4, 
+    image:require("../../assets/images/kitharringtonhair.jpg"),
+    title:'Dr. B.M. Jayasinghe.', 
+    university:"MBBS, University of Colombo.",
+    regno: "234589.",
+    hospital: "Anuradhapura Genaral Hospital.",
+  },
+  {id:5, 
+    image:require("../../assets/images/kitharringtonhair.jpg"),
+    title:'Dr. B.M. Ranasinghe.', 
+    university:"MBBS, University of Colombo.",
+    regno: "234589.",
+    hospital: "Anuradhapura Genaral Hospital.",
+  }
+]; 
+
+
 
 const AvailableDoctor = () => {
   const navigation=useNavigation();
 
+  const [searchPress, setSearchPress] = useState(false);
+  const [filteredData, setFilteredData] = useState([]);
+
   const pressHandler = () => {
     navigation.navigate('MakeAppointment')
+    
   };
 
-  const docList = [
-    {id:1, 
-      image:require("../../assets/images/kitharringtonhair.jpg"),
-      title:'Dr. B.M. Weerasinghe.', 
-      university:"MBBS, University of Colombo.",
-      regno: "234589.",
-      hospital: "Anuradhapura Genaral Hospital.",
-    },
-    {id:2, 
-      image:require("../../assets/images/kitharringtonhair.jpg"),
-      title:'Dr. B.M. Amarasinghe.', 
-      university:"MBBS, University of Colombo.",
-      regno: "234589.",
-      hospital: "Anuradhapura Genaral Hospital.",
-    },
-    {id:3, 
-      image:require("../../assets/images/kitharringtonhair.jpg"),
-      title:'Dr. B.M. Samarasinghe.', 
-      university:"MBBS, University of Colombo.",
-      regno: "234589.",
-      hospital: "Anuradhapura Genaral Hospital.",
-    },
-    {id:4, 
-      image:require("../../assets/images/kitharringtonhair.jpg"),
-      title:'Dr. B.M. Jayasinghe.', 
-      university:"MBBS, University of Colombo.",
-      regno: "234589.",
-      hospital: "Anuradhapura Genaral Hospital.",
-    },
-    {id:5, 
-      image:require("../../assets/images/kitharringtonhair.jpg"),
-      title:'Dr. B.M. Ranasinghe.', 
-      university:"MBBS, University of Colombo.",
-      regno: "234589.",
-      hospital: "Anuradhapura Genaral Hospital.",
-    }
-  ]; 
+  const goBack = () => {
+    setSearchPress(false); 
+    setFilteredData([]); 
+ 
+};
 
+  
   return (
     <View>
-      <HeaderSub headLine={'Doctor appointment'}  subHeadLine={'Explore and find the perfect specialist.'}/>
+      <HeaderSub headLine={'Doctor appointment'}  subHeadLine={'Explore and find the perfect specialist.'} onPress={goBack}/>
         
           <SafeAreaView style={{margin:25}}>
            
             <ScrollView style={{height:500}}>   
               
-              <ButtonGroup/>
+              <ButtonGroup type={'list'}/>
 
-              <SearchBar data={docList} />
+              <SearchBar press={setSearchPress} newData={setFilteredData}/>
               
               <View style={{marginHorizontal:15}}>
                   <Text style={style.descript2}>Available Doctors.</Text>
               </View>
+
+              {!searchPress && (
+                  <View style={{ marginBottom: 80}}>
+                  {docList.map(( item ) => (
+                    <CreateCard 
+                    key={item.id}
+                    image={item.image}
+                    title={item.title}
+                    cardName={'AvailableDoc'}
+                    university={item.university}
+                    regno={item.regno}
+                    hospital={item.hospital} onPress={pressHandler} />
+                  ))}  
+                    </View>
+              )}
+              
+              
+              { searchPress && (
+                <View style={{ marginBottom: 80}}>
+                  {filteredData.map(( item ) => (
+                    <CreateCard 
+                    key={item.id}
+                    image={item.image}
+                    title={item.title}
+                    cardName={'AvailableDoc'}
+                    university={item.university}
+                    regno={item.regno}
+                    hospital={item.hospital} onPress={pressHandler} />
+                  ))}  
+                    </View>
+              )}
   
-              <View style={{ marginBottom: 80}}>
-                {docList.map(( item ) => (
-                  <CreateCard 
-                  key={item.id}
-                  image={item.image}
-                  title={item.title}
-                  cardName={'AvailableDoc'}
-                  university={item.university}
-                  regno={item.regno}
-                  hospital={item.hospital} onPress={pressHandler} />
-                ))}  
-              </View>
+              
             
             </ScrollView>  
           

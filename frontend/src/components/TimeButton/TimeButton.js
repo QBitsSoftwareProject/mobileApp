@@ -1,17 +1,32 @@
 import { StyleSheet, TouchableOpacity, View, Text} from 'react-native'
-import React from 'react'
+import React, { useState } from 'react'
 
 const TimeButton = (props) => { 
+  const [pressButton, setPressButton] = useState(false);
+  const [ key, setKey ] = useState('');
 
 const handleTimePress = ()=>{
-  //pass
+  if(!props.change) {
+    setPressButton(true);
+    props.press(true)
+    setKey(props.indexKey)
+
+  }else if(props.indexKey===key){
+    setPressButton(false)
+    props.press(false)
+    setKey('')
+  }
+  
+ 
 }
 
     return (
 
-    <TouchableOpacity onPress={() => handleTimePress(props.time)}>
-      <View style={styles.Tbutton}>
-          <Text style={styles.time}>{props.time}</Text>
+    <TouchableOpacity onPress={handleTimePress}>
+      <View style={[styles.Tbutton, {backgroundColor: pressButton===true ? '#4A90BF': 'transparent'}]} >
+          <Text style={[styles.time, {color: pressButton===true ? '#fff': '#4A90BF'}]}>
+            {props.time}
+          </Text>
       </View> 
     </TouchableOpacity> 
     )

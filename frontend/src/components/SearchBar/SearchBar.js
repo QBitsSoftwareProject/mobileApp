@@ -1,62 +1,57 @@
-import { StyleSheet, View, TextInput, TouchableOpacity, FlatList, Text } from 'react-native'
+import { StyleSheet, View, TextInput, TouchableOpacity, Text } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import Feather  from 'react-native-vector-icons/Feather';
-import filter  from 'lodash.filter'
 
-const API_ENDPOINT = 'https://randomuser.me/api/?results=30';
+const docList = [
+    {id:1, 
+      image:require("../../assets/images/kitharringtonhair.jpg"),
+      title:'Dr. B.M. Weerasinghe.', 
+      university:"MBBS, University of Colombo.",
+      regno: "234589.",
+      hospital: "Anuradhapura Genaral Hospital.",
+    },
+    {id:2, 
+      image:require("../../assets/images/kitharringtonhair.jpg"),
+      title:'Dr. B.M. Amarasinghe.', 
+      university:"MBBS, University of Colombo.",
+      regno: "234589.",
+      hospital: "Anuradhapura Genaral Hospital.",
+    },
+    {id:3, 
+      image:require("../../assets/images/kitharringtonhair.jpg"),
+      title:'Dr. B.M. Samarasinghe.', 
+      university:"MBBS, University of Colombo.",
+      regno: "234589.",
+      hospital: "Anuradhapura Genaral Hospital.",
+    },
+    {id:4, 
+      image:require("../../assets/images/kitharringtonhair.jpg"),
+      title:'Dr. B.M. Jayasinghe.', 
+      university:"MBBS, University of Colombo.",
+      regno: "234589.",
+      hospital: "Anuradhapura Genaral Hospital.",
+    },
+    {id:5, 
+      image:require("../../assets/images/kitharringtonhair.jpg"),
+      title:'Dr. B.M. Ranasinghe.', 
+      university:"MBBS, University of Colombo.",
+      regno: "234589.",
+      hospital: "Anuradhapura Genaral Hospital.",
+    }
+  ]; 
 
-const SearchBar = ({data}) => {
-    // const [isLoading, setIsLoading] = useState(false);
-    const [searchData, setSearchData] = useState([]);
-    // const [error, setError] = useState(null);
-    // const [fullData, setFullData] = useState([]);
-    const [searchQuery, setSearchQuery] = useState("");
 
-    // useEffect(() => {
-    //     setIsLoading(true);
-    //     fetchData(API_ENDPOINT);
-    // }, []);
-
-    // const fetchData = async(url) => {
-    //     try{
-    //         const response = await fetch(url);
-    //         const json = await  response.json();
-    //         setSearchData(json.results);
-
-    //         // console.log(json.results);
-
-    //         setFullData(json.results);
-    //         setIsLoading(false);
-        
-    //     }catch(error) {
-
-    //         setError(error);
-    //         console.log(error)
-    //     }
-    // };
+const SearchBar = (props) => {
+    const [newFilteredData, setNewFilteredData] = useState();
     
-    const handleSearch = (query) => {
-        setSearchQuery(query);
-        // const formattedQuery = query.toLowerCase();
-        const filteredData = filter(data, (item) => {
-            return  item.title.toLowerCase().includes(query.toLowerCase());
-        });
-        setSearchData(filteredData)
+    const handleSearch = (text) => {
+        const lowerCaseText=text.toLowerCase();
+        const filteredData = docList.filter(item=>item.title.toLowerCase().includes(lowerCaseText))
+        setNewFilteredData(filteredData)
+        
     };
 
-    // const contains = ({title}, query) => {
-      
-    // }
-
-    // if (error) {
-    //     return (
-    //       <View>
-    //         <Text>Error in fetching data.. Please check your internet connection!</Text>
-    //       </View>  
-    //     )
-    // };
-
-    
+   
     return (
     <View style={{margin:25}}>
         
@@ -68,20 +63,18 @@ const SearchBar = ({data}) => {
                 clearButtonMode='always'
                 autoCapitalize='none' 
                 autoCorrect={false} 
-                value={searchQuery} 
                 onChangeText={(text) => handleSearch(text)}/>
             </View>    
             
             <View style={{flex:1, justifyContent:"center"}}>
-                <TouchableOpacity  onPress={() => handleSearch(searchQuery)}>
+                <TouchableOpacity  onPress={() => {
+                    props.press(true)
+                    props.newData(newFilteredData);
+                    
+                    }}>
                     <Feather  style={styles.icon} name = 'search' size={20}/>
                 </TouchableOpacity>
             </View>
-
-            <FlatList data={docList}
-            renderItem={({ item }) => <Text>{item.title}</Text>}
-            keyExtractor={(item, index) => index.toString()}
-            />
 
             
         </View>

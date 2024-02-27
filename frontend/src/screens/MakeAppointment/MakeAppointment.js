@@ -7,21 +7,23 @@ import TimeButton from '../../components/TimeButton/TimeButton'
 import PopupMessage from '../../components/Pop-up/Pop-upScreen'
 import RegularButton from '../../components/Button/RegularButton'
 import { useNavigation } from '@react-navigation/native'
-import AvailableDoctor from '../Specialists/AvailableDoctors'
+
 
 
 const MakeAppointment = () => {
 
   const [numColumns, setNumColumns] = useState(2);
+  const [ timeBtnpress, setTimebtnPress] = useState(false)
+  const [dateBtnPress, setDateBtnPress] = useState(false)
 
   const dateList = [
-    {id:1, date:'17 \n Mon'},
-    {id:2, date:'18 \n Tue'},
-    {id:3, date:'19 \n Wed'},
-    {id:4, date:'20 \n Thur'},
-    {id:5, date:'21 \n Fri'},
-    {id:6, date:'22 \n Sat'},
-    {id:7, date:'23 \n Sun'}
+    {id:1, date:'17',  month:'Mon'},
+    {id:2, date:'18',  month: 'Tue'},
+    {id:3, date:'19',  month: 'Wed'},
+    {id:4, date:'20',  month: 'Thur'},
+    {id:5, date:'21',  month: 'Fri'},
+    {id:6, date:'22',  month: 'Sat'},
+    {id:7, date:'23',  month: 'Sun'}
   ];
 
     const timeList = [
@@ -98,9 +100,9 @@ const MakeAppointment = () => {
                     <Text style = {styles.title}>Select Date{'\n'}</Text>
                     
                     <View style={{ flexDirection: 'row' }}>
-                    {dateList.map((item) => (
+                    {dateList.map((item, index) => (
                       <View key={item.id} style={{ paddingBottom: 10}}>
-                        <DateCard date={item.date} />
+                        <DateCard key={index} date={item.date} month={item.month} indexKey={index} press={setDateBtnPress} change={dateBtnPress}/>
                       </View>
                       ))}
                     </View>          
@@ -111,7 +113,7 @@ const MakeAppointment = () => {
 
                     <View style={{ flexDirection: 'row', flexWrap: 'wrap' }}>
                       {timeList.map((item, index) => (
-                        <TimeButton key={index} time={item.time} />
+                        <TimeButton key={index} time={item.time} indexKey={index} press={setTimebtnPress} change={timeBtnpress}/>
                       ))}
                     </View>
                 </View>
