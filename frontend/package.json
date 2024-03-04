@@ -26,6 +26,7 @@
     "react-native-dynamic-search-bar": "^2.0.2",
     "react-native-safe-area-context": "4.6.3",
     "react-native-screens": "~3.22.0",
+    "react-native-swiper": "^1.6.0",
     "react-native-snap-carousel": "^3.9.1",
     "react-native-sound-player": "^0.13.2",
     "react-native-spinkit": "^1.5.1",
