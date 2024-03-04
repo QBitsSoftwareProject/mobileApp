@@ -141,7 +141,7 @@ const Question = () => {
   
   const navigation = useNavigation();
 
-  const id1 = '214224J';
+  const id1 = '214102J';
 
   const handleSubmitButton = () => {
     if (selectedOption) {
