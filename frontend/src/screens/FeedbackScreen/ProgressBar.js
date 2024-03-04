@@ -22,12 +22,12 @@ export  const SplitButton = () => {
               backgroundColor:
 
               pressedSegment === null 
-                  ? '#979DAC' // color for pressed and preceding segments
+                  ? '#FFFFFF' // color for pressed and preceding segments
                   : 
 
                 pressedSegment !== null && i <= pressedSegment
                   ? '#4ABFB4' // color for pressed and preceding segments
-                  : '#979DAC', // default color
+                  : '#FFFFFF', // default color
 
                   borderTopLeftRadius: index === 0 ? 15 : 0,
                   borderTopRightRadius: index === 9 ? 15 : 0,

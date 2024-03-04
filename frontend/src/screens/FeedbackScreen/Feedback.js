@@ -3,6 +3,7 @@ import { StyleSheet, Text, View, TextInput, Button, Switch, TouchableOpacity, Sc
 import {SplitButton} from './ProgressBar';
 import styles from './feedbackStyles';
 import { QuestionButton } from './Switch';
+import HeaderSub from '../../components/HeaderSub/HeaderSub';
 
 
 const Feedback = () => {
@@ -31,10 +32,19 @@ return (
     <View contentContainerStyle={styles.container}>
       <ScrollView>
 
-      <Text style={styles.title1}>Feedback</Text>
+      {/* <Text style={styles.title1}>Feedback</Text>
       <Text style={styles.subtitle}>
         Feel free to drop us your feedback.
-      </Text>
+      </Text> */}
+
+
+      <HeaderSub
+      headLine={'FeedBack'}
+      subHeadLine={'Feel free to drop us your feedback.'}/>
+
+      
+
+      
 
       <Text style={styles.question1}>
         How satisfied are you overall with the support of our mental health application?

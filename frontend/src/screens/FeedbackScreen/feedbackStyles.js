@@ -44,10 +44,10 @@ const styles = StyleSheet.create({
       color:'#979DAC',
       backgroundColor:'#FFFFFF',
       shadowColor:'#000',
-      shadowOffset:{width:0,height:2},
-      shadowOpacity:1,
-      shadowRadius:20,
-      elevation:4,
+      // shadowOffset:{width:0,height:2},
+      shadowOpacity:0.05,
+      // shadowRadius:10,
+      elevation:1,
       marginTop:25,
       width:344,
       height:157,
@@ -116,7 +116,8 @@ const styles = StyleSheet.create({
       paddingLeft:25,
       paddingRight:25,
       fontSize:16,
-      lineHeight:22
+      lineHeight:22,
+      marginTop:32
    
   }
    
