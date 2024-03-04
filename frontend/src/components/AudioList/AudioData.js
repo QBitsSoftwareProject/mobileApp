@@ -3,7 +3,7 @@ export default [
     id: "1",
     name: "audio 001",
     author: "Dr.Andrew huberman",
-    file: "../../assets/audios/sample_audio/audio1.mp3",
+    file: require("../../assets/audios/sample_audio/audio1.mp3"),
     duration: 10,
   },
   {

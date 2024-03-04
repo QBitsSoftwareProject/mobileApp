@@ -14,10 +14,10 @@ export default function Categories() {
     <View style={categoryStyles.Container}>
       <FlatList
         data={CategoryTypes}
-        style={{ display: "flex",flexDirection:"column",width:scr_width}}
+        style={{ display: "flex", flexDirection: "column", width: scr_width }}
         horizontal
-        renderItem={({ item }) => {
-          return <CategoryItem item={item} />;
+        renderItem={({ item, index }) => {
+          return <CategoryItem key={index} item={item} />;
         }}
       />
     </View>

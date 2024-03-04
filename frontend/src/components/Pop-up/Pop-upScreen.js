@@ -60,7 +60,7 @@ messageText: {
   CCButtonText: {
     color: '#101318',
     fontSize:18,
-    fontWeight: '#400',
+    fontWeight: '400',
     textAlign:'center',
 
   },

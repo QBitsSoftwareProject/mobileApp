@@ -1,35 +1,60 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { View, Text, Image, TouchableOpacity } from "react-native";
 import styles from "./AudioStyles";
+import { Audio } from "expo-av";
 
 import playImg from "../../assets/images/icons/player/play.png";
 import pauseImg from "../../assets/images/icons/player/pause.png";
 
-// sound player
-import SoundPlayer from "react-native-sound-player";
-// sound player
-
 function AudioItem({ item }) {
+  const [sound, setSound] = useState();
   const [isPlaying, setIsPlaying] = useState(false);
+
+  useEffect(() => {
+    return () => {
+      // Clean up the sound object when the component unmounts
+      if (sound) {
+        sound.unloadAsync();
+      }
+    };
+  }, [sound]);
+
+  const playPauseSound = async () => {
+    if (sound) {
+      if (isPlaying) {
+        await sound.pauseAsync();
+      } else {
+        await sound.playAsync();
+      }
+      setIsPlaying(!isPlaying);
+    }
+  };
+
+  const loadSound = async () => {
+    try {
+      const { sound } = await Audio.Sound.createAsync(
+        { uri:item.file },
+        { shouldPlay: false }
+      );
+      setSound(sound);
+    } catch (error) {
+      console.error("Error loading audio:", error);
+    }
+  };
+
+  useEffect(() => {
+    loadSound();
+    return () => {
+      if (sound) {
+        sound.unloadAsync();
+      }
+    };
+  }, []);
+
   return (
     <View style={styles.audioItem}>
-      {/* playbutton */}
       <View style={styles.playBtnSection}>
-        <TouchableOpacity
-          onPress={async () => {
-            const audio = item.file;
-            try {
-              if (isPlaying) {
-                SoundPlayer.pause();
-              } else {
-                SoundPlayer.playSoundFile(audio);
-              }
-              setIsPlaying(!isPlaying);
-            } catch (error) {
-              console.error("Error playing/pausing audio:", error);
-            }
-          }}
-        >
+        <TouchableOpacity onPress={playPauseSound}>
           <View style={styles.imgContainer}>
             <Image
               source={isPlaying ? pauseImg : playImg}
@@ -38,15 +63,12 @@ function AudioItem({ item }) {
           </View>
         </TouchableOpacity>
       </View>
-      {/* playbutton */}
-      {/* description */}
       <View style={styles.descriptionSection}>
         <Text style={styles.audioTxt1}>{item.name}</Text>
         <Text>{item.author}</Text>
         <Text>{item.file}</Text>
         <Text>{item.duration}</Text>
       </View>
-      {/* description */}
     </View>
   );
 }

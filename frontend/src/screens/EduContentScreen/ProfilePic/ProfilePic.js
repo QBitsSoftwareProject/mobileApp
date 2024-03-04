@@ -33,7 +33,7 @@ const ProfilePic = ({ item }) => {
             textAlign: "center",
             marginTop: 10,
             color: "#596C79",
-            fontWeight: "1000",
+            fontWeight: "500"
           }}
         >
           {item.name}

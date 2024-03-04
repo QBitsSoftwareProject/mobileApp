@@ -1,4 +1,4 @@
-import { View,FlatList } from "react-native";
+import { View, FlatList } from "react-native";
 import React from "react";
 import styles from "./AudioStyles";
 
@@ -10,11 +10,9 @@ import AudioData from "./AudioData";
 export default function Audios() {
   return (
     <View style={styles.container}>
-      <FlatList
-        data={AudioData}
-        renderItem={({ item }) => <AudioItem item={item} />}
-        horizontal={false}
-      />
+      {AudioData.map((item,index) => (
+        <AudioItem key={index} item={item} />
+      ))}
     </View>
   );
 }

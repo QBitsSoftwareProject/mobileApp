@@ -1,13 +1,12 @@
+import React from "react";
 import {
   View,
   Text,
   TouchableOpacity,
   FlatList,
   Dimensions,
-  ScrollView,
   SafeAreaView,
 } from "react-native";
-import React from "react";
 import styles from "./articleStyle";
 import ProfilePic from "../ProfilePic/ProfilePic";
 
@@ -30,47 +29,54 @@ const scr_height = Dimensions.get("window").height;
 const ArticleContent = () => {
   return (
     <SafeAreaView>
-      <View>
-        <ScrollView>
-          <View style={{ zIndex: 100, marginTop: 40 }}>
-            {/* search and categories */}
-            <SearchBarComponent />
-            <SearchAndCategories currentView={"ArticleStack"} />
-            {/* search and categories */}
-          </View>
-          <View style={styles.authorSections}>
-            <View style={styles.authorSection1}>
-              <Text style={{ fontSize: 20 }}>Read articles from</Text>
-              <TouchableOpacity style={styles.exploreBtn}>
-                <Text style={styles.exploreBtnText}>Explore Authors</Text>
-              </TouchableOpacity>
+      <FlatList
+        data={[{ key: "unique-key" }]}
+        renderItem={() => (
+          <View>
+            {/* Your existing content */}
+            <View style={{ zIndex: 100, marginTop: 40 }}>
+              {/* search and categories */}
+              <SearchBarComponent />
+              <SearchAndCategories currentView={"ArticleStack"} />
+              {/* search and categories */}
             </View>
-            <View style={styles.authorSection2}>
+            <View style={styles.authorSections}>
+              <View style={styles.authorSection1}>
+                <Text style={{ fontSize: 20 }}>Read articles from</Text>
+                <TouchableOpacity style={styles.exploreBtn}>
+                  <Text style={styles.exploreBtnText}>Explore Authors</Text>
+                </TouchableOpacity>
+              </View>
+              <View style={styles.authorSection2}>
+                <FlatList
+                  data={Authors}
+                  style={{ display: "flex", flexDirection: "column" }}
+                  horizontal
+                  renderItem={({ item }) => {
+                    return <ProfilePic item={item} />;
+                  }}
+                />
+                <ProfilePic />
+              </View>
+            </View>
+            <View style={styles.articleCategories}>
               <FlatList
-                data={Authors}
-                style={{ display: "flex", flexDirection: "column" }}
+                data={ArticleCategories}
                 horizontal
                 renderItem={({ item }) => {
-                  return <ProfilePic item={item} />;
+                  return <ArticleCategoryBtn item={item} />;
                 }}
               />
-              <ProfilePic />
             </View>
-          </View>
-          <View style={styles.articleCategories}>
-            <FlatList
-              data={ArticleCategories}
-              horizontal
-              renderItem={({ item }) => {
-                return <ArticleCategoryBtn item={item} />;
-              }}
-            />
-          </View>
-          <View style={[styles.articleSection, { marginBottom: 100 ,marginTop:20}]}>
-            <Text style={{ fontSize: 20, fontWeight: "400", padding: 10 }}>
-              Some recent articles
-            </Text>
-            <View>
+            <View
+              style={[
+                styles.articleSection,
+                { marginBottom: 100, marginTop: 20 },
+              ]}
+            >
+              <Text style={{ fontSize: 20,padding: 10}}>
+                Some recent articles
+              </Text>
               <FlatList
                 data={ArticleData}
                 renderItem={({ item }) => {
@@ -79,8 +85,8 @@ const ArticleContent = () => {
               />
             </View>
           </View>
-        </ScrollView>
-      </View>
+        )}
+      />
     </SafeAreaView>
   );
 };
