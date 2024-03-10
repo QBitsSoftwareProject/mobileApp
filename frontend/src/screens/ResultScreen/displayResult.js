@@ -1,6 +1,6 @@
 import React , { useState, useEffect } from "react";
 import styles from './resultStyle';
-import HeaderSub from "../../components/HeaderSub.js/HeaderSub";
+import HeaderSub from "../../components/HeaderSub/HeaderSub";
 import TabBar from "../../components/TabBar/TabBar";
 import { useNavigation } from '@react-navigation/native';
 import { CustomButton } from "./doublebutton";

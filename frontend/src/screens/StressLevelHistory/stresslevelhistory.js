@@ -1,5 +1,5 @@
 import { View, Text, FlatList, ScrollView, ImageBackground } from 'react-native';
-import HeaderSub from "../../components/HeaderSub.js/HeaderSub";
+import HeaderSub from "../../components/HeaderSub/HeaderSub";
 import styles from './historystyle';
 import React, { useState, useEffect } from "react";
 import axiosInstance from '../../api/axios';
@@ -102,7 +102,7 @@ const HelloWorldScreen = ({route}) => {
     
     
       <View style={{ flex: 1 }}>
-        <HeaderSub headLine='History' subHeadLine='Past stress level.' BackButton={handleBackButton} />
+        <HeaderSub headLine='History' subHeadLine='Past stress level.' back = "DisplayResultScreen"  userID={userID} />
         <ImageBackground source={require('../../assets/images/stresslevelhistory/historybc.png')}>
         <View style={styles.scrollArea}>
           
