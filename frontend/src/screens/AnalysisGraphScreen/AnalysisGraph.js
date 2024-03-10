@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { View, Text, TouchableOpacity, Animated, ScrollView, route, Image } from 'react-native';
 import HeaderSub from '../../screens/MoodAnalysisScreen/Header';
 import MoodProgressBars from './Chart';
-import { useRoute } from '@react-navigation/native';
+import { useRoute, useNavigation } from '@react-navigation/native';
 
 const AnalysisGraph = () => {
     const[bHeight,setBHeight] = useState('');
@@ -20,6 +20,13 @@ const AnalysisGraph = () => {
 
     console.log(moodText);
     console.log(moodIndex);
+
+    const navigation = useNavigation();
+
+    const handleContiunePress = ()=>{
+        navigation.navigate('MonthAnalysisScreen',{selectedEmoji})
+
+    }
 
     
 
@@ -75,7 +82,7 @@ const AnalysisGraph = () => {
                         <MoodProgressBars selectedEmoji={'😄'} barHeight = {happyHeight} />
                     </View>
                 </View>
-                <TouchableOpacity style={styles.continueButton}>
+                <TouchableOpacity style={styles.continueButton} onPress={handleContiunePress}>
                 <Text style={styles.continue}>Continue</Text>
             </TouchableOpacity>
             </ScrollView>
