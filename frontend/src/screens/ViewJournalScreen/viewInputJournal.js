@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { StyleSheet, View,Text, } from "react-native";
+import { StyleSheet, View,Text, ImageBackground, } from "react-native";
 import { Animated } from "react-native";
 import { EditDeletebutton } from "./editDeleteButton";
 import { createStackNavigator } from '@react-navigation/stack';
@@ -63,7 +63,9 @@ export const SwipableList = (props) => {
     );
 
   return (
+    
 
+    <ImageBackground source={require('../../assets/images/journal/bg_1.png')}>
     <SwipeListView style={{height:342,}}
 
     data={inputJournals}
@@ -77,17 +79,21 @@ export const SwipableList = (props) => {
     leftOpenValue={0}
     rightOpenValue={-65}
   />
- 
+ </ImageBackground>
 );
 };
 
-const JournalListContent = ({ item, index }) => (
-  <FlatList
-    data={[inputJournals]}
-    keyExtractor={(item) => item.id}
-    renderItem={renderJournalItem}
-  />
-);
+
+
+// const JournalListContent = ({ item, index }) => (
+//   <FlatList
+//     data={[inputJournals]}
+//     keyExtractor={(item) => item.id}
+//     renderItem={renderJournalItem}
+//   />
+// );
+
+
 
 
 
@@ -138,5 +144,13 @@ const styles = StyleSheet.create({
       alignSelf:'flex-end',
       paddingRight:15
 
+    },
+    backgroundImage: {
+      flex: 1,
+      resizeMode: "cover",
+      justifyContent: "center",
+      paddingTop:10
+      
+  
     }
 });

@@ -43,8 +43,10 @@ const handleEmojiPress = ({ emoji, mark }) => {
     return(
       <View>
 <HeaderSub
+
       headLine={"Add New Journal"}
       subHeadLine={"Wellcome to our mindful haven"}
+      back={'ViewJournal'}
 />
 
 <CustomButton btnView={handleViewButton}></CustomButton>

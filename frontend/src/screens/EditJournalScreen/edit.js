@@ -33,9 +33,7 @@ const [isOverlayVisible, setOverlayVisible] = useState(false);
    
 
       const handleViewButton = () =>{
-      navigation.navigate('ViewJournal',{
-
-    }); 
+      navigation.navigate('ViewJournal'); 
 
 }
   
@@ -45,6 +43,7 @@ const [isOverlayVisible, setOverlayVisible] = useState(false);
 <HeaderSub
       headLine={"Edit Journal"}
       subHeadLine={"Edit your journals"}
+      back={'ViewJournal'}
 />
 
 <CustomButton btnView={handleViewButton}></CustomButton>

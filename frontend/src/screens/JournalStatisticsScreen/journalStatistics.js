@@ -16,9 +16,7 @@ export const JournalStatistics = ({navigation})=>{
     const stack = createStackNavigator();
 
     const handleJournalButton = () =>{
-        navigation.navigate('ViewJournal',{
-    
-      }); 
+        navigation.navigate('ViewJournal'); 
         }
 
 
@@ -30,6 +28,7 @@ export const JournalStatistics = ({navigation})=>{
        <HeaderSub
       headLine={"My Journals"}
       subHeadLine={"View your past journals"}
+      back={'ViewJournal'}
     />
 
 
