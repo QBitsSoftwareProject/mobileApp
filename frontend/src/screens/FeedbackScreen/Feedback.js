@@ -19,6 +19,7 @@ const Feedback = () => {
   const handleSubmit = () => {
     // send feedback to server or store locally
     console.log({
+      satisfication,
       interface: interfaceValue,
       design,
       responsive,
