@@ -3,11 +3,11 @@ import React from 'react';
 import { useNavigation, useRoute } from '@react-navigation/native';
 
 
-const HeaderSub = (props) => {
+const HeaderSubAnalysis = (props) => {
 
     const navigation = useNavigation();
     const backbtn = () =>{
-        navigation.navigate('MonthAnalysisScreen')
+        navigation.navigate('MoodAnaysisScreen')
     }
 
   
@@ -66,4 +66,4 @@ const HeaderSub = (props) => {
     
 })
   
-  export default HeaderSub
+  export default HeaderSubAnalysis

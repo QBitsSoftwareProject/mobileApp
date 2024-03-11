@@ -30,6 +30,8 @@ const MoodAnalysis = () => {
   };
 
   const handlePressButton = () => {
+
+    
   
     if (selectedEmoji !== null) {
       const selectedEmojiObject = emojis.find(emoji => emoji.emoji === selectedEmoji);

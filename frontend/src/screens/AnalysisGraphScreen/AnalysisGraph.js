@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, TouchableOpacity, Animated, ScrollView, route, Image } from 'react-native';
-import HeaderSub from '../../screens/MoodAnalysisScreen/Header';
+import HeaderSubAnalysis from './HeaderAnalysis'
 import MoodProgressBars from './Chart';
 import { useRoute, useNavigation } from '@react-navigation/native';
 
@@ -62,7 +62,7 @@ const AnalysisGraph = () => {
     return (
         <View style={{ flex: 1 }}>
             <ScrollView>
-                <HeaderSub headLine={'Good Morning Sara'} subheadLine={'You are feeling '+  moodText + ' today'} />
+                <HeaderSubAnalysis headLine={'Good Morning Sara'} subheadLine={'You are feeling '+  moodText + ' today'} />
                 <View style={[styles.selectedEmojiContainer, { opacity: 0.2 }]}>
                     <Text style={styles.selectedEmojiLeft}>{selectedEmoji}</Text>
                     <Text style={styles.selectedEmojiRight}>{selectedEmoji}</Text>

@@ -1,14 +1,23 @@
 import { View, Text, Image, Touchable, TouchableOpacity, ImageBackground , StyleSheet} from 'react-native'
 import React from 'react'
+import { useNavigation } from '@react-navigation/native'
 
 
 const HeaderSubSug = (props) => {
+
+    const navigation=useNavigation();
+
+    const backBtn = () =>{
+
+        navigation.navigate('MonthAnalysisScreen')
+       
+    }
   return (
     
       <View style={styles.contains} >
         <ImageBackground source={require("../../assets/images/blueSqures.png")} style={styles.backImg}>
 
-            <TouchableOpacity style={styles.backBtn}> 
+            <TouchableOpacity  onPress={backBtn} style={styles.backBtn}> 
                 <Image source={require(('../../assets/images/BackWhite.png'))}/>
             </TouchableOpacity>
             
