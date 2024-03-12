@@ -6,7 +6,7 @@ import LoginStack from '../routes/LoginStack';
 
 const NavContainer = () => {
   return (
-    <NavigationContainer>
+    <NavigationContainer >
       <TabBar/>
     </NavigationContainer>
   )
