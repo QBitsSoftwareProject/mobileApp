@@ -38,7 +38,7 @@ const Question = () => {
     const fetchQuestionIds = async () => {
       try {
         const response = await axiosInstance.get('/question/get-all-question-ids');
-        //console.log(response.data);
+        // console.log(response.data);
         setIds(response.data);
       } catch (err) {
         console.log(err);
