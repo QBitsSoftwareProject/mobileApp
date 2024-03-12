@@ -15,7 +15,7 @@ const styles = StyleSheet.create({
   },
   blueCard:{
     minHeight:112, 
-    elevation:1,
+    elevation:2,
     padding:20,
     justifyContent:'center',
   },
@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
     width:80,
     height:35,
     borderRadius:20,
-    elevation:1,
+    elevation:2,
     justifyContent:'center',
     alignItems:'center',
     backgroundColor:'white',

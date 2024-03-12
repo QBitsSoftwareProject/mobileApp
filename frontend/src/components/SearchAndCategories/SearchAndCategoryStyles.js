@@ -6,19 +6,21 @@ const styles = StyleSheet.create({
     backgroundColor: "#F2F3F5",
     alignItems: "center",
     height: "100%",
+    display:"flex",
   },
   NavContainer: {
+    display:"flex",
     position: "absolute",
     justifyContent: "center",
     alignItems: "center",
     marginTop: 40,
-    marginLeft: "8%",
+    width:"100%"
   },
   NavBar: {
     borderRadius: 100,
     flexDirection: "row",
     backgroundColor: "white",
-    width: "90%",
+    
     alignItems: "center",
     justifyContent: "space-between",
     height: 40,
@@ -26,19 +28,23 @@ const styles = StyleSheet.create({
   NavBarElements: {
     color: "black",
     fontWeight: "700",
-    textAlign: "center",
-    marginLeft: "auto",
-    marginRight: "auto",
+    display: "flex",
+    flexDirection: "row",
+    // marginLeft: "auto",
+    // marginRight: "auto",
+    width: 90,
+    justifyContent: "center",
+    alignItems: "center",
+    height: "100%",
+    borderRadius: 100,
   },
   NavBarElements_currentBtn: {
     backgroundColor: "#4A90BF",
-    padding: 10,
-    borderRadius: 100,
-    width: 100,
   },
   NavBarElements_currentText: {
     color: "white",
     textAlign: "center",
+    fontWeight: "bold",
   },
   Content: {
     width: "100%",

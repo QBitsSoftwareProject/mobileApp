@@ -21,90 +21,103 @@ import viewIcon from "../../../../assets/images/icons/bi_eye-fill.png";
 import ArticleListItem from "../../../../components/AuthorScreen/ArticleListItem";
 // components
 
-const AuthorScreen = ({ route }) => {
+const AuthorScreen = ({ route, key }) => {
   const authorData = route.params;
   const navigation = useNavigation();
+
   return (
     <SafeAreaView>
-      <View
-        style={{ position: "relative", display: "flex", alignItems: "center" }}
-      >
-        <View style={styles.authorDetails}>
-          <View
-            style={{
-              display: "flex",
-              alignItems: "center",
-              flexDirection: "row",
-            }}
-          >
-            <Pressable
-              onPress={() => {
-                navigation.navigate("ArticleScreen");
-              }}
-            >
-              <Image source={backImg} />
-            </Pressable>
-            <Text
-              style={{
-                color: "white",
-                fontSize: 25,
-                marginStart: "5%",
-                fontWeight: "600",
-              }}
-            >
-              Author
-            </Text>
-          </View>
-          <View>
-            <View>
-              <Text
-                style={{
-                  color: "white",
-                  fontSize: 23,
-                  marginTop: 20,
-                }}
-              >
-                Dinul Perera
-              </Text>
-            </View>
-            <View>
-              <Text
-                style={{
-                  color: "white",
-                  fontSize: 18,
-                }}
-              >
-                24 Articles
-              </Text>
-            </View>
-          </View>
-        </View>
+      <ScrollView>
         <View
           style={{
-            position: "absolute",
-            marginTop: 180,
-            shadowColor: "#000",
-            shadowOffset: { width: 0, height: 1 },
-            shadowOpacity: 0.8,
-            shadowRadius: 2,
-            elevation: 5,
+            position: "relative",
+            display: "flex",
+            alignItems: "center",
           }}
         >
-          <Image
-            source={profilePic2}
+          <View style={styles.authorDetails}>
+            <View
+              style={{
+                display: "flex",
+                alignItems: "center",
+                flexDirection: "row",
+              }}
+            >
+              <Pressable
+                onPress={() => {
+                  navigation.navigate("ArticleScreen");
+                }}
+              >
+                <Image source={backImg} />
+              </Pressable>
+              <Text
+                style={{
+                  color: "white",
+                  fontSize: 25,
+                  marginStart: "5%",
+                  fontWeight: "600",
+                }}
+              >
+                Author
+              </Text>
+            </View>
+            <View>
+              <View>
+                <Text
+                  style={{
+                    color: "white",
+                    fontSize: 23,
+                    marginTop: 20,
+                  }}
+                >
+                  Author ID: 000{authorData.authorId}
+                </Text>
+              </View>
+              <View>
+                <Text
+                  style={{
+                    color: "white",
+                    fontSize: 18,
+                  }}
+                >
+                  24 Articles
+                </Text>
+              </View>
+            </View>
+          </View>
+          <View
             style={{
+              position: "absolute",
+              marginTop: 180,
+              shadowColor: "#000",
+              shadowOffset: { width: 0, height: 1 },
+              shadowOpacity: 1.0,
+              shadowRadius: 2,
               borderRadius: 100,
-              height: 104,
-              width: 104,
+              elevation: 2,
             }}
-          />
+          >
+            <Image
+              source={profilePic2}
+              style={{
+                borderRadius: 100,
+                height: 104,
+                width: 104,
+              }}
+            />
+          </View>
+          {/* Article list */}
+          <View style={styles.articleList}>
+            <ArticleListItem />
+            <ArticleListItem />
+            <ArticleListItem />
+            <ArticleListItem />
+            <ArticleListItem />
+            <ArticleListItem />
+          </View>
+          {/* Article list */}
         </View>
-        {/* Article list */}
-        <View style={styles.articleList}>
-          <ArticleListItem />
-        </View>
-        {/* Article list */}
-      </View>
+      </ScrollView>
     </SafeAreaView>
   );
 };

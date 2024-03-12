@@ -7,7 +7,7 @@ export default styles = StyleSheet.create({
         backgroundColor:'white',
         padding:20,
         marginTop:15,
-        elevation:1,
+        elevation:2,
     },
     container:{
         flex:1,

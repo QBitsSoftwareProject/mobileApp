@@ -12,7 +12,6 @@ function AudioItem({ item }) {
 
   useEffect(() => {
     return () => {
-      // Clean up the sound object when the component unmounts
       if (sound) {
         sound.unloadAsync();
       }

@@ -68,15 +68,16 @@ const ArticleContent = () => {
                 }}
               />
             </View>
+
+            <Text style={{ fontSize: 20, padding: 10,marginTop:20 }}>
+              Some recent articles
+            </Text>
             <View
               style={[
                 styles.articleSection,
-                { marginBottom: 100, marginTop: 20 },
+                { marginBottom: 100, marginTop: 10 },
               ]}
             >
-              <Text style={{ fontSize: 20,padding: 10}}>
-                Some recent articles
-              </Text>
               <FlatList
                 data={ArticleData}
                 renderItem={({ item }) => {
