@@ -23,10 +23,21 @@ import SearchBarComponent from "../../../components/SearchBar/SearchBar.js";
 import SearchAndCategories from "../../../components/SearchAndCategories/SearchAndCategories.js";
 // components
 
+// navigation
+import { useNavigation } from "@react-navigation/native";
+// navigation
+
 const scr_width = Dimensions.get("window").width;
 const scr_height = Dimensions.get("window").height;
 
 const ArticleContent = () => {
+
+   const navigation = useNavigation();
+
+   const navigateToScreen = (screen) => {
+     navigation.navigate(screen);
+   };
+
   return (
     <SafeAreaView>
       <FlatList
@@ -43,7 +54,10 @@ const ArticleContent = () => {
             <View style={styles.authorSections}>
               <View style={styles.authorSection1}>
                 <Text style={{ fontSize: 20 }}>Read articles from</Text>
-                <TouchableOpacity style={styles.exploreBtn}>
+                <TouchableOpacity
+                  style={styles.exploreBtn}
+                  onPress={navigateToScreen("AllAuthorScreen")}
+                >
                   <Text style={styles.exploreBtnText}>Explore Authors</Text>
                 </TouchableOpacity>
               </View>
@@ -69,7 +83,7 @@ const ArticleContent = () => {
               />
             </View>
 
-            <Text style={{ fontSize: 20, padding: 10,marginTop:20 }}>
+            <Text style={{ fontSize: 20, padding: 10, marginTop: 20 }}>
               Some recent articles
             </Text>
             <View

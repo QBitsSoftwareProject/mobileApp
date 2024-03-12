@@ -1,6 +1,7 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import AuthorScreen from "../../screens/EduContentScreen/ArticleContent/AuthorsScreen/AuthorScreen";
-import ArticleContent from "../../screens/EduContentScreen/ArticleContent/ArticleContent"
+import AllAuthorScreen from "../../screens/EduContentScreen/ArticleContent/AuthorsScreen/AllAuthorScreen";
+import ArticleContent from "../../screens/EduContentScreen/ArticleContent/ArticleContent";
 
 const stack = createNativeStackNavigator();
 
@@ -14,6 +15,7 @@ const ArticleStack = () => {
     >
       <stack.Screen name="ArticleScreen" component={ArticleContent} />
       <stack.Screen name="AuthorScreen" component={AuthorScreen} />
+      {/* <stack.Screen name="AllAuthorScreen" component={AllAuthorScreen} /> */}
     </stack.Navigator>
   );
 };
