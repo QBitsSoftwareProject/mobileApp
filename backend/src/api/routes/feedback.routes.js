@@ -13,7 +13,7 @@ router.post('/add-feedback',storeFeedback);
 
 router.get('/getAll-feedback',getAllFeedback);
 
-router.delete('/delete-feedback',deleteFeedback)
+router.delete('/delete-feedback/:id',deleteFeedback)
 
 
 module.exports = router;

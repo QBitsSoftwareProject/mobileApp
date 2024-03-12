@@ -1,16 +1,26 @@
-const { default: Feedback } = require('../../../../frontend/src/screens/FeedbackScreen/Feedback');
+
 const feedBack = require('../models/feedbackModel')
 
-const storeFeedback = (userid, emoji, tittle, journalEntry, imgUrl, time, date) => {
+const storeFeedback = (satisfication, finterface, privacy, speed, consumption, design, comment) => {
+
+    console.log(satisfication)
+    console.log(finterface)
+    console.log(privacy)
+    console.log(speed)
+    console.log(consumption)
+    console.log(design)
+    console.log(comment)
+
+
     try{
-        if(!satisfication || !interface || !privacy || !speed || !consumption || !design || !comment) {
-            throw new Error('not completed')
+        if(!satisfication ) {
+            throw new Error('not completed!!!')
     }
 
     const newFeedBack = feedBack.create({
         
         satisfication:satisfication,
-        interface:interface,
+        finterface:finterface,
         privacy:privacy,
         speed:speed,
         consumption:consumption,
@@ -29,7 +39,7 @@ const storeFeedback = (userid, emoji, tittle, journalEntry, imgUrl, time, date) 
 
 const getAllFeedback =  async() => {
     try {
-        const allFeedback = await Feedback.find;
+        const allFeedback = await feedBack.find({});
         return allFeedback;
 
     } catch (error) {
@@ -40,10 +50,11 @@ const getAllFeedback =  async() => {
 
 const deleteFeedback = async (id) =>{
     try{
-        const deleteFeedback = await Feedback.findByIdAndDelete(id);
-        if(!deleteFeedback){
+        if(!id){
             throw new Error("Feedback not found");
         }
+        const deleteFeedback = await feedBack.findByIdAndDelete(id);
+        
         return deleteFeedback;
 
     }catch(error){

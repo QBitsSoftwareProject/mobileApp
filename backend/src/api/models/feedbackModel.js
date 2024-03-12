@@ -6,7 +6,7 @@ const FeedBackScheema = mongoose.Schema({
         type:Number,
         required:true
     },
-    interface:{
+    finterface:{
         type:Boolean,
         required:true
     },

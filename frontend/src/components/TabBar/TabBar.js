@@ -31,30 +31,6 @@ const TabBar = () => {
     }, []);
 
   return (
-<<<<<<< HEAD
-    <Tab.Navigator
-        screenOptions={{
-        tabBarShowLabel: false,
-        tabBarStyle: {
-          position: 'absolute',
-          height: 85,
-          borderTopLeftRadius: 40,
-          borderTopRightRadius: 40,
-        },
-        headerShown: false
-
-      }}
-    >
-      <Tab.Screen name='home' component={HomeStack} options={{tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} screenName={'home'}/>}}/>
-
-      <Tab.Screen name='profile' component={ProfileScreen} options={{tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} screenName={'user'}/>}}/>
-
-      <Tab.Screen name='Notification' component={NotifyScreen} options={{tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} screenName={'notification'}/>}}/>
-
-      <Tab.Screen name='setting' component={SettingScreen} options={{tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} screenName={'setting'}/>}}/>
-
-    </Tab.Navigator>
-=======
       
           <Tab.Navigator
             screenOptions={{
@@ -81,7 +57,6 @@ const TabBar = () => {
         </Tab.Navigator>
    
     
->>>>>>> main
   );
 };
 

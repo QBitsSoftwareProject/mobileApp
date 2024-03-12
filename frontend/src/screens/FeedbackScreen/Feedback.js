@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react";
 import { StyleSheet, Text, View, TextInput, Button, Switch, TouchableOpacity, ScrollView } from 'react-native';
 import {SplitButton} from './ProgressBar';
 import styles from './feedbackStyles';

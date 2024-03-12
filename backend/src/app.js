@@ -1,8 +1,9 @@
 const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
-const { PORT, DB_URI } = require('./config/env');
+const { PORT } = require('./config/env');
 const { connect } = require('./config/database.connection.js')
+const FeedbackRoute = require('./api/routes/feedback.routes.js')
 
 const app = express();
 
@@ -11,7 +12,11 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 
+app.use('/Feedback',FeedbackRoute)
+
 app.listen(PORT, ()=>{
     console.log(`server is running on port ${PORT}`)
     connect();
 })
+
+
