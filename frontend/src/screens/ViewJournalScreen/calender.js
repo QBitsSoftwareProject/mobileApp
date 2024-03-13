@@ -13,10 +13,11 @@ import Swiper from 'react-native-swiper';
 
 const { width } = Dimensions.get('window');
 
-export const Calendar = () => {
+export const Calendar = ({onDateSelect}) => {
   const swiper = useRef();
   const [value, setValue] = useState(new Date());
   const [week, setWeek] = useState(0);
+  const [selectedDate, setSelectedDate] = useState(null);
 
   const weeks = React.useMemo(() => {
     const start = moment().add(week, 'weeks').startOf('week');
@@ -33,8 +34,16 @@ export const Calendar = () => {
     });
   }, [week]);
 
-  return (
+  const handleDateSelect = (date) => {
+    setValue(date);
+    setSelectedDate(date)
+    if (onDateSelect){
+      onDateSelect(date);
+    }
+  };
 
+  return (
+<View>
  <View style={styles.picker}>
     <View>
        <Swiper
@@ -68,7 +77,7 @@ export const Calendar = () => {
                   return (
                     <TouchableWithoutFeedback
                       key={dateIndex}
-                      onPress={() => setValue(item.date)}>
+                      onPress={() => handleDateSelect(item.date)}>
                       <View
                         style={[
                           styles.item,
@@ -101,8 +110,15 @@ export const Calendar = () => {
             ))}
           </Swiper>
           </View>
+        
         </View>
-       
+          {/* display selected date below the calender */}
+          {selectedDate && (
+            <Text style={styles.selectedDate}>
+                {moment(selectedDate).format('MMMM DD, YYYY')}
+            </Text>
+          )}
+       </View>
       
   );
 };
@@ -114,7 +130,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     height:80,
     alignItems:'center',
-    marginBottom:24.5
+    
+    
   },
   item: {
     // flex: 1,
@@ -148,6 +165,14 @@ const styles = StyleSheet.create({
     marginTop: 10,
     marginBottom: 11,
   },
+  selectedDate: {
+    marginTop: 15,
+    fontSize: 15,
+    fontWeight: '300',
+  
+    alignSelf:'flex-end',
+    marginBottom:15
+  }
 });
 
 

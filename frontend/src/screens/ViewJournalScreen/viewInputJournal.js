@@ -19,6 +19,7 @@ const inputJournals = [
 
 ];
 
+
 export const SwipableList = (props) => {
 
   const stack = createStackNavigator();
@@ -29,6 +30,7 @@ export const SwipableList = (props) => {
   };
 
   const [showButton, setShowButton] = useState(false);
+  
 
   
 
@@ -36,6 +38,7 @@ export const SwipableList = (props) => {
     setShowButton(true);
   };
 
+ 
 
 
  
@@ -43,8 +46,13 @@ export const SwipableList = (props) => {
   const renderJournalItem = ({ item,index }) => (
       <View style={styles.container}>
       <View style={styles.journalItem}>
-        <Text style ={styles.emg}>{item.emoji}</Text>
-        <Text style={styles.journalTittle}>{item.tittle}</Text>
+        
+        <View style={styles.emgTittle}>
+
+       <Text style={styles.journalTittle}>{item.tittle}</Text>
+       <Text style ={styles.emg}>{item.emoji}</Text>
+
+        </View>
         <Text style={styles.journalText}>{item.text}</Text>
         {/* <Text style={styles.journalText}>{item.id}</Text> */}
       </View>
@@ -65,7 +73,7 @@ export const SwipableList = (props) => {
   return (
     
 
-    <ImageBackground source={require('../../assets/images/journal/bg_1.png')}>
+   
     <SwipeListView style={{height:342,}}
 
     data={inputJournals}
@@ -79,7 +87,7 @@ export const SwipableList = (props) => {
     leftOpenValue={0}
     rightOpenValue={-65}
   />
- </ImageBackground>
+
 );
 };
 
@@ -113,8 +121,13 @@ const styles = StyleSheet.create({
       alignSelf:'flex-end',
       borderRadius:20,
       marginBottom:15,
+      flexDirection:'column'
       
       
+  },
+
+  emgTittle:{
+  flexDirection:'row'
   },
   journalText: {
     color:'#101318',
@@ -122,7 +135,8 @@ const styles = StyleSheet.create({
     lineHeight:20,
     paddingTop:5, 
     padding:15,
-    fontSize:13
+    fontSize:13,
+    
 
   },
 
@@ -130,19 +144,25 @@ const styles = StyleSheet.create({
     color:'#101318',
     fontWeight:'300',
     lineHeight:20, 
+    paddingTop:15,
     paddingBottom:5,
     paddingLeft:15,
     paddingRight:15,
-    fontSize:14,
+    fontSize:15,
+    
+    flex:6
     
     },
     emg:{
      
-      paddingTop:5,
+      paddingTop:10,
       fontSize:20,
       
-      alignSelf:'flex-end',
-      paddingRight:15
+      
+      textAlign:'center',
+      paddingRight:10,
+      
+      flex:1
 
     },
     backgroundImage: {

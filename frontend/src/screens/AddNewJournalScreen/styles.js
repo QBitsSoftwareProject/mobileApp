@@ -4,7 +4,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         marginLeft:25,
-        marginRight:25
+        
       },
       
    
@@ -20,6 +20,7 @@ const styles = StyleSheet.create({
   fontSize: 18,
   fontWeight:'400',
   marginBottom:15,
+ 
   
 
 },
@@ -59,6 +60,10 @@ Text2:{
     fontSize: 16, // or any font size you prefer
     // add any other styles as needed
   },
+
+  tabbar:{
+    
+  }
 
 
     

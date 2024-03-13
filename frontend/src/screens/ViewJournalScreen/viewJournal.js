@@ -18,6 +18,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 export const ViewJournal = ({navigation}) =>{
 
     const stack = createStackNavigator();
+    
 
     const handleButton = () =>{
     navigation.navigate('JournalStatistics',{
@@ -42,6 +43,8 @@ export const ViewJournal = ({navigation}) =>{
 
       });
     };
+
+   
 
 
 
@@ -74,7 +77,7 @@ export const ViewJournal = ({navigation}) =>{
 
 <FloatingButton btnCreate = {handleFlotingPointButton}></FloatingButton>
 
-<View style={{ position: 'absolute', top:900, left: 0, right: 0 }}>
+<View style={{ top:40, left: 0, right: 0 }}>
         <TabBar/>
       </View>
 

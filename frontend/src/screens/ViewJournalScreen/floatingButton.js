@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
         // alignSelf:'flex-end',
         // right:30,
         // marginTop:-70
-        top:'90%',
+        top:'85%',
         right:25
         
         

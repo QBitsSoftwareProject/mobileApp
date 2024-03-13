@@ -51,7 +51,7 @@ export const JournalEntry = () => {
       color:'white',
       // marginTop:15,
       marginBottom:32,
-      // backgroundColor:'red'
+      
 
       },
 
@@ -65,7 +65,7 @@ export const JournalEntry = () => {
       height: 206,
       backgroundColor:'white',
       borderRadius:20,
-      width: 344,
+      width: 360,
       lineHeight:20,
       paddingTop:22,
       paddingHorizontal:25,

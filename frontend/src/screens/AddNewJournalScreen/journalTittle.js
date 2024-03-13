@@ -45,11 +45,11 @@ export const JournalTittle = () => {
   
   const styles = StyleSheet.create({
     container: {
-      // flex: 1,
+      
       color:'white',
       marginBottom:32,
       // marginTop:15,
-      // backgroundColor:'red'
+      
 
       
     },
@@ -58,7 +58,7 @@ export const JournalTittle = () => {
       backgroundColor:'white',
       borderRadius:20,
       paddingLeft:25,
-      width: 344,
+      width: 360,
       paddingHorizontal:35,
       lineHeight:20,
       fontSize:14,

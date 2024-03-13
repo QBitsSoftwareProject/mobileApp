@@ -1,11 +1,13 @@
 import React, { useState} from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import { View, TextInput, TouchableOpacity, Text, StyleSheet, ScrollView,Button,Image} from 'react-native';
+import { Overlay } from './deletePopup';
 
 
 export const EditDeletebutton = (props) =>{
 
     const stack = createStackNavigator();
+    const [isOverlayVisible, setIsOverlayVisible] = useState(false);
 
     const handleEditPress = () => {
         console.log('Item ID:', props.item);
@@ -15,6 +17,10 @@ export const EditDeletebutton = (props) =>{
         // Call the editFunction if needed
         props.editFunction(props.item,props.itemTittle, props.itemText);
       };
+
+    const handleDeletePress = ()=>{
+        setIsOverlayVisible(true);
+    }
    
   return(
         <View style={styles.mainButton}>
@@ -39,6 +45,7 @@ export const EditDeletebutton = (props) =>{
         {/* deleteButton */}
         <View style={styles.deleteButton}>
         <TouchableOpacity 
+        onPress={handleDeletePress}
         
         style={[styles.deleteButton,{ backgroundColor:'#D9D9D9;'}]}>
             <Image
@@ -47,6 +54,8 @@ export const EditDeletebutton = (props) =>{
 
        </TouchableOpacity>
         </View>
+
+        <Overlay isVisible={isOverlayVisible} onClose={() => setIsOverlayVisible(false)} propbtnfunction={handleDeletePress} />
 
     </View>
     )

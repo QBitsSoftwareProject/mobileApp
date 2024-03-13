@@ -95,7 +95,7 @@ const [isOverlayVisible, setOverlayVisible] = useState(false);
 
       </ScrollView>
 
-<View style={{ position: 'absolute', top:900, left: 0, right: 0 }}>
+<View style={{ top:0, left: 0, right: 0 }}>
 <TabBar/>
 </View>
 
