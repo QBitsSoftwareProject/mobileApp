@@ -25,7 +25,7 @@ const DropdownCard = ({ image, title, subTittle, content, imageContent, dropdown
                     </View>
                     {/* Dropdown Image */}
                     <TouchableOpacity onPress={toggleCollapse }  style={styles.dropdown}>
-                        <Image source={dropdown} />
+                        <Image source={!isCollapsed ? dropdown : require('../../assets/images/Suggestions/down.png')} />
                     </TouchableOpacity>
                 </View>
             </View>
