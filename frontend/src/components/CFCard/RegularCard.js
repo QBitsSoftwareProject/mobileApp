@@ -5,9 +5,9 @@ const RegularCard = (props) => {
 
   
   return (
-    <TouchableOpacity style={styles.cardBox} >
+    <TouchableOpacity style={styles.cardBox} onPress={props.forword}>
       
-      <View style={styles.content1}>
+      <View>
         
         <View style={styles.imageframe}>
           <Image source={props.image} style={styles.image} />
@@ -25,7 +25,7 @@ const RegularCard = (props) => {
 
       </View>
 
-      <View style={styles.content3}>
+      <View >
         <Image source={props.arrow} style={styles.arrow} />
       </View>
 

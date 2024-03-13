@@ -54,7 +54,7 @@ const postCategoryList = [
 
 const PostCategory = () => {
   
-  const navigation = useNavigation();
+  const navigation=useNavigation();
 
   const pressHandler = () => {
     navigation.navigate('CreatePost');
@@ -76,9 +76,7 @@ const PostCategory = () => {
                 image={item.image}
                 title={item.title}
                 sub={item.sub}
-                arrow={item.arrow}
-                onPress={pressHandler}
-              />
+                arrow={item.arrow} forword={pressHandler} />
             ))}
           </View>
 

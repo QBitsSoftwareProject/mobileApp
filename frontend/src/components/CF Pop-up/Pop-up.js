@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, Modal, StyleSheet, TouchableOpacity,Image} from 'react-native';
 
-const PopupMessage = ({ message, onClose, onConfirm }) => {
+const PopupMessage = ({ message, onConfirm }) => {
   return (
     <Modal transparent animationType="slide" visible={!!message}>
       
@@ -19,10 +19,6 @@ const PopupMessage = ({ message, onClose, onConfirm }) => {
          
           <TouchableOpacity onPress={onConfirm} style={styles.popupButton}>
             <Text style={styles.popupButtonText}>see my post</Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity onPress={onClose} style={styles.popupButton}>
-            <Text style={styles.popupButtonText}>Cancel</Text>
           </TouchableOpacity>
          
         </View>

@@ -5,13 +5,11 @@ const TransparentButton = (props) => {
    
     return(
         <View>
-            <TouchableOpacity onPress={() => {
+            <TouchableOpacity style={styles.btn} onPress={() => {
 
             }}>
-                <View style={styles.btn}>
-                    <Text style={styles.btnText}>{props.name}</Text>
-                </View>
-
+              
+                <Text style={styles.btnText}>{props.name}</Text>
             </TouchableOpacity>
         </View>
     )

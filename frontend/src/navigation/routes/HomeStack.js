@@ -3,7 +3,7 @@ import HomeScreen from "../../screens/HomeScreen/HomeScreen";
 import HomePage from "../../screens/HomePage/HomePage";
 import PostCategory from "../../screens/PostCategory/PostCategory";
 import CreatePost from "../../screens/CreatePost/CreatePost";
-import UploadPost from "../../screens/UploadPost/UploadPost"
+import PostContent from "../../screens/PostContent/PostContent"
 
 const stack = createNativeStackNavigator();
 
@@ -19,7 +19,7 @@ const HomeStack = () => {
       <stack.Screen name='HomePage' component={HomePage} /> 
       <stack.Screen name='PostCategory' component={PostCategory} /> 
       <stack.Screen name='CreatePost' component={CreatePost} /> 
-      {/* <stack.Screen name='UploadPost' component={UploadPost} />    */}
+      <stack.Screen name='PostContent' component={PostContent} />   
      
     </stack.Navigator>
   );
