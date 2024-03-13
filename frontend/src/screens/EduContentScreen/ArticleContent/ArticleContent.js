@@ -56,7 +56,7 @@ const ArticleContent = () => {
                 <Text style={{ fontSize: 20 }}>Read articles from</Text>
                 <TouchableOpacity
                   style={styles.exploreBtn}
-                  onPress={navigateToScreen("AllAuthorScreen")}
+                  onPress={()=>navigateToScreen("AllAuthorScreen")}
                 >
                   <Text style={styles.exploreBtnText}>Explore Authors</Text>
                 </TouchableOpacity>

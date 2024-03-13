@@ -6,37 +6,36 @@ const styles = StyleSheet.create({
     backgroundColor: "#F2F3F5",
     alignItems: "center",
     height: "100%",
-    display:"flex",
+    display: "flex",
   },
   NavContainer: {
-    display:"flex",
+    display: "flex",
     position: "absolute",
     justifyContent: "center",
     alignItems: "center",
     marginTop: 40,
-    width:"100%"
+    width: "100%",
   },
   NavBar: {
     borderRadius: 100,
     flexDirection: "row",
     backgroundColor: "white",
-    
     alignItems: "center",
     justifyContent: "space-between",
     height: 40,
   },
   NavBarElements: {
-    color: "black",
     fontWeight: "700",
     display: "flex",
     flexDirection: "row",
-    // marginLeft: "auto",
-    // marginRight: "auto",
     width: 90,
     justifyContent: "center",
     alignItems: "center",
     height: "100%",
     borderRadius: 100,
+  },
+  NavBarElementText: {
+    fontWeight: "bold",
   },
   NavBarElements_currentBtn: {
     backgroundColor: "#4A90BF",

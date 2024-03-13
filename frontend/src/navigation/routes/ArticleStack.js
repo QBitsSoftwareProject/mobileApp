@@ -14,8 +14,8 @@ const ArticleStack = () => {
       }}
     >
       <stack.Screen name="ArticleScreen" component={ArticleContent} />
+      <stack.Screen name="AllAuthorScreen" component={AllAuthorScreen} />
       <stack.Screen name="AuthorScreen" component={AuthorScreen} />
-      {/* <stack.Screen name="AllAuthorScreen" component={AllAuthorScreen} /> */}
     </stack.Navigator>
   );
 };

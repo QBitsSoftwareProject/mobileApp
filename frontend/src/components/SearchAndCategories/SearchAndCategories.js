@@ -33,6 +33,7 @@ const SearchAndCategories = ({ currentView }) => {
                 style={[
                   currentView === "HomeScreen" &&
                     styles.NavBarElements_currentText,
+                  styles.NavBarElementText,
                 ]}
               >
                 All
@@ -55,6 +56,7 @@ const SearchAndCategories = ({ currentView }) => {
                 style={[
                   currentView === "ArticleStack" &&
                     styles.NavBarElements_currentText,
+                  styles.NavBarElementText,
                 ]}
               >
                 Article
@@ -77,6 +79,7 @@ const SearchAndCategories = ({ currentView }) => {
                 style={[
                   currentView === "VideoScreen" &&
                     styles.NavBarElements_currentText,
+                  styles.NavBarElementText,
                 ]}
               >
                 Video
@@ -99,6 +102,7 @@ const SearchAndCategories = ({ currentView }) => {
                 style={[
                   currentView === "AudioScreen" &&
                     styles.NavBarElements_currentText,
+                  styles.NavBarElementText,
                 ]}
               >
                 Audio
