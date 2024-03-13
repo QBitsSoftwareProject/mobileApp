@@ -8,13 +8,24 @@ import HeaderSubSug from '../SuggestionsScreen/HeaderSubSug';
 const MonthAnalysis = () => {
     const route = useRoute();
     const navigation = useNavigation();
+    const { selectedEmoji } = route.params || {};
 
     const suggestionButton = ()=>{
         navigation.navigate('SuggestionsScreen')
 }
-const inputYourMoodBtn = () => {
+    const inputYourMoodBtn = () => {
         navigation.navigate('MoodAnaysisScreen');
     };
+
+    const monthlyAnalysisGraph = () => {
+        navigation.navigate('MonthlyAnalysisGraphScreen');
+    };
+
+    const weeklyAnalysisGraph = () => {
+        navigation.navigate('AnalysisGraphScreen',{selectedEmoji});
+    };
+
+    console.log(selectedEmoji)
 
     return (
 
@@ -26,6 +37,7 @@ const inputYourMoodBtn = () => {
 
             <View style={{ paddingLeft: 24, paddingRight:24, paddingTop:15 }}>
             <Card
+                
                 imageSource={require('../../assets/images/analysisMood/moodInput.png')}
                 title="Input your Mood 😍"
                 subtitle="Let Your Emotions Paint the Canvas of Your Day!"
@@ -38,7 +50,8 @@ const inputYourMoodBtn = () => {
                 imageSource={require('../../assets/images/analysisMood/weeklyInputs.png')}
                 title="Weekly input moods 📅 "
                 subtitle="Track Your Mood Changes Weekly"
-                onPress={inputYourMoodBtn}
+                onPress={weeklyAnalysisGraph}
+                
             />
         </View>
 
@@ -46,8 +59,8 @@ const inputYourMoodBtn = () => {
             <Card
                 imageSource={require('../../assets/images/analysisMood/analysis.png')}
                 title="Monthly analysis of your moods 📈 "
-                subtitle="Track Your Mood Changes Weekly"
-                onPress={inputYourMoodBtn}
+                subtitle="Track Your Mood Changes monthly"
+                onPress={monthlyAnalysisGraph}
             />
         </View>
 
@@ -56,8 +69,8 @@ const inputYourMoodBtn = () => {
             <Card
                 imageSource={require('../../assets/images/analysisMood/suggestions.png')}
                 title="Suggestions 💡 "
-                subtitle="Track Your Mood Changes Weekly"
-                onPress={inputYourMoodBtn}
+                subtitle="Recommendations for Enhancing Mood and Well-being"
+                onPress={suggestionButton}
             />
         </View>
             

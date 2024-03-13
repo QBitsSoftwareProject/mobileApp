@@ -24,7 +24,8 @@ const AnalysisGraph = () => {
     const navigation = useNavigation();
 
     const handleContiunePress = ()=>{
-        navigation.navigate('MonthAnalysisScreen',{selectedEmoji})
+        console.log(selectedEmoji)
+        navigation.navigate('MonthAnalysisScreen')
 
     }
 
@@ -33,28 +34,28 @@ const AnalysisGraph = () => {
     useEffect(() => {
         if (moodIndex === 1) {
             // Incrementing the happyHeight and updating state
-            setBHeight(prevHeight => prevHeight + 20);
+            setBHeight(prevHeight => prevHeight + 40);
         }
         else if(moodIndex === 2){
-            setSadBHeight(prevHeight => prevHeight + 20);
+            setSadBHeight(prevHeight => prevHeight + 40);
         }
         else if(moodIndex === 3){
-            setAngryHeight(prevHeight => prevHeight + 20);
+            setAngryHeight(prevHeight => prevHeight + 40);
         }
         else if(moodIndex === 4){
-            setSickHeight(prevHeight => prevHeight + 20);
+            setSickHeight(prevHeight => prevHeight + 40);
         }
         else if(moodIndex === 5){
-            setSleepHeight(prevHeight => prevHeight + 20);
+            setSleepHeight(prevHeight => prevHeight + 40);
         }
         else if(moodIndex === 6){
-            setNutralHeight(prevHeight => prevHeight + 20);
+            setNutralHeight(prevHeight => prevHeight + 40);
         }
         else if(moodIndex === 7){
-            setScaredHeight(prevHeight => prevHeight + 20);
+            setScaredHeight(prevHeight => prevHeight + 40);
         }
         else if(moodIndex === 0){
-            setHappyHeight(prevHeight => prevHeight + 20);
+            setHappyHeight(prevHeight => prevHeight + 40);
         }
     }, [moodIndex]);
     console.log(bHeight);
