@@ -10,7 +10,7 @@ import axios from 'axios';
 const Mindrelaxinmethod =() => {
 
   let yourMark;
-  yourMark = 25;
+  yourMark = 5;
   const [Data,setData] = useState([]);
 
   useEffect (() => {
@@ -19,7 +19,7 @@ const Mindrelaxinmethod =() => {
       try{
           let url;
 
-          url = "http://192.168.8.110:8070/method/get-method"
+          url = "http://172.20.10.6:8070/method/get-method"
 
           const response = await axios.get(url);
           setData(response.data);

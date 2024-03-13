@@ -11,7 +11,7 @@ const FetchMethod =  () => {
         try{
             let url;
 
-            url = "http://10.10.0.85:8070/method/get-method"
+            url = "http://172.20.10.6:8070/method/get-method"
 
             const response = await axios.get(url);
             setData(response.data);
