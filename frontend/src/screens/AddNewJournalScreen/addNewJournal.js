@@ -90,7 +90,7 @@ const handleEmojiPress = ({ emoji, mark }) => {
 
       </ScrollView>
 
-<View style={{  top:0, left: 0, right: 0 }}>
+<View style={{  top:65, left: 0, right: 0 }}>
 <TabBar />
 </View>
 
