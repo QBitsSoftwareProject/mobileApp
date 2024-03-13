@@ -14,6 +14,7 @@ const styles = StyleSheet.create({
 
     imageEditRight:{
         flex:7,
+        paddingTop:15
         
     },
 

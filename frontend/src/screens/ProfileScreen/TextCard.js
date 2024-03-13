@@ -24,7 +24,7 @@ const TextCard = (props) => {
 
         <View style = {styles.editIcon}>
 
-            <TouchableOpacity>
+            <TouchableOpacity onPress={props.function}>
             <Image
             source={require('../../assets/images/ProfileIcons/edit.png')}
             style = {{width:25, height:25}}
