@@ -6,7 +6,7 @@ import styles from "./ProfileStyles";
 import { useNavigation } from "@react-navigation/native";
 // navigation
 
-const ProfilePic = ({item, z}) => {
+const ProfilePic = ({item}) => {
   const navigation = useNavigation();
 
   const navigateToScreen = () => {

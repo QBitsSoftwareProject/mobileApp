@@ -4,7 +4,7 @@ import styles from "./AllAuthorScreenStyles";
 
 import { useNavigation } from "@react-navigation/native";
 
-const AuthorCard = () => {
+const AuthorCard = ({ item }) => {
   const navigation = useNavigation();
 
   return (
@@ -41,7 +41,9 @@ const AuthorCard = () => {
       >
         {/* VIEW BTN */}
         <Pressable
-          onPress={navigation.navigate("AllAuthorScreen")}
+          onPress={() => {
+            navigation.navigate("AuthorScreen", { authorId: item.id });
+          }}
           android_ripple={{ borderless: true, radius: 80, color: "#7CBDE8" }}
         >
           <View style={styles.ViewBtnBorder}>

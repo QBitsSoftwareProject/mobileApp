@@ -21,9 +21,13 @@ import viewIcon from "../../../../assets/images/icons/bi_eye-fill.png";
 import ArticleListItem from "../../../../components/AuthorScreen/ArticleListItem";
 // components
 
-const AuthorScreen = ({ route, key }) => {
+const AuthorScreen = ({ route }) => {
   const authorData = route.params;
   const navigation = useNavigation();
+
+  const goBack = () => {
+    navigation.goBack();
+  };
 
   return (
     <SafeAreaView>
@@ -43,11 +47,7 @@ const AuthorScreen = ({ route, key }) => {
                 flexDirection: "row",
               }}
             >
-              <Pressable
-                onPress={() => {
-                  navigation.navigate("ArticleScreen");
-                }}
-              >
+              <Pressable onPress={goBack}>
                 <Image source={backImg} />
               </Pressable>
               <Text
