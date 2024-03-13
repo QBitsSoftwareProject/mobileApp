@@ -3,46 +3,65 @@ import { View, StyleSheet, ScrollView, Text } from "react-native";
 import { SafeAreaView } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import HeaderSub from "../../components/HeaderSub/HeaderSub";
-import TransparentButton from "../../components/CFButton/TransparentButton";
 import RegularButton from "../../components/CFButton/RegularButton";
 import TemporyCard from "../../components/CFCard/TemporyCard";
+import PopupMessage from "../../components/CF Pop-up/Pop-up";
 import { useState } from "react";
 
-const user = 
+
+const newPost = [
   {
     id: 1,
     image: require("../../assets/images/PostCardImages/boydp.jpg"),
     title: "Chethiya Bandara",
-  }
-
-const pubImage = require("../../assets/images/PostCardImages/Globe.png")
-const priveImage = require("../../assets/images/PostCardImages/Private.png")
+    sub: "public",
+    status: require("../../assets/images/PostCardImages/Globe.png"),
+    description: "Healthy food comprises nutrient-rich options like fruits, vegetables, whole grains, and lean proteins, fostering overall well-being and reducing disease risk through balanced, mindful choices.",
+    selectedimage: require("../../assets/images/PostCardImages/foodimage.jpeg"),
+  },
+];
 
 const CreatePost = () => {
- const [status,setStatus] = useState('public');
- const [statusImg, setStatusImg] = useState(pubImage)
 
+  const [popupMessage, setPopupMessage] = useState('');
+    
+  const navigation=useNavigation();
+
+  const showMessage = (message) => {
+    setPopupMessage(message);
+  };
+
+  const confirmMessage = () => {
+    navigation.navigate('postContent');
+  };
+
+  const closeMessage = () => {
+    setPopupMessage('');
+  };
+
+  const goBack = () => {
+    navigation.navigate("PostCategory");
+  };
 
   return (
     <View>
-      
       <View>
-        <HeaderSub headLine={"Create Post"} subHeadLine={"Edit your post"} back={"PostCategory"}/>
+        <HeaderSub headLine={"Create Post"} subHeadLine={"Edit your post"} back={goBack}/>
       </View>
 
       <SafeAreaView style={{ margin: 25 }}>
-        
+
         <ScrollView style={{ height: 500 }}>
-        
-            <View>
+          {newPost.map((post) => (
+            <View key={post.id}>
               <TemporyCard
-                image={user.image}
-                title={user.title}
-                sub={status}
-                status={statusImg}
+                image={post.image}
+                title={post.title}
+                sub={post.sub}
+                status={post.status}
               />
             </View>
-        
+          ))}
 
           <View style={styles.flex1}>
 
@@ -54,14 +73,15 @@ const CreatePost = () => {
           </View>
 
           <View style={{ marginBottom: 60 }}>
-            <TransparentButton />
-            <RegularButton name={"post"} onPress= {() => {}}/>
+            <RegularButton name={"post"} onPress= {() => showMessage("Post Successful")}></RegularButton> 
           </View>
+
+          <PopupMessage message={popupMessage} onConfirm={confirmMessage} onClose={closeMessage} />
 
         </ScrollView>
 
       </SafeAreaView>
-
+      
     </View>
   );
 };

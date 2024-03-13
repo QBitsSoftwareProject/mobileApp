@@ -1,7 +1,7 @@
 import { View, Text, StyleSheet, TouchableOpacity} from 'react-native'
 import React from 'react'
 
-const TransparentButton = () => {
+const TransparentButton = (props) => {
    
     return(
         <View>
@@ -9,7 +9,7 @@ const TransparentButton = () => {
 
             }}>
                 <View style={styles.btn}>
-                    <Text style={styles.btnText}>Post</Text>
+                    <Text style={styles.btnText}>{props.name}</Text>
                 </View>
 
             </TouchableOpacity>

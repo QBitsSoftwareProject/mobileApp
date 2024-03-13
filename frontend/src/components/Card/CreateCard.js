@@ -1,12 +1,12 @@
 import { StyleSheet, TouchableOpacity, View, Image, Text } from 'react-native'
 import React from 'react'
-import { useState } from 'react';
 
 const CreateCard = (props) => {
 
 	return( 
 		<TouchableOpacity>
 			<View style = {styles.cardBox}>
+				
 				<View style={styles.imageframe}>
 					<Image source={props.image}style={styles.image} /> 
 				</View>
@@ -43,7 +43,9 @@ const CreateCard = (props) => {
 					</View>
 				
 				</View>
+
 			</View>
+
 		</TouchableOpacity>
 	) 
 } 
@@ -87,11 +89,6 @@ const styles = StyleSheet.create ({
 	   fontWeight: "400",
 		color: '#E82519',
 	  },
-	//   defaultStatus: {
-	// 	fontSize:12,
-	//   	fontWeight: "400",
-	// 	color:'#5C677D'
-	//   },
 	imageframe:{
 		height:70,
 		width:70,

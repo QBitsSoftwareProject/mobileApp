@@ -8,20 +8,21 @@ const PopupMessage = ({ message, onClose, onConfirm }) => {
       <View style={styles.modalBackground}>
         
         <View style={styles.modalContainer}>
+
           <Text style={styles.messageText}>{message}</Text>
-          
+
           <View style={{alignItems:'center'}}>
             <Image
                   source={require('../../assets/images/Confirm.png')}
                   style={{width:180, height:180, marginVertical:20}} />
           </View>
          
-          <TouchableOpacity onPress={onConfirm} style={styles.CCButton}>
-            <Text style={styles.CCButtonText}>Confirm</Text>
+          <TouchableOpacity onPress={onConfirm} style={styles.popupButton}>
+            <Text style={styles.popupButtonText}>see my post</Text>
           </TouchableOpacity>
 
-          <TouchableOpacity onPress={onClose} style={styles.CCButton}>
-            <Text style={styles.CCButtonText}>Cancel</Text>
+          <TouchableOpacity onPress={onClose} style={styles.popupButton}>
+            <Text style={styles.popupButtonText}>Cancel</Text>
           </TouchableOpacity>
          
         </View>
@@ -54,7 +55,7 @@ messageText: {
     marginBottom: 10,
   },
 
-  CCButton: {
+  popupButton: {
     backgroundColor:'transparent',
     borderWidth:1,
     borderColor: '#3498db',
@@ -63,7 +64,7 @@ messageText: {
     borderRadius: 20,
     alignItems: 'center',
   },
-  CCButtonText: {
+ popupButtonText: {
     color: '#101318',
     fontSize:18,
     fontWeight: '#400',
