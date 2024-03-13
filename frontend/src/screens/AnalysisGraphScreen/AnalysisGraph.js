@@ -25,7 +25,12 @@ const AnalysisGraph = () => {
 
     const handleContiunePress = ()=>{
         console.log(selectedEmoji)
-        navigation.navigate('MonthAnalysisScreen')
+        navigation.navigate('MonthAnalysisScreen',{
+            selectedEmoji: selectedEmoji,
+            moodText: moodText,
+            imageSource: imageSource,
+            moodIndex: moodIndex
+        })
 
     }
 
@@ -97,7 +102,9 @@ const styles = {
         flexDirection: 'row', // Arrange children horizontally
         alignItems: 'center',
         justifyContent: 'center',
-        marginTop: 65,
+        marginTop: 44,
+        
+        
     },
     selectedEmoji: {
         fontSize: 130,
@@ -105,14 +112,16 @@ const styles = {
         justifyContent: 'center',
         alignSelf: 'center',
         marginTop: -180,
+        
+        
     },
     selectedEmojiLeft: {
         fontSize: 90,
-        marginRight: 27.5,
+        marginRight:20,
     },
     selectedEmojiRight: {
         fontSize: 90,
-        marginLeft: 27.5,
+        marginLeft: 20,
     },
     moodText: {
         fontSize: 23,

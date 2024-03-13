@@ -7,11 +7,13 @@ import HeaderSubSug from '../SuggestionsScreen/HeaderSubSug';
 const SuggestioScreen = () => {
   return (
     <View>
-        <ScrollView>
+       
         <HeaderSubSug
         headLine="Suggestions"
         subHeadLine="Explore personal recommendations"
       />
+
+      <ScrollView style={{height:518}} >
       <DropdownCard 
       image={require("../../assets/images/Suggestions/sug1.png")}
       title="Do positive activity"

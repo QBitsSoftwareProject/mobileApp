@@ -8,7 +8,9 @@ import HeaderSubSug from '../SuggestionsScreen/HeaderSubSug';
 const MonthAnalysis = () => {
     const route = useRoute();
     const navigation = useNavigation();
-    const { selectedEmoji } = route.params || {};
+    const { selectedEmoji, moodText, imageSource, moodIndex } = route.params ||{};
+
+    
 
     const suggestionButton = ()=>{
         navigation.navigate('SuggestionsScreen')
@@ -22,7 +24,7 @@ const MonthAnalysis = () => {
     };
 
     const weeklyAnalysisGraph = () => {
-        navigation.navigate('AnalysisGraphScreen',{selectedEmoji});
+        navigation.navigate('AnalysisGraphScreen',{selectedEmoji, moodText, imageSource, moodIndex});
     };
 
     console.log(selectedEmoji)

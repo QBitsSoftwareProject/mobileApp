@@ -12,7 +12,7 @@ const DropdownCard = ({ image, title, subTittle, content, imageContent, dropdown
     return (
         <View style={styles.container}>
             {/* Header */}
-            <View  style={styles.title}>
+            <View  style={[styles.title, isCollapsed ? styles.collapsed : styles.expanded]}>
                 <View style={styles.headerContainer}>
                     {/* Column for image */}
                     <View style={styles.imageColumn}>
@@ -24,7 +24,7 @@ const DropdownCard = ({ image, title, subTittle, content, imageContent, dropdown
                         <Text style={styles.subTittle}>{subTittle}</Text>
                     </View>
                     {/* Dropdown Image */}
-                    <TouchableOpacity onPress={toggleCollapse} style={styles.dropdown}>
+                    <TouchableOpacity onPress={toggleCollapse }  style={styles.dropdown}>
                         <Image source={dropdown} />
                     </TouchableOpacity>
                 </View>
@@ -53,8 +53,17 @@ const styles = StyleSheet.create({
         marginTop:15,
         justifyContent: 'center',
         alignSelf: 'center',
-        borderRadius: 16,
+        borderTopRightRadius: 16,
+        borderTopLeftRadius:16,
+        borderBottomLeftRadius: 16,
+        borderBottomRightRadius:16,
         elevation: 2,
+    },
+
+    expanded:{
+        borderBottomLeftRadius:0,
+        borderBottomRightRadius:0
+
     },
     headerContainer: {
         flexDirection: 'row', // Arrange items horizontally
@@ -91,7 +100,8 @@ const styles = StyleSheet.create({
         width: 343,
         justifyContent: 'center',
         alignSelf: 'center',
-        borderRadius: 16,
+        borderBottomLeftRadius: 16,
+        borderBottomRightRadius:16,
         elevation: 2,
         paddingTop: 5,
         marginBottom: 15,

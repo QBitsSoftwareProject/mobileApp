@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, Image, StyleSheet } from 'react-native';
 
-const Card = ({ imageSource, title, subtitle, onPress }) => {
+const Card = ({ imageSource, title, subtitle, onPress, }) => {
     return (
         <TouchableOpacity onPress={onPress} style={styles.container}>
             {/* Image column */}
