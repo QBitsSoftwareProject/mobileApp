@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { View, Text, Image, ScrollView, FlatList, TouchableOpacity} from 'react-native'
+import { View, Text, Image, ScrollView, TouchableOpacity} from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import styles from './styles'
 import DateCard from '../../components/DateCard/DateCard'
@@ -7,8 +7,6 @@ import TimeButton from '../../components/TimeButton/TimeButton'
 import PopupMessage from '../../components/Pop-up/Pop-upScreen'
 import RegularButton from '../../components/Button/RegularButton'
 import { useNavigation } from '@react-navigation/native'
-
-
 
 const MakeAppointment = () => {
 
@@ -126,9 +124,7 @@ const MakeAppointment = () => {
             </ScrollView> 
         
         </SafeAreaView>
-      
-      
-    
+
     )
 }
 
