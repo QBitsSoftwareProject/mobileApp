@@ -34,6 +34,7 @@ const styles = StyleSheet.create({
   viewBtn:{
     width:80,
     height:35,
+    height:35,
     borderRadius:20,
     elevation:1,
     justifyContent:'center',
@@ -41,6 +42,7 @@ const styles = StyleSheet.create({
     backgroundColor:'white',
   },
   viewText:{
+    fontSize:12,
     fontSize:12,
     fontWeight:'400',
     color:'#5C677D'
@@ -56,6 +58,7 @@ const styles = StyleSheet.create({
   slide: {
     justifyContent: 'flex-end',
     position: 'relative',
+    marginHorizontal:7,
     overflow:'hidden',
     borderRadius:20,
     marginHorizontal:7

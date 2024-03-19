@@ -2,6 +2,7 @@ import { View, Text, Image, TextInput, TouchableOpacity, Keyboard, } from 'react
 import React, { useEffect, useState } from 'react'
 import styles from './styles'
 import { useNavigation } from '@react-navigation/native'
+import { userLogin } from '../../services/userServices/userService'
 
 const userEmail='nethsarawmrc@gmail.com'
 const userPassword='123'
@@ -17,11 +18,17 @@ const LoginScreen = () => {
     const handleBackPress = ()=>{
         navigation.navigate('WelcomeScreen')
     }
-    const handleLoginPress = ()=>{
-        if(email===userEmail && password===userPassword){
-            setIsValid(true)
-            navigation.navigate('TabBar')
-        }else {
+    const handleLoginPress = async ()=>{
+        try{
+            const userData = await userLogin(email, password);
+            
+            if (userData) {
+                setIsValid(true)
+                navigation.navigate('TabBar');
+            }
+
+        }catch(err){
+            console.log(err)
             setIsValid(false)
         }
         
