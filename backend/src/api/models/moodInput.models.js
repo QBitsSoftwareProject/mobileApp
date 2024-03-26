@@ -10,3 +10,6 @@ const moodEntrySchema = new mongoose.Schema({
 const MoodEntry = mongoose.model('MoodEntry', moodEntrySchema);
 
 module.exports = MoodEntry;
+
+
+
