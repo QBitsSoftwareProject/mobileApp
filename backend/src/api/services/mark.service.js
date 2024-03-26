@@ -1,5 +1,6 @@
 const markModel = require("../models/mark.model");
 
+
 const storeMark =  (userid, mark, date, time) => {
     try {
         if (!mark || !date || !time || !userid) {
@@ -30,7 +31,44 @@ const getMarkById =  (userid) => {
     }
 };
 
+const getMarkData = async (marks) => {
+    try {
+      // Fetch mark data from the API
+      console.log('data is',marks);
+      
+      // Extract the mark data from the response
+      const markData = marks;
+
+      
+
+      if (!markData || !Array.isArray(markData)) {
+        throw new Error('Mark data is missing or invalid');
+      }
+      
+      markData.reverse();
+
+      const groupedData = markData.reduce((acc, item) => {
+        const date = item.date;
+        if (!acc[date]) {
+          acc[date] = [];
+        }
+        acc[date].push(item);
+        return acc;
+      }, {});
+
+      
+  
+      // Return the sorted mark data
+      return groupedData;
+  
+    } catch (error) {
+      console.error('Error fetching mark data:', error);
+      throw error;
+    }
+  };
+
 module.exports = {
     storeMark,
-    getMarkById
+    getMarkById,
+    getMarkData
 };

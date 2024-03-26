@@ -17,35 +17,28 @@ const HelloWorldScreen = ({route}) => {
 
   const { user_id } = route.params;
 
+  //get history of stress level by newest first and groupde by date
   const fetchHistoryData = async (userid) => {
     try {
-      const response = await axiosInstance.get(`/mark/get-mark-by-id/${userid}`);
-      const userData = response.data.filter(item => item.userid === userid);
+      const response = await axiosInstance.get(`/mark/get-sorted-mark-by-id/${userid}`);
+      const userData = response.data;
 
-      // Group data by date
-      const groupedData = userData.reduce((acc, item) => {
-        const date = item.date;
-        if (!acc[date]) {
-          acc[date] = [];
-        }
-        acc[date].push(item);
-        return acc;
-      }, {});
+      console.log(userData)
 
-      const formattedData = Object.entries(groupedData)
-        .map(([date, items]) => ({ date, items }))
-        .sort((a, b) => new Date(b.date) - new Date(a.date));
+      // Transform groupedData into an array of objects
 
-      // to sort by time
-      formattedData.forEach(({ items }) => {
-        items.sort((a, b) => {
-          const timeA = new Date(`1970-01-01T${a.time}`);
-          const timeB = new Date(`1970-01-01T${b.time}`);
-          return timeB - timeA;
-        });
-      });
+      const historyDataArray = Object.entries(userData).map(([date, items]) => ({
+        date,
+        items
+      }));
 
-      setHistoryData(formattedData);
+ 
+      console.log(userData)
+
+      
+
+      setHistoryData(historyDataArray);
+      
     } catch (err) {
       console.log(err);
     }

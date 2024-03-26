@@ -33,6 +33,8 @@ const Question = () => {
   const [mark,setMark] = useState('');
   const [submit, setSubmit] = useState(false);
   const [stressLevel , setStressLevel] = useState('');
+
+  // get Ids of questions
   
   useEffect(() => {
     const fetchQuestionIds = async () => {
@@ -47,6 +49,9 @@ const Question = () => {
     fetchQuestionIds();
   }, []);
 
+
+  // get current qiestion id
+
   useEffect(() => {
     const fetchQuestions = async () => {
       try {
@@ -58,6 +63,9 @@ const Question = () => {
     };
     fetchQuestions();
   }, [currentQuestionIndex, ids]);
+
+
+  // get data relevent to the  question / (fetch by id)
 
   useEffect(() => {
     const fetchData = async () => {
@@ -78,8 +86,10 @@ const Question = () => {
     };
     fetchData();
 
-    
   }, [id]);
+
+
+  // to store marks to get final mark
 
   const marks = [];
   const [allMarks, setAllMarks] = useState([]);
@@ -141,7 +151,7 @@ const Question = () => {
   
   const navigation = useNavigation();
 
-  const id1 = '214012H';
+  const id1 = '214224J';
 
   const handleSubmitButton = () => {
     if (selectedOption) {

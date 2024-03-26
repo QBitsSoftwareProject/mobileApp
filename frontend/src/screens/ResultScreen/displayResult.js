@@ -103,13 +103,15 @@ const DisplayResultScreen = ({ route}) => {
         setOverlayVisible(!isOverlayVisible);
        };
 
-
+       // get last stress level of the user
        const fetchMark = async (userID) => {
         // const userid = userID;
         try {
           console.log('Fetching mark for userID:', userID);
           const response = await axiosInstance.get(`/mark/get-mark-by-id/${userID}`);
-          const userData = response.data.filter((item) => item.userid === userID);
+          
+          const userData = response.data;
+
       
           if (userData.length > 0) {
             const mostRecentMark = userData[userData.length - 1].mark;
