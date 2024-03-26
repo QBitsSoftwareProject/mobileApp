@@ -25,7 +25,7 @@ const HelloWorldScreen = ({route}) => {
 
       console.log(userData)
 
-      // Transform groupedData into an array of objects
+      // Transform userData into an array of objects
 
       const historyDataArray = Object.entries(userData).map(([date, items]) => ({
         date,
@@ -38,7 +38,7 @@ const HelloWorldScreen = ({route}) => {
       
 
       setHistoryData(historyDataArray);
-      
+
     } catch (err) {
       console.log(err);
     }
