@@ -1,10 +1,8 @@
 import {
   View,
   SafeAreaView,
-  ScrollView,
   Text,
   FlatList,
-  Dimensions,
 } from "react-native";
 import React, { useEffect, useState } from "react";
 import styles from "./videoStyle";
@@ -22,24 +20,6 @@ import VideoCategoryData from "./VideoCategoryData";
 // data
 
 const VideoContent = () => {
-  const [screenHeight, setScreenHeight] = useState(
-    Dimensions.get("window").height
-  );
-
-  useEffect(() => {
-    const updateDimensions = () => {
-      setScreenHeight(Dimensions.get("window").height);
-    };
-
-    // Listen for changes in screen dimensions
-    Dimensions.addEventListener("change", updateDimensions);
-
-    // Clean up the event listener when the component is unmounted
-    return () => {
-      Dimensions.removeEventListener("change", updateDimensions);
-    };
-  }, []);
-
   return (
     <SafeAreaView>
       <View>

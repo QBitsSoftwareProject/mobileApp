@@ -7,56 +7,58 @@ import playImg from "../../assets/images/icons/player/play.png";
 import pauseImg from "../../assets/images/icons/player/pause.png";
 
 function AudioItem({ item }) {
-  const [sound, setSound] = useState();
-  const [isPlaying, setIsPlaying] = useState(false);
+  // const [sound, setSound] = useState();
+  // const [isPlaying, setIsPlaying] = useState(false);
 
-  useEffect(() => {
-    return () => {
-      if (sound) {
-        sound.unloadAsync();
-      }
-    };
-  }, [sound]);
+  // useEffect(() => {
+  //   return () => {
+  //     if (sound) {
+  //       sound.unloadAsync();
+  //     }
+  //   };
+  // }, [sound]);
 
-  const playPauseSound = async () => {
-    if (sound) {
-      if (isPlaying) {
-        await sound.pauseAsync();
-      } else {
-        await sound.playAsync();
-      }
-      setIsPlaying(!isPlaying);
-    }
-  };
+  // const playPauseSound = async () => {
+  //   if (sound) {
+  //     if (isPlaying) {
+  //       await sound.pauseAsync();
+  //     } else {
+  //       await sound.playAsync();
+  //     }
+  //     setIsPlaying(!isPlaying);
+  //   }
+  // };
 
-  const loadSound = async () => {
-    try {
-      const { sound } = await Audio.Sound.createAsync(
-        { uri:item.file },
-        { shouldPlay: false }
-      );
-      setSound(sound);
-    } catch (error) {
-      console.error("Error loading audio:", error);
-    }
-  };
+  // const loadSound = async () => {
+  //   try {
+  //     const { sound } = await Audio.Sound.createAsync(
+  //       { uri:item.file },
+  //       { shouldPlay: false }
+  //     );
+  //     setSound(sound);
+  //   } catch (error) {
+  //     console.error("Error loading audio:", error);
+  //   }
+  // };
 
-  useEffect(() => {
-    loadSound();
-    return () => {
-      if (sound) {
-        sound.unloadAsync();
-      }
-    };
-  }, []);
+  // useEffect(() => {
+  //   loadSound();
+  //   return () => {
+  //     if (sound) {
+  //       sound.unloadAsync();
+  //     }
+  //   };
+  // }, []);
 
   return (
     <View style={styles.audioItem}>
       <View style={styles.playBtnSection}>
-        <TouchableOpacity onPress={playPauseSound}>
+        <TouchableOpacity>
+          {/* <TouchableOpacity onPress={playPauseSound}> */}
           <View style={styles.imgContainer}>
             <Image
-              source={isPlaying ? pauseImg : playImg}
+              source={playImg}
+              // source={isPlaying ? pauseImg : playImg}
               style={styles.image}
             />
           </View>
