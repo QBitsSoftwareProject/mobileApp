@@ -12,7 +12,7 @@ const Journalschema = mongoose.Schema({
     },
     tittle:{
         type:String,
-        required:true
+        
     },
     journalEntry:{
         type:String,

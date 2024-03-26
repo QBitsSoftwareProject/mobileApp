@@ -1,15 +1,22 @@
-import React, { useState} from 'react';
+import React, { useState,useEffect} from 'react';
 import { View, TextInput, TouchableOpacity, Text, StyleSheet, ScrollView} from 'react-native';
 import PropTypes from 'prop-types';
 import { useRoute } from '@react-navigation/native';
 
-export const EmojiPicker = ({onEmojiPress}) =>{
+export const EmojiPicker = ({onEmojiPress,imoji}) =>{
 
+  // console.log(imoji)
   const route = useRoute();
   const { itemEmoji } = route.params;
     
     const [userInput, setUserInput] = useState(itemEmoji);
-    const [selectedEmoji, setSelectedEmoji] = useState(null);
+    const [selectedEmoji, setSelectedEmoji] = useState(imoji|| '');
+
+    // console.log(selectedEmoji);
+
+    useEffect(() => {
+      setSelectedEmoji(imoji || '');
+    }, [imoji]);
 
     const handleEmojiPress = (emoji, mark) => {
       const selectedEmoji = emojiData.find(item => item.emoji === emoji);  
@@ -46,6 +53,8 @@ export const EmojiPicker = ({onEmojiPress}) =>{
        
     ];
 
+    // console.log(selectedEmoji)
+
     return (
         <View style={styles.container}>
             <ScrollView
@@ -57,7 +66,7 @@ export const EmojiPicker = ({onEmojiPress}) =>{
                     <TouchableOpacity
                     key={index}
                     style={[styles.emojiButton,
-                    selectedEmoji === item.emoji ? styles.selectedEmoji : null,
+                    selectedEmoji === parseInt(item.mark) ? styles.selectedEmoji : null,
                   ]}
                     onPress={() => handleEmojiPress(item.emoji, item.mark)}
                     >

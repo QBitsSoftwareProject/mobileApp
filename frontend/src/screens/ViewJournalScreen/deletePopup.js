@@ -1,12 +1,21 @@
 
 import { View, Text, Modal, StyleSheet, TouchableOpacity,Image } from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
+import axios from 'axios';
 
 
-export const Overlay = ({ isVisible, onClose, ...props }) => {
+export const Overlay = ({ isVisible, onClose, journalID }) => {
 
     
+const handleDeleteButton = async ()=>{
+  try{
+    const deleteResponse = await axios.delete(`http://192.168.43.51:3000/journal/delete-journal/${journalID}`);
+  }
+  catch(error){
+    console.log(error);
 
+}
+};
     
   return (
     <Modal
@@ -27,7 +36,7 @@ export const Overlay = ({ isVisible, onClose, ...props }) => {
         
            <Image source={require("../../assets/images/journal/addpic.png")}></Image>
 
-           <TouchableOpacity style={styles.create} onPress={props.propbtnfunction}>
+           <TouchableOpacity style={styles.create} onPress={handleDeleteButton}>
            <Text style={styles.createText}>Delete Journal</Text>
            </TouchableOpacity>
 

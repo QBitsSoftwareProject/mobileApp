@@ -1,22 +1,36 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect,useRef } from 'react';
 import { useRoute } from '@react-navigation/native';
 import { View, TextInput, StyleSheet ,Image,TouchableOpacity} from 'react-native';
 
 
-export const JournalTittle = () => {
+export const JournalTittle = ({newText,value}) => {
 
-
-  
- 
 
   const route = useRoute();
   const { itemID,itemTittle, itemText } = route.params;
 
-  const [inputTittle, setInputTittle] = useState(itemTittle);
+  const [inputTittle, setInputTittle] = useState(value || '');
+
+  
+
+  
+
+  useEffect(() => {
+     
+    setInputTittle(value || '');
+
+
+}, [value]);
+
 
   // console.log(itemID);
   // console.log(itemTittle);
   // console.log(itemText);
+
+  const handleInputChange = (text) => {
+    setInputTittle(text); // Update local state
+    newText(text);  // Call the parent's onChangeText callback
+  };
   
 
     return(
@@ -26,7 +40,7 @@ export const JournalTittle = () => {
           placeholder="Feeling happy today... "
           multiline={true}
           value={inputTittle}
-          onChangeText={(text) => setInputTittle(text)}
+          onChangeText={handleInputChange}
           
         />
         

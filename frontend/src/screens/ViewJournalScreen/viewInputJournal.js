@@ -1,26 +1,17 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { StyleSheet, View,Text, ImageBackground, } from "react-native";
 import { Animated } from "react-native";
 import { EditDeletebutton } from "./editDeleteButton";
 import { createStackNavigator } from '@react-navigation/stack';
 import { SwipeListView } from "react-native-swipe-list-view";
-
-const inputJournals = [
-  
-  { id: '1', tittle:'Grateful Moments🌸😊❤️', text: 'Feeling Positive today!🌸. I am grateful for the supportive phone call today, I had with my best friend😊❤️.', category:'positive', emoji:'😊' },
-  { id: '2', tittle: 'A Morning Brew of Coffee☀️🌈❤️', text: 'Woke up feeling grateful for a new day! 🙏 Starting the morning with a warm cup of coffee and the sun streaming through my window🌈❤️.', category:'positive',  emoji:'😍' },
-  { id: '3', tittle: 'Navigating Inner Storms🌧️', text: 'Negative thoughts looming overhead. 🌧️ Battling inner demons and self-critical voices😔', category:'negative', emoji:'😢' },
-  { id: '8', tittle:'Grateful Moments🌸😊❤️', text: 'Feeling Positive today!🌸. I am grateful for the supportive phone call today, I had with my best friend😊❤️.', category:'positive', emoji:'😊' },
-
-  { id: '4', tittle: 'Embracing Gratitude🌸🌟❤️', text: 'Decided to focus on the good stuff❤️ and let go of negativity. Gratitude is the attitude!🌸🌟.', category:'positive', emoji:'😊' },
-  { id: '5', tittle: 'Reflecting on Today Blessings😴💤',  text: 'Ending the day with gratitude. Thankful for the experiences and lessons today brought. Ready for a restful sleep. 😴💤.', category:'positive', emoji:'😴' },
-  { id: '6', tittle: 'A Morning Brew of Coffee☀️🌈❤️', text: 'Woke up feeling grateful for a new day! 🙏 Starting the morning with a warm cup of coffee and the sun streaming through my window🌈❤️.', category:'positive', emoji:'😍'},
-  { id: '7', tittle: 'Navigating Inner Storms🌧️😔', text: 'Negative thoughts looming overhead. 🌧️ Battling inner demons and self-critical voices😔', category:'negative', emoji:'😢' },
-
-];
+import getJournals from "./fetchJournals";
+import { useFocusEffect } from "@react-navigation/native";
+import axios from "axios";
 
 
 export const SwipableList = (props) => {
+
+  const [journalDisplay , setJournalDisplay] = useState([]);
 
   const stack = createStackNavigator();
 
@@ -38,46 +29,103 @@ export const SwipableList = (props) => {
     setShowButton(true);
   };
 
- 
+  //get journal data to display
+  useEffect(() => {
+  const getJournals = async () => {
+    try {
+      const userid = '214102J';
+      const journalArray = await axios.get(`http://192.168.43.51:3000/journal/getJournal-byid/${userid}`);
+      setJournalDisplay(journalArray.data);
+    } catch(error) {
+      console.log(error);
+    }
+  };
+
+  getJournals();
+}, [journalDisplay]);
+
+// console.log("Updated journalDisplay:", journalDisplay);
 
 
- 
+    const renderJournalItem = ({ item,index }) => {
 
-  const renderJournalItem = ({ item,index }) => (
+      let mood = '';
+      
+      if(item.emoji === 10){
+         mood = '😊';
+      }
+      if(item.emoji === 20){
+        mood = '😢';
+      }
+      if(item.emoji === 30){
+        mood = '😡'
+      }
+      if(item.emoji === 40){
+        mood = '😍';
+     }
+     if(item.emoji === 50){
+       mood = '😱';
+     }
+     if(item.emoji === 60){
+       mood = '😐'
+     }
+     if(item.emoji === 70){
+      mood = '😴';
+    }
+    if(item.emoji === 80){
+      mood = '🤒'
+    }
+
+      return(
+
       <View style={styles.container}>
       <View style={styles.journalItem}>
         
         <View style={styles.emgTittle}>
 
        <Text style={styles.journalTittle}>{item.tittle}</Text>
-       <Text style ={styles.emg}>{item.emoji}</Text>
+       
+
+       <Text style ={styles.emg}>{mood}</Text>
 
         </View>
-        <Text style={styles.journalText}>{item.text}</Text>
-        {/* <Text style={styles.journalText}>{item.id}</Text> */}
+        <Text style={styles.journalText}>{item.journalEntry}</Text>
       </View>
       </View>
-    );
+    )
+    };
 
-    const renderHiddenItem = ({ item, index }, rowMap) => (
+    const renderHiddenItem = ({ item, index }, rowMap) => {
+
+      let mood = '';
+      
+      if(item.emoji === 10){
+         mood = '😊';
+      }
+
+      return(
+
+      
+      
       <View style={styles.buttonContainer}>
         <EditDeletebutton 
-        item = {item.id}
+        item = {item._id}
         itemText={item.text}
         itemTittle={item.tittle}
-        itemEmoji={item.emoji}
+        itemEmoji={mood}
         editFunction={(itemID,itemTittle, itemText,itemEmoji) => handleEditPress(itemID, itemTittle, itemText,itemEmoji)} />
       </View>
-    );
+    )
+      };
+
+  
 
   return (
     
-
-   
     <SwipeListView style={{height:342,}}
 
-    data={inputJournals}
-    keyExtractor={(item) => item.id}
+    data={journalDisplay}
+    keyExtractor={(item) => item._id}
     renderItem={renderJournalItem}
 
     onSwipeOpen={handleSwipe}
@@ -93,13 +141,6 @@ export const SwipableList = (props) => {
 
 
 
-// const JournalListContent = ({ item, index }) => (
-//   <FlatList
-//     data={[inputJournals]}
-//     keyExtractor={(item) => item.id}
-//     renderItem={renderJournalItem}
-//   />
-// );
 
 
 
@@ -109,7 +150,7 @@ export const SwipableList = (props) => {
 const styles = StyleSheet.create({
 
   buttonContainer: {
-    // width: 80, // Adjust width as needed
+    
   },
   
     journalItem: {

@@ -6,6 +6,8 @@ import { Overlay } from './deletePopup';
 
 export const EditDeletebutton = (props) =>{
 
+    const [journalId,setJournalId] = useState('');
+
     const stack = createStackNavigator();
     const [isOverlayVisible, setIsOverlayVisible] = useState(false);
 
@@ -19,8 +21,17 @@ export const EditDeletebutton = (props) =>{
       };
 
     const handleDeletePress = ()=>{
+        // console.log('Item ID:', props.item);
         setIsOverlayVisible(true);
+
+        
     }
+
+   
+
+
+
+   
    
   return(
         <View style={styles.mainButton}>
@@ -55,7 +66,7 @@ export const EditDeletebutton = (props) =>{
        </TouchableOpacity>
         </View>
 
-        <Overlay isVisible={isOverlayVisible} onClose={() => setIsOverlayVisible(false)} propbtnfunction={handleDeletePress} />
+        <Overlay isVisible={isOverlayVisible} onClose={() => setIsOverlayVisible(false)} journalID =  {props.item}/>
 
     </View>
     )

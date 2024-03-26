@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import { useRoute } from '@react-navigation/native';
 import { View, TextInput, Text,StyleSheet, TouchableOpacity, Image } from 'react-native';
 
-export const JournalEntry = () => {
+export const JournalEntry = ({newText,value}) => {
 
   const route = useRoute();
   const { itemID, itemText } = route.params;
@@ -10,7 +10,28 @@ export const JournalEntry = () => {
   // console.log(itemID);
   // console.log(itemText);
 
-    const [inputJournal, setInputJournal] = useState(itemText);
+
+
+    const [inputJournal, setInputJournal] = useState(value || '');
+
+    
+
+    useEffect(() => {
+     
+        setInputJournal(value || '');
+
+  
+    }, [value]);
+
+    // console.log(inputJournal);
+    // console.log(value);
+
+    const handleInputChange = (text) => {
+      setInputJournal(text); // Update local state
+      newText(text);  // Call the parent's onChangeText callback
+    };
+
+  
 
     const handleButtonPress = () => {
         // Handle button press logic here
@@ -30,7 +51,7 @@ export const JournalEntry = () => {
           textAlignVertical='top'
           multiline={true}
           value={inputJournal}
-          onChangeText={(text) => setInputJournal(text)}
+          onChangeText={handleInputChange}
 
          />
           <TouchableOpacity style={styles.button} onPress={handleButtonPress}>
