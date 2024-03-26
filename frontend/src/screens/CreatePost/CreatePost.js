@@ -9,31 +9,30 @@ import PopupMessage from "../../components/CF Pop-up/Pop-up";
 import { useState } from "react";
 import PostCategory from "../PostCategory/PostCategory";
 
-
-const newPost = [
+const post = 
   {
     id: 1,
     image: require("../../assets/images/PostCardImages/boydp.jpg"),
     title: "Chethiya Bandara",
     sub: "public",
     status: require("../../assets/images/PostCardImages/Globe.png"),
-    description: "Healthy food comprises nutrient-rich options like fruits, vegetables, whole grains, and lean proteins, fostering overall well-being and reducing disease risk through balanced, mindful choices.",
-    selectedimage: require("../../assets/images/PostCardImages/foodimage.jpeg"),
-  },
-];
+  }
 
 const CreatePost = () => {
   
   const navigation=useNavigation();
-
   const [popupMessage, setPopupMessage] = useState('');
-
-  const showMessage = (message) => {
-    setPopupMessage(message);
+  
+  const handlePostImageButtonPress = () => {
+    setPopupMessage("Post Successful!");
   };
 
   const confirmMessage = () => {
-    navigation.navigate('postContent');
+    navigation.navigate('PostContent');
+  };
+
+  const closeMessage = () => {
+    setPopupMessage('');
   };
 
   return (
@@ -45,16 +44,14 @@ const CreatePost = () => {
       <SafeAreaView style={{ margin: 25 }}>
 
         <ScrollView style={{ height: 500 }}>
-          {newPost.map((post) => (
-            <View key={post.id}>
+          <View>
               <TemporyCard
                 image={post.image}
                 title={post.title}
                 sub={post.sub}
                 status={post.status}
               />
-            </View>
-          ))}
+          </View>
 
           <View style={styles.flex1}>
 
@@ -65,16 +62,14 @@ const CreatePost = () => {
 
           </View>
 
-          <View style={{ marginBottom: 60 }}>
-            <RegularButton name={"post"} onPress= {() => showMessage("Post Successful!")}></RegularButton> 
+          <View style={styles.buttonContainer}>
+            <RegularButton name={"post"} onPress={handlePostImageButtonPress} ></RegularButton> 
+            <PopupMessage message={popupMessage} onConfirm={confirmMessage}  onClose={closeMessage} />
           </View>
-
-          <PopupMessage message={popupMessage} onConfirm={confirmMessage} />
-
         </ScrollView>
 
       </SafeAreaView>
-      
+        
     </View>
   );
 };
@@ -102,6 +97,9 @@ const styles = StyleSheet.create({
   content2: {
     flex: 1,
     flexDirection: "row",
+  },
+  buttonContainer: {
+    marginBottom: 60,
   },
 });
 

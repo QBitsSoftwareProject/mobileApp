@@ -5,10 +5,8 @@ const TransparentButton = () => {
    
     return(
         <View>
-            <TouchableOpacity onPress={() => {
-
-            }}>
-                <View style={styles.btn}>
+            <TouchableOpacity style={styles.btn} onPress={props.onConfirm}>
+                <View >
                 <Text style={styles.btnText}>Save As Draft</Text>
                 </View>
                 

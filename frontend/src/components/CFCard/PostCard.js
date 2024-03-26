@@ -17,6 +17,13 @@ const PostCard = (props) => {
           <View style={{ width: "90%" }}>
             <Text style={styles.sub}>{props.sub}</Text>
           </View>
+        
+        {/* <View>
+          <Image 
+          source={require('../../assets/images/NavigationIcons/Navigation Menu Vertical.png')}
+          style={styles.navMenu}
+          />
+        </View> */}
 
         </View>
 

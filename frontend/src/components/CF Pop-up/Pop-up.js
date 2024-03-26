@@ -1,7 +1,8 @@
 import React from 'react';
 import { View, Text, Modal, StyleSheet, TouchableOpacity,Image} from 'react-native';
 
-const PopupMessage = ({ message, onConfirm }) => {
+const PopupMessage = ({ message, onClose, onConfirm }) => {
+
   return (
     <Modal transparent animationType="slide" visible={!!message}>
       
@@ -13,12 +14,16 @@ const PopupMessage = ({ message, onConfirm }) => {
 
           <View style={{alignItems:'center'}}>
             <Image
-                  source={require('../../assets/images/Confirm.png')}
+                  source={require('../../assets/images/amico.png')}
                   style={{width:180, height:180, marginVertical:20}} />
           </View>
          
           <TouchableOpacity onPress={onConfirm} style={styles.popupButton}>
             <Text style={styles.popupButtonText}>see my post</Text>
+          </TouchableOpacity>
+         
+          <TouchableOpacity onPress={onClose} style={styles.popupButton}>
+            <Text style={styles.popupButtonText}>Cancel</Text>
           </TouchableOpacity>
          
         </View>
@@ -63,7 +68,7 @@ messageText: {
  popupButtonText: {
     color: '#101318',
     fontSize:18,
-    fontWeight: '#400',
+    fontWeight: '400',
     textAlign:'center',
 
   },

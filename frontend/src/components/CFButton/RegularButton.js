@@ -2,17 +2,11 @@ import { View, Text, StyleSheet, TouchableOpacity} from 'react-native'
 import React from 'react'
 
 const TransparentButton = (props) => {
-   
-    return(
-        <View>
-            <TouchableOpacity style={styles.btn} onPress={() => {
-
-            }}>
-              
-                <Text style={styles.btnText}>{props.name}</Text>
-            </TouchableOpacity>
-        </View>
-    )
+    return (
+        <TouchableOpacity style={styles.btn} onPress={props.onPress}>
+            <Text style={styles.btnText}>{props.name}</Text>
+        </TouchableOpacity>
+    );
 }
 
 const styles=StyleSheet.create({
