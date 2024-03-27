@@ -11,7 +11,7 @@ import { useNavigation } from '@react-navigation/native';
 
 
 
-const HelloWorldScreen = ({route}) => {
+const StressLevelHistory = ({route}) => {
   const [historyData, setHistoryData] = useState([]);
   const [userID, setUserId] = useState('');
 
@@ -120,4 +120,4 @@ const HelloWorldScreen = ({route}) => {
   );
 };
 
-export default HelloWorldScreen;
+export default StressLevelHistory;

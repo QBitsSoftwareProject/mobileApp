@@ -1,6 +1,8 @@
 const markService = require("../../services/mark.service");
 const asyncHandler = require('express-async-handler');
 
+//controller to get mark by user id
+
 const getSortedMarkById = asyncHandler(async (req, res) => {
     try {
         const u_id = req.params.userid;

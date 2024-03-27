@@ -14,7 +14,11 @@ const markRouter = require("./api/routes/mark.route.js");
 
 // app.use("/questions",questionRouter);
 //app.use("/options",optionRouter);
+
+//set router to mark router
 app.use("/mark",markRouter);
+
+//set router to question router
 app.use('/question',questionRouter)
 
 app.listen(PORT, ()=>{

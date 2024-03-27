@@ -55,6 +55,7 @@ const Question = () => {
   useEffect(() => {
     const fetchQuestions = async () => {
       try {
+        
         const currentId = ids[currentQuestionIndex]._id;
         setId(currentId);
       } catch (err) {
@@ -151,7 +152,7 @@ const Question = () => {
   
   const navigation = useNavigation();
 
-  const id1 = '214224J';
+  const id1 = '214012H';
 
   const handleSubmitButton = () => {
     if (selectedOption) {

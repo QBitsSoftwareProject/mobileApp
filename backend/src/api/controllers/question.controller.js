@@ -46,6 +46,9 @@ const getAllQuestions = asyncHandler(async (req,res) => {
     }
  
 });
+
+// questions ids
+
 const getAllQuestionIds = asyncHandler(async (req, res) => {
     try {
         const questionIds = await QuestionModel.find({}, '_id');
@@ -61,6 +64,7 @@ const getAllQuestionIds = asyncHandler(async (req, res) => {
     }
 });
 
+//get questions by id
 
 const getQuestionById = asyncHandler(async (req, res) => {
     try {

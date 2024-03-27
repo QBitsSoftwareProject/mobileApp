@@ -1,6 +1,6 @@
 const markModel = require("../models/mark.model");
 
-
+// service for store mark
 const storeMark =  (userid, mark, date, time) => {
     try {
         if (!mark || !date || !time || !userid) {
@@ -21,6 +21,8 @@ const storeMark =  (userid, mark, date, time) => {
     }
 };
 
+// service for get mark by id
+
 const getMarkById =  (userid) => {
     try {
         const mark =  markModel.find({userid: userid});
@@ -30,6 +32,8 @@ const getMarkById =  (userid) => {
         throw new Error('Internal Server Error');
     }
 };
+
+//service for get sorted and grouped data
 
 const getMarkData = async (marks) => {
     try {

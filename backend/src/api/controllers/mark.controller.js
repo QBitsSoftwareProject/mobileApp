@@ -2,6 +2,8 @@
 const markService = require("../services/mark.service");
 const asyncHandler = require('express-async-handler');
 
+// controller to store stress level
+
 const storeMark = asyncHandler(async (req, res) => {
     try {
         const { userid, mark, date, time } = req.body;
@@ -25,6 +27,7 @@ const storeMark = asyncHandler(async (req, res) => {
     }
 });
 
+// controller to get mark by user
 const getMarkById = asyncHandler(async (req, res) => {
     try {
         const u_id = req.params.userid;
