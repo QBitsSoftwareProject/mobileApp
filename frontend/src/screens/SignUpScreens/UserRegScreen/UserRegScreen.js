@@ -4,6 +4,7 @@ import styles from './styles'
 import { useNavigation } from '@react-navigation/native'
 import InputField from '../../../components/InputField/InputField'
 import { CheckBox } from 'react-native-elements';
+import { userRegistration } from '../../../services/userServices/userService'
 
 
 const UserRegScreen = () => {
@@ -12,6 +13,7 @@ const UserRegScreen = () => {
   const [name, setName] = useState('');
   const [userName, setUserName] = useState('');
   const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [contactNo, setContactNo] = useState('');
   const [address, setAddress] = useState('');
   const [city, setCity] = useState('');
@@ -35,21 +37,28 @@ const UserRegScreen = () => {
     navigation.navigate('WelcomeScreen')
   }
 
+
+  //regular exprestion check for email
   const validateEmail = (email) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
   };
 
+  //regular exprestion check for phone number
   const validatePhoneNumber = (phoneNumber) => {
     const phoneRegex = /^\+\d{11}$/;
     return phoneRegex.test(phoneNumber);
   };
 
+
   const handleSubmit = ()=>{
+
+    //form validation
     if(
       name.trim() === '' ||
       userName.trim() === '' ||
       email.trim() === '' ||
+      password.trim() === '' ||
       contactNo.trim() === '' ||
       address.trim() === '' ||
       city.trim() === '' ||
@@ -71,8 +80,22 @@ const UserRegScreen = () => {
       setIsEmpty(false)
     }
     else{
+      sendUser();
       setIsEmpty(false)
-      navigation.navigate('TabBar')
+    }
+  }
+
+  const sendUser = async ()=>{
+    try {
+      const userData = await userRegistration(name, userName, email, password, contactNo, address, city, country)
+
+      if(userData!=null){
+        navigation.navigate("LoginScreen")
+      }
+      
+      
+    } catch (error) {
+      console.log(error)
     }
   }
 
@@ -92,6 +115,7 @@ const UserRegScreen = () => {
                 <InputField placeHolder={'B.M. Weerasinghe'} label={'Full name / Name with initial :'} onChangeText={setName}/>
                 <InputField placeHolder={'Bimsara Madusha'} label={'User name :'} onChangeText={setUserName}/>         
                 <InputField placeHolder={'ex@gmail.com'} label={'Email :'} onChangeText={setEmail} errMsg={!isEmailValid ? 'Email is not valid!':''}/>
+                <InputField placeHolder={'Enter a new password'} label={'Password :'} onChangeText={setPassword}/> 
  
                 <InputField placeHolder={'+9412345678'} label={'Contact No :'} onChangeText={setContactNo} errMsg={!isPhoneNumValid ? 'Phone number is not valid!':''}/>
                 <InputField placeHolder={'67/1, welona place, kaubedda'} label={'Address :'} onChangeText={setAddress}/>

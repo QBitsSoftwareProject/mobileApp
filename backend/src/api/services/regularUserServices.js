@@ -3,6 +3,7 @@ const bycrypt = require("bcryptjs")
 
 exports.createRegularUser = async ({ fullName, userName, email, password, contactNumber, address, city, country}) => {
 
+  try {
     const encryptedPwd = await bycrypt.hash(password, 10)
 
     const newUser = await regularUser.create({
@@ -18,10 +19,9 @@ exports.createRegularUser = async ({ fullName, userName, email, password, contac
       })
 
     return newUser;
-}
+  } catch (error) {
+    return error;
+  }
 
-exports.updateRegularUser = ({ fullName, userName, email, contactNumber, address, city, country}) => {
-
-    return { fullName, userName, email, contactNumber, address, city, country};
-
+    
 }

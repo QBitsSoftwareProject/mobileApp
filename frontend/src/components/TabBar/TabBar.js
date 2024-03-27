@@ -8,11 +8,12 @@ import TabBarIcon from './TabBarIcon';
 
 const Tab = createBottomTabNavigator();
 
-const TabBar = () => {
+const TabBar = ({route}) => {
+  const { userName } = route.params;
 
   return (
     <Tab.Navigator
-        screenOptions={{
+      screenOptions={{
         tabBarShowLabel: false,
         tabBarStyle: {
           position: 'absolute',
@@ -20,16 +21,23 @@ const TabBar = () => {
           borderTopLeftRadius: 40,
           borderTopRightRadius: 40,
         },
-        headerShown:false
+        headerShown: false
       }}
     >
-      <Tab.Screen name='home' component={HomeStack} options={{tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} screenName={'home'}/>}}/>
+      <Tab.Screen
+        name='home'
+        component={HomeStack}
+        initialParams={{ userName: userName }}
+        options={{
+          tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} screenName={'home'} />,
+          
+        }} />
 
-      <Tab.Screen name='profile' component={ProfileScreen} options={{tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} screenName={'user'}/>}}/>
+      <Tab.Screen name='profile' component={ProfileScreen} options={{ tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} screenName={'user'} /> }} />
 
-      <Tab.Screen name='Notification' component={NotifyScreen} options={{tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} screenName={'notification'}/>}}/>
+      <Tab.Screen name='Notification' component={NotifyScreen} options={{ tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} screenName={'notification'} /> }} />
 
-      <Tab.Screen name='setting' component={SettingScreen} options={{tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} screenName={'setting'}/>}}/>
+      <Tab.Screen name='setting' component={SettingScreen} options={{ tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} screenName={'setting'} /> }} />
 
     </Tab.Navigator>
   );

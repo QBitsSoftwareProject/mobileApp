@@ -3,13 +3,14 @@ import HomeScreen from '../../screens/HomeScreen/HomeScreen'
 
 const stack = createNativeStackNavigator();
 
-const HomeStack = () => {
+const HomeStack = ({route}) => {
+  const { userName } = route.params;
 
   return (
 
     <stack.Navigator screenOptions={{ headerStyle: { flex:1,backgroundColor: 'transparent' }, headerShown:false }}>
       
-      <stack.Screen name='HomeScreen' component={HomeScreen} />
+      <stack.Screen name='HomeScreen' component={HomeScreen}  initialParams={{ userName: userName }}/>
     
       
     </stack.Navigator>

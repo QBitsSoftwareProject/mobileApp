@@ -9,7 +9,7 @@ exports.createRegularUser= async (req, res)=>{
         
         return res.status(201).json({ message: 'User created successfully' });
 
-    }catch (err) {
+    }catch (err) { 
         if (err.name === 'ValidationError') {
           const validationErrors = err.message; 
           return res.status(400).json({ error: 'User creation failed', details: validationErrors });

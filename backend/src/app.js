@@ -11,9 +11,14 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 
+
+//endpoints
 app.use('/api/v1/user', regularUserRoute)
+
 
 app.listen(PORT, ()=>{
     console.log(`server is running on port ${PORT}`)
+
+    //database connection
     connect()
 })

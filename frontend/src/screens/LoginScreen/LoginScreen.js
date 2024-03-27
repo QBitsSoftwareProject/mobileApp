@@ -24,7 +24,7 @@ const LoginScreen = () => {
             
             if (userData) {
                 setIsValid(true)
-                navigation.navigate('TabBar');
+                navigation.navigate('TabBar', { userName: userData.user.userName});
             }
 
         }catch(err){
@@ -34,7 +34,7 @@ const LoginScreen = () => {
         
     }
     const handleSignUp = ()=>{
-        navigation.navigate('SelectionScreen')
+        navigation.navigate('SelectionScreen',)
     }
 
     // keyboard handling -----------------------------------------------------------------------------

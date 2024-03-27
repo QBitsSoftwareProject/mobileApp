@@ -7,11 +7,14 @@ const { loginUser } = require('../controllers/regularUserControllers/loginContro
 
 const router = express.Router();
 
+//user operations routes
 router.get('/', getRegularUsers)
 router.get('/:id', getARegularUser)
 router.put('/:id', updateRegularUser);
 router.delete('/:id', deleteRegularUser);
 
+
+//register and login routes
 router.post('/login', loginUser)
 router.post('/register', createRegularUser);
 

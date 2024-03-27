@@ -7,7 +7,7 @@ exports.updateRegularUser= async (req, res)=>{
         const { fullName, userName, email, contactNumber, address, city, country} = req.body;
         const { id } = req.params;
 
-        const updateUser = updateRegularUser({ fullName, userName, email, contactNumber, address, city, country});
+        const updateUser = { fullName, userName, email, contactNumber, address, city, country};
 
         await regularUser.findByIdAndUpdate(id, updateUser);
 

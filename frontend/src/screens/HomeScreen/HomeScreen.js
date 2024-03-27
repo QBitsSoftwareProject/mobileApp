@@ -6,6 +6,7 @@ import HomeCard from '../../components/HomeCard/HomeCard'
 import { LinearGradient } from 'expo-linear-gradient';
 import Swiper from 'react-native-swiper';
 import { useNavigation } from '@react-navigation/native'
+import { getUser } from '../../services/userServices/userService'
 
 
 const proPic = require('../../assets/images/doc.jpg')
@@ -26,15 +27,17 @@ const images =[
  
 ]
 
-const name = "Thishakya"
+// const name = "Thishakya"
 
-const HomeScreen = () => {
+const HomeScreen = ({route}) => {
   const navigation = useNavigation()
+  const { userName } = route.params;
 
   const winWidth = Dimensions.get('window').width-60
 
   useEffect(() => {
 
+    //back navigation
     const backHandler = BackHandler.addEventListener('hardwareBackPress', () => {
       if (navigation.isFocused()) {
         return true;
@@ -46,10 +49,12 @@ const HomeScreen = () => {
     };
   }, []);
 
+
+
   return (
     <View style={{flex:1, paddingBottom:80}}>
       <View>
-        <HomeTop headLine={'Hi,'+ name} subHeadLine={'"Your journey to wellness begins with a single step. Take it today."'} proPic={proPic}/>
+        <HomeTop headLine={'Hi,'+ userName} subHeadLine={'"Your journey to wellness begins with a single step. Take it today."'} proPic={proPic}/>
       </View>
 
       
