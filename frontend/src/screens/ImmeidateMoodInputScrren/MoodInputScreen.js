@@ -11,7 +11,7 @@ const MoodInputScreen = () => {
   const [screenHeight, setScreenHeight] = useState('');
 
   const handleOptions = (value) => {
-        console.log(value);
+        // console.log(value);
         setOptionValue(value);
   }
   useEffect(() => {
@@ -21,7 +21,7 @@ const MoodInputScreen = () => {
   setScreenHeight(windowHeight);
 
   console.log(optionValue);
-  console.log(windowHeight);
+  // console.log(windowHeight);
   })
 
   return (
