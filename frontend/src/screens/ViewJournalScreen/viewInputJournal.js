@@ -11,25 +11,24 @@ import axios from "axios";
 
 export const SwipableList = (props) => {
 
-  const [journalDisplay , setJournalDisplay] = useState([]);
+  const [journalDisplay , setJournalDisplay] = useState([]);  //set jouranal state
 
   const stack = createStackNavigator();
 
   const handleEditPress = (itemID,itemTittle, itemText, itemEmoji) => {
+    
     props.editFunction(itemID,itemTittle, itemText, itemEmoji);
     // navigation.navigate('EditJournal', { itemID, itemText });
   };
 
-  const [showButton, setShowButton] = useState(false);
+  const [showButton, setShowButton] = useState(false); // set state show edit delete button
   
-
-  
-
   const handleSwipe = () => {
     setShowButton(true);
   };
 
-  //get journal data to display
+  //get journal data to displayby userid
+  
   useEffect(() => {
   const getJournals = async () => {
     try {
@@ -44,7 +43,7 @@ export const SwipableList = (props) => {
   getJournals();
 }, [journalDisplay]);
 
-// console.log("Updated journalDisplay:", journalDisplay);
+
 
 
     const renderJournalItem = ({ item,index }) => {
@@ -138,13 +137,6 @@ export const SwipableList = (props) => {
 
 );
 };
-
-
-
-
-
-
-
 
 
 const styles = StyleSheet.create({

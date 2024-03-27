@@ -3,6 +3,7 @@ const journalModel = require('../models/createJournal');
 
 const asyncHandler = require('express-async-handler');
 
+// addNewJournal contoller
 const storeJournal = asyncHandler(async (req,res) =>{
     try{
         const {userid, emoji, tittle, journalEntry, imgUrl, time, date} = req.body;
@@ -24,15 +25,13 @@ const storeJournal = asyncHandler(async (req,res) =>{
             journal: newJournal
         });
 
-     
-
-    }   catch(error){
+}   catch(error){
         console.error(error.message);
         res.status(400).json({ error: error.message});
     }
 });
 
-
+// update journal by id
 const updateJournal = asyncHandler(async(req,res) => {
     
     const id = req.params.id
@@ -55,6 +54,7 @@ const updateJournal = asyncHandler(async(req,res) => {
     }
 });
 
+// get all journals by id
 const getJournalByUserId = asyncHandler(async (req, res) => {
     try {
         const userId = req.params.id;
@@ -73,6 +73,7 @@ const getJournalByUserId = asyncHandler(async (req, res) => {
     }
 });
 
+//get journal by object id
 const getJournalByObjectId = asyncHandler(async (req, res) => {
     try {
         const id = req.params.id;
@@ -91,6 +92,7 @@ const getJournalByObjectId = asyncHandler(async (req, res) => {
     }
 });
 
+// delete journal
 const deleteJournal = asyncHandler(async (req, res) =>{
     try{
         const deleteJournal = await journalModel.findByIdAndDelete(req.params.id);

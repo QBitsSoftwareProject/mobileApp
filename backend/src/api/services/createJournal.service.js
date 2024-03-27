@@ -1,5 +1,6 @@
 const createJournal = require("../models/createJournal")
 
+// addnew Journal service
 const storeJournal = (userid, emoji, tittle, journalEntry, imgUrl, time, date) => {
     try{
         if(!userid || !emoji || !tittle || !journalEntry || !time || !date) {
@@ -24,6 +25,7 @@ const storeJournal = (userid, emoji, tittle, journalEntry, imgUrl, time, date) =
 }
 };
 
+// filter journals by userId
 const getJournalByUserId =  (userId) => {
     try {
         const journal =  createJournal.find({userId: userId});
@@ -34,6 +36,8 @@ const getJournalByUserId =  (userId) => {
     }
 };
 
+
+// delete journal
 const deleteJournal = async (id) =>{
     try{
         const deleteJournalById = await createJournal.findById(id);

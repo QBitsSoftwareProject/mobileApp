@@ -3,26 +3,36 @@ import { View, TextInput, TouchableOpacity, Text, StyleSheet, ScrollView} from '
 import PropTypes from 'prop-types';
 import { useRoute } from '@react-navigation/native';
 
-export const EmojiPicker = ({onEmojiPress,imoji}) =>{
+export const EmojiPicker = ({onEmojiPress,imoji}) =>{   //onEmojiPress is called when emoji pressed, emoji is hold currently selected mood
 
-  // console.log(imoji)
+ 
   const route = useRoute();
   const { itemEmoji } = route.params;
     
-    const [userInput, setUserInput] = useState(itemEmoji);
-    const [selectedEmoji, setSelectedEmoji] = useState(imoji|| '');
+  const [userInput, setUserInput] = useState(itemEmoji);
+  const [selectedEmoji, setSelectedEmoji] = useState(imoji|| '');
 
-    // console.log(selectedEmoji);
 
-    useEffect(() => {
+  // useEffect to update selectedEmoji when emoji changes
+  useEffect(() => {
       setSelectedEmoji(imoji || '');
-    }, [imoji]);
+  }, [imoji]);
 
-    const handleEmojiPress = (emoji, mark) => {
-      const selectedEmoji = emojiData.find(item => item.emoji === emoji);  
-      
+  
+  // handleEmojiPress function
+  const handleEmojiPress = (emoji, mark) => {
+    
+    
+  // find the selected emoji in the emojiData array
+  const selectedEmoji = emojiData.find(item => item.emoji === emoji);  
+    
+    
+  // update userinput and selected emoji
         setUserInput((prevInput) => prevInput + `${emoji}(${mark})`);
         setSelectedEmoji(emoji);
+     
+  
+  // Call the onEmojiPress callback with the selected emoji data
         onEmojiPress({ emoji, mark , category: selectedEmoji? selectedEmoji.category:''});
 
         console.log(selectedEmoji? selectedEmoji.category: '')

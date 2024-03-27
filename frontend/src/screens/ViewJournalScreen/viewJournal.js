@@ -13,13 +13,10 @@ import { createStackNavigator } from '@react-navigation/stack';
 
 
 
-
-
 export const ViewJournal = ({navigation}) =>{
 
     const stack = createStackNavigator();
     
-
     const handleButton = () =>{
     navigation.navigate('JournalStatistics',{
 
@@ -33,6 +30,7 @@ export const ViewJournal = ({navigation}) =>{
     }
 
     const handleEditButton = (itemID,itemTittle,itemText,itemEmoji) =>{
+      // navigate edit jouranal
       navigation.navigate('EditJournal',{
         itemID,
         itemTittle,
@@ -44,30 +42,25 @@ export const ViewJournal = ({navigation}) =>{
       });
     };
 
-   
-
-
-
     return(
-        <View>
-            <HeaderSub
+      <View>
+      
+      <HeaderSub
       headLine={"My Journals"}
       subHeadLine={"View your past journals"}
     />
 
        
-        <SafeAreaView style={styles.container}>
-    
-
+      <SafeAreaView style={styles.container}>
       
-        <CustomButtonView btnAnalysis={handleButton}></CustomButtonView>
+      <CustomButtonView btnAnalysis={handleButton}></CustomButtonView>
 
-        <View>
+      <View>
+            
             <Calendar></Calendar>
 
-            
-          
             {/* <SwipableList editFunction={(itemID, itemText) => handleEditButton(itemID, itemText)}></SwipableList> */}
+            
             <SwipableList editFunction={handleEditButton} style={{ marginTop: 24.5, backgroundColor: 'yellow' } }  />
 
         </View>
@@ -77,7 +70,7 @@ export const ViewJournal = ({navigation}) =>{
 
 <FloatingButton btnCreate = {handleFlotingPointButton}></FloatingButton>
 
-<View style={{ top:65, left: 0, right: 0 }}>
+<View style={{ top:27, left: 0, right: 0 }}>
         <TabBar/>
       </View>
 

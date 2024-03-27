@@ -11,12 +11,12 @@ import TabBar from "../../components/TabBar/TabBar";
 import HeaderSub from "../../components/HeaderSub/HeaderSub";
 import axios from 'axios';
 
-
+//AddNewJournal function
 export const AddNewJournal = ({navigation}) =>{
 
-const [isOverlayVisible, setOverlayVisible] = useState(false);                                  
-const [selectedEmojiMarks, setSelectedEmojiMarks] = useState('');
-const [tittle, setTittle] = useState('');
+const [isOverlayVisible, setOverlayVisible] = useState(false);   //set state to visible popup                               
+const [selectedEmojiMarks, setSelectedEmojiMarks] = useState(''); //set marks in selected emoji
+const [tittle, setTittle] = useState(''); 
 const [journalEntry, setJournalEntry] = useState('');
 const [emoji, setEmoji] = useState('');
 const [date,setdate] = useState('');
@@ -25,23 +25,27 @@ const [time,settime ]= useState('');
 const userid = '214102J';
 const imgUrl = 'This is image url';
 
-      const toggleOverlay = () => {
-        setOverlayVisible(!isOverlayVisible);
-       };
+// popup visible function    
+const toggleOverlay = () => {
 
-      const handleViewButton = () =>{
+      setOverlayVisible(!isOverlayVisible);
+};
+
+// navigate to viewJournal
+const handleViewButton = () =>{
+      
       navigation.navigate('ViewJournal',{ 
 
     }); 
 }
-
+// handle the emoji press
 const handleEmojiPress = ({ emoji, mark }) => {
       setSelectedEmojiMarks((prevMarks) => prevMarks + `${emoji}(${mark})`);
       setEmoji(mark);
 };
 
-
-  const handleCreateButton = async() =>{
+// handle createbutton
+const handleCreateButton = async() =>{
 
       if(!emoji){
            alert('Emoji is required');
@@ -60,7 +64,7 @@ const handleEmojiPress = ({ emoji, mark }) => {
             settime(formattedTime);
 
             try{
-                  const journalResponse = await axios.post('http://192.168.43.51:3000/journal/add-journal',{
+                  const journalResponse = await axios.post('http://192.168.43.51:3000/journal/add-journal',{  // add new jouranl
 
                   userid,
                   emoji,
@@ -68,7 +72,7 @@ const handleEmojiPress = ({ emoji, mark }) => {
                   journalEntry,
                   imgUrl,
                   time: formattedTime, // Use the formatted time here
-                  date: formattedDate
+                  date: formattedDate  // use the formatted  date here
                         
                   });
 
@@ -95,8 +99,7 @@ const handleEmojiPress = ({ emoji, mark }) => {
 
 
   
-
-    return(
+return(
       <View>
 <HeaderSub
 
@@ -132,7 +135,8 @@ const handleEmojiPress = ({ emoji, mark }) => {
       <TouchableOpacity style={styles.create} onPress={handleCreateButton}>
       <Text style={styles.createText}>Create Journal</Text>
       </TouchableOpacity>
-      <Overlay isVisible={isOverlayVisible} onClose={toggleOverlay} propbtnfunction={handleViewButton} />
+      
+      <Overlay isVisible={isOverlayVisible} onClose={toggleOverlay} propbtnfunction={handleViewButton} /> 
     </View>
 
    
@@ -141,7 +145,7 @@ const handleEmojiPress = ({ emoji, mark }) => {
 
       </ScrollView>
 
-<View style={{  top:65, left: 0, right: 0 }}>
+<View style={{  top:5, left: 0, right: 0 }}>
 <TabBar />
 </View>
 

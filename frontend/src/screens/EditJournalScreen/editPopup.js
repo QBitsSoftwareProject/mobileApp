@@ -2,30 +2,29 @@
 import { View, Text, Modal, StyleSheet, TouchableOpacity,Image } from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
 
-
+// overlay fution to visible popup
 export const Overlay = ({ isVisible, onClose, ...props }) => {
 
-    
-
-    
-  return (
+return (
     <Modal
       transparent={true}
       animationType="slide"
-      visible={isVisible}
+      visible={isVisible}  //this based on isvisible prop
       onRequestClose={onClose}
     >
-      <View style={styles.overlay}>
+    <View style={styles.overlay}>
+        
         <View style={styles.overlayContent}>
+        
         <TouchableOpacity onPress={onClose}>
 
         <Image source={require("../../assets/images/journal/closeimg.png")} style = {styles.closeimg} ></Image></TouchableOpacity>
 
-          <Text style={styles.topic}>Journal Successfully Edited!</Text>
+        <Text style={styles.topic}>Journal Successfully Edited!</Text>
 
-          <View style = {styles.overlayimg}>
+        <View style = {styles.overlayimg}>
         
-           <Image source={require("../../assets/images/journal/addpic.png")}></Image>
+        <Image source={require("../../assets/images/journal/addpic.png")}></Image>
 
            <TouchableOpacity style={styles.create} onPress={props.propbtnfunction}>
            <Text style={styles.createText}>See my journal</Text>
@@ -35,7 +34,7 @@ export const Overlay = ({ isVisible, onClose, ...props }) => {
 </View>
           
           
-        </View>
+</View>
       </View>
     </Modal>
   );

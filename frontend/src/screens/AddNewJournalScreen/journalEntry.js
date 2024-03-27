@@ -2,46 +2,41 @@ import React, { useState,useEffect } from 'react';
 import { useRoute } from '@react-navigation/native';
 import { View, TextInput, Text,StyleSheet, TouchableOpacity, Image } from 'react-native';
 
-export const JournalEntry = ({newText,value}) => {
+export const JournalEntry = ({newText,value}) => {  //value is current entry and newText is after changing the entry
 
-  const route = useRoute();
-  const { itemID, itemText } = route.params;
+const route = useRoute();
+const { itemID, itemText } = route.params;
 
   // console.log(itemID);
   // console.log(itemText);
 
+const [inputJournal, setInputJournal] = useState(value || '');
 
-
-    const [inputJournal, setInputJournal] = useState(value || '');
-
-    
-
-    useEffect(() => {
+useEffect(() => {
      
-        setInputJournal(value || '');
+  setInputJournal(value || '');
 
-  
-    }, [value]);
+}, [value]);
 
     // console.log(inputJournal);
     // console.log(value);
 
-    const handleInputChange = (text) => {
+const handleInputChange = (text) => {
       setInputJournal(text); // Update local state
       newText(text);  // Call the parent's onChangeText callback
     };
 
   
-
-    const handleButtonPress = () => {
+const handleButtonPress = () => {
         // Handle button press logic here
         console.log('Button pressed!');
       };
 
-    return(
+return(
 
         <View style={styles.container}>
-            <View style ={styles.inputContainer}>
+        <View style ={styles.inputContainer}>
+        
         <TextInput
           style={styles.input}
           
@@ -54,7 +49,8 @@ export const JournalEntry = ({newText,value}) => {
           onChangeText={handleInputChange}
 
          />
-          <TouchableOpacity style={styles.button} onPress={handleButtonPress}>
+        
+        <TouchableOpacity style={styles.button} onPress={handleButtonPress}>
             <Image source ={require('../../assets/images/journal/camera.png')}/>
           
         </TouchableOpacity>

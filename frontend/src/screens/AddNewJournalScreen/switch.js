@@ -5,7 +5,11 @@ export const CustomButton = (props) =>{
    
     
     return(
+
+
         <View style={styles.mainButton}>
+
+            {/*move to create journal page */}
             
             <View style={styles.createButton}>
             <TouchableOpacity onPress={props.createButton}
@@ -18,7 +22,7 @@ export const CustomButton = (props) =>{
 
             
             
-            
+            {/*move to view journal page */}
             <View style={styles.veiwButton}>
             <TouchableOpacity onPress={props.btnView}
 

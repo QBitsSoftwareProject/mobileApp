@@ -2,17 +2,14 @@
 import { View, Text, Modal, StyleSheet, TouchableOpacity,Image } from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
 
-
+// overlay fution to visible popup
 export const Overlay = ({ isVisible, onClose, ...props }) => {
 
-    
-
-    
-  return (
+return (
     <Modal
       transparent={true}
       animationType="slide"
-      visible={isVisible}
+      visible={isVisible}  //this based on isvisible prop
       onRequestClose={onClose}
     >
       <View style={styles.overlay}>

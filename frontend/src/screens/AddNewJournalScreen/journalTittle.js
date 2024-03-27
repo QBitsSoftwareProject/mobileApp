@@ -3,39 +3,34 @@ import { useRoute } from '@react-navigation/native';
 import { View, TextInput, StyleSheet ,Image,TouchableOpacity} from 'react-native';
 
 
-export const JournalTittle = ({newText,value}) => {
+export const JournalTittle = ({newText,value}) => {   //value is current tittle, newText is after changing the tittle
 
-
-  const route = useRoute();
-  const { itemID,itemTittle, itemText } = route.params;
-
-  const [inputTittle, setInputTittle] = useState(value || '');
+const route = useRoute();
+const { itemID,itemTittle, itemText } = route.params;
+const [inputTittle, setInputTittle] = useState(value || '');
 
   
-
-  
-
-  useEffect(() => {
+useEffect(() => {
      
     setInputTittle(value || '');
 
-
 }, [value]);
-
 
   // console.log(itemID);
   // console.log(itemTittle);
   // console.log(itemText);
 
-  const handleInputChange = (text) => {
+const handleInputChange = (text) => {
     setInputTittle(text); // Update local state
     newText(text);  // Call the parent's onChangeText callback
-  };
+};
   
 
-    return(
-        <View style={styles.container}>
-        <TextInput
+return(
+        
+  <View style={styles.container}>
+    
+    <TextInput
           style={styles.input}
           placeholder="Feeling happy today... "
           multiline={true}
@@ -49,9 +44,6 @@ export const JournalTittle = ({newText,value}) => {
           
         </View>
 
-        
-        
-        
       </View>
       
     );
@@ -63,8 +55,6 @@ export const JournalTittle = ({newText,value}) => {
       color:'white',
       marginBottom:32,
       // marginTop:15,
-      
-
       
     },
     input: {

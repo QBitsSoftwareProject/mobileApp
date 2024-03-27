@@ -14,9 +14,6 @@ import axios from "axios";
 
 
 
-
-
-
 export const EditJournal = ({navigation, route,}) =>{
   const stack = createStackNavigator();
   const {itemID, itemTittle, itemText}=route.params;
@@ -25,14 +22,15 @@ export const EditJournal = ({navigation, route,}) =>{
   const [selectedEmojiMarks, setSelectedEmojiMarks] = useState('');
   const [emoji, setEmoji] = useState('');
   const [date,setdate] = useState('');
-const [time,settime ]= useState('');
+  const [time,settime ]= useState('');
 
   const userid = '214102J'
   const imgUrl = 'This is image url';
 
-//   const JournalData = getJournal(itemID);
-const handleEditButton = async() =>{
 
+const handleEditButton = async() =>{
+      
+  // update the journal
       if(!emoji){
            alert('Emoji is required');
       }
@@ -84,8 +82,7 @@ const handleEditButton = async() =>{
       toggleOverlay();
 
   }
-
-
+  // get the selected journal
   useEffect(() => {
       const getJournal = async () => {
         try {
@@ -110,12 +107,6 @@ const handleEditButton = async() =>{
       getJournal();
     }, [journalData]);
 
-//   console.log(journalData);
-
-
-    
-//     console.log(itemID);
-
 
 
 const [tittle,setTittle] = useState('');
@@ -135,23 +126,15 @@ useEffect(() => {
       
     }, [journalData]);
 
-//    console.log(newentry);
 
 
-// console.log(newtitle);
-
-
-    const handleEmojiPress = ({ emoji, mark }) => {
-      setSelectedEmojiMarks((prevMarks) => prevMarks + `${emoji}(${mark})`);
-      setEmoji(mark);
+const handleEmojiPress = ({ emoji, mark }) => {
+      
+  setSelectedEmojiMarks((prevMarks) => prevMarks + `${emoji}(${mark})`);
+  setEmoji(mark);
       
 
 };
-
-// console.log(emoji)
-    
-
-
 
 const [isOverlayVisible, setOverlayVisible] = useState(false);
 
@@ -159,15 +142,12 @@ const [isOverlayVisible, setOverlayVisible] = useState(false);
         setOverlayVisible(!isOverlayVisible);
        };
 
-   
-
       const handleViewButton = () =>{
       navigation.navigate('ViewJournal'); 
 
 }
   
-
-    return(
+return(
       <View>
 <HeaderSub
       headLine={"Edit Journal"}
@@ -177,14 +157,9 @@ const [isOverlayVisible, setOverlayVisible] = useState(false);
 
 <CustomButton btnView={handleViewButton}></CustomButton>
 
-
-        <ScrollView height = {500}>
+<ScrollView height = {500}>
    
-       <SafeAreaView style={styles.container}>
-
-        
-
-
+<SafeAreaView style={styles.container}>
 
         <Text style={styles.Text}>Feeling with...</Text>
 
@@ -200,17 +175,10 @@ const [isOverlayVisible, setOverlayVisible] = useState(false);
 
         <JournalEntry value = {journalEntry}  newText = {setNewEntry}/>
 
-        {/* <Text>{itemID}</Text>
-        <Text>{itemText}</Text> */}
-        
 
-        
-
-        {/* <TouchableOpacity style = {styles.create} onPress={toggleOverlay}>
-        <Text style={styles.createText}>Create Journal</Text>
-        </TouchableOpacity> */}
 
 <View>
+      
       <TouchableOpacity style={styles.create} onPress={handleEditButton}>
       <Text style={styles.createText}>Edit Journal</Text>
       </TouchableOpacity>
@@ -218,21 +186,15 @@ const [isOverlayVisible, setOverlayVisible] = useState(false);
       <Overlay isVisible={isOverlayVisible} onClose={toggleOverlay} propbtnfunction={handleViewButton} />
     </View>
 
-   
+     </SafeAreaView>
+     </ScrollView>
 
-      </SafeAreaView>
-
-      </ScrollView>
-
-<View style={{ top:65, left: 0, right: 0 }}>
+<View style={{ top:10, left: 0, right: 0 }}>
 <TabBar/>
 </View>
 
 </View>
 
     );
-
-
-
 };
 

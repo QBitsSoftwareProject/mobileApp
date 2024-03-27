@@ -16,7 +16,7 @@ export const EditDeletebutton = (props) =>{
         console.log('Item Tittle:', props.itemTittle);
         console.log('Item Text:', props.itemText);
         
-        // Call the editFunction if needed
+        // Call the editFunction if needed, navigate to Edit page
         props.editFunction(props.item,props.itemTittle, props.itemText);
       };
 
@@ -27,20 +27,14 @@ export const EditDeletebutton = (props) =>{
         
     }
 
-   
-
-
-
-   
-   
-  return(
+return(
         <View style={styles.mainButton}>
             
         {/* EditeButton */}
         <View style={styles.editButton}>
 
         <TouchableOpacity 
-        // onPress={() => props.editFunction(props.itemID)}
+        
         onPress={handleEditPress}
   
         style={[styles.editButton,{ backgroundColor: '#D9D9D9;' }]}>
