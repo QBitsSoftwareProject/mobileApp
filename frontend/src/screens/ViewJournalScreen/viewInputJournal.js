@@ -13,12 +13,15 @@ export const SwipableList = (props) => {
 
   const [journalDisplay , setJournalDisplay] = useState([]);  //set jouranal state
 
-  const stack = createStackNavigator();
+  
 
   const handleEditPress = (itemID,itemTittle, itemText, itemEmoji) => {
     
+    //get props from editDelete button (handleEditPress)
     props.editFunction(itemID,itemTittle, itemText, itemEmoji);
-    // navigation.navigate('EditJournal', { itemID, itemText });
+
+    
+   
   };
 
   const [showButton, setShowButton] = useState(false); // set state show edit delete button
@@ -27,7 +30,7 @@ export const SwipableList = (props) => {
     setShowButton(true);
   };
 
-  //get journal data to displayby userid
+  //get journal data to displayby userid in here display all jouranls according to that person
   
   useEffect(() => {
   const getJournals = async () => {
@@ -107,7 +110,8 @@ export const SwipableList = (props) => {
       
       
       <View style={styles.buttonContainer}>
-        <EditDeletebutton 
+        
+        <EditDeletebutton //edit and delete button , call the handleEditPress in editFunction
         item = {item._id}
         itemText={item.text}
         itemTittle={item.tittle}
@@ -121,7 +125,7 @@ export const SwipableList = (props) => {
 
   return (
     
-    <SwipeListView style={{height:342,}}
+    <SwipeListView style={{height:340}}
 
     data={journalDisplay}
     keyExtractor={(item) => item._id}

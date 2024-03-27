@@ -48,7 +48,7 @@ const handleEditButton = async() =>{
             settime(formattedTime);
 
             try{
-                  const journalID = itemID;
+                  const journalID = itemID;  //params
                   const journalResponse = await axios.post(`http://192.168.43.51:3000/journal/update-journal/${journalID}`,{
 
                   userid,
@@ -82,7 +82,7 @@ const handleEditButton = async() =>{
       toggleOverlay();
 
   }
-  // get the selected journal
+  // get the selected journal, we use this inside the use effect because of we want to render the data
   useEffect(() => {
       const getJournal = async () => {
         try {

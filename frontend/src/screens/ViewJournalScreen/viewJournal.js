@@ -30,7 +30,7 @@ export const ViewJournal = ({navigation}) =>{
     }
 
     const handleEditButton = (itemID,itemTittle,itemText,itemEmoji) =>{
-      // navigate edit jouranal
+      // navigate edit jouranal, get props from editFuntion 
       navigation.navigate('EditJournal',{
         itemID,
         itemTittle,
@@ -59,7 +59,7 @@ export const ViewJournal = ({navigation}) =>{
             
             <Calendar></Calendar>
 
-            {/* <SwipableList editFunction={(itemID, itemText) => handleEditButton(itemID, itemText)}></SwipableList> */}
+        
             
             <SwipableList editFunction={handleEditButton} style={{ marginTop: 24.5, backgroundColor: 'yellow' } }  />
 
@@ -70,7 +70,7 @@ export const ViewJournal = ({navigation}) =>{
 
 <FloatingButton btnCreate = {handleFlotingPointButton}></FloatingButton>
 
-<View style={{ top:27, left: 0, right: 0 }}>
+<View style={{ top:25, left: 0, right: 0 }}>
         <TabBar/>
       </View>
 

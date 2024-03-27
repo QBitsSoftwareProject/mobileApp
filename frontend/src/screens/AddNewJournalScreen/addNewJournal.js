@@ -45,7 +45,7 @@ const handleEmojiPress = ({ emoji, mark }) => {
 };
 
 // handle createbutton
-const handleCreateButton = async() =>{
+const handleCreateButton = async() =>{  // synchronize funtion
 
       if(!emoji){
            alert('Emoji is required');
@@ -64,7 +64,7 @@ const handleCreateButton = async() =>{
             settime(formattedTime);
 
             try{
-                  const journalResponse = await axios.post('http://192.168.43.51:3000/journal/add-journal',{  // add new jouranl
+                  const journalResponse = await axios.post('http://192.168.43.51:3000/journal/add-journal',{  // add new jouranl , wait unti post the data to database
 
                   userid,
                   emoji,

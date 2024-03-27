@@ -16,7 +16,7 @@ export const EditDeletebutton = (props) =>{
         console.log('Item Tittle:', props.itemTittle);
         console.log('Item Text:', props.itemText);
         
-        // Call the editFunction if needed, navigate to Edit page
+        // Call the editFunction if needed, navigate to main view page
         props.editFunction(props.item,props.itemTittle, props.itemText);
       };
 
