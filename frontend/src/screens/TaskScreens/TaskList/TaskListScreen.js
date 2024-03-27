@@ -3,6 +3,7 @@ import React from 'react'
 import HeaderSub from '../../../components/HeaderSub/HeaderSub'
 import TaskCard from '../../../components/TaskCards/TaskCard'
 
+// Importing images for task icons
 const images ={
     meditation:require('../../../assets/images/TaskIcons/meditation.png'),
     friends:require('../../../assets/images/TaskIcons/friends.png'),
@@ -10,6 +11,7 @@ const images ={
     story:require('../../../assets/images/TaskIcons/story.png')
 }
 
+// Array of tasks
 const taskList = [
   {id:1, headText:'Take today meditation', subText:'Heal yourself', completeness:'incomplete', icon:images.meditation},
   {id:2, headText:'Time to write your thoughts', subText:'collect memories', completeness:'incomplete', icon:images.journal},
@@ -22,6 +24,7 @@ const taskList = [
 
 const TaskListScreen = () => {
 
+  // Counting remaining incomplete tasks
   let remaining = 0
   const count = taskList.filter((item)=>{
     if(item.completeness==='incomplete'){
@@ -29,6 +32,7 @@ const TaskListScreen = () => {
     }
   })
 
+  // Sorting the task list with incomplete tasks first
   const sortedTaskList = [...taskList].sort((a, b) => {
     if (a.completeness === 'incomplete' && b.completeness !== 'incomplete') {
       return -1; 

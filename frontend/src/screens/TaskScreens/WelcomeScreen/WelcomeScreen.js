@@ -8,16 +8,18 @@ import { getTime } from './GetTime';
 
 
 const WelcomeScreen = ({ navigation }) => {
-
+  
+// Data object containing information to be displayed on the screen
   const data={
     currentDay:"01",
     userName:"kovida",
-    dayTime:getTime(),
+    dayTime:getTime(), // Current time of the day obtained from getTime function
     isAnswered:false,
     descrptionTxt:"It's a brand new day, and we're here to help you on your path to a stress-free life.Remember, you're not alone on this journey. We believe in your strength and resilience. Take it one day at a time, and trust the process. Each day brings you closer to a more relaxed and happier you. Stay committed, stay positive, and let's conquer stress together! ",
   };
 
   const presshandler = ()=>{
+    // Navigate to McqScreen if a question is not answered, otherwise navigate to TaskListScreen
     if(data.isAnswered){
       navigation.navigate('TaskListScreen');
     }else

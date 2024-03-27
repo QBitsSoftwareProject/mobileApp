@@ -6,9 +6,8 @@ import HomeCard from '../../components/HomeCard/HomeCard'
 import { LinearGradient } from 'expo-linear-gradient';
 import Swiper from 'react-native-swiper';
 
-
+// Importing images for the home screen
 const proPic = require('../../assets/images/doc.jpg')
-
 const medImg = require('../../assets/images/HomeCards/meditation.png')
 const mindImg = require('../../assets/images/HomeCards/mind.png')
 const moodImg = require('../../assets/images/HomeCards/mood.png')
@@ -18,6 +17,7 @@ const docsImg = require('../../assets/images/HomeCards/docs.png')
 const communityImg = require('../../assets/images/HomeCards/community.png')
 const feedbackImg = require('../../assets/images/HomeCards/feedback.png')
 
+// Array of images for the Swiper component
 const images =[
  {id:1, image:require('../../assets/images/HomeCards/2.jpg'), headerText:"Videos", subText:"Immerse yourself in our diverse video collection"},
  {id:2, image:require('../../assets/images/HomeCards/1.jpg'), headerText:"Articles", subText:"Explore insights, tips, and stories curated"},
@@ -25,7 +25,6 @@ const images =[
  
 ]
 
-const name = "Thishakya"
 
 const HomeScreen = () => {
   const winWidth = Dimensions.get('window').width-60
@@ -51,6 +50,8 @@ const HomeScreen = () => {
                 </TouchableOpacity>
               </View>
               
+
+              {/* Swiper component */}
               <Swiper style={styles.wrapper} showsButtons={false}>
 
                 {images.map((image, index) => (
@@ -73,6 +74,7 @@ const HomeScreen = () => {
 
             </View>
 
+            {/* Healthful Balance section */}
             <View>
               <Text style={styles.topicText}>Healthful Balance</Text>
               <HomeCard image={medImg} headLine={'Mindful Meditation'} subHeadLine={'Take a mindful pause for peace and tranquility.'} />
@@ -82,6 +84,8 @@ const HomeScreen = () => {
               <HomeCard image={goalsImg} headLine={'Set your Goals'} subHeadLine={'Chart your path to well-being by setting personalized health goals.'}/>
             </View>
 
+            
+            {/* Stress Level section */}
             <View style={{marginTop:32}}>
               <Text style={styles.topicText}>Stress Level</Text>
 
@@ -93,12 +97,16 @@ const HomeScreen = () => {
               </TouchableOpacity>
             </View>
 
+            
+            {/* Connect with Community section */}
             <View style={{marginTop:32}}>
               <Text style={styles.topicText}>Connect with Community</Text>
               <HomeCard image={docsImg} headLine={'Connect with Experts'} subHeadLine={'Your Instant Link to Specialized Healthcare Experts.'}/>
               <HomeCard image={communityImg} headLine={'Social Community'} subHeadLine={'Empathetic space connecting, sharing mental health journey companions.'}/>
             </View>
-
+            
+            
+            {/* Give your Ideas section */}
             <View style={{marginVertical:32}}>
               <Text style={styles.topicText}>Give your Ideas</Text>
               <HomeCard image={feedbackImg} headLine={'Feedback Form'} subHeadLine={'Share your thoughts with us. Your feedback shapes a better experience.'}/>
