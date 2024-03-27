@@ -44,11 +44,12 @@ return (
 
       
 
-      <Text style={styles.question1}>
+      <Text style={styles.question1}> 
         How satisfied are you overall with the support of our mental health application?
       </Text>
-
-      <SplitButton></SplitButton>
+       
+      {/* call the progressBar component */}
+      <SplitButton></SplitButton> 
 
         {/* question */}
         <QuestionButton qtext = "1. Is the user interface intuitive and easy to navigate?" qvalue={1}></QuestionButton>
