@@ -9,6 +9,8 @@ import {
     ActivityIndicator
   } from "react-native";
 
+  //radio button componennt with fetched options
+  //options pass from the stress level assessment screen 
 const RadioButton = ({ options, selectedOption, onSelect, selectedMark }) => {
     const [selectedOptionInternal, setSelectedOptionInternal] = useState(null);
     const [selectedOptionMark, setSelectedOptionMark] = useState(null);
