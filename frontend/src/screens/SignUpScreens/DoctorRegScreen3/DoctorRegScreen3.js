@@ -9,6 +9,7 @@ const DoctorRegScreen3 = () => {
     const navigation = useNavigation()
     const screenHeight = Dimensions.get('window').height;
 
+    // State variables for managing screen padding and availability details
     const [screenPadding, setScreenPadding] = useState(0)
     const [availableDays, setAvailableDays] = useState([])
     const [isNext, setIsNext] = useState(false)
@@ -21,6 +22,7 @@ const DoctorRegScreen3 = () => {
     const [availableTimesDay6, setAvailableTimesDay6] = useState([])
     const [availableTimesDay7, setAvailableTimesDay7] = useState([])
 
+    // Effect for managing keyboard visibility
     useEffect(() => {
         const keyboardDidShowListener = Keyboard.addListener(
           'keyboardDidShow',
@@ -43,18 +45,21 @@ const DoctorRegScreen3 = () => {
         };
       }, []);
 
+      // Handler for navigating back to the previous screen
     const handleBackPress = ()=>{
       navigation.navigate('DoctorRegScreen2')
         
     }
 
+// Handler for moving to the next step or screen
     const handleNext = ()=>{
         console.log(availableTimesDay1)
         setIsNext(true)
         navigation.navigate('DoctorRegScreen4') 
    
     }
-
+    
+// Function to update available days
     const updateAvailableDays = (day) => {
       setAvailableDays(prevAvailableDays => [...prevAvailableDays, day]);
     };

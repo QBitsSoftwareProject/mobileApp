@@ -8,6 +8,7 @@ const DoctorRegScreen = () => {
     const navigation = useNavigation()
     const screenHeight = Dimensions.get('window').height;
 
+    // State variables for storing form inputs
     const [name, setName] = useState('')
     const [userName, setUserName] = useState('')
     const [email, setEmail] = useState('')
@@ -16,12 +17,15 @@ const DoctorRegScreen = () => {
     const [city, setCity] = useState('')
     const [country, setCountry] = useState('')
 
+    // State variables for validation and error handling
     const [isEmpty, setIsEmpty] = useState(false)
     const [isEmailValid, setIsEmailValid] = useState(true);
     const [isPhoneNumValid, setIsPhoneNumValid] = useState(true);
 
+    // State variable for adjusting screen padding when keyboard is open
     const [screenPadding, setScreenPadding] = useState(0)
 
+    // Effect for managing keyboard visibility
     useEffect(() => {
         const keyboardDidShowListener = Keyboard.addListener(
           'keyboardDidShow',
@@ -44,23 +48,26 @@ const DoctorRegScreen = () => {
         };
       }, []);
       
-  
+      
+      // Handler for navigating back to the previous screen
     const handleBackPress = ()=>{
         navigation.navigate('SelectionScreen')
         
     }
 
+    // Function for validating email format
     const validateEmail = (email) => {
       const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
       return emailRegex.test(email);
     };
   
+    // Function for validating phone number format
     const validatePhoneNumber = (phoneNumber) => {
       const phoneRegex = /^\+\d{11}$/;
       return phoneRegex.test(phoneNumber);
     };
 
-  
+  // Handler for moving to the next step or screen
     const handleNext = ()=>{
       if(
         name.trim() === '' ||

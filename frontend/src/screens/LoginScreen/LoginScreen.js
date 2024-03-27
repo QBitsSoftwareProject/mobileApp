@@ -4,9 +4,6 @@ import styles from './styles'
 import { useNavigation } from '@react-navigation/native'
 import { userLogin } from '../../services/userServices/userService'
 
-const userEmail='nethsarawmrc@gmail.com'
-const userPassword='123'
-
 const LoginScreen = () => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
@@ -15,9 +12,12 @@ const LoginScreen = () => {
 
     const navigation = useNavigation()
 
+    // Handler for navigating back to the welcome screen
     const handleBackPress = ()=>{
         navigation.navigate('WelcomeScreen')
     }
+
+    // Handler for attempting login
     const handleLoginPress = async ()=>{
         try{
             const userData = await userLogin(email, password);
@@ -33,6 +33,8 @@ const LoginScreen = () => {
         }
         
     }
+
+    // Handler for navigating to sign up screen
     const handleSignUp = ()=>{
         navigation.navigate('SelectionScreen',)
     }

@@ -10,6 +10,7 @@ const DoctorRegScreen4 = () => {
     const navigation = useNavigation()
     const screenHeight = Dimensions.get('window').height;
 
+    // State variables for managing screen padding, additional details, and form validation
     const [screenPadding, setScreenPadding] = useState(0)
     const [bio, setBio] = useState('')
     const [unCheckedColor, setUnCheckedColor] = useState('#5C677D');
@@ -18,6 +19,7 @@ const DoctorRegScreen4 = () => {
     const [isChecked, setIsChecked] = useState(false);
     const [proPic, setProPic] = useState(null);
 
+    // Effect for managing keyboard visibility
     useEffect(() => {
         const keyboardDidShowListener = Keyboard.addListener(
           'keyboardDidShow',
@@ -41,13 +43,18 @@ const DoctorRegScreen4 = () => {
         };
       }, []);
 
+      // Handler for navigating back to the previous screen
       const handleBackPress = ()=>{
         navigation.navigate('DoctorRegScreen3')
         
     }
+
+    // Handler for cancelling the registration process
     const handleCancel = ()=>{
         navigation.navigate('WelcomeScreen')
       }
+
+      // Handler for submitting the registration form
     
       const handleSubmit = ()=>{
         if(

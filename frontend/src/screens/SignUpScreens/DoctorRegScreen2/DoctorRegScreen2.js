@@ -9,13 +9,16 @@ const DoctorRegScreen2 = () => {
     const navigation = useNavigation()
     const screenHeight = Dimensions.get('window').height;
 
+    // State variables for storing form inputs
     const [licenseNo, setLicenseNo] = useState('')
     const [qualification, setQualification] = useState('')
     const [isEmpty, setIsEmpty] = useState(false)
     const [selectedValue, setSelectedValue] = useState('');
 
+    // State variable for adjusting screen padding when keyboard is open
     const [screenPadding, setScreenPadding] = useState(0)
 
+    // Effect for managing keyboard visibility
     useEffect(() => {
         const keyboardDidShowListener = Keyboard.addListener(
           'keyboardDidShow',
@@ -38,11 +41,13 @@ const DoctorRegScreen2 = () => {
         };
       }, []);
 
+      // Handler for navigating back to the previous screen
     const handleBackPress = ()=>{
         navigation.navigate('DoctorRegScreen')
         
     }
 
+    // Handler for moving to the next step or screen
     const handleNext = ()=>{
         if(
           licenseNo.trim() === '' ||
