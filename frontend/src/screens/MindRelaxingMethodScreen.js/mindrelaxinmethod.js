@@ -9,17 +9,20 @@ import axios from 'axios';
 
 const Mindrelaxinmethod =() => {
 
+  //still not merge to stress level assessment branch so assing a valu yo stress level
   let yourMark;
-  yourMark = 5;
+  yourMark = 15;
   const [Data,setData] = useState([]);
 
+
+  //to fetch methods by stress level
   useEffect (() => {
 
       const fetchData = async () => {
       try{
           let url;
 
-          url = "http://172.20.10.6:8070/method/get-method"
+          url = "http://192.168.43.80:3000/method/get-method"
 
           const response = await axios.get(url);
           setData(response.data);
@@ -35,6 +38,7 @@ const Mindrelaxinmethod =() => {
      
   },[])
 
+  //filter method according to the stress level
   const filteredData = Data.filter(item => item.mark === yourMark);
 
      

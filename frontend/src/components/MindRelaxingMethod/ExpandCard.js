@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { Text, View, TouchableOpacity, Animated, Image, StyleSheet, ImageBackground ,Modal} from 'react-native';
 import AudioPlayer from '../../screens/MindRelaxingMethodScreen.js/AudioPlayer';
 
-
+//expand card componnent
 const ExpandableCard = (props) => {
   const [isExpanded, setIsExpanded] = useState(true);
   const heightAnim = useRef(new Animated.Value(0)).current;

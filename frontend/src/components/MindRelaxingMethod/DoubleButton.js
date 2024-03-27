@@ -1,6 +1,8 @@
 import React, { useState} from 'react';
 import { View, TextInput, TouchableOpacity, Text, StyleSheet, ScrollView,Button} from 'react-native';
 
+
+//double btn componennet
 export const CustomButton = () =>{
    
     
