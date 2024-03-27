@@ -49,7 +49,7 @@ const getMarkData = async (marks) => {
         throw new Error('Mark data is missing or invalid');
       }
       
-      markData.reverse();
+      // markData.reverse();
 
       const groupedData = markData.reduce((acc, item) => {
         const date = item.date;
