@@ -4,6 +4,7 @@ import { useNavigation, useRoute } from '@react-navigation/native'
 import { SafeAreaView } from 'react-native-safe-area-context';
 import styles from './styles';
 
+// Array containing all tasks with their steps
 const allTasks = [
   {
     id: 1,
@@ -52,7 +53,7 @@ const allTasks = [
   }
 ];
 
-
+// Dummy data for step demo
 const stepdemo =[
     {step1:"task5-----1"},
     {step2:"task5-----2"},
@@ -70,13 +71,16 @@ const TaskDescriptionScreen = () => {
 
   const screenHeight = Dimensions.get('screen').height;
 
+   // Finding the task based on the task ID
   const task = allTasks.find(step => step.id==taskId)
   const getTask = task ? Object.values(task.steps) : [];
 
+  // Handler for back button press
   const handleBackPress = () =>{
     navigation.navigate('TaskListScreen')
   }
-
+  
+ // Callback function for layout event of the box
   const onBoxLayout = (event) => {
     const { height } = event.nativeEvent.layout;
     setBoxHeight(height);

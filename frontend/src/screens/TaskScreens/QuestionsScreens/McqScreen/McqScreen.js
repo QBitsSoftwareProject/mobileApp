@@ -6,7 +6,7 @@ import AnswerBtns from '../../../../components/AnswerBtns/AnswerBtns'
 import ProgressBar from '../../../../components/ProgressBar/ProgressBar'
 
 
-
+// Array of questions with their IDs, questions, and types
 const questions = [
     { id:1, question:"How long you realized you are stressed ?", type:'mcq'},
     { id:2, question:"How long you realized you are stressed ?", type:'mcq'},
@@ -17,6 +17,7 @@ const questions = [
 
 ] 
 
+// Button options for different questions
 const buttons = {
     1: [
         { id: 1, text: 'About a week' },
@@ -43,10 +44,12 @@ const McqScreen = ({navigation}) => {
     const [selectedButtonIndex, setSelectedButtonIndex] = useState(null);
     const [qNumber,setQNumber] = useState(1)
   
+    // Handler for selecting answer buttons
     const pressHandlerBtns = (btnId) => {
         setSelectedButtonIndex(btnId)
     }
 
+    // Handler for moving to the next question
     const pressHandlerNext = () => {
         if (qNumber < questions.length) {
             if (selectedButtonIndex !== null || currentQuestion.type !== 'mcq') {
@@ -54,19 +57,21 @@ const McqScreen = ({navigation}) => {
                 setSelectedButtonIndex(null);
             }
         }else{
-            navigation.navigate('TaskListScreen')
+            navigation.navigate('TaskListScreen')// Navigating to the task list screen when all questions are answered
         }
     };
 
+    // Handler for going back to the previous question or screen
     const backHandler = () => {
         if (qNumber > 1) {
             setQNumber((prevQNumber) => prevQNumber - 1);
             setSelectedButtonIndex(null); 
         } else {
-            navigation.navigate('WelcomeScreen');
+            navigation.navigate('WelcomeScreen');// Navigating back to the welcome screen
         }
     };
 
+    // Finding the current question based on the question number
     const currentQuestion = questions.find(question => question.id === qNumber);
 
   return (
