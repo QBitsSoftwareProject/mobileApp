@@ -5,9 +5,9 @@ exports.getAppointments = async (req, res) => {
     try {
         const { doctorId } = req.body;
 
-        const doctor = await doctorSchema.findById(doctorId);
+        // const doctor = await doctorSchema.findById(doctorId);
        
-        const relevantAppointments = await appointmentSchema.find({doctorId:doctor._id});
+        const relevantAppointments = await appointmentSchema.find({doctorId:doctorId});
         
         if(!relevantAppointments){
             return res.status(404).json({message:"Appointments not found!"})

@@ -7,13 +7,7 @@ import TimeButton from '../../components/TimeButton/TimeButton'
 import PopupMessage from '../../components/Pop-up/Pop-upScreen'
 import RegularButton from '../../components/Button/RegularButton'
 import { useNavigation } from '@react-navigation/native'
-
-const MakeAppointment = () => {
-
-  const [numColumns, setNumColumns] = useState(2); // Number of columns for layout
-  const [ timeBtnpress, setTimebtnPress] = useState(false) // State to track time button press
-  const [dateBtnPress, setDateBtnPress] = useState(false) // State to track date button press
-  const [popupMessage, setPopupMessage] = useState(''); // State for popup message
+import { createAppointment } from '../../servises/appointmentServise/AppointmentServise'
 
   // Mock data for date and time slots
   const dateList = [
@@ -35,6 +29,22 @@ const MakeAppointment = () => {
       {id:6, time:'7.300PM'},
     ];
 
+    const doctorId1 = "6602fde8bdb3f4f68ebaa101"
+    const doctorId2 = "6603de56c39e6389183ec3c7"
+
+    const userId = "6602fde8bdb3f4f68ebaa101"
+
+const MakeAppointment = () => {
+
+  const [numColumns, setNumColumns] = useState(2); // Number of columns for layout
+  const [ timeBtnpress, setTimebtnPress] = useState(false) // State to track time button press
+  const [dateBtnPress, setDateBtnPress] = useState(false) // State to track date button press
+  const [popupMessage, setPopupMessage] = useState(''); // State for popup message
+  const [getTime, setGetTime] = useState();
+  // console.log(getTime);
+  const [getDate, setGetDate] = useState();  
+  // console.log(getDate);
+
   // Hook for navigation  
     const navigation=useNavigation();
     
@@ -42,8 +52,19 @@ const MakeAppointment = () => {
       setPopupMessage(message);
     };
 
-    const confirmMessage = () => {
-      navigation.navigate('AppointmentStatus');
+
+    const confirmMessage = async () => {
+      try {
+
+        await createAppointment(doctorId1,userId, getDate, getTime);
+
+        navigation.navigate('AppointmentStatus')
+
+      } catch(error) {
+        console.log(error)
+      }
+     
+      
     };
   
     const closeMessage = () => {
@@ -105,7 +126,7 @@ const MakeAppointment = () => {
                     <View style={{ flexDirection: 'row' }}>
                     {dateList.map((item, index) => (
                       <View key={item.id} style={{ paddingBottom: 10}}>
-                        <DateCard key={index} date={item.date} month={item.month} indexKey={index} press={setDateBtnPress} change={dateBtnPress}/>
+                        <DateCard key={index} date={item.date} month={item.month} indexKey={index} press={setDateBtnPress} change={dateBtnPress} getDate={setGetDate}/>
                       </View>
                       ))}
                     </View>          
@@ -118,7 +139,7 @@ const MakeAppointment = () => {
                   
                     <View style={{ flexDirection: 'row', flexWrap: 'wrap' }}>
                       {timeList.map((item, index) => (
-                        <TimeButton key={index} time={item.time} indexKey={index} press={setTimebtnPress} change={timeBtnpress}/>
+                        <TimeButton key={index} time={item.time} indexKey={index} press={setTimebtnPress} change={timeBtnpress} getTime={setGetTime}/>
                       ))}
                     </View>
                 </View>

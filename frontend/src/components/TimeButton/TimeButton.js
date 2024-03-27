@@ -11,10 +11,15 @@ const handleTimePress = ()=>{
     props.press(true)
     setKey(props.indexKey)
 
+    props.getTime(props.time)
+    // console.log(props.indexKey)
+
   }else if(props.indexKey===key){
     setPressButton(false)
     props.press(false)
     setKey('')
+
+    props.getTime(null)
   }
   
  

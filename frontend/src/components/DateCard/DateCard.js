@@ -13,11 +13,15 @@ const DateCard = (props) => {
       setPressDateCard(true);
       props.press(true)
       setCardKey(props.indexKey)
+
+      props.getDate(props.date)
   
     }else if(props.indexKey===cardKey){
       setPressDateCard(false)
       props.press(false)
       setCardKey('')
+
+      props.getDate(null)
     }
   }
   

@@ -12,7 +12,7 @@ app.use(bodyParser.json());
 
 app.use("/api/v1/appointments", appointmentRouter);
 app.use("/api/v1/doctors" , doctorsRouter);
-app.use("/api/v1/users" , userRoutes);
+// app.use("/api/v1/users" , userRoutes);
 
 app.listen(PORT, ()=>{
     console.log(`server is running on port ${PORT}`)
