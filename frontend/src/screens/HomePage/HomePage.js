@@ -6,12 +6,14 @@ import PostCard from '../../components/CFCard/PostCard'
 import  FloatingButton  from '../../components/FloatingButton/FloatingButton';
 import { useNavigation } from '@react-navigation/native'
 
+// Mock data for post categories
 const PostCatList = [
     {id:1, PstCat:'Trending'},
     {id:2, PstCat:'Stress'},
     {id:3, PstCat:'Calm'}, 
   ];
 
+  // Mock data for posts
 const postList = [
     {id:1, 
       image:require("../../assets/images/PostCardImages/boydp.jpg"),
@@ -57,13 +59,15 @@ const HomePage = () => {
                 
                     <ScrollView ScrollView style={{height:"100%", marginBottom:25}}>
 
+                
+                {/* posts category*/}
                         <View style={{ flexDirection: 'row', flexWrap: 'wrap' }}>
                             {PostCatList.map((item, index) => (
                             <PostCatBtn key={index} PstCat={item.PstCat}/>
                             ))}
                         </View>
 
-
+                {/* post cards list*/}
                         <View>
                             {postList.map(( item ) => (
                                 <PostCard

@@ -11,7 +11,7 @@ const FloatingButton = ({addNew}) =>{
         style={styles.touchableOpacity} onPress={addNew}>
              <Image 
                 style={styles.floatingbutton}
-                source ={require('../../assets/images/NavigationIcons/FloatingButton.png')}/>   
+                source ={require('../../assets/images/NavigationIcons/SVGRepo_iconCarrier.png')}/>   
 
         </TouchableOpacity>
  
@@ -25,6 +25,7 @@ const styles = StyleSheet.create({
         right:25,
     },
     floatingbutton:{
+
         resizeMode:'contain',
         width:62.5,
         height:62.5,

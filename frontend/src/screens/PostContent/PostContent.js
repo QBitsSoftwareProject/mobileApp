@@ -77,10 +77,12 @@ const post =
                                     <Image source={props.image} style={style.image} />
                                 </View> */}
                                 {commentsList.map((item) => (
+                                    <View key={item.id}>
                                     <CommentCard
                                         image={item.image}
                                         sub={item.sub}
                                     />
+                                    </View>
                                 ))}
                             </View>
                         </ScrollView>
