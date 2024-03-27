@@ -13,7 +13,7 @@ const storeFeedback = (satisfication, finterface, privacy, speed, consumption, d
 
 
     try{
-        if(!satisfication ) {
+        if(!satisfication || !finterface || !privacy || !speed || !consumption || !design) {
             throw new Error('not completed!!!')
     }
 
@@ -37,6 +37,7 @@ const storeFeedback = (satisfication, finterface, privacy, speed, consumption, d
 }
 };
 
+//get all feedbacks
 const getAllFeedback =  async() => {
     try {
         const allFeedback = await feedBack.find({});
@@ -48,6 +49,7 @@ const getAllFeedback =  async() => {
     }
 };
 
+//delete feedback
 const deleteFeedback = async (id) =>{
     try{
         if(!id){

@@ -10,30 +10,7 @@ const styles = StyleSheet.create({
       
       
     },
-    title1: {
-      fontSize: 32,
-      fontStyle:'semiBold',
-      marginBottom: 5,
-      paddingLeft:25,
-      paddingTop:25,
-  
-      color:'#101318'
-    },
-    subtitle: {
-      marginLeft:25,
-      marginBottom: 62,
-      fontSize: 18,
-      color:'#101318'
-    },
-    
-    // label: {
-      
-    //   fontSize: 16,
-    //   marginLeft:25,
-    //   //marginRight:82,
-    //   color:'#101318',
-    //   lineHeight:22
-    // },
+
 
     textarea: {
       borderWidth: 0,

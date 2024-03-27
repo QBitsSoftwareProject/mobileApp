@@ -8,8 +8,8 @@ import HeaderSub from '../../components/HeaderSub/HeaderSub';
 
 const Feedback = () => {
   
-  const [questionOne, setQuestionOne] = useState(true);
-  const [questionTwo, setQuestionTwo] = useState(false);
+  const [questionOne, setQuestionOne] = useState(true); //set Q1 state
+  const [questionTwo, setQuestionTwo] = useState(false); //set Q2 state
   const [questionThree, setQuestionThree] = useState(false);
   const [questionFour, setQuestionFour] = useState(false);
   const [questionFive, setQuestionFive] = useState(false);
@@ -33,10 +33,7 @@ return (
     <View contentContainerStyle={styles.container}>
       <ScrollView>
 
-      {/* <Text style={styles.title1}>Feedback</Text>
-      <Text style={styles.subtitle}>
-        Feel free to drop us your feedback.
-      </Text> */}
+ 
 
 
       <HeaderSub

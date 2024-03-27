@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 
+//genarate the segmented buttons based on loops
 export  const SplitButton = () => {
   const [pressedSegment, setPressedSegment] = useState(null);
   
@@ -21,15 +22,11 @@ export  const SplitButton = () => {
             {
               backgroundColor:
 
-              pressedSegment === null 
-                  ? '#FFFFFF' // color for pressed and preceding segments
-                  : 
-
-                pressedSegment !== null && i <= pressedSegment
+                  pressedSegment !== null && i <= pressedSegment
                   ? '#4ABFB4' // color for pressed and preceding segments
                   : '#FFFFFF', // default color
 
-                  borderTopLeftRadius: index === 0 ? 15 : 0,
+                  borderTopLeftRadius: index === 0 ? 15 : 0,    //assign border radius for progress bar
                   borderTopRightRadius: index === 9 ? 15 : 0,
                   borderBottomLeftRadius: index === 0 ? 15 : 0,
                   borderBottomRightRadius: index === 9 ? 15 : 0,
@@ -54,9 +51,7 @@ export  const SplitButton = () => {
   return (
     <View style={styles.container}>
       {renderSegments()}
-      {/* <Text style={styles.outputText}>
-        {pressedSegment !== null ? `Segment ${pressedSegment } pressed!` : ''}
-      </Text> */}
+      
     </View>
   );
 };

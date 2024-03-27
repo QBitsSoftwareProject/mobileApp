@@ -4,7 +4,7 @@ import ToggleSwitch from 'toggle-switch-react-native'
 
 export const QuestionButton =({qtext,qvalue})=> {
     
-    const [on, setOn] = useState(false);
+    const [on, setOn] = useState(false);  //set state for switch
     const [value, setValue] = useState(0);
 
  
