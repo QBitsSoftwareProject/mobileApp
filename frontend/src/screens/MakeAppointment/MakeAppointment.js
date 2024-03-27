@@ -10,10 +10,12 @@ import { useNavigation } from '@react-navigation/native'
 
 const MakeAppointment = () => {
 
-  const [numColumns, setNumColumns] = useState(2);
-  const [ timeBtnpress, setTimebtnPress] = useState(false)
-  const [dateBtnPress, setDateBtnPress] = useState(false)
+  const [numColumns, setNumColumns] = useState(2); // Number of columns for layout
+  const [ timeBtnpress, setTimebtnPress] = useState(false) // State to track time button press
+  const [dateBtnPress, setDateBtnPress] = useState(false) // State to track date button press
+  const [popupMessage, setPopupMessage] = useState(''); // State for popup message
 
+  // Mock data for date and time slots
   const dateList = [
     {id:1, date:'17',  month:'Mon'},
     {id:2, date:'18',  month: 'Tue'},
@@ -33,8 +35,7 @@ const MakeAppointment = () => {
       {id:6, time:'7.300PM'},
     ];
 
-    const [popupMessage, setPopupMessage] = useState('');
-    
+  // Hook for navigation  
     const navigation=useNavigation();
     
     const showMessage = (message) => {
@@ -64,6 +65,8 @@ const MakeAppointment = () => {
             </View>
             
             <ScrollView>
+
+                {/* Doctor details */}
                 <View style={styles.headerBox}>
                   <Text style={styles.header}>Dr. B.M. Weerasinghe</Text>
                 </View>
@@ -93,7 +96,9 @@ const MakeAppointment = () => {
                     the highest level of care to all patients.
                     </Text>
                 </View> 
-                
+
+
+              {/* Date selection */}  
                 <View style={{marginBottom:20}}>
                     <Text style = {styles.title}>Select Date{'\n'}</Text>
                     
@@ -105,20 +110,24 @@ const MakeAppointment = () => {
                       ))}
                     </View>          
                 </View> 
-
+              
+              
+              {/* Time selection */}
                 <View style={{marginBottom:20}}>
                     <Text style = {styles.title}>Available Time Slot{'\n'}</Text>
-
+                  
                     <View style={{ flexDirection: 'row', flexWrap: 'wrap' }}>
                       {timeList.map((item, index) => (
                         <TimeButton key={index} time={item.time} indexKey={index} press={setTimebtnPress} change={timeBtnpress}/>
                       ))}
                     </View>
                 </View>
-                
+
+
                 <View style={{marginBottom:150}}>
                     <RegularButton name = {"Make an appointment"} onPress={() => showMessage("Do you confirm???")}></RegularButton>
-                
+              
+              {/* Popup message */}  
                     <PopupMessage message={popupMessage} onConfirm={confirmMessage} onClose={closeMessage} />
                 </View>
             </ScrollView> 

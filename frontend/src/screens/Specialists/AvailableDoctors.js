@@ -8,6 +8,7 @@ import { useNavigation } from '@react-navigation/native'
 import SearchBar from '../../components/SearchBar/SearchBar'
 import { useState } from 'react'
 
+// Mock data for available doctors
 const docList = [
   {id:1, 
     image:require("../../assets/images/kitharringtonhair.jpg"),
@@ -51,24 +52,24 @@ const docList = [
 const AvailableDoctor = () => {
   const navigation=useNavigation();
 
-  const [searchPress, setSearchPress] = useState(false);
-  const [filteredData, setFilteredData] = useState([]);
+  const [searchPress, setSearchPress] = useState(false); // State variable to track if search bar is active
+  const [filteredData, setFilteredData] = useState([]);  // State variable to store filtered data based on search query
 
+  // Function to handle navigation to appointment screen
   const pressHandler = () => {
     navigation.navigate('MakeAppointment')
     
   };
 
   const goBack = () => {
-    setSearchPress(false); 
-    setFilteredData([]); 
+    setSearchPress(false); // Set searchPress state to false to exit search mode
+    setFilteredData([]); // Clear filtered data
+  };
  
-};
-
   
   return (
     <View>
-      <HeaderSub headLine={'Doctor appointment'}  subHeadLine={'Explore and find the perfect specialist.'} onPress={goBack}/>
+      <HeaderSub headLine={'Doctor appointment'}  subHeadLine={'Explore and find the perfect specialist.'}  onPress={goBack}/>
         
           <SafeAreaView style={{margin:25}}>
            
@@ -81,7 +82,8 @@ const AvailableDoctor = () => {
               <View style={{marginHorizontal:15}}>
                   <Text style={style.descript2}>Available Doctors.</Text>
               </View>
-
+          
+          {/* available doctors */}
               {!searchPress && (
                   <View style={{ marginBottom: 80}}>
                   {docList.map(( item ) => (
@@ -97,7 +99,7 @@ const AvailableDoctor = () => {
                     </View>
               )}
               
-              
+          {/* filtered doctors */}    
               { searchPress && (
                 <View style={{ marginBottom: 80}}>
                   {filteredData.map(( item ) => (
@@ -123,7 +125,7 @@ const AvailableDoctor = () => {
      
 
     )
-}
 
+  }
 
 export default AvailableDoctor;

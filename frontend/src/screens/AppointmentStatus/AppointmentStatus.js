@@ -7,8 +7,8 @@ import ButtonGroup from '../../components/Button/ButtonGroup'
 import HeaderSub from '../../components/HeaderSub/HeaderSub'
 
 
-
 const AppointmentStatus = () => {
+ // Mock data for appointment status
   const stateList = [
     {id:1, 
       image:require("../../assets/images/kitharringtonhair.jpg"),
@@ -62,6 +62,7 @@ const AppointmentStatus = () => {
                       <Text style={styles.descript2}>Appointment Status.</Text>
                     </View>
 
+              {/* appointment status cards */}
                     <View style={{marginBottom:80}}>
                       {stateList.map (( item ) => (
                         <CreateCard 
