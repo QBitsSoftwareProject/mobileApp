@@ -1,11 +1,11 @@
-const regularUser = require('../../models/regularUser/regularUser');
+const doctorModel = require("../../models/doctor/doctor")
 
 // Controller function to get all regular users
-exports.getRegularUsers= async (req, res)=>{
+exports.getDoctors= async (req, res)=>{
 
     try{
         // Finding all regular users
-        const getUser = await regularUser.find();
+        const getUser = await doctorModel.find();
 
         // If no users are found, return a 404 error response
         if (!getUser) {
@@ -24,13 +24,13 @@ exports.getRegularUsers= async (req, res)=>{
 
 // get one user by Id ------------------------------------------------------------------------------------------------------------------
 // Controller function to get a single regular user by ID
-exports.getARegularUser= async (req, res)=>{
+exports.getADoctor= async (req, res)=>{
 
     try{
         const { id } = req.params;
 
         // Finding the user by ID
-        const getUser = await regularUser.findById(id);
+        const getUser = await doctorModel.findById(id);
 
         // If user is not found, return a 404 error response
         if (!getUser) {

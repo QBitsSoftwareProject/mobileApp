@@ -8,13 +8,13 @@ const proPic = require('../../assets/images/doc.jpg');
 const FilePicker = (props) => {
   const [selectedImage, setSelectedImage] = useState(null);
 
-  useEffect(()=>{
+  useEffect(() => {
 
-    if(selectedImage != null){
+    if (selectedImage != null) {
       props.selectedImg(selectedImage)
     }
-    
-  },[selectedImage])
+
+  }, [selectedImage])
 
   const pickImage = async () => {
     if (Platform.OS !== 'web') {
@@ -32,14 +32,14 @@ const FilePicker = (props) => {
       quality: 1,
     });
 
-    if (!result.canceled) { 
-      setSelectedImage(result.assets[0].uri); 
+    if (!result.canceled) {
+      setSelectedImage(result.assets[0].uri);
     }
   };
 
   return (
     <View style={{ marginBottom: 32 }}>
-      <Text style={styles.title}>Upload a profile picture :</Text>
+      <Text style={styles.title}>{props.label} :</Text>
 
       <TouchableOpacity style={styles.imageBtn} onPress={pickImage}>
         <Text style={styles.btnText}>Choose Image</Text>
@@ -48,8 +48,8 @@ const FilePicker = (props) => {
       <View style={styles.imageContainer}>
         {selectedImage ? (
           <Image source={{ uri: selectedImage }} style={styles.image} />
-        ) :(
-          <Text style={{color:'#979DAC'}}>{props.errMsg}</Text>
+        ) : (
+          <Text style={{ color: '#979DAC' }}>{props.errMsg}</Text>
         )}
       </View>
     </View>

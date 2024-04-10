@@ -51,7 +51,7 @@ const DoctorRegScreen4 = () => {
 
     // Handler for cancelling the registration process
     const handleCancel = ()=>{
-        navigation.navigate('WelcomeScreen')
+        navigation.navigate('LoginScreen')
       }
 
       // Handler for submitting the registration form
@@ -88,7 +88,7 @@ const DoctorRegScreen4 = () => {
                 <Text style={styles.headerText}>Please fill the following form with correct details.</Text>
                 <Text style={styles.subText}>Additional Details</Text>
                 
-                <FilePicker errMsg={"You have to select an image"} selectedImg={setProPic}/>
+                <FilePicker errMsg={"You have to select an image"} selectedImg={setProPic} label={"Upload a profile picture"}/>
 
                 <InputField placeHolder={'Describe your expertise and approach. \n(max words 300)'} label={'Brief Bio :'} onChangeText={setBio} type={'textField'}/>
                   

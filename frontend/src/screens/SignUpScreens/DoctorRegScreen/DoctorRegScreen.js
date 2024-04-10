@@ -12,6 +12,7 @@ const DoctorRegScreen = () => {
     const [name, setName] = useState('')
     const [userName, setUserName] = useState('')
     const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
     const [contactNo, setContactNo] = useState('')
     const [address, setAddress] = useState('')
     const [city, setCity] = useState('')
@@ -73,6 +74,7 @@ const DoctorRegScreen = () => {
         name.trim() === '' ||
         userName.trim() === '' ||
         email.trim() === '' ||
+        password.trim() === '' ||
         contactNo.trim() === '' ||
         address.trim() === '' ||
         city.trim() === '' ||
@@ -117,6 +119,7 @@ const DoctorRegScreen = () => {
                   <InputField placeHolder={'B.M. Weerasinghe'} label={'Full name / Name with initial :'} onChangeText={setName}/>
                   <InputField placeHolder={'Bimsara Madusha'} label={'User name :'} onChangeText={setUserName}/>
                   <InputField placeHolder={'ex@gmail.com'} label={'Email :'} onChangeText={setEmail} errMsg={!isEmailValid ? 'Email is not valid!':''}/>
+                  <InputField placeHolder={'Password'} label={'Password :'} onChangeText={setPassword}/>
                   <InputField placeHolder={'+9412345678'} label={'Contact No :'} onChangeText={setContactNo} errMsg={!isPhoneNumValid ? 'Phone number is not valid!':''}/>
                   <InputField placeHolder={'67/1, welona place, kaubedda'} label={'Address :'} onChangeText={setAddress} />
                   <InputField placeHolder={'Moratuwa'} label={'City :'} onChangeText={setCity}/>

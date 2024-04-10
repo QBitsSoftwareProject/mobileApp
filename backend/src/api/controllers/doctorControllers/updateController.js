@@ -1,6 +1,6 @@
-const regularUser = require('../../models/regularUser/regularUser');
+const doctorModel = require("../../models/doctor/doctor")
 
-exports.updateRegularUser= async (req, res)=>{
+exports.updateDoctor= async (req, res)=>{
 
     try{
       // Destructuring the request body to extract user details
@@ -13,7 +13,7 @@ exports.updateRegularUser= async (req, res)=>{
         const updateUser = { fullName, userName, email, contactNumber, address, city, country};
 
         // Finding and updating the user by ID
-        await regularUser.findByIdAndUpdate(id, updateUser);
+        await doctorModel.findByIdAndUpdate(id, updateUser);
 
         // Sending success response with status code 201 and a message
         return res.status(201).json({ message: 'User updated successfully' });

@@ -4,13 +4,16 @@ import styles from './styles'
 import { useNavigation } from '@react-navigation/native'
 import InputField from '../../../components/InputField/InputField'
 import { Picker } from '@react-native-picker/picker';
+import FilePicker from '../../../components/GetImages/FilePicker'
 
 const DoctorRegScreen2 = () => {
     const navigation = useNavigation()
     const screenHeight = Dimensions.get('window').height;
 
     // State variables for storing form inputs
-    const [licenseNo, setLicenseNo] = useState('')
+    const [licenseSide1, setLicenseSide1] = useState(null)
+    const [licenseSide2, setLicenseSide2] = useState(null)
+
     const [qualification, setQualification] = useState('')
     const [isEmpty, setIsEmpty] = useState(false)
     const [selectedValue, setSelectedValue] = useState('');
@@ -50,7 +53,8 @@ const DoctorRegScreen2 = () => {
     // Handler for moving to the next step or screen
     const handleNext = ()=>{
         if(
-          licenseNo.trim() === '' ||
+          licenseSide1 === null ||
+          licenseSide2 === null ||
           qualification.trim() === ''
         ){
           setIsEmpty(true)
@@ -81,7 +85,8 @@ const DoctorRegScreen2 = () => {
                 <Text style={styles.headerText}>Please fill the following form with correct details.</Text>
                 <Text style={styles.subText}>Professional Information</Text>
                 
-                  <InputField placeHolder={'PAT8735'} label={'Medical License Number :'} onChangeText={setLicenseNo}/>
+                  <FilePicker errMsg={"You have to select an image"} selectedImg={setLicenseSide1} label={"Upload the doctor license front side picture"}/>
+                  <FilePicker errMsg={"You have to select an image"} selectedImg={setLicenseSide2} label={"Upload the doctor license back side picture"}/>
 
                   <View>
                     <Text style={{fontSize:14, fontWeight:'400', color:'#40495B', marginBottom:7}}>Specialization :</Text>

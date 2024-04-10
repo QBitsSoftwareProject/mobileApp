@@ -5,6 +5,7 @@ const { PORT } = require('./config/env');
 const { connect } = require('./config/database.connection.js');
 
 const regularUserRoute = require('./api/routes/regularUserRoute.js')
+const doctorRoute = require('./api/routes/doctorRoute.js')
 
 const app = express();
 
@@ -14,6 +15,7 @@ app.use(bodyParser.json());
 
 //endpoints
 app.use('/api/v1/user', regularUserRoute)
+app.use('/api/v1/doctor', doctorRoute)
 
 
 app.listen(PORT, ()=>{
