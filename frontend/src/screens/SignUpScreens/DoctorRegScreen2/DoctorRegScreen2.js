@@ -5,6 +5,7 @@ import { useNavigation } from '@react-navigation/native'
 import InputField from '../../../components/InputField/InputField'
 import { Picker } from '@react-native-picker/picker';
 import FilePicker from '../../../components/GetImages/FilePicker'
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const DoctorRegScreen2 = () => {
     const navigation = useNavigation()
@@ -50,6 +51,23 @@ const DoctorRegScreen2 = () => {
         
     }
 
+    // save data to local storage
+  const setItems = async () => {
+    try {
+      data = [
+        ["licenseSide1", "licenseSide1"],
+        ["licenseSide2", "licenseSide2"],
+        ["specialization", selectedValue],
+        ["qualification", qualification],
+      ];
+
+      await AsyncStorage.multiSet(data);
+      // console.log("Multiple items saved successfully!");
+    } catch (error) {
+      console.error("Error saving multiple items:", error);
+    }
+  };
+
     // Handler for moving to the next step or screen
     const handleNext = ()=>{
         if(
@@ -65,6 +83,9 @@ const DoctorRegScreen2 = () => {
         }
         else{
           setIsEmpty(false)
+
+          setItems();
+
           navigation.navigate('DoctorRegScreen3') 
           
         }

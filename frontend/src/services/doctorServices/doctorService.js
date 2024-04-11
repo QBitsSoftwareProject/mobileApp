@@ -1,31 +1,10 @@
 import axios from "axios";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-const URL = "http://192.168.8.149:3000/api/v1/user";
-
-//user login
-export const userLogin = async (email, password) => {
-  try {
-    const response = await axios.post(`${URL}/login`, { email, password });
-
-    // Check if the response contains the token in headers
-    if (!response.headers || !response.headers.authtoken) {
-      throw new Error("Token not found in response headers");
-    }
-
-    const token = response.headers.authtoken;
-
-    // Store token in AsyncStorage
-    await AsyncStorage.setItem("accessToken", token);
-
-    return response.data;
-  } catch (err) {
-    throw new Error("Error during request setup");
-  }
-};
+const URL = "http://192.168.8.149:3000/api/v1/doctor";
 
 //user registration
-export const userRegistration = async (
+export const doctorRegistration = async (
   fullName,
   userName,
   email,
@@ -33,7 +12,21 @@ export const userRegistration = async (
   contactNumber,
   address,
   city,
-  country
+  country,
+  licenseSide1,
+  licenseSide2,
+  specialization,
+  qualification,
+  availableDays,
+  availableTimesDay1,
+  availableTimesDay2,
+  availableTimesDay3,
+  availableTimesDay4,
+  availableTimesDay5,
+  availableTimesDay6,
+  availableTimesDay7,
+  proPic,
+  bio
 ) => {
   try {
     const response = await axios.post(`${URL}/register`, {
@@ -45,6 +38,19 @@ export const userRegistration = async (
       address,
       city,
       country,
+      
+      specialization,
+      qualification,
+      availableDays,
+      availableTimesDay1,
+      availableTimesDay2,
+      availableTimesDay3,
+      availableTimesDay4,
+      availableTimesDay5,
+      availableTimesDay6,
+      availableTimesDay7,
+      
+      bio,
     });
     // console.log(response)
     return response.data;

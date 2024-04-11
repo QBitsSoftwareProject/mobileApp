@@ -4,6 +4,7 @@ import { useNavigation } from '@react-navigation/native'
 import InputField from '../../../components/InputField/InputField'
 import styles from './styles'
 import SelectionBars from '../../../components/SelectionBars/SelectionBars'
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const DoctorRegScreen3 = () => {
     const navigation = useNavigation()
@@ -51,10 +52,36 @@ const DoctorRegScreen3 = () => {
         
     }
 
+    // save data to local storage
+const setItems = async () => {
+  try {
+    // Convert arrays to strings
+    const data = [
+      ["availableDays", JSON.stringify(availableDays)], // Convert array to string using JSON.stringify
+      ["availableTimesDay1", JSON.stringify(availableTimesDay1)],
+      ["availableTimesDay2", JSON.stringify(availableTimesDay2)],
+      ["availableTimesDay3", JSON.stringify(availableTimesDay3)],
+      ["availableTimesDay4", JSON.stringify(availableTimesDay4)],
+      ["availableTimesDay5", JSON.stringify(availableTimesDay5)],
+      ["availableTimesDay6", JSON.stringify(availableTimesDay6)],
+      ["availableTimesDay7", JSON.stringify(availableTimesDay7)],
+    ];
+
+    await AsyncStorage.multiSet(data);
+    // console.log("Multiple items saved successfully!");
+  } catch (error) {
+    console.error("Error saving multiple items:", error);
+  }
+};
+
+
+
 // Handler for moving to the next step or screen
     const handleNext = ()=>{
-        console.log(availableTimesDay1)
         setIsNext(true)
+
+        setItems();
+
         navigation.navigate('DoctorRegScreen4') 
    
     }

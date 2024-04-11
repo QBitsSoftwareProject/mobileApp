@@ -5,6 +5,8 @@ import { useNavigation } from '@react-navigation/native'
 import InputField from '../../../components/InputField/InputField'
 import { CheckBox } from 'react-native-elements'
 import FilePicker from '../../../components/GetImages/FilePicker'
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { doctorRegistration } from '../../../services/doctorServices/doctorService'
 
 const DoctorRegScreen4 = () => {
     const navigation = useNavigation()
@@ -54,8 +56,70 @@ const DoctorRegScreen4 = () => {
         navigation.navigate('LoginScreen')
       }
 
+      
+
+
+  //send doctor details to backend
+const sendDoctor = async () => {
+  try {
+    const fullName = await AsyncStorage.getItem('fullName');
+    const userName = await AsyncStorage.getItem('userName');
+    const email = await AsyncStorage.getItem('email');
+    const password = await AsyncStorage.getItem('password');
+    const contactNumber = await AsyncStorage.getItem('contactNumber');
+    const address = await AsyncStorage.getItem('address');
+    const city = await AsyncStorage.getItem('city');
+    const country = await AsyncStorage.getItem('country');
+    const licenseSide1 = await AsyncStorage.getItem('licenseSide1');
+    const licenseSide2 = await AsyncStorage.getItem('licenseSide2');
+    const specialization = await AsyncStorage.getItem('specialization');
+    const qualification = await AsyncStorage.getItem('qualification');
+    const availableDays = await AsyncStorage.getItem('availableDays');
+    const availableTimesDay1 = await AsyncStorage.getItem('availableTimesDay1');
+    const availableTimesDay2 = await AsyncStorage.getItem('availableTimesDay2');
+    const availableTimesDay3 = await AsyncStorage.getItem('availableTimesDay3');
+    const availableTimesDay4 = await AsyncStorage.getItem('availableTimesDay4');
+    const availableTimesDay5 = await AsyncStorage.getItem('availableTimesDay5');
+    const availableTimesDay6 = await AsyncStorage.getItem('availableTimesDay6');
+    const availableTimesDay7 = await AsyncStorage.getItem('availableTimesDay7');
+
+    const userData = await doctorRegistration(
+      fullName,
+      userName,
+      email,
+      password,
+      contactNumber,
+      address,
+      city,
+      country,
+      licenseSide1,
+      licenseSide2,
+      specialization,
+      qualification,
+      availableDays,
+      availableTimesDay1,
+      availableTimesDay2,
+      availableTimesDay3,
+      availableTimesDay4,
+      availableTimesDay5,
+      availableTimesDay6,
+      availableTimesDay7,
+      proPic,
+      bio
+    );
+
+    if (userData != null) {
+      navigation.navigate("LoginScreen");
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+
+
+      
       // Handler for submitting the registration form
-    
       const handleSubmit = ()=>{
         if(
           bio.trim() === '' ||
@@ -70,8 +134,8 @@ const DoctorRegScreen4 = () => {
         }
         else{
           setIsEmpty(false)
-          console.log(proPic)
-          navigation.navigate('TabBar')
+          
+          sendDoctor();
         }
       }
 
