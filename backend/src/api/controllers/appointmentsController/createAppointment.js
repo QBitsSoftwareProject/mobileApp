@@ -5,7 +5,7 @@ exports.createAppointment = async (req,res) => {
     try {
         // const { docId } = req.params;
 
-        const { doctorId,userId,date, time} = req.body;
+        const { doctorId, userId, date, time} = req.body;
 
         const doctor = await doctorSchema.findById(doctorId);
        

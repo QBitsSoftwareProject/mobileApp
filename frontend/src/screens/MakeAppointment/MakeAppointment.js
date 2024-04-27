@@ -41,9 +41,8 @@ const MakeAppointment = () => {
   const [dateBtnPress, setDateBtnPress] = useState(false) // State to track date button press
   const [popupMessage, setPopupMessage] = useState(''); // State for popup message
   const [getTime, setGetTime] = useState();
-  // console.log(getTime);
   const [getDate, setGetDate] = useState();  
-  // console.log(getDate);
+
 
   // Hook for navigation  
     const navigation=useNavigation();
