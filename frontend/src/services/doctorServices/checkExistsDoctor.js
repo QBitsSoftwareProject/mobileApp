@@ -1,5 +1,7 @@
 import axios from "axios";
-const URL = "http://192.168.8.149:3000/api/v1/doctor";
+import { BACKEND_URI } from "../../config/env";
+
+const URL = BACKEND_URI + "/doctor";
 
 export const checkExistsDoctor = async (email) => {
   try {

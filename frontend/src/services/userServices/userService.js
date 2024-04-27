@@ -1,7 +1,8 @@
 import axios from "axios";
+import { BACKEND_URI } from "../../config/env";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-const URL = "http://192.168.8.149:3000/api/v1/user";
+const URL = BACKEND_URI + "/user";
 
 //user login
 export const userLogin = async (email, password) => {

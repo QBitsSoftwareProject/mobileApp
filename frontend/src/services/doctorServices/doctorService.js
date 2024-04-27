@@ -1,7 +1,8 @@
 import axios from "axios";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { BACKEND_URI } from "../../config/env";
 
-const URL = "http://192.168.8.149:3000/api/v1/doctor";
+const URL = BACKEND_URI + "/doctor";
 
 //user registration
 export const doctorRegistration = async (

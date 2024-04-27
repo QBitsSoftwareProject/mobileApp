@@ -7,7 +7,6 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 const SettingScreen = ({ route }) => {
   const navigation = useNavigation();
   const { routeName } = route.params;
-  console.log(routeName);
 
   const handleLogout = async () => {
     await clearAllData();
