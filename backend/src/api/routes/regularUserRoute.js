@@ -19,6 +19,9 @@ const {
 const {
   loginUser,
 } = require("../controllers/regularUserControllers/loginController");
+const {
+  checkExistsUser,
+} = require("../controllers/regularUserControllers/checkExistsUser");
 
 const router = express.Router();
 
@@ -27,6 +30,8 @@ router.get("/", getRegularUsers);
 router.get("/:id", getARegularUser);
 router.put("/:id", updateRegularUser);
 router.delete("/:id", deleteRegularUser);
+
+router.post("/checkExistsUser", checkExistsUser);
 
 //register and login routes
 router.post("/login", loginUser);

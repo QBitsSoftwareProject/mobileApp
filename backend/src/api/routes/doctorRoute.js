@@ -12,6 +12,9 @@ const {
 const {
   createDoctor,
 } = require("../controllers/doctorControllers/createController");
+const {
+  checkExistsDoctor,
+} = require("../controllers/doctorControllers/checkExistsDoctor");
 
 const router = express.Router();
 
@@ -20,6 +23,8 @@ router.get("/", getDoctors);
 router.get("/:id", getADoctor);
 router.put("/:id", updateDoctor);
 router.delete("/:id", deleteDoctor);
+
+router.post("/checkExistsDoctor", checkExistsDoctor);
 
 //register route
 router.post("/register", createDoctor);

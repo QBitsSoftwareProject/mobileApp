@@ -3,8 +3,6 @@ import { View, Image, Text, TouchableOpacity, Platform, Alert } from 'react-nati
 import * as ImagePicker from 'expo-image-picker';
 import styles from './styles';
 
-const proPic = require('../../assets/images/doc.jpg');
-
 const FilePicker = (props) => {
   const [selectedImage, setSelectedImage] = useState(null);
 
@@ -33,7 +31,23 @@ const FilePicker = (props) => {
     });
 
     if (!result.canceled) {
-      setSelectedImage(result.assets[0].uri);
+      const selectedAsset = result.assets[0]; // Access the first selected asset
+  
+      const localUri = selectedAsset.uri;
+      const filename = localUri.split('/').pop();
+  
+      // Infer the type of the image
+      const match = /\.(\w+)$/.exec(filename);
+      const type = match ? `image/${match[1]}` : `image`;
+  
+      // Create a Blob from the selected image
+      const file = {
+        uri: localUri,
+        name: filename,
+        type,
+      };
+  
+      setSelectedImage(file);
     }
   };
 
@@ -47,7 +61,7 @@ const FilePicker = (props) => {
 
       <View style={styles.imageContainer}>
         {selectedImage ? (
-          <Image source={{ uri: selectedImage }} style={styles.image} />
+          <Image source={{ uri: selectedImage.uri }} style={styles.image} />
         ) : (
           <Text style={{ color: '#979DAC' }}>{props.errMsg}</Text>
         )}

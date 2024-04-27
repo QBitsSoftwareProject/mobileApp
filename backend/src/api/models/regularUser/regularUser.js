@@ -50,7 +50,11 @@ const regularUserSchema = new schema({
     country:{
         type:String,
         required:true,
-    }
+    },
+    proPic: {
+        type: String,
+        required:true
+      },
 
     
 })

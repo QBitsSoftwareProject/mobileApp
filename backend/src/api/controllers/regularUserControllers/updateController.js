@@ -4,13 +4,13 @@ exports.updateRegularUser= async (req, res)=>{
 
     try{
       // Destructuring the request body to extract user details
-        const { fullName, userName, email, contactNumber, address, city, country} = req.body;
+        const { fullName, userName, email, contactNumber, address, city, country, proPic} = req.body;
 
          // Extracting the user ID from request parameters
         const { id } = req.params;
 
         // Creating an object with updated user details
-        const updateUser = { fullName, userName, email, contactNumber, address, city, country};
+        const updateUser = { fullName, userName, email, contactNumber, address, city, country, proPic};
 
         // Finding and updating the user by ID
         await regularUser.findByIdAndUpdate(id, updateUser);

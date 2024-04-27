@@ -33,7 +33,8 @@ export const userRegistration = async (
   contactNumber,
   address,
   city,
-  country
+  country,
+  proPic
 ) => {
   try {
     const response = await axios.post(`${URL}/register`, {
@@ -45,6 +46,7 @@ export const userRegistration = async (
       address,
       city,
       country,
+      proPic,
     });
     // console.log(response)
     return response.data;
@@ -57,6 +59,19 @@ export const userRegistration = async (
 export const getUser = async () => {
   try {
     const response = await axios.get(URL, {
+      headers: { authtoken: AsyncStorage.getItem("token") },
+    });
+    // console.log(response.data)
+    return response.data;
+  } catch (error) {
+    console.log(error);
+    throw new Error("Error during request setup");
+  }
+};
+
+export const getAUser = async (id) => {
+  try {
+    const response = await axios.get(`${URL}/${id}`, {
       headers: { authtoken: AsyncStorage.getItem("token") },
     });
     // console.log(response.data)

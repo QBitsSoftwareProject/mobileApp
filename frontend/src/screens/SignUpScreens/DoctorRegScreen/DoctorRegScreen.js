@@ -13,9 +13,7 @@ import styles from "./styles";
 import { useNavigation } from "@react-navigation/native";
 import InputField from "../../../components/InputField/InputField";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-
-
-
+import { checkExistsDoctor } from "../../../services/doctorServices/checkExistsDoctor";
 
 const DoctorRegScreen = () => {
   const navigation = useNavigation();
@@ -35,6 +33,7 @@ const DoctorRegScreen = () => {
   const [isEmpty, setIsEmpty] = useState(false);
   const [isEmailValid, setIsEmailValid] = useState(true);
   const [isPhoneNumValid, setIsPhoneNumValid] = useState(true);
+  const [emailExist, setEmailExist] = useState(false);
 
   // State variable for adjusting screen padding when keyboard is open
   const [screenPadding, setScreenPadding] = useState(0);
@@ -61,14 +60,10 @@ const DoctorRegScreen = () => {
     };
   }, []);
 
-
-
   // Handler for navigating back to the previous screen
   const handleBackPress = () => {
     navigation.navigate("SelectionScreen");
   };
-
-
 
   // Function for validating email format
   const validateEmail = (email) => {
@@ -76,16 +71,22 @@ const DoctorRegScreen = () => {
     return emailRegex.test(email);
   };
 
-
-
+  //check email
+  const checkEmail = () => {
+    if (!isEmailValid) {
+      return "Email is not valid!";
+    } else if (emailExist) {
+      return "Email is already exists";
+    } else {
+      return "";
+    }
+  };
 
   // Function for validating phone number format
   const validatePhoneNumber = (phoneNumber) => {
     const phoneRegex = /^\+\d{11}$/;
     return phoneRegex.test(phoneNumber);
   };
-
-
 
   // save data to local storage
   const setItems = async () => {
@@ -109,38 +110,44 @@ const DoctorRegScreen = () => {
   };
 
   // Handler for moving to the next step or screen
-  const handleNext = () => {
-    if (
-      name.trim() === "" ||
-      userName.trim() === "" ||
-      email.trim() === "" ||
-      password.trim() === "" ||
-      contactNo.trim() === "" ||
-      address.trim() === "" ||
-      city.trim() === "" ||
-      country.trim() === ""
-    ) {
+  const handleNext = async () => {
+    try {
+      if (
+        name.trim() === "" ||
+        userName.trim() === "" ||
+        email.trim() === "" ||
+        password.trim() === "" ||
+        contactNo.trim() === "" ||
+        address.trim() === "" ||
+        city.trim() === "" ||
+        country.trim() === ""
+      ) {
+        setIsEmpty(true);
+      } else if (!validateEmail(email)) {
+        setIsEmailValid(false);
+        setIsEmpty(false);
+        setIsPhoneNumValid(true);
+      } else if (!validatePhoneNumber(contactNo)) {
+        setIsPhoneNumValid(false);
+        setIsEmailValid(true);
+        setIsEmpty(false);
+      } else {
+        setIsEmpty(false);
 
-      setIsEmpty(true);
-      
-    } else if (!validateEmail(email)) {
+        setIsPhoneNumValid(true);
+        const checkUser = await checkExistsDoctor(email);
 
-      setIsEmailValid(false);
-      setIsEmpty(false);
-      setIsPhoneNumValid(true);
+        if (checkUser.user != null) {
+          setEmailExist(true);
+          return;
+        }
 
-    } else if (!validatePhoneNumber(contactNo)) {
+        setItems();
 
-      setIsPhoneNumValid(false);
-      setIsEmailValid(true);
-      setIsEmpty(false);
-
-    } else {
-      setIsEmpty(false);
-
-      setItems();
-
-      navigation.navigate("DoctorRegScreen2");
+        navigation.navigate("DoctorRegScreen2");
+      }
+    } catch (err) {
+      console.log(err);
     }
   };
 
@@ -175,7 +182,7 @@ const DoctorRegScreen = () => {
               placeHolder={"ex@gmail.com"}
               label={"Email :"}
               onChangeText={setEmail}
-              errMsg={!isEmailValid ? "Email is not valid!" : ""}
+              errMsg={checkEmail()}
             />
             <InputField
               placeHolder={"Password"}
@@ -212,6 +219,11 @@ const DoctorRegScreen = () => {
               <Text style={{ color: "#E82519" }}>
                 Input fields cannot be empty!
               </Text>
+            </View>
+          )}
+          {(!isEmailValid || emailExist || !isPhoneNumValid) && (
+            <View style={{ alignItems: "center", marginTop: 15 }}>
+              <Text style={{ color: "#E82519" }}>Check your input data!</Text>
             </View>
           )}
 

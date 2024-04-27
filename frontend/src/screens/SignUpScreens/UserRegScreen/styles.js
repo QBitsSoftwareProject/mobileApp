@@ -58,5 +58,10 @@ export default style =StyleSheet.create({
         fontWeight:'400',
         color:'#5C677D'
     },
+    loader:{
+        display:'flex',
+        justifyContent:"center",
+        alignItems:'center'
+    }
  
 })

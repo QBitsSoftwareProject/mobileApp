@@ -1,44 +1,80 @@
-import React from 'react';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import SettingScreen from '../../screens/SettingScreen/SettingScreen';
-import NotifyScreen from '../../screens/NotificationScreen/NotifyScreen';
-import ProfileScreen from '../../screens/ProfileScreen/ProfileScreen';
-import HomeStack from '../../navigation/routes/HomeStack';
-import TabBarIcon from './TabBarIcon';
+import React from "react";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import SettingScreen from "../../screens/SettingScreen/SettingScreen";
+import NotifyScreen from "../../screens/NotificationScreen/NotifyScreen";
+import ProfileScreen from "../../screens/ProfileScreen/ProfileScreen";
+import HomeStack from "../../navigation/routes/HomeStack";
+import TabBarIcon from "./TabBarIcon";
 
 const Tab = createBottomTabNavigator();
 
-const TabBar = ({route}) => {
-  const { userName } = route.params;
+const TabBar = ({ route, user, userRole }) => {
+  let userId, role;
+  let routeName = "LoginStack";
+
+  if (!route || !route.params) {
+    userId = user;
+    role = userRole;
+  } else {
+    userId = route.params.userId;
+    role = route.params.role;
+    routeName = route.params.routeName;
+  }
 
   return (
     <Tab.Navigator
       screenOptions={{
         tabBarShowLabel: false,
         tabBarStyle: {
-          position: 'absolute',
+          position: "absolute",
           height: 85,
           borderTopLeftRadius: 40,
           borderTopRightRadius: 40,
         },
-        headerShown: false
+        headerShown: false,
       }}
     >
       <Tab.Screen
-        name='home'
+        name="home"
         component={HomeStack}
-        initialParams={{ userName: userName }}
+        initialParams={{ userId: userId, role: role }}
         options={{
-          tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} screenName={'home'} />,
-          
-        }} />
+          tabBarIcon: ({ focused }) => (
+            <TabBarIcon focused={focused} screenName={"home"} />
+          ),
+        }}
+      />
 
-      <Tab.Screen name='profile' component={ProfileScreen} options={{ tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} screenName={'user'} /> }} />
+      <Tab.Screen
+        name="profile"
+        component={ProfileScreen}
+        options={{
+          tabBarIcon: ({ focused }) => (
+            <TabBarIcon focused={focused} screenName={"user"} />
+          ),
+        }}
+      />
 
-      <Tab.Screen name='Notification' component={NotifyScreen} options={{ tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} screenName={'notification'} /> }} />
+      <Tab.Screen
+        name="Notification"
+        component={NotifyScreen}
+        options={{
+          tabBarIcon: ({ focused }) => (
+            <TabBarIcon focused={focused} screenName={"notification"} />
+          ),
+        }}
+      />
 
-      <Tab.Screen name='setting' component={SettingScreen} options={{ tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} screenName={'setting'} /> }} />
-
+      <Tab.Screen
+        name="setting"
+        component={SettingScreen}
+        initialParams={{ routeName: routeName }}
+        options={{
+          tabBarIcon: ({ focused }) => (
+            <TabBarIcon focused={focused} screenName={"setting"} />
+          ),
+        }}
+      />
     </Tab.Navigator>
   );
 };

@@ -38,7 +38,8 @@ export const doctorRegistration = async (
       address,
       city,
       country,
-      
+      licenseSide1,
+      licenseSide2,
       specialization,
       qualification,
       availableDays,
@@ -49,7 +50,7 @@ export const doctorRegistration = async (
       availableTimesDay5,
       availableTimesDay6,
       availableTimesDay7,
-      
+      proPic,
       bio,
     });
     // console.log(response)
@@ -60,9 +61,22 @@ export const doctorRegistration = async (
   }
 };
 
-export const getUser = async () => {
+export const getDoctors = async () => {
   try {
     const response = await axios.get(URL, {
+      headers: { authtoken: AsyncStorage.getItem("token") },
+    });
+    // console.log(response.data)
+    return response.data;
+  } catch (error) {
+    console.log(error);
+    throw new Error("Error during request setup");
+  }
+};
+
+export const getADoctor = async (id) => {
+  try {
+    const response = await axios.get(`${URL}/${id}`, {
       headers: { authtoken: AsyncStorage.getItem("token") },
     });
     // console.log(response.data)
