@@ -1,25 +1,20 @@
 import React, { useState } from 'react';
-import { Text, View, TouchableOpacity, Image, StyleSheet } from 'react-native';
+import { Text, View, TouchableOpacity, Image, StyleSheet, Modal } from 'react-native';
 import { Audio } from 'expo-av';
+import AudioPlayer from './AudioService';
 
 const ExpandableCard = (props) => {
-  const [sound, setSound] = useState(null);
+  const [isVisible, setIsVisible] = useState(false); // State for modal visibility
 
-  const playSound = async () => {
+  const handlePlaySound = async () => {
     try {
-      if (!sound) {
-        const { sound } = await Audio.Sound.createAsync(
-          { uri: props.rUrl }
-        );
-        setSound(sound);
-        await sound.playAsync();
-      } else {
-        await sound.replayAsync(); // Replay the sound if it's already loaded
-      }
+      // Set the visibility of the modal to true when the sound starts playing
+      setIsVisible(true);
     } catch (error) {
       console.error('Failed to play the sound:', error);
     }
   };
+  
 
   return (
     <View style={{ margin: 10 }}>
@@ -32,7 +27,7 @@ const ExpandableCard = (props) => {
           alignItems: 'center',
         }}
       >
-        <TouchableOpacity onPress={playSound}>
+        <TouchableOpacity onPress={handlePlaySound}>
           <Image
             source={require('../../assets/images/MindRelaxingMethod/mp3playbutton.png')}
             style={styles.playButton}
@@ -42,16 +37,15 @@ const ExpandableCard = (props) => {
       </View>
 
       <Modal visible={isVisible} transparent>
-      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: 'rgba(0, 0, 0, 0.5)' }}>
-        <TouchableOpacity onPress={() => setIsVisible(false)} style={{ position: 'absolute', top: 20, right: 20 }}>
-          <Text style={{ color: 'white' }}>Close</Text>
-        </TouchableOpacity>
-        <View style={{ backgroundColor: 'white', padding: 20, borderRadius: 10 }}>
-          <AudioPlayer mp3={props.rUrl} />
+        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: 'rgba(0, 0, 0, 0.5)' }}>
+          <TouchableOpacity onPress={() => setIsVisible(false)} style={{ position: 'absolute', top: 20, right: 20 }}>
+            <Text style={{ color: 'white' }}>Close</Text>
+          </TouchableOpacity>
+          <View style={{ backgroundColor: 'white', padding: 20, borderRadius: 10 }}>
+            <AudioPlayer mp3={props.rUrl} />
+          </View>
         </View>
-      </View>
-    </Modal>
-    
+      </Modal>
     </View>
   );
 };

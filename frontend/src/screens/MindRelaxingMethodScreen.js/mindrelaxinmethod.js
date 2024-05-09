@@ -22,7 +22,7 @@ const Mindrelaxinmethod =() => {
       try{
           let url;
 
-          url = "http://192.168.43.80:3000/method/get-method"
+          url = "http://192.168.1.26:3000/method/get-method"
 
           const response = await axios.get(url);
           setData(response.data);
@@ -40,6 +40,7 @@ const Mindrelaxinmethod =() => {
 
   //filter method according to the stress level
   const filteredData = Data.filter(item => item.mark === yourMark);
+
 
      
     return (

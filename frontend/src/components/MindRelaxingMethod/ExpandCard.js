@@ -1,57 +1,85 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Text, View, TouchableOpacity, Animated, Image, StyleSheet, ImageBackground ,Modal} from 'react-native';
-import AudioPlayer from '../../screens/MindRelaxingMethodScreen.js/AudioPlayer';
+import { Text, View, TouchableOpacity, Animated, Image, StyleSheet, ImageBackground, Modal } from 'react-native';
+import { Audio } from 'expo-av';
+import PopupModal from './MusicPlayer';
 
-//expand card componnent
+// expand card component
 const ExpandableCard = (props) => {
   const [isExpanded, setIsExpanded] = useState(true);
   const heightAnim = useRef(new Animated.Value(0)).current;
   const [imageHeight, setImageHeight] = useState(0);
   const [textHeight, setTextHeight] = useState(0);
   const [isVisible, setIsVisible] = useState(false);
+  const [sound, setSound] = useState(null);
+  const [modalVisible, setModalVisible] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(false);
 
-  let btnFunction;
+  const toggleModal = () => {
+    setModalVisible(!modalVisible);
+  };
 
   const toggleExpand = () => {
     setIsExpanded(!isExpanded);
   };
 
   const imglink = props.imgLink;
-  // console.log(imglink);
-
   const methodtype = props.methodType;
-  // console.log(methodtype);
+
   let mimg;
   let mtitle;
   let ibtn;
+  let btnfunction; // Declare btnfunction here
 
-  if (methodtype === 'music'){
-      mimg = require('../../assets/images/MindRelaxingMethod/mp3.png');
-      mtitle = 'Listen a music'
-      ibtn = require('../../assets/images/MindRelaxingMethod/mp3playbutton.png');
-      btnFunction = () => {
-        console.log(props.rUrl);
-        return <AudioPlayer mp3 = {props.rUrl}/>
-        
-      };
-      
-  }
-  else if(methodtype === 'story'){
+  // Define playAudio function
+  const playAudio = async () => {
+    
+    try {
+      if (sound) {
+        if (isPlaying) {
+          await sound.pauseAsync(); // Pause the audio if it's already playing
+        } else {
+          await sound.playAsync(); // Play the audio if it's paused
+        }
+        setIsPlaying(!isPlaying); // Toggle the isPlaying state
+      } else {
+        const { sound: newSound } = await Audio.Sound.createAsync(
+          { uri: props.rUrl },
+          { shouldPlay: true }
+        );
+        setSound(newSound);
+        setIsPlaying(true);
+      }
+    } catch (error) {
+      console.error('Failed to play/pause audio:', error);
+    }
+  };
+  
+  const pauseAudio = async () => {
+    try {
+      if (sound && isPlaying) { // Only pause if audio is playing
+        await sound.pauseAsync();
+        setIsPlaying(false); // Update isPlaying state
+      }
+    } catch (error) {
+      console.error('Failed to pause audio:', error);
+    }
+  };
+
+
+  if (methodtype === 'music') {
+    mimg = require('../../assets/images/MindRelaxingMethod/mp3.png');
+    mtitle = 'Listen to Music';
+    ibtn = require('../../assets/images/MindRelaxingMethod/mp3playbutton.png');
+    btnfunction = toggleModal; // Assign playAudio to btnfunction
+  } else if (methodtype === 'story') {
     mimg = require('../../assets/images/MindRelaxingMethod/story.png');
-    mtitle = 'Read a story'
+    mtitle = 'Read a Story';
     ibtn = require('../../assets/images/MindRelaxingMethod/read.png');
-    ibtn = require('../../assets/images/MindRelaxingMethod/mp3playbutton.png');
-       
-  }
-  else{
+  } else {
     mimg = require('../../assets/images/MindRelaxingMethod/breathing.png');
-    mtitle = 'Breathing exercise'
+    mtitle = 'Breathing Exercise';
     ibtn = require('../../assets/images/MindRelaxingMethod/mp3playbutton.png');
-    ibtn = require('../../assets/images/MindRelaxingMethod/mp3playbutton.png');
-       
   }
-
-  // console.log(mimg)
 
   useEffect(() => {
     Animated.timing(heightAnim, {
@@ -71,18 +99,16 @@ const ExpandableCard = (props) => {
 
   return (
     <View style={{ margin: 10 }}>
-      <View
-        style={{
-          backgroundColor: 'white',
-          padding: 10,
-          borderRadius: isExpanded ? 20 : 20,
-          borderBottomLeftRadius: isExpanded ? 20 : 0,
-          borderBottomRightRadius: isExpanded ? 20 : 0,
-          flexDirection: 'row',
-          height: 112,
-          marginHorizontal:10
-        }}
-      >
+      <View style={{
+        backgroundColor: 'white',
+        padding: 10,
+        borderRadius: isExpanded ? 20 : 20,
+        borderBottomLeftRadius: isExpanded ? 20 : 0,
+        borderBottomRightRadius: isExpanded ? 20 : 0,
+        flexDirection: 'row',
+        height: 112,
+        marginHorizontal: 10
+      }}>
         <View style={styles.expandImg}>
           <Image source={mimg} />
         </View>
@@ -112,20 +138,20 @@ const ExpandableCard = (props) => {
             backgroundColor: 'white',
             borderBottomLeftRadius: 15,
             borderBottomRightRadius: 15,
-            marginTop:-15,
-            marginHorizontal:10
+            marginTop: -15,
+            marginHorizontal: 10
           }}
         >
           <View style={{ flexDirection: 'column' }}>
-            <View style={{ height: 160, paddingHorizontal: 80, marginTop:10}} onLayout={onImageLayout}>
+            <View style={{ height: 160, paddingHorizontal: 80, marginTop: 10 }} onLayout={onImageLayout}>
               <View style={{ flex: 1, borderRadius: 15, overflow: 'hidden' }}>
                 <ImageBackground
                   source={{ uri: imglink }}
                   style={styles.contentImage}
                 >
-                  <TouchableOpacity onPress={btnFunction}>
-  <Image source={ibtn} />
-</TouchableOpacity>
+                  <TouchableOpacity onPress={btnfunction}>
+                    <Image source={ibtn} />
+                  </TouchableOpacity>
                 </ImageBackground>
               </View>
             </View>
@@ -137,8 +163,8 @@ const ExpandableCard = (props) => {
           </View>
         </Animated.View>
       </View>
+      <PopupModal modalVisible={modalVisible} toggleModal={toggleModal} playAudio={playAudio} isPlaying={isPlaying}  img = {imglink} />
 
-      
     </View>
   );
 };
@@ -148,7 +174,6 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    
   },
 
   expandTitle: {
@@ -183,7 +208,6 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    
   },
 
   contentText: {
