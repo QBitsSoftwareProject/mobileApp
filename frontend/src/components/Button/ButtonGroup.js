@@ -1,7 +1,7 @@
 import { View, Text, TouchableOpacity } from "react-native";
 import React, { useState } from "react";
 
-const ButtonGroup = ({ tab1, tab2, tab3 }) => {
+const ButtonGroup = ({ tab1, tab2, tab3, select }) => {
   const [selectedTab, setSelectedTab] = useState(0);
   return (
     <View
@@ -24,6 +24,7 @@ const ButtonGroup = ({ tab1, tab2, tab3 }) => {
         }}
         onPress={() => {
           setSelectedTab(0);
+          select(0);
         }}
       >
         <Text
@@ -48,6 +49,7 @@ const ButtonGroup = ({ tab1, tab2, tab3 }) => {
         }}
         onPress={() => {
           setSelectedTab(1);
+          select(1);
         }}
       >
         <Text
@@ -72,6 +74,7 @@ const ButtonGroup = ({ tab1, tab2, tab3 }) => {
         }}
         onPress={() => {
           setSelectedTab(2);
+          select(2);
         }}
       >
         <Text

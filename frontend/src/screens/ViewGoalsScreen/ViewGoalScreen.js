@@ -6,10 +6,12 @@ import {
   Touchable,
   TouchableOpacity,
 } from "react-native";
-import React from "react";
+import React, { useState } from "react";
 import HeaderSub from "../../components/HeaderSub/HeaderSub";
 import ButtonGroup from "../../components/Button/ButtonGroup";
 import ViewGoalCard from "../../components/ViewGoalCard/ViewGoalCard";
+import SuggestGoalCard from "../../components/suggestGoalCard/SuggestGoalCard";
+import HistoryGoalCard from "../../components/HistoryGoalCard/HistoryGoalCard";
 
 const goalsList = [
   {
@@ -49,7 +51,85 @@ const goalsList = [
   },
 ];
 
+const suggestGoalsList = [
+  {
+    id: 1,
+    title: "Mindfulness Moments",
+    subTitle:
+      "3 times a week! Ease stress with journaling. Pen your thoughts and feelings for clarity andcalmness.",
+  },
+  {
+    id: 2,
+    title: "Write it out",
+    subTitle:
+      "Take 10! Practice daily mindfulness for peace. Try meditation, breathing exercises, or body scans to find calm in just 10 minutes.",
+  },
+  {
+    id: 3,
+    title: "Connect and Smile",
+    subTitle:
+      "Twice a week, reach out! Socialize in-person, call, or message loved ones. Building connections for a happier you",
+  },
+  {
+    id: 4,
+    title: "Mindfulness Moments",
+    subTitle:
+      "Take 10! Practice daily mindfulness for peace. Try meditation, breathing exercises, or body scans to find calm in just 10 minutes.",
+  },
+];
+const completedGoalsList = [
+  {
+    id: 1,
+    title: "Mindfulness Moments",
+    completness: 3,
+    length: 6,
+    completedDate: "12.11.2024",
+  },
+  {
+    id: 2,
+    title: "Connect and Smile",
+
+    completness: 5,
+    length: 6,
+    completedDate: "12.11.2024",
+  },
+  {
+    id: 3,
+    title: "Write it Out",
+    completness: 1,
+    length: 6,
+    completedDate: "12.11.2024",
+  },
+  {
+    id: 4,
+    title: "Mindfulness Moments",
+    completness: 2,
+    length: 6,
+    completedDate: "12.11.2024",
+  },
+  {
+    id: 5,
+    title: "Connect and Smile",
+
+    completness: 3,
+    length: 10,
+    completedDate: "12.11.2024",
+  },
+];
+
 const ViewGoalScreen = () => {
+  const [selectedTab, setSelectedTab] = useState(0);
+
+  const handleSelectTab = () => {
+    if (selectedTab == 0) {
+      return goalsList;
+    } else if (selectedTab == 1) {
+      return suggestGoalsList;
+    } else {
+      return completedGoalsList;
+    }
+  };
+
   return (
     <View
       style={{
@@ -70,34 +150,50 @@ const ViewGoalScreen = () => {
             tab1={"Your Goals"}
             tab2={"Suggested"}
             tab3={"Completed"}
+            select={setSelectedTab}
           />
         </View>
       </View>
       <View style={{ flex: 1 }}>
         <FlatList
-          data={goalsList}
+          data={handleSelectTab()}
           renderItem={({ item, index }) => (
             <View
               style={{
                 marginHorizontal: 25,
                 marginTop: 15,
-                marginBottom: index === goalsList.length - 1 ? 32 : 0,
+                marginBottom: index === handleSelectTab().length - 1 ? 32 : 0,
               }}
             >
-              <ViewGoalCard
-                title={item.title}
-                subTitle={item.subTitle}
-                cNumber={item.completness}
-                length={item.length}
-              />
+              {selectedTab == 0 ? (
+                <ViewGoalCard
+                  title={item.title}
+                  subTitle={item.subTitle}
+                  cNumber={item.completness}
+                  length={item.length}
+                />
+              ) : selectedTab == 1 ? (
+                <SuggestGoalCard title={item.title} subTitle={item.subTitle} />
+              ) : (
+                <HistoryGoalCard
+                  title={item.title}
+                  cNumber={item.completness}
+                  length={item.length}
+                  completedDate={item.completedDate}
+                />
+              )}
             </View>
           )}
         />
       </View>
 
-      <TouchableOpacity style={{ position: "absolute", bottom: 90, right: 25 }}>
-        <Image source={require("../../assets/images/plusBtn.png")} />
-      </TouchableOpacity>
+      {selectedTab == 0 && (
+        <TouchableOpacity
+          style={{ position: "absolute", bottom: 90, right: 25 }}
+        >
+          <Image source={require("../../assets/images/plusBtn.png")} />
+        </TouchableOpacity>
+      )}
     </View>
   );
 };

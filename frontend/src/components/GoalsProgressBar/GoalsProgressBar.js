@@ -3,7 +3,7 @@ import React from "react";
 import styles from "./styles";
 import { Dimensions } from "react-native";
 
-const GoalsProgressBar = ({ cNumber, length }) => {
+const GoalsProgressBar = ({ cNumber, length, active }) => {
   const windowWidth = Dimensions.get("window").width;
   const percent = (cNumber / length).toFixed(2);
   const barWidth = percent * (windowWidth - 80);
@@ -17,7 +17,7 @@ const GoalsProgressBar = ({ cNumber, length }) => {
         <Text style={styles.percentage}>{percent * 100}%</Text>
       </View>
 
-      <Text style={styles.progressTxt}>Active</Text>
+      {active != "hide" && <Text style={styles.progressTxt}>Active</Text>}
     </View>
   );
 };
