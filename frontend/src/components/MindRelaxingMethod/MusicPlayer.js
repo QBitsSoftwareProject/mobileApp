@@ -3,7 +3,7 @@ import { Modal, View, Text, TouchableOpacity, StyleSheet, Image } from 'react-na
 
 
 
-const PopupModal = ({ modalVisible, toggleModal, playAudio ,isPlaying,img}) => {
+const PopupModal = ({ modalVisible, toggleModal, playAudio ,isPlaying,img,playVideo}) => {
 
     console.log(img)
   return (

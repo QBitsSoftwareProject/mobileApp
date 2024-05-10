@@ -1,7 +1,12 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Text, View, TouchableOpacity, Animated, Image, StyleSheet, ImageBackground, Modal } from 'react-native';
 import { Audio } from 'expo-av';
+import { Video } from 'expo-av';
 import PopupModal from './MusicPlayer';
+import VideoPlayerModal from './VideoPlayerModal';
+import AudioPlayerModal from './AudioPlayerModal';
+
+
 
 // expand card component
 const ExpandableCard = (props) => {
@@ -15,6 +20,7 @@ const ExpandableCard = (props) => {
   const [isPlaying, setIsPlaying] = useState(false);
 
   const toggleModal = () => {
+    console.log(resource)
     setModalVisible(!modalVisible);
   };
 
@@ -43,7 +49,7 @@ const ExpandableCard = (props) => {
         setIsPlaying(!isPlaying); // Toggle the isPlaying state
       } else {
         const { sound: newSound } = await Audio.Sound.createAsync(
-          { uri: props.rUrl },
+          { uri: resource },
           { shouldPlay: true }
         );
         setSound(newSound);
@@ -53,24 +59,46 @@ const ExpandableCard = (props) => {
       console.error('Failed to play/pause audio:', error);
     }
   };
-  
-  const pauseAudio = async () => {
-    try {
-      if (sound && isPlaying) { // Only pause if audio is playing
-        await sound.pauseAsync();
-        setIsPlaying(false); // Update isPlaying state
-      }
-    } catch (error) {
-      console.error('Failed to pause audio:', error);
-    }
+
+
+  const [video, setVideo] = useState(null);
+  const [isVideoPlaying, setIsVideoPlaying] = useState(false);
+
+  const [videoModalVisible, setvideoModalVisible] = useState(false);
+  // const videoSource = resource; // Replace with your video source
+  let videoSource;
+
+  const toggleVideoModal = () => {
+    console.log("resource is"+videoSource)
+    setvideoModalVisible(!videoModalVisible);
   };
+
+  const [audioModalVisible, setaudioModalVisible] = useState(false);
+  let audioSource ; // Replace with your audio file source
+
+  const toggleAudioModal = () => {
+    setaudioModalVisible(!audioModalVisible);
+  };
+
+  
+  let resource;
+
+  let img;
+
+  let name;
+  
+ 
+
 
 
   if (methodtype === 'music') {
     mimg = require('../../assets/images/MindRelaxingMethod/mp3.png');
     mtitle = 'Listen to Music';
     ibtn = require('../../assets/images/MindRelaxingMethod/mp3playbutton.png');
-    btnfunction = toggleModal; // Assign playAudio to btnfunction
+    btnfunction = toggleAudioModal; // Assign playAudio to btnfunction
+    audioSource = props.rUrl;
+    img = props.imgLink;
+    name = props.methodname;
   } else if (methodtype === 'story') {
     mimg = require('../../assets/images/MindRelaxingMethod/story.png');
     mtitle = 'Read a Story';
@@ -79,7 +107,11 @@ const ExpandableCard = (props) => {
     mimg = require('../../assets/images/MindRelaxingMethod/breathing.png');
     mtitle = 'Breathing Exercise';
     ibtn = require('../../assets/images/MindRelaxingMethod/mp3playbutton.png');
+    btnfunction = toggleVideoModal;
+    videoSource = props.rUrl;
   }
+
+  
 
   useEffect(() => {
     Animated.timing(heightAnim, {
@@ -164,7 +196,8 @@ const ExpandableCard = (props) => {
         </Animated.View>
       </View>
       <PopupModal modalVisible={modalVisible} toggleModal={toggleModal} playAudio={playAudio} isPlaying={isPlaying}  img = {imglink} />
-
+      <VideoPlayerModal visible={videoModalVisible} onClose={toggleVideoModal} videoSource={videoSource} />
+      <AudioPlayerModal visible={audioModalVisible} onClose={toggleAudioModal} audioSource={audioSource} img ={img} name = {name}/>
     </View>
   );
 };
