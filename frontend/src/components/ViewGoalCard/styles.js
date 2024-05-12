@@ -5,7 +5,6 @@ export default styles = StyleSheet.create({
     backgroundColor: "white",
     height: "auto",
     borderRadius: 20,
-    padding: 20,
   },
   title: {
     fontSize: 18,
@@ -14,5 +13,12 @@ export default styles = StyleSheet.create({
   subTitle: {
     fontSize: 12,
     color: "#979DAC",
+    width: 300,
+  },
+  deleteBtn: {
+    backgroundColor: "#B0B4C0",
+    borderRadius: 25,
+    alignItems: "center",
+    justifyContent: "center",
   },
 });

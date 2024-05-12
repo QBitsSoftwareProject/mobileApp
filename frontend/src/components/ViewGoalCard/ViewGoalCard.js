@@ -1,8 +1,10 @@
+import React, { useState } from "react";
 import { View, Text, TouchableOpacity } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import React from "react";
 import styles from "./styles";
 import GoalsProgressBar from "../GoalsProgressBar/GoalsProgressBar";
+import { ListItem } from "@rneui/themed";
+import { Button } from "@rneui/base";
 
 const ViewGoalCard = ({ title, subTitle, cNumber, length, goalId }) => {
   const navigation = useNavigation();
@@ -12,19 +14,41 @@ const ViewGoalCard = ({ title, subTitle, cNumber, length, goalId }) => {
   };
 
   return (
-    <TouchableOpacity
-      style={styles.cardContainer}
-      onPress={() => handlePress(goalId)}
+    <ListItem.Swipeable
+      rightContent={(reset) => (
+        <Button
+          onPress={() => {
+            reset();
+          }}
+          icon={{ name: "delete", color: "white", size: 50 }}
+          buttonStyle={{
+            backgroundColor: "#B0B4C0",
+            borderRadius: 20,
+          }}
+        />
+      )}
+      rightStyle={styles.deleteBtn}
+      containerStyle={styles.cardContainer}
     >
-      <View>
-        <Text style={styles.title}>{title}</Text>
-        <Text style={styles.subTitle}>{subTitle}</Text>
-      </View>
+      <ListItem.Content>
+        <TouchableOpacity
+          onPress={() => {
+            handlePress(goalId);
+            handleReload();
+          }}
+          style={{ width: "100%" }}
+        >
+          <View>
+            <Text style={styles.title}>{title}</Text>
+            <Text style={styles.subTitle}>{subTitle}</Text>
+          </View>
 
-      <View>
-        <GoalsProgressBar cNumber={cNumber} length={length} />
-      </View>
-    </TouchableOpacity>
+          <View>
+            <GoalsProgressBar cNumber={cNumber} length={length} />
+          </View>
+        </TouchableOpacity>
+      </ListItem.Content>
+    </ListItem.Swipeable>
   );
 };
 
