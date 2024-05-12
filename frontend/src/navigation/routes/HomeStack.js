@@ -1,6 +1,5 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import HomeScreen from "../../screens/HomeScreen/HomeScreen";
-import ViewGoalScreen from "../../screens/ViewGoalsScreen/ViewGoalScreen";
+import GoalsStack from "./GoalsStack";
 
 const stack = createNativeStackNavigator();
 
@@ -12,7 +11,7 @@ const HomeStack = () => {
         headerShown: false,
       }}
     >
-      <stack.Screen name="ViewGoalScreen" component={ViewGoalScreen} />
+      <stack.Screen name="GoalsStack" component={GoalsStack} />
     </stack.Navigator>
   );
 };

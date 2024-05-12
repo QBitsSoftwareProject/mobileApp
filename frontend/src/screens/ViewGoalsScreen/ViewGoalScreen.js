@@ -10,8 +10,9 @@ import React, { useState } from "react";
 import HeaderSub from "../../components/HeaderSub/HeaderSub";
 import ButtonGroup from "../../components/Button/ButtonGroup";
 import ViewGoalCard from "../../components/ViewGoalCard/ViewGoalCard";
-import SuggestGoalCard from "../../components/suggestGoalCard/SuggestGoalCard";
+
 import HistoryGoalCard from "../../components/HistoryGoalCard/HistoryGoalCard";
+import SuggestGoalCard from "../../components/SuggestGoalCard/SuggestGoalCard";
 
 const goalsList = [
   {
@@ -55,25 +56,25 @@ const suggestGoalsList = [
   {
     id: 1,
     title: "Mindfulness Moments",
-    subTitle:
+    description:
       "3 times a week! Ease stress with journaling. Pen your thoughts and feelings for clarity andcalmness.",
   },
   {
     id: 2,
     title: "Write it out",
-    subTitle:
+    description:
       "Take 10! Practice daily mindfulness for peace. Try meditation, breathing exercises, or body scans to find calm in just 10 minutes.",
   },
   {
     id: 3,
     title: "Connect and Smile",
-    subTitle:
+    description:
       "Twice a week, reach out! Socialize in-person, call, or message loved ones. Building connections for a happier you",
   },
   {
     id: 4,
     title: "Mindfulness Moments",
-    subTitle:
+    description:
       "Take 10! Practice daily mindfulness for peace. Try meditation, breathing exercises, or body scans to find calm in just 10 minutes.",
   },
 ];
@@ -125,7 +126,7 @@ const ViewGoalScreen = () => {
       return goalsList;
     } else if (selectedTab == 1) {
       return suggestGoalsList;
-    } else {
+    } else if (selectedTab == 2) {
       return completedGoalsList;
     }
   };
@@ -171,29 +172,36 @@ const ViewGoalScreen = () => {
                   subTitle={item.subTitle}
                   cNumber={item.completness}
                   length={item.length}
+                  goalId={item.id}
                 />
               ) : selectedTab == 1 ? (
-                <SuggestGoalCard title={item.title} subTitle={item.subTitle} />
-              ) : (
+                <SuggestGoalCard
+                  title={item.title}
+                  subTitle={item.description}
+                  goalId={item.id}
+                />
+              ) : selectedTab == 2 ? (
                 <HistoryGoalCard
                   title={item.title}
                   cNumber={item.completness}
                   length={item.length}
                   completedDate={item.completedDate}
                 />
-              )}
+              ) : null}
             </View>
           )}
         />
       </View>
 
-      {selectedTab == 0 && (
+      {/* Goals add btn--------------------------------------------------------------------------- */}
+
+      {/* {selectedTab == 0 && (
         <TouchableOpacity
           style={{ position: "absolute", bottom: 90, right: 25 }}
         >
           <Image source={require("../../assets/images/plusBtn.png")} />
         </TouchableOpacity>
-      )}
+      )} */}
     </View>
   );
 };
