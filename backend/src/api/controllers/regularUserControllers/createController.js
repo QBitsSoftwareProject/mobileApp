@@ -1,4 +1,5 @@
 const regularUser = require("../../models/regularUser/regularUser");
+const bcrypt = require("bcryptjs");
 
 exports.createRegularUser = async (req, res) => {
   try {
@@ -15,7 +16,7 @@ exports.createRegularUser = async (req, res) => {
       proPic,
     } = req.body;
 
-    const encryptedPwd = await bycrypt.hash(password, 10);
+    const encryptedPwd = await bcrypt.hash(password, 10);
 
     // Creating a new regular user using the regularUser model and the provided data
     const newUser = await regularUser.create({
@@ -44,7 +45,9 @@ exports.createRegularUser = async (req, res) => {
     } else {
       // Handling other errors
       // Sending internal server error response with status code 500 and error details
-      res.status(500).json({ error: "User creation failed", details: err });
+      res
+        .status(500)
+        .json({ error: "User creation failed", details: err.message });
     }
   }
 };
