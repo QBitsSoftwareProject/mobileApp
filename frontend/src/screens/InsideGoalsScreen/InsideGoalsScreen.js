@@ -94,7 +94,9 @@ const InsideGoalsScreen = ({ route }) => {
   };
 
   //Handler for checkBox
-  const handleCheck = () => {};
+  const handleCheck = () => {
+    console.log("jo");
+  };
 
   // Handler for back button press
   const handleBackPress = () => {

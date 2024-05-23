@@ -34,7 +34,7 @@ const ViewGoalCard = ({ title, subTitle, cNumber, length, goalId }) => {
         <TouchableOpacity
           onPress={() => {
             handlePress(goalId);
-            handleReload();
+            // handleReload();
           }}
           style={{ width: "100%" }}
         >
