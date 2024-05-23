@@ -12,11 +12,10 @@ import React, { useState } from "react";
 import styles from "./styles";
 import { useNavigation } from "@react-navigation/native";
 import InputField from "../../../components/InputField/InputField";
-import { CheckBox } from "react-native-elements";
+import CheckBox from "expo-checkbox";
 import { userRegistration } from "../../../services/userServices/userService";
 import { imageDb } from "../../../config/firebase";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
-import "react-native-get-random-values";
 import { v4 } from "uuid";
 import FilePicker from "../../../components/GetImages/FilePicker";
 import loadingGif from "../../../assets/animation/loading.gif";
@@ -36,10 +35,10 @@ const UserRegScreen = () => {
   const [proPic, setProPic] = useState(null);
   const [proPicUrl, setProPicUrl] = useState("");
 
-  const [unCheckedColor, setUnCheckedColor] = useState("#5C677D");
+  const [unCheckedColor, setUnCheckedColor] = useState("#40495B");
 
   const [isEmpty, setIsEmpty] = useState(false);
-  const [isChecked, setIsChecked] = useState(true);
+  const [isChecked, setIsChecked] = useState(false);
   const [isEmailValid, setIsEmailValid] = useState(true);
   const [emailExist, setEmailExist] = useState(false);
   const [isPhoneNumValid, setIsPhoneNumValid] = useState(true);
@@ -119,6 +118,8 @@ const UserRegScreen = () => {
     } else if (!isChecked) {
       setUnCheckedColor("#E82519");
       setIsEmpty(false);
+    } else if (isChecked) {
+      setUnCheckedColor("#40495B");
     } else if (!validateEmail(email)) {
       setIsEmailValid(false);
       setIsEmpty(false);
@@ -250,7 +251,24 @@ const UserRegScreen = () => {
               </TouchableOpacity>
             </View>
 
-            <View></View>
+            <View
+              style={{
+                flexDirection: "row",
+                gap: 10,
+                alignItems: "center",
+                width: "90%",
+              }}
+            >
+              <CheckBox
+                value={isChecked}
+                onValueChange={() => setIsChecked(!isChecked)}
+                style={{ padding: 10, borderRadius: 5 }}
+              />
+              <Text style={{ color: unCheckedColor }}>
+                I acknowledge that I have read, understood, and agree to abide
+                by the this app Privacy Policy and Terms of Service.
+              </Text>
+            </View>
 
             {isEmpty && (
               <View style={{ alignItems: "center", marginTop: 15 }}>

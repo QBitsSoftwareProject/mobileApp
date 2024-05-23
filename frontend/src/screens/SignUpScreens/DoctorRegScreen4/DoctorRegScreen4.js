@@ -11,7 +11,7 @@ import React, { useEffect, useState } from "react";
 import styles from "./styles";
 import { useNavigation } from "@react-navigation/native";
 import InputField from "../../../components/InputField/InputField";
-import { CheckBox } from "react-native-elements";
+import CheckBox from "expo-checkbox";
 import FilePicker from "../../../components/GetImages/FilePicker";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { doctorRegistration } from "../../../services/doctorServices/doctorService";
@@ -235,23 +235,23 @@ const DoctorRegScreen4 = () => {
             </TouchableOpacity>
           </View>
 
-          <View>
+          <View
+            style={{
+              flexDirection: "row",
+              gap: 10,
+              alignItems: "center",
+              width: "90%",
+            }}
+          >
             <CheckBox
-              checked={isChecked}
-              onPress={() => setIsChecked(!isChecked)}
-              uncheckedColor={unCheckedColor}
-              checkedColor="#4ABFB4"
-              size={25}
-              containerStyle={{
-                padding: 0,
-                margin: 0,
-                backgroundColor: "transparent",
-              }}
-              title={
-                "I acknowledge that I have read, understood, and agree to abide by the this app Privacy Policy and Terms of Service."
-              }
-              textStyle={styles.agreemetnText}
+              value={isChecked}
+              onValueChange={() => setIsChecked(!isChecked)}
+              style={{ padding: 10, borderRadius: 5 }}
             />
+            <Text style={{ color: unCheckedColor }}>
+              I acknowledge that I have read, understood, and agree to abide by
+              the this app Privacy Policy and Terms of Service.
+            </Text>
           </View>
 
           {isEmpty && (
