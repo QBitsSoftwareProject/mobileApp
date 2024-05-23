@@ -6,6 +6,7 @@ import {
   ScrollView,
   Dimensions,
   KeyboardAvoidingView,
+  Platform,
 } from "react-native";
 import React, { useState } from "react";
 import styles from "./styles";
@@ -38,7 +39,7 @@ const UserRegScreen = () => {
   const [unCheckedColor, setUnCheckedColor] = useState("#5C677D");
 
   const [isEmpty, setIsEmpty] = useState(false);
-  const [isChecked, setIsChecked] = useState(false);
+  const [isChecked, setIsChecked] = useState(true);
   const [isEmailValid, setIsEmailValid] = useState(true);
   const [emailExist, setEmailExist] = useState(false);
   const [isPhoneNumValid, setIsPhoneNumValid] = useState(true);
@@ -249,24 +250,7 @@ const UserRegScreen = () => {
               </TouchableOpacity>
             </View>
 
-            <View>
-              <CheckBox
-                checked={isChecked}
-                onPress={() => setIsChecked(!isChecked)}
-                uncheckedColor={unCheckedColor}
-                checkedColor="#4ABFB4"
-                size={25}
-                containerStyle={{
-                  padding: 0,
-                  margin: 0,
-                  backgroundColor: "transparent",
-                }}
-                title={
-                  "I acknowledge that I have read, understood, and agree to abide by the this app Privacy Policy and Terms of Service."
-                }
-                textStyle={styles.agreemetnText}
-              />
-            </View>
+            <View></View>
 
             {isEmpty && (
               <View style={{ alignItems: "center", marginTop: 15 }}>
