@@ -6,11 +6,11 @@ import styles from "./ProfileStyles";
 import { useNavigation } from "@react-navigation/native";
 // navigation
 
-const ProfilePic = ({ item }) => {
+const ProfilePic = ({item}) => {
   const navigation = useNavigation();
 
-  const navigateToScreen = (screenName, data) => {
-    navigation.navigate(screenName, { data });
+  const navigateToScreen = () => {
+    navigation.navigate("AuthorScreen", { authorId: item.id });
   };
 
   if (!item) {
@@ -21,7 +21,7 @@ const ProfilePic = ({ item }) => {
     <TouchableOpacity
       style={styles.ProfilePic}
       onPress={() => {
-        navigateToScreen("AuthorScreen", { authorData: item });
+        navigateToScreen();
       }}
     >
       <View style={{ alignItems: "center" }}>
@@ -33,7 +33,7 @@ const ProfilePic = ({ item }) => {
             textAlign: "center",
             marginTop: 10,
             color: "#596C79",
-            fontWeight: "1000",
+            fontWeight: "500",
           }}
         >
           {item.name}
