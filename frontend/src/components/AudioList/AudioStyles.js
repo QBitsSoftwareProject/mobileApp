@@ -2,7 +2,7 @@ import { PixelRatio, StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
   container: {
-    height: 500,
+    marginBottom:100,
   },
   audioItem: {
     backgroundColor: "white",
