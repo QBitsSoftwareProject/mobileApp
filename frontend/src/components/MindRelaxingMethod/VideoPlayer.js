@@ -11,7 +11,7 @@ const VideoPlayer = ({ videoSource }) => {
         style={styles.video}
         useNativeControls
         source={{ uri: videoSource }}
-        resizeMode="cover"
+        // resizeMode="cover"
         isLooping
       />
     </View>
@@ -25,8 +25,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   video: {
-    width: width - 40, // Adjust width as needed
-    height: height / 1.6, // Adjust height as needed
+    width: width - 10, // Adjust width as needed
+    height: height / 3, // Adjust height as needed
   },
 });
 

@@ -124,6 +124,7 @@ const ExpandableCard = (props) => {
     ibtn = require('../../assets/images/MindRelaxingMethod/mp3playbutton.png');
     btnfunction = toggleVideoModal;
     videoSource = props.rUrl;
+    name = props.methodname;
   }
 
   
@@ -210,8 +211,8 @@ const ExpandableCard = (props) => {
           </View>
         </Animated.View>
       </View>
-      <PopupModal modalVisible={modalVisible} toggleModal={toggleModal} playAudio={playAudio} isPlaying={isPlaying}  img = {imglink} />
-      <VideoPlayerModal visible={videoModalVisible} onClose={toggleVideoModal} videoSource={videoSource} />
+      <PopupModal modalVisible={modalVisible} toggleModal={toggleModal} playAudio={playAudio} isPlaying={isPlaying}  img = {imglink}  />
+      <VideoPlayerModal visible={videoModalVisible} onClose={toggleVideoModal} videoSource={videoSource} name = {name} />
       <AudioPlayerModal visible={audioModalVisible} onClose={toggleAudioModal} audioSource={audioSource} img ={img} name = {name}/>
       <PDFViewerModal visible={pdfModalVisible} onClose={togglePdfModal} pdfSource={pdfSource} name = {name}/>
     </View>

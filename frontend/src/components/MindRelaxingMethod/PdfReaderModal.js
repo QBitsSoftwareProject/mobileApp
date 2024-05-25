@@ -53,6 +53,8 @@ const styles = StyleSheet.create({
     marginTop: 20,
     borderColor: '#74A9CD',
     borderWidth: 1,
+    width:120,
+    alignSelf:'center'
   },
   closeButtonText: {
     fontSize: 16,
