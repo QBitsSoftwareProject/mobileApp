@@ -9,8 +9,6 @@ const AudioPlayerModal = ({ visible, onClose, audioSource,img, name }) => {
   
 
 
-  console.log("iiiiiii "+imgLink);
-
   useEffect(() => {
     const unsubscribe = async () => {
       if (soundObject) {

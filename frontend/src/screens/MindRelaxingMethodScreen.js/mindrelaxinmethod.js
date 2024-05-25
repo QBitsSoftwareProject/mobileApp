@@ -22,7 +22,7 @@ const Mindrelaxinmethod =() => {
       try{
           let url;
 
-          url = "http://192.168.1.26:3000/method/get-method"
+          url = "http://192.168.8.110:3000/method/get-method"
 
           const response = await axios.get(url);
           setData(response.data);

@@ -5,6 +5,7 @@ import { Video } from 'expo-av';
 import PopupModal from './MusicPlayer';
 import VideoPlayerModal from './VideoPlayerModal';
 import AudioPlayerModal from './AudioPlayerModal';
+import PDFViewerModal from './PdfReaderModal';
 
 
 
@@ -18,6 +19,7 @@ const ExpandableCard = (props) => {
   const [sound, setSound] = useState(null);
   const [modalVisible, setModalVisible] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
+  
 
   const toggleModal = () => {
     console.log(resource)
@@ -64,6 +66,16 @@ const ExpandableCard = (props) => {
   const [video, setVideo] = useState(null);
   const [isVideoPlaying, setIsVideoPlaying] = useState(false);
 
+
+  const [pdfModalVisible, setPdfModalVisible] = useState(false);
+  // const videoSource = resource; // Replace with your video source
+  let pdfSource;
+
+  const togglePdfModal = () => {
+    console.log("pdf resource is"+pdfSource)
+    setPdfModalVisible(!pdfModalVisible);
+  };
+
   const [videoModalVisible, setvideoModalVisible] = useState(false);
   // const videoSource = resource; // Replace with your video source
   let videoSource;
@@ -103,6 +115,9 @@ const ExpandableCard = (props) => {
     mimg = require('../../assets/images/MindRelaxingMethod/story.png');
     mtitle = 'Read a Story';
     ibtn = require('../../assets/images/MindRelaxingMethod/read.png');
+    btnfunction = togglePdfModal;
+    pdfSource = props.rUrl;
+    name = props.methodname;
   } else {
     mimg = require('../../assets/images/MindRelaxingMethod/breathing.png');
     mtitle = 'Breathing Exercise';
@@ -198,6 +213,7 @@ const ExpandableCard = (props) => {
       <PopupModal modalVisible={modalVisible} toggleModal={toggleModal} playAudio={playAudio} isPlaying={isPlaying}  img = {imglink} />
       <VideoPlayerModal visible={videoModalVisible} onClose={toggleVideoModal} videoSource={videoSource} />
       <AudioPlayerModal visible={audioModalVisible} onClose={toggleAudioModal} audioSource={audioSource} img ={img} name = {name}/>
+      <PDFViewerModal visible={pdfModalVisible} onClose={togglePdfModal} pdfSource={pdfSource} name = {name}/>
     </View>
   );
 };
