@@ -131,9 +131,13 @@ const InsideGoalsScreen = ({ route }) => {
 
                     {tab == "viewGoals" && (
                       <CheckBox
-                        value={isChecked}
+                        value={isChecked(item, num)}
                         onValueChange={handleCheck}
-                        style={{ padding: 10, borderRadius: 5 }}
+                        style={{
+                          padding: 10,
+                          borderRadius: 5,
+                          marginRight: 10,
+                        }}
                       />
                     )}
                   </View>

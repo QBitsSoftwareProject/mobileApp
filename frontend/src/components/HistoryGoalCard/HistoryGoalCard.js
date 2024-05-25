@@ -2,6 +2,7 @@ import { View, Text, TouchableOpacity } from "react-native";
 import React from "react";
 import styles from "./styles";
 import GoalsProgressBar from "../GoalsProgressBar/GoalsProgressBar";
+import { useNavigation } from "@react-navigation/native";
 
 const HistoryGoalCard = ({ title, cNumber, length, completedDate }) => {
   return (
