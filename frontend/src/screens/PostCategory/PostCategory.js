@@ -4,7 +4,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import HeaderSub from "../../components/HeaderSub/HeaderSub";
 import { useNavigation } from "@react-navigation/native";
 import RegularCard from "../../components/CFCard/RegularCard";
-import HomePage from "../HomePage/HomePage";
+import HomePage from "../CommunityHomePage/HomePage";
 
 const postCategoryList = [
   {
@@ -21,7 +21,6 @@ const postCategoryList = [
     sub: "Tips, tricks, and moments that help you prioritize self-love and care.",
     arrow: require("../../assets/images/PostCategoryImage/ForwordArrow.png"),
   },
-
   {
     id: 3,
     image: require("../../assets/images/PostCategoryImage/Yoga.png"),
@@ -53,22 +52,22 @@ const postCategoryList = [
 ];
 
 const PostCategory = () => {
-  
-  const navigation=useNavigation();
+  const navigation = useNavigation();
 
   const pressHandler = () => {
-    navigation.navigate('CreatePost');
+    navigation.navigate("CreatePost");
   };
 
   return (
     <View>
       <HeaderSub
-        headLine={"Add your post"} subHeadLine={"Select post category."} back={HomePage} />
+        headLine={"Add your post"}
+        subHeadLine={"Select post category."}
+        back={HomePage}
+      />
 
       <SafeAreaView style={{ margin: 25 }}>
-
         <ScrollView style={{ height: 500 }}>
-
           <View style={{ marginBottom: 80 }}>
             {postCategoryList.map((item) => (
               <RegularCard
@@ -76,16 +75,14 @@ const PostCategory = () => {
                 image={item.image}
                 title={item.title}
                 sub={item.sub}
-                arrow={item.arrow} forword={pressHandler} />
+                arrow={item.arrow}
+                forword={pressHandler}
+              />
             ))}
           </View>
-
         </ScrollView>
-
       </SafeAreaView>
-      
     </View>
-
   );
 };
 
