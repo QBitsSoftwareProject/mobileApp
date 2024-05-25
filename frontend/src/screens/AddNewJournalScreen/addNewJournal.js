@@ -124,7 +124,7 @@ return(
 
       <Text style={styles.Text1}>Journal Tittle</Text>
 
-      <JournalTittle value = {tittle} newText = {setTittle}/>
+      <JournalTittle style={styles.tittlejournal} value = {tittle} newText = {setTittle}/>
 
       <Text style={styles.Text2}>Write your journal</Text>
 
@@ -133,7 +133,7 @@ return(
  <View>
       
       <TouchableOpacity style={styles.create} onPress={handleCreateButton}>
-      <Text style={styles.createText}>Create Journal</Text>
+      <Text>Create Journal</Text>
       </TouchableOpacity>
       
       <Overlay isVisible={isOverlayVisible} onClose={toggleOverlay} propbtnfunction={handleViewButton} /> 

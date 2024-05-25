@@ -66,7 +66,8 @@ return(
       paddingHorizontal:35,
       lineHeight:20,
       fontSize:14,
-      fontWeight:'200'
+      fontWeight:'200',
+      
     
       
     },
