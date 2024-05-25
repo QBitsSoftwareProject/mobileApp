@@ -10,7 +10,7 @@ import React from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import styles from "./styles";
 import { useNavigation } from "@react-navigation/native";
-import { CheckBox } from "react-native-elements";
+import CheckBox from "expo-checkbox";
 
 const allGoals = [
   {
@@ -131,16 +131,9 @@ const InsideGoalsScreen = ({ route }) => {
 
                     {tab == "viewGoals" && (
                       <CheckBox
-                        checked={isChecked(item, num)}
-                        onPress={handleCheck}
-                        uncheckedColor="#5C677D"
-                        checkedColor="#4ABFB4"
-                        size={30}
-                        containerStyle={{
-                          padding: 0,
-                          margin: 0,
-                          backgroundColor: "transparent",
-                        }}
+                        value={isChecked}
+                        onValueChange={handleCheck}
+                        style={{ padding: 10, borderRadius: 5 }}
                       />
                     )}
                   </View>
