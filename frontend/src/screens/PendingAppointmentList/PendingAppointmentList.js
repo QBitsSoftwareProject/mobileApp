@@ -4,7 +4,8 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import DocCard from "../../components/Card/DocCard";
 import styles from "./styles";
 import ButtonGroup from "../../components/Button/ButtonGroup";
-import HeaderSub from "../../components/HeaderSub/HeaderSub";
+import DocAppHeader from "../../components/DocAppHeader/DocAppHeader";
+import DocDropDown from "../../components/DropDownMenu/DocDropDown";
 
 const AppointmentStatus = () => {
   // Mock data for appointment status
@@ -55,11 +56,15 @@ const AppointmentStatus = () => {
       status: "Reject",
     },
   ];
+  const profilePicture = require("../../assets/images/PostCardImages/manprofile.jpg");
 
   return (
     <View>
-      <HeaderSub headLine={"Wellcome"} subHeadLine={"Dr. B.M. Weerasinghe"} />
-
+      <DocAppHeader
+        headLine={"Welcome"}
+        subHeadLine={"Dr. B.M. Weerasinghe"}
+        proPic={profilePicture}
+      />
       <SafeAreaView style={{ margin: 25 }}>
         <ScrollView style={{ height: 500 }}>
           <ButtonGroup type={"status"} />

@@ -1,6 +1,6 @@
 import { StyleSheet, TouchableOpacity, View, Image, Text } from "react-native";
 import React from "react";
-import PostCatBtn from "../../components/CFButton/PostCatBtn";
+import AcptComBtn from "../CFButton/Accept&CompleteBtn";
 
 const CreateCard = (props) => {
   return (
@@ -32,7 +32,7 @@ const CreateCard = (props) => {
           <View>
             <Text style={styles.rejectedStatus}>{props.status}</Text>
           </View>
-          <PostCatBtn PstCat={"Accept"} />
+          <AcptComBtn AcptCom={"Accept"} />
         </View>
       </View>
     </TouchableOpacity>

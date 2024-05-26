@@ -2,7 +2,6 @@ import React from "react";
 import { View, Text, StyleSheet, ScrollView, Dimensions } from "react-native";
 import PostCard from "../../components/CFCard/PostCard";
 import ProfileCover from "../../components/ComForumCover/ComForumCover";
-// import HeaderSub from "../../components/HomeTop/HomeTop";
 import { useNavigation } from "@react-navigation/native";
 import ButtonGroup from "../../components/Button/ButtonGroup";
 

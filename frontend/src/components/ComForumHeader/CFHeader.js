@@ -1,3 +1,4 @@
+import React from "react";
 import {
   View,
   Text,
@@ -6,7 +7,7 @@ import {
   StyleSheet,
   TouchableOpacity,
 } from "react-native";
-import React from "react";
+
 import { useNavigation } from "@react-navigation/core";
 
 const CFHeaderSub = (props) => {
@@ -23,7 +24,7 @@ const CFHeaderSub = (props) => {
         style={styles.backImg}
       >
         <View style={styles.container1}>
-          <TouchableOpacity style={styles.container2} onPress={handlePress}>
+          <TouchableOpacity onPress={handlePress}>
             <View style={styles.imageframe}>
               <Image
                 source={require("../../assets/images/PostCardImages/manprofile.jpg")}
@@ -32,7 +33,7 @@ const CFHeaderSub = (props) => {
             </View>
           </TouchableOpacity>
 
-          <View style={styles.container3}>
+          <View>
             <Text style={styles.headlineTxt}>{props.headLine}</Text>
             <Text style={styles.subHeadlineTxt}>{props.subHeadLine}</Text>
           </View>
