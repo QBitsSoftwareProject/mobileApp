@@ -9,7 +9,7 @@ import {
 import React from "react";
 import styles from "./styles";
 
-const HeaderSub = (props) => {
+const HomeTop = (props) => {
   return (
     <View style={styles.contains}>
       <ImageBackground
@@ -37,4 +37,4 @@ const HeaderSub = (props) => {
   );
 };
 
-export default HeaderSub;
+export default HomeTop;
