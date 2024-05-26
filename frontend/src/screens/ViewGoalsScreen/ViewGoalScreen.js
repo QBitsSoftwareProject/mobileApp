@@ -6,13 +6,14 @@ import {
   Touchable,
   TouchableOpacity,
 } from "react-native";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import HeaderSub from "../../components/HeaderSub/HeaderSub";
 import ButtonGroup from "../../components/Button/ButtonGroup";
 import ViewGoalCard from "../../components/ViewGoalCard/ViewGoalCard";
 
 import HistoryGoalCard from "../../components/HistoryGoalCard/HistoryGoalCard";
 import SuggestGoalCard from "../../components/SuggestGoalCard/SuggestGoalCard";
+import { getSuggestedGoals } from "../../services/goalsService/goalsService";
 
 const goalsList = [
   {
@@ -52,32 +53,32 @@ const goalsList = [
   },
 ];
 
-const suggestGoalsList = [
-  {
-    id: 1,
-    title: "Mindfulness Moments",
-    description:
-      "3 times a week! Ease stress with journaling. Pen your thoughts and feelings for clarity andcalmness.",
-  },
-  {
-    id: 2,
-    title: "Write it out",
-    description:
-      "Take 10! Practice daily mindfulness for peace. Try meditation, breathing exercises, or body scans to find calm in just 10 minutes.",
-  },
-  {
-    id: 3,
-    title: "Connect and Smile",
-    description:
-      "Twice a week, reach out! Socialize in-person, call, or message loved ones. Building connections for a happier you",
-  },
-  {
-    id: 4,
-    title: "Mindfulness Moments",
-    description:
-      "Take 10! Practice daily mindfulness for peace. Try meditation, breathing exercises, or body scans to find calm in just 10 minutes.",
-  },
-];
+// const suggestGoalsList = [
+//   {
+//     id: 1,
+//     title: "Mindfulness Moments",
+//     description:
+//       "3 times a week! Ease stress with journaling. Pen your thoughts and feelings for clarity andcalmness.",
+//   },
+//   {
+//     id: 2,
+//     title: "Write it out",
+//     description:
+//       "Take 10! Practice daily mindfulness for peace. Try meditation, breathing exercises, or body scans to find calm in just 10 minutes.",
+//   },
+//   {
+//     id: 3,
+//     title: "Connect and Smile",
+//     description:
+//       "Twice a week, reach out! Socialize in-person, call, or message loved ones. Building connections for a happier you",
+//   },
+//   {
+//     id: 4,
+//     title: "Mindfulness Moments",
+//     description:
+//       "Take 10! Practice daily mindfulness for peace. Try meditation, breathing exercises, or body scans to find calm in just 10 minutes.",
+//   },
+// ];
 const completedGoalsList = [
   {
     id: 1,
@@ -120,16 +121,27 @@ const completedGoalsList = [
 
 const ViewGoalScreen = () => {
   const [selectedTab, setSelectedTab] = useState(0);
+  const [data, setData] = useState([]);
 
-  const handleSelectTab = () => {
-    if (selectedTab == 0) {
-      return goalsList;
-    } else if (selectedTab == 1) {
-      return suggestGoalsList;
-    } else if (selectedTab == 2) {
-      return completedGoalsList;
-    }
-  };
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        let result;
+        if (selectedTab === 0) {
+          result = goalsList;
+        } else if (selectedTab === 1) {
+          result = await getSuggestedGoals();
+        } else if (selectedTab === 2) {
+          result = completedGoalsList;
+        }
+        setData(result);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    fetchData();
+  }, [selectedTab]);
 
   return (
     <View
@@ -157,13 +169,13 @@ const ViewGoalScreen = () => {
       </View>
       <View style={{ flex: 1 }}>
         <FlatList
-          data={handleSelectTab()}
+          data={data}
           renderItem={({ item, index }) => (
             <View
               style={{
                 marginHorizontal: 25,
                 marginTop: 15,
-                marginBottom: index === handleSelectTab().length - 1 ? 32 : 0,
+                marginBottom: index === data.length - 1 ? 32 : 0,
               }}
             >
               {selectedTab == 0 ? (
@@ -178,7 +190,7 @@ const ViewGoalScreen = () => {
                 <SuggestGoalCard
                   title={item.title}
                   subTitle={item.description}
-                  goalId={item.id}
+                  goalId={item._id}
                 />
               ) : selectedTab == 2 ? (
                 <HistoryGoalCard

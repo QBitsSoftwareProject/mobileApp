@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const schema = mongoose.Schema;
 
 const goalSchema = new schema({
-  tittle: {
+  title: {
     type: String,
     required: true,
   },
