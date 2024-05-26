@@ -145,6 +145,7 @@ const ViewGoalScreen = () => {
           subHeadLine={
             '"Self-care is how you take your power back." - Lalah Delia'
           }
+          back={"HomeScreen"}
         />
         <View style={{ marginVertical: 32 }}>
           <ButtonGroup

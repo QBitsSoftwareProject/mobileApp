@@ -1,4 +1,11 @@
-import { View, Text, Image, ImageBackground } from "react-native";
+import {
+  View,
+  Text,
+  Image,
+  Touchable,
+  TouchableOpacity,
+  ImageBackground,
+} from "react-native";
 import React from "react";
 import styles from "./styles";
 

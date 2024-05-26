@@ -1,18 +1,26 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import HomeScreen from "../../screens/HomeScreen/HomeScreen";
 import GoalsStack from "./GoalsStack";
 
-const stack = createNativeStackNavigator();
+const Stack = createNativeStackNavigator();
 
-const HomeStack = () => {
+const HomeStack = ({ route }) => {
+  const { userId, role } = route.params;
+
   return (
-    <stack.Navigator
+    <Stack.Navigator
       screenOptions={{
         headerStyle: { flex: 1, backgroundColor: "transparent" },
         headerShown: false,
       }}
     >
-      <stack.Screen name="GoalsStack" component={GoalsStack} />
-    </stack.Navigator>
+      <Stack.Screen
+        name="HomeScreen"
+        component={HomeScreen}
+        initialParams={{ userId: userId, role: role }}
+      />
+      <Stack.Screen name="GoalsStack" component={GoalsStack} />
+    </Stack.Navigator>
   );
 };
 

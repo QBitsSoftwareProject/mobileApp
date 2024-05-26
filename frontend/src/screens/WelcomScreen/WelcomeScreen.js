@@ -1,8 +1,9 @@
 import { View, Text, Image, Dimensions, TouchableOpacity } from 'react-native'
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { LinearGradient } from 'expo-linear-gradient'
 import styles from './styles'
 import Swiper from 'react-native-swiper'
+import { useNavigation } from '@react-navigation/native'
 
 const quotes = [
     "Remember, your mental health matters take a moment to breathe, reflect, and prioritize your inner peace.",
@@ -14,48 +15,71 @@ const WelcomeScreen = () => {
     const frameWidth = Dimensions.get("window").width * 0.8
     const frameHeight = Dimensions.get("window").height * 0.8
 
-  return (
-    <LinearGradient colors={['#49B1F7', '#00453E']} style={{flex:1}}>
-        <Image source={require('../../assets/images/bgSquare.png')} style={styles.bgImage}/>
+    const navigation = useNavigation();
+    const [activeIndex, setActiveIndex] = useState(0); 
+
+    // useEffect(() => {
         
-        <View style={styles.container}>
-            <View style={[styles.logoFrame, {height:frameHeight, width:frameWidth}]}>
-                <Text style={styles.logoText}>LOGO</Text>
-            </View>
+    //     const intervalId = setInterval(() => {
+    //         setActiveIndex((prevIndex) => (prevIndex + 1) % quotes.length);
+    //     }, 2000); 
 
-            <Text style={styles.headText}>Make a better mindset</Text>
+        
+    //     return () => clearInterval(intervalId);
+    // }, []);
 
-            <View style={{height:250}}>
-                <Swiper style={styles.wrapper} showsButtons={false} paginationStyle={styles.pagination} dotColor='white'>
+    const handleLogin = () => {
+        navigation.navigate("LoginScreen");
+    }
 
-                    {quotes.map((quote, index)=>(
-                        <View key={index} style={styles.slideBox}>
-                            <Text style={styles.quoteText}>{quote}</Text>
-                        </View>
-                    ))}
-                </Swiper>
-            </View>
+    const handleGuest = () => {
+        navigation.navigate('TabBar')
+    }
 
-            <View style={styles.btnBox}>
-                <TouchableOpacity style={[styles.btn, {backgroundColor:'#45B4FF'}]}>
-                    <Text style={styles.btnText}>Sign Up</Text>
+    const handleSingUp = () => {
+        navigation.navigate('SelectionScreen')
+    }
+
+    return (
+        <LinearGradient colors={['#49B1F7', '#00453E']} style={{ flex: 1 }}>
+            <Image source={require('../../assets/images/bgSquare.png')} style={styles.bgImage} />
+
+            <View style={styles.container}>
+                <View style={[styles.logoFrame, { height: frameHeight, width: frameWidth }]}>
+                    <Text style={styles.logoText}>LOGO</Text>
+                </View>
+
+                <Text style={styles.headText}>Make a better mindset</Text>
+
+                <View style={{ height: 250 }}>
+                    <Swiper style={styles.wrapper} showsButtons={false} paginationStyle={styles.pagination} dotColor='white' index={activeIndex}>
+                        {quotes.map((quote, index) => (
+                            <View key={index} style={styles.slideBox}>
+                                <Text style={styles.quoteText}>{quote}</Text>
+                            </View>
+                        ))}
+                    </Swiper>
+                </View>
+
+                <View style={styles.btnBox}>
+                    <TouchableOpacity style={[styles.btn, { backgroundColor: '#45B4FF' }]} onPress={handleSingUp}>
+                        <Text style={styles.btnText}>Sign Up</Text>
+                    </TouchableOpacity>
+
+                    <TouchableOpacity style={[styles.btn, { backgroundColor: '#4ABFB4' }]} onPress={handleLogin}>
+                        <Text style={styles.btnText}>Login</Text>
+                    </TouchableOpacity>
+                </View>
+
+                <TouchableOpacity onPress={handleGuest}>
+                    <Text style={styles.guestText}>Use as a guest</Text>
                 </TouchableOpacity>
 
-                <TouchableOpacity style={[styles.btn, {backgroundColor:'#4ABFB4'}]}>
-                    <Text style={styles.btnText}>Login</Text>
-                </TouchableOpacity>
-            </View>
-            
-            <TouchableOpacity>
-                <Text style={styles.guestText}>Use as a guest</Text>
-            </TouchableOpacity>
+                <Text style={styles.bottomText}>Please use an earphone</Text>
 
-            <Text style={styles.bottomText}>Please use an earphone</Text>
-            
-        </View>
-    </LinearGradient>
-  
-  )
+            </View>
+        </LinearGradient>
+    )
 }
 
 export default WelcomeScreen
