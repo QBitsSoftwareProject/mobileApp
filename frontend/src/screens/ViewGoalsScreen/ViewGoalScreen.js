@@ -143,6 +143,9 @@ const ViewGoalScreen = () => {
     fetchData();
   }, [selectedTab]);
 
+  if (!data) {
+    return;
+  }
   return (
     <View
       style={{

@@ -6,7 +6,7 @@ const URL = BACKEND_URI + "/goal";
 export const getSuggestedGoals = async () => {
   try {
     const response = await axios.get(URL);
-    // console.log(response.data);
+    // consolse.log(response.data);
     return response.data;
   } catch (error) {
     //   console.log(error);
