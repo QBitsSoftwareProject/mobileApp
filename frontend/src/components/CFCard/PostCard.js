@@ -1,7 +1,7 @@
 import { StyleSheet, TouchableOpacity, View, Image, Text } from "react-native";
 import React from "react";
 import { useState } from "react";
-import DocPop from "../../components/DocPop/DocPop";
+import DocPop from "../../components/DropDownMenu/CFDocPop";
 const PostCard = (props) => {
   const [isPress, setIsPress] = useState(false);
   const handlePress = () => {
@@ -28,7 +28,7 @@ const PostCard = (props) => {
               style={styles.navMenu}
             />
           </TouchableOpacity>
-          {isPress && <DocPop DPtext={"Normal User"} />}
+          {isPress && <DocPop DPtext1={"Edit Post"} DPtext2={"Delete post"} />}
         </View>
       </View>
 

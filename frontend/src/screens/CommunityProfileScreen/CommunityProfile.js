@@ -57,7 +57,7 @@ const ProfileScreen = () => {
         </View>
 
         <View style={styles.contains3}>
-          <ButtonGroup />
+          <ButtonGroup tab1={"All"} tab2={"Post"} tab3={"Videos"} />
         </View>
 
         <ScrollView ScrollView style={{ height: "100%", marginBottom: 25 }}>
