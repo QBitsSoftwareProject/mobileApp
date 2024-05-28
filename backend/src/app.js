@@ -3,6 +3,7 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const { PORT } = require('./config/env');
 const { connect } = require('./config/database.connection.js');
+const moodEntryRoute = require('./api/routes/moodsInput.routes.js')
 
 
 
@@ -10,9 +11,9 @@ const app = express();
 
 app.use(cors());
 app.use(bodyParser.json());
-app.use('/moodEntries',require('./api/routes//moodsInput.routes.js'))
+app.use('/moodEntries',moodEntryRoute)
 
-connect();
+
 
 app.listen(PORT, ()=>{
     console.log(`server is running on port ${PORT}`)

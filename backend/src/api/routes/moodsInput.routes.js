@@ -1,18 +1,23 @@
 const express = require('express');
 const router = express.Router();
-const createMoodEntryController = require('../controllers/moodInputController/create.controller');
-const getAllMoodEntryController = require('../controllers/moodInputController/getAll.controller');
-const getSingleMoodEntryController = require('../controllers/moodInputController/getSingle.controller')
+const{
+    storeMoodEntry,
+    
+    updateMoodEntry,
+
+    getMoodEntryByUserId
+} = require('../controllers/moodInputs.controller')
 
 
 // Route to create a new mood entry
-router.post('/mood-create', createMoodEntryController.createMoodEntry);
+router.post('/mood-create',storeMoodEntry );
 
-// Route to get all mood entries
-router.get('/mood-entries', getAllMoodEntryController.getAllMoodEntries);
+// Route to get mood entry by id
+router.get('/mood-entries-get/:userId', getMoodEntryByUserId );
 
-// Route to get a single mood entry by ID
-router.get('/mood-entries/:id', getSingleMoodEntryController.getMoodEntryById);
+
+// Route to update mood entry by id
+router.post('/mood-entries-update/:id', updateMoodEntry );
 
 
 module.exports = router;

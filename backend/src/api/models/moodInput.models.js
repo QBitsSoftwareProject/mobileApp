@@ -1,15 +1,35 @@
+// models/moodEntry.js
 const mongoose = require('mongoose');
 
-const moodEntrySchema = new mongoose.Schema({
-    selectedEmoji: String,
-    moodText: String,
-    imageSource: String,
-    timestamp: { type: Date, default: Date.now }
+const MoodEntrySchema = new mongoose.Schema({
+    userid:{
+        type: String,
+        required: true
+    },
+    selectedEmoji: {
+        type: String,
+        required: true
+    },
+    moodText: {
+        type: String,
+        required: true
+    },
+    
+    time: {
+        type: String,
+        required:true
+    },
+    date: {
+        type: String,
+        required:true
+    },
+    count:{
+        type:Number,
+        required:true
+    }
 });
 
-const MoodEntry = mongoose.model('MoodEntry', moodEntrySchema);
-
-module.exports = MoodEntry;
+module.exports = mongoose.model('MoodEntry', MoodEntrySchema);
 
 
 

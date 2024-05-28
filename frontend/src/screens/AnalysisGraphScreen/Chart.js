@@ -4,8 +4,8 @@ import { View, StyleSheet, Text } from 'react-native';
 const MoodProgressBars = ({selectedEmoji,barHeight}) => {
 
 
-    console.log(barHeight);
-    console.log(barHeight);
+    // console.log(barHeight);
+    // console.log(barHeight);
    
 
     const[bheight,setBheight] = useState('');
@@ -36,18 +36,18 @@ const styles = StyleSheet.create({
     
     progressBarsContainer: {
        
-        alignSelf: 'center',
-        alignContent: 'center',
-        justifyContent: 'center',
+        alignSelf: 'flex-end',
+        // alignContent: 'center',
+        // justifyContent: 'center',
         // backgroundColor: 'yellow',
         marginLeft: 25,
         marginBottom:10,
-        marginTop:-65
+        marginTop:-265
     },
 
     contentContainer: {
         alignItems: 'center',
-        justifyContent: 'center'
+        // justifyContent: 'center'
     },
 
     progressBar: {
