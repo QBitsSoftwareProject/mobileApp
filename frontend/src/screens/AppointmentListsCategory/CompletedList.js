@@ -37,7 +37,7 @@ const AcceptedAppointment = () => {
       title: "Piyumi Silva",
       time: "05.30 PM.",
       date: "12/01/2024.",
-      status: "Completed",
+      status: "Reject",
     },
     {
       id: 5,
@@ -48,6 +48,8 @@ const AcceptedAppointment = () => {
       status: "Completed",
     },
   ];
+
+  // const screenHeight = Dimensions.get("window").height - 275;
 
   return (
     <View>
@@ -65,7 +67,7 @@ const AcceptedAppointment = () => {
         >
           <Text style={styles.descript2}>Completed List.</Text>
 
-          <DocNavDropDown DDMtext={"Completed"} />
+          <DocNavDropDown />
         </View>
 
         {/* appointment status cards */}

@@ -5,6 +5,7 @@ import DocNavPop from "../DropDownMenu/DocNavPop";
 
 const DocDropDown = (props) => {
   const [isPress, setIsPress] = useState(false);
+  const [selectedMenu, setSelectedMenu] = useState(null);
   const ddArrow = require("../../assets/images/PostCardImages/droparrow.png");
 
   const handlePress = () => {
@@ -15,19 +16,12 @@ const DocDropDown = (props) => {
       <TouchableOpacity onPress={() => handlePress()}>
         <View style={styles.DropDown}>
           <View style={styles.container}>
-            <Text style={styles.DDMtext}>{props.DDMtext}</Text>
-
+            <Text style={styles.DDMtext}>{selectedMenu}</Text>
             <Image source={ddArrow} style={styles.arrow} />
           </View>
         </View>
       </TouchableOpacity>
-      {isPress && (
-        <DocNavPop
-          DPtext1={"Completed"}
-          DPtext2={"Rejected"}
-          DPtext3={"Canceled"}
-        />
-      )}
+      {isPress && <DocNavPop selectedMenu={setSelectedMenu()} />}
     </View>
   );
 };

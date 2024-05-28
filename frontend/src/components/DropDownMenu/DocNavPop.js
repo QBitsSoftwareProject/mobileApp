@@ -1,14 +1,21 @@
 import { TouchableOpacity, View, Text, StyleSheet } from "react-native";
 import React from "react";
 
-const DocPop = (props, DropPopMsg) => {
+const DocPop = (props) => {
+  const handlePress = (menuNumber) => {
+    props.selectedMenu(menuNumber);
+  };
   return (
     <View style={styles.DropPop}>
       <View style={styles.container}>
-        <TouchableOpacity onPress={DropPopMsg} style={styles.arrow}>
-          <Text style={styles.DPtext}>{props.DPtext1}</Text>
-          <Text style={styles.DPtext}>{props.DPtext2}</Text>
-          <Text style={styles.DPtext}>{props.DPtext3}</Text>
+        <TouchableOpacity onPress={() => handlePress("Completed")}>
+          <Text style={styles.DPtext}>Completed</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => handlePress("Rejected")}>
+          <Text style={styles.DPtext}>Rejected</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => handlePress("Canceled")}>
+          <Text style={styles.DPtext}>Canceled</Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -27,7 +34,7 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    flexDirection: "row",
+    flexDirection: "column",
     alignItems: "center",
   },
   DPtext: {
