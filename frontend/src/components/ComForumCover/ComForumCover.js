@@ -3,10 +3,10 @@ import { View, Image, StyleSheet, ImageBackground } from "react-native";
 
 const ProfileCover = (props) => {
   return (
-    <View style={styles.backgroundFrame}>
+    <View>
       <ImageBackground
         source={require("../../assets/images/PostCardImages/cover.jpg")}
-        style={styles.backImg}
+        style={styles.bckImg}
       >
         <View style={{ alignItems: "center", zIndex: 101 }}>
           <View style={styles.profileFrame}>
@@ -19,19 +19,13 @@ const ProfileCover = (props) => {
 };
 
 const styles = StyleSheet.create({
-  backgroundFrame: {
+  bckImg: {
     height: 250,
     width: "100%",
-    zIndex: 100,
-    borderColor: "white",
     borderBottomLeftRadius: 40,
     borderBottomRightRadius: 40,
-    overflow: "hidden",
-  },
-  backImg: {
-    paddingRight: 25,
-    paddingLeft: 25,
-    height: 250,
+    zIndex: 100,
+    marginBottom: 30,
   },
 
   profileFrame: {

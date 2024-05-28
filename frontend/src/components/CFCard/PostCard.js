@@ -1,12 +1,15 @@
 import { StyleSheet, TouchableOpacity, View, Image, Text } from "react-native";
 import React from "react";
-
+import { useState } from "react";
+import DocPop from "../../components/DocPop/DocPop";
 const PostCard = (props) => {
+  const [isPress, setIsPress] = useState(false);
+  const handlePress = () => {
+    setIsPress(!isPress);
+  };
   return (
     <View style={styles.cardBox}>
-      
       <View style={styles.content1}>
-
         <View style={styles.imageframe}>
           <Image source={props.image} style={styles.image} />
         </View>
@@ -17,44 +20,39 @@ const PostCard = (props) => {
           <View style={{ width: "90%" }}>
             <Text style={styles.sub}>{props.sub}</Text>
           </View>
-        
-        {/* <View>
-          <Image 
-          source={require('../../assets/images/NavigationIcons/Navigation Menu Vertical.png')}
-          style={styles.navMenu}
-          />
-        </View> */}
-
         </View>
-
+        <View>
+          <TouchableOpacity onPress={() => handlePress()}>
+            <Image
+              source={require("../../assets/images/NavigationIcons/Navigation Menu Vertical.png")}
+              style={styles.navMenu}
+            />
+          </TouchableOpacity>
+          {isPress && <DocPop DPtext={"Normal User"} />}
+        </View>
       </View>
 
-      <View style={{paddingHorizontal:15, marginBottom:10}}>
-          <Text style={styles.des}>{props.description}</Text>
+      <View style={{ paddingHorizontal: 15, marginBottom: 10 }}>
+        <Text style={styles.des}>{props.description}</Text>
       </View>
 
       <View style={styles.content2}>
-    
-      <View>
-        {
-          props.Postimage!=null &&  (
-          <Image source={props.Postimage} style={styles.Postimage} />
-          )
-         }
+        <View>
+          {props.Postimage != null && (
+            <Image source={props.Postimage} style={styles.Postimage} />
+          )}
+        </View>
       </View>
-         
-      </View>
-
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   cardBox: {
-    display:'flex',
-    flexDirection:'column',
-    width: '100%',
-    height:"auto",
+    display: "flex",
+    flexDirection: "column",
+    width: "100%",
+    height: "auto",
     backgroundColor: "white",
     borderRadius: 20,
     elevation: 1,
@@ -62,11 +60,10 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   content1: {
-    display:'flex',
+    display: "flex",
     flexDirection: "row",
-    alignItems:"center",
-    padding:10,
-  
+    alignItems: "center",
+    padding: 10,
   },
   imageframe: {
     height: 60,
@@ -74,7 +71,7 @@ const styles = StyleSheet.create({
     borderColor: "white",
     borderWidth: 4,
     borderRadius: 50,
-    marginRight:15,
+    marginRight: 15,
     overflow: "hidden",
     elevation: 2,
   },
@@ -84,16 +81,16 @@ const styles = StyleSheet.create({
     resizeMode: "cover",
   },
   content3: {
-    display:'flex',
-    flexDirection:'column',
-    gap:2
+    display: "flex",
+    flexDirection: "column",
+    gap: 2,
   },
   title: {
     fontSize: 18,
     fontWeight: "500",
     color: "#40495B",
   },
-  
+
   sub: {
     fontSize: 12,
     fontWeight: "500",
@@ -106,10 +103,15 @@ const styles = StyleSheet.create({
   },
   Postimage: {
     width: "100%",
-    height:200,
+    height: 200,
     borderBottomLeftRadius: 20,
     borderBottomRightRadius: 20,
-  }
+  },
+  navMenu: {
+    height: 8,
+    width: 8,
+    marginLeft: 100,
+  },
 });
 
 export default PostCard;

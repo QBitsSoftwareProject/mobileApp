@@ -53,7 +53,7 @@ const PostContent = (props) => {
   return (
     <View>
       <View style={style.contains}>
-        <HeaderSub headLine={"Post Content"} subHeadLine={""} back={HomePage} />
+        <HeaderSub headLine={"Post Content"} back={HomePage} />
       </View>
 
       <View style={{ height: screenHeight, paddingHorizontal: 25 }}>
