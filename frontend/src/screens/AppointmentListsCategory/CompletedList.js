@@ -1,7 +1,7 @@
 import React from "react";
 import { Text, ScrollView, View } from "react-native";
 import DocCard from "../../components/Card/DocCard";
-import DocDropDown from "../../components/DropDownMenu/DocDropDown";
+import DocNavDropDown from "../../components/DropDownMenu/DocNavDropDown";
 import styles from "./styles";
 
 const AcceptedAppointment = () => {
@@ -65,7 +65,7 @@ const AcceptedAppointment = () => {
         >
           <Text style={styles.descript2}>Completed List.</Text>
 
-          <DocDropDown DDMtext={"Completed"} />
+          <DocNavDropDown DDMtext={"Completed"} />
         </View>
 
         {/* appointment status cards */}
