@@ -6,7 +6,7 @@ const DocAppHeader = (props) => {
   return (
     <View style={styles.contains}>
       <ImageBackground
-        source={require("../../assets/images/headerTop.png")}
+        source={require("../../assets/images/DocHeaderTop.png")}
         style={styles.backImg}
       >
         <View
@@ -42,7 +42,6 @@ const styles = StyleSheet.create({
     width: "100%",
     borderBottomLeftRadius: 50,
     borderBottomRightRadius: 50,
-    overflow: "hidden",
   },
   headlineTxt: {
     fontWeight: "700",
@@ -61,6 +60,8 @@ const styles = StyleSheet.create({
     paddingRight: 25,
     paddingLeft: 25,
     height: 250,
+    borderBottomLeftRadius: 50,
+    borderBottomRightRadius: 50,
   },
   container: {
     flex: 1,

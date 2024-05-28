@@ -15,25 +15,44 @@ const CreateCard = (props) => {
             <View>
               <Text style={styles.title}>{props.title}</Text>
 
-              {props.cardName == "Pending" && (
-                <View>
-                  <Text style={styles.description}>Time: {props.time}</Text>
-                  <Text style={styles.description}>Date: {props.date}</Text>
+              <View>
+                <Text style={styles.description}>Time: {props.time}</Text>
+                <Text style={styles.description}>Date: {props.date}</Text>
+                {props.cardName == "Pending" && (
                   <Text style={styles.description}>
                     Contact No: {props.contactNo}
                   </Text>
-                </View>
-              )}
+                )}
+                {props.cardName == "Accepted" && (
+                  <Text style={styles.description}>
+                    Contact No: {props.contactNo}
+                  </Text>
+                )}
+                {props.cardName == "Completed" && (
+                  <Text style={styles.completedStatus}>
+                    Status: {props.status}
+                  </Text>
+                )}
+              </View>
             </View>
           </View>
         </View>
-
-        <View style={styles.content2}>
-          <View>
-            <Text style={styles.rejectedStatus}>{props.status}</Text>
+        {props.cardName == "Pending" && (
+          <View style={styles.content2}>
+            <View>
+              <Text style={styles.rejectedStatus}>{props.status}</Text>
+            </View>
+            <AcptComBtn AcptCom={"Accept"} />
           </View>
-          <AcptComBtn AcptCom={"Accept"} />
-        </View>
+        )}
+        {props.cardName == "Accepted" && (
+          <View style={styles.content2}>
+            <View>
+              <Text style={styles.rejectedStatus}>{props.status}</Text>
+            </View>
+            <AcptComBtn AcptCom={"Complete"} />
+          </View>
+        )}
       </View>
     </TouchableOpacity>
   );
@@ -73,6 +92,11 @@ const styles = StyleSheet.create({
     fontSize: 12,
     fontWeight: "500",
     color: "#5C677D",
+  },
+  completedStatus: {
+    fontSize: 12,
+    fontWeight: "500",
+    color: "#0AC112",
   },
   content2: {
     flex: 1,

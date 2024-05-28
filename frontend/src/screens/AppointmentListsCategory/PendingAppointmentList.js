@@ -1,15 +1,11 @@
 import React from "react";
 import { Text, ScrollView, View } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
 import DocCard from "../../components/Card/DocCard";
 import styles from "./styles";
-import ButtonGroup from "../../components/Button/ButtonGroup";
-import DocAppHeader from "../../components/DocAppHeader/DocAppHeader";
-import DocDropDown from "../../components/DropDownMenu/DocDropDown";
 
-const AppointmentStatus = () => {
+const PendingAppointment = () => {
   // Mock data for appointment status
-  const pendingList = [
+  const PendingList = [
     {
       id: 1,
       image: require("../../assets/images/kitharringtonhair.jpg"),
@@ -56,42 +52,32 @@ const AppointmentStatus = () => {
       status: "Reject",
     },
   ];
-  const profilePicture = require("../../assets/images/PostCardImages/manprofile.jpg");
 
   return (
     <View>
-      <DocAppHeader
-        headLine={"Welcome"}
-        subHeadLine={"Dr. B.M. Weerasinghe"}
-        proPic={profilePicture}
-      />
-      <SafeAreaView style={{ margin: 25 }}>
-        <ScrollView style={{ height: 500 }}>
-          <ButtonGroup type={"status"} />
+      <ScrollView style={{ height: 500 }}>
+        <View style={{ marginHorizontal: 15, marginVertical: 15 }}>
+          <Text style={styles.descript2}>Pending Appointment List.</Text>
+        </View>
 
-          <View style={{ marginHorizontal: 15, marginVertical: 15 }}>
-            <Text style={styles.descript2}>Pending Appointment List.</Text>
-          </View>
-
-          {/* appointment status cards */}
-          <View style={{ marginBottom: 80 }}>
-            {pendingList.map((item) => (
-              <DocCard
-                key={item.id}
-                image={item.image}
-                title={item.title}
-                cardName={"Pending"}
-                time={item.time}
-                date={item.date}
-                contactNo={item.contactNo}
-                status={item.status}
-              />
-            ))}
-          </View>
-        </ScrollView>
-      </SafeAreaView>
+        {/* appointment status cards */}
+        <View style={{ marginBottom: 80 }}>
+          {PendingList.map((item) => (
+            <DocCard
+              key={item.id}
+              image={item.image}
+              title={item.title}
+              cardName={"Pending"}
+              time={item.time}
+              date={item.date}
+              contactNo={item.contactNo}
+              status={item.status}
+            />
+          ))}
+        </View>
+      </ScrollView>
     </View>
   );
 };
 
-export default AppointmentStatus;
+export default PendingAppointment;

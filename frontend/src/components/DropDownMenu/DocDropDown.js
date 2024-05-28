@@ -1,17 +1,28 @@
 import { TouchableOpacity, View, Text, StyleSheet, Image } from "react-native";
 import React from "react";
+import { useState } from "react";
+import DocPop from "./DocPop";
 
 const DocDropDown = (props) => {
+  const [isPress, setIsPress] = useState(false);
   const ddArrow = require("../../assets/images/PostCardImages/droparrow.png");
+
+  const handlePress = () => {
+    setIsPress(!isPress);
+  };
   return (
-    <TouchableOpacity onPress={() => handleDDMPress(props.ddArrow)}>
-      <View style={styles.DropDown}>
-        <View style={styles.container}>
-          <Text style={styles.DDMtext}>{props.DDMtext}</Text>
-          <Image source={ddArrow} style={styles.arrow} />
+    <View>
+      <TouchableOpacity onPress={() => handlePress()}>
+        <View style={styles.DropDown}>
+          <View style={styles.container}>
+            <Text style={styles.DDMtext}>{props.DDMtext}</Text>
+
+            <Image source={ddArrow} style={styles.arrow} />
+          </View>
         </View>
-      </View>
-    </TouchableOpacity>
+      </TouchableOpacity>
+      {isPress && <DocPop DPtext={"Normal User"} />}
+    </View>
   );
 };
 
@@ -22,11 +33,10 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     borderRadius: 20,
     elevation: 1,
-
-    marginHorizontal: 7,
-    marginVertical: 15,
+    marginHorizontal: 5,
+    marginTop: 18,
+    marginBottom: 5,
     alignItems: "center",
-    justifyContent: "center",
   },
   container: {
     flex: 1,

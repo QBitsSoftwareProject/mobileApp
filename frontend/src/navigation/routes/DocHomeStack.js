@@ -1,6 +1,6 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import HomeScreen from "../../screens/HomeScreen/HomeScreen";
-import PendingAppointmentList from "../../screens/PendingAppointmentList/PendingAppointmentList";
+import AppointmentListsCategory from "../../screens/AppointmentListsCategory/AppointmentListsCategory";
 const stack = createNativeStackNavigator();
 
 const DocHomeStack = () => {
@@ -13,8 +13,8 @@ const DocHomeStack = () => {
     >
       {/* <stack.Screen name='HomeScreen' component={HomeScreen} />  */}
       <stack.Screen
-        name="PendingAppointmentList"
-        component={PendingAppointmentList}
+        name="AppointmentListsCategory"
+        component={AppointmentListsCategory}
       />
     </stack.Navigator>
   );
