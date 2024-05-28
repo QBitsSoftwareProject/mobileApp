@@ -42,8 +42,6 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     elevation: 1,
     marginHorizontal: 5,
-    // alignItems: "center",
-    // justifyContent: "center",
   },
   container: {
     flex: 1,
