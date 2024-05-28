@@ -2,7 +2,7 @@ import { TouchableOpacity, View, Text, Image, StyleSheet } from "react-native";
 import React from "react";
 import { useNavigation } from "@react-navigation/native";
 
-const DocPop = (props, DropPopMsg) => {
+const DocPop = (props) => {
   const navigation = useNavigation();
 
   const handleEdit = () => {
@@ -11,24 +11,23 @@ const DocPop = (props, DropPopMsg) => {
   return (
     <View style={styles.DropPop}>
       <View style={styles.container}>
-        <TouchableOpacity onPress={() => handleEdit()}>
-          <View style={styles.contains1}>
-            <Text style={styles.DPtext}>{props.DPtext1}</Text>
-            <Image
-              source={require("../../assets/images/PostCardImages/Edit.png")}
-              style={styles.edtImg}
-            />
-          </View>
+        <TouchableOpacity onPress={() => handleEdit()} style={styles.contains1}>
+          <Text style={styles.DPtext}>{props.DPtext1}</Text>
+          <Image
+            source={require("../../assets/images/PostCardImages/Edit.png")}
+            style={styles.edtImg}
+          />
         </TouchableOpacity>
 
-        <TouchableOpacity onPress={() => handleDelete()}>
-          <View style={styles.contains1}>
-            <Text style={styles.DPtext}>{props.DPtext2}</Text>
-            <Image
-              source={require("../../assets/images/PostCardImages/DeleteBin.png")}
-              style={styles.dltImg}
-            />
-          </View>
+        <TouchableOpacity
+          onPress={() => handleDelete()}
+          style={styles.contains1}
+        >
+          <Text style={styles.DPtext}>{props.DPtext2}</Text>
+          <Image
+            source={require("../../assets/images/PostCardImages/DeleteBin.png")}
+            style={styles.dltImg}
+          />
         </TouchableOpacity>
       </View>
     </View>
@@ -37,7 +36,7 @@ const DocPop = (props, DropPopMsg) => {
 const styles = StyleSheet.create({
   DropPop: {
     width: 100,
-    height: 55,
+    height: "auto",
     backgroundColor: "white",
     borderRadius: 5,
     elevation: 1,
@@ -45,6 +44,7 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
+    height: "auto",
     flexDirection: "column",
     alignItems: "center",
   },
@@ -58,7 +58,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
-    gap: 8,
   },
   edtImg: {
     width: 11.5,
