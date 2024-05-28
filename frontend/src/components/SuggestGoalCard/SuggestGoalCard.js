@@ -2,12 +2,34 @@ import { View, Text, TouchableOpacity, Image } from "react-native";
 import React from "react";
 import styles from "./styles";
 import { useNavigation } from "@react-navigation/native";
+import { updateAUser } from "../../services/userServices/userService";
+import { addAGoal } from "../../services/goalsService/goalsService";
 
-const SuggestGoalCard = ({ title, subTitle, goalId }) => {
+const SuggestGoalCard = ({
+  title,
+  subTitle,
+  goalId,
+  objectives,
+  completeness,
+}) => {
   const navigation = useNavigation();
+
+  const updatedData = {
+    goalId: goalId,
+    objectiveState: objectives,
+    completeness: 0,
+  };
 
   const handlePress = (goalId) => {
     navigation.navigate("InsideGoalsScreen", { goalId, tab: "suggestGoal" });
+  };
+
+  const handleAdd = async () => {
+    try {
+      await addAGoal({ selectedGoals: updatedData });
+    } catch (error) {
+      console.log(error);
+    }
   };
   return (
     <TouchableOpacity
@@ -19,7 +41,7 @@ const SuggestGoalCard = ({ title, subTitle, goalId }) => {
 
         <Text style={styles.subTitle}>{subTitle}</Text>
       </View>
-      <TouchableOpacity style={styles.addBtn}>
+      <TouchableOpacity style={styles.addBtn} onPress={handleAdd}>
         <Image source={require("../../assets/images/addBtn.png")} />
       </TouchableOpacity>
     </TouchableOpacity>

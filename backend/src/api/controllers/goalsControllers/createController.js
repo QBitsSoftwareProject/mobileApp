@@ -3,7 +3,7 @@ const goalModel = require("../../models/goals/goals");
 exports.createGoal = async (req, res) => {
   try {
     const {
-      tittle,
+      title,
       subTitle,
       description,
       objectives,
@@ -13,7 +13,7 @@ exports.createGoal = async (req, res) => {
     } = req.body;
 
     const newGoal = await goalModel.create({
-      tittle,
+      title,
       subTitle,
       description,
       objectives,

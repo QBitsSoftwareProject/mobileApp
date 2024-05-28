@@ -32,7 +32,9 @@ exports.loginUser = async (req, res) => {
     }
 
     //create a new token
-    const token = jwt.sign({ user_id: user._id }, TOKEN_KEY);
+    const token = jwt.sign({ user_id: user._id }, TOKEN_KEY, {
+      expiresIn: "24h",
+    });
 
     res
       .status(201)

@@ -22,13 +22,14 @@ const {
 const {
   checkExistsUser,
 } = require("../controllers/regularUserControllers/checkExistsUser");
+const auth = require("../middlewares/auth");
 
 const router = express.Router();
 
 //user operations routes
 router.get("/", getRegularUsers);
-router.get("/:id", getARegularUser);
-router.put("/:id", updateRegularUser);
+router.get("/one-user", auth, getARegularUser);
+router.put("/", auth, updateRegularUser);
 router.delete("/:id", deleteRegularUser);
 
 router.post("/checkExistsUser", checkExistsUser);

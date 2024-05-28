@@ -64,8 +64,9 @@ export const doctorRegistration = async (
 
 export const getDoctors = async () => {
   try {
+    const token = await AsyncStorage.getItem("authToken");
     const response = await axios.get(URL, {
-      headers: { authtoken: AsyncStorage.getItem("token") },
+      headers: { authtoken: token },
     });
     // console.log(response.data)
     return response.data;
@@ -75,10 +76,11 @@ export const getDoctors = async () => {
   }
 };
 
-export const getADoctor = async (id) => {
+export const getADoctor = async () => {
   try {
-    const response = await axios.get(`${URL}/${id}`, {
-      headers: { authtoken: AsyncStorage.getItem("token") },
+    const token = await AsyncStorage.getItem("authToken");
+    const response = await axios.get(`${URL}/one-doctor`, {
+      headers: { authtoken: token },
     });
     // console.log(response.data)
     return response.data;

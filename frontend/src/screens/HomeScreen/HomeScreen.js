@@ -55,14 +55,14 @@ const images = [
 const HomeScreen = (props) => {
   const navigation = useNavigation();
 
-  const { userId, role } = props.route.params;
+  const { role } = props.route.params;
 
   const [user, setUser] = useState(null);
 
   const winWidth = Dimensions.get("window").width - 60;
 
   useEffect(() => {
-    fetchUser(userId, role);
+    fetchUser(role);
 
     //back navigation
     const backHandler = BackHandler.addEventListener(
@@ -80,14 +80,14 @@ const HomeScreen = (props) => {
   }, []);
 
   //fetch user from database
-  const fetchUser = async (id, checkRole) => {
+  const fetchUser = async (checkRole) => {
     try {
       let currentUser;
 
       if (checkRole == "doctor") {
-        currentUser = await getADoctor(id);
+        currentUser = await getADoctor();
       } else {
-        currentUser = await getAUser(id);
+        currentUser = await getAUser();
       }
 
       setUser(currentUser);

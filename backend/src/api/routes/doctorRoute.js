@@ -15,13 +15,14 @@ const {
 const {
   checkExistsDoctor,
 } = require("../controllers/doctorControllers/checkExistsDoctor");
+const auth = require("../middlewares/auth");
 
 const router = express.Router();
 
 //user operations routes
 router.get("/", getDoctors);
-router.get("/:id", getADoctor);
-router.put("/:id", updateDoctor);
+router.get("/one-doctor", auth, getADoctor);
+router.put("/", auth, updateDoctor);
 router.delete("/:id", deleteDoctor);
 
 router.post("/checkExistsDoctor", checkExistsDoctor);

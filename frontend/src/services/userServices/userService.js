@@ -17,7 +17,7 @@ export const userLogin = async (email, password) => {
     const token = response.headers.authtoken;
 
     // Store token in AsyncStorage
-    await AsyncStorage.setItem("accessToken", token);
+    await AsyncStorage.setItem("authToken", token);
 
     return response.data;
   } catch (err) {
@@ -59,8 +59,9 @@ export const userRegistration = async (
 
 export const getUser = async () => {
   try {
+    const token = await AsyncStorage.getItem("authToken");
     const response = await axios.get(URL, {
-      headers: { authtoken: AsyncStorage.getItem("token") },
+      headers: { authtoken: token },
     });
     // console.log(response.data)
     return response.data;
@@ -70,13 +71,29 @@ export const getUser = async () => {
   }
 };
 
-export const getAUser = async (id) => {
+export const getAUser = async () => {
   try {
-    const response = await axios.get(`${URL}/${id}`, {
-      headers: { authtoken: AsyncStorage.getItem("token") },
+    const token = await AsyncStorage.getItem("authToken");
+    const response = await axios.get(`${URL}/one-user`, {
+      headers: { authtoken: token },
     });
     // console.log(response.data)
     return response.data;
+  } catch (error) {
+    console.log(error);
+    throw new Error("Error during request setup");
+  }
+};
+
+export const updateAUser = async (updates) => {
+  try {
+    const token = await AsyncStorage.getItem("authToken");
+
+    const response = await axios.put(`${URL}`, updates, {
+      headers: { authtoken: token },
+    });
+    // console.log(response);
+    // return response;
   } catch (error) {
     console.log(error);
     throw new Error("Error during request setup");

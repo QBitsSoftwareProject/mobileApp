@@ -23,10 +23,8 @@ exports.getDoctors = async (req, res) => {
 // Controller function to get a single regular user by ID
 exports.getADoctor = async (req, res) => {
   try {
-    const { id } = req.params;
-
     // Finding the user by ID
-    const getUser = await doctorModel.findById(id);
+    const getUser = await doctorModel.findById(req.user.user_id);
 
     // If user is not found, return a 404 error response
     if (!getUser) {
