@@ -132,16 +132,7 @@ const ViewGoalScreen = () => {
       try {
         let result;
         if (selectedTab === 0) {
-          const selectedGoals = await getSelectedGoals();
-
-          // Fetch data for each selected goal
-
-          result = await Promise.all(
-            selectedGoals.map(async (item) => {
-              const goal = await getTheReleventGoal(item.goalId);
-              return goal;
-            })
-          );
+          result = await getSelectedGoals();
         } else if (selectedTab === 1) {
           result = await getSuggestedGoals();
         } else if (selectedTab === 2) {
@@ -156,9 +147,6 @@ const ViewGoalScreen = () => {
     fetchData();
   }, [selectedTab]);
 
-  if (!data) {
-    return;
-  }
   return (
     <View
       style={{
@@ -201,7 +189,7 @@ const ViewGoalScreen = () => {
                   subTitle={item.subTitle}
                   cNumber={item.completness}
                   length={item.length}
-                  goalId={item.id}
+                  goalId={item._id}
                 />
               ) : selectedTab == 1 ? (
                 <SuggestGoalCard

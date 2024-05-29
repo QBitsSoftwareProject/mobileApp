@@ -8,7 +8,6 @@ exports.addSelectedGoal = async (req, res) => {
 
     // Extract the goal to be added from the request body
     const { selectedGoals } = req.body;
-    console.log(selectedGoals);
 
     // Ensure the goal is provided
     if (!selectedGoals) {

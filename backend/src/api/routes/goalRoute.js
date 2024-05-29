@@ -17,15 +17,22 @@ const auth = require("../middlewares/auth");
 const {
   addSelectedGoal,
 } = require("../controllers/goalsControllers/addSelectedGoal");
+const {
+  getSelectedGoals,
+} = require("../controllers/goalsControllers/getSelectedGoals");
+const {
+  objectiveStateUpdate,
+} = require("../controllers/goalsControllers/objectiveStatesUpdate");
 
 const router = express.Router();
 
 router.post("/", createGoal);
-router.put("/:id", updateGoal);
+router.put("/update/:id", updateGoal);
 router.delete("/:id", deleteGoal);
 router.get("/", getGoals);
-router.get("/:id", getAGoal);
+router.get("/get-goal/:id", getAGoal);
 
 router.post("/add-goal", auth, addSelectedGoal);
-
+router.get("/selected-goals", auth, getSelectedGoals);
+router.put("/update-completeness", auth, objectiveStateUpdate);
 module.exports = router;

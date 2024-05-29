@@ -6,12 +6,16 @@ import {
   ScrollView,
   Dimensions,
 } from "react-native";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import styles from "./styles";
 import { useNavigation } from "@react-navigation/native";
 import CheckBox from "expo-checkbox";
-import { getASuggestedGoals } from "../../services/goalsService/goalsService";
+import {
+  getAGoal,
+  updateCompleteness,
+} from "../../services/goalsService/goalsService";
+import { getAUser } from "../../services/userServices/userService";
 
 // const allGoals = [
 //   {
@@ -83,26 +87,31 @@ const InsideGoalsScreen = ({ route }) => {
   const { goalId, tab } = route.params;
 
   const [goal, setGoal] = useState(null);
+  const [selectedGoal, setSelectedGoal] = useState(null);
 
   //finding goals based on goalId
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await getASuggestedGoals(goalId);
-
-        setGoal(response);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-
     fetchData();
-  }, [goalId]);
+  }, []);
+
+  const fetchData = async () => {
+    try {
+      const user = await getAUser();
+      const response = await getAGoal(goalId);
+      const selectOne = user.selectedGoals.find(
+        (item) => item.goalId == goalId
+      );
+      setSelectedGoal(selectOne);
+      setGoal(response);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   //initially check the checkBox
   const isChecked = (item, num) => {
-    if (item.completeness[num] == "complete") {
+    if (item.completeness[num] == true) {
       return true;
     } else {
       return false;
@@ -110,8 +119,23 @@ const InsideGoalsScreen = ({ route }) => {
   };
 
   //Handler for checkBox
-  const handleCheck = () => {
-    console.log("jo");
+  const handleCheck = async (index, num, item) => {
+    try {
+      let updatedState = false;
+      if (!isChecked(item, num)) {
+        updatedState = true;
+      }
+      await updateCompleteness({
+        goalId: goalId,
+        day: index + 1,
+        objNum: num,
+        newState: updatedState,
+      });
+
+      fetchData();
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   // Handler for back button press
@@ -119,7 +143,7 @@ const InsideGoalsScreen = ({ route }) => {
     navigation.navigate("ViewGoalsScreen");
   };
 
-  if (!goal) {
+  if (!goal || !selectedGoal) {
     return;
   }
 
@@ -139,9 +163,9 @@ const InsideGoalsScreen = ({ route }) => {
               <Text style={styles.goalDescription}>{goal.description}</Text>
             </View>
 
-            {goal.objectivesState.map((item, index) => (
+            {selectedGoal.objectiveState.map((item, index) => (
               <View key={index} style={styles.itemComponent}>
-                <Text style={styles.dayText}>Day 0{item.day}</Text>
+                <Text style={styles.dayText}>Day 0{index + 1}</Text>
 
                 {goal.objectives.map((obj, num) => (
                   <View key={num} style={styles.objComponent}>
@@ -152,7 +176,7 @@ const InsideGoalsScreen = ({ route }) => {
                     {tab == "viewGoals" && (
                       <CheckBox
                         value={isChecked(item, num)}
-                        onValueChange={handleCheck}
+                        onValueChange={() => handleCheck(index, num, item)}
                         style={{
                           padding: 10,
                           borderRadius: 5,
