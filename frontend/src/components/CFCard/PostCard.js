@@ -10,15 +10,17 @@ const PostCard = (props) => {
   return (
     <View style={styles.cardBox}>
       <View style={styles.content1}>
-        <View style={styles.imageframe}>
-          <Image source={props.image} style={styles.image} />
-        </View>
+        <View style={{ flexDirection: "row", alignItems: "center" }}>
+          <View style={styles.imageframe}>
+            <Image source={props.image} style={styles.image} />
+          </View>
 
-        <View style={styles.content3}>
-          <Text style={styles.title}>{props.title}</Text>
+          <View style={styles.content3}>
+            <Text style={styles.title}>{props.title}</Text>
 
-          <View style={{ width: "90%" }}>
-            <Text style={styles.sub}>{props.sub}</Text>
+            <View style={{ width: "90%" }}>
+              <Text style={styles.sub}>{props.sub}</Text>
+            </View>
           </View>
         </View>
         <View>
@@ -64,6 +66,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     padding: 10,
+    justifyContent: "space-between",
   },
   imageframe: {
     height: 60,
@@ -110,7 +113,7 @@ const styles = StyleSheet.create({
   navMenu: {
     height: 8,
     width: 8,
-    marginLeft: 100,
+    marginRight: 25,
   },
 });
 
