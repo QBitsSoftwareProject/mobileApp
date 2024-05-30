@@ -118,8 +118,6 @@ const UserRegScreen = () => {
     } else if (!isChecked) {
       setUnCheckedColor("#E82519");
       setIsEmpty(false);
-    } else if (isChecked) {
-      setUnCheckedColor("#40495B");
     } else if (!validateEmail(email)) {
       setIsEmailValid(false);
       setIsEmpty(false);
@@ -130,6 +128,8 @@ const UserRegScreen = () => {
     } else {
       setIsEmpty(false);
       setIsPhoneNumValid(true);
+      setUnCheckedColor("#40495B");
+
       const checkUser = await checkExistsUser(email);
 
       if (checkUser.user != null) {
@@ -149,6 +149,7 @@ const UserRegScreen = () => {
 
   const sendUser = async (imageUrl) => {
     try {
+      console.log("12");
       const userData = await userRegistration(
         name,
         userName,

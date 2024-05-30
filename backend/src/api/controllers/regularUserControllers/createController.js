@@ -23,7 +23,7 @@ exports.createRegularUser = async (req, res) => {
       fullName,
       userName,
       email,
-      password,
+      password: encryptedPwd,
       contactNumber,
       address,
       city,

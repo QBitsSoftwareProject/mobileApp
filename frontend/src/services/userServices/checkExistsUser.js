@@ -6,6 +6,7 @@ const URL = BACKEND_URI + "/user";
 export const checkExistsUser = async (email) => {
   try {
     const response = await axios.post(`${URL}/checkExistsUser`, { email });
+
     return response.data;
   } catch (error) {
     console.log(error);
