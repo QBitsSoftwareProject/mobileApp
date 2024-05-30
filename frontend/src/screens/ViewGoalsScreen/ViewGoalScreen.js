@@ -13,76 +13,14 @@ import ViewGoalCard from "../../components/ViewGoalCard/ViewGoalCard";
 
 import HistoryGoalCard from "../../components/HistoryGoalCard/HistoryGoalCard";
 import SuggestGoalCard from "../../components/SuggestGoalCard/SuggestGoalCard";
+import notFoundGif from "../../assets/animation/not-found.png";
+import LottieView from "lottie-react-native";
+
 import {
   getSelectedGoals,
   getSuggestedGoals,
-  getTheReleventGoal,
 } from "../../services/goalsService/goalsService";
 
-const goalsList = [
-  {
-    id: 1,
-    title: "Mindfulness Moments",
-    subTitle: "Take 10 minutes daily meditation at 6.30 A.M.",
-    completness: 3,
-    length: 6,
-  },
-  {
-    id: 2,
-    title: "Connect and Smile",
-    subTitle: "reaching out to friends and family 3 times a week",
-    completness: 5,
-    length: 6,
-  },
-  {
-    id: 3,
-    title: "Write it Out",
-    subTitle: "Allocate time for reflective journaling 4 times",
-    completness: 1,
-    length: 6,
-  },
-  {
-    id: 4,
-    title: "Mindfulness Moments",
-    subTitle: "Take 10 minutes daily meditation at 6.30 A.M. ",
-    completness: 2,
-    length: 6,
-  },
-  {
-    id: 5,
-    title: "Connect and Smile",
-    subTitle: "reaching out to friends and family 3 times a week",
-    completness: 3,
-    length: 10,
-  },
-];
-
-// const suggestGoalsList = [
-//   {
-//     id: 1,
-//     title: "Mindfulness Moments",
-//     description:
-//       "3 times a week! Ease stress with journaling. Pen your thoughts and feelings for clarity andcalmness.",
-//   },
-//   {
-//     id: 2,
-//     title: "Write it out",
-//     description:
-//       "Take 10! Practice daily mindfulness for peace. Try meditation, breathing exercises, or body scans to find calm in just 10 minutes.",
-//   },
-//   {
-//     id: 3,
-//     title: "Connect and Smile",
-//     description:
-//       "Twice a week, reach out! Socialize in-person, call, or message loved ones. Building connections for a happier you",
-//   },
-//   {
-//     id: 4,
-//     title: "Mindfulness Moments",
-//     description:
-//       "Take 10! Practice daily mindfulness for peace. Try meditation, breathing exercises, or body scans to find calm in just 10 minutes.",
-//   },
-// ];
 const completedGoalsList = [
   {
     id: 1,
@@ -125,7 +63,8 @@ const completedGoalsList = [
 
 const ViewGoalScreen = () => {
   const [selectedTab, setSelectedTab] = useState(0);
-  const [data, setData] = useState([]);
+  const [prevTab, setPrevTab] = useState(selectedTab);
+  const [data, setData] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -146,6 +85,14 @@ const ViewGoalScreen = () => {
 
     fetchData();
   }, [selectedTab]);
+
+  const tabChecking = () => {
+    if (selectedTab != prevTab) {
+      setData([]);
+      setPrevTab(selectedTab);
+    }
+  };
+  tabChecking();
 
   return (
     <View
@@ -173,43 +120,54 @@ const ViewGoalScreen = () => {
         </View>
       </View>
       <View style={{ flex: 1 }}>
-        <FlatList
-          data={data}
-          renderItem={({ item, index }) => (
-            <View
-              style={{
-                marginHorizontal: 25,
-                marginTop: 15,
-                marginBottom: index === data.length - 1 ? 32 : 0,
-              }}
-            >
-              {selectedTab == 0 ? (
-                <ViewGoalCard
-                  title={item.title}
-                  subTitle={item.subTitle}
-                  cNumber={item.completness}
-                  length={item.length}
-                  goalId={item._id}
-                />
-              ) : selectedTab == 1 ? (
-                <SuggestGoalCard
-                  title={item.title}
-                  subTitle={item.description}
-                  goalId={item._id}
-                  objectives={item.objectivesState}
-                  completness={item.completness}
-                />
-              ) : selectedTab == 2 ? (
-                <HistoryGoalCard
-                  title={item.title}
-                  cNumber={item.completness}
-                  length={item.length}
-                  completedDate={item.completedDate}
-                />
-              ) : null}
-            </View>
-          )}
-        />
+        {data[0] != null ? (
+          <FlatList
+            data={data}
+            renderItem={({ item, index }) => (
+              <View
+                style={{
+                  marginHorizontal: 25,
+                  marginTop: 15,
+                  marginBottom: index === data.length - 1 ? 32 : 0,
+                }}
+              >
+                {selectedTab == 0 ? (
+                  <ViewGoalCard
+                    title={item.title}
+                    subTitle={item.subTitle}
+                    cNumber={item.completness}
+                    length={item.length}
+                    goalId={item._id}
+                  />
+                ) : selectedTab == 1 ? (
+                  <SuggestGoalCard
+                    title={item.title}
+                    subTitle={item.description}
+                    goalId={item._id}
+                    objectives={item.objectivesState}
+                    completness={item.completness}
+                  />
+                ) : selectedTab == 2 ? (
+                  <HistoryGoalCard
+                    title={item.title}
+                    cNumber={item.completness}
+                    length={item.length}
+                    completedDate={item.completedDate}
+                  />
+                ) : null}
+              </View>
+            )}
+          />
+        ) : (
+          <View
+            style={{
+              alignItems: "center",
+              width: "100%",
+            }}
+          >
+            <Image source={notFoundGif} style={{ width: "60%", height: 250 }} />
+          </View>
+        )}
       </View>
 
       {/* Goals add btn--------------------------------------------------------------------------- */}
