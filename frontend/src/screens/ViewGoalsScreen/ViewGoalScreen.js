@@ -1,20 +1,12 @@
-import {
-  View,
-  Text,
-  FlatList,
-  Image,
-  Touchable,
-  TouchableOpacity,
-} from "react-native";
+import { View, Text, FlatList, Image, TouchableOpacity } from "react-native";
 import React, { useEffect, useState } from "react";
 import HeaderSub from "../../components/HeaderSub/HeaderSub";
 import ButtonGroup from "../../components/Button/ButtonGroup";
 import ViewGoalCard from "../../components/ViewGoalCard/ViewGoalCard";
-
 import HistoryGoalCard from "../../components/HistoryGoalCard/HistoryGoalCard";
 import SuggestGoalCard from "../../components/SuggestGoalCard/SuggestGoalCard";
 import notFoundGif from "../../assets/animation/not-found.png";
-import LottieView from "lottie-react-native";
+import loadingGif from "../../assets/animation/loading.gif";
 
 import {
   getSelectedGoals,
@@ -32,7 +24,6 @@ const completedGoalsList = [
   {
     id: 2,
     title: "Connect and Smile",
-
     completness: 5,
     length: 6,
     completedDate: "12.11.2024",
@@ -54,7 +45,6 @@ const completedGoalsList = [
   {
     id: 5,
     title: "Connect and Smile",
-
     completness: 3,
     length: 10,
     completedDate: "12.11.2024",
@@ -63,13 +53,15 @@ const completedGoalsList = [
 
 const ViewGoalScreen = () => {
   const [selectedTab, setSelectedTab] = useState(0);
-  const [prevTab, setPrevTab] = useState(selectedTab);
-  const [data, setData] = useState(null);
+  const [data, setData] = useState([]);
+  const [isChange, setIsChange] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        let result;
+        setIsLoading(true);
+        let result = [];
         if (selectedTab === 0) {
           result = await getSelectedGoals();
         } else if (selectedTab === 1) {
@@ -77,28 +69,21 @@ const ViewGoalScreen = () => {
         } else if (selectedTab === 2) {
           result = completedGoalsList;
         }
-        setData(result);
+        setData(result || []);
+        setIsLoading(false);
       } catch (error) {
         console.log(error);
+        setData([]);
       }
     };
 
     fetchData();
-  }, [selectedTab]);
-
-  const tabChecking = () => {
-    if (selectedTab != prevTab) {
-      setData([]);
-      setPrevTab(selectedTab);
-    }
-  };
-  tabChecking();
+  }, [selectedTab, isChange]);
 
   return (
     <View
       style={{
         flex: 1,
-
         paddingBottom: 80,
       }}
     >
@@ -120,7 +105,18 @@ const ViewGoalScreen = () => {
         </View>
       </View>
       <View style={{ flex: 1 }}>
-        {data[0] != null ? (
+        {isLoading == true ? (
+          <View
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              height: "80%",
+            }}
+          >
+            <Image source={loadingGif} />
+          </View>
+        ) : data && data.length > 0 ? (
           <FlatList
             data={data}
             renderItem={({ item, index }) => (
@@ -131,6 +127,7 @@ const ViewGoalScreen = () => {
                   marginBottom: index === data.length - 1 ? 32 : 0,
                 }}
               >
+                {console.log(item)}
                 {selectedTab == 0 ? (
                   <ViewGoalCard
                     title={item.title}
@@ -138,6 +135,7 @@ const ViewGoalScreen = () => {
                     cNumber={item.completness}
                     length={item.length}
                     goalId={item._id}
+                    change={(id) => setIsChange(!isChange)}
                   />
                 ) : selectedTab == 1 ? (
                   <SuggestGoalCard
@@ -146,6 +144,7 @@ const ViewGoalScreen = () => {
                     goalId={item._id}
                     objectives={item.objectivesState}
                     completness={item.completness}
+                    change={(id) => setIsChange(!isChange)}
                   />
                 ) : selectedTab == 2 ? (
                   <HistoryGoalCard
@@ -169,16 +168,6 @@ const ViewGoalScreen = () => {
           </View>
         )}
       </View>
-
-      {/* Goals add btn--------------------------------------------------------------------------- */}
-
-      {/* {selectedTab == 0 && (
-        <TouchableOpacity
-          style={{ position: "absolute", bottom: 90, right: 25 }}
-        >
-          <Image source={require("../../assets/images/plusBtn.png")} />
-        </TouchableOpacity>
-      )} */}
     </View>
   );
 };

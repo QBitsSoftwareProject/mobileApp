@@ -6,11 +6,14 @@ const URL = BACKEND_URI + "/goal";
 
 export const getSuggestedGoals = async () => {
   try {
-    const response = await axios.get(URL);
+    const token = await AsyncStorage.getItem("authToken");
+    const response = await axios.get(URL + "/suggested-goals", {
+      headers: { authtoken: token },
+    });
     // consolse.log(response.data);
     return response.data;
   } catch (error) {
-    //   console.log(error);
+    console.log(error);
     throw new Error("Error during request setup");
   }
 };
@@ -58,6 +61,20 @@ export const updateCompleteness = async (data) => {
   try {
     const token = await AsyncStorage.getItem("authToken");
     const response = await axios.put(`${URL}/update-completeness`, data, {
+      headers: { authtoken: token },
+    });
+
+    // return response;
+  } catch (error) {
+    console.log(error);
+    throw new Error("Error during request setup");
+  }
+};
+
+export const deleteASelectedGoal = async (goalId) => {
+  try {
+    const token = await AsyncStorage.getItem("authToken");
+    const response = await axios.put(`${URL}/delete-selected-goal`, goalId, {
       headers: { authtoken: token },
     });
 

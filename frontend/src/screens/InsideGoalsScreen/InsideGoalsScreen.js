@@ -97,12 +97,19 @@ const InsideGoalsScreen = ({ route }) => {
 
   const fetchData = async () => {
     try {
-      const user = await getAUser();
       const response = await getAGoal(goalId);
+
+      const user = await getAUser();
       const selectOne = user.selectedGoals.find(
         (item) => item.goalId == goalId
       );
-      setSelectedGoal(selectOne);
+
+      if (tab == "viewGoals") {
+        setSelectedGoal(selectOne);
+      } else {
+        setSelectedGoal(response);
+      }
+
       setGoal(response);
     } catch (error) {
       console.log(error);
@@ -122,14 +129,17 @@ const InsideGoalsScreen = ({ route }) => {
   const handleCheck = async (index, num, item) => {
     try {
       let updatedState = false;
+      let completenessValue = -1;
       if (!isChecked(item, num)) {
         updatedState = true;
+        completenessValue = 1;
       }
       await updateCompleteness({
         goalId: goalId,
         day: index + 1,
         objNum: num,
         newState: updatedState,
+        value: completenessValue,
       });
 
       fetchData();
@@ -143,7 +153,7 @@ const InsideGoalsScreen = ({ route }) => {
     navigation.navigate("ViewGoalsScreen");
   };
 
-  if (!goal || !selectedGoal) {
+  if (!goal || (!selectedGoal && tab == "viewGoals")) {
     return;
   }
 
@@ -163,7 +173,7 @@ const InsideGoalsScreen = ({ route }) => {
               <Text style={styles.goalDescription}>{goal.description}</Text>
             </View>
 
-            {selectedGoal.objectiveState.map((item, index) => (
+            {selectedGoal.objectivesState.map((item, index) => (
               <View key={index} style={styles.itemComponent}>
                 <Text style={styles.dayText}>Day 0{index + 1}</Text>
 

@@ -11,12 +11,13 @@ const SuggestGoalCard = ({
   goalId,
   objectives,
   completeness,
+  change,
 }) => {
   const navigation = useNavigation();
 
   const updatedData = {
     goalId: goalId,
-    objectiveState: objectives,
+    objectivesState: objectives,
     completeness: 0,
   };
 
@@ -27,6 +28,7 @@ const SuggestGoalCard = ({
   const handleAdd = async () => {
     try {
       await addAGoal({ selectedGoals: updatedData });
+      change(goalId);
     } catch (error) {
       console.log(error);
     }

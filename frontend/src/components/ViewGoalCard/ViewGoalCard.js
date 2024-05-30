@@ -5,12 +5,22 @@ import styles from "./styles";
 import GoalsProgressBar from "../GoalsProgressBar/GoalsProgressBar";
 import { ListItem } from "@rneui/themed";
 import { Button } from "@rneui/base";
+import { deleteASelectedGoal } from "../../services/goalsService/goalsService";
 
-const ViewGoalCard = ({ title, subTitle, cNumber, length, goalId }) => {
+const ViewGoalCard = ({ title, subTitle, cNumber, length, goalId, change }) => {
   const navigation = useNavigation();
 
   const handlePress = (goalId) => {
     navigation.navigate("InsideGoalsScreen", { goalId, tab: "viewGoals" });
+  };
+
+  const handleDelete = async () => {
+    try {
+      await deleteASelectedGoal({ goalId: goalId });
+      change(goalId);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -18,6 +28,7 @@ const ViewGoalCard = ({ title, subTitle, cNumber, length, goalId }) => {
       rightContent={(reset) => (
         <Button
           onPress={() => {
+            handleDelete();
             reset();
           }}
           icon={{ name: "delete", color: "white", size: 50 }}

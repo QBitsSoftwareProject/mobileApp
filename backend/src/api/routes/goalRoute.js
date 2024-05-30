@@ -23,6 +23,12 @@ const {
 const {
   objectiveStateUpdate,
 } = require("../controllers/goalsControllers/objectiveStatesUpdate");
+const {
+  deleteSelectedGoal,
+} = require("../controllers/goalsControllers/deleteSelectedGoal");
+const {
+  getSuggestedGoals,
+} = require("../controllers/goalsControllers/getSuggestedGoals");
 
 const router = express.Router();
 
@@ -35,4 +41,6 @@ router.get("/get-goal/:id", getAGoal);
 router.post("/add-goal", auth, addSelectedGoal);
 router.get("/selected-goals", auth, getSelectedGoals);
 router.put("/update-completeness", auth, objectiveStateUpdate);
+router.put("/delete-selected-goal", auth, deleteSelectedGoal);
+router.get("/suggested-goals", auth, getSuggestedGoals);
 module.exports = router;

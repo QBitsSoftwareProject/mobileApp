@@ -10,7 +10,7 @@ exports.loginUser = async (req, res) => {
     const { email, password } = req.body;
 
     if (!(email && password)) {
-      res.status(400).send("All inputs are required");
+      return res.status(400).send("All inputs are required");
     }
 
     //find user

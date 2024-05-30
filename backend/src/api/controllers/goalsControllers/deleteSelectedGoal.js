@@ -1,9 +1,9 @@
 const regularUser = require("../../models/regularUser/regularUser");
 
-exports.objectiveStateUpdate = async (req, res) => {
+exports.deleteSelectedGoal = async (req, res) => {
   try {
     // Destructuring the request body to extract user details
-    const { goalId, objNum, day, newState, value } = req.body;
+    const { goalId } = req.body;
 
     // Finding the user by ID
     const getUser = await regularUser.findById(req.user.user_id);
@@ -22,25 +22,8 @@ exports.objectiveStateUpdate = async (req, res) => {
     if (goalIndex === -1) {
       return res.status(404).json({ message: "Goal not found" });
     }
-
-    // Find the relevant day index based on day
-    const dayIndex = getUser.selectedGoals[goalIndex].objectivesState.findIndex(
-      (obj) => obj.day == day
-    );
-
-    // If day is not found, return an error response
-    if (dayIndex === -1) {
-      return res.status(402).json({ message: "Day not found" });
-    }
-
-    // Update the completeness field
-    getUser.selectedGoals[goalIndex].objectivesState[dayIndex].completeness[
-      objNum
-    ] = newState;
-
-    //update the completeness
-    getUser.selectedGoals[goalIndex].completeness =
-      getUser.selectedGoals[goalIndex].completeness + value;
+    // Remove the goal from the selectedGoals array
+    getUser.selectedGoals.splice(goalIndex, 1);
 
     // Save the updated user
     await regularUser.findByIdAndUpdate(req.user.user_id, getUser);
