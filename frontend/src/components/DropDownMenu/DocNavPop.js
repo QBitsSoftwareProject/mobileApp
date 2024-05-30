@@ -31,6 +31,9 @@ const styles = StyleSheet.create({
     marginHorizontal: 7,
     alignItems: "center",
     justifyContent: "center",
+    position: "absolute",
+    marginTop: 50,
+    zIndex: 10,
   },
   container: {
     flex: 1,

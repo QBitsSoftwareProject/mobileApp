@@ -5,7 +5,7 @@ import DocNavPop from "../DropDownMenu/DocNavPop";
 
 const DocDropDown = (props) => {
   const [isPress, setIsPress] = useState(false);
-  const [selectedMenu, setSelectedMenu] = useState(null);
+  const [selectedMenu, setSelectedMenu] = useState("Complete");
   const ddArrow = require("../../assets/images/PostCardImages/droparrow.png");
 
   const handlePress = () => {
@@ -21,7 +21,7 @@ const DocDropDown = (props) => {
           </View>
         </View>
       </TouchableOpacity>
-      {isPress && <DocNavPop selectedMenu={setSelectedMenu()} />}
+      {isPress && <DocNavPop selectedMenu={setSelectedMenu} />}
     </View>
   );
 };

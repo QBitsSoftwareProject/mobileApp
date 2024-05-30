@@ -4,16 +4,18 @@ import { View, Image, StyleSheet, ImageBackground } from "react-native";
 const ProfileCover = (props) => {
   return (
     <View style={styles.backgroundFrame}>
-      <ImageBackground
-        source={require("../../assets/images/PostCardImages/cover.jpg")}
-        style={styles.backImg}
-      >
-        <View style={{ alignItems: "center", zIndex: 101 }}>
-          <View style={styles.profileFrame}>
-            <Image source={props.proPic} style={styles.profileImage} />
+      <View style={styles.wrapper}>
+        <ImageBackground
+          source={require("../../assets/images/PostCardImages/cover.jpg")}
+          style={styles.backImg}
+        >
+          <View style={{ alignItems: "center", zIndex: 101 }}>
+            <View style={styles.profileFrame}>
+              <Image source={props.proPic} style={styles.profileImage} />
+            </View>
           </View>
-        </View>
-      </ImageBackground>
+        </ImageBackground>
+      </View>
     </View>
   );
 };
@@ -27,6 +29,10 @@ const styles = StyleSheet.create({
     borderBottomLeftRadius: 40,
     borderBottomRightRadius: 40,
     overflow: "hidden",
+  },
+  wrapper: {
+    borderBottomLeftRadius: 40,
+    borderBottomRightRadius: 40,
   },
   backImg: {
     paddingRight: 25,
