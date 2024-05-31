@@ -7,6 +7,7 @@ const { connect } = require("./config/database.connection.js");
 const regularUserRoute = require("./api/routes/regularUserRoute.js");
 const doctorRoute = require("./api/routes/doctorRoute.js");
 const goalRoute = require("./api/routes/goalRoute.js");
+const appointmentRouter = require('./api/routes/appointmentRoutes/appointmentRoutes.js');
 
 const app = express();
 
@@ -17,6 +18,7 @@ app.use(bodyParser.json());
 app.use("/api/v1/user", regularUserRoute);
 app.use("/api/v1/doctor", doctorRoute);
 app.use("/api/v1/goal", goalRoute);
+app.use("/api/v1/appointments", appointmentRouter);
 
 app.listen(PORT, () => {
   console.log(`server is running on port ${PORT}`);

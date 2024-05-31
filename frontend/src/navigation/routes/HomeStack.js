@@ -1,6 +1,7 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import HomeScreen from "../../screens/HomeScreen/HomeScreen";
 import GoalsStack from "./GoalsStack";
+import AppointmentStack from "../routes/AppointmentStack";
 
 const Stack = createNativeStackNavigator();
 
@@ -20,6 +21,7 @@ const HomeStack = ({ route }) => {
         initialParams={{ userId: userId, role: role }}
       />
       <Stack.Screen name="GoalsStack" component={GoalsStack} />
+      <Stack.Screen name="AppointmentStack" component={AppointmentStack} />
     </Stack.Navigator>
   );
 };

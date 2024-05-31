@@ -16,6 +16,7 @@ exports.loginUser = async (req, res) => {
     //find user
     let user = await doctorModel.findOne({ email });
     let role = "doctor";
+    console.log(user);
 
     if (!user) {
       user = await regularUser.findOne({ email });
@@ -41,7 +42,6 @@ exports.loginUser = async (req, res) => {
       .header("authtoken", token)
       .json({ message: "Login Successful", user: user, role: role });
   } catch (err) {
-    //console.error(err);
     res.status(500).json({ error: "Login is failed", error: err.message });
   }
 };

@@ -21,6 +21,7 @@ export const userLogin = async (email, password) => {
 
     return response.data;
   } catch (err) {
+    console.log(err);
     throw new Error("Error during request setup");
   }
 };
