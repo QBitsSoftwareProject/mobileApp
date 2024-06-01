@@ -17,8 +17,19 @@ exports.getSelectedGoals = async (req, res) => {
     // Find goals in the goals collection that match the extracted goal IDs
     const selectedGoals = await goals.find({ _id: { $in: goalIds } });
 
+    // Initialize joinedGoals as an empty array
+    let joinedGoals = [];
+
+    // Updating objectiveStatus of each goal
+    selectedGoals.forEach(async (item, index) => {
+      item.completeness = getUser.selectedGoals.find(
+        (goal) => goal.goalId == item._id
+      ).completeness;
+      joinedGoals.push(item);
+    });
+
     // Sending success response with status code 200 and the selected goals
-    return res.status(200).json(selectedGoals);
+    return res.status(200).json(joinedGoals);
   } catch (err) {
     res.status(500).json({ error: "fetch failed", error: err.message });
   }

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { View, Text, TouchableOpacity } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import styles from "./styles";
@@ -11,7 +11,10 @@ const ViewGoalCard = ({ title, subTitle, cNumber, length, goalId, change }) => {
   const navigation = useNavigation();
 
   const handlePress = (goalId) => {
-    navigation.navigate("InsideGoalsScreen", { goalId, tab: "viewGoals" });
+    navigation.navigate("InsideGoalsScreen", {
+      goalId,
+      tab: "viewGoals",
+    });
   };
 
   const handleDelete = async () => {

@@ -19,7 +19,8 @@ const goalSchema = new schema({
     type: Array,
     required: true,
   },
-  completness: {
+
+  completeness: {
     type: Number,
     default: 0,
   },

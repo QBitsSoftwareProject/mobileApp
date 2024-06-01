@@ -17,69 +17,6 @@ import {
 } from "../../services/goalsService/goalsService";
 import { getAUser } from "../../services/userServices/userService";
 
-// const allGoals = [
-//   {
-//     id: 1,
-//     tittle: "Mindfulness Moments ",
-//     description:
-//       "Take 10! Practice daily mindfulness for peace. Try meditation, breathing exercises, or body scans to find calm in just 10 minutes for 3 days.",
-//     objectives: ["10 minutes meditation", "At 6.30 A.M."],
-//     objectivesState: [
-//       { day: 1, completeness: ["complete", "incomplete"] },
-//       { day: 2, completeness: ["incomplete", "complete"] },
-//       { day: 3, completeness: ["incomplete", "incomplete"] },
-//     ],
-//   },
-//   {
-//     id: 2,
-//     tittle: "Connect and Smile ",
-//     description:
-//       "Take 10! Practice daily mindfulness for peace. Try meditation, breathing exercises, or body scans to find calm in just 10 minutes.",
-//     objectives: ["10 minutes meditation", "At 6.30 A.M."],
-//     objectivesState: [
-//       { day: 1, completeness: ["complete", "incomplete"] },
-//       { day: 2, completeness: ["incomplete", "complete"] },
-//       { day: 3, completeness: ["incomplete", "incomplete"] },
-//     ],
-//   },
-//   {
-//     id: 3,
-//     tittle: "Write it Out ",
-//     description:
-//       "Twice a week, reach out! Socialize in-person, call, or message loved ones. Building connections for a happier you",
-//     objectives: ["10 minutes meditation", "At 6.30 A.M."],
-//     objectivesState: [
-//       { day: 1, completeness: ["complete", "incomplete"] },
-//       { day: 2, completeness: ["incomplete", "complete"] },
-//       { day: 3, completeness: ["incomplete", "incomplete"] },
-//     ],
-//   },
-//   {
-//     id: 4,
-//     tittle: "Mindfulness Moments ",
-//     description:
-//       "Take 10! Practice daily mindfulness for peace. Try meditation, breathing exercises, or body scans to find calm in just 10 minutes for 3 days.",
-//     objectives: ["10 minutes meditation", "At 6.30 A.M."],
-//     objectivesState: [
-//       { day: 1, completeness: ["complete", "incomplete"] },
-//       { day: 2, completeness: ["incomplete", "complete"] },
-//       { day: 3, completeness: ["incomplete", "incomplete"] },
-//     ],
-//   },
-//   {
-//     id: 5,
-//     tittle: "Connect and Smile ",
-//     description:
-//       "Take 10! Practice daily mindfulness for peace. Try meditation, breathing exercises, or body scans to find calm in just 10 minutes for 3 days.",
-//     objectives: ["10 minutes meditation", "At 6.30 A.M."],
-//     objectivesState: [
-//       { day: 1, completeness: ["complete", "incomplete"] },
-//       { day: 2, completeness: ["incomplete", "complete"] },
-//       { day: 3, completeness: ["incomplete", "incomplete"] },
-//     ],
-//   },
-// ];
-
 const InsideGoalsScreen = ({ route }) => {
   const scrollHeight = Dimensions.get("window").height;
   const navigation = useNavigation();

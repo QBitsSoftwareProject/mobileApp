@@ -12,6 +12,7 @@ import {
   getSelectedGoals,
   getSuggestedGoals,
 } from "../../services/goalsService/goalsService";
+import { useFocusEffect } from "@react-navigation/native";
 
 const completedGoalsList = [
   {
@@ -57,26 +58,26 @@ const ViewGoalScreen = () => {
   const [isChange, setIsChange] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        setIsLoading(true);
-        let result = [];
-        if (selectedTab === 0) {
-          result = await getSelectedGoals();
-        } else if (selectedTab === 1) {
-          result = await getSuggestedGoals();
-        } else if (selectedTab === 2) {
-          result = completedGoalsList;
-        }
-        setData(result || []);
-        setIsLoading(false);
-      } catch (error) {
-        console.log(error);
-        setData([]);
+  const fetchData = async () => {
+    try {
+      setIsLoading(true);
+      let result = [];
+      if (selectedTab === 0) {
+        result = await getSelectedGoals();
+      } else if (selectedTab === 1) {
+        result = await getSuggestedGoals();
+      } else if (selectedTab === 2) {
+        result = completedGoalsList;
       }
-    };
+      setData(result || []);
+      setIsLoading(false);
+    } catch (error) {
+      console.log(error);
+      setData([]);
+    }
+  };
 
+  useEffect(() => {
     fetchData();
   }, [selectedTab, isChange]);
 
@@ -127,12 +128,11 @@ const ViewGoalScreen = () => {
                   marginBottom: index === data.length - 1 ? 32 : 0,
                 }}
               >
-                {console.log(item)}
                 {selectedTab == 0 ? (
                   <ViewGoalCard
                     title={item.title}
                     subTitle={item.subTitle}
-                    cNumber={item.completness}
+                    cNumber={item.completeness}
                     length={item.length}
                     goalId={item._id}
                     change={(id) => setIsChange(!isChange)}
@@ -143,7 +143,7 @@ const ViewGoalScreen = () => {
                     subTitle={item.description}
                     goalId={item._id}
                     objectives={item.objectivesState}
-                    completness={item.completness}
+                    completness={item.completeness}
                     change={(id) => setIsChange(!isChange)}
                   />
                 ) : selectedTab == 2 ? (
