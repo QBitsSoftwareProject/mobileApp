@@ -89,3 +89,17 @@ export const getADoctor = async () => {
     throw new Error("Error during request setup");
   }
 };
+
+export const viewADoctor = async (doctorId) => {
+  try {
+    const token = await AsyncStorage.getItem("authToken");
+    const response = await axios.post(`${URL}/view-doctor`, doctorId, {
+      headers: { authtoken: token },
+    });
+    // console.log(response.data)
+    return response.data;
+  } catch (error) {
+    console.log(error);
+    throw new Error("Error during request ");
+  }
+};

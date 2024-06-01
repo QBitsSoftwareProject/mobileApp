@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { View, Text, Image, ScrollView, TouchableOpacity } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import styles from "./styles";
@@ -8,6 +8,11 @@ import PopupMessage from "../../components/Pop-up/Pop-upScreen";
 import RegularButton from "../../components/Button/RegularButton";
 import { useNavigation } from "@react-navigation/native";
 import { createAppointment } from "../../servises/appointmentServise/AppointmentServise";
+import {
+  getADoctor,
+  viewADoctor,
+} from "../../services/doctorServices/doctorService";
+import loardingGIF from "../../assets/animation/loading.gif";
 
 // Mock data for date and time slots
 const dateList = [
@@ -34,14 +39,29 @@ const doctorId2 = "6603de56c39e6389183ec3c7";
 
 const userId = "6602fde8bdb3f4f68ebaa101";
 
-const MakeAppointment = () => {
+const MakeAppointment = ({ route }) => {
   const [numColumns, setNumColumns] = useState(2); // Number of columns for layout
   const [timeBtnpress, setTimebtnPress] = useState(false); // State to track time button press
   const [dateBtnPress, setDateBtnPress] = useState(false); // State to track date button press
   const [popupMessage, setPopupMessage] = useState(""); // State for popup message
   const [getTime, setGetTime] = useState();
   const [getDate, setGetDate] = useState();
+  const [doctor, setDoctor] = useState();
+  const { id } = route.params;
 
+  useEffect(() => {
+    fetchDoctor();
+  }, []);
+
+  const fetchDoctor = async () => {
+    try {
+      const res = await viewADoctor({ doctorId: id });
+      setDoctor(res);
+      // console.log(res);
+    } catch (error) {
+      console.log(error);
+    }
+  };
   // Hook for navigation
   const navigation = useNavigation();
 
@@ -67,6 +87,21 @@ const MakeAppointment = () => {
     navigation.navigate("AvailableDoctors");
   };
 
+  if (!doctor) {
+    return (
+      <View
+        style={{
+          width: "100%",
+          height: "100%",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <Image source={loardingGIF} />
+      </View>
+    );
+  }
+
   return (
     <SafeAreaView style={{ margin: 25 }}>
       <View style={{ marginBottom: 20 }}>
@@ -78,38 +113,30 @@ const MakeAppointment = () => {
       <ScrollView>
         {/* Doctor details */}
         <View style={styles.headerBox}>
-          <Text style={styles.header}>Dr. B.M. Weerasinghe</Text>
+          <Text style={styles.header}>Dr. {doctor.userName}</Text>
         </View>
 
         <View style={styles.boxcontainer}>
           <View>
             <Image
               source={{
-                uri: "https://www.hollywoodreporter.com/wp-content/uploads/2015/01/kit_harrington.jpg?w=3000",
+                uri: doctor.proPic,
               }}
               style={styles.Image}
             />
           </View>
 
           <View style={styles.description}>
-            <Text style={styles.docDetails}>MBBS, University of Colombo.</Text>
-            <Text style={styles.docDetails}>RegNo: 158764258</Text>
-            <Text style={styles.docDetails}>
-              Anuradhapura Genaral Hospital.
-            </Text>
+            <Text style={styles.docDetails}>{doctor.qualification}</Text>
+
+            <Text style={styles.docDetails}>{doctor.workPlace}</Text>
           </View>
         </View>
 
         <View style={{ marginBottom: 20 }}>
           <Text style={styles.title}>About</Text>
 
-          <Text style={styles.titledescription}>
-            Experienced Psychiatrist with 8+ years of experience providing
-            compassionate, patient-centered mental health care to a diverse
-            population of adults and adolescents. A highly organized and
-            detail-oriented professional who is committed to providing the
-            highest level of care to all patients.
-          </Text>
+          <Text style={styles.titledescription}>{doctor.bio}</Text>
         </View>
 
         {/* Date selection */}
