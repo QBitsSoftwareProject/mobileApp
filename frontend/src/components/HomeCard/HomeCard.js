@@ -9,7 +9,11 @@ const HomeCard = (props) => {
   const navigation = useNavigation();
 
   const handlePress = (cardName) => {
-    if (cardName == "goals") navigation.navigate("GoalsStack");
+    if (cardName == "goals") {
+      navigation.navigate("GoalsStack");
+    } else if (cardName == "appointment") {
+      navigation.navigate("AppointmentStack");
+    }
   };
 
   return (

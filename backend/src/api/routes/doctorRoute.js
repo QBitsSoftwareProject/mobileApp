@@ -2,6 +2,7 @@ const express = require("express");
 const {
   getDoctors,
   getADoctor,
+  viewADoctor,
 } = require("../controllers/doctorControllers/getController");
 const {
   updateDoctor,
@@ -24,6 +25,7 @@ router.get("/", getDoctors);
 router.get("/one-doctor", auth, getADoctor);
 router.put("/", auth, updateDoctor);
 router.delete("/:id", deleteDoctor);
+router.post("/view-doctor", viewADoctor);
 
 router.post("/checkExistsDoctor", checkExistsDoctor);
 
