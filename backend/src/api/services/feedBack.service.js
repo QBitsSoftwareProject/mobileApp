@@ -1,36 +1,37 @@
 
 const feedBack = require('../models/feedbackModel')
 
-const storeFeedback = (satisfication, finterface, privacy, speed, consumption, design, comment) => {
+const storeFeedback = (userid,satisfication, finterface, privacy, speed, consumption, design, comment,date,time) => {
 
-    console.log(satisfication)
-    console.log(finterface)
-    console.log(privacy)
-    console.log(speed)
-    console.log(consumption)
-    console.log(design)
-    console.log(comment)
 
 
     try{
-        if(!satisfication || !finterface || !privacy || !speed || !consumption || !design) {
+        if(!userid ||!satisfication || !finterface || !privacy || !speed || !consumption || !design || !date || !time){
             throw new Error('not completed!!!')
-    }
+        }
 
-    const newFeedBack = feedBack.create({
         
-        satisfication:satisfication,
-        finterface:finterface,
-        privacy:privacy,
-        speed:speed,
-        consumption:consumption,
-        design:design,
-        comment:comment
 
-    });
 
-    return newFeedBack;
 
+            const newFeedBack =  feedBack.create({
+                userid:userid,
+                satisfication:satisfication,
+                finterface:finterface,
+                privacy:privacy,
+                speed:speed,
+                consumption:consumption,
+                design:design,
+                comment:comment,
+                date:date,
+                time:time
+            });
+         
+            return newFeedBack;
+        
+
+
+    
 }catch (error){
     console.error(error);
     throw new Error('internal server error')

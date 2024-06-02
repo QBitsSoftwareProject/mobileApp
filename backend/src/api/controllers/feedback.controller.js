@@ -2,10 +2,10 @@ const feedbackService = require('../services/feedBack.service')
 
 // Controller function to store feedback
 const storeFeedback = async (req, res) => {
-    const { satisfication, finterface, privacy, speed, consumption, design, comment } = req.body;
+    const { userid, satisfication, finterface, privacy, speed, consumption, design, comment , date , time } = req.body;
 
     try {
-        const newFeedback = await feedbackService.storeFeedback(satisfication, finterface, privacy, speed, consumption, design, comment);
+        const newFeedback = await feedbackService.storeFeedback(userid, satisfication, finterface, privacy, speed, consumption, design, comment , date , time);
         res.status(201).json({ 
             success: true, 
             message: 'Feedback stored successfully', 

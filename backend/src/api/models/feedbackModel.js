@@ -2,32 +2,49 @@ const mongoose = require('mongoose');
 
 const FeedBackScheema = mongoose.Schema({
 
+    userid:{
+        type:String,
+        required:true,
+    },
+    
     satisfication:{
-        type:Number,
-        required:true
+        type:String,
+        required:true,
+        
     },
     finterface:{
-        type:Boolean,
+        type:String,
         required:true
     },
     privacy:{
-        type:Boolean,
+        type:String,
         required:true
     },
     speed:{
-        type:Boolean,
+        type:String,
         required:true
     },
     consumption:{
-        type:Boolean,
+        type:String,
         required:true
     },
     design:{
-        type:Boolean,
+        type:String,
         required:true
     },
     comment:{
-        type:String
+        type:String,
+        
+    },
+
+    date:{
+        type:String,
+        required:true
+    },
+
+    time:{
+        type:String,
+        required:true
     }
 
 })

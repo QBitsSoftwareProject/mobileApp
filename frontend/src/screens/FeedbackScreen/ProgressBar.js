@@ -1,13 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState , useEffect } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 
 //genarate the segmented buttons based on loops
-export  const SplitButton = () => {
+export  const SplitButton = ({rateFunction}) => {
   const [pressedSegment, setPressedSegment] = useState(null);
+  
+
   
 
   const handlePress = (segment) => {
     setPressedSegment(segment);
+    // rateFunction(segment + 1);
+    
   };
 
   const renderSegments = () => {
@@ -17,6 +21,7 @@ export  const SplitButton = () => {
       segments.push(
         <TouchableOpacity
           key={i}
+          
           style={[
             styles.segment,
             {
@@ -44,6 +49,15 @@ export  const SplitButton = () => {
           <Text style={styles.segmentText}>{i + 1}</Text>
         </TouchableOpacity>
       );
+
+      useEffect ( () => {
+        if(pressedSegment === null){
+          rateFunction(0);
+        }else{
+          rateFunction(pressedSegment + 1);
+        }
+      })
+
     }
     return segments;
   };
