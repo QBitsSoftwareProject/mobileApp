@@ -3,7 +3,7 @@ import React from "react";
 import styles from "./styles";
 import { Dimensions } from "react-native";
 
-const GoalsProgressBar = ({ cNumber, length, active }) => {
+const GoalsProgressBar = ({ cNumber, length, active, levels }) => {
   const windowWidth = Dimensions.get("window").width;
   const percent = (cNumber / length).toFixed(2);
   const barWidth = percent * (windowWidth - 80);

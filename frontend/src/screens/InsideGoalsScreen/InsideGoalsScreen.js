@@ -87,7 +87,7 @@ const InsideGoalsScreen = ({ route }) => {
 
   // Handler for back button press
   const handleBackPress = () => {
-    navigation.navigate("ViewGoalsScreen");
+    navigation.navigate("ViewGoalsScreen", { goalId: goalId });
   };
 
   if (!goal || (!selectedGoal && tab == "viewGoals")) {

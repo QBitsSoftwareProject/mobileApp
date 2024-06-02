@@ -92,7 +92,7 @@ const AvailableDoctor = () => {
       <HeaderSub
         headLine={"Doctor appointment"}
         subHeadLine={"Explore and find the perfect specialist."}
-        onPress={goBack}
+        onPress={"HomeScreen"}
       />
 
       <SafeAreaView style={{ margin: 25 }}>

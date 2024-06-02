@@ -5,20 +5,17 @@ import { useNavigation } from "@react-navigation/native";
 import { updateAUser } from "../../services/userServices/userService";
 import { addAGoal } from "../../services/goalsService/goalsService";
 
-const SuggestGoalCard = ({
-  title,
-  subTitle,
-  goalId,
-  objectives,
-  completeness,
-  change,
-}) => {
+const SuggestGoalCard = ({ title, subTitle, goalId, objectives, change }) => {
   const navigation = useNavigation();
+
+  const date = new Date();
 
   const updatedData = {
     goalId: goalId,
     objectivesState: objectives,
     completeness: 0,
+    isComplete: false,
+    selectedDate: date,
   };
 
   const handlePress = (goalId) => {

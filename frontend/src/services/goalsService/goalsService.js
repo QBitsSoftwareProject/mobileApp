@@ -84,3 +84,17 @@ export const deleteASelectedGoal = async (goalId) => {
     throw new Error("Error during request setup");
   }
 };
+
+export const getCompletedGoals = async () => {
+  try {
+    const token = await AsyncStorage.getItem("authToken");
+    const response = await axios.get(URL + "/completed-goals", {
+      headers: { authtoken: token },
+    });
+    // console.log(response.data);
+    return response.data;
+  } catch (error) {
+    console.log(error);
+    throw new Error("Error during request setup");
+  }
+};

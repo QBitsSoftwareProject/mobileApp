@@ -1,5 +1,5 @@
 import { View, Text, FlatList, Image, TouchableOpacity } from "react-native";
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import HeaderSub from "../../components/HeaderSub/HeaderSub";
 import ButtonGroup from "../../components/Button/ButtonGroup";
 import ViewGoalCard from "../../components/ViewGoalCard/ViewGoalCard";
@@ -9,6 +9,7 @@ import notFoundGif from "../../assets/animation/not-found.png";
 import loadingGif from "../../assets/animation/loading.gif";
 
 import {
+  getCompletedGoals,
   getSelectedGoals,
   getSuggestedGoals,
 } from "../../services/goalsService/goalsService";
@@ -18,35 +19,35 @@ const completedGoalsList = [
   {
     id: 1,
     title: "Mindfulness Moments",
-    completness: 3,
+    completeness: 3,
     length: 6,
     completedDate: "12.11.2024",
   },
   {
     id: 2,
     title: "Connect and Smile",
-    completness: 5,
+    completeness: 5,
     length: 6,
     completedDate: "12.11.2024",
   },
   {
     id: 3,
     title: "Write it Out",
-    completness: 1,
+    completeness: 1,
     length: 6,
     completedDate: "12.11.2024",
   },
   {
     id: 4,
     title: "Mindfulness Moments",
-    completness: 2,
+    completeness: 2,
     length: 6,
     completedDate: "12.11.2024",
   },
   {
     id: 5,
     title: "Connect and Smile",
-    completness: 3,
+    completeness: 3,
     length: 10,
     completedDate: "12.11.2024",
   },
@@ -67,7 +68,7 @@ const ViewGoalScreen = () => {
       } else if (selectedTab === 1) {
         result = await getSuggestedGoals();
       } else if (selectedTab === 2) {
-        result = completedGoalsList;
+        result = await getCompletedGoals();
       }
       setData(result || []);
       setIsLoading(false);
@@ -77,9 +78,11 @@ const ViewGoalScreen = () => {
     }
   };
 
-  useEffect(() => {
-    fetchData();
-  }, [selectedTab, isChange]);
+  useFocusEffect(
+    useCallback(() => {
+      fetchData();
+    }, [selectedTab, isChange])
+  );
 
   return (
     <View
@@ -149,9 +152,9 @@ const ViewGoalScreen = () => {
                 ) : selectedTab == 2 ? (
                   <HistoryGoalCard
                     title={item.title}
-                    cNumber={item.completness}
+                    cNumber={item.completeness}
                     length={item.length}
-                    completedDate={item.completedDate}
+                    dueDate={item.dueDate}
                   />
                 ) : null}
               </View>
@@ -164,7 +167,10 @@ const ViewGoalScreen = () => {
               width: "100%",
             }}
           >
-            <Image source={notFoundGif} style={{ width: "60%", height: 250 }} />
+            <Image
+              source={notFoundGif}
+              style={{ width: "60%", height: 250, opacity: 0.3 }}
+            />
           </View>
         )}
       </View>

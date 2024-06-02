@@ -17,16 +17,60 @@ exports.getSelectedGoals = async (req, res) => {
     // Find goals in the goals collection that match the extracted goal IDs
     const selectedGoals = await goals.find({ _id: { $in: goalIds } });
 
+    // Function to check due date
+    const dateChecking = (selectedDate, duration) => {
+      const currentDate = new Date();
+      const durationParts = duration.split(" ");
+      const durationValue = parseInt(durationParts[0], 10);
+      const durationUnit = durationParts[1];
+
+      const selectedDateObj = new Date(selectedDate);
+
+      if (durationUnit === "weeks") {
+        selectedDateObj.setDate(selectedDateObj.getDate() + durationValue * 7);
+      } else if (durationUnit === "days") {
+        selectedDateObj.setDate(selectedDateObj.getDate() + durationValue);
+      } else {
+        throw new Error("Unsupported duration unit");
+      }
+
+      dueDate = selectedDateObj.toISOString();
+
+      return selectedDateObj >= currentDate;
+    };
+
     // Initialize joinedGoals as an empty array
     let joinedGoals = [];
 
     // Updating objectiveStatus of each goal
-    selectedGoals.forEach(async (item, index) => {
-      item.completeness = getUser.selectedGoals.find(
+    for (const item of selectedGoals) {
+      const choosedGoal = getUser.selectedGoals.find(
         (goal) => goal.goalId == item._id
-      ).completeness;
-      joinedGoals.push(item);
-    });
+      );
+      const goalToUpdate = getUser.selectedGoals.find(
+        (goal) => goal.goalId == item._id
+      );
+
+      if (goalToUpdate.isComplete == true) {
+        continue;
+      }
+
+      // console.log(item._id);
+
+      item.completeness = choosedGoal.completeness;
+
+      if (dateChecking(choosedGoal.selectedDate, item.duration)) {
+        joinedGoals.push(item);
+      } else {
+        goalToUpdate.isComplete = true;
+        goalToUpdate.dueDate = dueDate;
+
+        //console.log(dueDate);
+      }
+    }
+
+    // Save the updated user
+    await regularUser.findByIdAndUpdate(req.user.user_id, getUser);
 
     // Sending success response with status code 200 and the selected goals
     return res.status(200).json(joinedGoals);

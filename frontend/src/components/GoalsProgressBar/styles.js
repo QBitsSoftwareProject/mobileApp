@@ -30,6 +30,10 @@ const styles = StyleSheet.create({
   percentage: {
     fontSize: 14,
   },
+  bottomItems: {
+    display: "flex",
+    flexDirection: "row",
+  },
 });
 
 export default styles;

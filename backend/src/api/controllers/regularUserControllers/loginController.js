@@ -16,7 +16,6 @@ exports.loginUser = async (req, res) => {
     //find user
     let user = await doctorModel.findOne({ email });
     let role = "doctor";
-    console.log(user);
 
     if (!user) {
       user = await regularUser.findOne({ email });

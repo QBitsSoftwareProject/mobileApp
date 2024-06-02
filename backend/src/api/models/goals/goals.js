@@ -32,6 +32,20 @@ const goalSchema = new schema({
     type: Array,
     required: true,
   },
+
+  duration: {
+    type: String, // E.g., '2 weeks', '3 days'
+    required: true,
+  },
+
+  isComplete: {
+    type: Boolean,
+    default: false,
+  },
+
+  dueDate: {
+    type: String,
+  },
 });
 
 module.exports = mongoose.model("Goals", goalSchema);
