@@ -188,6 +188,7 @@ const DoctorRegScreen = () => {
               placeHolder={"Password"}
               label={"Password :"}
               onChangeText={setPassword}
+              hide={true}
             />
             <InputField
               placeHolder={"+9412345678"}

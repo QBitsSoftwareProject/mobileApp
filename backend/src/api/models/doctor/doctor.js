@@ -79,37 +79,37 @@ const doctorSchema = new schema({
     // required:true
   },
 
-  availableTimesDay1: {
+  monday: {
     type: Array,
     // required:true
   },
 
-  availableTimesDay2: {
+  tuesday: {
     type: Array,
     // required:true
   },
 
-  availableTimesDay3: {
+  wednessday: {
     type: Array,
     // required:true
   },
 
-  availableTimesDay4: {
+  thursday: {
     type: Array,
     // required:true
   },
 
-  availableTimesDay5: {
+  friday: {
     type: Array,
     // required:true
   },
 
-  availableTimesDay6: {
+  saturday: {
     type: Array,
     // required:true
   },
 
-  availableTimesDay7: {
+  sunday: {
     type: Array,
     // required:true
   },
