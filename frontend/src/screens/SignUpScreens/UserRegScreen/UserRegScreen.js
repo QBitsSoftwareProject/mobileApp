@@ -209,6 +209,7 @@ const UserRegScreen = () => {
                 placeHolder={"Enter a new password"}
                 label={"Password :"}
                 onChangeText={setPassword}
+                hide={true}
               />
 
               <InputField

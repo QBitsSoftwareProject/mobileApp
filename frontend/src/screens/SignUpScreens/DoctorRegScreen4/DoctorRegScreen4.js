@@ -21,9 +21,22 @@ import "react-native-get-random-values";
 import { v4 } from "uuid";
 import loadingGif from "../../../assets/animation/loading.gif";
 
-const DoctorRegScreen4 = () => {
+const DoctorRegScreen4 = ({ route }) => {
   const navigation = useNavigation();
   const screenHeight = Dimensions.get("window").height;
+
+  const {
+    availableDays,
+    monday,
+    tuesday,
+    wednesday,
+    thursday,
+    friday,
+    saturday,
+    sunday,
+  } = route.params;
+
+  // console.log(availableDays);
 
   // State variables for managing screen padding, additional details, and form validation
   const [screenPadding, setScreenPadding] = useState(0);
@@ -107,28 +120,6 @@ const DoctorRegScreen4 = () => {
       const licenseSide2 = await AsyncStorage.getItem("licenseSide2");
       const specialization = await AsyncStorage.getItem("specialization");
       const qualification = await AsyncStorage.getItem("qualification");
-      const availableDays = await AsyncStorage.getItem("availableDays");
-      const availableTimesDay1 = await AsyncStorage.getItem(
-        "availableTimesDay1"
-      );
-      const availableTimesDay2 = await AsyncStorage.getItem(
-        "availableTimesDay2"
-      );
-      const availableTimesDay3 = await AsyncStorage.getItem(
-        "availableTimesDay3"
-      );
-      const availableTimesDay4 = await AsyncStorage.getItem(
-        "availableTimesDay4"
-      );
-      const availableTimesDay5 = await AsyncStorage.getItem(
-        "availableTimesDay5"
-      );
-      const availableTimesDay6 = await AsyncStorage.getItem(
-        "availableTimesDay6"
-      );
-      const availableTimesDay7 = await AsyncStorage.getItem(
-        "availableTimesDay7"
-      );
 
       const userData = await doctorRegistration(
         fullName,
@@ -144,13 +135,13 @@ const DoctorRegScreen4 = () => {
         specialization,
         qualification,
         availableDays,
-        availableTimesDay1,
-        availableTimesDay2,
-        availableTimesDay3,
-        availableTimesDay4,
-        availableTimesDay5,
-        availableTimesDay6,
-        availableTimesDay7,
+        monday,
+        tuesday,
+        wednesday,
+        thursday,
+        friday,
+        saturday,
+        sunday,
         imageUrl,
         bio
       );

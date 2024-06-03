@@ -27,9 +27,9 @@ const SelectionBars = (props) => {
 
   useEffect(() => {
     if (isChecked) {
-      props.dayBlock(props.headLine);
       props.timeBlock(times);
     }
+    props.dayBlock(isChecked);
   }, [isChecked, times]);
 
   return (
