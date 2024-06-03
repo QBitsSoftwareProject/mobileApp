@@ -10,7 +10,7 @@ const doctorRoute = require("./api/routes/doctorRoute.js");
 const app = express();
 
 app.use(cors());
-app.use(bodyParser.json()); 
+app.use(bodyParser.json());
 
 //endpoints
 app.use("/api/v1/user", regularUserRoute);
