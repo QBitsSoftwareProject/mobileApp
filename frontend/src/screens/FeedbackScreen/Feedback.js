@@ -114,6 +114,7 @@ try {
 
       if (response.status === 201) {
         console.log('Data saved successfully');
+        alert('Thank you for your Feedback!!')
       } else {
         console.log('Errorrrr');
       }
