@@ -38,21 +38,3 @@ exports.getADoctor = async (req, res) => {
     res.status(500).json({ error: "User fetch failed", err: err.message });
   }
 };
-
-exports.viewADoctor = async (req, res) => {
-  try {
-    const { doctorId } = req.body;
-    // Finding the user by ID
-    const getUser = await doctorModel.findById(doctorId);
-
-    // If user is not found, return a 404 error response
-    if (!getUser) {
-      return res.status(404).json({ message: "User not found" });
-    }
-
-    // Sending success response with status code 200 and the user object
-    return res.status(201).json(getUser);
-  } catch (err) {
-    res.status(500).json({ error: "User fetch failed", err: err.message });
-  }
-};
