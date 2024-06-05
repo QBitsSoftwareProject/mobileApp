@@ -28,7 +28,7 @@ export const ViewJournal = ({navigation}) =>{
 
     
     
-    const handleButton = () =>{
+    const handleButton = () =>{ 
     navigation.navigate('JournalStatistics',{
 
   }); 
