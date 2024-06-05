@@ -22,3 +22,31 @@ export const createAppointment = async (doctorId, date, time) => {
     throw new Error("Error during request setup");
   }
 };
+
+export const getUserAppointments = async () => {
+  try {
+    const token = await AsyncStorage.getItem("authToken");
+
+    const response = await axios.get(URL + "/user-appointment", {
+      headers: { authtoken: token },
+    });
+    return response.data;
+  } catch (error) {
+    console.log(error);
+    throw new Error("Error during request setup");
+  }
+};
+
+export const getDoctorAppointments = async () => {
+  try {
+    const token = await AsyncStorage.getItem("authToken");
+
+    const response = await axios.get(URL + "/doctor-appointment", {
+      header: { authtoken: token },
+    });
+    return response.data;
+  } catch (error) {
+    console.log(error);
+    throw new Error("Error during request setup");
+  }
+};

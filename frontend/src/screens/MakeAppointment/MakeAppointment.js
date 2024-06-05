@@ -77,7 +77,7 @@ const MakeAppointment = ({ route }) => {
   const confirmMessage = async () => {
     try {
       await createAppointment(doctor._id, getDate, getTime);
-      console.log(234);
+
       navigation.navigate("AppointmentStatus");
     } catch (error) {
       console.log(error);

@@ -2,7 +2,7 @@ import { StyleSheet, TouchableOpacity, View, Image, Text } from "react-native";
 import React from "react";
 
 const CreateCard = (props) => {
-  // Function to handle navigation to appointment screen
+  const currentDate = new Date(props.date);
 
   return (
     <TouchableOpacity style={styles.cardBox} onPress={props.onPress}>
@@ -25,8 +25,13 @@ const CreateCard = (props) => {
 
             {props.cardName === "AppointmentStatus" && (
               <View>
-                <Text style={styles.description}>Time:{props.time}</Text>
-                <Text style={styles.description}>Date:{props.date}</Text>
+                <Text style={styles.description}>
+                  Time:{props.time.from}-{props.time.to}
+                </Text>
+                <Text style={styles.description}>
+                  Date:{currentDate.getUTCFullYear()}-
+                  {currentDate.getUTCMonth()}-{currentDate.getUTCDate()}
+                </Text>
                 <Text
                   style={[
                     styles.description,
