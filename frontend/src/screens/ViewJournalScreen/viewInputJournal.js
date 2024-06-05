@@ -12,8 +12,20 @@ import axios from "axios";
 export const SwipableList = (props) => {
 
   const [journalDisplay , setJournalDisplay] = useState([]);  //set jouranal state
+  const [dataArray, setDataArray] = useState([]);
 
-  
+  const [journalByDate, setJournalByDate] = useState('');
+  const [finalArray,setFinalArray] = useState('')
+
+  // console.log(props.journalArray);
+
+  useEffect(() => {
+
+  setJournalByDate(props.journalArray);
+
+  console.log(journalByDate);
+
+},[props.journalArray])
 
   const handleEditPress = (itemID,itemTittle, itemText, itemEmoji) => {
     
@@ -30,7 +42,7 @@ export const SwipableList = (props) => {
     setShowButton(true);
   };
 
-  //get journal data to displayby userid in here display all jouranls according to that person
+  // get journal data to displayby userid in here display all jouranls according to that person
   
   useEffect(() => {
   const getJournals = async () => {
@@ -38,6 +50,7 @@ export const SwipableList = (props) => {
       const userid = '214102J';
       const journalArray = await axios.get(`http://192.168.43.51:3000/journal/getJournal-byid/${userid}`);
       setJournalDisplay(journalArray.data);
+     
     } catch(error) {
       console.log(error);
     }
@@ -46,10 +59,22 @@ export const SwipableList = (props) => {
   getJournals();
 }, [journalDisplay]);
 
+useEffect( () => {
+
+  if(props.arrayController === 1){
+    
+    setFinalArray(journalByDate)
+  }
+
+  else{
+    setFinalArray(journalDisplay)
+  }
+
+}, [props.arrayController,journalDisplay])
 
 
 
-    const renderJournalItem = ({ item,index }) => {
+const renderJournalItem = ({ item,index }) => {
 
       let mood = '';
       
@@ -127,7 +152,7 @@ export const SwipableList = (props) => {
     
     <SwipeListView style={{height:340}}
 
-    data={journalDisplay}
+    data={finalArray}
     keyExtractor={(item) => item._id}
     renderItem={renderJournalItem}
 

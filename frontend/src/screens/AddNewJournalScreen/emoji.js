@@ -20,7 +20,7 @@ export const EmojiPicker = ({onEmojiPress,imoji}) =>{   //onEmojiPress is called
 
   
   // handleEmojiPress function
-  const handleEmojiPress = (emoji, mark) => {
+  const handleEmojiPress = (emoji, mark, category) => {
     
     
   // find the selected emoji in the emojiData array
@@ -28,14 +28,15 @@ export const EmojiPicker = ({onEmojiPress,imoji}) =>{   //onEmojiPress is called
     
     
   // update userinput and selected emoji
-        setUserInput((prevInput) => prevInput + `${emoji}(${mark})`);
+        setUserInput((prevInput) => prevInput + `${emoji}(${mark})(${category})`);
         setSelectedEmoji(emoji);
+        // console.log(emoji)
      
   
   // Call the onEmojiPress callback with the selected emoji data
         onEmojiPress({ emoji, mark , category: selectedEmoji? selectedEmoji.category:''});
 
-        console.log(selectedEmoji? selectedEmoji.category: '')
+        // console.log(selectedEmoji? selectedEmoji.category: '')
 
         // console.log(mark); 
         // get the marks of emoji

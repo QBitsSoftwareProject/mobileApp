@@ -10,6 +10,7 @@ export const Overlay = ({ isVisible, onClose, journalID }) => {
 const handleDeleteButton = async ()=>{
   try{
     const deleteResponse = await axios.delete(`http://192.168.43.51:3000/journal/delete-journal/${journalID}`);
+    console.log("Delete successful", deleteResponse.data);
   }
   catch(error){
     console.log(error);

@@ -40,7 +40,7 @@ return(
         <TextInput
           style={styles.input}
           
-          placeholder="I have a happy day today.                                                       
+          placeholder="I have a happy day today.
           At school..,my class teacher give me a gift.. "
           textAlign='left'
           textAlignVertical='top'
@@ -50,10 +50,7 @@ return(
 
          />
         
-        <TouchableOpacity style={styles.button} onPress={handleButtonPress}>
-            <Image source ={require('../../assets/images/journal/camera.png')}/>
-          
-        </TouchableOpacity>
+       
         
         
       </View>

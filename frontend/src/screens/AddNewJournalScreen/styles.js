@@ -43,7 +43,9 @@ Text2:{
     height:58,
     borderRadius: 75,
     alignSelf:'center',
-    marginBottom:112
+    marginBottom:112,
+    color:'red'
+
     
   },
   createText: {
@@ -52,6 +54,7 @@ Text2:{
     color:'#101318',
     textAlign:'center',
     justifyContent:'center',
+    
     
   },
 

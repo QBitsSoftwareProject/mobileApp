@@ -36,6 +36,30 @@ const getJournalByUserId =  (userId) => {
     }
 };
 
+// filter journals by userId, date
+const getJournalByDate = async (userId, date) => {
+    try {
+        const journalByUserId = await createJournal.find({ userId: userId });
+        const journalByUserIdAndDate = journalByUserId.filter(item => item.date === date);
+        
+        // console.log('byid');
+        // console.log(journalByUserId);
+        // console.log('byid&date');
+        // console.log(journalByUserIdAndDate);
+
+        if (journalByUserIdAndDate) {
+            return journalByUserIdAndDate;
+            
+        } else {
+            throw new Error('Journal not found for the specified user ID and date');
+        }
+
+    } catch (error) {
+        console.error(error.message);
+        throw new Error('Internal server error');
+    }
+};
+
 
 // delete journal
 const deleteJournal = async (id) =>{
@@ -53,5 +77,6 @@ const deleteJournal = async (id) =>{
 module.exports = {
     storeJournal,
     getJournalByUserId,
-    deleteJournal
+    deleteJournal,
+    getJournalByDate
 };

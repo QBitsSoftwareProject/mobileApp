@@ -1,23 +1,39 @@
-import React, { useState, useRef } from 'react';
-import {
-  StyleSheet,
-  SafeAreaView,
-  View,
-  TouchableWithoutFeedback,
-  Text,
-  Dimensions,
-} from 'react-native';
+import React, { useState, useRef, useEffect } from 'react';
+import {StyleSheet,SafeAreaView,View,TouchableWithoutFeedback,Text,Dimensions,} from 'react-native';
 import moment from 'moment';
-
+import axios from 'axios';
 import Swiper from 'react-native-swiper';
 
 const { width } = Dimensions.get('window');
 
-export const Calendar = ({onDateSelect}) => {
+export const Calendar = ({onDateSelect , setJournalArray , setArrayController}) => {
   const swiper = useRef();
   const [value, setValue] = useState(new Date());
   const [week, setWeek] = useState(0);
   const [selectedDate, setSelectedDate] = useState(null);
+  const [journalDisplay, setJournalDisplay] = useState([]);
+  
+  useEffect(() => {
+    if (selectedDate) {
+      const getJournalsByDate = async () => {
+        try {
+          const userid = '214102J';
+          const formattedDate = moment(selectedDate).format('DD, MMMM, YYYY')
+          const journalArray = await axios.get(`http://192.168.43.51:3000/journal/getJournal-bydate/${userid}/${formattedDate}`);
+          setJournalDisplay(journalArray.data);
+          setJournalArray(journalArray.data);
+          
+          // console.log(formattedDate); // Print the selected date to the console
+          // console.log(journalArray.data);
+
+        } catch (error) {
+          console.log(error);
+        }
+      };
+
+      getJournalsByDate();
+    }
+  }, [selectedDate]);
 
   const weeks = React.useMemo(() => {
     const start = moment().add(week, 'weeks').startOf('week');
@@ -34,13 +50,21 @@ export const Calendar = ({onDateSelect}) => {
     });
   }, [week]);
 
-  const handleDateSelect = (date) => {
-    setValue(date);
-    setSelectedDate(date)
+
+
+  const handleDateSelect = (formattedDate) => {
+    setValue(formattedDate);
+    setArrayController(1);
+    setSelectedDate(formattedDate)
     if (onDateSelect){
-      onDateSelect(date);
-    }
+      onDateSelect(formattedDate);
+      }
+      // console.log("Selected Date:", formattedDate);
+
+    
   };
+
+
 
   return (
 <View>
@@ -115,7 +139,7 @@ export const Calendar = ({onDateSelect}) => {
           {/* display selected date below the calender */}
           {selectedDate && (
             <Text style={styles.selectedDate}>
-                {moment(selectedDate).format('MMMM DD, YYYY')}
+                {moment(selectedDate).format('DD, MMMM, YYYY')}
             </Text>
           )}
        </View>
@@ -130,6 +154,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     height:80,
     alignItems:'center',
+    // backgroundColor:'red'
+    
     
     
   },
@@ -144,7 +170,6 @@ const styles = StyleSheet.create({
     borderColor: 'white',
     flexDirection: 'column',
     alignItems: 'center',
-    
     backgroundColor: 'white',
   },
   itemRow: {

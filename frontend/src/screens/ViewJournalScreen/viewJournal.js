@@ -16,6 +16,17 @@ import { createStackNavigator } from '@react-navigation/stack';
 export const ViewJournal = ({navigation}) =>{
 
     const stack = createStackNavigator();
+
+    const [before, setBefore] = useState('')
+    const [arrayController, setArrayController] = useState(0);
+
+   
+
+    const [journalArray, setJournalArray] = useState('');
+
+
+
+    
     
     const handleButton = () =>{
     navigation.navigate('JournalStatistics',{
@@ -40,7 +51,12 @@ export const ViewJournal = ({navigation}) =>{
         // navigation:navigate,
 
       });
+
+
+
     };
+
+    // console.log(journalArray);
 
     return(
       <View>
@@ -57,11 +73,11 @@ export const ViewJournal = ({navigation}) =>{
 
       <View>
             
-            <Calendar></Calendar>
+            <Calendar setJournalArray = {setJournalArray} setArrayController = {setArrayController}></Calendar>
 
         
             
-            <SwipableList editFunction={handleEditButton} style={{ marginTop: 24.5, backgroundColor: 'yellow' } }  />
+            <SwipableList editFunction={handleEditButton} journalArray = {journalArray}  arrayController = {arrayController} style={{ marginTop: 24.5, backgroundColor: 'yellow' } }  />
 
         </View>
 
@@ -70,7 +86,7 @@ export const ViewJournal = ({navigation}) =>{
 
 <FloatingButton btnCreate = {handleFlotingPointButton}></FloatingButton>
 
-<View style={{ top:25, left: 0, right: 0 }}>
+<View style={{ top:61, left: 0, right: 0 }}>
         <TabBar/>
       </View>
 

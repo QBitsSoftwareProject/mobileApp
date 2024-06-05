@@ -39,9 +39,11 @@ const handleViewButton = () =>{
     }); 
 }
 // handle the emoji press
-const handleEmojiPress = ({ emoji, mark }) => {
-      setSelectedEmojiMarks((prevMarks) => prevMarks + `${emoji}(${mark})`);
+const handleEmojiPress = ({ emoji, mark,category }) => {
+      setSelectedEmojiMarks((prevMarks) => prevMarks + `${emoji}(${mark}) (${category})`);
       setEmoji(mark);
+      console.log(category);
+      
 };
 
 // handle createbutton
@@ -55,9 +57,17 @@ const handleCreateButton = async() =>{  // synchronize funtion
             alert('Journal is required');
        }
 
-            const currentDate = new Date();
+       const currentDate = new Date();
 
-            const formattedDate = currentDate.toLocaleDateString();
+       const year = currentDate.getFullYear();
+       const month = currentDate.toLocaleString('default', { month: 'long' });
+       const day = currentDate.getDate().toString().padStart(2, '0');
+       
+       const formattedDate = `${day}, ${month}, ${year}`;
+       console.log(formattedDate); 
+      
+
+            
             const formattedTime = currentDate.toLocaleTimeString();
 
             setdate(formattedDate);
@@ -91,6 +101,7 @@ const handleCreateButton = async() =>{  // synchronize funtion
       console.log(time);
       console.log(userid);
       console.log(imgUrl);
+      // console.log(category);
 
      
       toggleOverlay();
@@ -133,7 +144,7 @@ return(
  <View>
       
       <TouchableOpacity style={styles.create} onPress={handleCreateButton}>
-      <Text>Create Journal</Text>
+      <Text style={styles.createText}>Create Journal</Text>
       </TouchableOpacity>
       
       <Overlay isVisible={isOverlayVisible} onClose={toggleOverlay} propbtnfunction={handleViewButton} /> 
@@ -145,7 +156,7 @@ return(
 
       </ScrollView>
 
-<View style={{  top:5, left: 0, right: 0 }}>
+<View style={{  top:0, left: 0, right: 0 }}>
 <TabBar />
 </View>
 
