@@ -25,26 +25,6 @@ const appointmentSchema = new schema({
     required: true,
   },
 
-  accept: {
-    type: Boolean,
-    default: false,
-  },
-
-  reject: {
-    type: Boolean,
-    default: false,
-  },
-
-  cancel: {
-    type: Boolean,
-    default: false,
-  },
-
-  complete: {
-    type: Boolean,
-    default: false,
-  },
-
   status: {
     type: String,
     default: "Pending",

@@ -6,14 +6,21 @@ const {
 const auth = require("../../middlewares/auth");
 const {
   getUserAppointments,
+  getDoctorPendingAppointments,
+  getDoctorAcceptedAppointments,
+  getDoctorCompletedAppointments,
 } = require("../../controllers/appointmentsController/getAppointments");
-const {
-  getDoctorAppointments,
-} = require("../../controllers/appointmentsController/getAppointments");
+
 const router = express.Router();
 
 router.post("/", auth, createAppointment);
 router.get("/user-appointment", auth, getUserAppointments);
-router.get("/doctor-appointment", auth, getDoctorAppointments);
+router.get("/doctor-pending-appointment", auth, getDoctorPendingAppointments);
+router.get("/doctor-accepted-appointment", auth, getDoctorAcceptedAppointments);
+router.get(
+  "./doctor-completed-appointment",
+  auth,
+  getDoctorCompletedAppointments
+);
 
 module.exports = router;

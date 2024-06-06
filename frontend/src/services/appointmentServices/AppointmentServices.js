@@ -37,11 +37,39 @@ export const getUserAppointments = async () => {
   }
 };
 
-export const getDoctorAppointments = async () => {
+export const getDoctorPendingAppointments = async () => {
   try {
     const token = await AsyncStorage.getItem("authToken");
 
-    const response = await axios.get(URL + "/doctor-appointment", {
+    const response = await axios.get(URL + "/doctor-pending-appointment", {
+      header: { authtoken: token },
+    });
+    return response.data;
+  } catch (error) {
+    console.log(error);
+    throw new Error("Error during request setup");
+  }
+};
+
+export const getDoctorAcceptedAppointments = async () => {
+  try {
+    const token = await AsyncStorage.getItem("authToken");
+
+    const response = await axios.get(URL + "/doctor-accepted-appointment", {
+      header: { authtoken: token },
+    });
+    return response.data;
+  } catch (error) {
+    console.log(error);
+    throw new Error("Error during request setup");
+  }
+};
+
+export const getDoctorCompletedAppointments = async () => {
+  try {
+    const token = await AsyncStorage.getItem("authToken");
+
+    const response = await axios.get(URL + "/doctor-completed-appointment", {
       header: { authtoken: token },
     });
     return response.data;

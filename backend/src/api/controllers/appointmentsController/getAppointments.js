@@ -24,7 +24,7 @@ exports.getUserAppointments = async (req, res) => {
   }
 };
 
-exports.getDoctorAppointments = async (req, res) => {
+exports.getDoctorPendingAppointments = async (req, res) => {
   try {
     const doctorId = req.user.user_id;
 
@@ -33,6 +33,55 @@ exports.getDoctorAppointments = async (req, res) => {
     const relevantAppointments = await appointmentSchema
       .find({
         doctorId: doctorId,
+        status: "Pending",
+      })
+      .populate("userId");
+
+    if (!relevantAppointments) {
+      return res.status(404).json({ message: "Appointments not found!" });
+    }
+
+    return res.status(201).json(relevantAppointments);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Failed to fetch!", error: err });
+  }
+};
+
+exports.getDoctorAcceptedAppointments = async (req, res) => {
+  try {
+    const doctorId = req.user.user_id;
+
+    // const doctor = await doctorSchema.findById(doctorId);
+
+    const relevantAppointments = await appointmentSchema
+      .find({
+        doctorId: doctorId,
+        accept: true,
+      })
+      .populate("userId");
+
+    if (!relevantAppointments) {
+      return res.status(404).json({ message: "Appointments not found!" });
+    }
+
+    return res.status(201).json(relevantAppointments);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Failed to fetch!", error: err });
+  }
+};
+
+exports.getDoctorCompletedAppointments = async (req, res) => {
+  try {
+    const doctorId = req.user.user_id;
+
+    // const doctor = await doctorSchema.findById(doctorId);
+
+    const relevantAppointments = await appointmentSchema
+      .find({
+        doctorId: doctorId,
+        complete: true,
       })
       .populate("userId");
 
