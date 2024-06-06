@@ -1,11 +1,11 @@
 const appointmentSchema = require("../../models/appointments/appointmentsModels");
-
+const doctorSchema = require("../../models/doctor/doctor");
 exports.createAppointment = async (req, res) => {
   try {
     // const { docId } = req.params;
 
-    const { doctorId, userId, date, time } = req.body;
-
+    const { doctorId, date, time } = req.body;
+    const userId = req.user.user_id;
     const doctor = await doctorSchema.findById(doctorId);
 
     const newAppointment = new appointmentSchema({

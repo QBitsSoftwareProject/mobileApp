@@ -2,7 +2,6 @@ const express = require("express");
 const {
   getDoctors,
   getADoctor,
-  viewADoctor,
 } = require("../controllers/doctorControllers/getController");
 const {
   updateDoctor,
@@ -17,6 +16,7 @@ const {
   checkExistsDoctor,
 } = require("../controllers/doctorControllers/checkExistsDoctor");
 const auth = require("../middlewares/auth");
+const { viewADoctor } = require("../controllers/doctorControllers/viewDoctor");
 
 const router = express.Router();
 

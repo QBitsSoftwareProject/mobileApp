@@ -7,37 +7,12 @@ import TimeButton from "../../components/Button/TimeButton";
 import PopupMessage from "../../components/Pop-up/Pop-upScreen";
 import RegularButton from "../../components/Button/RegularButton";
 import { useNavigation } from "@react-navigation/native";
-// import { createAppointment } from "../../servises/appointmentServise/AppointmentServise";
+import { createAppointment } from "../../services/appointmentServices/AppointmentServices";
 import {
   getADoctor,
   viewADoctor,
 } from "../../services/doctorServices/doctorService";
 import loardingGIF from "../../assets/animation/loading.gif";
-
-// Mock data for date and time slots
-const dateList = [
-  { id: 1, date: "17", month: "Mon" },
-  { id: 2, date: "18", month: "Tue" },
-  { id: 3, date: "19", month: "Wed" },
-  { id: 4, date: "20", month: "Thur" },
-  { id: 5, date: "21", month: "Fri" },
-  { id: 6, date: "22", month: "Sat" },
-  { id: 7, date: "23", month: "Sun" },
-];
-
-const timeList = [
-  { id: 1, time: "5.00PM" },
-  { id: 2, time: "5.30PM" },
-  { id: 3, time: "6.00PM" },
-  { id: 4, time: "6.30PM" },
-  { id: 5, time: "7.00PM" },
-  { id: 6, time: "7.300PM" },
-];
-
-const doctorId1 = "6602fde8bdb3f4f68ebaa101";
-const doctorId2 = "6603de56c39e6389183ec3c7";
-
-const userId = "6602fde8bdb3f4f68ebaa101";
 
 const MakeAppointment = ({ route }) => {
   const [numColumns, setNumColumns] = useState(2); // Number of columns for layout
@@ -47,7 +22,38 @@ const MakeAppointment = ({ route }) => {
   const [getTime, setGetTime] = useState();
   const [getDate, setGetDate] = useState();
   const [doctor, setDoctor] = useState();
+  const [pressDay, setPressDay] = useState(6);
   const { id } = route.params;
+
+  const dateIncrement = (number) => {
+    const currentDate = new Date();
+    currentDate.setDate(currentDate.getUTCDate() + number);
+    return currentDate.getDate();
+  };
+
+  const dayIncrement = (number) => {
+    const currentDate = new Date();
+    currentDate.setDate(currentDate.getUTCDate() + number);
+    const day = currentDate.getDay();
+
+    const weekdays = [
+      "Sunday",
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saturday",
+    ];
+
+    return weekdays[day];
+  };
+
+  const setAppointmentDate = (date) => {
+    const appointmentDate = new Date();
+    appointmentDate.setDate(date);
+    setGetDate(appointmentDate);
+  };
 
   useEffect(() => {
     fetchDoctor();
@@ -57,7 +63,6 @@ const MakeAppointment = ({ route }) => {
     try {
       const res = await viewADoctor({ doctorId: id });
       setDoctor(res);
-      // console.log(res);
     } catch (error) {
       console.log(error);
     }
@@ -71,7 +76,7 @@ const MakeAppointment = ({ route }) => {
 
   const confirmMessage = async () => {
     try {
-      await createAppointment(doctorId1, userId, getDate, getTime);
+      await createAppointment(doctor._id, getDate, getTime);
 
       navigation.navigate("AppointmentStatus");
     } catch (error) {
@@ -102,6 +107,28 @@ const MakeAppointment = ({ route }) => {
     );
   }
 
+  const handleDatePress = (item, value) => {
+    setDateBtnPress(value);
+
+    if (item == "Monday") {
+      setPressDay(0);
+    } else if (item == "Tuesday") {
+      setPressDay(1);
+    } else if (item == "Wednesday") {
+      setPressDay(0);
+    } else if (item == "Thursday") {
+      setPressDay(3);
+    } else if (item == "Friday") {
+      setPressDay(4);
+    } else if (item == "Saturday") {
+      setPressDay(5);
+    } else if (item == "Sunday") {
+      setPressDay(6);
+    } else {
+      null;
+    }
+  };
+
   return (
     <SafeAreaView style={{ margin: 25 }}>
       <View style={{ marginBottom: 20 }}>
@@ -113,7 +140,7 @@ const MakeAppointment = ({ route }) => {
       <ScrollView>
         {/* Doctor details */}
         <View style={styles.headerBox}>
-          <Text style={styles.header}>Dr. {doctor.userName}</Text>
+          <Text style={styles.header}>Dr. {doctor.fullName}</Text>
         </View>
 
         <View style={styles.boxcontainer}>
@@ -144,16 +171,21 @@ const MakeAppointment = ({ route }) => {
           <Text style={styles.title}>Select Date{"\n"}</Text>
 
           <View style={{ flexDirection: "row" }}>
-            {dateList.map((item, index) => (
-              <View key={item.id} style={{ paddingBottom: 10 }}>
+            {Array.from({ length: 7 }).map((item, index) => (
+              <View key={index} style={{ paddingBottom: 10 }}>
                 <DateCard
                   key={index}
-                  date={item.date}
-                  month={item.month}
+                  date={dateIncrement(index)}
+                  day={dayIncrement(index)}
                   indexKey={index}
-                  press={setDateBtnPress}
+                  press={(value) => {
+                    let day = dayIncrement(index);
+                    handleDatePress(day, value);
+                  }}
                   change={dateBtnPress}
-                  getDate={setGetDate}
+                  getDate={(date) => {
+                    setAppointmentDate(date);
+                  }}
                 />
               </View>
             ))}
@@ -162,13 +194,13 @@ const MakeAppointment = ({ route }) => {
 
         {/* Time selection */}
         <View style={{ marginBottom: 20 }}>
-          <Text style={styles.title}>Available Time Slot{"\n"}</Text>
+          <Text style={styles.title}>Available Time Slot</Text>
 
           <View style={{ flexDirection: "row", flexWrap: "wrap" }}>
-            {timeList.map((item, index) => (
+            {doctor.availableTimes[pressDay].map((item, index) => (
               <TimeButton
                 key={index}
-                time={item.time}
+                time={item}
                 indexKey={index}
                 press={setTimebtnPress}
                 change={timeBtnpress}

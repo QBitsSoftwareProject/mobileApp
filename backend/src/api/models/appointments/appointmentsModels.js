@@ -5,13 +5,13 @@ const schema = mongoose.Schema;
 const appointmentSchema = new schema({
   doctorId: {
     type: schema.Types.ObjectId,
-    ref: "doctorSchema",
+    ref: "Doctor",
     required: true,
   },
 
   userId: {
     type: schema.Types.ObjectId,
-    ref: "userSchema",
+    ref: "RegularUser",
     required: true,
   },
 
@@ -21,24 +21,33 @@ const appointmentSchema = new schema({
   },
 
   time: {
-    type: String,
+    type: Object,
     required: true,
   },
 
   accept: {
     type: Boolean,
+    default: false,
   },
 
   reject: {
     type: Boolean,
+    default: false,
   },
 
   cancel: {
     type: Boolean,
+    default: false,
   },
 
   complete: {
     type: Boolean,
+    default: false,
+  },
+
+  status: {
+    type: String,
+    default: "Pending",
   },
 });
 

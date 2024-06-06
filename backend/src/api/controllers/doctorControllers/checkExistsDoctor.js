@@ -3,6 +3,7 @@ const doctorModel = require("../../models/doctor/doctor");
 exports.checkExistsDoctor = async (req, res) => {
   try {
     const { email } = req.body;
+    // console.log(email);
     const checkUser = await doctorModel.findOne({ email });
 
     if (!checkUser) {
@@ -17,6 +18,7 @@ exports.checkExistsDoctor = async (req, res) => {
       user: checkUser._id,
     });
   } catch (error) {
+    console.log(error);
     res
       .status(500)
       .json({ error: "Error fetching user", message: error.message });
