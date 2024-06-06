@@ -97,7 +97,7 @@ const storeData = async () => {
 const userId = '214102J';
 
 try {
-      const response = await axios.post('http://192.168.43.51:3000/Feedback/add-feedback', {
+      const response = await axios.post('http://192.168.205.128:3000/Feedback/add-feedback', {
         userid: userId,
         satisfication:userRate,
         finterface: finterfaceValue,
@@ -130,7 +130,7 @@ try {
       const userid='214102J';
 
       try{
-        const getResponse = await axios.get('http://192.168.43.51:3000/Feedback/getAll-feedback');
+        const getResponse = await axios.get('http://192.168.205.128:3000/Feedback/getAll-feedback');
         setData(getResponse.data);
         console.log(data);
       }
