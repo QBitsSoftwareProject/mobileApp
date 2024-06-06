@@ -6,26 +6,35 @@ import styles from "./styles";
 import { getDoctorPendingAppointments } from "../../services/appointmentServices/AppointmentServices";
 
 const PendingAppointment = () => {
-  const [acceptedData, setAcceptedData] = useState(null);
+  const [pendingData, setPendingData] = useState(null);
 
-  const fetchAccAppointment = async () => {
+  const fetchPendAppointment = async () => {
     try {
       const response = await getDoctorPendingAppointments();
-      setAcceptedData(response);
+      setPendingData(response);
     } catch (error) {
       console.log(error);
     }
   };
 
   useEffect(() => {
-    fetchAccAppointment();
+    fetchPendAppointment();
   }, []);
 
-  if (!acceptedData) {
-    return;
+  if (!pendingData) {
+    return (
+      <View
+        style={{
+          width: "100%",
+          height: "100%",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <Image source={loardingGIF} />
+      </View>
+    );
   }
-
-  console.log(acceptedData);
 
   return (
     <View>
@@ -36,13 +45,14 @@ const PendingAppointment = () => {
 
         {/* appointment status cards */}
         <View style={{ marginBottom: 80 }}>
-          {acceptedData.map((item) => (
+          {pendingData.map((item) => (
             <DocCard
               key={item.id}
               image={item.image}
               title={item.title}
               cardName={"Pending"}
               // time={item.time}
+              // time={props.time.from}-{props.time.to}
               date={item.date}
               contactNo={item.contactNo}
               status={item.status}

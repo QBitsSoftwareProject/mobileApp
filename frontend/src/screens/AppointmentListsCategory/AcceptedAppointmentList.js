@@ -2,8 +2,41 @@ import React, { useEffect, useState } from "react";
 import { Text, ScrollView, View } from "react-native";
 import DocCard from "../../components/Card/DocCard";
 import styles from "./styles";
+import { getDoctorAcceptedAppointments } from "../../services/appointmentServices/AppointmentServices";
 
 const AcceptedAppointment = () => {
+  const [acceptedData, setAcceptedData] = useState(null);
+
+  const fetchAccAppointment = async () => {
+    try {
+      const response = await getDoctorAcceptedAppointments();
+      setAcceptedData(response);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    fetchAccAppointment();
+  }, []);
+
+  if (!acceptedData) {
+    return (
+      <View
+        style={{
+          width: "100%",
+          height: "100%",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <Image source={loardingGIF} />
+      </View>
+    );
+  }
+
+  // console.log(acceptedData);
+
   return (
     <View>
       <ScrollView style={{ height: 500 }}>
@@ -13,13 +46,13 @@ const AcceptedAppointment = () => {
 
         {/* appointment status cards */}
         <View style={{ marginBottom: 80 }}>
-          {AcceptedList.map((item) => (
+          {acceptedData.map((item) => (
             <DocCard
               key={item.id}
               image={item.image}
               title={item.title}
               cardName={"Accepted"}
-              time={item.time}
+              // time={item.time}
               date={item.date}
               contactNo={item.contactNo}
               status={item.status}

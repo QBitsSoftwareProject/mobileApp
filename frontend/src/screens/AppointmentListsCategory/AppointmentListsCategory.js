@@ -7,7 +7,7 @@ import PendingAppointmentList from "../../screens/AppointmentListsCategory/Pendi
 import AcceptedAppointmentList from "../../screens/AppointmentListsCategory/AcceptedAppointmentList";
 import CompletedList from "../../screens/AppointmentListsCategory/CompletedList";
 
-const PendingAppointment = () => {
+const AppointmentList = () => {
   const profilePicture = require("../../assets/images/PostCardImages/manprofile.jpg");
   const [selectedTab, setSelectedTab] = useState(0);
 
@@ -43,4 +43,4 @@ const PendingAppointment = () => {
   );
 };
 
-export default PendingAppointment;
+export default AppointmentList;

@@ -1,55 +1,40 @@
-import React from "react";
+import React, { useState } from "react";
 import { Text, ScrollView, View } from "react-native";
 import DocCard from "../../components/Card/DocCard";
 import DocNavDropDown from "../../components/DropDownMenu/DocNavDropDown";
 import styles from "./styles";
+import { getDoctorCompletedAppointments } from "../../services/appointmentServices/AppointmentServices";
 
-const AcceptedAppointment = () => {
-  // Mock data for appointment status
-  const CompletedList = [
-    {
-      id: 1,
-      image: require("../../assets/images/kitharringtonhair.jpg"),
-      title: "Thishakya Perera",
-      time: "05.30 PM.",
-      date: "12/01/2024.",
-      status: "Completed",
-    },
-    {
-      id: 2,
-      image: require("../../assets/images/kitharringtonhair.jpg"),
-      title: "Sanuki Ahinsa",
-      time: "05.30 PM.",
-      date: "12/01/2024.",
-      status: "Completed",
-    },
-    {
-      id: 3,
-      image: require("../../assets/images/kitharringtonhair.jpg"),
-      title: "Dhanuka Pemasiri",
-      time: "05.30 PM.",
-      date: "12/01/2024.",
-      status: "Completed",
-    },
-    {
-      id: 4,
-      image: require("../../assets/images/kitharringtonhair.jpg"),
-      title: "Piyumi Silva",
-      time: "05.30 PM.",
-      date: "12/01/2024.",
-      status: "Reject",
-    },
-    {
-      id: 5,
-      image: require("../../assets/images/kitharringtonhair.jpg"),
-      title: "Pasan Bandara",
-      time: "05.30 PM.",
-      date: "12/01/2024.",
-      status: "Completed",
-    },
-  ];
+const CompletedAppointment = () => {
+  const [completedData, setCompletedData] = useState(null);
 
-  // const screenHeight = Dimensions.get("window").height - 275;
+  const fetchComAppointment = async () => {
+    try {
+      const response = getDoctorCompletedAppointments();
+      setCompletedData(response);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    fetchComAppointment();
+  }, []);
+
+  if (!completedData) {
+    return (
+      <View
+        style={{
+          width: "100%",
+          height: "100%",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <Image source={loardingGIF} />
+      </View>
+    );
+  }
 
   return (
     <View>
@@ -72,13 +57,13 @@ const AcceptedAppointment = () => {
 
         {/* appointment status cards */}
         <View style={{ marginBottom: 80 }}>
-          {CompletedList.map((item) => (
+          {completedData.map((item) => (
             <DocCard
               key={item.id}
               image={item.image}
               title={item.title}
               cardName={"Completed"}
-              time={item.time}
+              // time={item.time}
               date={item.date}
               status={item.status}
             />
@@ -89,4 +74,4 @@ const AcceptedAppointment = () => {
   );
 };
 
-export default AcceptedAppointment;
+export default CompletedAppointment;
