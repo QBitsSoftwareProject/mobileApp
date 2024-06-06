@@ -42,7 +42,7 @@ export const getDoctorPendingAppointments = async () => {
     const token = await AsyncStorage.getItem("authToken");
 
     const response = await axios.get(URL + "/doctor-pending-appointment", {
-      header: { authtoken: token },
+      headers: { authtoken: token },
     });
     return response.data;
   } catch (error) {
@@ -56,7 +56,7 @@ export const getDoctorAcceptedAppointments = async () => {
     const token = await AsyncStorage.getItem("authToken");
 
     const response = await axios.get(URL + "/doctor-accepted-appointment", {
-      header: { authtoken: token },
+      headers: { authtoken: token },
     });
     return response.data;
   } catch (error) {
@@ -70,7 +70,7 @@ export const getDoctorCompletedAppointments = async () => {
     const token = await AsyncStorage.getItem("authToken");
 
     const response = await axios.get(URL + "/doctor-completed-appointment", {
-      header: { authtoken: token },
+      headers: { authtoken: token },
     });
     return response.data;
   } catch (error) {

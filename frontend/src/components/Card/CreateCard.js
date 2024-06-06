@@ -22,6 +22,13 @@ const CreateCard = (props) => {
                 <Text style={styles.description}>{props.hospital}</Text>
               </View>
             )}
+            {props.cardName == "AvailableDoc" && (
+              <View>
+                <Text style={styles.description}>{props.university}</Text>
+                <Text style={styles.description}>REG NO-{props.regno}</Text>
+                <Text style={styles.description}>{props.hospital}</Text>
+              </View>
+            )}
 
             {props.cardName === "AppointmentStatus" && (
               <View>
