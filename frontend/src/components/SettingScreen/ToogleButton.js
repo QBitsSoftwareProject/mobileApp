@@ -1,24 +1,28 @@
-import React, { useState, useRef } from 'react';
+import React, { useEffect, useRef, useState ,  useContext} from 'react';
 import { StyleSheet, TouchableWithoutFeedback, View, Animated } from 'react-native';
+import { BackgroundMusicContext } from '../SettingScreen/BackgroundMusicProvider';
 
 const ToggleSwitch = () => {
-  const [isOn, setIsOn] = useState(false);
-  const animatedValue = useRef(new Animated.Value(0)).current;
+  const { setBackgroundMusic , backgroundMusic} = useContext(BackgroundMusicContext);
+  const [isOn, setIsOn] = useState(backgroundMusic);
+  const animatedValue = useRef(new Animated.Value(isOn ? 1 : 0)).current;
 
-  const handleToggle = () => {
-    const toValue = isOn ? 0 : 0.7;
+  
 
+  useEffect(() => {
     Animated.timing(animatedValue, {
-      toValue,
+      toValue: isOn ? 1 : 0,
       duration: 300,
       useNativeDriver: false,
     }).start();
+  }, [isOn]);
 
-    setIsOn(!isOn);
-  };
+  useEffect(() => {
+    setBackgroundMusic(isOn);
+  }, [isOn, setBackgroundMusic]);
 
   const thumbPosition = animatedValue.interpolate({
-    inputRange: [0, 1],
+    inputRange: [0.1, 1.3],
     outputRange: [2, 26], // Adjust these values based on your thumb size and track width
   });
 
@@ -27,8 +31,12 @@ const ToggleSwitch = () => {
     outputRange: ['#4A90BF', '#4ABFB4'],
   });
 
+  const onToggle = () => {
+    setIsOn(prevIsOn => !prevIsOn);
+  };
+
   return (
-    <TouchableWithoutFeedback onPress={handleToggle}>
+    <TouchableWithoutFeedback onPress={onToggle}>
       <Animated.View style={[styles.track, { backgroundColor: trackColor }]}>
         <Animated.View style={[styles.thumb, { transform: [{ translateX: thumbPosition }] }]} />
       </Animated.View>

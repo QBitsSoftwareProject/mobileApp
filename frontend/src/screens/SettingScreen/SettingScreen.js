@@ -6,11 +6,15 @@ import LogoutCard from '../../components/SettingScreen/LogoutCard'
 
 
 const SettingScreen = () => {
+
+  
+
+  
   return (
     <SafeAreaView>
       <View style={{marginRight:25,marginLeft:25}}>
         <Text style = {styles.SettingText}>Settings</Text>
-        <SettingCard></SettingCard>
+        <SettingCard ></SettingCard>
         <LogoutCard/>
       </View>
       
