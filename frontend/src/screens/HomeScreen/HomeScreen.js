@@ -170,6 +170,7 @@ const HomeScreen = (props) => {
               </Swiper>
             </View>
 
+            {/* Healthful Balance section */}
             <View>
               <Text style={styles.topicText}>Healthful Balance</Text>
               <HomeCard

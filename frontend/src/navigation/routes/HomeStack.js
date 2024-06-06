@@ -1,6 +1,7 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import HomeScreen from "../../screens/HomeScreen/HomeScreen";
 import GoalsStack from "./GoalsStack";
+import TaskStack from "./TaskStack";
 import AppointmentStack from "../routes/AppointmentStack";
 
 const Stack = createNativeStackNavigator();
@@ -22,6 +23,7 @@ const HomeStack = ({ route }) => {
       />
       <Stack.Screen name="GoalsStack" component={GoalsStack} />
       <Stack.Screen name="AppointmentStack" component={AppointmentStack} />
+      <Stack.Screen name="TaskStack" component={TaskStack} />
     </Stack.Navigator>
   );
 };

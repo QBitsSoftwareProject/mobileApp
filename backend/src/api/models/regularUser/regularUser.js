@@ -3,6 +3,28 @@ const mongoose = require("mongoose");
 // Extracting the Schema class from mongoose
 const schema = mongoose.Schema;
 
+// Subdocument schema for user tasks
+const userTaskSchema = new schema({
+  taskId: {
+    type: schema.Types.ObjectId,
+    ref: "Tasks",
+    required: true,
+  },
+  isComplete: {
+    type: Boolean,
+    default: false,
+  },
+  day: {
+    type: Number,
+    required: true,
+  },
+  duration: {
+    type: String,
+    enum: ["short-term", "medium-term", "long-term"],
+    required: true,
+  },
+});
+
 // Defining the schema for regular users
 const regularUserSchema = new schema({
   fullName: {
@@ -58,6 +80,29 @@ const regularUserSchema = new schema({
 
   selectedGoals: {
     type: Array,
+  },
+
+  tasks: [userTaskSchema],
+
+  currentShortTermDay: {
+    type: Number,
+    default: 0,
+  },
+
+  currentMediumTermDay: {
+    type: Number,
+    default: 0,
+  },
+
+  currentLongTermDay: {
+    type: Number,
+    default: 0,
+  },
+
+  currentTaskType: {
+    type: String,
+    enum: ["short-term", "medium-term", "long-term"],
+    default: "short-term",
   },
 });
 
