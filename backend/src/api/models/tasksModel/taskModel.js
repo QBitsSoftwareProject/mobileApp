@@ -23,6 +23,7 @@ const taskSchema = new schema({
   },
   duration: {
     type: String,
+    enum: ["short-term", "medium-term", "long-term"],
     required: true,
   },
   day: {
