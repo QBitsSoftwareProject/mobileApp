@@ -5,6 +5,7 @@ import styles from './styles'
 import Swiper from 'react-native-swiper'
 import { useNavigation } from '@react-navigation/native'
 
+// Array of quotes to display in the Swiper component
 const quotes = [
     "Remember, your mental health matters take a moment to breathe, reflect, and prioritize your inner peace.",
     "In the journey of life, your mental well-being is the compass. Take a moment to recalibrate, reflect, and cherish your inner peace.",
@@ -12,6 +13,7 @@ const quotes = [
 ]
 
 const WelcomeScreen = () => {
+    // Calculate frame dimensions based on screen width and height
     const frameWidth = Dimensions.get("window").width * 0.8
     const frameHeight = Dimensions.get("window").height * 0.8
 

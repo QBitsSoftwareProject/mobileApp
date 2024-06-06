@@ -7,7 +7,7 @@ import TimeButton from "../../components/Button/TimeButton";
 import PopupMessage from "../../components/Pop-up/Pop-upScreen";
 import RegularButton from "../../components/Button/RegularButton";
 import { useNavigation } from "@react-navigation/native";
-import { createAppointment } from "../../servises/appointmentServise/AppointmentServise";
+// import { createAppointment } from "../../servises/appointmentServise/AppointmentServise";
 import {
   getADoctor,
   viewADoctor,
