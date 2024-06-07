@@ -15,6 +15,8 @@ const HomeCard = (props) => {
       navigation.navigate("AppointmentStack");
     } else if (cardName == "stressManagement") {
       navigation.navigate("TaskStack");
+    } else if (cardName == "meditation") {
+      // navigation.navigate("");
     }
   };
 

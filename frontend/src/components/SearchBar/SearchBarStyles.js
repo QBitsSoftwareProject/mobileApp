@@ -16,8 +16,8 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     display: "flex",
     flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
+    justifyContent:"space-between",
+    alignItems:"center"
   },
 });
 

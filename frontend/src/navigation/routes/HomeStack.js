@@ -5,6 +5,9 @@ import TaskStack from "./TaskStack";
 import AppointmentStack from "../routes/AppointmentStack";
 import DocHomeStack from "../routes/DocHomeStack";
 
+// import EduContent from '../../screens/EduContentScreen/EduContent';
+import EducationalStack from '../../navigation/routes/EducationalStack';
+
 const Stack = createNativeStackNavigator();
 
 const HomeStack = ({ route }) => {
@@ -32,8 +35,12 @@ const HomeStack = ({ route }) => {
       <Stack.Screen name="GoalsStack" component={GoalsStack} />
       <Stack.Screen name="AppointmentStack" component={AppointmentStack} />
       <Stack.Screen name="TaskStack" component={TaskStack} />
+      <Stack.Screen name='EducationalStack' component={EducationalStack} />
     </Stack.Navigator>
+
   );
 };
+
+
 
 export default HomeStack;

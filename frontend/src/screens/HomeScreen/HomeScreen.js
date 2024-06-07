@@ -137,7 +137,9 @@ const HomeScreen = (props) => {
                 }}
               >
                 <Text style={styles.topicText}>Wellness Knowledge</Text>
-                <TouchableOpacity style={styles.viewBtn}>
+                <TouchableOpacity style={styles.viewBtn} onPress={()=>{
+                  navigation.navigate("EducationalStack");
+                }}>
                   <Text style={styles.viewText}>View All</Text>
                 </TouchableOpacity>
               </View>
