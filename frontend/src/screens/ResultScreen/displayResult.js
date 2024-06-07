@@ -196,9 +196,7 @@ const DisplayResultScreen = ({ route}) => {
 
     </View>
 
-    <View style={{ position: 'absolute', top:900, left: 0, right: 0 }}>
-        <TabBar/>
-      </View>
+    
 
       
     </View>
