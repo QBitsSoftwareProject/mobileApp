@@ -18,9 +18,10 @@ router.get("/user-appointment", auth, getUserAppointments);
 router.get("/doctor-pending-appointment", auth, getDoctorPendingAppointments);
 router.get("/doctor-accepted-appointment", auth, getDoctorAcceptedAppointments);
 router.get(
-  "./doctor-completed-appointment",
+  "/doctor-completed-appointment",
   auth,
   getDoctorCompletedAppointments
 );
+router.update("/doc-appointment", auth, updateDocAppointment);
 
 module.exports = router;

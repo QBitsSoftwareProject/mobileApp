@@ -1,17 +1,19 @@
-import React, { useState } from "react";
-import { Text, ScrollView, View } from "react-native";
+import React, { useEffect, useState } from "react";
+import { Text, ScrollView, View, Image } from "react-native";
 import DocCard from "../../components/Card/DocCard";
 import DocNavDropDown from "../../components/DropDownMenu/DocNavDropDown";
 import styles from "./styles";
 import { getDoctorCompletedAppointments } from "../../services/appointmentServices/AppointmentServices";
+import loardingGIF from "../../assets/animation/loading.gif";
 
 const CompletedAppointment = () => {
   const [completedData, setCompletedData] = useState(null);
 
   const fetchComAppointment = async () => {
     try {
-      const response = getDoctorCompletedAppointments();
-      setCompletedData(response);
+      const response = await getDoctorCompletedAppointments();
+      // setCompletedData(response);
+      console.log(response);
     } catch (error) {
       console.log(error);
     }
@@ -35,6 +37,8 @@ const CompletedAppointment = () => {
       </View>
     );
   }
+
+  console.log(completedData);
 
   return (
     <View>
@@ -60,8 +64,8 @@ const CompletedAppointment = () => {
           {completedData.map((item) => (
             <DocCard
               key={item.id}
-              image={item.image}
-              title={item.title}
+              image={item.proPic}
+              title={item.fullName}
               cardName={"Completed"}
               // time={item.time}
               date={item.date}

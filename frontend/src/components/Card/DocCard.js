@@ -8,7 +8,7 @@ const CreateCard = (props) => {
       <View style={styles.content}>
         <View style={styles.content1}>
           <View style={styles.imageframe}>
-            <Image source={props.image} style={styles.image} />
+            <Image source={{ uri: props.image }} style={styles.image} />
           </View>
 
           <View>
@@ -42,7 +42,7 @@ const CreateCard = (props) => {
             <View>
               <Text style={styles.rejectedStatus}>{props.status}</Text>
             </View>
-            <AcptComBtn AcptCom={"Accept"} />
+            <AcptComBtn AcptCom={"Accept"} stat={""} />
           </View>
         )}
         {props.cardName == "Accepted" && (
@@ -50,7 +50,7 @@ const CreateCard = (props) => {
             <View>
               <Text style={styles.rejectedStatus}>{props.status}</Text>
             </View>
-            <AcptComBtn AcptCom={"Complete"} />
+            <AcptComBtn AcptCom={"Complete"} stat={""} />
           </View>
         )}
       </View>

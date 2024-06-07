@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { Text, ScrollView, View } from "react-native";
+import { Text, ScrollView, View, Image } from "react-native";
 import DocCard from "../../components/Card/DocCard";
 import styles from "./styles";
 import { getDoctorAcceptedAppointments } from "../../services/appointmentServices/AppointmentServices";
+import loardingGIF from "../../assets/animation/loading.gif";
 
 const AcceptedAppointment = () => {
   const [acceptedData, setAcceptedData] = useState(null);
@@ -35,7 +36,7 @@ const AcceptedAppointment = () => {
     );
   }
 
-  // console.log(acceptedData);
+  console.log(acceptedData);
 
   return (
     <View>
@@ -49,8 +50,8 @@ const AcceptedAppointment = () => {
           {acceptedData.map((item) => (
             <DocCard
               key={item.id}
-              image={item.image}
-              title={item.title}
+              image={item.proPic}
+              title={item.fullName}
               cardName={"Accepted"}
               // time={item.time}
               date={item.date}

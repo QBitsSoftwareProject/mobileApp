@@ -1,9 +1,10 @@
 import React from "react";
-import { Text, ScrollView, View } from "react-native";
+import { Text, ScrollView, View, Image } from "react-native";
 import { useEffect, useState } from "react";
 import DocCard from "../../components/Card/DocCard";
 import styles from "./styles";
 import { getDoctorPendingAppointments } from "../../services/appointmentServices/AppointmentServices";
+import loardingGIF from "../../assets/animation/loading.gif";
 
 const PendingAppointment = () => {
   const [pendingData, setPendingData] = useState(null);
@@ -36,6 +37,8 @@ const PendingAppointment = () => {
     );
   }
 
+  console.log(pendingData);
+
   return (
     <View>
       <ScrollView style={{ height: 500 }}>
@@ -48,8 +51,8 @@ const PendingAppointment = () => {
           {pendingData.map((item) => (
             <DocCard
               key={item.id}
-              image={item.image}
-              title={item.title}
+              image={item.userId.proPic}
+              title={item.userId.fullName}
               cardName={"Pending"}
               // time={item.time}
               // time={props.time.from}-{props.time.to}
