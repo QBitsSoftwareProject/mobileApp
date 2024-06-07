@@ -4,10 +4,8 @@
     "slug": "frontend",
     "version": "1.0.0",
     "orientation": "portrait",
-   
     "userInterfaceStyle": "light",
     "splash": {
-      
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -19,12 +17,16 @@
     },
     "android": {
       "adaptiveIcon": {
-        
         "backgroundColor": "#ffffff"
       }
     },
-    "web": {
-     
-    }
+    "web": {},
+    
+    "plugins": [
+      "expo-font",
+      "@config-plugins/react-native-blob-util",
+      "@config-plugins/react-native-pdf"
+    
+    ]
   }
 }

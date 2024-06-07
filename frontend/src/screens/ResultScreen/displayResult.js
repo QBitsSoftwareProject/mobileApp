@@ -24,16 +24,6 @@ import {
 
 const DisplayResultScreen = ({ route}) => {
 
-  // const secretKey = 'mysecretkey';
-  // const originalText = 'Hello, World!';
-  
-  // const encryptedData = encrypt(originalText, secretKey);
-  // console.log('Encrypted:', encryptedData);
-
-
-
-
-
 
 
     const [StressLevel, setStressLevel] = useState('');
@@ -126,7 +116,15 @@ const DisplayResultScreen = ({ route}) => {
       };
 
       
-    
+ 
+
+      
+  const suggessionBtnFunction = () => {
+
+    console.log(lastMark);
+    console.log(userID);
+    navigation.navigate('MindRelaxingMethod');
+  };
         
 
        
@@ -140,7 +138,7 @@ const DisplayResultScreen = ({ route}) => {
       <HeaderSub headLine = 'Result' subHeadLine = 'understand and manage your stress better.'/>
     </View>
 
-    <CustomButton></CustomButton>
+    <CustomButton  suggessionBtnFunction ={suggessionBtnFunction}></CustomButton>
 
     <Text style = {styles.pccText}>
     This numerical assessment reflects your 

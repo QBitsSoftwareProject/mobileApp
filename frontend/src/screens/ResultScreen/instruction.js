@@ -1,6 +1,6 @@
 import React from 'react';
-import { View, Text, Modal, StyleSheet, TouchableOpacity,Image } from 'react-native';
-import { ScrollView } from 'react-native-gesture-handler';
+import { View, Text, Modal, StyleSheet, TouchableOpacity,Image, ScrollView } from 'react-native';
+
 
 const Overlay = ({ isVisible, onClose }) => {
   return (

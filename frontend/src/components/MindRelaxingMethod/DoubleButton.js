@@ -1,31 +1,41 @@
 import React, { useState} from 'react';
 import { View, TextInput, TouchableOpacity, Text, StyleSheet, ScrollView,Button} from 'react-native';
 
-export const CustomButton = ({suggessionBtnFunction }) =>{
+
+//double btn componennet
+export const CustomButton = ({ resultBtnFunction }) =>{
+
+
    
     
     return(
         <View style={styles.mainButton}>
-
             <View style={styles.veiwButton}>
-
             <TouchableOpacity
-            
-            style={[styles.veiwButton,{ backgroundColor:'#4A90BF' }]}>
+            onPress={resultBtnFunction}
+            style={[styles.veiwButton,{ backgroundColor:'white' }]}>
+
             <Text style={styles.buttonTextone}>Result</Text>
             </TouchableOpacity>
-
            </View>
 
             <View style={styles.createButton}>
+                <TouchableOpacity
+            
+             
+           
 
-            <TouchableOpacity
-            onPress={suggessionBtnFunction}
-            style={[styles.createButton,{ backgroundColor:'white'}]}>
+            
+            style={[styles.createButton,{ backgroundColor:'#4A90BF'}]}>
             <Text style={styles.buttonTexttwo}>Suggestions</Text>
-            </TouchableOpacity>
 
+           
+
+            </TouchableOpacity>
             </View>
+
+            
+
 
         </View>
     )
@@ -46,6 +56,7 @@ const styles = StyleSheet.create({
         alignItems:'center',
         alignSelf:'center',
         marginTop:32,
+        marginBottom:22,
         
        
     },
@@ -78,13 +89,15 @@ const styles = StyleSheet.create({
         fontSize: 14,
         fontWeight: '500',
         textAlign:'center',
-        color:'white'
+        
+        
       },
 
       buttonTexttwo: {
         fontSize: 14,
         fontWeight: '500',
         textAlign:'center',
+        color:'white',
       },
 
 

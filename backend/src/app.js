@@ -6,8 +6,11 @@ const { connect } = require('./config/database.connection.js')
 
 const app = express();
 
+const methodRouter = require("./api/routes/method.route.js");
+
 app.use(cors());
 app.use(bodyParser.json());
+app.use("/method",methodRouter);
 
 const questionRouter = require("./api/routes/question.route.js");
 const markRouter = require("./api/routes/mark.route.js");
