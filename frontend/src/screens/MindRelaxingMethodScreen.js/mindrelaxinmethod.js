@@ -2,9 +2,7 @@ import React, { useState ,useEffect} from 'react'
 import { Text, View ,FlatList,TouchableOpacity, ScrollView} from 'react-native'
 import HeaderSub from '../../components/HeaderSub/HeaderSub'
 import ExpandableCard from '../../components/MindRelaxingMethod/ExpandCard'
-import data from './dummyData';
 import { CustomButton } from '../../components/MindRelaxingMethod/DoubleButton';
-import FetchMethod from './fetchMethods';
 import axios from 'axios';
 
 const Mindrelaxinmethod =() => {
@@ -22,7 +20,7 @@ const Mindrelaxinmethod =() => {
       try{
           let url;
 
-          url = "http://192.168.8.110:3000/method/get-method"
+          url = "http://192.168.1.26:3000/method/get-method"
 
           const response = await axios.get(url);
           setData(response.data);

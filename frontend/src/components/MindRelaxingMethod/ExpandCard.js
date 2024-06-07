@@ -1,8 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Text, View, TouchableOpacity, Animated, Image, StyleSheet, ImageBackground, Modal } from 'react-native';
 import { Audio } from 'expo-av';
-import { Video } from 'expo-av';
-import PopupModal from './MusicPlayer';
 import VideoPlayerModal from './VideoPlayerModal';
 import AudioPlayerModal from './AudioPlayerModal';
 import PDFViewerModal from './PdfReaderModal';
@@ -15,10 +13,8 @@ const ExpandableCard = (props) => {
   const heightAnim = useRef(new Animated.Value(0)).current;
   const [imageHeight, setImageHeight] = useState(0);
   const [textHeight, setTextHeight] = useState(0);
-  const [isVisible, setIsVisible] = useState(false);
-  const [sound, setSound] = useState(null);
   const [modalVisible, setModalVisible] = useState(false);
-  const [isPlaying, setIsPlaying] = useState(false);
+  
   
 
   const toggleModal = () => {
@@ -38,33 +34,7 @@ const ExpandableCard = (props) => {
   let ibtn;
   let btnfunction; // Declare btnfunction here
 
-  // Define playAudio function
-  const playAudio = async () => {
-    
-    try {
-      if (sound) {
-        if (isPlaying) {
-          await sound.pauseAsync(); // Pause the audio if it's already playing
-        } else {
-          await sound.playAsync(); // Play the audio if it's paused
-        }
-        setIsPlaying(!isPlaying); // Toggle the isPlaying state
-      } else {
-        const { sound: newSound } = await Audio.Sound.createAsync(
-          { uri: resource },
-          { shouldPlay: true }
-        );
-        setSound(newSound);
-        setIsPlaying(true);
-      }
-    } catch (error) {
-      console.error('Failed to play/pause audio:', error);
-    }
-  };
-
-
-  const [video, setVideo] = useState(null);
-  const [isVideoPlaying, setIsVideoPlaying] = useState(false);
+  
 
 
   const [pdfModalVisible, setPdfModalVisible] = useState(false);
@@ -211,7 +181,7 @@ const ExpandableCard = (props) => {
           </View>
         </Animated.View>
       </View>
-      <PopupModal modalVisible={modalVisible} toggleModal={toggleModal} playAudio={playAudio} isPlaying={isPlaying}  img = {imglink}  />
+      
       <VideoPlayerModal visible={videoModalVisible} onClose={toggleVideoModal} videoSource={videoSource} name = {name} />
       <AudioPlayerModal visible={audioModalVisible} onClose={toggleAudioModal} audioSource={audioSource} img ={img} name = {name}/>
       <PDFViewerModal visible={pdfModalVisible} onClose={togglePdfModal} pdfSource={pdfSource} name = {name}/>
