@@ -1,11 +1,28 @@
-import { Dimensions, Image, ScrollView, Text, TouchableOpacity, View ,SafeAreaView, ImageBackground} from 'react-native'
-import React, {useState} from 'react'
+// ProfileScreen.js
+import { Dimensions, Image, ScrollView, Text, TouchableOpacity, View ,SafeAreaView, ImageBackground} from 'react-native';
 import styles from './profileStyles'
 import TextCard from './TextCard'
 import BioEditPopUp from './BioEditPopUp'
+import React, { useEffect, useContext ,useState} from 'react';
+import { BackgroundMusicContext } from '../../components/SettingScreen/BackgroundMusicProvider';
+import { useFocusEffect } from '@react-navigation/native';
 
 const ProfileScreen = () => {
+  const { setBackgroundMusicValid } = useContext(BackgroundMusicContext);
 
+  useFocusEffect(
+    React.useCallback(() => {
+      setBackgroundMusicValid(false);
+      
+
+      return () => {
+        setBackgroundMusicValid(true);
+        
+      };
+    }, [setBackgroundMusicValid])
+  );
+
+  
   const [isPopupVisibleName, setPopupVisibleName] = useState(false);
   const [isPopupVisibleUserName, setPopupVisibleUserName] = useState(false);
   const [isPopupVisibleEmail, setPopupVisibleEmail] = useState(false);
@@ -118,5 +135,4 @@ const ProfileScreen = () => {
   )
 }
 
-export default ProfileScreen
-
+export default ProfileScreen;

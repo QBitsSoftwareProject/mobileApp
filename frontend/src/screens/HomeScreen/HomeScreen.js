@@ -1,10 +1,11 @@
-import React, { useState } from 'react'
+import React, { useState , useContext , useEffect} from 'react'
 import HomeTop from '../../components/HomeTop/HomeTop'
 import { Dimensions, Image, ScrollView, Text, TouchableOpacity, View } from 'react-native'
 import styles from './styles'
 import HomeCard from '../../components/HomeCard/HomeCard'
 import { LinearGradient } from 'expo-linear-gradient';
 import Swiper from 'react-native-swiper';
+import { BackgroundMusicContext } from '../../components/SettingScreen/BackgroundMusicProvider';
 
 
 const proPic = require('../../assets/images/doc.jpg')
@@ -28,6 +29,8 @@ const images =[
 const name = "Thishakya"
 
 const HomeScreen = () => {
+
+
   const winWidth = Dimensions.get('window').width-60
 
   return (
