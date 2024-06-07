@@ -146,6 +146,8 @@ const Question = () => {
     }
   }, [currentQuestionIndex ,ids.length]);
 
+  
+
 
   
 
@@ -184,6 +186,8 @@ const Question = () => {
        
     }
   };
+
+  const progress = ((currentQuestionIndex + 1) / ids.length);
   
 
   const handleBackButton = () => {
@@ -209,8 +213,9 @@ const Question = () => {
       {isLoading ? (
         <ActivityIndicator size="large" color="#4ABFB4" style={{ marginTop: 40 }} />
       ) : (
+        
         <>
-          {/* <ProgressBar progress={((currentQuestionIndex + 1) / ids.length)} color="#4ABFB4" style={{ marginTop: 32, width:375, alignSelf: "center", backgroundColor:"white" , height:10 , borderRadius:15}} /> */}
+          <ProgressBar progress={((currentQuestionIndex + 1) / 11)} color="#4ABFB4" style={{ marginTop: 32, width:375, alignSelf: "center", backgroundColor:"white" , height:10 , borderRadius:15}} />
           {question && question.question && (
             <>
               <Text style={styles.quesnum}>Question {currentQuestionIndex + 1} of {ids.length}</Text>

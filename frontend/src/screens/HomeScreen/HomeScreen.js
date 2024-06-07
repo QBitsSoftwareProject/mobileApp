@@ -7,6 +7,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import Swiper from 'react-native-swiper';
 
 
+
 const proPic = require('../../assets/images/doc.jpg')
 
 const medImg = require('../../assets/images/HomeCards/meditation.png')
@@ -29,6 +30,8 @@ const name = "Thishakya"
 
 const HomeScreen = () => {
   const winWidth = Dimensions.get('window').width-60
+
+ 
 
   return (
     <View style={{flex:1, paddingBottom:80}}>

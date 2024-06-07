@@ -1,42 +1,33 @@
 import axiosInstance from "../../api/axios";
 
-const submitToDatabase = async(totMark, u_id) => {
+const submitToDatabase = async (totMark, u_id) => {
+  try {
+    const currentDate = new Date();
 
-    try{
+    // Extract date and time parts
+    const formattedDate = currentDate.toLocaleDateString();
+    const formattedTime = currentDate.toLocaleTimeString();
 
-      const currentDate = new Date();
+    // Prepare the payload with mark converted to a number
+    const payload = {
+      userid: u_id,
+      mark: Number(totMark), 
+      date: formattedDate,
+      time: formattedTime,
+    };
 
-// Extract date and time parts
-const formattedDate = currentDate.toLocaleDateString();
-const formattedTime = currentDate.toLocaleTimeString();
+    // Send POST request using axiosInstance
+    const response = await axiosInstance.post('/mark/add-mark', payload);
 
-      const payload = {
-        userid:u_id,
-        mark: totMark,
-        date: formattedDate,
-        time: formattedTime,
-      }
-
-
-      // const response = await axiosInstance.post('/mark/add-mark', payload);
-
-      const response = await fetch('http://192.168.43.80:3000/mark/add-mark', {
-        method: 'POST',
-        headers: {
-          "Content-Type": "application/json"
-      },
-        body: JSON.stringify(payload),
-      });
-
-  if(response.ok) {
-    console.log("data sent");
-  }else {
-    console.error("Failed to send data to the server", response.status, response.statusText);
+    
+    if (response.status >= 200 && response.status < 300) {
+      console.log("Data sent successfully");
+    } else {
+      console.error(`Failed to send data to the server. Status: ${response.status}`);
+    }
+  } catch (error) {
+    console.error('Error sending mark:', error.message);
   }
-
-}catch (error) {
-  console.error('Error sending mark:', error.message);
-}
 };
 
 export { submitToDatabase };

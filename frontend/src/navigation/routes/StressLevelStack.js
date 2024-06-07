@@ -10,7 +10,7 @@ const StressLevelStack = () => {
 
     <stack.Navigator screenOptions={{ headerStyle: { flex:1,backgroundColor: 'transparent' }, headerShown:false }}>
       
-      <stack.Screen name="Question" component={Question} />
+          <stack.Screen name="Question" component={Question} />
           <stack.Screen name="DisplayResultScreen" component={DisplayResultScreen} />
           <stack.Screen name="StressLevelHistoryScreen" component={StressLevelHistoryScreen} />
       
