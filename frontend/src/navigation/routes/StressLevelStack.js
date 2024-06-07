@@ -2,6 +2,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Question from '../../screens/StressLevelAssessmentQuestions/StressLevelQuestions';
 import DisplayResultScreen from '../../screens/ResultScreen/displayResult';
 import StressLevelHistoryScreen from '../../screens/StressLevelHistory/stresslevelhistory';
+
 const stack = createNativeStackNavigator();
 
 const StressLevelStack = () => {

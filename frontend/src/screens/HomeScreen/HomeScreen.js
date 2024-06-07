@@ -5,6 +5,7 @@ import styles from './styles'
 import HomeCard from '../../components/HomeCard/HomeCard'
 import { LinearGradient } from 'expo-linear-gradient';
 import Swiper from 'react-native-swiper';
+import { useNavigation } from '@react-navigation/native';
 
 
 
@@ -30,6 +31,12 @@ const name = "Thishakya"
 
 const HomeScreen = () => {
   const winWidth = Dimensions.get('window').width-60
+
+  const navigation = useNavigation();
+
+  const handleStressLevelPress = () => {
+    navigation.navigate('StressLevel');
+  };
 
  
 
@@ -88,7 +95,8 @@ const HomeScreen = () => {
             <View style={{marginTop:32}}>
               <Text style={styles.topicText}>Stress Level</Text>
 
-              <TouchableOpacity style={{borderRadius:20,overflow:'hidden', marginTop:15}} >
+              <TouchableOpacity style={{borderRadius:20,overflow:'hidden', marginTop:15}} 
+              onPress={handleStressLevelPress}>
                 <LinearGradient colors={['#00453E', 'rgba(73,177,247,0.7)']} style={styles.blueCard}>
                   <Text style={styles.bluCardText1}>Stress Level Assesment</Text>
                   <Text style={styles.bluCardText2}>Assess stress levels, find peace. Your stress guide for a balanced life.</Text>

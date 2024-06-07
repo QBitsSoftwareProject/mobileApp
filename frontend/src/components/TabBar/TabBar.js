@@ -10,6 +10,7 @@ const Tab = createBottomTabNavigator();
 
 const TabBar = () => {
 
+
   return (
     <Tab.Navigator
         screenOptions={{
@@ -30,6 +31,8 @@ const TabBar = () => {
       <Tab.Screen name='Notification' component={NotifyScreen} options={{tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} screenName={'notification'}/>}}/>
 
       <Tab.Screen name='setting' component={SettingScreen} options={{tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} screenName={'setting'}/>}}/>
+
+      
 
     </Tab.Navigator>
   );
