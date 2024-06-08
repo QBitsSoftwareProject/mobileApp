@@ -17,11 +17,12 @@ const CompletedAppointment = () => {
   const fetchComAppointment = async () => {
     try {
       let response;
+
       if (checkPage == "Completed") {
         response = await getDoctorCompletedAppointments();
       } else if (checkPage == "Rejected") {
         response = await getDoctorRejectedAppointments();
-      } else if (checkPage == "Cancelled") {
+      } else if (checkPage == "Canceled") {
         response = await getDoctorCancelledAppointments();
       }
 
@@ -33,7 +34,7 @@ const CompletedAppointment = () => {
 
   useEffect(() => {
     fetchComAppointment();
-  }, []);
+  }, [checkPage]);
 
   if (!completedData) {
     return (

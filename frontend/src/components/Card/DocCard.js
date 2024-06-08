@@ -8,10 +8,10 @@ const docCard = (props) => {
     try {
       if (props.cardName == "Pending") {
         await updateStatusAppointments(props.id, "Rejected");
-        console.log("Updated to Reject.", props.id, props.status);
+        // console.log("Updated to Reject.", props.id, props.status);
       } else if (props.cardName == "Accepted") {
         await updateStatusAppointments(props.id, "Cancelled");
-        console.log("Updated to Cancel.", props.id, props.status);
+        // console.log("Updated to Cancel.", props.id, props.status);
       }
     } catch (error) {
       console.log(error);
