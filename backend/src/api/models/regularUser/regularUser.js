@@ -84,6 +84,10 @@ const regularUserSchema = new schema({
 
   tasks: [userTaskSchema],
 
+  taskTakenDate: {
+    type: Date,
+  },
+
   currentShortTermDay: {
     type: Number,
     default: 0,
