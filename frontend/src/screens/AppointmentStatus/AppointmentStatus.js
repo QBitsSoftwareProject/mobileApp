@@ -7,50 +7,7 @@ import styles from "./styles";
 import HeaderSub from "../../components/HeaderSub/HeaderSub";
 import TwoButtonGroup from "../../components/Button/2ButtonGroup";
 import { getUserAppointments } from "../../services/appointmentServices/AppointmentServices";
-
-// Mock data for appointment status
-const stateList = [
-  {
-    id: 1,
-    image: require("../../assets/images/kitharringtonhair.jpg"),
-    title: "Dr. B.M. Weerasinghe.",
-    time: "05.30 PM.",
-    date: "12/01/2024.",
-    status: "Accepted.",
-  },
-  {
-    id: 2,
-    image: require("../../assets/images/kitharringtonhair.jpg"),
-    title: "Dr. B.M. Weerasinghe.",
-    time: "05.30 PM.",
-    date: "12/01/2024.",
-    status: "Rejected.",
-  },
-  {
-    id: 3,
-    image: require("../../assets/images/kitharringtonhair.jpg"),
-    title: "Dr. B.M. Weerasinghe.",
-    time: "05.30 PM.",
-    date: "12/01/2024.",
-    status: "Rejected.",
-  },
-  {
-    id: 4,
-    image: require("../../assets/images/kitharringtonhair.jpg"),
-    title: "Dr. B.M. Weerasinghe.",
-    time: "05.30 PM.",
-    date: "12/01/2024.",
-    status: "Canceled.",
-  },
-  {
-    id: 5,
-    image: require("../../assets/images/kitharringtonhair.jpg"),
-    title: "Dr. B.M. Weerasinghe.",
-    time: "05.30 PM.",
-    date: "12/01/2024.",
-    status: "Accepted.",
-  },
-];
+import { useNavigation } from "@react-navigation/native";
 
 const AppointmentStatus = () => {
   const [appointments, setAppointments] = useState(null);
@@ -71,14 +28,13 @@ const AppointmentStatus = () => {
   if (!appointments) {
     return;
   }
-  // console.log(appointments[0].doctorId);
 
   return (
     <View>
       <HeaderSub
         headLine={"Appointment"}
         subHeadLine={"Review and manage appointment"}
-        backarrow={"AvailableDoctors"}
+        back={"AvailableDoctors"}
       />
 
       <SafeAreaView style={{ margin: 25 }}>

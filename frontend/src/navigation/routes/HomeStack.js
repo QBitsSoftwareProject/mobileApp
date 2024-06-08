@@ -3,6 +3,7 @@ import HomeScreen from "../../screens/HomeScreen/HomeScreen";
 import GoalsStack from "./GoalsStack";
 import TaskStack from "./TaskStack";
 import AppointmentStack from "../routes/AppointmentStack";
+import DocHomeStack from "../routes/DocHomeStack";
 
 const Stack = createNativeStackNavigator();
 
@@ -16,11 +17,18 @@ const HomeStack = ({ route }) => {
         headerShown: false,
       }}
     >
-      <Stack.Screen
-        name="HomeScreen"
-        component={HomeScreen}
-        initialParams={{ userId: userId, role: role }}
-      />
+      {role == "regularUser" && (
+        <Stack.Screen
+          name="HomeScreen"
+          component={HomeScreen}
+          initialParams={{ userId: userId, role: role }}
+        />
+      )}
+
+      {role == "doctor" && (
+        <Stack.Screen name="DocHomeStack" component={DocHomeStack} />
+      )}
+
       <Stack.Screen name="GoalsStack" component={GoalsStack} />
       <Stack.Screen name="AppointmentStack" component={AppointmentStack} />
       <Stack.Screen name="TaskStack" component={TaskStack} />

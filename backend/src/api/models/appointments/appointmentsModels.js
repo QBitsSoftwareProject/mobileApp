@@ -27,6 +27,7 @@ const appointmentSchema = new schema({
 
   status: {
     type: String,
+    enum: ["Pending", "Accepted", "Completed", "Rejected", "Cancelled"],
     default: "Pending",
   },
 });

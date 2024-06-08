@@ -7,7 +7,7 @@ const { connect } = require("./config/database.connection.js");
 const regularUserRoute = require("./api/routes/regularUserRoute.js");
 const doctorRoute = require("./api/routes/doctorRoute.js");
 const goalRoute = require("./api/routes/goalRoute.js");
-const appointmentRouter = require("./api/routes/appointmentRoutes/appointmentRoutes.js");
+const appointmentRouter = require("./api/routes/appointmentRoutes.js");
 const taskRoute = require("./api/routes/taskRoutes.js");
 const motivationRoute = require("./api/routes/motivationsRoute.js");
 

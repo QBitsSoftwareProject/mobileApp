@@ -13,50 +13,6 @@ import {
   getDoctors,
 } from "../../services/doctorServices/doctorService";
 
-// Mock data for available doctors
-// const docList = [
-//   {
-//     id: 1,
-//     image: require("../../assets/images/kitharringtonhair.jpg"),
-//     title: "Dr. B.M. Weerasinghe.",
-//     university: "MBBS, University of Colombo.",
-//     regno: "234589.",
-//     hospital: "Anuradhapura Genaral Hospital.",
-//   },
-//   {
-//     id: 2,
-//     image: require("../../assets/images/kitharringtonhair.jpg"),
-//     title: "Dr. B.M. Amarasinghe.",
-//     university: "MBBS, University of Colombo.",
-//     regno: "234589.",
-//     hospital: "Anuradhapura Genaral Hospital.",
-//   },
-//   {
-//     id: 3,
-//     image: require("../../assets/images/kitharringtonhair.jpg"),
-//     title: "Dr. B.M. Samarasinghe.",
-//     university: "MBBS, University of Colombo.",
-//     regno: "234589.",
-//     hospital: "Anuradhapura Genaral Hospital.",
-//   },
-//   {
-//     id: 4,
-//     image: require("../../assets/images/kitharringtonhair.jpg"),
-//     title: "Dr. B.M. Jayasinghe.",
-//     university: "MBBS, University of Colombo.",
-//     regno: "234589.",
-//     hospital: "Anuradhapura Genaral Hospital.",
-//   },
-//   {
-//     id: 5,
-//     image: require("../../assets/images/kitharringtonhair.jpg"),
-//     title: "Dr. B.M. Ranasinghe.",
-//     university: "MBBS, University of Colombo.",
-//     regno: "234589.",
-//     hospital: "Anuradhapura Genaral Hospital.",
-//   },
-// ];
-
 const AvailableDoctor = () => {
   const navigation = useNavigation();
 
@@ -92,7 +48,7 @@ const AvailableDoctor = () => {
       <HeaderSub
         headLine={"Doctor appointment"}
         subHeadLine={"Explore and find the perfect specialist."}
-        onPress={"HomeScreen"}
+        back={"HomeScreen"}
       />
 
       <SafeAreaView style={{ margin: 25 }}>
