@@ -3,10 +3,9 @@ exports.createPost = async (req, res) => {
   try {
     const { postCategory, date, time, description, image } = req.body;
     const userId = req.user.user_id;
-    const user = await userSchema.findById(userId);
 
     const newPost = new PostSchema({
-      userId: user._id,
+      userId: userId,
       postCategory,
       date,
       time,

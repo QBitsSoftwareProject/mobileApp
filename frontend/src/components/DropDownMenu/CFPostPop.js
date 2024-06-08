@@ -44,7 +44,12 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     elevation: 1,
     marginHorizontal: 5,
+    alignSelf: "flex-end",
     alignItems: "center",
+    justifyContent: "center",
+    position: "absolute",
+    marginTop: 10,
+    zIndex: 10,
   },
   container: {
     flex: 1,
@@ -63,7 +68,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
-    // gap: 15,
   },
   edtImg: {
     width: 11.5,
