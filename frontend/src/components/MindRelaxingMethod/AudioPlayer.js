@@ -1,7 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect ,useContext} from 'react';
 import { View, StyleSheet, Button, Text ,Image,TouchableOpacity} from 'react-native';
 import { Audio } from 'expo-av';
 import Slider from '@react-native-community/slider';
+import { BackgroundMusicContext } from '../SettingScreen/BackgroundMusicProvider';
+import { useFocusEffect } from '@react-navigation/native';
 
 const AudioPlayer = ({ audioSource, onStop, imglink ,title}) => {
   const [soundObject, setSoundObject] = useState(null);
@@ -10,6 +12,21 @@ const AudioPlayer = ({ audioSource, onStop, imglink ,title}) => {
   const [position, setPosition] = useState(0);
   const [img,setImg] = useState(imglink)
   const [name,setName] = useState(title)
+
+
+  const { setBackgroundMusicValid } = useContext(BackgroundMusicContext);
+
+  useFocusEffect(
+    React.useCallback(() => {
+      setBackgroundMusicValid(false);
+      
+
+      return () => {
+        setBackgroundMusicValid(true);
+        
+      };
+    }, [setBackgroundMusicValid])
+  );
 
  
   useEffect(() => {

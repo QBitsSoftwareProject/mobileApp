@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect ,useContext} from "react";
 import { SafeAreaView } from 'react-native-safe-area-context';
 import RadioButton from './optionfetch';
 import { useNavigation } from '@react-navigation/native';
@@ -7,6 +7,8 @@ import TabBar from "../../components/TabBar/TabBar";
 import { getMark } from "../ResultScreen/getStressLevel";
 import { submitToDatabase } from "./sendMarkToDB.js";
 import axiosInstance from "../../api/axios.js";
+import { BackgroundMusicContext } from '../../components/SettingScreen/BackgroundMusicProvider';
+import { useFocusEffect } from '@react-navigation/native';
 
 import {
   View,
@@ -22,6 +24,7 @@ import { ProgressBar } from 'react-native-paper';
 import axios from "axios";
 
 const Question = () => {
+
   const [options, setOptions] = useState([]);
   const [ids, setIds] = useState([]);
   const [question, setQuestion] = useState('');
@@ -33,6 +36,24 @@ const Question = () => {
   const [mark,setMark] = useState('');
   const [submit, setSubmit] = useState(false);
   const [stressLevel , setStressLevel] = useState('');
+
+  // const { setBackgroundMusicValid } = useContext(BackgroundMusicContext);
+
+  // useFocusEffect(
+  //   React.useCallback(() => {
+  //     setBackgroundMusicValid(false);
+      
+
+  //     return () => {
+  //       setBackgroundMusicValid(true);
+        
+  //     };
+  //   }, [setBackgroundMusicValid])
+  // );
+
+
+
+
 
   // get Ids of questions
   

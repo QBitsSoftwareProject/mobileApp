@@ -82,6 +82,11 @@ const fetchMark = async (userID) => {
     });
   };
 
+  const handleTryLaterBtn = () => {
+    console.log('ptressed')
+    // navigation.navigate('');
+  }
+
      
     return (
       <View>
@@ -106,6 +111,9 @@ const fetchMark = async (userID) => {
 
     <View style = {{justifyContent:'center',alignItems:'center'}}>
       <TouchableOpacity 
+
+        onPress={handleTryLaterBtn}
+
       style = {{backgroundColor:'white',
       marginBottom:350,
       width:289,
@@ -115,12 +123,9 @@ const fetchMark = async (userID) => {
       borderColor:'#74A9CD',
       borderWidth:1,
       marginTop:22
-
-
-      
       }}>
 
-        <Text style = {{alignSelf:'center'}}>Try Again</Text>
+        <Text style = {{alignSelf:'center'}}>Try Later</Text>
       </TouchableOpacity>
     </View>
     </ScrollView>

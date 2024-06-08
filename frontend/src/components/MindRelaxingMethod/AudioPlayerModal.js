@@ -2,11 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { View, Modal, Button, StyleSheet } from 'react-native';
 import AudioPlayer from './AudioPlayer';
 
+
 const AudioPlayerModal = ({ visible, onClose, audioSource,img, name }) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [soundObject, setSoundObject] = useState(null);
   const [imgLink, setImgLink] = useState(img);
-  
 
 
   useEffect(() => {
