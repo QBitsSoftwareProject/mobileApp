@@ -56,7 +56,13 @@ const PostContent = (props) => {
         <HeaderSub headLine={"Post Content"} back={HomePage} />
       </View>
 
-      <View style={{ height: screenHeight, paddingHorizontal: 25 }}>
+      <View
+        style={{
+          height: screenHeight,
+          paddingHorizontal: 25,
+          paddingTop: 15,
+        }}
+      >
         <ScrollView ScrollView style={{ height: "100%", marginBottom: 25 }}>
           <View>
             <PostCard

@@ -1,5 +1,5 @@
 import React from "react";
-import { View, StyleSheet, ScrollView, Text } from "react-native";
+import { View, StyleSheet, ScrollView, Text, Dimensions } from "react-native";
 import { SafeAreaView } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import HeaderSub from "../../components/HeaderSub/HeaderSub";
@@ -16,7 +16,10 @@ const post = {
 };
 
 const CreatePost = () => {
+  const screenHeight = Dimensions.get("window").height - 275;
+
   const navigation = useNavigation();
+
   const [popupMessage, setPopupMessage] = useState("");
 
   const handlePostImageButtonPress = () => {
@@ -41,8 +44,14 @@ const CreatePost = () => {
         />
       </View>
 
-      <SafeAreaView style={{ margin: 25 }}>
-        <ScrollView style={{ height: 500 }}>
+      <View
+        style={{
+          height: screenHeight,
+          paddingHorizontal: 25,
+          paddingTop: 15,
+        }}
+      >
+        <ScrollView ScrollView style={{ height: "100%", marginBottom: 25 }}>
           <View>
             <TemporyCard
               image={post.image}
@@ -70,7 +79,7 @@ const CreatePost = () => {
             />
           </View>
         </ScrollView>
-      </SafeAreaView>
+      </View>
     </View>
   );
 };

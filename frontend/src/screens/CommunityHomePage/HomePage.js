@@ -1,17 +1,10 @@
 import React from "react";
 import { View, StyleSheet, ScrollView, Dimensions } from "react-native";
 import CFHeaderSub from "../../components/ComForumHeader/CFHeader";
-import PostCatBtn from "../../components/CFButton/PostCatBtn";
+// import PostCatBtn from "../../components/CFButton/PostCatBtn";
 import PostCard from "../../components/CFCard/PostCard";
 import FloatingButton from "../../components/FloatingButton/FloatingButton";
 import { useNavigation } from "@react-navigation/native";
-
-// Mock data for post categories
-const PostCatList = [
-  { id: 1, PstCat: "Trending" },
-  { id: 2, PstCat: "Stress" },
-  { id: 3, PstCat: "Calm" },
-];
 
 // Mock data for posts
 const postList = [
@@ -63,14 +56,20 @@ const HomePage = () => {
         />
       </View>
 
-      <View style={{ height: screenHeight, paddingHorizontal: 25 }}>
+      <View
+        style={{
+          height: screenHeight,
+          paddingHorizontal: 25,
+          paddingTop: 15,
+        }}
+      >
         <ScrollView ScrollView style={{ height: "100%", marginBottom: 25 }}>
-          {/* posts category*/}
+          {/* posts category
           <View style={{ flexDirection: "row", flexWrap: "wrap" }}>
             {PostCatList.map((item, index) => (
               <PostCatBtn key={index} PstCat={item.PstCat} />
             ))}
-          </View>
+          </View> */}
 
           {/* post cards list*/}
           <View>
