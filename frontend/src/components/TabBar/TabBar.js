@@ -1,10 +1,14 @@
-import React from "react";
+import React , { useEffect, useState, useContext }from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import SettingScreen from "../../screens/SettingScreen/SettingScreen";
 import NotifyScreen from "../../screens/NotificationScreen/NotifyScreen";
 import ProfileScreen from "../../screens/ProfileScreen/ProfileScreen";
 import HomeStack from "../../navigation/routes/HomeStack";
 import TabBarIcon from "./TabBarIcon";
+import MusicPlayer from './BackgroundMusic';
+import { BackgroundMusicContext } from '../SettingScreen/BackgroundMusicProvider';
+import { View, Text, StyleSheet, Image } from 'react-native';
+
 
 const Tab = createBottomTabNavigator();
 
@@ -21,7 +25,13 @@ const TabBar = ({ route, user, userRole }) => {
     routeName = route.params.routeName;
   }
 
+  const { backgroundMusicValid , backgroundMusic, musicStop } = useContext(BackgroundMusicContext);
+  const firebaseAudioUrl = 'https://firebasestorage.googleapis.com/v0/b/uploadingfile-9e556.appspot.com/o/music%2FBlue%20Sky%20-%20Anime%20Piano%20%20Relaxation%20and%20Inspiration.mp3?alt=media&token=63f0612a-cfaf-41c7-ac6c-a001512b5369';
+  
+
   return (
+    <View style={{ flex: 1 }}>
+       {musicStop && <MusicPlayer play={backgroundMusic && backgroundMusicValid} url={firebaseAudioUrl} />}
     <Tab.Navigator
       screenOptions={{
         tabBarShowLabel: false,
@@ -76,6 +86,7 @@ const TabBar = ({ route, user, userRole }) => {
         }}
       />
     </Tab.Navigator>
+    </View>
   );
 };
 

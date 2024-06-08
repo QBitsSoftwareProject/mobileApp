@@ -1,14 +1,29 @@
-import { View, Text, TouchableOpacity } from "react-native";
-import React from "react";
-import { SafeAreaView } from "react-native-safe-area-context";
+import { View, Text ,StyleSheet} from 'react-native'
+import React , { useContext }from 'react'
+import { SafeAreaView } from 'react-native-safe-area-context'
+import SettingCard from '../../components/SettingScreen/SettingCard'
+import LogoutCard from '../../components/SettingScreen/LogoutCard'
 import { useNavigation, useRoute } from "@react-navigation/native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { BackgroundMusicContext } from '../../components/SettingScreen/BackgroundMusicProvider';
 
-const SettingScreen = ({ route }) => {
+
+const SettingScreen = ({route}) => {
+
+  const { setMusicStop } = useContext(BackgroundMusicContext);
+
   const navigation = useNavigation();
   const { routeName } = route.params;
 
+  console.log(routeName)
+
+  
+
   const handleLogout = async () => {
+    
+    setMusicStop(false);
+
+    console.log("pressed")
     await clearAllData();
 
     if (routeName === "MainStack") {
@@ -25,25 +40,31 @@ const SettingScreen = ({ route }) => {
       console.error("Error clearing AsyncStorage data:", error);
     }
   };
+  
+
+  
   return (
     <SafeAreaView>
-      <TouchableOpacity
-        style={{
-          marginHorizontal: 25,
-          marginVertical: 100,
-          backgroundColor: "yellow",
-          width: 300,
-          height: 50,
-          borderRadius: 20,
-          alignItems: "center",
-          justifyContent: "center",
-        }}
-        onPress={handleLogout}
-      >
-        <Text>Logout</Text>
-      </TouchableOpacity>
+      <View style={{marginRight:25,marginLeft:25}}>
+        <Text style = {styles.SettingText}>Settings</Text>
+        <SettingCard ></SettingCard>
+        <LogoutCard handleLogout = {handleLogout}/>
+      </View>
+      
     </SafeAreaView>
-  );
-};
+  )
+}
+
+const styles = StyleSheet.create({
+  
+  SettingText:{
+    alignSelf:'center',
+    marginTop:32,
+    fontSize:22,
+    fontWeight:'500',
+    marginBottom:32
+
+  }
+})
 
 export default SettingScreen;
