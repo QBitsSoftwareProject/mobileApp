@@ -13,9 +13,9 @@ const getOrAssignTask = async (userId) => {
 
   // Check if tasks have been taken for today
   if (
-    taskTakenDate.getUTCFullYear() === currentDate.getUTCFullYear() &&
-    taskTakenDate.getUTCMonth() === currentDate.getUTCMonth() &&
-    taskTakenDate.getUTCDate() === currentDate.getUTCDate()
+    taskTakenDate.getFullYear() === currentDate.getFullYear() &&
+    taskTakenDate.getMonth() === currentDate.getMonth() &&
+    taskTakenDate.getDate() === currentDate.getDate()
   ) {
     // Tasks already assigned for today
     const taskDay = getCurrentTaskDay(user);

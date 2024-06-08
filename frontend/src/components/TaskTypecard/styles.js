@@ -49,7 +49,7 @@ export default styles = StyleSheet.create({
   },
 
   cardImg: {
-    width: 70,
-    height: 70,
+    width: 65,
+    height: 65,
   },
 });

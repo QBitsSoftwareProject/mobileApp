@@ -9,6 +9,7 @@ const { createTask } = require("../controllers/taskControllers/taskCreate");
 const {
   getOrAssignTask,
 } = require("../controllers/taskControllers/selectedTask");
+const auth = require("../middlewares/auth");
 
 const router = express.Router();
 
@@ -19,6 +20,6 @@ router.get("/get-one/:id", getATask);
 router.put("/update/:id", updateTask);
 router.delete("/delete/:id", deleteTask);
 
-router.post("/suggested-task", getOrAssignTask);
+router.get("/suggested-task", auth, getOrAssignTask);
 
 module.exports = router;
