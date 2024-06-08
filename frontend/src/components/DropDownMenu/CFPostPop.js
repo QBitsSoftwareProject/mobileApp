@@ -2,7 +2,7 @@ import { TouchableOpacity, View, Text, Image, StyleSheet } from "react-native";
 import React from "react";
 import { useNavigation } from "@react-navigation/native";
 
-const DocPop = (props) => {
+const PostPop = (props) => {
   const navigation = useNavigation();
 
   const handleEdit = () => {
@@ -11,7 +11,10 @@ const DocPop = (props) => {
   return (
     <View style={styles.DropPop}>
       <View style={styles.container}>
-        <TouchableOpacity onPress={() => handleEdit()} style={styles.contains1}>
+        <TouchableOpacity
+          onPress={() => handleEdit()}
+          style={[styles.contains1, { gap: 25 }]}
+        >
           <Text style={styles.DPtext}>{props.DPtext1}</Text>
           <Image
             source={require("../../assets/images/PostCardImages/Edit.png")}
@@ -21,7 +24,7 @@ const DocPop = (props) => {
 
         <TouchableOpacity
           onPress={() => handleDelete()}
-          style={styles.contains1}
+          style={[styles.contains1, { gap: 15 }]}
         >
           <Text style={styles.DPtext}>{props.DPtext2}</Text>
           <Image
@@ -41,14 +44,16 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     elevation: 1,
     marginHorizontal: 5,
+    alignItems: "center",
   },
   container: {
     flex: 1,
     height: "auto",
     flexDirection: "column",
-    alignItems: "center",
+    alignItems: "flex-start",
   },
   DPtext: {
+    fontSize: 12,
     color: "#40495B",
     fontWeight: "400",
     lineHeight: 35,
@@ -58,6 +63,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
+    // gap: 15,
   },
   edtImg: {
     width: 11.5,
@@ -70,4 +76,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default DocPop;
+export default PostPop;
