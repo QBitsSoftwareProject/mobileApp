@@ -27,7 +27,7 @@ useEffect(() => {
       const userid = '214102J';
 
       try {
-          const getResponse = await axios.get(`http://192.168.205.128:3000/moodEntries/mood-entries-get/${userid}`);
+          const getResponse = await axios.get(`http://192.168.43.51:3000/moodEntries/mood-entries-get/${userid}`);
 
           const responseData = getResponse.data;
           // console.log(responseData);

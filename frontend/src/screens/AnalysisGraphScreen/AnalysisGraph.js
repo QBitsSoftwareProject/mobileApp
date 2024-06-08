@@ -217,10 +217,7 @@ const AnalysisGraph = () => {
 
     const handleContinuePress = () => {
         navigation.navigate('MonthAnalysisScreen', {
-            selectedEmoji: selectedEmoji,
-            moodText: moodtext,
-            imageSource: imageSource,
-            moodIndex: moodIndex
+            
         });
 
         
