@@ -101,7 +101,7 @@ export const getDoctorCancelledAppointments = async () => {
     const response = await axios.get(URL + "/doctor-cancelled-appointment", {
       headers: { authtoken: token },
     });
-    console.log(response.data);
+
     return response.data;
   } catch (error) {
     console.log(error);

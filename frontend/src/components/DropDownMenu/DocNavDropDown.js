@@ -5,7 +5,7 @@ import DocNavPop from "../DropDownMenu/DocNavPop";
 
 const DocDropDown = (props) => {
   const [isPress, setIsPress] = useState(false);
-  const [selectedMenu, setSelectedMenu] = useState("Complete");
+  const [selectedMenu, setSelectedMenu] = useState("Completed");
   const ddArrow = require("../../assets/images/PostCardImages/droparrow.png");
 
   const handlePress = () => {
