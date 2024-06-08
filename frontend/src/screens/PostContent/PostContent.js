@@ -17,7 +17,7 @@ const post = {
   id: 1,
   image: require("../../assets/images/PostCardImages/boydp.jpg"),
   title: "Chethiya Bandara",
-  sub: "public  10 min ago",
+  time: "10 min ago",
   description:
     "“You don't have to see the whole staircase, just take the first step.” – Martin Luther King.",
   Postimage: require("../../assets/images/PostCardImages/fooddish.jpg"),
@@ -63,7 +63,7 @@ const PostContent = (props) => {
               key={post.id}
               image={post.image}
               title={post.title}
-              sub={post.sub}
+              time={post.time}
               description={post.description}
               Postimage={post.Postimage}
             />

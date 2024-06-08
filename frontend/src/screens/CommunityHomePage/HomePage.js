@@ -19,7 +19,7 @@ const postList = [
     id: 1,
     image: require("../../assets/images/PostCardImages/boydp.jpg"),
     title: "Chethiya Bandara",
-    sub: "public  10 min ago",
+    time: "10 min ago",
     description:
       "“You don't have to see the whole staircase, just take the first step.” – Martin Luther King.",
     Postimage: require("../../assets/images/PostCardImages/post1image.jpg"),
@@ -28,7 +28,7 @@ const postList = [
     id: 2,
     image: require("../../assets/images/PostCardImages/girldp.jpg"),
     title: "Piyumi Amarasinghe",
-    sub: "public  22 min ago",
+    time: "22 min ago",
     description:
       "“Success usually comes to those who are too busy looking for it.” — Henry David Thoreau",
     Postimage: null,
@@ -37,7 +37,7 @@ const postList = [
     id: 3,
     image: require("../../assets/images/PostCardImages/boydp.jpg"),
     title: "Chethiya Bandara",
-    sub: "public  1 hour ago",
+    time: " 1 hour ago",
     description:
       "“You don't have to see the whole staircase, just take the first step.” – Martin Luther King.",
     Postimage: require("../../assets/images/PostCardImages/post2image.jpg"),
@@ -79,7 +79,7 @@ const HomePage = () => {
                 key={item.id}
                 image={item.image}
                 title={item.title}
-                sub={item.sub}
+                time={item.time}
                 description={item.description}
                 Postimage={item.Postimage}
               />

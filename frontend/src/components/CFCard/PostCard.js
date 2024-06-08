@@ -20,7 +20,7 @@ const PostCard = (props) => {
             <Text style={styles.title}>{props.title}</Text>
 
             <View style={{ width: "90%" }}>
-              <Text style={styles.sub}>{props.sub}</Text>
+              <Text style={styles.sub}>{props.time}</Text>
             </View>
           </View>
         </View>

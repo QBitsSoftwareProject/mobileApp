@@ -9,67 +9,68 @@ import PopupMessage from "../../components/CF Pop-up/Pop-up";
 import { useState } from "react";
 import PostCategory from "../PostCategory/PostCategory";
 
-const post = 
-  {
-    id: 1,
-    image: require("../../assets/images/PostCardImages/boydp.jpg"),
-    title: "Chethiya Bandara",
-    sub: "public",
-    status: require("../../assets/images/PostCardImages/Globe.png"),
-  }
+const post = {
+  id: 1,
+  image: require("../../assets/images/PostCardImages/boydp.jpg"),
+  title: "Chethiya Bandara",
+};
 
 const CreatePost = () => {
-  
-  const navigation=useNavigation();
-  const [popupMessage, setPopupMessage] = useState('');
-  
+  const navigation = useNavigation();
+  const [popupMessage, setPopupMessage] = useState("");
+
   const handlePostImageButtonPress = () => {
     setPopupMessage("Post Successful!");
   };
 
   const confirmMessage = () => {
-    navigation.navigate('PostContent');
+    navigation.navigate("PostContent");
   };
 
   const closeMessage = () => {
-    setPopupMessage('');
+    setPopupMessage("");
   };
 
   return (
     <View>
       <View>
-        <HeaderSub headLine={"Create Post"} subHeadLine={"Edit your post"} back={PostCategory}/>
+        <HeaderSub
+          headLine={"Create Post"}
+          subHeadLine={"Edit your post"}
+          back={PostCategory}
+        />
       </View>
 
       <SafeAreaView style={{ margin: 25 }}>
-
         <ScrollView style={{ height: 500 }}>
           <View>
-              <TemporyCard
-                image={post.image}
-                title={post.title}
-                sub={post.sub}
-                status={post.status}
-              />
+            <TemporyCard
+              image={post.image}
+              title={post.title}
+              status={post.status}
+            />
           </View>
 
-          <View style={styles.flex1}>
-
+          {/* <View style={styles.flex1}>
             <View>
               <Text style={styles.text1}>Hide from community???</Text>
               <Text style={styles.text2}>This post will be private</Text>
             </View>
-
-          </View>
+          </View> */}
 
           <View style={styles.buttonContainer}>
-            <RegularButton name={"post"} onPress={handlePostImageButtonPress} ></RegularButton> 
-            <PopupMessage message={popupMessage} onConfirm={confirmMessage}  onClose={closeMessage} />
+            <RegularButton
+              name={"post"}
+              onPress={handlePostImageButtonPress}
+            ></RegularButton>
+            <PopupMessage
+              message={popupMessage}
+              onConfirm={confirmMessage}
+              onClose={closeMessage}
+            />
           </View>
         </ScrollView>
-
       </SafeAreaView>
-        
     </View>
   );
 };

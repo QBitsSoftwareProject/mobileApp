@@ -2,16 +2,24 @@ const mongoose = require("mongoose");
 
 const schema = mongoose.Schema;
 
-const appointmentSchema = new schema({
-  postId: {
-    type: schema.Types.ObjectId,
-    required: true,
-  },
-
+const postSchema = new schema({
   userId: {
     type: schema.Types.ObjectId,
     ref: "RegularUser",
     required: true,
+  },
+  postCategory: {
+    type: String,
+    required: true,
+    enum: [
+      "Stories",
+      "Self Care",
+      "Mindfullness",
+      "Creative",
+      "Supportive",
+      "Stress",
+    ],
+    default: "",
   },
 
   date: {
@@ -23,14 +31,10 @@ const appointmentSchema = new schema({
     type: Object,
     required: true,
   },
-  status: {
-    type: String,
-    enum: ["Public", "Private"],
-    default: "Public",
-  },
+
   description: {
     type: String,
-    required: false,
+    required: true,
   },
   image: {
     type: String,
@@ -38,4 +42,4 @@ const appointmentSchema = new schema({
   },
 });
 
-module.exports = mongoose.model("userAppointments", appointmentSchema);
+module.exports = mongoose.model("post", postSchema);
