@@ -22,7 +22,7 @@ const CompletedAppointment = () => {
         response = await getDoctorCompletedAppointments();
       } else if (checkPage == "Rejected") {
         response = await getDoctorRejectedAppointments();
-      } else if (checkPage == "Canceled") {
+      } else if (checkPage == "Cancelled") {
         response = await getDoctorCancelledAppointments();
       }
 
