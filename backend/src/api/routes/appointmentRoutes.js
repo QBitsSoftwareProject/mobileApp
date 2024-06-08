@@ -1,9 +1,9 @@
 const express = require("express");
 const {
   createAppointment,
-} = require("../../controllers/appointmentsController/createAppointment");
+} = require("../controllers/appointmentsController/createAppointment");
 
-const auth = require("../../middlewares/auth");
+const auth = require("../middlewares/auth");
 const {
   getUserAppointments,
   getDoctorPendingAppointments,
@@ -11,10 +11,10 @@ const {
   getDoctorCompletedAppointments,
   getDoctorRejectedAppointments,
   getDoctorCancelledAppointments,
-} = require("../../controllers/appointmentsController/getAppointments");
+} = require("../controllers/appointmentsController/getAppointments");
 const {
   updateDocAppointment,
-} = require("../../controllers/appointmentsController/updateAppointment");
+} = require("../controllers/appointmentsController/updateAppointment");
 
 const router = express.Router();
 
