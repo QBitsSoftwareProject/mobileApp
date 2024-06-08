@@ -9,6 +9,7 @@ export default styles = StyleSheet.create({
     elevation: 1,
     gap: 15,
     flexDirection: "row",
+    marginTop: 15,
   },
 
   headText: {
@@ -45,5 +46,10 @@ export default styles = StyleSheet.create({
     fontSize: 14,
     fontWeight: "500",
     color: "#40495B",
+  },
+
+  cardImg: {
+    width: 70,
+    height: 70,
   },
 });
