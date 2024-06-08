@@ -15,9 +15,9 @@ exports.createPost = async (req, res) => {
 
     await newPost.save();
 
-    return res.status(201).json("New appointment succesfully created!");
+    return res.status(201).json("New post succesfully created!");
   } catch (error) {
     console.error(error);
-    return res.status(500).json("New appointment created unsuccsess!");
+    return res.status(500).json("New post created unsuccsess!");
   }
 };

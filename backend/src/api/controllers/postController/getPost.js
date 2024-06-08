@@ -5,7 +5,7 @@ exports.getPost = async (req, res) => {
     const Posts = await postSchema.find().populate("userId");
 
     if (!Posts) {
-      return res.status(404).json({ message: "Appointments not found!" });
+      return res.status(404).json({ message: "Post not found!" });
     }
 
     return res.status(201).json(Posts);
