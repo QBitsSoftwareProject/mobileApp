@@ -1,10 +1,25 @@
 import { StyleSheet, TouchableOpacity, View, Image, Text } from "react-native";
 import React from "react";
 import AcptComBtn from "../CFButton/Accept&CompleteBtn";
+import { updateStatusAppointments } from "../../services/appointmentServices/AppointmentServices";
 
-const CreateCard = (props) => {
+const docCard = (props) => {
+  const statusUpdate = async () => {
+    try {
+      if (props.cardName == "Pending") {
+        await updateStatusAppointments(props.id, "Rejected");
+        console.log("Updated to Reject.", props.id, props.status);
+      } else if (props.cardName == "Accepted") {
+        await updateStatusAppointments(props.id, "Cancelled");
+        console.log("Updated to Cancel.", props.id, props.status);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
-    <TouchableOpacity style={styles.cardBox}>
+    <View style={styles.cardBox}>
       <View style={styles.content}>
         <View style={styles.content1}>
           <View style={styles.imageframe}>
@@ -39,22 +54,32 @@ const CreateCard = (props) => {
         </View>
         {props.cardName == "Pending" && (
           <View style={styles.content2}>
-            <View>
-              <Text style={styles.rejectedStatus}>{props.status}</Text>
-            </View>
-            <AcptComBtn AcptCom={"Accept"} stat={""} />
+            <TouchableOpacity
+              onPress={() => {
+                statusUpdate();
+              }}
+            >
+              <Text style={styles.rejectedStatus}>Reject</Text>
+            </TouchableOpacity>
+            <AcptComBtn AcptCom={"Accept"} appId={props.id} />
+            <Text>{props.status}</Text>
           </View>
         )}
         {props.cardName == "Accepted" && (
           <View style={styles.content2}>
-            <View>
-              <Text style={styles.rejectedStatus}>{props.status}</Text>
-            </View>
-            <AcptComBtn AcptCom={"Complete"} stat={""} />
+            <TouchableOpacity
+              onPress={() => {
+                statusUpdate();
+              }}
+            >
+              <Text style={styles.rejectedStatus}>Cancel</Text>
+            </TouchableOpacity>
+            <AcptComBtn AcptCom={"Complete"} appId={props.id} />
+            <Text>{props.status}</Text>
           </View>
         )}
       </View>
-    </TouchableOpacity>
+    </View>
   );
 };
 const styles = StyleSheet.create({
@@ -126,4 +151,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default CreateCard;
+export default docCard;

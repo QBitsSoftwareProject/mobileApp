@@ -1,10 +1,26 @@
 import { TouchableOpacity, View, Text, StyleSheet } from "react-native";
-import React from "react";
-import { useNavigation } from "@react-navigation/core";
+import React, { useState } from "react";
+import { updateStatusAppointments } from "../../services/appointmentServices/AppointmentServices";
 
 const AcptComBtn = (props) => {
+  const statusUpdate = async () => {
+    try {
+      if (props.AcptCom == "Accept") {
+        await updateStatusAppointments(props.appId, "Accepted");
+      } else if (props.AcptCom == "Complete") {
+        await updateStatusAppointments(props.appId, "Completed");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
-    <TouchableOpacity onPress={""}>
+    <TouchableOpacity
+      onPress={() => {
+        statusUpdate();
+      }}
+    >
       <View style={styles.ACbutton}>
         <Text style={styles.AcptCom}>{props.AcptCom}</Text>
       </View>

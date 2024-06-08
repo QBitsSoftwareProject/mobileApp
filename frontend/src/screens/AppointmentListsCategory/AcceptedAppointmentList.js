@@ -36,8 +36,6 @@ const AcceptedAppointment = () => {
     );
   }
 
-  console.log(acceptedData);
-
   return (
     <View>
       <ScrollView style={{ height: 500 }}>
@@ -49,14 +47,14 @@ const AcceptedAppointment = () => {
         <View style={{ marginBottom: 80 }}>
           {acceptedData.map((item) => (
             <DocCard
-              key={item.id}
-              image={item.proPic}
-              title={item.fullName}
+              id={item._id}
+              key={item._id}
+              image={item.userId.proPic}
+              title={item.userId.fullName}
               cardName={"Accepted"}
               // time={item.time}
               date={item.date}
               contactNo={item.contactNo}
-              status={item.status}
             />
           ))}
         </View>

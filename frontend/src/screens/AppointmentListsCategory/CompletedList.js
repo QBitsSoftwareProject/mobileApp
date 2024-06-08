@@ -3,17 +3,29 @@ import { Text, ScrollView, View, Image } from "react-native";
 import DocCard from "../../components/Card/DocCard";
 import DocNavDropDown from "../../components/DropDownMenu/DocNavDropDown";
 import styles from "./styles";
-import { getDoctorCompletedAppointments } from "../../services/appointmentServices/AppointmentServices";
+import {
+  getDoctorCancelledAppointments,
+  getDoctorCompletedAppointments,
+  getDoctorRejectedAppointments,
+} from "../../services/appointmentServices/AppointmentServices";
 import loardingGIF from "../../assets/animation/loading.gif";
 
 const CompletedAppointment = () => {
   const [completedData, setCompletedData] = useState(null);
+  const [checkPage, setCheckPage] = useState("Completed");
 
   const fetchComAppointment = async () => {
     try {
-      const response = await getDoctorCompletedAppointments();
-      // setCompletedData(response);
-      console.log(response);
+      let response;
+      if (checkPage == "Completed") {
+        response = await getDoctorCompletedAppointments();
+      } else if (checkPage == "Rejected") {
+        response = await getDoctorRejectedAppointments();
+      } else if (checkPage == "Cancelled") {
+        response = await getDoctorCancelledAppointments();
+      }
+
+      setCompletedData(response);
     } catch (error) {
       console.log(error);
     }
@@ -38,7 +50,7 @@ const CompletedAppointment = () => {
     );
   }
 
-  console.log(completedData);
+  // console.log(checkPage);
 
   return (
     <View>
@@ -56,16 +68,16 @@ const CompletedAppointment = () => {
         >
           <Text style={styles.descript2}>Completed List.</Text>
 
-          <DocNavDropDown />
+          <DocNavDropDown check={setCheckPage} />
         </View>
 
         {/* appointment status cards */}
         <View style={{ marginBottom: 80 }}>
           {completedData.map((item) => (
             <DocCard
-              key={item.id}
-              image={item.proPic}
-              title={item.fullName}
+              key={item._id}
+              image={item.userId.proPic}
+              title={item.userId.fullName}
               cardName={"Completed"}
               // time={item.time}
               date={item.date}

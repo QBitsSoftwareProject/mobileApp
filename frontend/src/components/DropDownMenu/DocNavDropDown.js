@@ -10,6 +10,7 @@ const DocDropDown = (props) => {
 
   const handlePress = () => {
     setIsPress(!isPress);
+    props.check(selectedMenu);
   };
   return (
     <View>

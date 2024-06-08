@@ -9,7 +9,12 @@ const {
   getDoctorPendingAppointments,
   getDoctorAcceptedAppointments,
   getDoctorCompletedAppointments,
+  getDoctorRejectedAppointments,
+  getDoctorCancelledAppointments,
 } = require("../../controllers/appointmentsController/getAppointments");
+const {
+  updateDocAppointment,
+} = require("../../controllers/appointmentsController/updateAppointment");
 
 const router = express.Router();
 
@@ -22,6 +27,12 @@ router.get(
   auth,
   getDoctorCompletedAppointments
 );
-router.update("/doc-appointment", auth, updateDocAppointment);
+router.get("/doctor-rejected-appointment", auth, getDoctorRejectedAppointments);
+router.get(
+  "/doctor-cancelled-appointment",
+  auth,
+  getDoctorCancelledAppointments
+);
+router.put("/appointment-status", auth, updateDocAppointment);
 
 module.exports = router;

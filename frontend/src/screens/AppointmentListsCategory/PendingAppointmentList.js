@@ -37,8 +37,6 @@ const PendingAppointment = () => {
     );
   }
 
-  console.log(pendingData);
-
   return (
     <View>
       <ScrollView style={{ height: 500 }}>
@@ -50,7 +48,8 @@ const PendingAppointment = () => {
         <View style={{ marginBottom: 80 }}>
           {pendingData.map((item) => (
             <DocCard
-              key={item.id}
+              id={item._id}
+              key={item._id}
               image={item.userId.proPic}
               title={item.userId.fullName}
               cardName={"Pending"}
@@ -58,7 +57,6 @@ const PendingAppointment = () => {
               // time={props.time.from}-{props.time.to}
               date={item.date}
               contactNo={item.contactNo}
-              status={item.status}
             />
           ))}
         </View>
