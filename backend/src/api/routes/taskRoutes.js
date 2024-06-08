@@ -6,6 +6,9 @@ const {
 const { updateTask } = require("../controllers/taskControllers/updatetask");
 const { deleteTask } = require("../controllers/taskControllers/deletetask");
 const { createTask } = require("../controllers/taskControllers/taskCreate");
+const {
+  getOrAssignTask,
+} = require("../controllers/taskControllers/selectedTask");
 
 const router = express.Router();
 
@@ -15,5 +18,7 @@ router.get("/get-all", getTasks);
 router.get("/get-one/:id", getATask);
 router.put("/update/:id", updateTask);
 router.delete("/delete/:id", deleteTask);
+
+router.post("/suggested-task", getOrAssignTask);
 
 module.exports = router;
