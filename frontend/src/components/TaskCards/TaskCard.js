@@ -10,19 +10,25 @@ let completenessImage = null;
 const TaskCard = (props) => {
   const navigation = useNavigation();
 
-  if (props.completeness === "complete") {
+  if (props.completeness) {
     completenessImage = complete;
-  } else if (props.completeness === "incomplete") {
+  } else if (!props.completeness) {
     completenessImage = warning;
   }
 
   const handlePress = (taskId, completeness) => {
-    navigation.navigate("TaskDescriptionScreen", { taskId, completeness });
+    navigation.navigate("TaskDescriptionScreen", {
+      taskId,
+      completeness,
+      index: props.index,
+    });
   };
 
   return (
     <View style={styles.cardBox}>
-      <Image source={props.icon} />
+      <View style={styles.imgFrame}>
+        <Image source={props.icon} style={styles.cardImg} />
+      </View>
 
       <View style={{ flex: 1, flexDirection: "column", gap: 7 }}>
         <View style={styles.textSection}>
@@ -40,21 +46,16 @@ const TaskCard = (props) => {
             style={[
               styles.takeBtn,
               {
-                borderColor:
-                  props.completeness === "complete"
-                    ? "rgba(74,191,180,0.5)"
-                    : "rgba(151,157,172,0.5)",
+                borderColor: props.completeness
+                  ? "rgba(74,191,180,0.5)"
+                  : "rgba(151,157,172,0.5)",
               },
             ]}
-            onPress={() => handlePress(props.taskId, props.completeness)}
+            onPress={() => handlePress(props.taskId, props.isComplete)}
           >
-            {props.completeness === "incomplete" && (
-              <Text style={styles.btnText}>Take</Text>
-            )}
+            {!props.completeness && <Text style={styles.btnText}>Take</Text>}
 
-            {props.completeness === "complete" && (
-              <Text style={styles.btnText}>View</Text>
-            )}
+            {props.completeness && <Text style={styles.btnText}>View</Text>}
           </TouchableOpacity>
         </View>
       </View>

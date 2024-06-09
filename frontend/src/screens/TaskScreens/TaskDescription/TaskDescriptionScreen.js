@@ -6,10 +6,11 @@ import {
   ScrollView,
   Dimensions,
 } from "react-native";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import styles from "./styles";
+import { viewASelectedTask } from "../../../services/taskServices/taskservice";
 
 // Array containing all tasks with their steps
 const allTasks = [
@@ -74,13 +75,33 @@ const TaskDescriptionScreen = () => {
   const route = useRoute();
   const navigation = useNavigation();
   const [boxHeight, setBoxHeight] = useState(0);
-  const { taskId, completeness } = route.params;
+  const [taskDetails, setTaskDetails] = useState(null);
+
+  const { taskId, completeness, index } = route.params;
 
   const screenHeight = Dimensions.get("screen").height;
 
-  // Finding the task based on the task ID
-  const task = allTasks.find((step) => step.id == taskId);
-  const getTask = task ? Object.values(task.steps) : [];
+  useEffect(() => {
+    fetchTask();
+  }, []);
+
+  const fetchTask = async () => {
+    try {
+      const response = await viewASelectedTask(taskId);
+
+      setTaskDetails(response);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  if (!taskDetails) {
+    return;
+  }
+
+  // // Finding the task based on the task ID
+  // const task = taskDetails.find((step) => step.id == taskId);
+  // const getTask = task ? Object.values(task.steps) : [];
 
   // Handler for back button press
   const handleBackPress = () => {
@@ -107,7 +128,7 @@ const TaskDescriptionScreen = () => {
         <View style={{ height: scrollHeight - 190, alignItems: "center" }}>
           <ScrollView>
             <View style={styles.headTextBox}>
-              <Text style={styles.task}>Task {taskId}</Text>
+              <Text style={styles.task}>Task {index}</Text>
               <Text style={styles.taskHead}>Take today meditation</Text>
             </View>
 
@@ -122,7 +143,7 @@ const TaskDescriptionScreen = () => {
                 <View style={[styles.bar, { height: boxHeight }]}></View>
               </View>
 
-              {getTask.map((item, index) => (
+              {taskDetails.steps.map((item, index) => (
                 <View key={index}>
                   <View style={[styles.stepContainer]}>
                     <View

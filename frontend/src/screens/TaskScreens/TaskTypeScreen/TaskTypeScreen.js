@@ -1,8 +1,9 @@
 import { View, FlatList, ScrollView } from "react-native";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import HeaderSub from "../../../components/HeaderSub/HeaderSub";
 import TaskCard from "../../../components/TaskCards/TaskCard";
 import TaskTypeCard from "../../../components/TaskTypecard/TaskTypeCard";
+import { getAUser } from "../../../services/userServices/userService";
 
 // Importing images for task icons
 const images = {
@@ -12,6 +13,26 @@ const images = {
 };
 
 const TaskTypeScreen = () => {
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    fetchUser();
+  }, []);
+
+  const fetchUser = async () => {
+    try {
+      const response = await getAUser();
+
+      setUser(response);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  if (!user) {
+    return;
+  }
+
   return (
     <View style={{ flex: 1, paddingBottom: 85 }}>
       <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
@@ -27,18 +48,24 @@ const TaskTypeScreen = () => {
             subText={"This is 7 days guided stress management treatment."}
             icon={images.shortTerm}
             taskType={"short-term"}
+            currentTaskType={user.currentTaskType}
+            userName={user.userName}
           />
           <TaskTypeCard
             headText={"Medium Term Tasks"}
             subText={"This is 14 days guided stress management treatment."}
             icon={images.mediumTerm}
             taskType={"medium-term"}
+            currentTaskType={user.currentTaskType}
+            userName={user.userName}
           />
           <TaskTypeCard
             headText={"Long Term Tasks"}
             subText={"This is 30 days guided stress management treatment."}
             icon={images.longTerm}
             taskType={"long-term"}
+            currentTaskType={user.currentTaskType}
+            userName={user.userName}
           />
         </View>
       </ScrollView>

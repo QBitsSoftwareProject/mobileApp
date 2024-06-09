@@ -46,4 +46,10 @@ export default styles = StyleSheet.create({
     fontWeight: "500",
     color: "#40495B",
   },
+
+  cardImg: {
+    width: 70,
+    height: 70,
+    bordewrRadius: 70,
+  },
 });

@@ -30,7 +30,7 @@ exports.getATask = async (req, res) => {
 
     // If user is not found, return a 404 error response
     if (!task) {
-      return res.status(404).json({ message: "Task not found" });
+      return res.status(401).json({ message: "Task not found" });
     }
 
     // Sending success response with status code 200 and the user object

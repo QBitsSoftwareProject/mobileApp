@@ -1,7 +1,8 @@
 import { View, FlatList } from "react-native";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import HeaderSub from "../../../components/HeaderSub/HeaderSub";
 import TaskCard from "../../../components/TaskCards/TaskCard";
+import { getSuggestedTasks } from "../../../services/taskServices/taskservice";
 
 // Importing images for task icons
 const images = {
@@ -11,62 +12,40 @@ const images = {
   story: require("../../../assets/images/TaskIcons/story.png"),
 };
 
-// Array of tasks
-const taskList = [
-  {
-    id: 1,
-    headText: "Take today meditation",
-    subText: "Heal yourself",
-    completeness: "incomplete",
-    icon: images.meditation,
-  },
-  {
-    id: 2,
-    headText: "Time to write your thoughts",
-    subText: "collect memories",
-    completeness: "incomplete",
-    icon: images.journal,
-  },
-  {
-    id: 3,
-    headText: "Renew your connections",
-    subText: "say hi",
-    completeness: "complete",
-    icon: images.friends,
-  },
-  {
-    id: 4,
-    headText: "See the story",
-    subText: "Way to understand",
-    completeness: "incomplete",
-    icon: images.story,
-  },
-  {
-    id: 5,
-    headText: "Take today meditation",
-    subText: "Heal yourself",
-    completeness: "complete",
-    icon: images.meditation,
-  },
-];
-
 const TaskListScreen = () => {
+  const [taskList, setTaskList] = useState(null);
+
+  useEffect(() => {
+    fetchUser();
+  }, []);
+
+  const fetchUser = async () => {
+    try {
+      const response = await getSuggestedTasks();
+
+      setTaskList(response);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  if (!taskList) {
+    return;
+  }
+
   // Counting remaining incomplete tasks
   let remaining = 0;
   const count = taskList.filter((item) => {
-    if (item.completeness === "incomplete") {
+    if (!item.iscomplete) {
       remaining++;
     }
   });
 
   // Sorting the task list with incomplete tasks first
   const sortedTaskList = [...taskList].sort((a, b) => {
-    if (a.completeness === "incomplete" && b.completeness !== "incomplete") {
+    if (!a.iscomplete && b.iscomplete) {
       return -1;
-    } else if (
-      a.completeness !== "incomplete" &&
-      b.completeness === "incomplete"
-    ) {
+    } else if (a.iscomplete && !b.iscomplete) {
       return 1;
     } else {
       return 0;
@@ -78,7 +57,7 @@ const TaskListScreen = () => {
       <HeaderSub
         headLine={"Daily Activities"}
         subHeadLine={remaining + " more to complete"}
-        back={"WelcomeScreen"}
+        back={"TaskTypeScreen"}
       />
 
       <View style={{ flex: 1 }}>
@@ -93,11 +72,12 @@ const TaskListScreen = () => {
               }}
             >
               <TaskCard
-                headText={item.headText}
-                subText={item.subText}
-                completeness={item.completeness}
-                icon={item.icon}
-                taskId={item.id}
+                headText={item.taskId.headText}
+                subText={item.taskId.subText}
+                completeness={item.iscomplete}
+                icon={images.meditation}
+                taskId={item.taskId._id}
+                index={index + 1}
               />
             </View>
           )}

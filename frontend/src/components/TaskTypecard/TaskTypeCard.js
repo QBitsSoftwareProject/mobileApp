@@ -6,7 +6,11 @@ import { useNavigation } from "@react-navigation/native";
 const TaskTypeCard = (props) => {
   const navigation = useNavigation();
 
-  const handlePress = () => {};
+  const disable = props.currentTaskType != props.taskType ? true : false;
+
+  const handlePress = () => {
+    navigation.navigate("WelcomeScreen");
+  };
 
   return (
     <View style={styles.cardBox}>
@@ -33,8 +37,13 @@ const TaskTypeCard = (props) => {
               },
             ]}
             onPress={() => handlePress(props.taskId, props.completeness)}
+            disabled={disable}
           >
-            <Text style={styles.btnText}>go for It</Text>
+            {disable ? (
+              <Text style={[styles.btnText, { opacity: 0.2 }]}>Disabled</Text>
+            ) : (
+              <Text style={styles.btnText}>go for It</Text>
+            )}
           </TouchableOpacity>
         </View>
       </View>
