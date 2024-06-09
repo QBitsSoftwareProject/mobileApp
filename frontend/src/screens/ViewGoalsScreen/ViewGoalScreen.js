@@ -15,44 +15,6 @@ import {
 } from "../../services/goalsService/goalsService";
 import { useFocusEffect } from "@react-navigation/native";
 
-const completedGoalsList = [
-  {
-    id: 1,
-    title: "Mindfulness Moments",
-    completeness: 3,
-    length: 6,
-    completedDate: "12.11.2024",
-  },
-  {
-    id: 2,
-    title: "Connect and Smile",
-    completeness: 5,
-    length: 6,
-    completedDate: "12.11.2024",
-  },
-  {
-    id: 3,
-    title: "Write it Out",
-    completeness: 1,
-    length: 6,
-    completedDate: "12.11.2024",
-  },
-  {
-    id: 4,
-    title: "Mindfulness Moments",
-    completeness: 2,
-    length: 6,
-    completedDate: "12.11.2024",
-  },
-  {
-    id: 5,
-    title: "Connect and Smile",
-    completeness: 3,
-    length: 10,
-    completedDate: "12.11.2024",
-  },
-];
-
 const ViewGoalScreen = () => {
   const [selectedTab, setSelectedTab] = useState(0);
   const [data, setData] = useState([]);
@@ -159,6 +121,7 @@ const ViewGoalScreen = () => {
                 ) : null}
               </View>
             )}
+            keyExtractor={(item) => item._id}
           />
         ) : (
           <View
