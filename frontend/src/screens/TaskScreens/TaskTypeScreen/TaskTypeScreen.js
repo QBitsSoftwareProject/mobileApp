@@ -1,9 +1,10 @@
-import { View, FlatList, ScrollView } from "react-native";
+import { View, FlatList, ScrollView, Image } from "react-native";
 import React, { useEffect, useState } from "react";
 import HeaderSub from "../../../components/HeaderSub/HeaderSub";
 import TaskCard from "../../../components/TaskCards/TaskCard";
 import TaskTypeCard from "../../../components/TaskTypecard/TaskTypeCard";
 import { getAUser } from "../../../services/userServices/userService";
+import loadingGif from "../../../assets/animation/loading.gif";
 
 // Importing images for task icons
 const images = {
@@ -30,7 +31,18 @@ const TaskTypeScreen = () => {
   };
 
   if (!user) {
-    return;
+    return (
+      <View
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          height: "100%",
+        }}
+      >
+        <Image source={loadingGif} />
+      </View>
+    );
   }
 
   return (

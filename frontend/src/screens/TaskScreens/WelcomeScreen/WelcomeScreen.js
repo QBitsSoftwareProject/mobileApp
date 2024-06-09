@@ -14,10 +14,13 @@ import { getTime } from "./GetTime";
 import { useNavigation } from "@react-navigation/native";
 import { getSuggestedMotivation } from "../../../services/motivationServices/motivation";
 import { getAUser } from "../../../services/userServices/userService";
+import { getDailyQuestion } from "../../../services/questionServices/questionServices";
+import loadingGif from "../../../assets/animation/loading.gif";
 
 const WelcomeScreen = ({ route }) => {
   const navigation = useNavigation();
   const [data, setData] = useState(null);
+  const [questionData, setQuestionData] = useState(null);
 
   useEffect(() => {
     fetchData();
@@ -25,32 +28,37 @@ const WelcomeScreen = ({ route }) => {
 
   const fetchData = async () => {
     try {
-      const response = await getSuggestedMotivation();
+      const motivation = await getSuggestedMotivation();
+      const question = await getDailyQuestion();
 
-      setData(response);
+      setData(motivation);
+      setQuestionData(question);
     } catch (error) {
       console.log(error);
     }
   };
 
-  if (!data) {
-    return;
+  if (!data || !questionData) {
+    return (
+      <View
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          height: "100%",
+        }}
+      >
+        <Image source={loadingGif} />
+      </View>
+    );
   }
-
-  // Data object containing information to be displayed on the screen
-  const datas = {
-    currentDay: "01",
-    userName: "kovida",
-    isAnswered: true,
-    descrptionTxt:
-      "It's a brand new day, and we're here to help you on your path to a stress-free life.Remember, you're not alone on this journey. We believe in your strength and resilience. Take it one day at a time, and trust the process. Each day brings you closer to a more relaxed and happier you. Stay committed, stay positive, and let's conquer stress together! ",
-  };
 
   const presshandler = () => {
     // Navigate to McqScreen if a question is not answered, otherwise navigate to TaskListScreen
-    if (datas.isAnswered) {
+    if (questionData.isAnswered) {
       navigation.navigate("TaskListScreen");
-    } else navigation.navigate("McqScreen");
+    } else
+      navigation.navigate("McqScreen", { questions: questionData.questions });
   };
 
   return (

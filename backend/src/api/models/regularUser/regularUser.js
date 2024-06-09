@@ -25,6 +25,19 @@ const userTaskSchema = new schema({
   },
 });
 
+// Subdocument schema for user responses
+const userResponseSchema = new schema({
+  questionId: {
+    type: schema.Types.ObjectId,
+    ref: "Questions",
+    required: true,
+  },
+  answer: {
+    type: String,
+    default: "",
+  },
+});
+
 // Defining the schema for regular users
 const regularUserSchema = new schema({
   fullName: {
@@ -107,6 +120,15 @@ const regularUserSchema = new schema({
     type: String,
     enum: ["short-term", "medium-term", "long-term"],
     default: "short-term",
+  },
+
+  response: [userResponseSchema],
+
+  answeredDate: {
+    type: Date,
+    default: function () {
+      return new Date();
+    },
   },
 });
 

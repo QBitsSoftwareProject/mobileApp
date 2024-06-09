@@ -1,8 +1,9 @@
-import { View, FlatList } from "react-native";
+import { View, FlatList, Image } from "react-native";
 import React, { useEffect, useState } from "react";
 import HeaderSub from "../../../components/HeaderSub/HeaderSub";
 import TaskCard from "../../../components/TaskCards/TaskCard";
 import { getSuggestedTasks } from "../../../services/taskServices/taskservice";
+import loadingGif from "../../../assets/animation/loading.gif";
 
 // Importing images for task icons
 const images = {
@@ -30,7 +31,18 @@ const TaskListScreen = () => {
   };
 
   if (!taskList) {
-    return;
+    return (
+      <View
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          height: "100%",
+        }}
+      >
+        <Image source={loadingGif} />
+      </View>
+    );
   }
 
   // Counting remaining incomplete tasks
