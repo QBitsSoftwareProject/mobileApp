@@ -23,7 +23,7 @@ const SettingScreen = ({route}) => {
     
     setMusicStop(false);
 
-    console.log("pressed")
+    
     await clearAllData();
 
     if (routeName === "MainStack") {

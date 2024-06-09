@@ -3,16 +3,29 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import SettingScreen from "../../screens/SettingScreen/SettingScreen";
 import NotifyScreen from "../../screens/NotificationScreen/NotifyScreen";
 import ProfileScreen from "../../screens/ProfileScreen/ProfileScreen";
-import HomeStack from "../../navigation/routes/HomeStack";
+// import HomeStack from "../../navigation/routes/HomeStack";
 import TabBarIcon from "./TabBarIcon";
 import MusicPlayer from './BackgroundMusic';
 import { BackgroundMusicContext } from '../SettingScreen/BackgroundMusicProvider';
-import { View, Text, StyleSheet, Image } from 'react-native';
+import { View, Text, StyleSheet, Image ,ActivityIndicator} from 'react-native';
 
 
 const Tab = createBottomTabNavigator();
 
 const TabBar = ({ route, user, userRole }) => {
+
+  const [HomeStack, setHomeStack] = useState(null);
+
+  useEffect(() => {
+    const loadHomeStack = async () => {
+      const { default: loadedHomeStack } = await import('../../navigation/routes/HomeStack');
+      setHomeStack(() => loadedHomeStack);
+    };
+    loadHomeStack();
+  }, [])
+
+
+
   let userId, role;
   let routeName = "LoginStack";
 
@@ -28,6 +41,16 @@ const TabBar = ({ route, user, userRole }) => {
   const { backgroundMusicValid , backgroundMusic, musicStop } = useContext(BackgroundMusicContext);
   const firebaseAudioUrl = 'https://firebasestorage.googleapis.com/v0/b/uploadingfile-9e556.appspot.com/o/music%2FBlue%20Sky%20-%20Anime%20Piano%20%20Relaxation%20and%20Inspiration.mp3?alt=media&token=63f0612a-cfaf-41c7-ac6c-a001512b5369';
   
+  // const HomeStack = React.lazy(() => import('../../navigation/routes/HomeStack'));
+
+  if (!HomeStack) {
+    // Return a loading indicator or placeholder until HomeStack is loaded
+    return (
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+        <ActivityIndicator size="large" color="#0000ff" />
+      </View>
+    );
+  }
 
   return (
     <View style={{ flex: 1 }}>

@@ -93,7 +93,7 @@ const Question = () => {
     const fetchData = async () => {
       try {
         const response = await axiosInstance.get(`/question/get-question/${id}`);
-        console.log(response.data);
+        // console.log(response.data);
         setQuestion(response.data);
         const optionTexts = response.data.options.map(option => option.OptionText);
         setOptions(optionTexts);
@@ -140,7 +140,7 @@ const Question = () => {
       setAllMarks((prevAllMarks) => [...prevAllMarks, selectedOptionMark]);
 
       
-      console.log(currentQuestionIndex);
+      // console.log(currentQuestionIndex);
 
       
 
@@ -155,7 +155,7 @@ const Question = () => {
     if(currentQuestionIndex >= ids.length ){
       setSubmit(true);
 }
-    console.log("All marks:", allMarks); // Log updated marks array
+    // console.log("All marks:", allMarks); // Log updated marks array
   }, [allMarks]);
 
   useEffect(() => {
@@ -188,11 +188,11 @@ const Question = () => {
       setAllMarks((prevAllMarks) => [...prevAllMarks, selectedOptionMark]);
       
       
-      console.log(currentQuestionIndex);
+      // console.log(currentQuestionIndex);
 
       const totMark = getMark(allMarks) + selectedOptionMark;
       
-       console.log('tot mark is',totMark);
+      //  console.log('tot mark is',totMark);
        setStressLevel(totMark);
 
        submitToDatabase(totMark, id1);
@@ -213,7 +213,7 @@ const Question = () => {
       setCurrentQuestionIndex((prevIndex) => prevIndex - 1);
       setIsLoadingImage(true);
       allMarks.pop();
-      console.log
+      
 
       setTimeout(() => {
         setIsLoadingImage(false);

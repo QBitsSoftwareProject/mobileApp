@@ -25,7 +25,7 @@ const RadioButton = ({ options, selectedOption, onSelect, selectedMark }) => {
       setSelectedOptionInternal(option);
       setSelectedOptionMark(selectedMark)
       onSelect(option); // Pass the entire option object to onSelect
-      console.log('Selected Option Mark:', mark);
+      // console.log('Selected Option Mark:', mark);
     };
 
     

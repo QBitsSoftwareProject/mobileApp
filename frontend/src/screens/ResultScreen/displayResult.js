@@ -43,7 +43,7 @@ const DisplayResultScreen = () => {
 // console.log('Encrypted Text:', encryptText);
 
         useEffect ( () => {
-            console.log('Stress Level Mark:', StressLevel);
+            // console.log('Stress Level Mark:', StressLevel);
            
             
         },[StressLevel])
@@ -119,8 +119,7 @@ const DisplayResultScreen = () => {
       
   const suggessionBtnFunction = () => {
 
-    console.log(lastMark);
-    console.log(userID);
+    
     navigation.navigate('MindRelaxingMethod');
   };
         

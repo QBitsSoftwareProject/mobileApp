@@ -23,7 +23,7 @@ const StressLevelHistory = ({route}) => {
       const response = await axiosInstance.get(`/mark/get-sorted-mark-by-id/${userid}`);
       const userData = response.data;
 
-      console.log(userData)
+      // console.log(userData)
 
       // Transform userData into an array of objects
 
@@ -33,7 +33,7 @@ const StressLevelHistory = ({route}) => {
       }));
 
  
-      console.log(userData)
+      // console.log(userData)
 
       
 
@@ -46,7 +46,7 @@ const StressLevelHistory = ({route}) => {
 
   useEffect(() => {
     setUserId(user_id);
-    console.log("id is", userID);
+    // console.log("id is", userID);
     fetchHistoryData(user_id); // Call fetchHistoryData here
   }, [user_id]);
 
