@@ -98,7 +98,7 @@ const InsideGoalsScreen = ({ route }) => {
     <View style={styles.container}>
       <SafeAreaView>
         <TouchableOpacity style={styles.backBtn} onPress={handleBackPress}>
-          <Image source={require("../../assets/images/backBlack.png")} />
+          <Image source={require("../../assets/images/blackBack.png")} />
         </TouchableOpacity>
 
         {/* goals rendering ..................................................................................... */}

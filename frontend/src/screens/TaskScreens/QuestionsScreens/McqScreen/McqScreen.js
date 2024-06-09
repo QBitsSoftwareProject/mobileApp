@@ -68,7 +68,7 @@ const McqScreen = ({ navigation, route }) => {
     <SafeAreaView style={{ flex: 1, backgroundColor: "#F2F3F5" }}>
       <View style={{ marginLeft: 25, marginRight: 25 }}>
         <TouchableOpacity style={styles.backbtn} onPress={backHandler}>
-          <Image source={require("../../../../assets/images/backBlack.png")} />
+          <Image source={require("../../../../assets/images/blackBack.png")} />
         </TouchableOpacity>
 
         <ProgressBar qNumber={qNumber} length={questions.length} />

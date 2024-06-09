@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState,useContext } from "react";
 import HomeTop from "../../components/HomeTop/HomeTop";
 import {
   BackHandler,
@@ -17,6 +17,7 @@ import { useNavigation } from "@react-navigation/native";
 import { getAUser, getUser } from "../../services/userServices/userService";
 import { getADoctor } from "../../services/doctorServices/doctorService";
 import loadingGif from "../../assets/animation/loading.gif";
+import { BackgroundMusicContext } from '../../components/SettingScreen/BackgroundMusicProvider';
 
 // const proPic = require('../../assets/images/doc.jpg')
 
@@ -53,6 +54,15 @@ const images = [
 // const name = "Thishakya"
 
 const HomeScreen = (props) => {
+
+  const { setMusicStop } = useContext(BackgroundMusicContext);
+
+  useEffect(() => {
+    // Set musicStop to true when the component mounts
+    setMusicStop(true);
+  }, []);
+
+
   const navigation = useNavigation();
 
   const { role } = props.route.params;
@@ -78,6 +88,12 @@ const HomeScreen = (props) => {
       backHandler.remove();
     };
   }, []);
+
+ 
+
+  const handleStressLevelPress = () => {
+    navigation.navigate('StressLevel');
+  };
 
   //fetch user from database
   const fetchUser = async (checkRole) => {
@@ -215,6 +231,7 @@ const HomeScreen = (props) => {
 
             <TouchableOpacity
               style={{ borderRadius: 20, overflow: "hidden", marginTop: 15 }}
+              onPress={handleStressLevelPress}
             >
               <LinearGradient
                 colors={["#00453E", "rgba(73,177,247,0.7)rgba(73,177,247,0.7)"]}

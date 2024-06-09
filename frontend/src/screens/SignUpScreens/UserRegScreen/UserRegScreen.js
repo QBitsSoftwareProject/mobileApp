@@ -174,7 +174,7 @@ const UserRegScreen = () => {
     <View style={styles.conatiner}>
       <TouchableOpacity onPress={handleBackPress}>
         <Image
-          source={require("../../../assets/images/backBlack.png")}
+          source={require("../../../assets/images/blackBack.png")}
           style={{ marginTop: 55 }}
         />
       </TouchableOpacity>
@@ -183,17 +183,24 @@ const UserRegScreen = () => {
         <KeyboardAvoidingView
           behavior={Platform.OS === "ios" ? "padding" : null}
         >
-          <ScrollView>
-            <View style={{ alignItems: "left" }}>
+          <ScrollView contentContainerStyle={{flexGrow: 1}} >
+
+            
+            <View style={{ alignItems: "left" } }>
               <Text style={styles.headerText}>
                 Please fill the following form with correct details.
               </Text>
+
+              
 
               <InputField
                 placeHolder={"B.M. Weerasinghe"}
                 label={"Full name / Name with initial :"}
                 onChangeText={setName}
               />
+
+
+              
               <InputField
                 placeHolder={"Bimsara Madusha"}
                 label={"User name :"}

@@ -14,8 +14,23 @@ const questionRoute = require("./api/routes/questionRoute.js");
 
 const app = express();
 
+const methodRouter = require("./api/routes/method.route.js");
+
 app.use(cors());
 app.use(bodyParser.json());
+app.use("/method",methodRouter);
+
+const questionRouter = require("./api/routes/question.route.js");
+const markRouter = require("./api/routes/mark.route.js");
+
+// app.use("/questions",questionRouter);
+//app.use("/options",optionRouter);
+
+//set router to mark router
+app.use("/mark",markRouter);
+
+//set router to question router
+app.use('/question',questionRouter)
 
 //endpoints
 app.use("/api/v1/user", regularUserRoute);
