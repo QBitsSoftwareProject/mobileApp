@@ -1,10 +1,10 @@
 const mongoose = require("mongoose");
 
-const schema = mongoose.Schema;
+const { Schema } = mongoose;
 
-const postSchema = new schema({
+const postSchema = new Schema({
   userId: {
-    type: schema.Types.ObjectId,
+    type: Schema.Types.ObjectId,
     ref: "RegularUser",
     required: true,
   },
@@ -14,20 +14,18 @@ const postSchema = new schema({
     enum: [
       "Stories",
       "Self Care",
-      "Mindfullness",
+      "Mindfulness",
       "Creative",
       "Supportive",
       "Stress",
     ],
     default: "",
   },
-
   createdAt: {
     type: Date,
     required: true,
     default: Date.now,
   },
-
   description: {
     type: String,
     required: true,
@@ -36,6 +34,19 @@ const postSchema = new schema({
     type: String,
     required: false,
   },
+  comments: [
+    {
+      text: String,
+      created: {
+        type: Date,
+        default: Date.now,
+      },
+      postedBy: {
+        type: Schema.Types.ObjectId,
+        ref: "RegularUser",
+      },
+    },
+  ],
 });
 
-module.exports = mongoose.model("post", postSchema);
+module.exports = mongoose.model("Post", postSchema); // Use capitalized model name for convention

@@ -1,13 +1,15 @@
-const postsModels = require("../../models/posts/postsModels");
+const postSchema = require("../../models/posts/postsModels");
 
 exports.deletePost = async (req, res) => {
   try {
     const { postId } = req.params;
 
-    // Finding and deleting the task by id
-    const deletedPost = await postsModels.findByIdAndDelete(postId);
+    // Finding and deleting the post by id
+    const deletedPost = await postSchema.findByIdAndDelete(postId);
 
-    // If task is not found, return a 404 error response
+    console.log("Deleted Post:", deletedPost);
+
+    // If post is not found, return a 404 error response
     if (!deletedPost) {
       return res.status(404).json({ message: "Post not found" });
     }
