@@ -9,8 +9,8 @@ const { deletePost } = require("../controllers/postController/deletePost");
 const router = express.Router();
 
 router.post("/", auth, createPost);
-router.get("/post", auth, getPost);
-router.put("/update", auth, updatePost);
-router.delete("/delete", auth, deletePost);
+router.get("/view-post", auth, getPost);
+router.put("/update-post/:postId", auth, updatePost);
+router.delete("/delete-post/:postId", auth, deletePost);
 
 module.exports = router;

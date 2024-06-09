@@ -2,10 +2,10 @@ const postsModels = require("../../models/posts/postsModels");
 
 exports.deletePost = async (req, res) => {
   try {
-    const { id } = req.params;
+    const { postId } = req.params;
 
     // Finding and deleting the task by id
-    const deletedPost = await postsModels.findByIdAndDelete(id);
+    const deletedPost = await postsModels.findByIdAndDelete(postId);
 
     // If task is not found, return a 404 error response
     if (!deletedPost) {

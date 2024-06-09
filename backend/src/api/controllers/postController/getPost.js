@@ -2,7 +2,8 @@ const postSchema = require("../../models/posts/postsModels");
 
 exports.getPost = async (req, res) => {
   try {
-    const Posts = await postSchema.find().populate("userId");
+    const { userId } = req.params;
+    const Posts = await postSchema.find({ userId: userId });
 
     if (!Posts) {
       return res.status(404).json({ message: "Post not found!" });
