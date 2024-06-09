@@ -22,14 +22,10 @@ const postSchema = new schema({
     default: "",
   },
 
-  date: {
-    type: String,
+  createdAt: {
+    type: Date,
     required: true,
-  },
-
-  time: {
-    type: Object,
-    required: true,
+    default: Date.now,
   },
 
   description: {

@@ -1,5 +1,5 @@
 import axios from "axios";
-import { BACKEND_URI } from "../../config/env";
+import { BACKEND_URI } from "../../../config/env";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const URL = BACKEND_URI + "/posts";
@@ -7,8 +7,7 @@ const URL = BACKEND_URI + "/posts";
 export const createPost = async (
   userId,
   postCategory,
-  date,
-  time,
+  createdAt,
   description,
   image
 ) => {
@@ -23,8 +22,7 @@ export const createPost = async (
       {
         userId,
         postCategory,
-        date,
-        time,
+        createdAt,
         description,
         image,
       }
@@ -49,14 +47,14 @@ export const getPost = async () => {
   }
 };
 
-export const updatePost = async (updateDescription, updateImage) => {
+export const updatePost = async (id, newDescription, updateImage) => {
   try {
     const token = await AsyncStorage.getItem("authToken");
 
     const response = await axios.put(
-      URL + "/update-post/:postId",
+      URL + "/update-post/" + id,
       {
-        newDescription: updateDescription,
+        newDescription,
         newImage: updateImage,
       },
       {
@@ -69,11 +67,10 @@ export const updatePost = async (updateDescription, updateImage) => {
   }
 };
 
-export const deleteAPost = async () => {
+export const deleteAPost = async (id) => {
   try {
-    const { postId } = req.params;
     const token = await AsyncStorage.getItem("authToken");
-    const response = await axios.put(URL + "/delete-post/:postId", postId, {
+    const response = await axios.put(URL + "/delete-post/" + id, {
       headers: { authtoken: token },
     });
     return response.data;
