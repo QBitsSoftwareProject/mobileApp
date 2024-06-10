@@ -3,7 +3,6 @@ import { View, Text, StyleSheet, ScrollView, Dimensions } from 'react-native';
 import axios from 'axios';
 
 const screenWidth = Dimensions.get('window').width;
-const chartWidth = screenWidth * 1.5;
 
 const CustomBarChart = ({ positiveMoods, negativeMoods }) => {
   const [chartData, setChartData] = useState([]);
@@ -68,97 +67,94 @@ const CustomBarChart = ({ positiveMoods, negativeMoods }) => {
   const yAxisLabels = Array.from({ length: yAxisMaxValue * 2 + 1 }, (_, i) => i - yAxisMaxValue);
 
   return (
-    <ScrollView horizontal>
-      <View style={styles.container}>
-        <View style={styles.yAxisView}>
-          <View style={styles.yAxis}>
-            {yAxisLabels.reverse().map((label, index) => (
-              <View key={index}>
-                <Text style={styles.yAxisLabel}>{label}</Text>
-              </View>
-            ))}
-          </View>
-        </View>
-          <View style={styles.chartContainer}>
-            <View style={styles.chart}>
-              <View style={styles.zeroLine} />
-              {chartData.map((data, index) => {
-                const netCount = data.netCount;
-                const barHeight = Math.abs(netCount) * 33;
-                const isPositive = netCount >= 0;
-
-                return (
-                
-                  <View key={index} style={styles.barWrapper}>
-                    <View style={[
-                      styles.bar,
-                      {
-                        height: barHeight,
-                        backgroundColor: isPositive ? '#4ABFB4' : '#E82519',
-                        marginTop: isPositive ? 200 - barHeight : 200,
-                        marginBottom: isPositive ? 200 : 200 - barHeight,
-                        borderTopLeftRadius: isPositive ? 13 : 0,
-                        borderTopRightRadius: isPositive ? 13 : 0,
-                        borderBottomLeftRadius: isPositive ? 0 : 13,
-                        borderBottomRightRadius: isPositive ? 0 : 13,
-                      }
-                    ]}>
-                      <Text style={styles.barLabel}>{Math.abs(netCount)}</Text>
-                    </View>
-                  </View>
-                
-               
-            
-                );
-              })}
+    <View style={styles.container}>
+      <View style={styles.yAxisView}>
+        <View style={styles.yAxis}>
+          {yAxisLabels.reverse().map((label, index) => (
+            <View key={index}>
+              <Text style={styles.yAxisLabel}>{label}</Text>
             </View>
-          </View>
-        <View style={styles.xAxis}>
-          {chartData.map((data, index) => (
-            <Text key={index} style={styles.label}>{data.date}</Text>
           ))}
         </View>
       </View>
-    </ScrollView>
+      <ScrollView horizontal>
+        <View style={styles.chartContainer}>
+          <View style={styles.chart}>
+            <View style={styles.zeroLine} />
+            {chartData.map((data, index) => {
+              const netCount = data.netCount;
+              const barHeight = Math.abs(netCount) * (180 / yAxisMaxValue);
+              const isPositive = netCount >= 0;
+
+              return (
+                <View key={index} style={styles.barWrapper}>
+                  <View style={[
+                    styles.bar,
+                    {
+                      height: barHeight,
+                      backgroundColor: isPositive ? '#4ABFB4' : '#684c6b',
+                      marginTop: isPositive ? 200 - barHeight : 200,
+                      marginBottom: isPositive ? 200 : 200 - barHeight,
+                      borderTopLeftRadius: isPositive ? 15 : 0,
+                      borderTopRightRadius: isPositive ? 15 : 0,
+                      borderBottomLeftRadius: isPositive ? 0 : 15,
+                      borderBottomRightRadius: isPositive ? 0 : 15,
+                    }
+                  ]}>
+                   
+                  </View>
+                </View>
+              );
+            })}
+          </View>
+          <View style={styles.xAxis}>
+            {chartData.map((data, index) => (
+              <Text key={index} style={styles.label}>{data.date}</Text>
+            ))}
+          </View>
+        </View>
+      </ScrollView>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    flexDirection: 'column',
-    height: 350,
-    backgroundColor: '#F2F3F5'
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#F2F3F5',
+    marginTop: 15,
   },
-
+  yAxisView: {
+    width: 50,
+    height: 350,
+    justifyContent: 'center',
+    alignItems: 'center',
+   
+  },
   yAxis: {
     justifyContent: 'space-between',
-    alignItems: 'flex-end',
-    height: 400,
-    position:'absolute'
+    height: 350,
   },
   yAxisLabel: {
     fontSize: 10,
-    marginLeft:15,
-    color:'#5C677D'
+    color: '#5C677D',
   },
   chartContainer: {
-    flex: 10,
-    position: 'relative',
     height: 400,
+    
   },
   chart: {
     flexDirection: 'row',
     alignItems: 'flex-end',
     height: 400,
-    position: 'relative',
-    marginLeft:50
+    
   },
   barWrapper: {
     alignItems: 'center',
     flexDirection: 'column',
     height: 400,
     justifyContent: 'flex-end',
-    position: 'relative',
   },
   bar: {
     width: 33,
@@ -171,23 +167,17 @@ const styles = StyleSheet.create({
     backgroundColor: '#5C677D',
     top: '50%',
     zIndex: 1,
-    marginLeft:0
   },
   xAxis: {
     flexDirection: 'row',
     justifyContent: 'space-around',
-    marginTop: 10,
-    marginLeft:32
+    marginTop: -20,
+    marginLeft: 0,
   },
   label: {
     fontSize: 10,
-    color:'#5C677D',
-    marginHorizontal:5,
-  },
-  barLabel: {
-    fontSize: 10,
-    color:'#FFFFFF',
-    alignSelf:'center'
+    color: '#5C677D',
+    marginHorizontal: 5,
   },
 
 });
