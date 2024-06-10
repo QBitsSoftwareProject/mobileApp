@@ -47,6 +47,40 @@ export const getPost = async () => {
   }
 };
 
+export const getAPost = async (id) => {
+  try {
+    const token = await AsyncStorage.getItem("authToken");
+
+    const response = await axios.get(
+      URL + "/view-one-post/" + id,
+
+      {
+        headers: { authtoken: token },
+      }
+    );
+  } catch (error) {
+    console.log(error);
+    throw new Error("Error during request setup");
+  }
+};
+
+export const getUpdatedPost = async (id) => {
+  try {
+    const token = await AsyncStorage.getItem("authToken");
+
+    const response = await axios.get(
+      URL + "/view-updated-post/" + id,
+
+      {
+        headers: { authtoken: token },
+      }
+    );
+  } catch (error) {
+    console.log(error);
+    throw new Error("Error during request setup");
+  }
+};
+
 export const updatePost = async (id, newDescription, updateImage) => {
   try {
     const token = await AsyncStorage.getItem("authToken");

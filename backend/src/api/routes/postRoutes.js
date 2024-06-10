@@ -15,10 +15,9 @@ const router = express.Router();
 
 router.post("/", createPost);
 router.get("/view-post", getPost);
-router.get("/view-one-post", getAPost);
-router.get("/view-updated-post", getUpdatedPost);
-router.get("/view-deleted-post", getDeletedPost);
-router.put("/update-post/:id", updatePost);
+router.get("/view-one-post/:postId", getAPost);
+router.get("/view-updated-post/:postId", getUpdatedPost);
+router.put("/update-post/:postId", updatePost);
 router.delete("/delete-post/:postId", deletePost);
 
 module.exports = router;

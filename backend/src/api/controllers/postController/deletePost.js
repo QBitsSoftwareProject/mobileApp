@@ -1,9 +1,10 @@
 const postSchema = require("../../models/posts/postsModels");
 
 exports.deletePost = async (req, res) => {
-  try {
-    const { postId } = req.params;
+  const { postId } = req.params;
 
+  console.log(`Received postId: ${postId}`);
+  try {
     // Finding and deleting the post by id
     const deletedPost = await postSchema.findByIdAndDelete(postId);
 
