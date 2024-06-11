@@ -1,4 +1,5 @@
 const regularUser = require("../../models/regularUser/regularUser");
+const bcrypt = require("bcryptjs");
 
 exports.updateRegularUser = async (req, res) => {
   try {
@@ -7,6 +8,7 @@ exports.updateRegularUser = async (req, res) => {
       fullName,
       userName,
       email,
+      password,
       contactNumber,
       address,
       city,
@@ -15,11 +17,21 @@ exports.updateRegularUser = async (req, res) => {
       selectedGoals,
     } = req.body;
 
+    if (password) {
+      const encryptedPwd = await bcrypt.hash(password, 10);
+      password = encryptedPwd;
+    }
+
+    if (email) {
+      email = email.toLowerCase();
+    }
+
     // Creating an object with updated user details
     const updateUser = {
       fullName,
       userName,
       email,
+      password,
       contactNumber,
       address,
       city,
@@ -41,7 +53,9 @@ exports.updateRegularUser = async (req, res) => {
         .status(400)
         .json({ error: "User update failed", details: validationErrors });
     } else {
-      res.status(500).json({ error: "User update failed", details: err });
+      res
+        .status(500)
+        .json({ error: "User update failed", details: err.message });
     }
   }
 };

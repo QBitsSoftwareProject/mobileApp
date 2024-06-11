@@ -3,7 +3,7 @@ const qModel = require("../../models//questions/questions");
 exports.createQuestion = async (req, res) => {
   try {
     // Destructuring question data from request body
-    const { questionText, questionType, options, day } = req.body;
+    const { questionText, questionType, options, day, number } = req.body;
 
     // Creating a new Question using the Question model and the provided data
     const newQuestion = await qModel.create({
@@ -11,6 +11,7 @@ exports.createQuestion = async (req, res) => {
       questionType,
       options,
       day,
+      number,
     });
 
     // Sending success response with status code 201 and a success message

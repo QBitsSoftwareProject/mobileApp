@@ -76,7 +76,7 @@ exports.userQuestion = async (req, res) => {
       day = user.currentLongTermDay;
     }
 
-    const questions = await qModel.find({ day: day + 1 });
+    const questions = await qModel.find({ day: day });
 
     if (questions) {
       questions.forEach((item) => {

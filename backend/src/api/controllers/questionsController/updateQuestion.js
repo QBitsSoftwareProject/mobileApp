@@ -42,6 +42,7 @@ exports.updateAnswer = async (req, res) => {
     return res.status(201).json({ message: "answer updated successfully" });
   } catch (err) {
     // Sending internal server error response with status code 500 and error details
+    console.log(err);
     res.status(500).json({ error: "Update failed", details: err.message });
   }
 };

@@ -29,17 +29,21 @@ exports.updateDoctor = async (req, res) => {
       bio,
     } = req.body;
 
-    // Extracting the user ID from request parameters
-    const { id } = req.params;
+    if (password) {
+      const encryptedPwd = await bcrypt.hash(password, 10);
+      password = encryptedPwd;
+    }
 
-    const encryptedPwd = await bcrypt.hash(password, 10);
+    if (email) {
+      email = email.toLowerCase();
+    }
 
     // Creating an object with updated user details
     const updateUser = {
       fullName,
       userName,
-      email: email.toLowerCase(),
-      password: encryptedPwd,
+      email,
+      password,
       contactNumber,
       address,
       city,
@@ -69,11 +73,14 @@ exports.updateDoctor = async (req, res) => {
     // Handling validation errors
     if (err.name === "ValidationError") {
       const validationErrors = err.message;
-      return res
-        .status(400)
-        .json({ error: "User update failed", details: validationErrors });
+      return res.status(400).json({
+        error: "User update failed. Validation Error",
+        details: validationErrors,
+      });
     } else {
-      res.status(500).json({ error: "User update failed", details: err });
+      res
+        .status(500)
+        .json({ error: "User update failed", details: err.message });
     }
   }
 };

@@ -7,12 +7,13 @@ import {
   FlatList,
   TextInput,
 } from "react-native";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import styles from "./styles";
 import AnswerBtns from "../../../../components/AnswerBtns/AnswerBtns";
 import ProgressBar from "../../../../components/ProgressBar/ProgressBar";
 import { updateAnswer } from "../../../../services/questionServices/questionServices";
+import loadingGif from "../../../../assets/animation/loading.gif";
 
 const McqScreen = ({ navigation, route }) => {
   const [selectedButtonIndex, setSelectedButtonIndex] = useState(null);
@@ -64,6 +65,12 @@ const McqScreen = ({ navigation, route }) => {
     (question) => question.number === qNumber
   );
 
+  useEffect(() => {
+    if (currentQuestion) {
+      setQId(currentQuestion._id);
+    }
+  }, [qNumber, currentQuestion]);
+
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: "#F2F3F5" }}>
       <View style={{ marginLeft: 25, marginRight: 25 }}>
@@ -73,58 +80,67 @@ const McqScreen = ({ navigation, route }) => {
 
         <ProgressBar qNumber={qNumber} length={questions.length} />
 
-        <FlatList
-          data={questions.filter((question) => question.number === qNumber)}
-          renderItem={({ item }) => (
-            <Text style={styles.question}>{item.questionText}</Text>
-          )}
-          keyExtractor={(item) => {
-            setQId(item._id);
-            return item._id.toString();
-          }}
-        />
-
-        {/* answers list--------------------------------------------------------------------------------------- */}
+        {/* answers list */}
         <ScrollView>
-          <View style={{ paddingBottom: 393 }}>
-            <View style={{ marginTop: 32 }}>
-              {currentQuestion &&
-                currentQuestion.questionType === "mcq" &&
-                currentQuestion.options.map((item, index) => (
-                  <AnswerBtns
-                    key={index}
-                    button={item}
-                    index={index}
-                    active={selectedButtonIndex}
-                    onPress={() => pressHandlerBtns(item, index)}
-                  />
-                ))}
+          {currentQuestion ? (
+            <>
+              <Text style={styles.question}>
+                {currentQuestion.questionText}
+              </Text>
 
-              {currentQuestion && currentQuestion.questionType === "input" && (
-                <TextInput
-                  placeholder="Input your text here"
-                  style={styles.inputBox}
-                />
-              )}
-            </View>
+              <View style={{ paddingBottom: 393 }}>
+                <View style={{ marginTop: 32 }}>
+                  {currentQuestion.questionType === "mcq" &&
+                    currentQuestion.options.map((item, index) => (
+                      <AnswerBtns
+                        key={index}
+                        button={item}
+                        index={index}
+                        active={selectedButtonIndex}
+                        onPress={() => pressHandlerBtns(item, index)}
+                      />
+                    ))}
 
-            {/* next btn-------------------------------------------------------------------------------------------- */}
+                  {currentQuestion.questionType === "input" && (
+                    <TextInput
+                      placeholder="Input your text here"
+                      style={styles.inputBox}
+                      value={answer}
+                      onChangeText={setAnswer}
+                    />
+                  )}
+                </View>
+
+                {/* next btn */}
+                <View
+                  style={{
+                    flex: 1,
+                    flexDirection: "row",
+                    marginTop: 70,
+                    justifyContent: "center",
+                  }}
+                >
+                  <TouchableOpacity
+                    style={styles.nextBtn}
+                    onPress={pressHandlerNext}
+                  >
+                    <Text style={styles.nextBtnTxt}>Next</Text>
+                  </TouchableOpacity>
+                </View>
+              </View>
+            </>
+          ) : (
             <View
               style={{
-                flex: 1,
-                flexDirection: "row",
-                marginTop: 70,
+                display: "flex",
                 justifyContent: "center",
+                alignItems: "center",
+                height: "100%",
               }}
             >
-              <TouchableOpacity
-                style={styles.nextBtn}
-                onPress={pressHandlerNext}
-              >
-                <Text style={styles.nextBtnTxt}>Next</Text>
-              </TouchableOpacity>
+              <Image source={loadingGif} />
             </View>
-          </View>
+          )}
         </ScrollView>
       </View>
     </SafeAreaView>

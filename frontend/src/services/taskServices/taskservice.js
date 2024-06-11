@@ -24,7 +24,7 @@ export const viewASelectedTask = async (id) => {
     const response = await axios.get(URL + "/get-one/" + id, {
       headers: { authtoken: token },
     });
-    // consolse.log(response.data);
+    // consolse.log(response);
     return response.data;
   } catch (error) {
     console.log(error);

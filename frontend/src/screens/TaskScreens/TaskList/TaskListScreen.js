@@ -4,6 +4,7 @@ import HeaderSub from "../../../components/HeaderSub/HeaderSub";
 import TaskCard from "../../../components/TaskCards/TaskCard";
 import { getSuggestedTasks } from "../../../services/taskServices/taskservice";
 import loadingGif from "../../../assets/animation/loading.gif";
+import notFoundGif from "../../../assets/animation/not-found.png";
 
 // Importing images for task icons
 const images = {
@@ -73,27 +74,43 @@ const TaskListScreen = () => {
       />
 
       <View style={{ flex: 1 }}>
-        <FlatList
-          data={sortedTaskList}
-          renderItem={({ item, index }) => (
-            <View
-              style={{
-                marginHorizontal: 25,
-                marginTop: 15,
-                marginBottom: index === taskList.length - 1 ? 32 : 0,
-              }}
-            >
-              <TaskCard
-                headText={item.taskId.headText}
-                subText={item.taskId.subText}
-                completeness={item.iscomplete}
-                icon={images.meditation}
-                taskId={item.taskId._id}
-                index={index + 1}
-              />
-            </View>
-          )}
-        />
+        {taskList.length <= 0 ? (
+          <View
+            style={{
+              justifyContent: "center",
+              alignItems: "center",
+              width: "100%",
+              height: "100%",
+            }}
+          >
+            <Image
+              source={notFoundGif}
+              style={{ width: "60%", height: 250, opacity: 0.3 }}
+            />
+          </View>
+        ) : (
+          <FlatList
+            data={sortedTaskList}
+            renderItem={({ item, index }) => (
+              <View
+                style={{
+                  marginHorizontal: 25,
+                  marginTop: 15,
+                  marginBottom: index === taskList.length - 1 ? 32 : 0,
+                }}
+              >
+                <TaskCard
+                  headText={item.taskId.headText}
+                  subText={item.taskId.subText}
+                  completeness={item.iscomplete}
+                  icon={images.meditation}
+                  taskId={item.taskId._id}
+                  index={index + 1}
+                />
+              </View>
+            )}
+          />
+        )}
       </View>
     </View>
   );
