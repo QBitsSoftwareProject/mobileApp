@@ -1,6 +1,5 @@
 import React from "react";
-import { View, StyleSheet, ScrollView, Text, Dimensions } from "react-native";
-import { SafeAreaView } from "react-native";
+import { View, StyleSheet, ScrollView, Dimensions } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import HeaderSub from "../../components/HeaderSub/HeaderSub";
 import RegularButton from "../../components/CFButton/RegularButton";
@@ -8,12 +7,15 @@ import TemporyCard from "../../components/CFCard/TemporyCard";
 import PopupMessage from "../../components/CF Pop-up/Pop-up";
 import { useState } from "react";
 import PostCategory from "../PostCategory/PostCategory";
+import { createPost } from "../../services/postServices/postServices";
 
-const post = {
-  id: 1,
-  image: require("../../assets/images/PostCardImages/boydp.jpg"),
-  title: "Chethiya Bandara",
-};
+post = [
+  {
+    id: 1,
+    image: require("../../assets/images/PostCardImages/manprofile.jpg"),
+    title: "Chethiya Bandara",
+  },
+];
 
 const CreatePost = () => {
   const screenHeight = Dimensions.get("window").height - 275;
@@ -22,11 +24,17 @@ const CreatePost = () => {
 
   const [popupMessage, setPopupMessage] = useState("");
 
-  const handlePostImageButtonPress = () => {
-    setPopupMessage("Post Successful!");
+  const handlePostImageButtonPress = async () => {
+    try {
+      const res = await createPost();
+      console.log(res);
+      setPopupMessage("Post Successful!");
+    } catch (error) {
+      console.log(error);
+    }
   };
 
-  const confirmMessage = () => {
+  const confirmMessage = async () => {
     navigation.navigate("PostContent");
   };
 
@@ -53,19 +61,8 @@ const CreatePost = () => {
       >
         <ScrollView ScrollView style={{ height: "100%", marginBottom: 25 }}>
           <View>
-            <TemporyCard
-              image={post.image}
-              title={post.title}
-              status={post.status}
-            />
+            <TemporyCard image={post.image} title={post.title} />
           </View>
-
-          {/* <View style={styles.flex1}>
-            <View>
-              <Text style={styles.text1}>Hide from community???</Text>
-              <Text style={styles.text2}>This post will be private</Text>
-            </View>
-          </View> */}
 
           <View style={styles.buttonContainer}>
             <RegularButton

@@ -5,6 +5,8 @@ import {
   Image,
   Text,
   TextInput,
+  TouchableWithoutFeedback,
+  Keyboard,
 } from "react-native";
 import React from "react";
 import { useState } from "react";
@@ -12,14 +14,25 @@ import { useState } from "react";
 const uploadimage = require("../../assets/images/PostCardImages/upload.png");
 
 const TemporyCard = (props) => {
-  const [image, setImage] = useState(null);
+  const [post, setPost] = useState(null);
+
+  const [description, setDescription] = useState("");
+
+  const handleOnChangeText = (text) => {
+    setDescription(text);
+  };
+  console.log(description);
+
+  const handleModalClose = () => {
+    Keyboard.dismiss();
+  };
 
   return (
     <View style={[styles.cardBox]}>
       <View style={{ display: "flex", flexDirection: "column", padding: 15 }}>
         <View style={styles.content1}>
           <View style={styles.imageframe}>
-            <Image source={props.image} style={styles.image} />
+            <Image source={{ uri: props.image }} style={styles.image} />
           </View>
 
           <View>
@@ -29,16 +42,22 @@ const TemporyCard = (props) => {
 
         <View style={{ marginVertical: 10 }}>
           <TextInput
+            value={description}
+            onChangeText={handleOnChangeText}
             multiline
             placeholder="Say something about your post...."
           />
+          <TouchableWithoutFeedback onPress={handleModalClose}>
+            <View style={[styles.modalBG, StyleSheet.absoluteFillObject]} />
+          </TouchableWithoutFeedback>
         </View>
       </View>
 
-      {image === null && (
+      {post === null && (
         <View style={{ padding: 15 }}>
           <TouchableOpacity style={styles.content2}>
             <Image source={uploadimage} style={styles.uploadimage} />
+
             <Text style={styles.des}>Upload your image here....</Text>
           </TouchableOpacity>
         </View>
@@ -137,6 +156,10 @@ const styles = StyleSheet.create({
   },
   uploadimage: {
     display: "flex",
+  },
+  modalBG: {
+    flex: 1,
+    zIndex: -1,
   },
 });
 

@@ -1,50 +1,40 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { View, StyleSheet, ScrollView, Dimensions } from "react-native";
 import CFHeaderSub from "../../components/ComForumHeader/CFHeader";
 // import PostCatBtn from "../../components/CFButton/PostCatBtn";
 import PostCard from "../../components/CFCard/PostCard";
 import FloatingButton from "../../components/FloatingButton/FloatingButton";
 import { useNavigation } from "@react-navigation/native";
-
-// Mock data for posts
-const postList = [
-  {
-    id: 1,
-    image: require("../../assets/images/PostCardImages/boydp.jpg"),
-    title: "Chethiya Bandara",
-    time: "10 min ago",
-    description:
-      "“You don't have to see the whole staircase, just take the first step.” – Martin Luther King.",
-    Postimage: require("../../assets/images/PostCardImages/post1image.jpg"),
-  },
-  {
-    id: 2,
-    image: require("../../assets/images/PostCardImages/girldp.jpg"),
-    title: "Piyumi Amarasinghe",
-    time: "22 min ago",
-    description:
-      "“Success usually comes to those who are too busy looking for it.” — Henry David Thoreau",
-    Postimage: null,
-  },
-  {
-    id: 3,
-    image: require("../../assets/images/PostCardImages/boydp.jpg"),
-    title: "Chethiya Bandara",
-    time: " 1 hour ago",
-    description:
-      "“You don't have to see the whole staircase, just take the first step.” – Martin Luther King.",
-    Postimage: require("../../assets/images/PostCardImages/post2image.jpg"),
-  },
-];
+import { getPost } from "../../services/postServices/postServices";
 
 const HomePage = () => {
   const screenHeight = Dimensions.get("window").height - 275;
 
   const navigation = useNavigation();
 
+  const [postList, setPostList] = useState();
+
+  const fetchPostData = async () => {
+    try {
+      const res = await getPost();
+      // console.log(res);
+      setPostList(res);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    fetchPostData();
+  }, []);
+
   const addNew = () => {
     navigation.navigate("PostCategory");
   };
+
+  if (!postList) {
+    return;
+  }
 
   return (
     <View>
@@ -75,12 +65,12 @@ const HomePage = () => {
           <View>
             {postList.map((item) => (
               <PostCard
-                key={item.id}
-                image={item.image}
-                title={item.title}
-                time={item.time}
+                key={item._id}
+                // image={item.user.proPic}
+                // title={item.user.userName}
+                Date={item.createdAt}
                 description={item.description}
-                Postimage={item.Postimage}
+                // postImage={item.image}
               />
             ))}
           </View>

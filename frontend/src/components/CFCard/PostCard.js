@@ -13,7 +13,7 @@ const PostCard = (props) => {
       <View style={styles.content1}>
         <View style={{ flexDirection: "row", alignItems: "center" }}>
           <View style={styles.imageframe}>
-            <Image source={props.image} style={styles.image} />
+            <Image source={{ uri: props.image }} style={styles.image} />
           </View>
 
           <View style={styles.content3}>
@@ -41,8 +41,8 @@ const PostCard = (props) => {
 
       <View style={styles.content2}>
         <View>
-          {props.Postimage != null && (
-            <Image source={props.Postimage} style={styles.Postimage} />
+          {props.postImage != null && (
+            <Image source={{ uri: props.postImage }} style={styles.postImage} />
           )}
         </View>
       </View>
@@ -105,7 +105,7 @@ const styles = StyleSheet.create({
     fontWeight: "400",
     color: "#5C677D",
   },
-  Postimage: {
+  postImage: {
     width: "100%",
     height: 200,
     borderBottomLeftRadius: 20,

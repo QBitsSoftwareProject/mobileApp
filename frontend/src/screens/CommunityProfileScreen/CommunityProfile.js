@@ -1,47 +1,38 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { View, Text, StyleSheet, ScrollView, Dimensions } from "react-native";
 import PostCard from "../../components/CFCard/PostCard";
 import ProfileCover from "../../components/ComForumCover/ComForumCover";
 // import HeaderSub from "../../components/HomeTop/HomeTop";
 import { useNavigation } from "@react-navigation/native";
 import ButtonGroup from "../../components/Button/ButtonGroup";
-
-// Mock data for posts
-const postList = [
-  {
-    id: 1,
-    image: require("../../assets/images/PostCardImages/manprofile.jpg"),
-    title: "Chethiya Bandara",
-    sub: "public  10 min ago",
-    description:
-      "“You don't have to see the whole staircase, just take the first step.” – Martin Luther King.",
-    Postimage: require("../../assets/images/PostCardImages/post3image.jpg"),
-  },
-  {
-    id: 2,
-    image: require("../../assets/images/PostCardImages/manprofile.jpg"),
-    title: "Piyumi Amarasinghe",
-    sub: "public  22 min ago",
-    description:
-      "“Success usually comes to those who are too busy looking for it.” — Henry David Thoreau",
-    Postimage: null,
-  },
-  {
-    id: 3,
-    image: require("../../assets/images/PostCardImages/manprofile.jpg"),
-    title: "Chethiya Bandara",
-    sub: "public  1 hour ago",
-    description:
-      "“You don't have to see the whole staircase, just take the first step.” – Martin Luther King.",
-    Postimage: require("../../assets/images/PostCardImages/post4image.jpg"),
-  },
-];
+import { getPost } from "../../services/postServices/postServices";
 
 const ProfileScreen = () => {
+  const [postList, setPostList] = useState();
+
+  const fetchPostData = async () => {
+    try {
+      const res = await getPost();
+      // console.log(res);
+      setPostList(res);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    fetchPostData();
+  }, []);
+
   const profilePicture = require("../../assets/images/PostCardImages/manprofile.jpg");
+
   const screenHeight = Dimensions.get("window").height - 275;
 
   const navigation = useNavigation();
+
+  if (!postList) {
+    return;
+  }
 
   return (
     <View style={styles.contains}>
@@ -65,12 +56,12 @@ const ProfileScreen = () => {
           <View>
             {postList.map((item) => (
               <PostCard
-                key={item.id}
-                image={item.image}
-                title={item.title}
-                sub={item.sub}
+                key={item._id}
+                // image={item.user.proPic}
+                // title={item.user.userName}
+                sub={item.postedAt}
                 description={item.description}
-                Postimage={item.Postimage}
+                // Postimage={item.Postimage}
               />
             ))}
           </View>
