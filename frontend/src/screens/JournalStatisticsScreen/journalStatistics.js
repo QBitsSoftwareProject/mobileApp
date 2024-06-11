@@ -6,6 +6,7 @@ import { JournalCalendar} from './statisticCalender';
 
 import TabBar from "../../components/TabBar/TabBar";
 import HeaderSub from "../../components/HeaderSub/HeaderSub";
+import { CustomAnalysisButton } from './switchAnalysis';
 
 
 import styles, { Styles} from "../JournalStatisticsScreen/statisticsStyles";
@@ -14,6 +15,7 @@ import styles, { Styles} from "../JournalStatisticsScreen/statisticsStyles";
 export const JournalStatistics = ({navigation})=>{
 
     const stack = createStackNavigator();
+    const [journalArray, setJournalArray] = useState([]);
 
     const handleJournalButton = () =>{
         navigation.navigate('ViewJournal'); 
@@ -21,9 +23,6 @@ export const JournalStatistics = ({navigation})=>{
 
 
     return(
-
-
-        
 <View>
        <HeaderSub
       headLine={"My Journals"}
@@ -31,68 +30,67 @@ export const JournalStatistics = ({navigation})=>{
       back={'ViewJournal'}
     />
 
-
     <ScrollView height={575}>
 
-           
-
-        <SafeAreaView style={styles.container}>
+    <SafeAreaView style={styles.container}>
             
-            
-                
-        <View>
+    <View>
         
-
-        <Image 
+       {/* <Image 
             style={styles.img}
-            source ={require('../../assets/images/journal/healthJournal.png')}/>
-
-            <AnalysisSwitch btnAnalysis={handleJournalButton}></AnalysisSwitch>
+            source ={require('../../assets/images/journal/healthJournal.png')}/> */}
            
            
+    <CustomAnalysisButton btnAnalysis ={handleJournalButton}/>
+    {/* <AnalysisSwitch btnAnalysis={handleJournalButton}></AnalysisSwitch> */}
+           
+    {/* <Text style={styles.tittle}>Journal Statistics</Text> */}
 
-        <Text style={styles.tittle}>Journal Statistics</Text>
+    <JournalCalendar></JournalCalendar>
 
-        
-        
+    {/* <View style={styles.pns}>
+        <View style={styles.align}>
+            <Image source={require('../../assets/images/journal/positive.png')}></Image>
+        </View>
 
-        <JournalCalendar></JournalCalendar>
+        <View>
+            <Text style={styles.pnsTitle}>Positive</Text>
+        </View>
+
+        </View>
+
+    <View style={styles.pns1}>
+        <View style={styles.align}>
+            <Image source={require('../../assets/images/journal/negative.png')}></Image>
+        </View>
+
+        <View>
+            <Text style={styles.pnsTitle}>Negative</Text>
+        </View>
+
+    </View> */}
+
+      <View style={styles.row}>
+        <View style={styles.pns}>
+          <View style={styles.align}>
+            <Image source={require('../../assets/images/journal/positive.png')} />
+          </View>
+          <View>
+            <Text style={styles.pnsTitle}>Positive</Text>
+          </View>
+        </View>
 
         <View style={styles.pns}>
-            <View style={styles.align}>
-                <Image source={require('../../assets/images/journal/positive.png')}></Image>
-            </View>
-
-            <View>
-                <Text style={styles.pnsTitle}>Positive</Text>
-            </View>
-
-
+          <View style={styles.align}>
+            <Image source={require('../../assets/images/journal/negative.png')} />
+          </View>
+          <View>
+            <Text style={styles.pnsTitle}>Negative</Text>
+          </View>
         </View>
+      </View>
 
-        <View style={styles.pns1}>
-            <View style={styles.align}>
-                <Image source={require('../../assets/images/journal/negative.png')}></Image>
-            </View>
-
-            <View>
-                <Text style={styles.pnsTitle}>Negative</Text>
-            </View>
-
-
-        </View>
-
-        <View style={styles.pns2}>
-            <View style={styles.align}>
-                <Image source={require('../../assets/images/journal/skip.png')}></Image>
-            </View>
-
-            <View>
-                <Text style={styles.pnsTitle}>Skipped</Text>
-            </View>
-
-
-        </View>
+    
 
         </View>
 
@@ -101,7 +99,7 @@ export const JournalStatistics = ({navigation})=>{
       
 
         </ScrollView>
-        <View style={{  top:5, left: 0, right: 0 }}>
+        <View style={{  top:0, left: 0, right: 0 }}>
         <TabBar/>
         </View>
         </View>

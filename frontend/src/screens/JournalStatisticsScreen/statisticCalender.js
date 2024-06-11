@@ -1,999 +1,132 @@
 import React, { useState, useEffect } from 'react';
-import { View, StyleSheet, StatusBar, Text } from 'react-native';
+import { View, StyleSheet, StatusBar, Text, ImageBackground } from 'react-native';
 import { Calendar } from 'react-native-calendars';
-import moment from 'moment';
 import axios from 'axios';
+import moment from 'moment';
 
-export const JournalCalendar = ({setJournalArray}) => {  
+export const JournalCalendar = ({ setJournalArray }) => {
   const [markedDates, setMarkedDates] = useState({});
-  const [journalEntries, setJournalEntries] = useState([
-    { date: '2024-01-01', category: 'positive', text: 'Had a great day!' },
-    { date: '2024-01-02', category: 'negative', text: 'Feeling a bit down.' },
-    // Add more entries
-  ]);
+  const [journalEntries, setJournalEntries] = useState([]);
+  const [selectedDate, setSelectedDate] = useState();
 
-  const [selectedDate, setSelectedDate] = useState(null);
-  const [journalDisplay, setJournalDisplay] = useState([]);
+  const emojiData = [
+    { emoji: '10', category: 'positive' },
+    { emoji: '20', category: 'negative' },
+    { emoji: '30', category: 'negative' },
+    { emoji: '40', category: 'positive' },
+    { emoji: '50', category: 'negative' },
+    { emoji: '60', category: 'negative' },
+    { emoji: '70', category: 'positive' },
+    { emoji: '80', category: 'negative' }, 
+  ];
+
+  const getCategoryByEmoji = (emoji) => {
+    const emojiEntry = emojiData.find(entry => entry.emoji === emoji.toString());
+    return emojiEntry ? emojiEntry.category : 'unknown';
+  };
 
   useEffect(() => {
-    const updatedMarkedDates = {};
+    const getJournals = async () => {
+      try {
+        const userid = '214102J';
+        const response = await axios.get(`http://192.168.43.51:3000/journal/getJournal-byid/${userid}`);
+        const journalArray = response.data;
 
-    journalEntries.forEach((entry) => {
-      let backgroundColor;
+        const filteredData = journalArray.map(entry => ({
+          date: moment(entry.date, 'DD-MMMM-YYYY').format('YYYY-MM-DD'),
+          category: getCategoryByEmoji(entry.emoji)
+        }));
 
-      if (entry.category === 'positive') {
-        backgroundColor = '#5296C5'; 
-      } else if (entry.category === 'negative') {
-        backgroundColor = '#4ABFB4'; // Red for negative
-      } else if (entry.category === 'skipped') {
-        backgroundColor = '#9E9E9E'; 
+        setJournalEntries(filteredData);
+
+        const counts = {};
+        filteredData.forEach(entry => {
+          if (!counts[entry.date]) {
+            counts[entry.date] = { positive: 0, negative: 0 };
+          }
+          counts[entry.date][entry.category]++;
+        });
+
+        // Calculate the difference and assign new category
+        const markedData = {};
+        for (const date in counts) {
+          const diff = counts[date].positive - counts[date].negative;
+          const newCategory = diff >= 0 ? 'positive' : 'negative';
+          markedData[date] = {
+            customStyles: {
+              container: { backgroundColor: newCategory === 'positive' ? '#5296C5' : '#4ABFB4' ,
+                           width:30,
+                           height:30,
+                           alignitem:'center'
+  
+              } // Blue for positive, Red for negative
+              
+            }
+          };
+          console.log(`Date: ${date}, Difference: ${diff}, Category: ${newCategory}`);
+        }
+
+        setMarkedDates(markedData);
+      } catch (error) {
+        console.log(error);
       }
+    };
 
-      updatedMarkedDates[entry.date] = {
-        customStyles: { container: { backgroundColor } },
-      };
-    });
+    getJournals();
+  }, []);
 
-    setMarkedDates(updatedMarkedDates);
-  }, [journalEntries]);
-
-  // Handle date selection
   const handleDateSelect = (date) => {
-    // Retrieve and display journal entries for the selected date
-    const selectedEntries = journalEntries.filter((entry) => entry.date === date.dateString);
-    console.log('Selected Date Entries:', selectedEntries);
+    setSelectedDate(date.dateString);
+    console.log('Selected Date:', date.dateString);
   };
 
   const renderCustomHeader = (date) => {
     const headerDate = new Date(date);
+    const day = headerDate.getDate();
     const month = headerDate.toLocaleString('default', { month: 'long' });
     const year = headerDate.getFullYear();
-
     return (
       <View style={styles.header}>
-        <Text style={styles.headerText}>{`${month} ${year}`}</Text>
+        <Text style={styles.headerText}>{`${day} - ${month} - ${year}`}</Text>
       </View>
     );
   };
 
-  const getTodayDate = () => {
-    const today = new Date();
-    const day = today.getDate();
-    const month = today.toLocaleString('default', { month: 'long' });
-    const year = today.getFullYear();
-    return `${day}, ${month}, ${year}`;
-    // return selectedDate;
-    
-  };
-  // console.log(getTodayDate());
-  
-
-
-  useEffect(() => {
-    if (selectedDate) {
-      const getJournalsByDate = async () => {
-        try {
-          const userid = '214102J';
-          const formattedDate = moment(selectedDate).format('DD, MMMM, YYYY');
-          
-
-          const journalArray = await axios.get(`http://192.168.43.51:3000/journal/getJournal-bydate/${userid}/${formattedDate}`);
-          
-          
-          setJournalDisplay(journalArray.data);
-          setJournalArray(journalArray.data);
-
-          
-          
-          // console.log(formattedDate); // Print the selected date to the console
-          
-
-        } catch (error) {
-          console.log(error);
-        }
-      };
-
-      getJournalsByDate();
-    }
-  }, [selectedDate]);
+  // const getTodayDate = () => {
+  //   const today = new Date();
+  //   const day = today.getDate();
+  //   const month = today.toLocaleString('default', { month: 'long' });
+  //   const year = today.getFullYear();
+  //   return `${day}, ${month}, ${year}`;
+  // };
 
   return (
     <View style={styles.container}>
-      <Text style={styles.todayText}>Today's Date: {getTodayDate()}</Text>
-      <Calendar
-        style={{ backgroundColor: '#F2F3F5' }}
-        theme={{
-          calendarBackground: '#F2F3F5',
-          textDayFontSize: 10,
-          textDayFontWeight: '300',
-          textMonthFontSize: 16,
-          textDayHeaderFontSize: 15,
-          textDayHeaderFontWeight: '500',
-        }}
-        onDayPress={handleDateSelect}
-        markingType={'custom'}
-        markedDates={markedDates}
-        renderHeader={renderCustomHeader}
-    //   markedDates={{
-        
-    // '2024-01-16': {
-    //   customStyles: {
-    //     container: {
-    //       width:43,
-    //       height:39,
-    //       backgroundColor: '#5296C5',
-    //       borderRadius:100
-    //     },
-    //     text: {
-    //       color: '#101318',
-    //       fontWeight: '300',
-    //       paddingTop:9
-
-          
-    //     }
-    //   }
-    // },
-    // '2024-01-18': {
-    //     customStyles: {
-    //         container: {
-    //           width:43,
-    //           height:39,
-    //           backgroundColor: '#4ABFB4',
-    //           borderRadius:100
-    //         },
-    //         text: {
-    //           color: '#101318',
-    //           fontWeight: '300',
-    //           paddingTop:9
-    
-              
-    //         }
-    //       }
-    // },  
-    // '2024-01-29': {
-    //     customStyles: {
-    //         container: {
-    //           width:43,
-    //           height:39,
-    //           backgroundColor: '#E7E7E7',
-    //           borderRadius:100
-    //         },
-    //         text: {
-    //           color: '#101318',
-    //           fontWeight: '300',
-    //           fontSize:10,
-    //           paddingTop:9
-    
-              
-    //         }
-    //       }
-    //   }, 
-    //   '2024-01-05': {
-    //     customStyles: {
-    //       container: {
-    //         width:43,
-    //         height:39,
-    //         backgroundColor: '#5296C5',
-    //         borderRadius:100
-    //       },
-    //       text: {
-    //         color: '#101318',
-    //         fontWeight: '300',
-    //         fontSize:10,
-    //         paddingTop:9
-  
+      <ImageBackground
+        source={require('../../assets/images/journal/positive2.png')}
+        style={styles.backgroundImage}
+        opacity={0.1} // Set the opacity of the background image
+      
+      >
+        <Calendar
+          style={styles.calendar}
+          theme={{
+            calendarBackground: 'transparent', // Set calendar background color to transparent
+            textDayFontSize: 10,
+            textDayFontWeight: '500',
+            textMonthFontSize: 10,
+            textDayHeaderFontSize: 14,
+            textDayHeaderFontWeight: '500',
+            textSectionTitleColor: '#5C677D', 
             
-    //       }
-    //     }
-    //   },
-    //   '2024-01-28': {
-    //       customStyles: {
-    //           container: {
-    //             width:43,
-    //             height:39,
-    //             backgroundColor: '#4ABFB4',
-    //             borderRadius:100
-    //           },
-    //           text: {
-    //             color: '#101318',
-    //             fontWeight: '300',
-    //             fontSize:10,
-    //             paddingTop:9
-      
-                
-    //           }
-    //         }
-    //   },  
-    //   '2024-02-03': {
-    //       customStyles: {
-    //           container: {
-    //             width:43,
-    //             height:39,
-    //             backgroundColor: '#E7E7E7',
-    //             borderRadius:100
-    //           },
-    //           text: {
-    //             color: '#101318',
-    //             fontWeight: '300',
-    //             fontSize:10,
-    //             paddingTop:9
-      
-                
-    //           }
-    //         }
-    //     }, 
-
-    //     '2024-01-09': {
-    //         customStyles: {
-    //           container: {
-    //             width:43,
-    //             height:39,
-    //             backgroundColor: '#5296C5',
-    //             borderRadius:100
-    //           },
-    //           text: {
-    //             color: '#101318',
-    //             fontWeight: '300',
-    //             fontSize:10,
-    //             paddingTop:9
-      
-                
-    //           }
-    //         }
-    //       },
-    //       '2024-01-11': {
-    //           customStyles: {
-    //               container: {
-    //                 width:43,
-    //                 height:39,
-    //                 backgroundColor: '#4ABFB4',
-    //                 borderRadius:100
-    //               },
-    //               text: {
-    //                 color: '#101318',
-    //                 fontWeight: '300',
-    //                 fontSize:10,
-    //                 paddingTop:9
-          
-                    
-    //               }
-    //             }
-    //       },  
-    //       '2024-01-12': {
-    //           customStyles: {
-    //               container: {
-    //                 width:43,
-    //                 height:39,
-    //                 backgroundColor: '#E7E7E7',
-    //                 borderRadius:100
-    //               },
-    //               text: {
-    //                 color: '#101318',
-    //                 fontWeight: '300',
-    //                 fontSize:10,
-    //                 paddingTop:9
-          
-                    
-    //               }
-    //             }
-    //         }, 
-    //         '2024-01-15': {
-    //           customStyles: {
-    //             container: {
-    //               width:43,
-    //               height:39,
-    //               backgroundColor: '#5296C5',
-    //               borderRadius:100
-    //             },
-    //             text: {
-    //               color: '#101318',
-    //               fontWeight: '300',
-    //               fontSize:10,
-    //               paddingTop:9
-        
-                  
-    //             }
-    //           }
-    //         },
-    //         '2024-01-17': {
-    //             customStyles: {
-    //                 container: {
-    //                   width:43,
-    //                   height:39,
-    //                   backgroundColor: '#4ABFB4',
-    //                   borderRadius:100
-    //                 },
-    //                 text: {
-    //                   color: '#101318',
-    //                   fontWeight: '300',
-    //                   fontSize:10,
-    //                   paddingTop:9
-            
-                      
-    //                 }
-    //               }
-    //         },  
-    //         '2024-01-20': {
-    //             customStyles: {
-    //                 container: {
-    //                   width:43,
-    //                   height:39,
-    //                   backgroundColor: '#E7E7E7',
-    //                   borderRadius:100
-    //                 },
-    //                 text: {
-    //                   color: '#101318',
-    //                   fontWeight: '300',
-    //                   fontSize:10,
-    //                   paddingTop:9
-            
-                      
-    //                 }
-    //               }
-    //           }, 
-
-    //           '2024-01-23': {
-    //             customStyles: {
-    //               container: {
-    //                 width:43,
-    //                 height:39,
-    //                 backgroundColor: '#5296C5',
-    //                 borderRadius:100
-    //               },
-    //               text: {
-    //                 color: '#101318',
-    //                 fontWeight: '300',
-    //                 fontSize:10,
-    //                 paddingTop:9
-          
-                    
-    //               }
-    //             }
-    //           },
-    //           '2024-01-25': {
-    //               customStyles: {
-    //                   container: {
-    //                     width:43,
-    //                     height:39,
-    //                     backgroundColor: '#4ABFB4',
-    //                     borderRadius:100
-    //                   },
-    //                   text: {
-    //                     color: '#101318',
-    //                     fontWeight: '300',
-    //                     fontSize:10,
-    //                     paddingTop:9
-              
-                        
-    //                   }
-    //                 }
-    //           },  
-    //           '2024-01-26': {
-    //               customStyles: {
-    //                   container: {
-    //                     width:43,
-    //                     height:39,
-    //                     backgroundColor: '#E7E7E7',
-    //                     borderRadius:100
-    //                   },
-    //                   text: {
-    //                     color: '#101318',
-    //                     fontWeight: '300',
-    //                     fontSize:10,
-    //                     paddingTop:9
-              
-                        
-    //                   }
-    //                 }
-    //             }, 
-    //             '2024-01-27': {
-    //               customStyles: {
-    //                 container: {
-    //                   width:43,
-    //                   height:39,
-    //                   backgroundColor: '#5296C5',
-    //                   borderRadius:100
-    //                 },
-    //                 text: {
-    //                   color: '#101318',
-    //                   fontWeight: '300',
-    //                   fontSize:10,
-    //                   paddingTop:9
-            
-                      
-    //                 }
-    //               }
-    //             },
-    //             '2024-01-31': {
-    //                 customStyles: {
-    //                     container: {
-    //                       width:43,
-    //                       height:39,
-    //                       backgroundColor: '#4ABFB4',
-    //                       borderRadius:100
-    //                     },
-    //                     text: {
-    //                       color: '#101318',
-    //                       fontWeight: '300',
-    //                       fontSize:10,
-    //                       paddingTop:9
-                
-                          
-    //                     }
-    //                   }
-    //             },  
-    //             '2024-02-01': {
-    //                 customStyles: {
-    //                     container: {
-    //                       width:43,
-    //                       height:39,
-    //                       backgroundColor: '#E7E7E7',
-    //                       borderRadius:100
-    //                     },
-    //                     text: {
-    //                       color: '#101318',
-    //                       fontWeight: '300',
-    //                       fontSize:10,
-    //                       paddingTop:9
-                
-                          
-    //                     }
-    //                   }
-    //               }, 
-          
-    //               '2024-02-02': {
-    //                   customStyles: {
-    //                     container: {
-    //                       width:43,
-    //                       height:39,
-    //                       backgroundColor: '#5296C5',
-    //                       borderRadius:100
-    //                     },
-    //                     text: {
-    //                       color: '#101318',
-    //                       fontWeight: '300',
-    //                       fontSize:10,
-    //                       paddingTop:9
-                
-                          
-    //                     }
-    //                   }
-    //                 },
-    //                         '2023-12-31': {
-    //                             customStyles: {
-    //                                 container: {
-    //                                 width:43,
-    //                                 height:39,
-    //                                 backgroundColor: '#4ABFB4',
-    //                                 borderRadius:100
-    //                                 },
-    //                                 text: {
-    //                                 color: '#101318',
-    //                                 fontWeight: '300',
-    //                                 fontSize:10,
-    //                                 paddingTop:9
-                            
-                                    
-    //                                 }
-    //                             }
-    //                         },  
-    //                         '2024-02-14': {
-    //                             customStyles: {
-    //                                 container: {
-    //                                 width:43,
-    //                                 height:39,
-    //                                 backgroundColor: '#E7E7E7',
-    //                                 borderRadius:100
-    //                                 },
-    //                                 text: {
-    //                                 color: '#101318',
-    //                                 fontWeight: '300',
-    //                                 fontSize:10,
-    //                                 paddingTop:9
-                            
-                                    
-    //                                 }
-    //                             }
-    //                         }, 
-    //                         '2024-02-21': {
-    //                             customStyles: {
-    //                             container: {
-    //                                 width:43,
-    //                                 height:39,
-    //                                 backgroundColor: '#5296C5',
-    //                                 borderRadius:100
-    //                             },
-    //                             text: {
-    //                                 color: '#101318',
-    //                                 fontWeight: '300',
-    //                                 fontSize:10,
-    //                                 paddingTop:9
-                        
-                                    
-    //                             }
-    //                             }
-    //                         },
-    //                         '2024-02-07': {
-    //                             customStyles: {
-    //                                 container: {
-    //                                     width:43,
-    //                                     height:39,
-    //                                     backgroundColor: '#4ABFB4',
-    //                                     borderRadius:100
-    //                                 },
-    //                                 text: {
-    //                                     color: '#101318',
-    //                                     fontWeight: '300',
-    //                                     fontSize:10,
-    //                                     paddingTop:9
-                            
-                                        
-    //                                 }
-    //                                 }
-    //                         },  
-    //                         '2024-02-10': {
-    //                             customStyles: {
-    //                                 container: {
-    //                                     width:43,
-    //                                     height:39,
-    //                                     backgroundColor: '#E7E7E7',
-    //                                     borderRadius:100
-    //                                 },
-    //                                 text: {
-    //                                     color: '#101318',
-    //                                     fontWeight: '300',
-    //                                     fontSize:10,
-    //                                     paddingTop:9
-                            
-                                        
-    //                                 }
-    //                                 }
-    //                             }, 
-
-    //                             '2024-02-16': {
-    //                                 customStyles: {
-    //                                 container: {
-    //                                     width:43,
-    //                                     height:39,
-    //                                     backgroundColor: '#5296C5',
-    //                                     borderRadius:100
-    //                                 },
-    //                                 text: {
-    //                                     color: '#101318',
-    //                                     fontWeight: '300',
-    //                                     fontSize:10,
-    //                                     paddingTop:9
-                            
-                                        
-    //                                 }
-    //                                 }
-    //                             },
-    //                             '2024-02-18': {
-    //                                 customStyles: {
-    //                                     container: {
-    //                                         width:43,
-    //                                         height:39,
-    //                                         backgroundColor: '#4ABFB4',
-    //                                         borderRadius:100
-    //                                     },
-    //                                     text: {
-    //                                         color: '#101318',
-    //                                         fontWeight: '300',
-    //                                         fontSize:10,
-    //                                         paddingTop:9
-                                
-                                            
-    //                                     }
-    //                                     }
-    //                             },  
-    //                             '2024-02-29': {
-    //                                 customStyles: {
-    //                                     container: {
-    //                                         width:43,
-    //                                         height:39,
-    //                                         backgroundColor: '#E7E7E7',
-    //                                         borderRadius:100
-    //                                     },
-    //                                     text: {
-    //                                         color: '#101318',
-    //                                         fontWeight: '300',
-    //                                         fontSize:10,
-    //                                         paddingTop:9
-                                
-                                            
-    //                                     }
-    //                                     }
-    //                                 }, 
-    //                                 '2024-02-05': {
-    //                                 customStyles: {
-    //                                     container: {
-    //                                     width:43,
-    //                                     height:39,
-    //                                     backgroundColor: '#5296C5',
-    //                                     borderRadius:100
-    //                                     },
-    //                                     text: {
-    //                                     color: '#101318',
-    //                                     fontWeight: '300',
-    //                                     fontSize:10,
-    //                                     paddingTop:9
-                                
-                                        
-    //                                     }
-    //                                 }
-    //                                 },
-    //                                 '2024-02-28': {
-    //                                     customStyles: {
-    //                                         container: {
-    //                                         width:43,
-    //                                         height:39,
-    //                                         backgroundColor: '#4ABFB4',
-    //                                         borderRadius:100
-    //                                         },
-    //                                         text: {
-    //                                         color: '#101318',
-    //                                         fontWeight: '300',
-    //                                         fontSize:10,
-    //                                         paddingTop:9
-                                    
-                                            
-    //                                         }
-    //                                     }
-    //                                 },  
-    //                                 '2024-02-20': {
-    //                                     customStyles: {
-    //                                         container: {
-    //                                         width:43,
-    //                                         height:39,
-    //                                         backgroundColor: '#E7E7E7',
-    //                                         borderRadius:100
-    //                                         },
-    //                                         text: {
-    //                                         color: '#101318',
-    //                                         fontWeight: '300',
-    //                                         fontSize:10,
-    //                                         paddingTop:9
-                                    
-                                            
-    //                                         }
-    //                                     }
-    //                                 }, 
-                            
-    //                                 '2024-02-29': {
-    //                                     customStyles: {
-    //                                         container: {
-    //                                         width:43,
-    //                                         height:39,
-    //                                         backgroundColor: '#5296C5',
-    //                                         borderRadius:100
-    //                                         },
-    //                                         text: {
-    //                                         color: '#101318',
-    //                                         fontWeight: '300',
-    //                                         fontSize:10,
-    //                                         paddingTop:9
-                                    
-                                            
-    //                                         }
-    //                                     }
-    //                                     },
-    //                                     '2024-02-19': {
-    //                                         customStyles: {
-    //                                             container: {
-    //                                             width:43,
-    //                                             height:39,
-    //                                             backgroundColor: '#4ABFB4',
-    //                                             borderRadius:100
-    //                                             },
-    //                                             text: {
-    //                                             color: '#101318',
-    //                                             fontWeight: '300',
-    //                                             fontSize:10,
-    //                                             paddingTop:9
-                                        
-                                                
-    //                                             }
-    //                                         }
-    //                                     },  
-    //                                     '2024-02-24': {
-    //                                         customStyles: {
-    //                                             container: {
-    //                                             width:43,
-    //                                             height:39,
-    //                                             backgroundColor: '#E7E7E7',
-    //                                             borderRadius:100
-    //                                             },
-    //                                             text: {
-    //                                             color: '#101318',
-    //                                             fontWeight: '300',
-    //                                             fontSize:10,
-    //                                             paddingTop:9
-                                        
-                                                
-    //                                             }
-    //                                         }
-    //                                     }, 
-    //                                     '2024-01-30': {
-    //                                         customStyles: {
-    //                                         container: {
-    //                                             width:43,
-    //                                             height:39,
-    //                                             backgroundColor: '#5296C5',
-    //                                             borderRadius:100
-    //                                         },
-    //                                         text: {
-    //                                             color: '#101318',
-    //                                             fontWeight: '300',
-    //                                             fontSize:10,
-    //                                             paddingTop:9
-                                    
-                                                
-    //                                         }
-    //                                         }
-    //                                     },
-    //                                     '2024-01-24': {
-    //                                         customStyles: {
-    //                                             container: {
-    //                                                 width:43,
-    //                                                 height:39,
-    //                                                 backgroundColor: '#4ABFB4',
-    //                                                 borderRadius:100
-    //                                             },
-    //                                             text: {
-    //                                                 color: '#101318',
-    //                                                 fontWeight: '300',
-    //                                                 fontSize:10,
-    //                                                 paddingTop:9
-                                        
-                                                    
-    //                                             }
-    //                                             }
-    //                                     },  
-    //                                     '2024-01-22': {
-    //                                         customStyles: {
-    //                                             container: {
-    //                                                 width:43,
-    //                                                 height:39,
-    //                                                 backgroundColor: '#E7E7E7',
-    //                                                 borderRadius:100
-    //                                             },
-    //                                             text: {
-    //                                                 color: '#101318',
-    //                                                 fontWeight: '300',
-    //                                                 fontSize:10,
-    //                                                 paddingTop:9
-                                        
-                                                    
-    //                                             }
-    //                                             }
-    //                                         }, 
-                            
-    //                                         '2024-01-21': {
-    //                                         customStyles: {
-    //                                             container: {
-    //                                             width:43,
-    //                                             height:39,
-    //                                             backgroundColor: '#5296C5',
-    //                                             borderRadius:100
-    //                                             },
-    //                                             text: {
-    //                                             color: '#101318',
-    //                                             fontWeight: '300',
-    //                                             fontSize:10,
-    //                                             paddingTop:9
-                                        
-                                                
-    //                                             }
-    //                                         }
-    //                                         },
-    //                                         '2024-01-19': {
-    //                                             customStyles: {
-    //                                                 container: {
-    //                                                 width:43,
-    //                                                 height:39,
-    //                                                 backgroundColor: '#4ABFB4',
-    //                                                 borderRadius:100
-    //                                                 },
-    //                                                 text: {
-    //                                                 color: '#101318',
-    //                                                 fontWeight: '300',
-    //                                                 fontSize:10,
-    //                                                 paddingTop:9
-                                            
-                                                    
-    //                                                 }
-    //                                             }
-    //                                         },  
-    //                                         '2024-01-14': {
-    //                                             customStyles: {
-    //                                                 container: {
-    //                                                 width:43,
-    //                                                 height:39,
-    //                                                 backgroundColor: '#E7E7E7',
-    //                                                 borderRadius:100
-    //                                                 },
-    //                                                 text: {
-    //                                                 color: '#101318',
-    //                                                 fontWeight: '300',
-    //                                                 fontSize:10,
-    //                                                 paddingTop:9
-                                            
-                                                    
-    //                                                 }
-    //                                             }
-    //                                         }, 
-    //                                         '2024-01-13': {
-    //                                             customStyles: {
-    //                                             container: {
-    //                                                 width:43,
-    //                                                 height:39,
-    //                                                 backgroundColor: '#5296C5',
-    //                                                 borderRadius:100
-    //                                             },
-    //                                             text: {
-    //                                                 color: '#101318',
-    //                                                 fontWeight: '300',
-    //                                                 fontSize:10,
-    //                                                 paddingTop:9
-                                        
-                                                    
-    //                                             }
-    //                                             }
-    //                                         },
-    //                                         '2024-01-10': {
-    //                                             customStyles: {
-    //                                                 container: {
-    //                                                     width:43,
-    //                                                     height:39,
-    //                                                     backgroundColor: '#4ABFB4',
-    //                                                     borderRadius:100
-    //                                                 },
-    //                                                 text: {
-    //                                                     color: '#101318',
-    //                                                     fontWeight: '300',
-    //                                                     fontSize:10,
-    //                                                     paddingTop:9
-                                            
-                                                        
-    //                                                 }
-    //                                                 }
-    //                                         },  
-    //                                         '2024-01-08': {
-    //                                             customStyles: {
-    //                                                 container: {
-    //                                                     width:43,
-    //                                                     height:39,
-    //                                                     backgroundColor: '#E7E7E7',
-    //                                                     borderRadius:100
-    //                                                 },
-    //                                                 text: {
-    //                                                     color: '#101318',
-    //                                                     fontWeight: '300',
-    //                                                     fontSize:10,
-    //                                                     paddingTop:9
-                                            
-                                                        
-    //                                                 }
-    //                                                 }
-    //                                             }, 
-                                        
-    //                                             '2024-01-07': {
-    //                                                 customStyles: {
-    //                                                 container: {
-    //                                                     width:43,
-    //                                                     height:39,
-    //                                                     backgroundColor: '#5296C5',
-    //                                                     borderRadius:100
-    //                                                 },
-    //                                                 text: {
-    //                                                     color: '#101318',
-    //                                                     fontWeight: '300',
-    //                                                     fontSize:10,
-    //                                                     paddingTop:9
-                                            
-                                                        
-    //                                                 }
-    //                                                 }
-    //                                             },
-    //                                             '2024-01-06': {
-    //                                                 customStyles: {
-    //                                                     container: {
-    //                                                         width:43,
-    //                                                         height:39,
-    //                                                         backgroundColor: '#4ABFB4',
-    //                                                         borderRadius:100
-    //                                                     },
-    //                                                     text: {
-    //                                                         color: '#101318',
-    //                                                         fontWeight: '300',
-    //                                                         fontSize:10,
-    //                                                         paddingTop:9
-                                                
-                                                            
-    //                                                     }
-    //                                                     }
-    //                                             },  
-    //                                             '2024-01-04': {
-    //                                                 customStyles: {
-    //                                                     container: {
-    //                                                         width:43,
-    //                                                         height:39,
-    //                                                         backgroundColor: '#E7E7E7',
-    //                                                         borderRadius:100
-    //                                                     },
-    //                                                     text: {
-    //                                                         color: '#101318',
-    //                                                         fontWeight: '300',
-    //                                                         fontSize:10,
-    //                                                         paddingTop:9
-                                                
-                                                            
-    //                                                     }
-    //                                                     }
-    //                                                 }, 
-    //                                                 '2024-01-03': {
-    //                                                 customStyles: {
-    //                                                     container: {
-    //                                                     width:43,
-    //                                                     height:39,
-    //                                                     backgroundColor: '#5296C5',
-    //                                                     borderRadius:100
-    //                                                     },
-    //                                                     text: {
-    //                                                     color: '#101318',
-    //                                                     fontWeight: '300',
-    //                                                     fontSize:10,
-    //                                                     paddingTop:9
-                                                
-                                                        
-    //                                                     }
-    //                                                 }
-    //                                                 },
-    //                                                 '2024-01-02': {
-    //                                                     customStyles: {
-    //                                                         container: {
-    //                                                         width:43,
-    //                                                         height:39,
-    //                                                         backgroundColor: '#4ABFB4',
-    //                                                         borderRadius:100
-    //                                                         },
-    //                                                         text: {
-    //                                                         color: '#101318',
-    //                                                         fontWeight: '300',
-    //                                                         fontSize:10,
-    //                                                         paddingTop:9
-                                                    
-                                                            
-    //                                                         }
-    //                                                     }
-    //                                                 },  
-    //                                                 '2024-01-01': {
-    //                                                     customStyles: {
-    //                                                         container: {
-    //                                                         width:43,
-    //                                                         height:39,
-    //                                                         backgroundColor: '#E7E7E7',
-    //                                                         borderRadius:100
-    //                                                         },
-    //                                                         text: {
-    //                                                         color: '#101318',
-    //                                                         fontWeight: '300',
-    //                                                         fontSize:10,
-    //                                                         paddingTop:9
-                                                    
-                                                            
-    //                                                         }
-    //                                                     }
-    //                                                 },                                              
-                            
-      
-  
-      
-      />
-      
-    {/* onDayPress={handleDateSelect} markedDates={markedDates}  */}
-
-    <StatusBar style ='auto'></StatusBar>
+          }}
+          onDayPress={handleDateSelect}
+          markingType={'custom'}
+          markedDates={markedDates}
+          renderHeader={renderCustomHeader}
+        />
+      </ImageBackground>
+      <StatusBar style='auto' />
     </View>
   );
 };
@@ -1001,9 +134,32 @@ export const JournalCalendar = ({setJournalArray}) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // backgroundColor: 'green',
+    marginTop:30,
+   
+  },
+  backgroundImage: {
+    flex: 1,
+    // resizeMode: 'center', // or 'stretch'
+   
     
+
+  },
+  calendar: {
+    flex: 1,
+    backgroundColor: 'transparent', // Set calendar background color to transparent
+  },
+  // todayText: {
+  //   fontSize: 16,
+  //   textAlign: 'center',
+  //   marginVertical: 10,
+  // },
+  // header: {
+  //   // padding: 10,
+  // },
+  headerText: {
+    fontSize: 16,
+    textAlign: 'center',
   },
 });
 
-
+export default JournalCalendar;

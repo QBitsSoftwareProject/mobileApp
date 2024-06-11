@@ -22,50 +22,74 @@ const styles = StyleSheet.create({
         marginBottom:15
     },
     tittle:{
-        marginTop:40,
-        color:'#2C2E33',
-        fontSize:15,
+        marginTop:15,
+        color:'#101318',
+        fontSize:16,
         fontWeight:'400',
-        paddingBottom:10
+        marginBottom:15
+        
         
     },
-    pns:{
-        flexDirection:'row',
-        marginTop:32,
-        marginLeft:30,
+    // pns:{
+    //     flexDirection:'row',
+    //     marginTop:32,
+    //     marginLeft:30,
         
 
-    },
+    // },
 
-    align:{
+    // align:{
     
-    },
-    pnsTitle:{
-        fontSize:11,
-        color:'#5C677D',
-        fontWeight:'400',
-        marginLeft:8,
-        position:'absolute'
-    },
+    // },
+    // pnsTitle:{
+    //     fontSize:11,
+    //     color:'#5C677D',
+    //     fontWeight:'400',
+    //     marginLeft:8,
+    //     position:'absolute'
+    // },
 
-    pns1:{
-        flexDirection:'row',
-        marginTop:-15,
-        marginLeft:150,
-        // alignContent:'center',
+    // pns1:{
+    //     flexDirection:'row',
+    //     marginTop:-15,
+    //     marginLeft:150,
+    //     // alignContent:'center',
 
-    },
-    pns2:{
-        flexDirection:'row',
-        marginTop:-15,
-        marginLeft:270,
-        // alignContent:'center',
+    // },
+    // pns2:{
+    //     flexDirection:'row',
+    //     marginTop:-15,
+    //     marginLeft:270,
+    //     // alignContent:'center',
 
-    },
+    // },
 
-    background:{
+    // background:{
         
-    }
+    // }
+
+    row: {
+        flexDirection: 'row',
+        marginTop:15,
+        
+        
+      },
+      pns: {
+        marginLeft:25,
+        marginRight:25,
+        alignItems: 'center',
+        flexDirection:'row',
+        paddingHorizontal:32
+      },
+      align: {
+        alignItems: 'center',
+      },
+      pnsTitle: {
+        fontSize: 11,
+        fontWeight: '300',
+        marginLeft:10
+        
+      },
    
 
 

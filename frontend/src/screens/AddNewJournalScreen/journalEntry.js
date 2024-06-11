@@ -49,6 +49,8 @@ return(
           onChangeText={handleInputChange}
 
          />
+
+         {/* <Text style={styles.time}>date</Text> */}
         
        
         
@@ -84,7 +86,8 @@ return(
       paddingTop:22,
       paddingHorizontal:25,
       fontSize:13,
-      fontWeight:'200'
+      fontWeight:'200',
+      
       
     },
 
@@ -93,5 +96,15 @@ return(
         marginLeft: -51,
         marginTop:173
       },
+
+      // time:{
+      //   backgroundColor:'yellow',
+      //   flex:1,
+      //   marginTop:170,
+      //   marginRight:25
+      
+        
+
+      // }
 
       });

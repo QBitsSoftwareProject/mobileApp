@@ -28,53 +28,57 @@ const handleInputChange = (text) => {
 
 return(
         
-  <View style={styles.container}>
-    
+<View style={styles.container}>
+  <View style={styles.inputContainer}>
     <TextInput
-          style={styles.input}
-          placeholder="Feeling happy today... "
-          multiline={true}
-          value={inputTittle}
-          onChangeText={handleInputChange}
-          
-        />
-        
-        <View style={styles.edit}>
-            <Image source ={require('../../assets/images/journal/title.png')}/>
-          
-        </View>
-
-      </View>
-      
-    );
-  };
+      style={styles.input}
+      placeholder="Feeling happy today..."
+      multiline={true}
+      value={inputTittle}
+      onChangeText={handleInputChange}
+    />
+    <TouchableOpacity style={styles.edit} >
+      <Image source={require('../../assets/images/journal/title.png')} />
+    </TouchableOpacity>
+  </View>
+</View>
+)};
   
   const styles = StyleSheet.create({
     container: {
       
-      color:'white',
-      marginBottom:32,
-      // marginTop:15,
+      flex: 1,
+      alignItems: 'center',
+      justifyContent: 'center',
       
     },
+
+    inputContainer: {
+      flexDirection: 'row',
+      alignItems: 'center',
+    },
+
     input: {
       height: 69,
       backgroundColor:'white',
       borderRadius:20,
-      paddingLeft:25,
-      width: 360,
-      paddingHorizontal:35,
+      // width: ,
+      paddingHorizontal:25,
       lineHeight:20,
       fontSize:14,
       fontWeight:'200',
+      flex: 1,
+      marginRight:25,
       
     
       
     },
 
     edit:{
-      marginLeft:290,
-      marginTop:-45
+      // marginLeft:290,
+      // marginTop:-45
+      position: 'absolute',
+      right:50
       
       
   

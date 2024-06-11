@@ -42,7 +42,7 @@ const handleViewButton = () =>{
 const handleEmojiPress = ({ emoji, mark,category }) => {
       setSelectedEmojiMarks((prevMarks) => prevMarks + `${emoji}(${mark}) (${category})`);
       setEmoji(mark);
-      console.log(category);
+      // console.log(category);
       
 };
 
@@ -64,11 +64,13 @@ const handleCreateButton = async() =>{  // synchronize funtion
        const day = currentDate.getDate().toString().padStart(2, '0');
        
        const formattedDate = `${day}, ${month}, ${year}`;
-       console.log(formattedDate); 
+      //  console.log(formattedDate); 
       
 
             
             const formattedTime = currentDate.toLocaleTimeString();
+          
+ 
 
             setdate(formattedDate);
             settime(formattedTime);
@@ -94,13 +96,13 @@ const handleCreateButton = async() =>{  // synchronize funtion
             }
 
       
-      console.log(emoji);
-      console.log(tittle);
-      console.log(journalEntry);
-      console.log(date);
-      console.log(time);
-      console.log(userid);
-      console.log(imgUrl);
+      // console.log(emoji);
+      // console.log(tittle);
+      // console.log(journalEntry);
+      // console.log(date);
+      // console.log(time);
+      // console.log(userid);
+      // console.log(imgUrl);
       // console.log(category);
 
      
@@ -156,9 +158,9 @@ return(
 
       </ScrollView>
 
-<View style={{  top:0, left: 0, right: 0 }}>
+
 <TabBar />
-</View>
+
 
 </View>
 

@@ -77,7 +77,9 @@ export const EmojiPicker = ({onEmojiPress,imoji}) =>{   //onEmojiPress is called
                     <TouchableOpacity
                     key={index}
                     style={[styles.emojiButton,
-                    selectedEmoji === parseInt(item.mark) ? styles.selectedEmoji : null,
+                    selectedEmoji === parseInt(item.mark) ? styles.selectedEmoji : null ,
+                    selectedEmoji === item.emoji ? styles.selectedEmoji : null ,
+
                   ]}
                     onPress={() => handleEmojiPress(item.emoji, item.mark)}
                     >
