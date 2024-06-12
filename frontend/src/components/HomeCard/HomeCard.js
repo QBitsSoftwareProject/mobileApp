@@ -17,6 +17,8 @@ const HomeCard = (props) => {
       navigation.navigate("TaskStack");
     } else if (cardName == "feedback") {
       navigation.navigate("FeedbackStack");
+    } else if (cardName == "ournal") {
+      navigation.navigate("JournalStack");
     }
   };
 
