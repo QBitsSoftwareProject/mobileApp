@@ -30,9 +30,9 @@ export const JournalStatistics = ({navigation})=>{
       back={'ViewJournal'}
     />
 
-    <ScrollView height={575}>
+    <ScrollView height={585}>
 
-    <SafeAreaView style={styles.container}>
+    <View style={styles.container}>
             
     <View>
         
@@ -94,9 +94,9 @@ export const JournalStatistics = ({navigation})=>{
 
         </View>
 
-        </SafeAreaView>
         
-      
+        
+      </View>
 
         </ScrollView>
         <View style={{  top:0, left: 0, right: 0 }}>

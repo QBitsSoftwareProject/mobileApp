@@ -1,5 +1,3 @@
-
-
 import React, { useEffect, useState, useRef } from "react";
 import { StyleSheet, View, Text } from "react-native";
 import { SwipeListView } from "react-native-swipe-list-view";

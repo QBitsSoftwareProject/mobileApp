@@ -42,8 +42,7 @@ export const ViewJournal = ({navigation}) =>{
       });
 };
 
-    // console.log(journalArray);
-    return(
+  return(
       <View>
       
       <HeaderSub
@@ -53,27 +52,28 @@ export const ViewJournal = ({navigation}) =>{
       back=''
     />
 
-       
-      <SafeAreaView style={styles.container}>
+      <View style={styles.container}>
+      {/* <SafeAreaView style={styles.container}> */}
       
       <CustomButtonView btnAnalysis={handleButton}></CustomButtonView>
 
-      <View>
+      {/* <View> */}
       <Calendar setJournalArray = {setJournalArray} setArrayController = {setArrayController}></Calendar>
       <SwipableList editFunction={handleEditButton} journalArray = {journalArray}  arrayController = {arrayController} style={{ marginTop: 24.5, backgroundColor: 'yellow' } }  />
-      </View>
+      {/* </View> */}
 
-      </SafeAreaView>    
+      {/* </SafeAreaView>     */}
 
-
-       <FloatingButton btnCreate = {handleFlotingPointButton}></FloatingButton>
+      <FloatingButton btnCreate = {handleFlotingPointButton}></FloatingButton>
 
        
-      <TabBar/>
-      
+</View>
 
+<TabBar/>
 
 </View>
+
+
 
 
  );
