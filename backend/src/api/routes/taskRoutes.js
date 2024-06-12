@@ -10,6 +10,7 @@ const {
   getOrAssignTask,
 } = require("../controllers/taskControllers/selectedTask");
 const auth = require("../middlewares/auth");
+const { checkTheTerm } = require("../controllers/taskControllers/checkTheTerm");
 
 const router = express.Router();
 
@@ -21,5 +22,6 @@ router.put("/update/:id", updateTask);
 router.delete("/delete/:id", deleteTask);
 
 router.get("/suggested-task", auth, getOrAssignTask);
+router.get("/check-term", auth, checkTheTerm);
 
 module.exports = router;

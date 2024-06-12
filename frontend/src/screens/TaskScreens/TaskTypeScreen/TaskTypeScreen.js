@@ -5,6 +5,8 @@ import TaskCard from "../../../components/TaskCards/TaskCard";
 import TaskTypeCard from "../../../components/TaskTypecard/TaskTypeCard";
 import { getAUser } from "../../../services/userServices/userService";
 import loadingGif from "../../../assets/animation/loading.gif";
+import { getSuggestedMotivation } from "../../../services/motivationServices/motivation";
+import { checkTheTerm } from "../../../services/taskServices/taskservice";
 
 // Importing images for task icons
 const images = {
@@ -22,6 +24,7 @@ const TaskTypeScreen = () => {
 
   const fetchUser = async () => {
     try {
+      await checkTheTerm();
       const response = await getAUser();
 
       setUser(response);

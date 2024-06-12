@@ -5,8 +5,6 @@ const getMotivationByDay = async (userId) => {
   const user = await userModel.findById(userId);
   if (!user) return { error: true, status: 404, message: "User not found" };
 
-  updateTaskType(user);
-
   const currentDate = new Date();
   const answerDate = new Date(user.answeredDate);
 
@@ -45,25 +43,6 @@ const incrementCurrentTaskDay = (user) => {
       break;
     default:
       throw new Error("Invalid task type");
-  }
-};
-
-const updateTaskType = (user) => {
-  if (user.currentTaskType === "short-term" && user.currentShortTermDay >= 7) {
-    user.currentTaskType = "medium-term";
-    user.currentShortTermDay = 0;
-  } else if (
-    user.currentTaskType === "medium-term" &&
-    user.currentMediumTermDay >= 14
-  ) {
-    user.currentTaskType = "long-term";
-    user.currentMediumTermDay = 0;
-  } else if (
-    user.currentTaskType === "long-term" &&
-    user.currentLongTermDay >= 30
-  ) {
-    user.currentTaskType = "short-term";
-    user.currentLongTermDay = 0;
   }
 };
 
