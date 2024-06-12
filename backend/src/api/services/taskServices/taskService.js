@@ -3,75 +3,49 @@ const taskModel = require("../../models/tasksModel/taskModel");
 
 const getOrAssignTask = async (userId) => {
   const user = await userModel.findById(userId);
-
-  if (!user) {
-    throw new Error("User not found");
-  }
+  if (!user) throw new Error("User not found");
 
   const currentDate = new Date();
+  // currentDate.setDate(10);
   const taskTakenDate = new Date(user.taskTakenDate);
 
-  // Check if tasks have been taken for today
-  if (
-    taskTakenDate.getFullYear() === currentDate.getFullYear() &&
-    taskTakenDate.getMonth() === currentDate.getMonth() &&
-    taskTakenDate.getDate() === currentDate.getDate()
-  ) {
-    // Tasks already assigned for today
-    const taskDay = getCurrentTaskDay(user);
-
-    const populatedTasks = await userModel
-      .findById(userId)
-      .populate("tasks.taskId");
-
-    return populatedTasks.tasks;
+  if (isSameDay(taskTakenDate, currentDate)) {
+    return await getTasksForToday(user, currentDate);
   }
 
-  // Increment the task day for the current task type
-  incrementCurrentTaskDay(user);
-
-  // Update task type
-  updateTaskType(user);
-
-  // Get the incremented task day
   const taskDay = getCurrentTaskDay(user);
-
-  // Find new tasks for the current day and task type
   const suggestedTasks = await taskModel.find({
     day: taskDay,
     duration: user.currentTaskType,
   });
 
-  if (suggestedTasks.length === 0) {
-    throw new Error("No tasks found for the given day and duration");
-  }
-
-  // Add the tasks to the user's tasks
-  suggestedTasks.forEach((task) => {
-    user.tasks.push({
-      taskId: task._id,
-      isComplete: false,
-      day: taskDay,
-      duration: user.currentTaskType,
-    });
-  });
-
-  // Update the taskTakenDate to today
+  addTasksToUser(user, suggestedTasks, taskDay, currentDate);
   user.taskTakenDate = currentDate;
-
-  // Save the updated user data
   await user.save();
 
-  // Fetch the user again to populate tasks
-  const populatedUser = await userModel
-    .findById(userId)
-    .populate("tasks.taskId");
-
-  return populatedUser.tasks;
+  return await getTasksForToday(user, currentDate);
 };
 
-// Helper function to get the current task day
-function getCurrentTaskDay(user) {
+const isSameDay = (date1, date2) =>
+  date1.getFullYear() === date2.getFullYear() &&
+  date1.getMonth() === date2.getMonth() &&
+  date1.getDate() === date2.getDate();
+
+const getTasksForToday = async (user, currentDate) => {
+  const taskDay = getCurrentTaskDay(user);
+  await user.populate({
+    path: "tasks.taskId",
+    match: { day: taskDay, duration: user.currentTaskType },
+  });
+  return user.tasks.filter(
+    (item) =>
+      item.day === taskDay &&
+      item.duration === user.currentTaskType &&
+      isSameDay(new Date(item.assignedDate), currentDate)
+  );
+};
+
+const getCurrentTaskDay = (user) => {
   switch (user.currentTaskType) {
     case "short-term":
       return user.currentShortTermDay;
@@ -82,47 +56,19 @@ function getCurrentTaskDay(user) {
     default:
       throw new Error("Invalid task type");
   }
-}
+};
 
-// Helper function to increment the current task day
-function incrementCurrentTaskDay(user) {
-  switch (user.currentTaskType) {
-    case "short-term":
-      user.currentShortTermDay += 1;
-      break;
-    case "medium-term":
-      user.currentMediumTermDay += 1;
-      break;
-    case "long-term":
-      user.currentLongTermDay += 1;
-      break;
-    default:
-      throw new Error("Invalid task type");
-  }
-}
-
-// Helper function to update the task type
-function updateTaskType(user) {
-  if (user.currentTaskType === "short-term" && user.currentShortTermDay > 7) {
-    user.currentTaskType = "medium-term";
-    user.currentMediumTermDay = 1;
-    user.currentShortTermDay = 0;
-  } else if (
-    user.currentTaskType === "medium-term" &&
-    user.currentMediumTermDay > 14
-  ) {
-    user.currentTaskType = "long-term";
-    user.currentLongTermDay = 1;
-    user.currentMediumTermDay = 0;
-  } else if (
-    user.currentTaskType === "long-term" &&
-    user.currentLongTermDay > 30
-  ) {
-    user.currentTaskType = "short-term";
-    user.currentShortTermDay = 1;
-    user.currentLongTermDay = 0;
-  }
-}
+const addTasksToUser = (user, tasks, taskDay, currentDate) => {
+  tasks.forEach((task) => {
+    user.tasks.push({
+      taskId: task._id,
+      isComplete: false,
+      day: taskDay,
+      duration: user.currentTaskType,
+      assignedDate: currentDate,
+    });
+  });
+};
 
 module.exports = {
   getOrAssignTask,

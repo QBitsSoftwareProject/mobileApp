@@ -20,9 +20,11 @@ import {
   ScrollView
 } from "react-native";
 
-import { ProgressBar } from 'react-native-paper';
+import {ProgressBar} from 'react-native-paper';
+
 
 import axios from "axios";
+
 
 const Question = () => {
 

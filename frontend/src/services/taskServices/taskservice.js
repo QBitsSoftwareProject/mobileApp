@@ -24,7 +24,21 @@ export const viewASelectedTask = async (id) => {
     const response = await axios.get(URL + "/get-one/" + id, {
       headers: { authtoken: token },
     });
-    // consolse.log(response.data);
+    // consolse.log(response);
+    return response.data;
+  } catch (error) {
+    console.log(error);
+    throw new Error("Error during request setup");
+  }
+};
+
+export const checkTheTerm = async () => {
+  try {
+    const token = await AsyncStorage.getItem("authToken");
+    const response = await axios.get(URL + "/check-term", {
+      headers: { authtoken: token },
+    });
+
     return response.data;
   } catch (error) {
     console.log(error);

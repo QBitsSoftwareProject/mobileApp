@@ -21,6 +21,6 @@ exports.createTask = async (req, res) => {
     // Sending internal server error response with status code 500 and error details
     res
       .status(500)
-      .json({ error: "User creation failed", details: err.message });
+      .json({ error: "Task creation failed", details: err.message });
   }
 };

@@ -1,5 +1,8 @@
 const motivationModel = require("../../models/motivations/motivation");
 const userModel = require("../../models/regularUser/regularUser");
+const {
+  getMotivationByDay,
+} = require("../../services/taskServices/motivationService");
 
 // Controller function to get all Motivations
 exports.getMotivation = async (req, res) => {
@@ -48,41 +51,17 @@ exports.getAMotivation = async (req, res) => {
 exports.getAMotivationByDay = async (req, res) => {
   try {
     const userId = req.user.user_id;
+    const result = await getMotivationByDay(userId);
 
-    const user = await userModel.findById(userId);
-
-    if (!user) {
-      return res.status(404).json("User not found");
+    if (result.error) {
+      return res.status(result.status).json(result.message);
     }
 
-    //check current Task type
-    let day;
-    if (user.currentTaskType === "short-term") {
-      day = user.currentShortTermDay;
-    } else if (user.currentTaskType === "medium-term") {
-      day = user.currentMediumTermDay;
-    } else if (user.currentTaskType === "long-term") {
-      day = user.currentLongTermDay;
-    }
-
-    // Finding the motivation by ID
-    const motivation = await motivationModel.findOne({
-      day: day,
-      duration: user.currentTaskType,
-    });
-    // If user is not found, return a 404 error response
-    if (!motivation) {
-      return res.status(404).json({ message: "motivation not found" });
-    }
-
-    // Sending success response with status code 200 and the user object
-    return res
-      .status(201)
-      .json({ motivation: motivation, userName: user.userName });
+    return res.status(200).json(result.data);
   } catch (err) {
-    console.log(err);
-    res
+    console.error(err);
+    return res
       .status(500)
-      .json({ error: "motivation fetch failed", error: err.message });
+      .json({ error: "Motivation fetch failed", message: err.message });
   }
 };

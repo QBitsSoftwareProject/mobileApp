@@ -4,8 +4,6 @@ import styles from './profileStyles'
 import TextCard from './TextCard'
 import BioEditPopUp from './BioEditPopUp'
 import React, { useEffect, useContext ,useState} from 'react';
-import { BackgroundMusicContext } from '../../components/SettingScreen/BackgroundMusicProvider';
-import { useFocusEffect } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { getAUser, updateAUser } from '../../services/userServices/userService';
 import { imageDb } from "../../config/firebase";
@@ -19,19 +17,7 @@ import SchedulePopUp from './ScheduleUpdatePopUp';
 const ProfileScreen = () => {
 
   
-  const { setBackgroundMusicValid } = useContext(BackgroundMusicContext);
-
-  useFocusEffect(
-    React.useCallback(() => {
-      setBackgroundMusicValid(false);
-      
-
-      return () => {
-        setBackgroundMusicValid(true);
-        
-      };
-    }, [setBackgroundMusicValid])
-  );
+  
 
   
   const [isPopupVisibleName, setPopupVisibleName] = useState(false);
@@ -55,7 +41,7 @@ const ProfileScreen = () => {
         try {
             const role = await AsyncStorage.getItem("role");
             setUserRole(role);
-            console.log(role);
+            
             
 
             let userData;
@@ -133,7 +119,7 @@ const ProfileScreen = () => {
 
   useEffect( () => {
 
-  
+   
   if(user != null){
     
       

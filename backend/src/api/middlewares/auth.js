@@ -4,6 +4,7 @@ const { TOKEN_KEY } = require("../../config/env");
 // Middleware function to verify the authentication token
 function auth(req, res, next) {
   // Extracting the token from the request headers
+
   const token = req.headers["authtoken"];
 
   // Checking if the token exists in the request headers

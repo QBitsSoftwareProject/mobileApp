@@ -48,6 +48,8 @@ exports.updateDoctor = async (req, res) => {
       userName,
       email,
       password,
+      email,
+      password,
       contactNumber,
       address,
       city,
@@ -77,11 +79,14 @@ exports.updateDoctor = async (req, res) => {
     // Handling validation errors
     if (err.name === "ValidationError") {
       const validationErrors = err.message;
-      return res
-        .status(400)
-        .json({ error: "User update failed", details: validationErrors });
+      return res.status(400).json({
+        error: "User update failed. Validation Error",
+        details: validationErrors,
+      });
     } else {
-      res.status(500).json({ error: "User update failed", details: err });
+      res
+        .status(500)
+        .json({ error: "User update failed", details: err.message });
     }
   }
 };
