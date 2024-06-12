@@ -16,6 +16,9 @@ const HomeCard = (props) => {
     } else if (cardName == "stressManagement") {
       navigation.navigate("TaskStack");
     }
+    else if (cardName == "meditation") {
+      navigation.navigate("MindRelaxingMethod");
+    }
   };
 
   return (

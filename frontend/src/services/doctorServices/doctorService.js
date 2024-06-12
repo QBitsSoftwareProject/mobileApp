@@ -103,3 +103,20 @@ export const viewADoctor = async (doctorId) => {
     throw new Error("Error during request ");
   }
 };
+
+export const updateADoctor = async (updates) => {
+  try {
+    const token = await AsyncStorage.getItem("authToken");
+
+    
+
+    const response = await axios.put(`${URL}`, updates, {
+      headers: { authtoken: token },
+    });
+    // console.log(response);
+    // return response;
+  } catch (error) {
+    console.log(error);
+    throw new Error("Error during request setup");
+  }
+};
