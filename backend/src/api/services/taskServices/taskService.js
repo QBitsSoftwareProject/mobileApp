@@ -6,10 +6,11 @@ const getOrAssignTask = async (userId) => {
   if (!user) throw new Error("User not found");
 
   const currentDate = new Date();
+  // currentDate.setDate(10);
   const taskTakenDate = new Date(user.taskTakenDate);
 
   if (isSameDay(taskTakenDate, currentDate)) {
-    return await getTasksForToday(user);
+    return await getTasksForToday(user, currentDate);
   }
 
   const taskDay = getCurrentTaskDay(user);
@@ -18,11 +19,11 @@ const getOrAssignTask = async (userId) => {
     duration: user.currentTaskType,
   });
 
-  addTasksToUser(user, suggestedTasks, taskDay);
+  addTasksToUser(user, suggestedTasks, taskDay, currentDate);
   user.taskTakenDate = currentDate;
   await user.save();
 
-  return await getTasksForToday(user);
+  return await getTasksForToday(user, currentDate);
 };
 
 const isSameDay = (date1, date2) =>
@@ -30,14 +31,17 @@ const isSameDay = (date1, date2) =>
   date1.getMonth() === date2.getMonth() &&
   date1.getDate() === date2.getDate();
 
-const getTasksForToday = async (user) => {
+const getTasksForToday = async (user, currentDate) => {
   const taskDay = getCurrentTaskDay(user);
   await user.populate({
     path: "tasks.taskId",
     match: { day: taskDay, duration: user.currentTaskType },
   });
   return user.tasks.filter(
-    (item) => item.day === taskDay && item.duration === user.currentTaskType
+    (item) =>
+      item.day === taskDay &&
+      item.duration === user.currentTaskType &&
+      isSameDay(new Date(item.assignedDate), currentDate)
   );
 };
 
@@ -54,13 +58,14 @@ const getCurrentTaskDay = (user) => {
   }
 };
 
-const addTasksToUser = (user, tasks, taskDay) => {
+const addTasksToUser = (user, tasks, taskDay, currentDate) => {
   tasks.forEach((task) => {
     user.tasks.push({
       taskId: task._id,
       isComplete: false,
       day: taskDay,
       duration: user.currentTaskType,
+      assignedDate: currentDate,
     });
   });
 };

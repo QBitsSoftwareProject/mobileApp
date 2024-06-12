@@ -28,6 +28,11 @@ const questionSchema = new schema({
     type: Number,
     required: true,
   },
+  duration: {
+    type: String,
+    enum: ["short-term", "medium-term", "long-term"],
+    required: true,
+  },
 });
 
 // Exporting the mongoose model for questions based on the defined schema

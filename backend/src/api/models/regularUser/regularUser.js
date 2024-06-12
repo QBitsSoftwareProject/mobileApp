@@ -23,6 +23,10 @@ const userTaskSchema = new schema({
     enum: ["short-term", "medium-term", "long-term"],
     required: true,
   },
+  assignedDate: {
+    type: Date,
+    require: true,
+  },
 });
 
 // Subdocument schema for user responses

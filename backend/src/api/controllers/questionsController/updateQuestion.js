@@ -5,7 +5,8 @@ exports.updateQuestion = async (req, res) => {
   try {
     const { id } = req.params;
     // Destructuring question data from request body
-    const { questionText, questionType, options, day } = req.body;
+    const { questionText, questionType, options, day, duration, number } =
+      req.body;
 
     // Creating a new Question using the Question model and the provided data
     const updateQuestion = {
@@ -13,6 +14,8 @@ exports.updateQuestion = async (req, res) => {
       questionType,
       options,
       day,
+      duration,
+      number,
     };
 
     await qModel.findByIdAndUpdate(id, updateQuestion);
