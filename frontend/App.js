@@ -15,26 +15,26 @@ const Stack = createNativeStackNavigator();
 
 export default function App() {
     return (
-        // <View style={{flex:1}}>
-        //     <NavContainer/>
+        <View style={{flex:1}}>
+            <NavContainer/>
            
-        // </View>
+        </View>
 
-        <GestureHandlerRootView style={{ flex: 1 }}>
-      <NavigationContainer>
-      <Stack.Navigator
-        initialRouteName="ViewJournal"
-        screenOptions={{ headerShown: false }}
-      >
-        <Stack.Screen name="AddNewJournal" component={AddNewJournal} />
-        <Stack.Screen name="ViewJournal" component={ViewJournal} />
-        <Stack.Screen name="JournalStatistics" component={JournalStatistics}/>
-        <Stack.Screen name="EditJournal" component={EditJournal}/>
+  //       <GestureHandlerRootView style={{ flex: 1 }}>
+  //     <NavigationContainer>
+  //     <Stack.Navigator
+  //       initialRouteName="ViewJournal"
+  //       screenOptions={{ headerShown: false }}
+  //     >
+  //       <Stack.Screen name="AddNewJournal" component={AddNewJournal} />
+  //       <Stack.Screen name="ViewJournal" component={ViewJournal} />
+  //       <Stack.Screen name="JournalStatistics" component={JournalStatistics}/>
+  //       <Stack.Screen name="EditJournal" component={EditJournal}/>
         
         
-      </Stack.Navigator>
-    </NavigationContainer>
-  </GestureHandlerRootView>
+  //     </Stack.Navigator>
+  //   </NavigationContainer>
+  // </GestureHandlerRootView>
     
     );
   

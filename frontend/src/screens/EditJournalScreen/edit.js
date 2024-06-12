@@ -157,7 +157,7 @@ return(
 
 <CustomButton btnView={handleViewButton}></CustomButton>
 
-<ScrollView height = {500}>
+<ScrollView height = {470}>
    
 <SafeAreaView style={styles.container}>
 
@@ -189,7 +189,7 @@ return(
      </SafeAreaView>
      </ScrollView>
 
-<View style={{ top:10, left: 0, right: 0 }}>
+<View style={{ top:0, left: 0, right: 0 }}>
 <TabBar/>
 </View>
 

@@ -124,7 +124,7 @@ return(
 <CustomButton btnView={handleViewButton}></CustomButton>
 
 
-      <ScrollView height = {500}>
+      <ScrollView height = {470}>
    
       <SafeAreaView style={styles.container}>
 
