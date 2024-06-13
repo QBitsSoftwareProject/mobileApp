@@ -51,10 +51,11 @@ const navigation = useNavigation();
   },[])
 
   //filter method according to the stress level
-  const filteredData = Data.filter(item => item.mark === yourMark);
+  const filteredData = Data.filter(item => item.mark === yourMark);   
 
   const resultBtnFunction = () => {
-    navigation.navigate('DisplayResultScreen');
+    // navigation.navigate('DisplayResultScreen');
+    navigation.navigate("StressLevel", { screen: 'DisplayResultScreen' });
   };
 
   const handleTryLaterBtn = () => {

@@ -215,7 +215,7 @@ const handleUpdateEmail = async (newEmail) => {
     console.log("email updated successfully:");
   } catch (error) {
     // Handle error
-    console.error("Failed to update name:", error.message);
+    console.error("Failed to update Email:", error.message);
   }
 };
 

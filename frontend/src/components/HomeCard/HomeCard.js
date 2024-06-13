@@ -17,7 +17,7 @@ const HomeCard = (props) => {
       navigation.navigate("TaskStack");
     }
     else if (cardName == "meditation") {
-      navigation.navigate("MindRelaxingMethod");
+      navigation.navigate("CurrentMoodInputStack");
     }
   };
 
