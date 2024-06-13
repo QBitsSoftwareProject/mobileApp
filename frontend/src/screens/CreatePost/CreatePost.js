@@ -6,28 +6,30 @@ import RegularButton from "../../components/CFButton/RegularButton";
 import TemporyCard from "../../components/CFCard/TemporyCard";
 import PopupMessage from "../../components/CF Pop-up/Pop-up";
 import { useState } from "react";
-import PostCategory from "../PostCategory/PostCategory";
+import HomePage from "../../screens/CommunityHomePage/HomePage";
 import { createPost } from "../../services/postServices/postServices";
+import { storage } from "../../config/fireBase";
 
-post = [
-  {
-    id: 1,
-    image: require("../../assets/images/PostCardImages/manprofile.jpg"),
-    title: "Chethiya Bandara",
-  },
-];
+import { getDownloadURL, uploadBytes, ref } from "firebase/storage";
 
-const CreatePost = () => {
+const CreatePost = ({ route }) => {
+  const { postCat } = route.params;
+
   const screenHeight = Dimensions.get("window").height - 275;
 
   const navigation = useNavigation();
 
   const [popupMessage, setPopupMessage] = useState("");
 
+  const [description, setDescription] = useState();
+
+  const [selectedImage, setSelectedImage] = useState();
+
   const handlePostImageButtonPress = async () => {
     try {
-      const res = await createPost();
-      console.log(res);
+      const imgResponse = await fireBaseUpload();
+
+      await createPost(postCat, description, imgResponse);
       setPopupMessage("Post Successful!");
     } catch (error) {
       console.log(error);
@@ -35,11 +37,31 @@ const CreatePost = () => {
   };
 
   const confirmMessage = async () => {
-    navigation.navigate("PostContent");
+    navigation.navigate("ProfileScreen");
   };
 
   const closeMessage = () => {
-    setPopupMessage("");
+    navigation.navigate("HomePage", { refresh: true });
+  };
+
+  const fireBaseUpload = async () => {
+    try {
+      if (selectedImage) {
+        const imgFileRef = ref(storage, `post/images/`);
+
+        const fileData = await fetch(selectedImage.uri);
+
+        const fileBlob = await fileData.blob();
+
+        await uploadBytes(imgFileRef, fileBlob);
+
+        const imgURL = await getDownloadURL(imgFileRef);
+
+        return imgURL;
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -48,7 +70,7 @@ const CreatePost = () => {
         <HeaderSub
           headLine={"Create Post"}
           subHeadLine={"Edit your post"}
-          back={PostCategory}
+          back={HomePage}
         />
       </View>
 
@@ -61,7 +83,10 @@ const CreatePost = () => {
       >
         <ScrollView ScrollView style={{ height: "100%", marginBottom: 25 }}>
           <View>
-            <TemporyCard image={post.image} title={post.title} />
+            <TemporyCard
+              description={setDescription}
+              selectedImage={setSelectedImage}
+            />
           </View>
 
           <View style={styles.buttonContainer}>

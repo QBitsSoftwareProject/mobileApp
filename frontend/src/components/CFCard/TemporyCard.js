@@ -8,20 +8,22 @@ import {
   TouchableWithoutFeedback,
   Keyboard,
 } from "react-native";
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
+import FilePicker from "../GetImages/FilePicker";
 
 const uploadimage = require("../../assets/images/PostCardImages/upload.png");
 
 const TemporyCard = (props) => {
   const [post, setPost] = useState(null);
 
-  const [description, setDescription] = useState("");
+  const [postdescription, setPostDescription] = useState("");
 
-  const handleOnChangeText = (text) => {
-    setDescription(text);
-  };
-  console.log(description);
+  const [image, setImage] = useState();
+
+  useEffect(() => {
+    props.selectedImage(image);
+  }, [image]);
 
   const handleModalClose = () => {
     Keyboard.dismiss();
@@ -42,11 +44,17 @@ const TemporyCard = (props) => {
 
         <View style={{ marginVertical: 10 }}>
           <TextInput
-            value={description}
-            onChangeText={handleOnChangeText}
+            value={postdescription}
+            onChangeText={(text) => {
+              props.description(text);
+              setPostDescription(text);
+            }}
             multiline
             placeholder="Say something about your post...."
           />
+
+          <FilePicker selectedImg={setImage} />
+
           <TouchableWithoutFeedback onPress={handleModalClose}>
             <View style={[styles.modalBG, StyleSheet.absoluteFillObject]} />
           </TouchableWithoutFeedback>

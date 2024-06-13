@@ -4,7 +4,7 @@ import CFHeaderSub from "../../components/ComForumHeader/CFHeader";
 // import PostCatBtn from "../../components/CFButton/PostCatBtn";
 import PostCard from "../../components/CFCard/PostCard";
 import FloatingButton from "../../components/FloatingButton/FloatingButton";
-import { useNavigation } from "@react-navigation/native";
+import { useFocusEffect, useNavigation } from "@react-navigation/native";
 import { getPost } from "../../services/postServices/postServices";
 
 const HomePage = () => {
@@ -12,21 +12,22 @@ const HomePage = () => {
 
   const navigation = useNavigation();
 
-  const [postList, setPostList] = useState();
+  const [postList, setPostList] = useState([]);
 
   const fetchPostData = async () => {
     try {
       const res = await getPost();
-      // console.log(res);
       setPostList(res);
     } catch (error) {
       console.log(error);
     }
   };
 
-  useEffect(() => {
-    fetchPostData();
-  }, []);
+  useFocusEffect(
+    React.useCallback(() => {
+      fetchPostData();
+    }, [])
+  );
 
   const addNew = () => {
     navigation.navigate("PostCategory");
@@ -54,23 +55,17 @@ const HomePage = () => {
         }}
       >
         <ScrollView ScrollView style={{ height: "100%", marginBottom: 25 }}>
-          {/* posts category
-          <View style={{ flexDirection: "row", flexWrap: "wrap" }}>
-            {PostCatList.map((item, index) => (
-              <PostCatBtn key={index} PstCat={item.PstCat} />
-            ))}
-          </View> */}
-
           {/* post cards list*/}
           <View>
             {postList.map((item) => (
               <PostCard
+                postId={item._id}
                 key={item._id}
                 // image={item.user.proPic}
                 // title={item.user.userName}
                 Date={item.createdAt}
                 description={item.description}
-                // postImage={item.image}
+                postImage={item.image}
               />
             ))}
           </View>

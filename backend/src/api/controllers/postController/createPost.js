@@ -1,20 +1,17 @@
 const PostSchema = require("../../models/posts/postsModels");
 exports.createPost = async (req, res) => {
   try {
-    const { userId, postCategory, createdAt, description, image } = req.body;
+    const { postCategory, description, img } = req.body;
 
     // const userId = req.user.user_id;
 
-    if (!userId) {
-      return res.status(400).json({ message: "userId is required" });
-    }
+    const createdAt = new Date();
 
     const newPost = new PostSchema({
-      userId,
       postCategory,
-      createdAt,
       description,
-      image,
+      createdAt: createdAt,
+      image: img,
     });
 
     await newPost.save();

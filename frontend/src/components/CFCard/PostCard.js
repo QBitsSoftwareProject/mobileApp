@@ -1,13 +1,56 @@
-import { StyleSheet, TouchableOpacity, View, Image, Text } from "react-native";
+import {
+  StyleSheet,
+  TouchableOpacity,
+  View,
+  Image,
+  Text,
+  TouchableWithoutFeedback,
+} from "react-native";
 import React from "react";
 import { useState } from "react";
 
 import PostPop from "../DropDownMenu/CFPostPop";
+
 const PostCard = (props) => {
   const [isPress, setIsPress] = useState(false);
+
   const handlePress = () => {
     setIsPress(!isPress);
   };
+
+  const formatTimestamp = (timestamp) => {
+    const date = new Date(timestamp);
+    const now = new Date();
+    const diff = now - date;
+
+    const minutes = Math.floor(diff / (1000 * 60));
+    if (minutes < 60) {
+      return `${minutes}min ago`;
+    }
+
+    const hours = Math.floor(diff / (1000 * 60 * 60));
+    if (hours < 24) {
+      return `${hours}h ago`;
+    }
+
+    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+    if (days < 7) {
+      return `${days}d ago`;
+    }
+
+    if (now.getFullYear() === date.getFullYear()) {
+      return date.toLocaleString("default", { month: "short", day: "numeric" });
+    }
+
+    return date.toLocaleString("default", {
+      year: "numeric",
+      month: "short",
+      day: "numeric",
+    });
+  };
+
+  const formattedDate = formatTimestamp(props.Date);
+
   return (
     <View style={styles.cardBox}>
       <View style={styles.content1}>
@@ -20,7 +63,7 @@ const PostCard = (props) => {
             <Text style={styles.title}>{props.title}</Text>
 
             <View style={{ width: "90%" }}>
-              <Text style={styles.sub}>{props.time}</Text>
+              <Text style={styles.sub}>{formattedDate}</Text>
             </View>
           </View>
         </View>
@@ -31,7 +74,14 @@ const PostCard = (props) => {
               style={styles.navMenu}
             />
           </TouchableOpacity>
-          {isPress && <PostPop DPtext1={"Edit Post"} DPtext2={"Delete post"} />}
+          {isPress && (
+            <PostPop
+              postId={props.postId}
+              DPtext1={"Edit Post"}
+              DPtext2={"Delete post"}
+              onDelete={props.onDelete}
+            />
+          )}
         </View>
       </View>
 

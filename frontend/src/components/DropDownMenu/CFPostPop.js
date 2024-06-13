@@ -6,40 +6,65 @@ import {
   StyleSheet,
   Alert,
 } from "react-native";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { deleteAPost } from "../../services/postServices/postServices";
+import EditPopupMessage from "../CF Pop-up/EditPop-up";
 
 const PostPop = (props) => {
   const navigation = useNavigation();
 
-  const [deleteThePost, setDeleteThePost] = useState("");
+  const [popupMessage, setPopupMessage] = useState("");
 
-  const handleEdit = () => {
-    navigation.navigate("CreatePost");
-  };
+  // const [press, setPress] = useState(true);
 
-  const deletePost = async (id) => {
+  const handleEdit = async () => {
     try {
-      const res = await deleteAPost(`/posts/delete-post/:id`);
-      setDeleteThePost(res);
-      console.log("Post deleted:", res);
+      setPopupMessage("Edit your caption");
     } catch (error) {
-      // console.error("Failed to delete post:", error);
+      console.log(error);
     }
   };
 
-  const displayDeleteAlert = (id) => {
+  const confirmMessage = async () => {
+    // navigation.navigate("");
+  };
+
+  const closeMessage = () => {
+    setPopupMessage("");
+  };
+
+  const deletePost = async () => {
+    try {
+      await deleteAPost(props.postId);
+      if (props.onDelete) {
+        props.onDelete(props.postId);
+      }
+    } catch (error) {
+      console.error("Failed to delete post:", error);
+    }
+  };
+
+  // const handlePress = () => {
+  //   setPress(!press);
+  // };
+
+  const displayDeleteAlert = () => {
     Alert.alert(
       "Are you sure!",
       "This action will delete your post permanently!",
       [
-        { text: "cancel", onPress: () => console.log("cancel") },
-        { text: "Delete", onPress: () => deletePost(id) },
+        {
+          text: "cancel",
+          onPress: () => {},
+          style: "cancel",
+        },
+        { text: "Delete", onPress: () => deletePost() },
       ],
       { cancelable: true }
     );
   };
+
   return (
     <View style={styles.DropPop}>
       <View style={styles.container}>
@@ -55,7 +80,7 @@ const PostPop = (props) => {
         </TouchableOpacity>
 
         <TouchableOpacity
-          onPress={() => displayDeleteAlert(props.postId)}
+          onPress={displayDeleteAlert}
           style={[styles.contains1, { gap: 15 }]}
         >
           <Text style={styles.DPtext}>{props.DPtext2}</Text>
@@ -64,6 +89,12 @@ const PostPop = (props) => {
             style={styles.dltImg}
           />
         </TouchableOpacity>
+
+        <EditPopupMessage
+          message={popupMessage}
+          onConfirm={confirmMessage}
+          onClose={closeMessage}
+        />
       </View>
     </View>
   );

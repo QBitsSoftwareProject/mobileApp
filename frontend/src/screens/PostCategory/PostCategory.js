@@ -55,10 +55,6 @@ const PostCategory = () => {
   const screenHeight = Dimensions.get("window").height - 275;
   const navigation = useNavigation();
 
-  const pressHandler = () => {
-    navigation.navigate("CreatePost");
-  };
-
   return (
     <View>
       <HeaderSub
@@ -83,7 +79,6 @@ const PostCategory = () => {
                 title={item.title}
                 sub={item.sub}
                 arrow={item.arrow}
-                forword={pressHandler}
               />
             ))}
           </View>

@@ -3,12 +3,9 @@ const postSchema = require("../../models/posts/postsModels");
 exports.deletePost = async (req, res) => {
   const { postId } = req.params;
 
-  console.log(`Received postId: ${postId}`);
   try {
     // Finding and deleting the post by id
     const deletedPost = await postSchema.findByIdAndDelete(postId);
-
-    console.log("Deleted Post:", deletedPost);
 
     // If post is not found, return a 404 error response
     if (!deletedPost) {

@@ -2,18 +2,17 @@ import React, { useEffect, useState } from "react";
 import { View, Text, StyleSheet, ScrollView, Dimensions } from "react-native";
 import PostCard from "../../components/CFCard/PostCard";
 import ProfileCover from "../../components/ComForumCover/ComForumCover";
-// import HeaderSub from "../../components/HomeTop/HomeTop";
-import { useNavigation } from "@react-navigation/native";
 import ButtonGroup from "../../components/Button/ButtonGroup";
 import { getPost } from "../../services/postServices/postServices";
 
 const ProfileScreen = () => {
+  const screenHeight = Dimensions.get("window").height - 275;
+
   const [postList, setPostList] = useState();
 
   const fetchPostData = async () => {
     try {
       const res = await getPost();
-      // console.log(res);
       setPostList(res);
     } catch (error) {
       console.log(error);
@@ -26,9 +25,11 @@ const ProfileScreen = () => {
 
   const profilePicture = require("../../assets/images/PostCardImages/manprofile.jpg");
 
-  const screenHeight = Dimensions.get("window").height - 275;
-
-  const navigation = useNavigation();
+  const onDeletePost = (postId) => {
+    setPostList((prevPostList) =>
+      prevPostList.filter((post) => post._id !== postId)
+    );
+  };
 
   if (!postList) {
     return;
@@ -38,7 +39,9 @@ const ProfileScreen = () => {
     <View style={styles.contains}>
       {/* <HeaderSub proPic={profilePicture} /> */}
       <ProfileCover proPic={profilePicture} />
-      <View style={{ height: screenHeight, paddingHorizontal: 25 }}>
+      <View
+        style={{ height: screenHeight, paddingHorizontal: 25, paddingTop: 15 }}
+      >
         <View style={styles.contains2}>
           <Text style={styles.header}>Thishakya Perera</Text>
           <Text style={styles.des}>
@@ -56,12 +59,14 @@ const ProfileScreen = () => {
           <View>
             {postList.map((item) => (
               <PostCard
+                postId={item._id}
                 key={item._id}
                 // image={item.user.proPic}
                 // title={item.user.userName}
-                sub={item.postedAt}
+                Date={item.createdAt}
                 description={item.description}
-                // Postimage={item.Postimage}
+                postImage={item.image}
+                onDelete={onDeletePost}
               />
             ))}
           </View>

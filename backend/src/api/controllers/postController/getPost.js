@@ -2,7 +2,7 @@ const postSchema = require("../../models/posts/postsModels");
 
 exports.getPost = async (req, res) => {
   try {
-    const Posts = await postSchema.find();
+    const Posts = await postSchema.find().sort({ createdAt: -1 }); //.populate({userId:userId})
 
     if (!Posts) {
       return res.status(404).json({ message: "Post not found!" });

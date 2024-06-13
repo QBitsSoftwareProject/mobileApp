@@ -14,7 +14,6 @@ const ProfileCover = (props) => {
           zIndex: 101,
           position: "absolute",
           flex: 1,
-
           width: "100%",
           bottom: -50,
         }}
@@ -29,7 +28,7 @@ const ProfileCover = (props) => {
 
 const styles = StyleSheet.create({
   bckImg: {
-    height: 250,
+    height: 200,
     width: "100%",
     borderBottomLeftRadius: 40,
     borderBottomRightRadius: 40,

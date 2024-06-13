@@ -1,9 +1,18 @@
 import { StyleSheet, TouchableOpacity, View, Image, Text } from "react-native";
 import React from "react";
+import { useNavigation } from "@react-navigation/native";
 
 const RegularCard = (props) => {
+  const navigation = useNavigation();
+
+  const pressHandler = () => {
+    navigation.navigate("CreatePost", {
+      postCat: props.title,
+    });
+  };
+
   return (
-    <TouchableOpacity style={styles.cardBox} onPress={props.forword}>
+    <TouchableOpacity style={styles.cardBox} onPress={pressHandler}>
       <View>
         <View style={styles.imageframe}>
           <Image source={props.image} style={styles.image} />
