@@ -1,4 +1,4 @@
-const markModel = require("../models/mark.model");
+const markModel = require("../../models/stressMark/mark.model");
 
 // service for store mark
 const storeMark =  (userid, mark, date, time) => {

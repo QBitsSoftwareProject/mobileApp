@@ -5,15 +5,16 @@ import { useNavigation } from '@react-navigation/native';
 import DisplayResultScreen from '../ResultScreen/displayResult';
 import TabBar from "../../components/TabBar/TabBar";
 import { getMark } from "../ResultScreen/getStressLevel";
-import { submitToDatabase } from "./sendMarkToDB.js";
+import { submitMarksToDatabase } from "../../services/stressMarksServices/stressMarkServices.js";
 import axiosInstance from "../../api/axios.js";
 import { BackgroundMusicContext } from '../../components/SettingScreen/BackgroundMusicProvider';
 import { useFocusEffect } from '@react-navigation/native';
+import { fetchQuestionIds , fetchData} from "../../services/stressQuestionServices/QuestionService.js";
 
 import {
   View,
   Text,
-  StyleSheet,
+  StyleSheet, 
   Image,
   TouchableOpacity,
   ActivityIndicator,
@@ -31,7 +32,7 @@ const Question = () => {
   const [options, setOptions] = useState([]);
   const [ids, setIds] = useState([]);
   const [question, setQuestion] = useState('');
-  const [id, setId] = useState('');
+  const [id, setId] = useState(''); 
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [selectedOption, setSelectedOption] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -39,41 +40,25 @@ const Question = () => {
   const [mark,setMark] = useState('');
   const [submit, setSubmit] = useState(false);
   const [stressLevel , setStressLevel] = useState('');
-
-  // const { setBackgroundMusicValid } = useContext(BackgroundMusicContext);
-
-  // useFocusEffect(
-  //   React.useCallback(() => {
-  //     setBackgroundMusicValid(false);
-      
-
-  //     return () => {
-  //       setBackgroundMusicValid(true);
-        
-  //     };
-  //   }, [setBackgroundMusicValid])
-  // );
-
-
-
-
-
-  // get Ids of questions
   
+
+
   useEffect(() => {
-    const fetchQuestionIds = async () => {
+    const fetchId = async () => {
       try {
-        const response = await axiosInstance.get('/question/get-all-question-ids');
-        // console.log(response.data);
-        setIds(response.data);
-      } catch (err) {
-        console.log(err);
+        const fetchIds = await fetchQuestionIds();
+        if (fetchIds) {
+          setIds(fetchIds);
+        }
+      } catch (error) {
+        console.error("Failed to fetch question ids:", error.message);
       }
     };
-    fetchQuestionIds();
+
+    fetchId();
   }, []);
 
-
+  
   // get current qiestion id
 
   useEffect(() => {
@@ -87,30 +72,30 @@ const Question = () => {
       }
     };
     fetchQuestions();
+    
   }, [currentQuestionIndex, ids]);
 
 
-  // get data relevent to the  question / (fetch by id)
 
   useEffect(() => {
-    const fetchData = async () => {
+    const getQuestionData = async (id) => {
       try {
-        const response = await axiosInstance.get(`/question/get-question/${id}`);
-        // console.log(response.data);
-        setQuestion(response.data);
-        const optionTexts = response.data.options.map(option => option.OptionText);
-        setOptions(optionTexts);
-        const optionMarks = response.data.options.map(option => option.OptionMark);
-        setMark(optionMarks);
-      } catch (err) {
+      const data = await fetchData(id);
+      setQuestion(data);
+
+      const optionTexts = data.options.map(option => option.OptionText);
+      const optionMarks = data.options.map(option => option.OptionMark);
+      setOptions(optionTexts);
+      setMark(optionMarks);
+      }catch (err) {
         console.log(err);
       }
-     finally {
-      setIsLoading(false);
-    }
+      finally {
+            setIsLoading(false);
+          }
     };
-    fetchData();
-
+    console.log(question);
+    getQuestionData(id);
   }, [id]);
 
 
@@ -171,10 +156,6 @@ const Question = () => {
   }, [currentQuestionIndex ,ids.length]);
 
   
-
-
-  
-
   
   const navigation = useNavigation();
 
@@ -198,7 +179,7 @@ const Question = () => {
       //  console.log('tot mark is',totMark);
        setStressLevel(totMark);
 
-       submitToDatabase(totMark, id1);
+       submitMarksToDatabase(totMark, id1);
 
        Index = 0;
       

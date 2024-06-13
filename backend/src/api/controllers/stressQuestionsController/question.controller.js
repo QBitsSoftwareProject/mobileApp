@@ -1,6 +1,6 @@
 const { model } = require('mongoose');
-const QuestionModel = require('../models/Question.model');
-const OptionsModel = require('../models/Options.model');
+const QuestionModel = require('../../models/stressQuestions/Question.model');
+const OptionsModel = require('../../models/stressOptions/Options.model');
 const asyncHandler = require('express-async-handler');
 
 

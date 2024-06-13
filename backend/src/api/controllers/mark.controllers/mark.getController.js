@@ -1,4 +1,4 @@
-const markService = require("../../services/mark.service");
+const markService = require("../../services/stressMarks/mark.service");
 const asyncHandler = require('express-async-handler');
 
 //controller to get mark by id

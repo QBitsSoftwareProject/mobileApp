@@ -1,7 +1,7 @@
 
-const methodService = require("../services/method.service");
+const methodService = require("../../services/mindRelaxingMethods/method.service");
 const asyncHandler = require('express-async-handler');
-const methodModel = require('../models/method.model')
+const methodModel = require('../../models/mindRelaxingMethods/method.model')
 
 const storeMethod = asyncHandler(async (req, res) => {
     try {

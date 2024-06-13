@@ -7,6 +7,7 @@ import { CustomButton } from "./doublebutton";
 import Overlay from './instruction';
 import axiosInstance from "../../api/axios";
 // import { encryptData } from "../StressLevelAssessmentQuestions/encrypt";
+import { fetchMarkById } from "../../services/stressMarksServices/stressMarkServices";
 
 
 import {
@@ -93,13 +94,10 @@ const DisplayResultScreen = () => {
 
        // get last stress level of the user
        const fetchMark = async (userID) => {
-        // const userid = userID;
+        
         try {
-          console.log('Fetching mark for userID:', userID);
-          const response = await axiosInstance.get(`/mark/get-mark-by-id/${userID}`);
           
-          const userData = response.data;
-
+          const userData = await fetchMarkById(userID);
       
           if (userData.length > 0) {
             const mostRecentMark = userData[userData.length - 1].mark;

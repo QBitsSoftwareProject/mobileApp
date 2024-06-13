@@ -1,4 +1,4 @@
-const methodModel = require("../models/method.model");
+const methodModel = require("../../models/mindRelaxingMethods/method.model");
 const asyncHandler = require('express-async-handler');
 
 const storeMethod =  (methodType, mark, resouceName, discription,imageURL,resourceURL) => {
