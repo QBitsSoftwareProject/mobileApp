@@ -16,11 +16,12 @@ const PostPop = (props) => {
 
   const [popupMessage, setPopupMessage] = useState("");
 
-  // const [press, setPress] = useState(true);
+  const [press, setPress] = useState(false);
 
   const handleEdit = async () => {
     try {
       setPopupMessage("Edit your caption");
+      handlePress();
     } catch (error) {
       console.log(error);
     }
@@ -36,6 +37,7 @@ const PostPop = (props) => {
 
   const deletePost = async () => {
     try {
+      handlePress();
       await deleteAPost(props.postId);
       if (props.onDelete) {
         props.onDelete(props.postId);
@@ -45,9 +47,9 @@ const PostPop = (props) => {
     }
   };
 
-  // const handlePress = () => {
-  //   setPress(!press);
-  // };
+  const handlePress = () => {
+    setPress(true);
+  };
 
   const displayDeleteAlert = () => {
     Alert.alert(
@@ -64,6 +66,10 @@ const PostPop = (props) => {
       { cancelable: true }
     );
   };
+
+  if (press) {
+    return null; // Dismiss the component
+  }
 
   return (
     <View style={styles.DropPop}>

@@ -4,8 +4,6 @@ exports.updatePost = async (req, res) => {
   const { postId } = req.params;
 
   try {
-    // Extracting the post ID from request parameters
-
     // Destructuring the request body to extract post details
     const { newDescription, newImage } = req.body;
 

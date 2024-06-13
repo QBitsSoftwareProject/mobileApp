@@ -1,7 +1,7 @@
 const PostSchema = require("../../models/posts/postsModels");
 exports.createPost = async (req, res) => {
   try {
-    const { postCategory, description, img } = req.body;
+    const { postCategory, description, image } = req.body;
 
     // const userId = req.user.user_id;
 
@@ -11,7 +11,7 @@ exports.createPost = async (req, res) => {
       postCategory,
       description,
       createdAt: createdAt,
-      image: img,
+      image,
     });
 
     await newPost.save();

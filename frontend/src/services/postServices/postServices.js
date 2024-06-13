@@ -13,7 +13,7 @@ export const createPost = async (postCategory, caption, image) => {
       {
         postCategory,
         description: caption,
-        img: image,
+        image,
       },
       {
         headers: { authtoken: token },
