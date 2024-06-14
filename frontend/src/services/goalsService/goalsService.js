@@ -10,7 +10,7 @@ export const getSuggestedGoals = async () => {
     const response = await axios.get(URL + "/suggested-goals", {
       headers: { authtoken: token },
     });
-    // consolse.log(response.data);
+    // console.log(response);
     return response.data;
   } catch (error) {
     console.log(error);

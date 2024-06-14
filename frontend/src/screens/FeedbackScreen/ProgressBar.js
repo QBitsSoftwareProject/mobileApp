@@ -2,7 +2,7 @@ import React, { useState , useEffect } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 
 //genarate the segmented buttons based on loops
-export  const SplitButton = ({rateFunction}) => {
+export  const SplitButton = ({rateFunction, submitTriggered}) => {
   const [pressedSegment, setPressedSegment] = useState(null);
   
 
@@ -14,6 +14,16 @@ export  const SplitButton = ({rateFunction}) => {
     
   };
 
+  const resetSegment = () => {
+    setPressedSegment(null); // Reset pressedSegment state to null
+  };
+
+  useEffect(() => {
+    if (submitTriggered) {
+      resetSegment(); // Reset pressedSegment when submitTriggered changes to true
+    }
+  }, [submitTriggered]);
+  
   const renderSegments = () => {
     const segments = [];
     for (let i = 0; i < 10; i++) {

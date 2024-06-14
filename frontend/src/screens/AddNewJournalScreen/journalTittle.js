@@ -6,7 +6,7 @@ import { View, TextInput, StyleSheet ,Image,TouchableOpacity} from 'react-native
 export const JournalTittle = ({newText,value}) => {   //value is current tittle, newText is after changing the tittle
 
 const route = useRoute();
-const { itemID,itemTittle, itemText } = route.params;
+const { itemID,itemTittle, itemText } = route.params || {};
 const [inputTittle, setInputTittle] = useState(value || '');
 
   

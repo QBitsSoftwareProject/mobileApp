@@ -1,25 +1,25 @@
+import {
+  View,
+  Text,
+  Modal,
+  StyleSheet,
+  TouchableOpacity,
+  Image,
+} from "react-native";
 
-import { View, Text, Modal, StyleSheet, TouchableOpacity,Image } from 'react-native';
-import { createStackNavigator } from '@react-navigation/stack';
-import axios from 'axios';
+import { deleteJournal } from "../../services/journalService/journalService";
 
+// call the delete function
+export const Overlay = ({ item, isVisible, onClose }) => {
+  const handleDeleteButton = async () => {
+    try {
+      await deleteJournal(item);
+      onClose(); // Close the modal after successful deletion
+    } catch (error) {
+      console.error("Error deleting journal:", error);
+    }
+  };
 
-export const Overlay = ({ isVisible, onClose, journalID,  }) => {
-
-// delete journal    
-const handleDeleteButton = async ()=>{
-  try{
-    const deleteResponse = await axios.delete(`http://192.168.43.51:3000/journal/delete-journal/${journalID}`);
-    console.log("Delete successful", deleteResponse.data);
-    onClose();
-   
-  }
-  catch(error){
-    console.log(error);
-
-}
-};
-    
   return (
     <Modal
       transparent={true}
@@ -29,24 +29,27 @@ const handleDeleteButton = async ()=>{
     >
       <View style={styles.overlay}>
         <View style={styles.overlayContent}>
-        <TouchableOpacity onPress={onClose}>
-
-        <Image source={require("../../assets/images/journal/closeimg.png")} style = {styles.closeimg} ></Image></TouchableOpacity>
+          <TouchableOpacity onPress={onClose}>
+            <Image
+              source={require("../../assets/images/journal/closeimg.png")}
+              style={styles.closeimg}
+            ></Image>
+          </TouchableOpacity>
 
           <Text style={styles.topic}>Delete this ? </Text>
 
-          <View style = {styles.overlayimg}>
-        
-           <Image source={require("../../assets/images/journal/addpic.png")}></Image>
+          <View style={styles.overlayimg}>
+            <Image
+              source={require("../../assets/images/journal/addpic.png")}
+            ></Image>
 
-           <TouchableOpacity style={styles.create} onPress={handleDeleteButton}>
-           <Text style={styles.createText}>Delete Journal</Text>
-           </TouchableOpacity>
-
-            
-</View>
-          
-          
+            <TouchableOpacity
+              style={styles.create}
+              onPress={handleDeleteButton}
+            >
+              <Text style={styles.createText}>Delete Journal</Text>
+            </TouchableOpacity>
+          </View>
         </View>
       </View>
     </Modal>
@@ -56,61 +59,57 @@ const handleDeleteButton = async ()=>{
 const styles = StyleSheet.create({
   overlay: {
     flex: 1,
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
-    justifyContent: 'center',
-    alignItems: 'center',
+    backgroundColor: "rgba(0, 0, 0, 0.5)",
+    justifyContent: "center",
+    alignItems: "center",
   },
   overlayContent: {
-    backgroundColor: '#fff',
+    backgroundColor: "#fff",
     padding: 20,
     borderRadius: 10,
-    alignItems: 'center',
+    alignItems: "center",
   },
 
-  closeimg : {
-    width:30,
-    height:30,
-    alignSelf: 'flex-end',
-    marginLeft:270,
-    
-},
+  closeimg: {
+    width: 30,
+    height: 30,
+    alignSelf: "flex-end",
+    marginLeft: 270,
+  },
 
-topic:{
-  fontSize:24,
-  alignSelf:'center',
-  fontWeight:'400',
-  marginBottom:40,
-  color:'#101318'
+  topic: {
+    fontSize: 24,
+    alignSelf: "center",
+    fontWeight: "400",
+    marginBottom: 40,
+    color: "#101318",
+  },
 
-},
+  overlayimg: {
+    width: 197,
+    height: 350,
+  },
 
-overlayimg : {
-  width:197,
-  height:350,
-},
-
-textarea: {
-  width:322,
-  height:300,
-},
-create: {
-    
+  textarea: {
+    width: 322,
+    height: 300,
+  },
+  create: {
     backgroundColor: "#ffffff",
-    borderColor:'#5FA1CE',
-    borderWidth:2,
-    width:250,
-    height:58,
+    borderColor: "#5FA1CE",
+    borderWidth: 2,
+    width: 250,
+    height: 58,
     borderRadius: 75,
-    alignSelf:'center',
-    marginTop:82
-    
+    alignSelf: "center",
+    marginTop: 82,
   },
   createText: {
-    paddingTop:17,
+    paddingTop: 17,
     fontSize: 16,
-    color:'#101318',
-    textAlign:'center',
-    justifyContent:'center',
+    color: "#101318",
+    textAlign: "center",
+    justifyContent: "center",
   },
 });
 

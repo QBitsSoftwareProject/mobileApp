@@ -1,172 +1,156 @@
-import React, {useState} from "react";
-import { View, Text, StyleSheet,ScrollView, TouchableOpacity, SafeAreaView, TextInput, Button, } from "react-native";
+import React, { useCallback, useState, useEffect } from "react";
+import {
+  View,
+  Text,
+  StyleSheet,
+  ScrollView,
+  TouchableOpacity,
+  SafeAreaView,
+  TextInput,
+  Button,
+} from "react-native";
 import { EmojiPicker } from "./emoji";
 import styles from "../AddNewJournalScreen/styles";
 import { CustomButton } from "./switch";
 import { JournalTittle } from "./journalTittle";
 import { JournalEntry } from "./journalEntry";
 
-import {Overlay} from "./AddNewPopup";
+import { Overlay } from "./AddNewPopup";
 import TabBar from "../../components/TabBar/TabBar";
 import HeaderSub from "../../components/HeaderSub/HeaderSub";
-import axios from 'axios';
+import axios from "axios";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { addNewJournal } from "../../services/journalService/journalService";
 
 //AddNewJournal function
-export const AddNewJournal = ({navigation}) =>{
+export const AddNewJournal = ({ navigation }) => {
+  const [isOverlayVisible, setOverlayVisible] = useState(false); //set state to visible popup
+  const [selectedEmojiMarks, setSelectedEmojiMarks] = useState(""); //set marks in selected emoji
+  const [tittle, setTittle] = useState("");
+  const [journalEntry, setJournalEntry] = useState("");
+  const [emoji, setEmoji] = useState("");
+  const [date, setdate] = useState("");
+  const [time, settime] = useState("");
 
-const [isOverlayVisible, setOverlayVisible] = useState(false);   //set state to visible popup                               
-const [selectedEmojiMarks, setSelectedEmojiMarks] = useState(''); //set marks in selected emoji
-const [tittle, setTittle] = useState(''); 
-const [journalEntry, setJournalEntry] = useState('');
-const [emoji, setEmoji] = useState('');
-const [date,setdate] = useState('');
-const [time,settime ]= useState('');
+  // popup visible function
+  const toggleOverlay = () => {
+    setOverlayVisible(!isOverlayVisible);
+  };
 
-const userid = '214102J';
-const imgUrl = 'This is image url';
+  // navigate to viewJournal
+  const handleViewButton = () => {
+    navigation.navigate("ViewJournal", {});
+  };
 
-// popup visible function    
-const toggleOverlay = () => {
+  // handle the emoji press
+  const handleEmojiPress = ({ emoji, mark, category }) => {
+    setSelectedEmojiMarks(
+      (prevMarks) => prevMarks + `${emoji}(${mark}) (${category})`
+    );
+    setEmoji(mark);
+    // console.log(category);
+  };
 
-      setOverlayVisible(!isOverlayVisible);
-};
+  const getDate = useCallback(() => {
+    const currentDate = new Date();
 
-// navigate to viewJournal
-const handleViewButton = () =>{
-      
-      navigation.navigate('ViewJournal',{ 
+    const year = currentDate.getFullYear();
+    const month = currentDate.toLocaleString("default", { month: "long" });
+    const day = currentDate.getDate().toString().padStart(2, "0");
 
-    }); 
-}
-// handle the emoji press
-const handleEmojiPress = ({ emoji, mark,category }) => {
-      setSelectedEmojiMarks((prevMarks) => prevMarks + `${emoji}(${mark}) (${category})`);
-      setEmoji(mark);
-      // console.log(category);
-      
-};
+    const formattedDate = `${day}, ${month}, ${year}`;
+    //  console.log(formattedDate);
 
-// handle createbutton
-const handleCreateButton = async() =>{  // synchronize funtion
+    const formattedTime = currentDate.toLocaleTimeString();
 
-      if(!emoji){
-           alert('Emoji is required');
-      }
+    setdate(formattedDate);
+    settime(formattedTime);
+  }, []);
 
-      if(!journalEntry){
-            alert('Journal is required');
-       }
+  useEffect(() => {
+    if (date && time) {
+      // Ensure date and time are set before calling addNewJournal
+      const createJournal = async () => {
+        try {
+          await addNewJournal(emoji, tittle, journalEntry, time, date);
+          toggleOverlay();
+        } catch (error) {
+          console.log(error);
+        }
+      };
+      createJournal();
+    }
+  }, [date, time]);
 
-       const currentDate = new Date();
+  // handle createbutton
+  const handleCreateButton = async () => {
+    // synchronize funtion
 
-       const year = currentDate.getFullYear();
-       const month = currentDate.toLocaleString('default', { month: 'long' });
-       const day = currentDate.getDate().toString().padStart(2, '0');
-       
-       const formattedDate = `${day}, ${month}, ${year}`;
-      //  console.log(formattedDate); 
-      
+    if (!emoji) {
+      alert("Emoji is required");
+      return;
+    }
 
-            
-            const formattedTime = currentDate.toLocaleTimeString();
-          
- 
+    if (!journalEntry) {
+      alert("Journal is required");
+      return;
+    }
 
-            setdate(formattedDate);
-            settime(formattedTime);
+    getDate();
+    // await addNewJournal(emoji, tittle, journalEntry, time, date); //call the journal Service file for create a new journal
 
-            try{
-                  const journalResponse = await axios.post('http://192.168.43.51:3000/journal/add-journal',{  // add new jouranl , wait unti post the data to database
+    // toggleOverlay();
+    // } catch (error) {
+    //   console.log(error);
+    // }
+  };
 
-                  userid,
-                  emoji,
-                  tittle,
-                  journalEntry,
-                  imgUrl,
-                  time: formattedTime, // Use the formatted time here
-                  date: formattedDate  // use the formatted  date here
-                        
-                  });
+  return (
+    <View>
+      <HeaderSub
+        headLine={"Add New Journal"}
+        subHeadLine={"Wellcome to our mindful haven"}
+        back={"ViewJournal"}
+      />
 
-                  if(journalResponse.data){
-                        console.log('data ok');
-                  }
-            }catch (error){
-                  console.log(error);
-            }
+      <CustomButton btnView={handleViewButton}></CustomButton>
 
-      
-      // console.log(emoji);
-      // console.log(tittle);
-      // console.log(journalEntry);
-      // console.log(date);
-      // console.log(time);
-      // console.log(userid);
-      // console.log(imgUrl);
-      // console.log(category);
+      <ScrollView height={470}>
+        <SafeAreaView style={styles.container}>
+          <Text style={styles.Text}>Feeling with...</Text>
 
-     
-      toggleOverlay();
+          <EmojiPicker onEmojiPress={handleEmojiPress} />
 
-  }
+          <Text style={styles.Text1}>Journal Tittle</Text>
 
+          <JournalTittle
+            style={styles.tittlejournal}
+            value={tittle}
+            newText={setTittle}
+          />
 
-  
-return(
-      <View>
-<HeaderSub
+          <Text style={styles.Text2}>Write your journal</Text>
 
-      headLine={"Add New Journal"}
-      subHeadLine={"Wellcome to our mindful haven"}
-      back={'ViewJournal'}
-/>
+          <JournalEntry value={journalEntry} newText={setJournalEntry} />
 
-<CustomButton btnView={handleViewButton}></CustomButton>
+          <View>
+            <TouchableOpacity
+              style={styles.create}
+              onPress={handleCreateButton}
+            >
+              <Text style={styles.createText}>Create Journal</Text>
+            </TouchableOpacity>
 
-
-      <ScrollView height = {470}>
-   
-      <SafeAreaView style={styles.container}>
-
-        
-      <Text style={styles.Text}>Feeling with...</Text>
-
-      <EmojiPicker onEmojiPress={handleEmojiPress} />
-
-        
-
-      <Text style={styles.Text1}>Journal Tittle</Text>
-
-      <JournalTittle style={styles.tittlejournal} value = {tittle} newText = {setTittle}/>
-
-      <Text style={styles.Text2}>Write your journal</Text>
-
-      <JournalEntry value = {journalEntry} newText = {setJournalEntry}/>
-
- <View>
-      
-      <TouchableOpacity style={styles.create} onPress={handleCreateButton}>
-      <Text style={styles.createText}>Create Journal</Text>
-      </TouchableOpacity>
-      
-      <Overlay isVisible={isOverlayVisible} onClose={toggleOverlay} propbtnfunction={handleViewButton} /> 
-    </View>
-
-   
-
-      </SafeAreaView>
-
+            <Overlay
+              isVisible={isOverlayVisible}
+              onClose={toggleOverlay}
+              propbtnfunction={handleViewButton}
+            />
+          </View>
+        </SafeAreaView>
       </ScrollView>
 
-
-<TabBar />
-
-
-</View>
-
-    );
-
-
-
+      <TabBar />
+    </View>
+  );
 };
-

@@ -5,7 +5,9 @@ import { View, TextInput, Text,StyleSheet, TouchableOpacity, Image } from 'react
 export const JournalEntry = ({newText,value}) => {  //value is current entry and newText is after changing the entry
 
 const route = useRoute();
-const { itemID, itemText } = route.params;
+const { itemID = '', itemText = '' } = route.params ||{};
+
+//itemID, itemText
 
   // console.log(itemID);
   // console.log(itemText);

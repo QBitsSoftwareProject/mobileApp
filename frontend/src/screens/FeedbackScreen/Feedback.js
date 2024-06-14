@@ -1,20 +1,27 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet, Text, View, TextInput, TouchableOpacity, ScrollView } from 'react-native';
-import { SplitButton } from './ProgressBar';
-import styles from './feedbackStyles';
-import { QuestionButton } from './Switch';
-import HeaderSub from '../../components/HeaderSub/HeaderSub';
-import axios from 'axios';
+import {
+  StyleSheet,
+  Text,
+  View,
+  TextInput,
+  TouchableOpacity,
+  ScrollView,
+} from "react-native";
+import { SplitButton } from "./ProgressBar";
+import styles from "./feedbackStyles";
+import { QuestionButton } from "./Switch";
+import HeaderSub from "../../components/HeaderSub/HeaderSub";
 import axiosInstance from "../../api/axios";
+import { addFeedback } from "../../services/feedbackServices/feedbackServices";
 
 const Feedback = () => {
-  const [satisfaction, setSatisfaction] = useState('');
-  const [finterfaceValue, setFinterfaceValue] = useState('');
-  const [design, setDesign] = useState('');
-  const [speed, setSpeed] = useState('');
-  const [consumption, setConsumption] = useState('');
-  const [privacy, setPrivacy] = useState('');
-  const [comments, setComments] = useState('');
+  const [satisfaction, setSatisfaction] = useState("");
+  const [finterfaceValue, setFinterfaceValue] = useState("");
+  const [design, setDesign] = useState("");
+  const [speed, setSpeed] = useState("");
+  const [consumption, setConsumption] = useState("");
+  const [privacy, setPrivacy] = useState("");
+  const [comments, setComments] = useState("");
   const [questionSix, setQuestionSix] = useState("");
   const [qOne, setQone] = useState(0);
   const [qTwo, setQtwo] = useState(0);
@@ -22,43 +29,58 @@ const Feedback = () => {
   const [qFour, setQfour] = useState(0);
   const [qFive, setQfive] = useState(0);
   const [rateValue, setRateValue] = useState(0);
-  const [userRate, setUserRate] = useState('');
-  const [fDate, setDate] = useState('');
-  const [fTime, setTime] = useState('');
+  const [userRate, setUserRate] = useState("");
+  const [fDate, setDate] = useState("");
+  const [fTime, setTime] = useState("");
   const [data, setData] = useState([]);
-
+  const [submitTriggered, setSubmitTriggered] = useState(false);
 
   useEffect(() => {
     if (qOne !== null) {
-      const value = qOne === 0 ? 'User interface is intuitive and easy to navigate' : 'User interface is not intuitive and easy to navigate';
+      const value =
+        qOne === 0
+          ? "User interface is intuitive and easy to navigate"
+          : "User interface is not intuitive and easy to navigate";
       setFinterfaceValue(value);
     }
   }, [qOne]);
 
   useEffect(() => {
     if (qTwo !== null) {
-      const value = qTwo === 0 ? 'There are privacy settings or permissions that seem excessive or insufficient' : 'There are not privacy settings or permissions that seem excessive or insufficient';
+      const value =
+        qTwo === 0
+          ? "There are privacy settings or permissions that seem excessive or insufficient"
+          : "There are not privacy settings or permissions that seem excessive or insufficient";
       setPrivacy(value);
     }
   }, [qTwo]);
 
   useEffect(() => {
     if (qThree !== null) {
-      const value = qThree === 1 ? 'App is slow to load or respond' : 'App is not slow to load or respond';
+      const value =
+        qThree === 1
+          ? "App is slow to load or respond"
+          : "App is not slow to load or respond";
       setSpeed(value);
     }
   }, [qThree]);
 
   useEffect(() => {
     if (qFour !== null) {
-      const value = qFour === 1 ? 'This app consumes excessive battery or data' : 'This app does not consume excessive battery or data';
+      const value =
+        qFour === 1
+          ? "This app consumes excessive battery or data"
+          : "This app does not consume excessive battery or data";
       setConsumption(value);
     }
   }, [qFour]);
 
   useEffect(() => {
     if (qFive !== null) {
-      const value = qFive === 1 ? 'There are elements of the design that are confusing or difficult to use' : 'There are not elements of the design that are confusing or difficult to use';
+      const value =
+        qFive === 1
+          ? "There are elements of the design that are confusing or difficult to use"
+          : "There are not elements of the design that are confusing or difficult to use";
       setDesign(value);
     }
   }, [qFive]);
@@ -67,105 +89,121 @@ const Feedback = () => {
     if (rateValue === 0) {
       const satisfactionRate = `User satisfaction rate is: Not rated`;
       setUserRate(satisfactionRate);
-    }
-    else{
+    } else {
       const satisfactionRate = `User satisfaction rate is: ${rateValue}`;
       setUserRate(satisfactionRate);
     }
-    
   }, [rateValue]);
 
-  const getDeviceTimeAndDate= () => {
-    const now = new Date();
-
-    const date = now.toLocaleDateString(); 
-    const time = now.toLocaleTimeString(); 
-
-    setDate(date);
-    setTime(time);
-
-
-}
+  useEffect(() => {
+    if (submitTriggered) {
+      storeData();
+    }
+  }, [submitTriggered]);
 
   const handleSubmit = async () => {
+    if (submitTriggered) return; // Prevent multiple submissions
     getDeviceTimeAndDate();
-    await storeData();
-    setQuestionSix('');
+    setQone(0);
+    setQtwo(0);
+    setQthree(0);
+    setQfour(0);
+    setQfive(0);
   };
 
-const storeData = async () => {
+  const getDeviceTimeAndDate = () => {
+    const now = new Date();
+    const date = now.toLocaleDateString();
+    const time = now.toLocaleTimeString();
+    setDate(date);
+    setTime(time);
+    setSubmitTriggered(true);
+  };
 
-const userId = '214102J';
+  const storeData = async () => {
+    try {
+      await addFeedback(
+        userRate,
+        finterfaceValue,
+        privacy,
+        speed,
+        consumption,
+        design,
+        questionSix,
+        fDate,
+        fTime
+      );
 
-try {
+      console.log("Data saved successfully");
+      setUserRate("");
+      setFinterfaceValue("");
+      setPrivacy("");
+      setSpeed("");
+      setConsumption("");
+      setDesign("");
+      setQuestionSix("");
+      setDate("");
+      setTime("");
 
-const response = await axiosInstance.post('/Feedback/add-feedback' , {
-
-        userid: userId,
-        satisfication:userRate,
-        finterface: finterfaceValue,
-        privacy: privacy,
-        speed: speed,
-        consumption: consumption,
-        design: design,
-        comment: questionSix,
-        date:fDate,
-        time:fTime
-
-        
-      });
-
-      if (response.status === 201) {
-        console.log('Data saved successfully');
-        alert('Thank you for your Feedback!!')
-      } else {
-        console.log('Errorrrr');
-      }
+      alert("Thank you for your Feedback!!");
+      setSubmitTriggered(false); // Reset submitTriggered after successful submission
     } catch (error) {
-      console.log('Error:', );
+      console.log("Error saving data:", error);
+      setSubmitTriggered(false); // Reset submitTriggered on error
     }
-
   };
 
-
-  useEffect( ()=>{
-    const fetchData = async()=>{
-      const userid='214102J';
-
-      
-      try{
-        const getResponse = await axiosInstance.get('/Feedback/getAll-feedback'); 
-        setData(getResponse.data);
-        console.log(data);
-      }
-      catch(error){
-        console.log(error);
-      }
-    };
-    fetchData();
-  },[])
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       const getResponse = await axiosInstance.get(
+  //         "/Feedback/getAll-feedback"
+  //       );
+  //       setData(getResponse.data);
+  //       console.log(data);
+  //     } catch (error) {
+  //       console.log(error);
+  //     }
+  //   };
+  //   fetchData();
+  // }, []);
 
   return (
     <View contentContainerStyle={styles.container}>
       <ScrollView>
         <HeaderSub
-          headLine={'Feedback'}
-          subHeadLine={'Feel free to drop us your feedback.'}
-
-          back = 'HomeScreen'
+          headLine={"Feedback"}
+          subHeadLine={"Feel free to drop us your feedback."}
+          back="HomeScreen"
         />
 
         <Text style={styles.question1}>
-          How satisfied are you overall with the support of our mental health application?
+          How satisfied are you overall with the support of our mental health
+          application?
         </Text>
 
         <SplitButton rateFunction={setRateValue} />
 
-        <QuestionButton qtext="1. Is the user interface intuitive and easy to navigate?" btnFunction={setQone} />
-        <QuestionButton qtext="2. Are there any privacy settings or permissions that seem excessive or insufficient?" btnFunction={setQtwo} />
-        <QuestionButton qtext="3. Is the app slow to load or respond?" btnFunction={setQthree} />
-        <QuestionButton qtext="4. Does it consume excessive battery or data?" btnFunction={setQfour} />
-        <QuestionButton qtext="5. Are there any elements of the design that are confusing or difficult to use?" btnFunction={setQfive} />
+        <QuestionButton
+          qtext="1. Is the user interface intuitive and easy to navigate?"
+          btnFunction={setQone}
+        />
+        <QuestionButton
+          qtext="2. Are there any privacy settings or permissions that seem excessive or insufficient?"
+          btnFunction={setQtwo}
+        />
+        <QuestionButton
+          qtext="3. Is the app slow to load or respond?"
+          btnFunction={setQthree}
+        />
+        <QuestionButton
+          qtext="4. Does it consume excessive battery or data?"
+          btnFunction={setQfour}
+        />
+        <QuestionButton
+          qtext="5. Are there any elements of the design that are confusing or difficult to use?"
+          btnFunction={setQfive}
+        />
 
         <TextInput
           style={styles.textarea}

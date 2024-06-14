@@ -3,25 +3,26 @@ import { StyleSheet, View, Text } from "react-native";
 import { SwipeListView } from "react-native-swipe-list-view";
 import axios from "axios";
 import { EditDeletebutton } from "./editDeleteButton";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { getJournalsByUserId } from "../../services/journalService/journalService";
 
 export const SwipableList = (props) => {
   const [journalDisplay, setJournalDisplay] = useState([]);
   const [finalArray, setFinalArray] = useState([]);
   const swipeListViewRef = useRef(null);
-  
 
   useEffect(() => {
-    const getJournals = async () => {
+    const fetchJournals = async () => {
       try {
-        const userid = '214102J';
-        const journalArray = await axios.get(`http://192.168.43.51:3000/journal/getJournal-byid/${userid}`);
-        setJournalDisplay(journalArray.data);
-      } catch (error) {
-        console.log(error);
+        const journalData = await getJournalsByUserId();
+        setJournalDisplay(journalData);
+        // console.log("display", journalDisplay);
+      } catch (err) {
+        console.log("err" + err.message);
       }
     };
 
-    getJournals();
+    fetchJournals();
   }, []);
 
   useEffect(() => {
@@ -31,8 +32,6 @@ export const SwipableList = (props) => {
       setFinalArray(journalDisplay);
     }
   }, [props.arrayController, journalDisplay, props.journalArray]);
-
-
 
   useEffect(() => {
     // Use a slight delay to ensure the list has rendered before attempting to scroll
@@ -45,43 +44,41 @@ export const SwipableList = (props) => {
     // Clear timeout if the component unmounts or finalArray changes
     return () => clearTimeout(scrollTimeout);
   }, [finalArray]);
-  
-  
-  
-  const handleEditPress = (itemID, itemTittle, itemText, itemEmoji, itemTime) => {
-    props.editFunction(itemID, itemTittle, itemText, itemEmoji, itemTime);
+
+  const handleEditPress = (item, itemTittle, itemText, itemEmoji, itemTime) => {
+    props.editFunction(item, itemTittle, itemText, itemEmoji, itemTime);
   };
 
   const renderJournalItem = ({ item, index }) => {
-    let mood = '';
+    let mood = "";
 
     switch (item.emoji) {
       case 10:
-        mood = '😊';
+        mood = "😊";
         break;
       case 20:
-        mood = '😢';
+        mood = "😢";
         break;
       case 30:
-        mood = '😡';
+        mood = "😡";
         break;
       case 40:
-        mood = '😍';
+        mood = "😍";
         break;
       case 50:
-        mood = '😱';
+        mood = "😱";
         break;
       case 60:
-        mood = '😐';
+        mood = "😐";
         break;
       case 70:
-        mood = '😴';
+        mood = "😴";
         break;
       case 80:
-        mood = '🤒';
+        mood = "🤒";
         break;
       default:
-        mood = '';
+        mood = "";
     }
 
     return (
@@ -91,32 +88,29 @@ export const SwipableList = (props) => {
             <Text style={styles.journalTittle}>{item.tittle}</Text>
             <Text style={styles.emg}>{mood}</Text>
           </View>
-          
-          <Text style={styles.journalText}>{item.journalEntry}</Text>
-          
-          <Text style={styles.time}>{item.time}</Text>
 
-          </View>
-          
-       
+          <Text style={styles.journalText}>{item.journalEntry}</Text>
+
+          <Text style={styles.time}>{item.time}</Text>
+        </View>
       </View>
     );
   };
 
   const renderHiddenItem = ({ item, index }) => {
-    let mood = '';
-    if (item.emoji === 10) mood = '😊';
+    let mood = "";
+    if (item.emoji === 10) mood = "😊";
 
     return (
       <View style={styles.buttonContainer}>
         <EditDeletebutton
           item={item._id}
-          itemText={item.text}
+          itemText={item.journalEntry}
           itemTittle={item.tittle}
           itemTime={item.time}
-          itemEmoji={mood}
-          editFunction={(itemID, itemTittle, itemText, itemEmoji, itemTime) =>
-            handleEditPress(itemID, itemTittle, itemText, itemEmoji, itemTime)
+          itemEmoji={item.emoji}
+          editFunction={(item, itemTittle, itemText, itemEmoji, itemTime) =>
+            handleEditPress(item, itemTittle, itemText, itemEmoji, itemTime)
           }
         />
       </View>
@@ -124,7 +118,8 @@ export const SwipableList = (props) => {
   };
 
   return (
-    <SwipeListView  style={{height:300, marginBottom:50}}
+    <SwipeListView
+      style={{ height: 300, marginBottom: 50 }}
       ref={swipeListViewRef}
       data={finalArray}
       keyExtractor={(item) => item._id}
@@ -133,7 +128,6 @@ export const SwipableList = (props) => {
       leftOpenValue={0}
       rightOpenValue={-65}
       disableRightSwipe={true}
-    
     />
   );
 };
@@ -145,32 +139,32 @@ const styles = StyleSheet.create({
   buttonContainer: {},
 
   journalItem: {
-    backgroundColor: '#FFFFFF',
+    backgroundColor: "#FFFFFF",
     width: 350,
     height: 127,
     elevation: 2,
-    alignSelf: 'flex-end',
+    alignSelf: "flex-end",
     borderRadius: 20,
     marginBottom: 15,
-    flexDirection: 'column',
+    flexDirection: "column",
   },
   emgTittle: {
-    flexDirection: 'row',
+    flexDirection: "row",
   },
   journalText: {
-    color: '#101318',
-    fontWeight: '200',
+    color: "#101318",
+    fontWeight: "200",
     lineHeight: 20,
     paddingTop: 5,
     padding: 15,
     fontSize: 14,
     // backgroundColor:'yellow',
-    marginTop:5,
-    flex:2
+    marginTop: 5,
+    flex: 2,
   },
   journalTittle: {
-    color: '#101318',
-    fontWeight: '300',
+    color: "#101318",
+    fontWeight: "300",
     lineHeight: 20,
     paddingTop: 15,
     paddingBottom: 5,
@@ -178,26 +172,21 @@ const styles = StyleSheet.create({
     paddingRight: 15,
     fontSize: 16,
     flex: 6,
-    
-    
   },
   emg: {
     paddingTop: 10,
     fontSize: 20,
-    textAlign: 'center',
+    textAlign: "center",
     paddingRight: 10,
     flex: 1,
   },
 
-  time:{
-    
-    flex:1,
-    alignItems:'flex-end',
-    alignSelf:'flex-end',
-    marginRight:15,
-    fontWeight:'100',
-    fontSize:10
-    
+  time: {
+    flex: 1,
+    alignItems: "flex-end",
+    alignSelf: "flex-end",
+    marginRight: 15,
+    fontWeight: "100",
+    fontSize: 10,
   },
- 
 });

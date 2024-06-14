@@ -16,7 +16,7 @@ export const ViewJournal = ({navigation}) =>{
     const stack = createStackNavigator();
     const [before, setBefore] = useState('')
     const [arrayController, setArrayController] = useState(0);
-    const [journalArray, setJournalArray] = useState('');
+    const [journalArray, setJournalArray] = useState([]);
 
      const handleButton = () =>{ 
     navigation.navigate('JournalStatistics',{
@@ -30,10 +30,10 @@ export const ViewJournal = ({navigation}) =>{
         })
     }
 
-    const handleEditButton = (itemID,itemTittle,itemText,itemEmoji) =>{
+    const handleEditButton = (item,itemTittle,itemText,itemEmoji) =>{
       // navigate edit jouranal, get props from editFuntion 
       navigation.navigate('EditJournal',{
-        itemID,
+        item,
         itemTittle,
         itemText,
         itemEmoji
@@ -49,7 +49,7 @@ export const ViewJournal = ({navigation}) =>{
       headLine={"My Journals"}
       subHeadLine={"View your past journals"}
 
-      back=''
+      back='HomeScreen'
     />
 
       <View style={styles.container}>

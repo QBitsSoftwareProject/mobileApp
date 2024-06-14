@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState , useEffect} from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import ToggleSwitch from 'toggle-switch-react-native';
 
-export const QuestionButton = ({ qtext, btnFunction }) => {
+export const QuestionButton = ({ qtext, btnFunction, reet }) => {
   const [on, setOn] = useState(false);
 
+ 
   return (
     <View style={styles.questionSection}>
       <View style={styles.left}>
