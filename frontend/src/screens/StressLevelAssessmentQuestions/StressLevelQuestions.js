@@ -179,7 +179,7 @@ const Question = () => {
       //  console.log('tot mark is',totMark);
        setStressLevel(totMark);
 
-       submitMarksToDatabase(totMark, id1);
+       submitMarksToDatabase(totMark);
 
        Index = 0;
       

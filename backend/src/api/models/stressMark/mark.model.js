@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const MarkSchema = mongoose.Schema({
 
   userid: {
-    type: String,
+    type: mongoose.Schema.Types.ObjectId,
     required:true
   },
   mark: {

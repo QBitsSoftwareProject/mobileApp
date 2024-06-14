@@ -1,8 +1,16 @@
 import axiosInstance from "../../api/axios";
+import { getUserId } from "../getUserIdService/getUserIdService";
 
 //fetch stress level
-export const fetchMarkById = async (userID) => {
+export const fetchMarkById = async () => {
         try {
+
+          const userID = await getUserId();
+            console.log(`User ID: ${userID}`);
+    
+            if (!userID) {
+                throw new Error('User ID is not available');
+            }
             const response = await axiosInstance.get(`/mark/get-mark-by-id/${userID}`);
           
           return response.data;
@@ -13,8 +21,15 @@ export const fetchMarkById = async (userID) => {
       };
 
 
-export const submitMarksToDatabase = async (totMark, u_id) => {
+export const submitMarksToDatabase = async (totMark) => {
         try {
+
+          const userID = await getUserId();
+          console.log(`User ID: ${userID}`);
+  
+          if (!userID) {
+              throw new Error('User ID is not available');
+          }
             
           const currentDate = new Date();
       
@@ -24,7 +39,7 @@ export const submitMarksToDatabase = async (totMark, u_id) => {
       
           // Prepare the payload with mark converted to a number
           const payload = {
-            userid: u_id,
+            userid: userID,
             mark: Number(totMark), 
             date: formattedDate,
             time: formattedTime,
@@ -44,3 +59,21 @@ export const submitMarksToDatabase = async (totMark, u_id) => {
         }
       };
       
+
+      export const fetchHistoryDataByUserId = async () => {
+        try {
+
+          const userID = await getUserId();
+            console.log(`User ID: ${userID}`);
+    
+            if (!userID) {
+                throw new Error('User ID is not available');
+            }
+            const response = await axiosInstance.get(`/mark/get-sorted-mark-by-id/${userID}`);
+          
+          return response.data;
+
+        } catch (err) {
+          console.log(err);
+        }
+      };

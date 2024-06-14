@@ -25,29 +25,16 @@ import {
 
 const DisplayResultScreen = () => {
 
-
-
-    const [StressLevel, setStressLevel] = useState('');
-    const [userID, setUserId] = useState('');
-    const [lastMark,setLastMark] = useState('');
+    const [lastMark,setLastMark] = useState(null);
+    const [val,setVal] = useState('');
 
     
-
-    useEffect(() => {
-      
-  setUserId('214012H'); 
-  fetchMark('214012H');
-  
-}, []);
-    
-// const encryptText = encryptData({ text: "i am madusha" });
-// console.log('Encrypted Text:', encryptText);
-
-        useEffect ( () => {
-            // console.log('Stress Level Mark:', StressLevel);
-           
-            
-        },[StressLevel])
+    useEffect ( () => {
+      if(val !== null){
+      fetchMark();
+      }
+    },[val])    
+        
 
         let level;
 
@@ -67,7 +54,6 @@ const DisplayResultScreen = () => {
         const handleHistorybutton = () => {
 
           navigation.navigate('StressLevelHistoryScreen', {
-             user_id: userID,
 
           });
         }
@@ -93,39 +79,35 @@ const DisplayResultScreen = () => {
        };
 
        // get last stress level of the user
-       const fetchMark = async (userID) => {
-        
+       const fetchMark = async () => {
+         
         try {
           
-          const userData = await fetchMarkById(userID);
+          const response = await fetchMarkById();
+          const userData = response 
       
           if (userData.length > 0) {
             const mostRecentMark = userData[userData.length - 1].mark;
             console.log('Most Recent Mark:', mostRecentMark);
             setLastMark(mostRecentMark);
+            setVal(1);
           } else {
             console.log('No user data found.');
           }
         } catch (err) {
           console.log('Error fetching mark:', err);
         }
-      };
+      }; 
 
-      
- 
-
-      
+  
   const suggessionBtnFunction = () => {
 
     
     navigation.navigate('MindRelaxingMethod');
   };
+
+   
         
-
-       
-  
-       
-
 
   return (
     <View>

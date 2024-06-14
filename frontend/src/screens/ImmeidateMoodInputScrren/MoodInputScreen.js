@@ -4,6 +4,8 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import styles from './MoodInputStyles';
 import back from '../../assets/images/back.png';
 import { useNavigation } from "@react-navigation/native";
+import { storeCurrentMood , updateCurrentMood , fetchCurrentMoodInput} from '../../services/currentMoodInputServices/currentMoodInputServices';
+import { getUserId } from '../../services/getUserIdService/getUserIdService';
 
 
 const MoodInputScreen = () => {
@@ -12,6 +14,16 @@ const MoodInputScreen = () => {
 
   const [optionValue, setOptionValue] = useState('');
   const [screenHeight, setScreenHeight] = useState('');
+  const [happy, setHappy] = useState('');
+  const [sad, setSad] = useState('');
+  const [neutral, setNeutral] = useState('');
+  const [worried, setWorried] = useState('');
+  const [userId, setUserId] = useState('');
+
+  
+
+  
+
 
   const handleOptions = (value) => {
         // console.log(value);
@@ -23,12 +35,68 @@ const MoodInputScreen = () => {
   const windowHeight = windowSize.height;
   setScreenHeight(windowHeight);
 
-  console.log(optionValue);
-  // console.log(windowHeight);
-  })
+   
+  
 
-  const handleSubmitBtn = () => {
+  console.log(optionValue);
+  setUserId("214224J");
+
+  if(optionValue === 'happy'){
+    setHappy(1);
+    setSad(0);
+    setNeutral(0);
+    setWorried(0)
+  }else if(optionValue === 'sad'){
+    setHappy(0);
+    setSad(1);
+    setNeutral(0);
+    setWorried(0)
+  }else if(optionValue === 'neutral'){
+    setHappy(0);
+    setSad(0);
+    setNeutral(1);
+    setWorried(0)
+  }else if(optionValue === 'worried'){
+    setHappy(0);
+    setSad(0);
+    setNeutral(0);
+    setWorried(1)
+  }else{
+    console.log("wrong value");
+  }
+
+   console.log(happy);
+   console.log(sad);
+   console.log(neutral);
+   console.log(worried);
+  },[optionValue])
+
+  const getdata = async() => {
+    try{
+      const data = await fetchCurrentMoodInput();
+      console.log(data);
+   
+  
+    }
+    catch(error){
+      console(error);
+    }
+  } 
+  
+  useEffect ( () => {
+    getdata()
+  },[])  
+
+  const handleSubmitBtn = async() => {
+    if(optionValue){
+      // storeCurrentMood(happy,sad,neutral,worried);
+      updateCurrentMood(happy,sad,neutral,worried); 
+      
+      
     navigation.navigate("MindRelaxingMethod");
+    }else{
+      alert("Choose a mood");
+    }
   }
   const handleBackBtn = () => {
     navigation.navigate("HomeScreen");
@@ -44,7 +112,7 @@ const MoodInputScreen = () => {
         </TouchableOpacity>
 
         <View style={styles.horivontalBar}></View>
-        <View style = {{height: screenHeight-282}}>
+        <View style = {{height: screenHeight-282}}> 
         <ScrollView >
         <View style={styles.textArea}>
           <Text style={styles.textOne}>Hey there!</Text>
@@ -57,12 +125,12 @@ const MoodInputScreen = () => {
 
         <View style={styles.imojiRow}>
 
-          <TouchableOpacity style={[styles.leftImoji, optionValue === 30 ? styles.selectedOption : null, ]}
-            onPress={() => handleOptions(30)}>
+          <TouchableOpacity style={[styles.leftImoji, optionValue === "sad" ? styles.selectedOption : null, ]}
+            onPress={() => handleOptions("sad")}>
             <Image source={require('../../assets/images/ImmediatMoodInput/sad.png')} style={styles.optionImg} />
           </TouchableOpacity>
 
-          <TouchableOpacity  style={[styles.rightImoji, optionValue === 20 ? styles.selectedOption : null]} onPress={() => handleOptions(20)}>
+          <TouchableOpacity  style={[styles.rightImoji, optionValue === "happy" ? styles.selectedOption : null]} onPress={() => handleOptions("happy")}>
             <Image source={require('../../assets/images/ImmediatMoodInput/upset.png')} style={styles.optionImg} />
           </TouchableOpacity>
 
@@ -70,11 +138,11 @@ const MoodInputScreen = () => {
 
         <View style={styles.imojiRowTwo}>
 
-          <TouchableOpacity  style={[styles.leftImoji, optionValue === 10 ? styles.selectedOption : null]} onPress={() => handleOptions(10)}>
+          <TouchableOpacity  style={[styles.leftImoji, optionValue === "worried" ? styles.selectedOption : null]} onPress={() => handleOptions("worried")}>
             <Image source={require('../../assets/images/ImmediatMoodInput/nervous.png')} style={styles.optionImg} />
           </TouchableOpacity>
 
-          <TouchableOpacity style={[styles.rightImoji, optionValue === 5 ? styles.selectedOption : null]} onPress={() => handleOptions(5)}>
+          <TouchableOpacity style={[styles.rightImoji, optionValue === "neutral" ? styles.selectedOption : null]} onPress={() => handleOptions("neutral")}>
             <Image source={require('../../assets/images/ImmediatMoodInput/nutral.png')} style={styles.optionImg} />
           </TouchableOpacity>
 
