@@ -20,6 +20,9 @@ const HomeCard = (props) => {
     } else if (cardName == "journal") {
       navigation.navigate("JournalStack");
     }
+    else if (cardName == "meditation") {
+      navigation.navigate("MindRelaxingMethod");
+    }
   };
 
   return (

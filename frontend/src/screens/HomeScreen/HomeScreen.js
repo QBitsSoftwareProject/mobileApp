@@ -1,4 +1,4 @@
-import React, { useEffect, useState,useContext } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import HomeTop from "../../components/HomeTop/HomeTop";
 import {
   BackHandler,
@@ -17,7 +17,7 @@ import { useNavigation } from "@react-navigation/native";
 import { getAUser, getUser } from "../../services/userServices/userService";
 import { getADoctor } from "../../services/doctorServices/doctorService";
 import loadingGif from "../../assets/animation/loading.gif";
-import { BackgroundMusicContext } from '../../components/SettingScreen/BackgroundMusicProvider';
+import { BackgroundMusicContext } from "../../components/SettingScreen/BackgroundMusicProvider";
 
 // const proPic = require('../../assets/images/doc.jpg')
 
@@ -54,14 +54,12 @@ const images = [
 // const name = "Thishakya"
 
 const HomeScreen = (props) => {
-
   const { setMusicStop } = useContext(BackgroundMusicContext);
 
   useEffect(() => {
     // Set musicStop to true when the component mounts
     setMusicStop(true);
   }, []);
-
 
   const navigation = useNavigation();
 
@@ -89,10 +87,8 @@ const HomeScreen = (props) => {
     };
   }, []);
 
- 
-
   const handleStressLevelPress = () => {
-    navigation.navigate('StressLevel');
+    navigation.navigate("StressLevel");
   };
 
   //fetch user from database
@@ -205,7 +201,7 @@ const HomeScreen = (props) => {
             <HomeCard
               image={moodImg}
               cardName={"mood"}
-              headLine={"Mood Tracking"}
+              headLine={"Mood Tracking"} 
               subHeadLine={
                 "Track your moods, find balance. Your emotional compass in one place."
               }

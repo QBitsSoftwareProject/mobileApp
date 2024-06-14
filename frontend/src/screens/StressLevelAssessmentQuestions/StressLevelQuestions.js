@@ -16,7 +16,8 @@ import {
   StyleSheet,
   Image,
   TouchableOpacity,
-  ActivityIndicator
+  ActivityIndicator,
+  ScrollView
 } from "react-native";
 
 import {ProgressBar} from 'react-native-paper';
@@ -229,6 +230,8 @@ const Question = () => {
 
   return (
     <SafeAreaView>
+
+      <ScrollView>
       
       <TouchableOpacity onPress={handleBackButton}>
         <Image source={require("../../assets/images/back.png")} style={{ width: 53, height: 53, marginLeft: 25 }} />
@@ -276,7 +279,7 @@ const Question = () => {
       
 
   
-        
+</ScrollView>
       
     </SafeAreaView>
     );
@@ -306,7 +309,8 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     borderWidth: 2,
     borderColor: '#4A90BF',
-    backgroundColor: "white"
+    backgroundColor: "white",
+    marginBottom:100
   }
 });
 

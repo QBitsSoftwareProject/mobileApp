@@ -100,3 +100,4 @@ export const updateAUser = async (updates) => {
     throw new Error("Error during request setup");
   }
 };
+

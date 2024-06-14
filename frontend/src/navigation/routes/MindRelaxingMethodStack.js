@@ -10,7 +10,7 @@ const MindRelaxingMethodStack = () => {
 
     <stack.Navigator screenOptions={{ headerStyle: { flex:1,backgroundColor: 'transparent' }, headerShown:false }}>
       
-      <stack.Screen name='HomeScreen' component={Mindrelaxinmethod} /> 
+      <stack.Screen name='MindrelaxinmethodScreen' component={Mindrelaxinmethod} /> 
       
     </stack.Navigator>
 

@@ -19,7 +19,11 @@ const TextCard = (props) => {
 
             <Text style = {{fontSize:14, marginBottom:4}}>
                 {props.title}</Text>
-            <Text style = {{fontSize:12,color:'#868686'}}>{props.subText}</Text>
+            <Text style = {{fontSize:12,color:'#868686' ,whiteSpace: 'nowrap', overflow: 'hidden'}} numberOfLines={1}>
+                {props.subText.split(' ').slice(0, 10).join(' ')}
+                {props.subText.split(' ').length > 10 ? ' ...' : ''}
+                
+                </Text>
         </View>
 
         <View style = {styles.editIcon}>
