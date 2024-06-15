@@ -5,11 +5,11 @@ exports.updateComment = async (req, res) => {
 
   try {
     // Destructuring the request body to extract Comment details
-    const { newContent } = req.body;
+    const { newComment } = req.body;
 
     // Creating an object with updated Comment details
     const updateComment = {
-      content: newContent,
+      content: newComment,
     };
 
     // Finding and updating the Comment by ID

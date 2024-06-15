@@ -15,7 +15,6 @@ import EditDeletMenu from "../../components/DropDownMenu/EditDeleteMenu";
 import ReportMenu from "../DropDownMenu/ReportMenu";
 import {
   createComment,
-  getComment,
   getComments,
 } from "../../services/commentServices/commentServices";
 import CommentCard from "../../components/CFCard/CommentCard";
@@ -26,10 +25,6 @@ const PostCard = (props) => {
   const [comment, setComment] = useState();
 
   const [commentList, setCommentList] = useState();
-
-  const handlePress = () => {
-    setIsPress(!isPress);
-  };
 
   const formatTimestamp = (timestamp) => {
     const date = new Date(timestamp);
@@ -93,6 +88,10 @@ const PostCard = (props) => {
     return;
   }
 
+  const handlePress = () => {
+    setIsPress(!isPress);
+  };
+
   return (
     <View style={styles.cardBox}>
       <View style={styles.content1}>
@@ -112,7 +111,6 @@ const PostCard = (props) => {
         <View
           style={{
             flexDirection: "column",
-
             justifyContent: "center",
             zIndex: 10,
           }}
@@ -125,17 +123,21 @@ const PostCard = (props) => {
           </TouchableOpacity>
 
           {props.cardName == "HomePageCard" && isPress && (
-            <ReportMenu postId={props.postId} DPtext={"Report"} />
+            <ReportMenu
+              postId={props.postId}
+              DPtext={"Report"}
+              onClose={setIsPress}
+            />
           )}
 
           {props.cardName == "MyProfileCard" && isPress && (
             <EditDeletMenu
               postId={props.postId}
-              // checkPress={setIsPress}
               DPtext1={"Edit Post"}
               DPtext2={"Delete post"}
               onDelete={props.onDelete}
               onClose={setIsPress}
+              onUpdate={props.onUpdate}
             />
           )}
         </View>
@@ -157,14 +159,13 @@ const PostCard = (props) => {
           style={styles.textinput}
           value={comment}
           onChangeText={(text) => {
-            // props.content(text);
             setComment(text);
           }}
           multiline
           placeholder="Add a comment...."
         />
         <TouchableOpacity
-          style={styles.iconframe}
+          // style={styles.iconframe}
           onPress={handleSendButtonPress}
         >
           <Image
@@ -270,7 +271,7 @@ const styles = StyleSheet.create({
   textinput: {
     width: "90%",
     borderBottomWidth: 1,
-    borderColor: "#3498db",
+    borderColor: "#E7E7E7",
     marginBottom: 15,
   },
   iconframe: {

@@ -1,7 +1,13 @@
+import { useState } from "react";
 import { StyleSheet, TouchableOpacity, View, Image, Text } from "react-native";
-import React, { useState } from "react";
+import CommentEditDeleteMenu from "../../components/DropDownMenu/CommentsEditDeleteMenu";
 
 const CommentCard = (props) => {
+  const [isPress, setIsPress] = useState(false);
+
+  const handlePress = () => {
+    setIsPress(!isPress);
+  };
   return (
     <View style={styles.cardBox}>
       <View>
@@ -9,29 +15,44 @@ const CommentCard = (props) => {
           <Image source={props.image} style={styles.image} />
         </View>
       </View>
-
       <View style={styles.content2}>
         <View>
-          <Text style={styles.content}>{props.content}</Text>
+          <Text style={styles.comment}>{props.content}</Text>
         </View>
       </View>
+      <TouchableOpacity onPress={() => handlePress("")}>
+        <Image
+          source={require("../../assets/images/PostCardImages/dots.png")}
+          style={styles.navMenu}
+        />
+      </TouchableOpacity>
+      {isPress && (
+        <CommentEditDeleteMenu
+          postId={props.commentId}
+          DPtext1={"Edit"}
+          DPtext2={"Delete"}
+          onDelete={props.onDelete}
+          onClose={setIsPress}
+          onUpdate={props.onUpdate}
+        />
+      )}
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   cardBox: {
+    width: "90%",
+    height: "auto",
+    gap: 15,
+    paddingHorizontal: 20,
+    paddingVertical: 10,
     display: "flex",
     flexDirection: "row",
-    gap: 15,
     alignItems: "center",
-    width: "90%",
-    height: 90,
-    padding: 20,
-    backgroundColor: "#D9D9D9",
-    opacity: 0.2,
-    borderRadius: 20,
-    elevation: 1,
+    justifyContent: "space-between",
+    alignSelf: "center",
+    backgroundColor: "red",
     marginBottom: 15,
   },
 
@@ -52,21 +73,24 @@ const styles = StyleSheet.create({
   },
   content2: {
     width: "70%",
+    height: "auto",
+    backgroundColor: "white",
   },
   title: {
     fontSize: 18,
     fontWeight: "500",
     color: "#40495B",
   },
-  content: {
+  comment: {
     fontSize: 12,
     fontWeight: "500",
     color: "#5C677D",
   },
 
-  arrow: {
-    width: 20,
+  navMenu: {
     height: 20,
+    width: 20,
+    marginRight: 25,
   },
 });
 

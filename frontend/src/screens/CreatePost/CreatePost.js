@@ -9,7 +9,6 @@ import { useState } from "react";
 import HomePage from "../../screens/CommunityHomePage/HomePage";
 import { createPost } from "../../services/postServices/postServices";
 import { storage } from "../../config/fireBase";
-
 import { getDownloadURL, uploadBytes, ref } from "firebase/storage";
 
 const CreatePost = ({ route }) => {
@@ -89,10 +88,7 @@ const CreatePost = ({ route }) => {
           </View>
 
           <View style={styles.buttonContainer}>
-            <RegularButton
-              name={"post"}
-              onPress={handlePostImageButtonPress}
-            ></RegularButton>
+            <RegularButton name={"post"} onPress={handlePostImageButtonPress} />
             <PopupMessage
               message={popupMessage}
               onConfirm={confirmMessage}
@@ -131,6 +127,8 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     marginBottom: 60,
+    alignSelf: "center",
+    justifyContent: "center",
   },
 });
 

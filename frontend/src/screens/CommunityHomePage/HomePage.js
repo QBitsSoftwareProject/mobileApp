@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { View, StyleSheet, ScrollView, Dimensions } from "react-native";
 import CFHeaderSub from "../../components/ComForumHeader/CFHeader";
-// import PostCatBtn from "../../components/CFButton/PostCatBtn";
 import PostCard from "../../components/CFCard/PostCard";
 import FloatingButton from "../../components/FloatingButton/FloatingButton";
 import { useFocusEffect, useNavigation } from "@react-navigation/native";
 import { getPost } from "../../services/postServices/postServices";
-import { getComment } from "../../services/commentServices/commentServices";
 
 const HomePage = () => {
   const screenHeight = Dimensions.get("window").height - 275;

@@ -10,7 +10,7 @@ import {
 import * as ImagePicker from "expo-image-picker";
 import styles from "./styles";
 
-const FilePicker = (props) => {
+const ImageUploader = (props) => {
   const [selectedImage, setSelectedImage] = useState(null);
 
   useEffect(() => {
@@ -61,10 +61,8 @@ const FilePicker = (props) => {
 
   return (
     <View style={{ marginBottom: 32 }}>
-      <Text style={styles.title}>{props.label} :</Text>
-
       <TouchableOpacity style={styles.imageBtn} onPress={pickImage}>
-        <Text style={styles.btnText}>Choose Image</Text>
+        <Text style={styles.btnText}>Upload your image here... </Text>
       </TouchableOpacity>
 
       <View style={styles.imageContainer}>
@@ -78,4 +76,4 @@ const FilePicker = (props) => {
   );
 };
 
-export default FilePicker;
+export default ImageUploader;

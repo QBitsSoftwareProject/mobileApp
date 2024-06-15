@@ -1,14 +1,14 @@
 import { TouchableOpacity, View, Text, StyleSheet, Alert } from "react-native";
 import React, { useState } from "react";
-import { deleteAPost } from "../../services/postServices/postServices";
 import EditPopupMessage from "../CF Pop-up/EditPop-up";
+import { deleteAComment } from "../../services/commentServices/commentServices";
 
-const EditDeletMenu = (props) => {
+const CommentEditDeletMenu = (props) => {
   const [popupMessage, setPopupMessage] = useState("");
 
   const handleEdit = async () => {
     try {
-      setPopupMessage("Edit your caption");
+      setPopupMessage("Edit your Comment");
     } catch (error) {
       console.log(error);
     }
@@ -23,22 +23,24 @@ const EditDeletMenu = (props) => {
     setPopupMessage("");
   };
 
-  const deletePost = async () => {
+  const deleteComment = async () => {
     try {
+      console.log("Deleting comment with ID:", props.commentId);
       props.onClose(false);
-      await deleteAPost(props.postId);
+      await deleteAComment(props.commentId);
+      console.log(props.commentId);
       if (props.onDelete) {
-        props.onDelete(props.postId);
+        props.onDelete(props.commentId);
       }
     } catch (error) {
-      console.error("Failed to delete post:", error);
+      console.error("Failed to delete comment:", error);
     }
   };
 
   const displayDeleteAlert = () => {
     Alert.alert(
       "Are you sure!",
-      "This action will delete your post permanently!",
+      "This action will delete your comment permanently!",
       [
         {
           text: "cancel",
@@ -47,7 +49,7 @@ const EditDeletMenu = (props) => {
           },
           style: "cancel",
         },
-        { text: "Delete", onPress: () => deletePost() },
+        { text: "Delete", onPress: () => deleteComment() },
       ],
       { cancelable: true }
     );
@@ -71,7 +73,7 @@ const EditDeletMenu = (props) => {
         </TouchableOpacity>
 
         <EditPopupMessage
-          id={props.postId}
+          id={props.commentId}
           message={popupMessage}
           onConfirm={confirmMessage}
           onClose={closeMessage}
@@ -83,7 +85,7 @@ const EditDeletMenu = (props) => {
 };
 const styles = StyleSheet.create({
   DropPop: {
-    width: 120,
+    width: 100,
     height: "auto",
     backgroundColor: "white",
     borderRadius: 5,
@@ -93,7 +95,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     alignSelf: "flex-end",
     justifyContent: "center",
-    position: "absolute",
+    // position: "absolute",
   },
   container: {
     flex: 1,
@@ -115,4 +117,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default EditDeletMenu;
+export default CommentEditDeletMenu;

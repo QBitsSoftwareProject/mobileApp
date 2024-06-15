@@ -15,7 +15,7 @@ export default styles = StyleSheet.create({
   imageBtn: {
     width: 170,
     height: 40,
-    backgroundColor: "#45B4FF",
+    backgroundColor: "transperant",
     justifyContent: "center",
     alignItems: "center",
     borderRadius: 10,
@@ -23,7 +23,8 @@ export default styles = StyleSheet.create({
   btnText: {
     fontSize: 14,
     fontWeight: "400",
-    color: "white",
+    color: "#5C677D",
+    opacity: 0.6,
   },
   imageContainer: {
     flexDirection: "row",

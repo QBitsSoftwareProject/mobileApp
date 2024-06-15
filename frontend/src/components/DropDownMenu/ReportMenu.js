@@ -74,14 +74,15 @@ const styles = StyleSheet.create({
     position: "absolute",
   },
   container: {
+    flex: 1,
     height: "auto",
+    flexDirection: "column",
     alignItems: "flex-start",
   },
   DPtext: {
-    fontSize: 12,
+    fontSize: 15,
     color: "#40495B",
     fontWeight: "400",
-    lineHeight: 35,
   },
   contains1: {
     flex: 1,
@@ -90,8 +91,8 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
   },
   reportImg: {
-    width: 17,
-    height: 17,
+    width: 25,
+    height: 25,
   },
 });
 

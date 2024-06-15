@@ -1,11 +1,13 @@
 const commentsSchema = require("../../models/comments/commentsModels");
 
 exports.deletecomments = async (req, res) => {
-  const { commentId } = req.params;
+  const { postId } = req.params;
 
   try {
     // Finding and deleting the comment by id
-    const deletedcomment = await commentsSchema.findByIdAndDelete(commentId);
+    const deletedcomment = await commentsSchema.findByIdAndDelete({
+      postId: postId,
+    });
 
     // If comment is not found, return a 404 error response
     if (!deletedcomment) {

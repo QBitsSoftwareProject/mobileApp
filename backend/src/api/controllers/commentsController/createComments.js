@@ -7,13 +7,13 @@ exports.createComment = async (req, res) => {
 
     const createdAt = new Date();
 
-    const newcomment = new commentsSchema({
+    const newComment = new commentsSchema({
       postId,
       createdAt: createdAt,
       content,
     });
 
-    await newcomment.save();
+    await newComment.save();
 
     return res.status(201).json("New comment succesfully created!");
   } catch (error) {

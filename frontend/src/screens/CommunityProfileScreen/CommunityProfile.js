@@ -10,11 +10,11 @@ const ProfileScreen = () => {
 
   const [postList, setPostList] = useState();
 
-  const [isChange, setIsChange] = useState(false);
+  // const [isChange, setIsChange] = useState(false);
 
-  const change = () => {
-    setIsChange(!isChange);
-  };
+  // const change = () => {
+  //   setIsChange(!isChange);
+  // };
 
   const fetchPostData = async () => {
     try {
@@ -28,6 +28,10 @@ const ProfileScreen = () => {
   useEffect(() => {
     fetchPostData();
   }, []);
+
+  const handleUpdate = () => {
+    fetchPostData();
+  };
 
   const profilePicture = require("../../assets/images/PostCardImages/manprofile.jpg");
 
@@ -70,6 +74,7 @@ const ProfileScreen = () => {
                 description={item.description}
                 postImage={item.image}
                 onDelete={onDeletePost}
+                onUpdate={handleUpdate}
               />
             ))}
           </View>

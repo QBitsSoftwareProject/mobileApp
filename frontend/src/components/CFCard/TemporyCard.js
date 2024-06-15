@@ -1,6 +1,5 @@
 import {
   StyleSheet,
-  TouchableOpacity,
   View,
   Image,
   Text,
@@ -10,16 +9,19 @@ import {
 } from "react-native";
 import React, { useEffect } from "react";
 import { useState } from "react";
-import FilePicker from "../GetImages/FilePicker";
+import ImageUploader from "../../components/ImageUploader/ImageUploader";
 
 const TemporyCard = (props) => {
   const [post, setPost] = useState(null);
 
   const [postdescription, setPostDescription] = useState("");
 
-  const [image, setImage] = useState();
+  const [image, setImage] = useState(null);
 
   useEffect(() => {
+    // if (image) {
+    //   setPost({ image }); // Update post state with the selected image
+    // }
     props.selectedImage(image);
   }, [image]);
 
@@ -40,7 +42,11 @@ const TemporyCard = (props) => {
           </View>
         </View>
 
-        <View style={{ marginVertical: 10 }}>
+        <View
+          style={{
+            marginVertical: 10,
+          }}
+        >
           <TextInput
             value={postdescription}
             onChangeText={(text) => {
@@ -50,7 +56,7 @@ const TemporyCard = (props) => {
             multiline
             placeholder="Say something about your post..."
           />
-          <FilePicker selectedImg={setImage} />
+
           <TouchableWithoutFeedback onPress={handleModalClose}>
             <View style={[styles.modalBG, StyleSheet.absoluteFillObject]} />
           </TouchableWithoutFeedback>
@@ -59,11 +65,7 @@ const TemporyCard = (props) => {
 
       {post === null && (
         <View style={styles.content2}>
-          {/* <TouchableOpacity style={styles.content2}>
-            <Image source={uploadimage} style={styles.uploadimage} />
-
-            <Text style={styles.des}>Upload your image here....</Text>
-          </TouchableOpacity> */}
+          <ImageUploader selectedImg={setImage} />
         </View>
       )}
     </View>
@@ -79,7 +81,7 @@ const styles = StyleSheet.create({
     elevation: 1,
     flexDirection: "column",
     alignSelf: "center",
-    marginBottom: 15,
+    marginBottom: 5,
   },
   content1: {
     display: "flex",
@@ -107,23 +109,6 @@ const styles = StyleSheet.create({
     fontWeight: "500",
     color: "#40495B",
   },
-  flex1: {
-    display: "flex",
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
-    gap: 15,
-    borderWidth: 1,
-    width: "60%",
-    padding: 3,
-    borderRadius: 5,
-  },
-
-  sub: {
-    fontSize: 12,
-    fontWeight: "500",
-    color: "#5C677D",
-  },
   arrow: {
     width: 20,
     height: 20,
@@ -141,21 +126,16 @@ const styles = StyleSheet.create({
     color: "#5C677D",
   },
   content2: {
-    display: "flex",
-    position: "relative",
     width: "100%",
-    height: 150,
+    height: "auto",
     borderWidth: 1,
     borderRadius: 10,
     borderColor: "#C1C1C1",
+    display: "flex",
     justifyContent: "center",
     alignItems: "center",
-  },
-  Postimage: {
-    width: 344,
-    height: 176,
-    borderBottomLeftRadius: 20,
-    borderBottomRightRadius: 20,
+    position: "relative",
+    backgroundColor: "red",
   },
 
   modalBG: {

@@ -8,7 +8,7 @@ export const createComment = async (postId, cont) => {
   try {
     const token = await AsyncStorage.getItem("authToken");
 
-    const response = await axios.post(
+    await axios.post(
       URL + "/",
       {
         postId,
@@ -27,7 +27,7 @@ export const createComment = async (postId, cont) => {
 export const getComments = async (postId) => {
   try {
     const token = await AsyncStorage.getItem("authToken");
-    console.log(postId);
+
     const response = await axios.get(
       URL + "/view-comments/" + postId,
 
@@ -77,14 +77,14 @@ export const getUpdatedComment = async (id) => {
   }
 };
 
-export const updateComment = async (id, newContent) => {
+export const updateComment = async (id, newComment) => {
   try {
     const token = await AsyncStorage.getItem("authToken");
 
     const response = await axios.put(
       URL + "/update-comment/" + id,
       {
-        newContent,
+        newComment,
       },
       {
         headers: { authtoken: token },
@@ -96,10 +96,11 @@ export const updateComment = async (id, newContent) => {
   }
 };
 
-export const deleteAComment = async (id) => {
+export const deleteAComment = async (postId) => {
   try {
     const token = await AsyncStorage.getItem("authToken");
-    const response = await axios.delete(URL + "/delete-comment/" + id, {
+    console.log(id);
+    const response = await axios.delete(URL + "/delete-comment/" + postId, {
       headers: { authtoken: token },
     });
     return response.data;

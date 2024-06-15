@@ -11,7 +11,7 @@ import {
 } from "react-native";
 import { getAPost, updatePost } from "../../services/postServices/postServices";
 
-const EditPopupMessage = ({ message, onClose, onConfirm, id }) => {
+const EditPopupMessage = ({ message, onClose, id, onUpdate }) => {
   const [editedPostDescription, setEditedPostDescription] = useState("");
 
   const [onePost, setOnePost] = useState("");
@@ -29,6 +29,7 @@ const EditPopupMessage = ({ message, onClose, onConfirm, id }) => {
     try {
       onClose();
       await updatePost(id, editedPostDescription);
+      onUpdate();
     } catch (error) {
       console.log(error);
     }
@@ -43,7 +44,7 @@ const EditPopupMessage = ({ message, onClose, onConfirm, id }) => {
   };
 
   if (!onePost) {
-    return;
+    return null;
   }
 
   return (
@@ -54,7 +55,6 @@ const EditPopupMessage = ({ message, onClose, onConfirm, id }) => {
 
           <TextInput
             style={styles.textinput}
-            // value={editedPostDescription}
             defaultValue={onePost.description}
             onChangeText={(text) => {
               // editedPostDescription(text);
