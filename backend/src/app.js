@@ -13,6 +13,7 @@ const motivationRoute = require("./api/routes/motivationsRoute.js");
 const FeedbackRoute = require("./api/routes/feedback.route.js");
 const journalRoute = require("./api/routes/Journal.route.js");
 const questionRoute = require("./api/routes/questionRoute.js");
+const moodEntryRoute = require("./api/routes/moodsInputroutes.js");
 
 const app = express();
 
@@ -44,6 +45,7 @@ app.use("/api/v1/motivation", motivationRoute);
 app.use("/api/v1/Feedback", FeedbackRoute);
 app.use("/api/v1/journal", journalRoute);
 app.use("/api/v1/question", questionRoute);
+app.use("/api/v1/moodEntries", moodEntryRoute);
 
 app.listen(PORT, () => {
   console.log(`server is running on port ${PORT}`);

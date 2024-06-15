@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import LoginStack from "../routes/LoginStack";
 import MainStack from "../routes/MainStack";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { BackgroundMusicProvider } from '../../components/SettingScreen/BackgroundMusicProvider';
+import { BackgroundMusicProvider } from "../../components/SettingScreen/BackgroundMusicProvider";
 
 const NavContainer = () => {
   const [userId, setUserId] = useState();
@@ -34,24 +34,19 @@ const NavContainer = () => {
 
   return (
     <BackgroundMusicProvider>
-    <NavigationContainer>
-      
-      {!userId ? (
-        <>
-          <LoginStack />
-        </>
-      ) : (
-        
-        <>
-          <MainStack userId={userId} role={role} />
-        </>
-        
-      )}
-      
-    </NavigationContainer>
+      <NavigationContainer>
+        {!userId ? (
+          <>
+            <LoginStack />
+          </>
+        ) : (
+          <>
+            <MainStack userId={userId} role={role} />
+          </>
+        )}
+      </NavigationContainer>
     </BackgroundMusicProvider>
   );
 };
- 
 
 export default NavContainer;
