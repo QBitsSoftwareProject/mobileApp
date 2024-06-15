@@ -12,8 +12,6 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import FilePicker from "../GetImages/FilePicker";
 
-const uploadimage = require("../../assets/images/PostCardImages/upload.png");
-
 const TemporyCard = (props) => {
   const [post, setPost] = useState(null);
 
@@ -50,11 +48,9 @@ const TemporyCard = (props) => {
               setPostDescription(text);
             }}
             multiline
-            placeholder="Say something about your post...."
+            placeholder="Say something about your post..."
           />
-
           <FilePicker selectedImg={setImage} />
-
           <TouchableWithoutFeedback onPress={handleModalClose}>
             <View style={[styles.modalBG, StyleSheet.absoluteFillObject]} />
           </TouchableWithoutFeedback>
@@ -62,12 +58,12 @@ const TemporyCard = (props) => {
       </View>
 
       {post === null && (
-        <View style={{ padding: 15 }}>
-          <TouchableOpacity style={styles.content2}>
+        <View style={styles.content2}>
+          {/* <TouchableOpacity style={styles.content2}>
             <Image source={uploadimage} style={styles.uploadimage} />
 
             <Text style={styles.des}>Upload your image here....</Text>
-          </TouchableOpacity>
+          </TouchableOpacity> */}
         </View>
       )}
     </View>
@@ -98,7 +94,7 @@ const styles = StyleSheet.create({
     borderWidth: 4,
     borderRadius: 50,
     overflow: "hidden",
-    elevation: 2,
+    elevation: 1,
   },
 
   image: {
@@ -154,7 +150,6 @@ const styles = StyleSheet.create({
     borderColor: "#C1C1C1",
     justifyContent: "center",
     alignItems: "center",
-    gap: 5,
   },
   Postimage: {
     width: 344,
@@ -162,9 +157,7 @@ const styles = StyleSheet.create({
     borderBottomLeftRadius: 20,
     borderBottomRightRadius: 20,
   },
-  uploadimage: {
-    display: "flex",
-  },
+
   modalBG: {
     flex: 1,
     zIndex: -1,

@@ -1,26 +1,19 @@
-import {
-  TouchableOpacity,
-  View,
-  Text,
-  Image,
-  StyleSheet,
-  Alert,
-} from "react-native";
+import { TouchableOpacity, View, Text, Image, StyleSheet } from "react-native";
 import React, { useState } from "react";
 import { useNavigation } from "@react-navigation/native";
-import { deleteAPost } from "../../services/postServices/postServices";
+
 import EditPopupMessage from "../CF Pop-up/EditPop-up";
 
-const PostPop = (props) => {
+const ReportMenu = (props) => {
   const navigation = useNavigation();
 
   const [popupMessage, setPopupMessage] = useState("");
 
   const [press, setPress] = useState(false);
 
-  const handleEdit = async () => {
+  const handleReport = async () => {
     try {
-      setPopupMessage("Edit your caption");
+      setPopupMessage("Report");
       handlePress();
     } catch (error) {
       console.log(error);
@@ -35,36 +28,8 @@ const PostPop = (props) => {
     setPopupMessage("");
   };
 
-  const deletePost = async () => {
-    try {
-      handlePress();
-      await deleteAPost(props.postId);
-      if (props.onDelete) {
-        props.onDelete(props.postId);
-      }
-    } catch (error) {
-      console.error("Failed to delete post:", error);
-    }
-  };
-
   const handlePress = () => {
     setPress(true);
-  };
-
-  const displayDeleteAlert = () => {
-    Alert.alert(
-      "Are you sure!",
-      "This action will delete your post permanently!",
-      [
-        {
-          text: "cancel",
-          onPress: () => {},
-          style: "cancel",
-        },
-        { text: "Delete", onPress: () => deletePost() },
-      ],
-      { cancelable: true }
-    );
   };
 
   if (press) {
@@ -75,24 +40,13 @@ const PostPop = (props) => {
     <View style={styles.DropPop}>
       <View style={styles.container}>
         <TouchableOpacity
-          onPress={() => handleEdit()}
+          onPress={() => handleReport()}
           style={[styles.contains1, { gap: 25 }]}
         >
-          <Text style={styles.DPtext}>{props.DPtext1}</Text>
+          <Text style={styles.DPtext}>{props.DPtext}</Text>
           <Image
-            source={require("../../assets/images/PostCardImages/Edit.png")}
-            style={styles.edtImg}
-          />
-        </TouchableOpacity>
-
-        <TouchableOpacity
-          onPress={displayDeleteAlert}
-          style={[styles.contains1, { gap: 15 }]}
-        >
-          <Text style={styles.DPtext}>{props.DPtext2}</Text>
-          <Image
-            source={require("../../assets/images/PostCardImages/DeleteBin.png")}
-            style={styles.dltImg}
+            source={require("../../assets/images/PostCardImages/report.png")}
+            style={styles.reportImg}
           />
         </TouchableOpacity>
 
@@ -121,9 +75,7 @@ const styles = StyleSheet.create({
     zIndex: 10,
   },
   container: {
-    flex: 1,
     height: "auto",
-    flexDirection: "column",
     alignItems: "flex-start",
   },
   DPtext: {
@@ -138,15 +90,10 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "space-between",
   },
-  edtImg: {
-    width: 11.5,
-    height: 11.5,
-  },
-
-  dltImg: {
-    width: 13.5,
-    height: 13.5,
+  reportImg: {
+    width: 17,
+    height: 17,
   },
 });
 
-export default PostPop;
+export default ReportMenu;

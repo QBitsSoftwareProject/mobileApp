@@ -23,11 +23,7 @@ const postSchema = new Schema(
       ],
       default: "",
     },
-    // createdAt: {
-    //   type: Date,
-    //   required: true,
-    //   default: Date.now,
-    // },
+
     description: {
       type: String,
       required: true,
@@ -36,19 +32,6 @@ const postSchema = new Schema(
       type: String,
       required: false,
     },
-    comments: [
-      {
-        text: String,
-        created: {
-          type: Date,
-          default: Date.now,
-        },
-        postedBy: {
-          type: Schema.Types.ObjectId,
-          ref: "RegularUser",
-        },
-      },
-    ],
   },
   { timestamps: true }
 );

@@ -1,7 +1,7 @@
 import { StyleSheet, TouchableOpacity, View, Image, Text } from "react-native";
-import React from "react";
+import React, { useState } from "react";
 
-const RegularCard = (props) => {
+const CommentCard = (props) => {
   return (
     <View style={styles.cardBox}>
       <View>
@@ -12,7 +12,7 @@ const RegularCard = (props) => {
 
       <View style={styles.content2}>
         <View>
-          <Text style={styles.sub}>{props.sub}</Text>
+          <Text style={styles.content}>{props.content}</Text>
         </View>
       </View>
     </View>
@@ -25,10 +25,11 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     gap: 15,
     alignItems: "center",
-    width: "100%",
+    width: "90%",
     height: 90,
     padding: 20,
-    backgroundColor: "white",
+    backgroundColor: "#D9D9D9",
+    opacity: 0.2,
     borderRadius: 20,
     elevation: 1,
     marginBottom: 15,
@@ -57,7 +58,7 @@ const styles = StyleSheet.create({
     fontWeight: "500",
     color: "#40495B",
   },
-  sub: {
+  content: {
     fontSize: 12,
     fontWeight: "500",
     color: "#5C677D",
@@ -69,4 +70,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default RegularCard;
+export default CommentCard;

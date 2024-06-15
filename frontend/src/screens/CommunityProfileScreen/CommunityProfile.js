@@ -50,10 +50,6 @@ const ProfileScreen = () => {
           </Text>
         </View>
 
-        <View style={styles.contains3}>
-          <ButtonGroup tab1={"All"} tab2={"Post"} tab3={"Videos"} />
-        </View>
-
         <ScrollView ScrollView style={{ height: "100%", marginBottom: 25 }}>
           {/* post cards list*/}
           <View>
@@ -61,6 +57,7 @@ const ProfileScreen = () => {
               <PostCard
                 postId={item._id}
                 key={item._id}
+                cardName={"MyProfileCard"}
                 // image={item.user.proPic}
                 // title={item.user.userName}
                 Date={item.createdAt}
@@ -101,9 +98,6 @@ const styles = StyleSheet.create({
     paddingTop: 30,
     paddingBottom: 15,
     gap: 10,
-  },
-  contains3: {
-    paddingVertical: 15,
   },
 });
 

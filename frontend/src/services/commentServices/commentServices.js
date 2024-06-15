@@ -2,18 +2,17 @@ import axios from "axios";
 import { BACKEND_URI } from "../../config/env";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-const URL = BACKEND_URI + "/posts";
+const URL = BACKEND_URI + "/comments";
 
-export const createPost = async (postCategory, caption, image) => {
+export const createComment = async (postId, content) => {
   try {
     const token = await AsyncStorage.getItem("authToken");
 
     const response = await axios.post(
       URL + "/",
       {
-        postCategory,
-        description: caption,
-        image,
+        postId,
+        content,
       },
       {
         headers: { authtoken: token },
@@ -25,11 +24,11 @@ export const createPost = async (postCategory, caption, image) => {
   }
 };
 
-export const getPost = async () => {
+export const getComment = async () => {
   try {
     const token = await AsyncStorage.getItem("authToken");
 
-    const response = await axios.get(URL + "/view-post", {
+    const response = await axios.get(URL + "/view-comments", {
       headers: { authtoken: token },
     });
     return response.data;
@@ -39,30 +38,12 @@ export const getPost = async () => {
   }
 };
 
-export const getAPost = async (id) => {
+export const getAComment = async (id) => {
   try {
     const token = await AsyncStorage.getItem("authToken");
 
     const response = await axios.get(
-      URL + "/view-one-post/" + id,
-
-      {
-        headers: { authtoken: token },
-      }
-    );
-    return response.data;
-  } catch (error) {
-    console.log(error);
-    throw new Error("Error during request setup");
-  }
-};
-
-export const getUpdatedPost = async (id) => {
-  try {
-    const token = await AsyncStorage.getItem("authToken");
-
-    const response = await axios.get(
-      URL + "/view-updated-post/" + id,
+      URL + "/view-one-comment/" + id,
 
       {
         headers: { authtoken: token },
@@ -74,15 +55,31 @@ export const getUpdatedPost = async (id) => {
   }
 };
 
-export const updatePost = async (id, newDescription, updateImage) => {
+export const getUpdatedComment = async (id) => {
+  try {
+    const token = await AsyncStorage.getItem("authToken");
+
+    const response = await axios.get(
+      URL + "/view-updated-comment/" + id,
+
+      {
+        headers: { authtoken: token },
+      }
+    );
+  } catch (error) {
+    console.log(error);
+    throw new Error("Error during request setup");
+  }
+};
+
+export const updateComment = async (id, newContent) => {
   try {
     const token = await AsyncStorage.getItem("authToken");
 
     const response = await axios.put(
-      URL + "/update-post/" + id,
+      URL + "/update-comment/" + id,
       {
-        newDescription,
-        newImage: updateImage,
+        newContent,
       },
       {
         headers: { authtoken: token },
@@ -94,10 +91,10 @@ export const updatePost = async (id, newDescription, updateImage) => {
   }
 };
 
-export const deleteAPost = async (id) => {
+export const deleteAComment = async (id) => {
   try {
     const token = await AsyncStorage.getItem("authToken");
-    const response = await axios.delete(URL + "/delete-post/" + id, {
+    const response = await axios.delete(URL + "/delete-comment/" + id, {
       headers: { authtoken: token },
     });
     return response.data;

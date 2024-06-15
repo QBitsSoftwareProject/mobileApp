@@ -6,25 +6,37 @@ import {
   StyleSheet,
   TouchableOpacity,
   TextInput,
+  Keyboard,
+  TouchableWithoutFeedback,
 } from "react-native";
+import { getAPost } from "../../services/postServices/postServices";
 
-const EditPopupMessage = ({ message, onClose, onConfirm }) => {
+const EditPopupMessage = ({ message, onClose, onConfirm, id }) => {
   const [editedPostDescription, setEditedPostDescription] = useState("");
 
-  const [onePost, setOnePost] = useState();
+  const [onePost, setOnePost] = useState("");
+  console.log(onePost);
 
-  // const fetchAPostData = async () => {
-  //   try {
-  //     const res = await getAPost(props.postId);
-  //     setOnePost(res);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
+  const fetchAPostData = async () => {
+    try {
+      const res = await getAPost(id);
+      setOnePost(res);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
-  // useEffect(() => {
-  //   fetchAPostData();
-  // }, []);
+  useEffect(() => {
+    fetchAPostData();
+  }, []);
+
+  const handleModalClose = () => {
+    Keyboard.dismiss();
+  };
+
+  if (!onePost) {
+    return;
+  }
 
   return (
     <Modal transparent animationType="slide" visible={!!message}>
@@ -35,12 +47,16 @@ const EditPopupMessage = ({ message, onClose, onConfirm }) => {
           <TextInput
             style={styles.textinput}
             value={editedPostDescription}
+            defaultValue={onePost.description}
             onChangeText={(text) => {
               // props.description(text);
               setEditedPostDescription(text);
             }}
             multiline
           />
+          <TouchableWithoutFeedback onPress={handleModalClose}>
+            <View style={[styles.modalBG, StyleSheet.absoluteFillObject]} />
+          </TouchableWithoutFeedback>
 
           <View style={styles.modalContainer2}>
             <TouchableOpacity onPress={onConfirm} style={styles.popupButton}>
@@ -80,7 +96,6 @@ const styles = StyleSheet.create({
   textinput: {
     borderBottomWidth: 1,
     borderColor: "#3498db",
-    borderRadius: 5,
     padding: 10,
   },
   modalContainer2: {
@@ -95,6 +110,10 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: "400",
     textAlign: "center",
+  },
+  modalBG: {
+    flex: 1,
+    zIndex: -1,
   },
 });
 export default EditPopupMessage;
