@@ -4,7 +4,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import styles from './MoodInputStyles';
 import back from '../../assets/images/back.png';
 import { useNavigation } from "@react-navigation/native";
-import { storeCurrentMood , updateCurrentMood , fetchCurrentMoodInput} from '../../services/currentMoodInputServices/currentMoodInputServices';
+import { storeCurrentMood , updateCurrentMood , fetchCurrentMoodInput, checkAndUpsertMood} from '../../services/currentMoodInputServices/currentMoodInputServices';
 import { getUserId } from '../../services/getUserIdService/getUserIdService';
 
 
@@ -84,13 +84,12 @@ const MoodInputScreen = () => {
   } 
   
   useEffect ( () => {
-    getdata()
+    getdata() 
   },[])  
 
   const handleSubmitBtn = async() => {
     if(optionValue){
-      // storeCurrentMood(happy,sad,neutral,worried);
-      updateCurrentMood(happy,sad,neutral,worried); 
+      checkAndUpsertMood(happy,sad,neutral,worried);
       
       
     navigation.navigate("MindRelaxingMethod");
@@ -127,11 +126,11 @@ const MoodInputScreen = () => {
 
           <TouchableOpacity style={[styles.leftImoji, optionValue === "sad" ? styles.selectedOption : null, ]}
             onPress={() => handleOptions("sad")}>
-            <Image source={require('../../assets/images/ImmediatMoodInput/sad.png')} style={styles.optionImg} />
+            <Image source={require('../../assets/images/ImmediatMoodInput/sad2.png')} style={styles.optionImg} />
           </TouchableOpacity>
 
           <TouchableOpacity  style={[styles.rightImoji, optionValue === "happy" ? styles.selectedOption : null]} onPress={() => handleOptions("happy")}>
-            <Image source={require('../../assets/images/ImmediatMoodInput/upset.png')} style={styles.optionImg} />
+            <Image source={require('../../assets/images/ImmediatMoodInput/happy.png')} style={styles.optionImg} />
           </TouchableOpacity>
 
         </View>
@@ -139,11 +138,11 @@ const MoodInputScreen = () => {
         <View style={styles.imojiRowTwo}>
 
           <TouchableOpacity  style={[styles.leftImoji, optionValue === "worried" ? styles.selectedOption : null]} onPress={() => handleOptions("worried")}>
-            <Image source={require('../../assets/images/ImmediatMoodInput/nervous.png')} style={styles.optionImg} />
+            <Image source={require('../../assets/images/ImmediatMoodInput/worried.png')} style={styles.optionImg} />
           </TouchableOpacity>
 
           <TouchableOpacity style={[styles.rightImoji, optionValue === "neutral" ? styles.selectedOption : null]} onPress={() => handleOptions("neutral")}>
-            <Image source={require('../../assets/images/ImmediatMoodInput/nutral.png')} style={styles.optionImg} />
+            <Image source={require('../../assets/images/ImmediatMoodInput/neutral2.png')} style={styles.optionImg} />
           </TouchableOpacity>
 
         </View>

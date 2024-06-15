@@ -85,8 +85,8 @@ const styles = StyleSheet.create({
       },
 
       optionImg : {
-        width:74,
-        height:74,
+        width:70,
+        height:70,
       },
 
       submitBtn : {
