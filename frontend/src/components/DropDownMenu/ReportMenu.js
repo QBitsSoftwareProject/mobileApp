@@ -61,18 +61,17 @@ const ReportMenu = (props) => {
 };
 const styles = StyleSheet.create({
   DropPop: {
-    width: 100,
+    width: 120,
     height: "auto",
     backgroundColor: "white",
     borderRadius: 5,
-    elevation: 1,
-    marginHorizontal: 5,
-    alignSelf: "flex-end",
+    elevation: 3,
+    padding: 10,
+    top: 25,
     alignItems: "center",
+    alignSelf: "flex-end",
     justifyContent: "center",
     position: "absolute",
-    marginTop: 10,
-    zIndex: 10,
   },
   container: {
     height: "auto",

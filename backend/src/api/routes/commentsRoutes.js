@@ -19,10 +19,10 @@ const {
 const router = express.Router();
 
 router.post("/", createComment);
-router.get("/view-post", getComments);
-router.get("/view-one-post/:postId", getAComment);
-router.get("/view-updated-post/:postId", getUpdatedComment);
-router.put("/update-post/:postId", updateComment);
-router.delete("/delete-post/:postId", deletecomments);
+router.get("/view-comments/:postId", getComments);
+router.get("/view-one-comment/:commentId", getAComment);
+router.get("/view-updated-comment/:commentId", getUpdatedComment);
+router.put("/update-comment/:commentId", updateComment);
+router.delete("/delete-comment/:commentId", deletecomments);
 
 module.exports = router;

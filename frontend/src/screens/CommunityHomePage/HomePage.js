@@ -15,8 +15,6 @@ const HomePage = () => {
 
   const [postList, setPostList] = useState([]);
 
-  const [commentList, setCommentList] = useState([]);
-
   const fetchPostData = async () => {
     try {
       const res = await getPost();

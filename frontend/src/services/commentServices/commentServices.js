@@ -4,7 +4,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const URL = BACKEND_URI + "/comments";
 
-export const createComment = async (postId, content) => {
+export const createComment = async (postId, cont) => {
   try {
     const token = await AsyncStorage.getItem("authToken");
 
@@ -12,7 +12,7 @@ export const createComment = async (postId, content) => {
       URL + "/",
       {
         postId,
-        content,
+        content: cont,
       },
       {
         headers: { authtoken: token },
@@ -24,13 +24,18 @@ export const createComment = async (postId, content) => {
   }
 };
 
-export const getComment = async () => {
+export const getComments = async (postId) => {
   try {
     const token = await AsyncStorage.getItem("authToken");
+    console.log(postId);
+    const response = await axios.get(
+      URL + "/view-comments/" + postId,
 
-    const response = await axios.get(URL + "/view-comments", {
-      headers: { authtoken: token },
-    });
+      {
+        headers: { authtoken: token },
+      }
+    );
+
     return response.data;
   } catch (error) {
     console.log(error);

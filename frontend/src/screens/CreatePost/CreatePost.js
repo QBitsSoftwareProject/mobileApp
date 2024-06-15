@@ -28,7 +28,6 @@ const CreatePost = ({ route }) => {
   const handlePostImageButtonPress = async () => {
     try {
       const imgResponse = await fireBaseUpload();
-
       await createPost(postCat, description, imgResponse);
       setPopupMessage("Post Successful!");
     } catch (error) {

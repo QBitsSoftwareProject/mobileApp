@@ -16,6 +16,7 @@ import ReportMenu from "../DropDownMenu/ReportMenu";
 import {
   createComment,
   getComment,
+  getComments,
 } from "../../services/commentServices/commentServices";
 import CommentCard from "../../components/CFCard/CommentCard";
 
@@ -23,6 +24,8 @@ const PostCard = (props) => {
   const [isPress, setIsPress] = useState(false);
 
   const [comment, setComment] = useState();
+
+  const [commentList, setCommentList] = useState();
 
   const handlePress = () => {
     setIsPress(!isPress);
@@ -65,37 +68,30 @@ const PostCard = (props) => {
     Keyboard.dismiss();
   };
 
-  // const handleSendButtonPress = async () => {
-  //   try {
-  //     const res = await createComment(props.postId, content);
-  //     console.log(res);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
+  const handleSendButtonPress = async () => {
+    try {
+      await createComment(props.postId, comment);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
-  // useEffect(() => {
-  //   handleSendButtonPress;
-  // }, []);
+  const fetchComment = async () => {
+    try {
+      const res = await getComments(props.postId);
+      setCommentList(res);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
-  // const [commentList, setCommentList] = useState();
+  useEffect(() => {
+    fetchComment();
+  }, []);
 
-  // const fetchComment = async () => {
-  //   try {
-  //     const res = await getComment();
-  //     setCommentList(res);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   fetchComment();
-  // }, []);
-
-  // if (!commentList) {
-  //   return;
-  // }
+  if (!commentList) {
+    return;
+  }
 
   return (
     <View style={styles.cardBox}>
@@ -113,10 +109,17 @@ const PostCard = (props) => {
             </View>
           </View>
         </View>
-        <View>
+        <View
+          style={{
+            flexDirection: "column",
+
+            justifyContent: "center",
+            zIndex: 10,
+          }}
+        >
           <TouchableOpacity onPress={() => handlePress("")}>
             <Image
-              source={require("../../assets/images/NavigationIcons/Navigation Menu Vertical.png")}
+              source={require("../../assets/images/PostCardImages/dots.png")}
               style={styles.navMenu}
             />
           </TouchableOpacity>
@@ -132,6 +135,7 @@ const PostCard = (props) => {
               DPtext1={"Edit Post"}
               DPtext2={"Delete post"}
               onDelete={props.onDelete}
+              onClose={setIsPress}
             />
           )}
         </View>
@@ -161,7 +165,7 @@ const PostCard = (props) => {
         />
         <TouchableOpacity
           style={styles.iconframe}
-          // onPress={handleSendButtonPress}
+          onPress={handleSendButtonPress}
         >
           <Image
             source={require("../../assets/images/PostCardImages/sendBtn.png")}
@@ -173,8 +177,8 @@ const PostCard = (props) => {
           <View style={[styles.modalBG, StyleSheet.absoluteFillObject]} />
         </TouchableWithoutFeedback>
       </View>
-      {/* 
-      <ScrollView style={{ height: "100%", marginBottom: 25 }}>
+
+      <ScrollView style={{ marginBottom: 25 }}>
         <View>
           {commentList.map((item) => (
             <CommentCard
@@ -185,7 +189,7 @@ const PostCard = (props) => {
             />
           ))}
         </View>
-      </ScrollView> */}
+      </ScrollView>
     </View>
   );
 };
@@ -252,8 +256,8 @@ const styles = StyleSheet.create({
     borderBottomRightRadius: 20,
   },
   navMenu: {
-    height: 8,
-    width: 8,
+    height: 20,
+    width: 20,
     marginRight: 25,
   },
   content3: {

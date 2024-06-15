@@ -74,7 +74,7 @@ export const getUpdatedPost = async (id) => {
   }
 };
 
-export const updatePost = async (id, newDescription, updateImage) => {
+export const updatePost = async (id, newDescription) => {
   try {
     const token = await AsyncStorage.getItem("authToken");
 
@@ -82,7 +82,6 @@ export const updatePost = async (id, newDescription, updateImage) => {
       URL + "/update-post/" + id,
       {
         newDescription,
-        newImage: updateImage,
       },
       {
         headers: { authtoken: token },

@@ -16,6 +16,8 @@ const EditDeletMenu = (props) => {
 
   const [popupMessage, setPopupMessage] = useState("");
 
+  const [isSavePress, setIsSavePress] = useState(false);
+
   const handleEdit = async () => {
     try {
       setPopupMessage("Edit your caption");
@@ -25,10 +27,11 @@ const EditDeletMenu = (props) => {
   };
 
   const confirmMessage = async () => {
-    // navigation.navigate("");
+    setPopupMessage("");
   };
 
   const closeMessage = () => {
+    props.onClose(false);
     setPopupMessage("");
   };
 
@@ -67,10 +70,6 @@ const EditDeletMenu = (props) => {
           style={[styles.contains1, { gap: 25 }]}
         >
           <Text style={styles.DPtext}>{props.DPtext1}</Text>
-          <Image
-            source={require("../../assets/images/PostCardImages/Edit.png")}
-            style={styles.edtImg}
-          />
         </TouchableOpacity>
 
         <TouchableOpacity
@@ -78,10 +77,6 @@ const EditDeletMenu = (props) => {
           style={[styles.contains1, { gap: 15 }]}
         >
           <Text style={styles.DPtext}>{props.DPtext2}</Text>
-          <Image
-            source={require("../../assets/images/PostCardImages/DeleteBin.png")}
-            style={styles.dltImg}
-          />
         </TouchableOpacity>
 
         <EditPopupMessage
@@ -96,18 +91,17 @@ const EditDeletMenu = (props) => {
 };
 const styles = StyleSheet.create({
   DropPop: {
-    width: 100,
+    width: 120,
     height: "auto",
     backgroundColor: "white",
     borderRadius: 5,
-    elevation: 1,
-    marginHorizontal: 5,
-    alignSelf: "flex-end",
+    elevation: 3,
+    padding: 10,
+    top: 25,
     alignItems: "center",
+    alignSelf: "flex-end",
     justifyContent: "center",
     position: "absolute",
-    marginTop: 10,
-    zIndex: 10,
   },
   container: {
     flex: 1,
@@ -116,7 +110,7 @@ const styles = StyleSheet.create({
     alignItems: "flex-start",
   },
   DPtext: {
-    fontSize: 12,
+    fontSize: 15,
     color: "#40495B",
     fontWeight: "400",
     lineHeight: 35,
@@ -126,15 +120,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
-  },
-  edtImg: {
-    width: 11.5,
-    height: 11.5,
-  },
-
-  dltImg: {
-    width: 13.5,
-    height: 13.5,
   },
 });
 

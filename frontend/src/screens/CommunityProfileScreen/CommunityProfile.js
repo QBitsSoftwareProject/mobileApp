@@ -10,6 +10,12 @@ const ProfileScreen = () => {
 
   const [postList, setPostList] = useState();
 
+  const [isChange, setIsChange] = useState(false);
+
+  const change = () => {
+    setIsChange(!isChange);
+  };
+
   const fetchPostData = async () => {
     try {
       const res = await getPost();

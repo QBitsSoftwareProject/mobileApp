@@ -2,7 +2,11 @@ const commentsSchema = require("../../models/comments/commentsModels");
 
 exports.getComments = async (req, res) => {
   try {
-    const Comments = await commentsSchema.find().sort({ createdAt: -1 }); //.populate({userId:userId})
+    const { postId } = req.params;
+
+    const Comments = await commentsSchema
+      .find({ postId: postId })
+      .sort({ createdAt: -1 }); //.populate("userId")
 
     if (!Comments) {
       return res.status(404).json({ message: "Comments not found!" });

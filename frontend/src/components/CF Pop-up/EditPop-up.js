@@ -9,18 +9,26 @@ import {
   Keyboard,
   TouchableWithoutFeedback,
 } from "react-native";
-import { getAPost } from "../../services/postServices/postServices";
+import { getAPost, updatePost } from "../../services/postServices/postServices";
 
 const EditPopupMessage = ({ message, onClose, onConfirm, id }) => {
   const [editedPostDescription, setEditedPostDescription] = useState("");
 
   const [onePost, setOnePost] = useState("");
-  console.log(onePost);
 
   const fetchAPostData = async () => {
     try {
       const res = await getAPost(id);
       setOnePost(res);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleSaveButtonPress = async () => {
+    try {
+      onClose();
+      await updatePost(id, editedPostDescription);
     } catch (error) {
       console.log(error);
     }
@@ -46,10 +54,10 @@ const EditPopupMessage = ({ message, onClose, onConfirm, id }) => {
 
           <TextInput
             style={styles.textinput}
-            value={editedPostDescription}
+            // value={editedPostDescription}
             defaultValue={onePost.description}
             onChangeText={(text) => {
-              // props.description(text);
+              // editedPostDescription(text);
               setEditedPostDescription(text);
             }}
             multiline
@@ -59,12 +67,15 @@ const EditPopupMessage = ({ message, onClose, onConfirm, id }) => {
           </TouchableWithoutFeedback>
 
           <View style={styles.modalContainer2}>
-            <TouchableOpacity onPress={onConfirm} style={styles.popupButton}>
-              <Text style={styles.popupButtonText}>Save</Text>
-            </TouchableOpacity>
-
             <TouchableOpacity onPress={onClose} style={styles.popupButton}>
               <Text style={styles.popupButtonText}>Cancel</Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity
+              onPress={handleSaveButtonPress}
+              style={styles.popupButton}
+            >
+              <Text style={styles.popupButtonText}>Save</Text>
             </TouchableOpacity>
           </View>
         </View>
