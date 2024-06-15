@@ -7,6 +7,8 @@ import DocHomeStack from "../routes/DocHomeStack";
 import StressLevelStack from './StressLevelStack';
 import MethodSuggessionStack from './MindRelaxingMethodStack';
 import CurrentMoodInput from "./ImmediateMoodInputStack"
+import FeedbackStack from './FeedbackStack';
+import JournalStack from './JournalStack';
 
 const Stack = createNativeStackNavigator();
 
@@ -38,6 +40,8 @@ const HomeStack = ({ route }) => {
       <Stack.Screen name="StressLevel" component={StressLevelStack} />
       <Stack.Screen name="MindRelaxingMethod" component={MethodSuggessionStack} />
       <Stack.Screen name="CurrentMoodInputStack" component={CurrentMoodInput} />
+      <Stack.Screen name='FeedbackStack' component={FeedbackStack} />
+      <Stack.Screen name='JournalStack' component={JournalStack} />
     </Stack.Navigator>
   );
 };

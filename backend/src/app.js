@@ -10,6 +10,8 @@ const goalRoute = require("./api/routes/goalRoute.js");
 const appointmentRoute = require("./api/routes/appointmentRoutes.js");
 const taskRoute = require("./api/routes/taskRoutes.js");
 const motivationRoute = require("./api/routes/motivationsRoute.js");
+const FeedbackRoute = require("./api/routes/feedback.route.js");
+const journalRoute = require("./api/routes/Journal.route.js");
 const questionRoute = require("./api/routes/questionRoute.js");
 
 const app = express();
@@ -41,6 +43,8 @@ app.use("/api/v1/goal", goalRoute);
 app.use("/api/v1/appointments", appointmentRoute);
 app.use("/api/v1/task", taskRoute);
 app.use("/api/v1/motivation", motivationRoute);
+app.use("/api/v1/Feedback", FeedbackRoute);
+app.use("/api/v1/journal", journalRoute);
 app.use("/api/v1/question", questionRoute);
 
 app.listen(PORT, () => {
