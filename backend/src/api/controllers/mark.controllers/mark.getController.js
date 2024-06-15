@@ -5,7 +5,7 @@ const asyncHandler = require('express-async-handler');
 
 const getMarkById = asyncHandler(async (req, res) => {
     try {
-        const u_id = req.params.userid;
+        const u_id = req.user.user_id;
 
         const mark = await markService.getMarkById(u_id);
 

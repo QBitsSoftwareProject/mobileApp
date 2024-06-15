@@ -185,7 +185,7 @@ const UserRegScreen = () => {
         <KeyboardAvoidingView
           behavior={Platform.OS === "ios" ? "padding" : null}
         >
-          <ScrollView contentContainerStyle={{flexGrow: 1}} >
+          <ScrollView >
 
             
             <View style={{ alignItems: "left" } }>

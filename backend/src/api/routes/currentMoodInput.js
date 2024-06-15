@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-
+const auth = require("../middlewares/auth");
 
 const{
     storeMood,
@@ -11,8 +11,8 @@ const{
 
 
 
-router.post("/add-mood", storeMood);
-router.get("/get-mood-by-id/:userid",getMoodById);
-router.post("/update-current-mood/:userid",updateCurrentMood);
+router.post("/add-mood",auth, storeMood);
+router.get("/get-mood-by-id",auth,getMoodById);
+router.post("/update-current-mood",auth,updateCurrentMood);
 
 module.exports = router;

@@ -13,10 +13,11 @@ import FilePicker from "../../components/GetImages/FilePicker";
 import ProfilePopup from "./ProfileImageUpdatePopUp"
 import { getADoctor , updateADoctor } from '../../services/doctorServices/doctorService';
 import SchedulePopUp from './ScheduleUpdatePopUp';
+import { useNavigation } from "@react-navigation/native";
 
 const ProfileScreen = () => {
 
-  
+  const navigation = useNavigation();
   
 
   
@@ -157,6 +158,12 @@ const ProfileScreen = () => {
   }
 
 },[user]) 
+
+const handlebackBtn = () => {
+  
+  navigation.navigate("HomeScreen");
+  
+}
 
 
 
@@ -495,7 +502,8 @@ const deleteImage = async (previousImageUrl) => {
     <View>
       
     <View>
-      <TouchableOpacity>
+      <TouchableOpacity 
+      onPress={handlebackBtn}>
       <Image
       source={require('../../assets/images/back.png')}
       style = {{marginTop:50, marginLeft:25 ,width:50, height:50}}

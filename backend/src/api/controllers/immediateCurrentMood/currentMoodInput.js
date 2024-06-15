@@ -7,7 +7,7 @@ const asyncHandler = require('express-async-handler');
 
 const getMoodById = asyncHandler(async (req, res) => {
     try {
-        const u_id = req.params.userid;
+        const u_id = req.user.user_id;
 
         const mark = await currentMoodService.getMarkMoodById(u_id);
 
@@ -24,8 +24,9 @@ const getMoodById = asyncHandler(async (req, res) => {
 
 const storeMood = asyncHandler(async (req, res) => {
     try {
-        const { userid, happy, sad, neutral,worried } = req.body;
+        const { happy, sad, neutral,worried } = req.body;
 
+        const userid = req.user.user_id;
 
         const newMood = await currentMoodService.storeCurrentMood(userid, happy, sad, neutral,worried);
 
@@ -43,7 +44,7 @@ const storeMood = asyncHandler(async (req, res) => {
 
 
 const updateCurrentMood = asyncHandler(async (req, res) => {
-    const userid = req.params.userid;
+    const userid = req.user.user_id;
 
     const checkInstance = await CurrentMoodModel.findOne({ userid: userid });
 

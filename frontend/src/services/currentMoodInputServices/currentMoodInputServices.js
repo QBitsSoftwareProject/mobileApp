@@ -1,17 +1,18 @@
 import axiosInstance from "../../api/axios";
 import { getUserId } from "../getUserIdService/getUserIdService";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 // Fetch current mood input
 export const fetchCurrentMoodInput = async () => {
     try {
-        const userid = await getUserId();
-        console.log(`User ID: ${userid}`);
+        
+        const token = await AsyncStorage.getItem("authToken");
 
-        if (!userid) {
-            throw new Error('User ID is not available');
-        }
-
-        const response = await axiosInstance.get(`/currentmood/get-mood-by-id/${userid}`);
+        const response = await axiosInstance.get(`/currentmood/get-mood-by-id`,
+            {
+                headers: { authtoken: token },
+              }
+        );
         return response.data;
     } catch (err) {
         if (err.response && err.response.status === 404) {
@@ -25,15 +26,13 @@ export const fetchCurrentMoodInput = async () => {
 // Store current mood
 export const storeCurrentMood = async (happy, sad, neutral, worried) => {
     try {
-        const userId = await getUserId();
-        console.log(`User ID: ${userId}`);
+        
 
-        if (!userId) {
-            throw new Error('User ID is not available');
-        }
+        const token = await AsyncStorage.getItem("authToken");
+
 
         const data = {
-            userid: userId,
+            
             happy: Number(happy), // Ensure the data type matches the schema
             sad: Number(sad),
             neutral: Number(neutral),
@@ -42,7 +41,12 @@ export const storeCurrentMood = async (happy, sad, neutral, worried) => {
 
         // console.log('Data to be sent:', data);
 
-        const response = await axiosInstance.post('/currentmood/add-mood', data);
+        const response = await axiosInstance.post('/currentmood/add-mood', data,
+            {
+                headers: { authtoken: token },
+              }
+
+        );
         // console.log('Response:', response);
 
         if (response.status >= 200 && response.status < 300) {
@@ -58,20 +62,19 @@ export const storeCurrentMood = async (happy, sad, neutral, worried) => {
 // Update current mood
 export const updateCurrentMood = async (happy, sad, neutral, worried) => {
     try {
-        const userId = await getUserId();
-        console.log(`User ID: ${userId}`);
+        const token = await AsyncStorage.getItem("authToken");
 
-        if (!userId) {
-            throw new Error('User ID is not available');
-        }
-
-        const response = await axiosInstance.post(`/currentmood/update-current-mood/${userId}`, {
-            userid: userId,
+        const response = await axiosInstance.post(`/currentmood/update-current-mood`, {
+            
             happy: Number(happy), // Ensure the data type matches the schema
             sad: Number(sad),
             neutral: Number(neutral),
             worried: Number(worried)
-        });
+        },
+        {
+            headers: { authtoken: token },
+          }
+    );
 
         if (response.status >= 200 && response.status < 300) {
             console.log("Data updated successfully");

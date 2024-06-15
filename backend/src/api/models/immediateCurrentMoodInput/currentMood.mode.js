@@ -4,7 +4,8 @@ const CurrentMoodSchema = mongoose.Schema({
 
   userid: {
     type: mongoose.Schema.Types.ObjectId,
-    required:true
+    required:true,
+    ref: "RegularUser",
   },
   happy: {
     type: Number,

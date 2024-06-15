@@ -8,6 +8,7 @@ import {
   Text,
   TouchableOpacity,
   View,
+  SafeAreaView
 } from "react-native";
 import styles from "./styles";
 import HomeCard from "../../components/HomeCard/HomeCard";
@@ -126,7 +127,9 @@ const HomeScreen = (props) => {
   }
 
   return (
+   
     <View style={{ flex: 1, paddingBottom: 80 }}>
+      <SafeAreaView>
       <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
         <View>
           <HomeTop
@@ -275,7 +278,10 @@ const HomeScreen = (props) => {
           </View>
         </View>
       </ScrollView>
+      </SafeAreaView>
     </View>
+   
+    
   );
 };
 

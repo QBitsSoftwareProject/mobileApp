@@ -4,7 +4,8 @@ const MarkSchema = mongoose.Schema({
 
   userid: {
     type: mongoose.Schema.Types.ObjectId,
-    required:true
+    required:true,
+    ref: "RegularUser",
   },
   mark: {
     type: Number,

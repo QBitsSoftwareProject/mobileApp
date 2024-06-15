@@ -5,7 +5,11 @@ const asyncHandler = require('express-async-handler');
 
 const storeMark = asyncHandler(async (req, res) => {
     try {
-        const { userid, mark, date, time } = req.body;
+        const { mark, date, time } = req.body;
+
+        const userid = req.user.user_id;
+
+        
 
         console.log('Received Mark:', mark);
         console.log('Received date', date);
