@@ -68,6 +68,8 @@ const HomeScreen = (props) => {
 
   const [user, setUser] = useState(null);
 
+  
+
   const winWidth = Dimensions.get("window").width - 60;
 
   useEffect(() => {
@@ -104,10 +106,14 @@ const HomeScreen = (props) => {
       }
 
       setUser(currentUser);
+       
     } catch (error) {
       console.log(error);
     }
   };
+
+ 
+
 
   if (!user) {
     // Render loading state or placeholder if user is not yet fetched
