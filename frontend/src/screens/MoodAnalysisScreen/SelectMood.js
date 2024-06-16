@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, TouchableOpacity, Animated } from "react-native";
+import { View, Text, TouchableOpacity, Animated, Easing } from "react-native";
 import HeaderSub from "../../screens/MoodAnalysisScreen/Header";
 import { useNavigation } from "@react-navigation/native";
 import { addMood } from "../../services/moodAnalysisServices/moodAnalysisServices";
+import { ScrollView } from "react-native-gesture-handler";
 
 const MoodAnalysis = () => {
   const navigation = useNavigation();
@@ -27,7 +28,7 @@ const MoodAnalysis = () => {
       imageSource: require("../../assets/images/analysisMood/lovelyPicture.png"),
     },
     {
-      emoji: "😢",
+      emoji: "😭",
       moodText: "Sad",
       imageSource: require("../../assets/images/analysisMood/sadPicture.png"),
     },
@@ -37,23 +38,23 @@ const MoodAnalysis = () => {
       imageSource: require("../../assets/images/analysisMood/angryPicture.png"),
     },
     {
-      emoji: "🤒",
-      moodText: "Sick",
+      emoji: "😟",
+      moodText: "Worried",
       imageSource: require("../../assets/images/analysisMood/sickPicture.png"),
     },
     {
-      emoji: "😴",
-      moodText: "Sleepy",
+      emoji: "🥱",
+      moodText: "Boring",
       imageSource: require("../../assets/images/analysisMood/sleepPicture.png"),
     },
     {
       emoji: "😐",
-      moodText: "Nutral",
+      moodText: "Neutral",
       imageSource: require("../../assets/images/analysisMood/nutralPicture.png"),
     },
     {
-      emoji: "😱",
-      moodText: "Scare",
+      emoji: "😨",
+      moodText: "Dizzy",
       imageSource: require("../../assets/images/analysisMood/scaredPicture.png"),
     },
   ];
@@ -104,24 +105,6 @@ const MoodAnalysis = () => {
     }
   };
 
-  useEffect(() => {
-    const animation = new Animated.Value(1);
-    Animated.loop(
-      Animated.sequence([
-        Animated.timing(animation, {
-          toValue: 1.1,
-          duration: 550,
-          useNativeDriver: true,
-        }),
-        Animated.timing(animation, {
-          toValue: 1,
-          duration: 700,
-          useNativeDriver: true,
-        }),
-      ])
-    ).start();
-  }, []);
-
   const radiusX = 150;
   const radiusY = 175;
   const totalEmojis = emojis.length;
@@ -136,7 +119,7 @@ const MoodAnalysis = () => {
       position: "relative",
       alignContent: "center",
       alignSelf: "center",
-      marginTop: 175,
+      marginTop: 150,
       marginRight: 65,
       justifyContent: "center",
     },
@@ -168,11 +151,18 @@ const MoodAnalysis = () => {
       fontSize: 16,
       alignSelf: "center",
     },
+    moodtext: {
+      fontSize: 10,
+      alignSelf: "center",
+      fontweight: "50",
+      marginTop: 2.5,
+    },
   };
 
   return (
     <View>
       <HeaderSub headLine={"How are you feeling today!"} />
+
       <View style={styles.circleContainer}>
         {emojis.map((emoji, index) => {
           const x = radiusX * Math.cos(index * angle);
@@ -185,6 +175,7 @@ const MoodAnalysis = () => {
               style={[styles.emojiWrapper, { left: x, top: y }]}
             >
               <Text style={styles.emojiText}>{emoji.emoji}</Text>
+              <Text style={styles.moodtext}>{emoji.moodText}</Text>
             </TouchableOpacity>
           );
         })}
@@ -202,6 +193,7 @@ const MoodAnalysis = () => {
           </View>
         )}
       </View>
+
       <TouchableOpacity style={styles.setMood} onPress={handlePressButton}>
         <Text style={styles.mood}>Set mood</Text>
       </TouchableOpacity>

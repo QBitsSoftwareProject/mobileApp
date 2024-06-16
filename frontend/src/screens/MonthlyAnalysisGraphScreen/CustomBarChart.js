@@ -138,7 +138,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     backgroundColor: "#F2F3F5",
-    marginTop: 15,
+    marginTop: -5,
   },
   yAxisView: {
     width: 50,

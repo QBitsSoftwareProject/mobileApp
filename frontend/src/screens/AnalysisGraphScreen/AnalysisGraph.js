@@ -18,19 +18,19 @@ const AnalysisGraph = () => {
   const [bHeight, setBHeight] = useState(0);
   const [sadHeight, setSadHeight] = useState(0);
   const [angryHeight, setAngryHeight] = useState(0);
-  const [sickHeight, setSickHeight] = useState(0);
-  const [sleepHeight, setSleepHeight] = useState(0);
-  const [nutralHeight, setNutralHeight] = useState(0);
-  const [scaredHeight, setScaredHeight] = useState(0);
+  const [worriedHeight, setWorriedHeight] = useState(0);
+  const [boringHeight, setBoringHeight] = useState(0);
+  const [neutralHeight, setNeutralHeight] = useState(0);
+  const [dizzyHeight, setDizzyHeight] = useState(0);
   const [happyHeight, setHappyHeight] = useState(0);
 
   const [data, setData] = useState([]);
-  const [sleepyCount, setSleepyCount] = useState("");
+  const [boringCount, setBoringCount] = useState("");
   const [AngryCount, setAngryCount] = useState("");
   const [sadCount, setSadCount] = useState("");
-  const [sickCount, setSickCount] = useState("");
-  const [nutralCount, setNutralCount] = useState("");
-  const [scaredCount, setScaredCount] = useState("");
+  const [worriedCount, setWorriedCount] = useState("");
+  const [neutralCount, setNeutralCount] = useState("");
+  const [dizzyCount, setDizzyCount] = useState("");
   const [happyCount, setHappyCount] = useState("");
   const [lovelyCount, setLovelyCount] = useState("");
   const [totalCount, setTotalCount] = useState("");
@@ -40,8 +40,8 @@ const AnalysisGraph = () => {
   const [username, setUsername] = useState("");
 
   const countEmoji = (dataArray) => {
-    const sleepy = dataArray.filter((item) => item.moodText === "Sleepy");
-    setSleepyCount(sleepy.length);
+    const boring = dataArray.filter((item) => item.moodText === "Boring");
+    setBoringCount(boring.length);
 
     const angry = dataArray.filter((item) => item.moodText === "Angry");
     setAngryCount(angry.length);
@@ -49,14 +49,14 @@ const AnalysisGraph = () => {
     const sad = dataArray.filter((item) => item.moodText === "Sad");
     setSadCount(sad.length);
 
-    const sick = dataArray.filter((item) => item.moodText === "Sick");
-    setSickCount(sick.length);
+    const worried = dataArray.filter((item) => item.moodText === "Worried");
+    setWorriedCount(worried.length);
 
-    const nutral = dataArray.filter((item) => item.moodText === "Nutral");
-    setNutralCount(nutral.length);
+    const neutral = dataArray.filter((item) => item.moodText === "Neutral");
+    setNeutralCount(neutral.length);
 
-    const scared = dataArray.filter((item) => item.moodText === "Scare");
-    setScaredCount(scared.length);
+    const dizzy = dataArray.filter((item) => item.moodText === "Dizzy");
+    setDizzyCount(dizzy.length);
 
     const happy = dataArray.filter((item) => item.moodText === "Happy");
     setHappyCount(happy.length);
@@ -106,12 +106,12 @@ const AnalysisGraph = () => {
 
   useEffect(() => {
     const total =
-      sleepyCount +
+      boringCount +
       AngryCount +
       sadCount +
-      nutralCount +
-      scaredCount +
-      sickCount +
+      neutralCount +
+      dizzyCount +
+      worriedCount +
       happyCount +
       lovelyCount;
 
@@ -127,28 +127,28 @@ const AnalysisGraph = () => {
       const angryheight = parseFloat(AngryCount / total) * 200.0;
       setAngryHeight(angryheight);
 
-      const sickheight = parseFloat(sickCount / total) * 200.0;
-      setSickHeight(sickheight);
+      const worriedheight = parseFloat(worriedCount / total) * 200.0;
+      setWorriedHeight(worriedheight);
 
-      const sleepheight = parseFloat(sleepyCount / total) * 200.0;
-      setSleepHeight(sleepheight);
+      const boringheight = parseFloat(boringCount / total) * 200.0;
+      setBoringHeight(boringheight);
 
-      const nutralheight = parseFloat(nutralCount / total) * 200.0;
-      setNutralHeight(nutralheight);
+      const neutralheight = parseFloat(neutralCount / total) * 200.0;
+      setNeutralHeight(neutralheight);
 
-      const scaredheight = parseFloat(scaredCount / total) * 200.0;
-      setScaredHeight(scaredheight);
+      const dizzyheight = parseFloat(dizzyCount / total) * 200.0;
+      setDizzyHeight(dizzyheight);
 
       const happyheight = parseFloat(happyCount / total) * 200.0;
       setHappyHeight(happyheight);
     }
   }, [
-    sleepyCount,
+    boringCount,
     AngryCount,
     sadCount,
-    nutralCount,
-    scaredCount,
-    sickCount,
+    neutralCount,
+    dizzyCount,
+    worriedCount,
     happyCount,
     lovelyCount,
   ]);
@@ -187,7 +187,7 @@ const AnalysisGraph = () => {
         require("../../assets/images/analysisMood/lovelyPicture.png")
       );
     } else if (lastMoodText === "Sad") {
-      setEmoji("😢");
+      setEmoji("😭");
       setImageSource(
         require("../../assets/images/analysisMood/sadPicture.png")
       );
@@ -196,24 +196,24 @@ const AnalysisGraph = () => {
       setImageSource(
         require("../../assets/images/analysisMood/angryPicture.png")
       );
-    } else if (lastMoodText === "Sick") {
-      setEmoji("🤒");
+    } else if (lastMoodText === "Worried") {
+      setEmoji("😟");
       setImageSource(
         require("../../assets/images/analysisMood/sickPicture.png")
       );
-    } else if (lastMoodText === "Sleepy") {
-      setEmoji("😴");
+    } else if (lastMoodText === "Boring") {
+      setEmoji("🥱");
       setImageSource(
         require("../../assets/images/analysisMood/sleepPicture.png")
       );
-    } else if (lastMoodText === "Nutral") {
+    } else if (lastMoodText === "Neutral") {
       // Assuming 'Nutral' is a typo and should be 'Neutral'
       setEmoji("😐");
       setImageSource(
         require("../../assets/images/analysisMood/nutralPicture.png")
       );
-    } else if (lastMoodText === "Scare") {
-      setEmoji("😱");
+    } else if (lastMoodText === "Dizzy") {
+      setEmoji("😨");
       setImageSource(
         require("../../assets/images/analysisMood/scaredPicture.png")
       );
@@ -242,19 +242,27 @@ const AnalysisGraph = () => {
         </View>
         <Text style={styles.selectedEmoji}>{emoji}</Text>
         <Text style={styles.moodText}>{lastMoodText}</Text>
-        <View style={styles.graphContainer}>
-          <Image style={styles.image} source={image} />
-          <View style={styles.bar}>
-            <MoodProgressBars selectedEmoji={"😍"} barHeight={loveheight} />
-            <MoodProgressBars selectedEmoji={"😢"} barHeight={sadHeight} />
-            <MoodProgressBars selectedEmoji={"😡"} barHeight={angryHeight} />
-            <MoodProgressBars selectedEmoji={"🤒"} barHeight={sickHeight} />
-            <MoodProgressBars selectedEmoji={"😴"} barHeight={sleepHeight} />
-            <MoodProgressBars selectedEmoji={"😐"} barHeight={nutralHeight} />
-            <MoodProgressBars selectedEmoji={"😱"} barHeight={scaredHeight} />
-            <MoodProgressBars selectedEmoji={"😄"} barHeight={happyHeight} />
+        <ScrollView horizontal>
+          <View style={styles.graphContainer}>
+            <Image style={styles.image} source={image} />
+            <View style={styles.bar}>
+              <MoodProgressBars selectedEmoji={"😍"} barHeight={loveheight} />
+              <MoodProgressBars selectedEmoji={"😭"} barHeight={sadHeight} />
+              <MoodProgressBars selectedEmoji={"😡"} barHeight={angryHeight} />
+              <MoodProgressBars
+                selectedEmoji={"😟"}
+                barHeight={worriedHeight}
+              />
+              <MoodProgressBars selectedEmoji={"🥱"} barHeight={boringHeight} />
+              <MoodProgressBars
+                selectedEmoji={"😐"}
+                barHeight={neutralHeight}
+              />
+              <MoodProgressBars selectedEmoji={"😨"} barHeight={dizzyHeight} />
+              <MoodProgressBars selectedEmoji={"😄"} barHeight={happyHeight} />
+            </View>
           </View>
-        </View>
+        </ScrollView>
         <TouchableOpacity
           style={styles.continueButton}
           onPress={handleContinuePress}

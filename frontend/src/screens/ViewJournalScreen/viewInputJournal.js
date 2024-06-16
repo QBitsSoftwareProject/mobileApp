@@ -57,7 +57,7 @@ export const SwipableList = (props) => {
         mood = "😊";
         break;
       case 20:
-        mood = "😢";
+        mood = "😭";
         break;
       case 30:
         mood = "😡";
@@ -66,16 +66,16 @@ export const SwipableList = (props) => {
         mood = "😍";
         break;
       case 50:
-        mood = "😱";
+        mood = "😨";
         break;
       case 60:
         mood = "😐";
         break;
       case 70:
-        mood = "😴";
+        mood = "🥱";
         break;
       case 80:
-        mood = "🤒";
+        mood = "😟";
         break;
       default:
         mood = "";
