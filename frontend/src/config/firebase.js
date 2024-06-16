@@ -3,14 +3,16 @@ import { initializeApp } from "firebase/app";
 import { getStorage } from "firebase/storage"
 
 const firebaseConfig = {
-  apiKey: "AIzaSyAIK8WWpbxJEmWRpCdkyHgonuxvz_L-gJ4",
-  authDomain: "mental-health-app-83d87.firebaseapp.com",
-  projectId: "mental-health-app-83d87",
-  storageBucket: "mental-health-app-83d87.appspot.com",
-  messagingSenderId: "202077495682",
-  appId: "1:202077495682:web:a1a7401d2f8db09b69ef9b",
-  measurementId: "G-B4DXN1T0NT"
+  apiKey: "AIzaSyBefGNwALa65sWL3we96bdfR0dNWwwKZrg",
+  authDomain: "mental-health-and-wellne-9f050.firebaseapp.com",
+  projectId: "mental-health-and-wellne-9f050",
+  storageBucket: "mental-health-and-wellne-9f050.appspot.com",
+  messagingSenderId: "10404649959",
+  appId: "1:10404649959:web:c75780d01034076d12bb42",
+  measurementId: "G-B61RYBF306"
 };
+
+
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
