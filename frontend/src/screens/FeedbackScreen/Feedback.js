@@ -170,13 +170,12 @@ const Feedback = () => {
 
   return (
     <View contentContainerStyle={styles.container}>
-      <ScrollView>
-        <HeaderSub
-          headLine={"Feedback"}
-          subHeadLine={"Feel free to drop us your feedback."}
-          back="HomeScreen"
-        />
-
+      <HeaderSub
+        headLine={"Feedback"}
+        subHeadLine={"Feel free to drop us your feedback."}
+        back="HomeScreen"
+      />
+      <ScrollView height={500}>
         <Text style={styles.question1}>
           How satisfied are you overall with the support of our mental health
           application?

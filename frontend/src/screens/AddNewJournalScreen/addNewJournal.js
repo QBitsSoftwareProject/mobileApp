@@ -149,8 +149,6 @@ export const AddNewJournal = ({ navigation }) => {
           </View>
         </SafeAreaView>
       </ScrollView>
-
-      
     </View>
   );
 };

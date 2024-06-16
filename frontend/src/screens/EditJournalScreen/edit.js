@@ -84,21 +84,6 @@ export const EditJournal = ({ navigation, route }) => {
     }
   };
 
-  useEffect(() => {
-    if (date && time) {
-      // Ensure date and time are set before calling addNewJournal
-      const createJournal = async () => {
-        try {
-          await addNewJournal(emoji, title, entry, time, date);
-          toggleOverlay();
-        } catch (error) {
-          console.log(error);
-        }
-      };
-      createJournal();
-    }
-  }, [date, time]);
-
   const handleEmojiPress = ({ emoji, mark }) => {
     setSelectedEmojiMarks((prevMarks) => prevMarks + `${emoji}(${mark})`);
     setEmoji(mark);
@@ -152,9 +137,9 @@ export const EditJournal = ({ navigation, route }) => {
         </SafeAreaView>
       </ScrollView>
 
-      <View style={{ top: 0, left: 0, right: 0 }}>
+      {/* <View style={{ top: 0, left: 0, right: 0 }}>
         <TabBar />
-      </View>
+      </View> */}
     </View>
   );
 };
