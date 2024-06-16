@@ -5,6 +5,7 @@ import CreatePost from "../../screens/CreatePost/CreatePost";
 import PostContent from "../../screens/PostContent/PostContent";
 import HomePage from "../../screens/CommunityHomePage/HomePage";
 import ProfileScreen from "../../screens/CommunityProfileScreen/CommunityProfile";
+import CommentPage from "../../screens/CommentPage/CommentPage";
 
 const stack = createNativeStackNavigator();
 
@@ -22,6 +23,7 @@ const HomeStack = () => {
       <stack.Screen name="CreatePost" component={CreatePost} />
       <stack.Screen name="PostContent" component={PostContent} />
       <stack.Screen name="ProfileScreen" component={ProfileScreen} />
+      <stack.Screen name="CommentPage" component={CommentPage} />
     </stack.Navigator>
   );
 };

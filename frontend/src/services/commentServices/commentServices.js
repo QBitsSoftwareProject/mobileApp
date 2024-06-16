@@ -4,7 +4,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const URL = BACKEND_URI + "/comments";
 
-export const createComment = async (postId, cont) => {
+export const createComment = async (postId, content) => {
   try {
     const token = await AsyncStorage.getItem("authToken");
 
@@ -12,7 +12,7 @@ export const createComment = async (postId, cont) => {
       URL + "/",
       {
         postId,
-        content: cont,
+        content,
       },
       {
         headers: { authtoken: token },
@@ -96,11 +96,11 @@ export const updateComment = async (id, newComment) => {
   }
 };
 
-export const deleteAComment = async (postId) => {
+export const deleteAComment = async (commentId) => {
   try {
     const token = await AsyncStorage.getItem("authToken");
-    console.log(id);
-    const response = await axios.delete(URL + "/delete-comment/" + postId, {
+    console.log(commentId);
+    const response = await axios.delete(URL + "/delete-comment/" + commentId, {
       headers: { authtoken: token },
     });
     return response.data;

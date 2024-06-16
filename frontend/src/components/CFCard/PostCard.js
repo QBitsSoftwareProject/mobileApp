@@ -1,30 +1,18 @@
-import {
-  StyleSheet,
-  TouchableOpacity,
-  View,
-  Image,
-  Text,
-  TouchableWithoutFeedback,
-  TextInput,
-  Keyboard,
-  ScrollView,
-} from "react-native";
-import React, { useEffect } from "react";
+import { StyleSheet, TouchableOpacity, View, Image, Text } from "react-native";
+import React from "react";
 import { useState } from "react";
 import EditDeletMenu from "../../components/DropDownMenu/EditDeleteMenu";
 import ReportMenu from "../DropDownMenu/ReportMenu";
-import {
-  createComment,
-  getComments,
-} from "../../services/commentServices/commentServices";
-import CommentCard from "../../components/CFCard/CommentCard";
+import { useNavigation } from "@react-navigation/native";
 
 const PostCard = (props) => {
   const [isPress, setIsPress] = useState(false);
 
-  const [comment, setComment] = useState();
+  const navigation = useNavigation();
 
-  const [commentList, setCommentList] = useState();
+  // const [comment, setComment] = useState();
+
+  // const [commentList, setCommentList] = useState();
 
   const formatTimestamp = (timestamp) => {
     const date = new Date(timestamp);
@@ -59,34 +47,38 @@ const PostCard = (props) => {
 
   const formattedDate = formatTimestamp(props.Date);
 
-  const handleModalClose = () => {
-    Keyboard.dismiss();
+  const handleCommentSectionNavigation = () => {
+    navigation.navigate("CommentPage", { postId: props.postId });
   };
 
-  const handleSendButtonPress = async () => {
-    try {
-      await createComment(props.postId, comment);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  // const handleModalClose = () => {
+  //   Keyboard.dismiss();
+  // };
 
-  const fetchComment = async () => {
-    try {
-      const res = await getComments(props.postId);
-      setCommentList(res);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  // const handleSendButtonPress = async () => {
+  //   try {
+  //     await createComment(props.postId, comment);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
 
-  useEffect(() => {
-    fetchComment();
-  }, []);
+  // const fetchComment = async () => {
+  //   try {
+  //     const res = await getComments(props.postId);
+  //     setCommentList(res);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
 
-  if (!commentList) {
-    return;
-  }
+  // useEffect(() => {
+  //   fetchComment();
+  // }, []);
+
+  // if (!commentList) {
+  //   return;
+  // }
 
   const handlePress = () => {
     setIsPress(!isPress);
@@ -103,9 +95,7 @@ const PostCard = (props) => {
           <View style={styles.content2}>
             <Text style={styles.title}>{props.title}</Text>
 
-            <View style={{ width: "100%" }}>
-              <Text style={styles.sub}>{formattedDate}</Text>
-            </View>
+            <Text style={styles.sub}>{formattedDate}</Text>
           </View>
         </View>
         <View
@@ -115,7 +105,10 @@ const PostCard = (props) => {
             zIndex: 10,
           }}
         >
-          <TouchableOpacity onPress={() => handlePress("")}>
+          <TouchableOpacity
+            style={styles.toucharea}
+            onPress={() => handlePress("")}
+          >
             <Image
               source={require("../../assets/images/PostCardImages/dots.png")}
               style={styles.navMenu}
@@ -133,8 +126,6 @@ const PostCard = (props) => {
           {props.cardName == "MyProfileCard" && isPress && (
             <EditDeletMenu
               postId={props.postId}
-              DPtext1={"Edit Post"}
-              DPtext2={"Delete post"}
               onDelete={props.onDelete}
               onClose={setIsPress}
               onUpdate={props.onUpdate}
@@ -154,7 +145,17 @@ const PostCard = (props) => {
           )}
         </View>
       </View>
-      <View style={styles.content3}>
+
+      <TouchableOpacity
+        style={styles.toucharea}
+        onPress={handleCommentSectionNavigation}
+      >
+        <Image
+          source={require("../../assets/images/CommentSecImages/comment.png")}
+          style={styles.commentIcon}
+        />
+      </TouchableOpacity>
+      {/* <View style={styles.content3}>
         <TextInput
           style={styles.textinput}
           value={comment}
@@ -164,10 +165,7 @@ const PostCard = (props) => {
           multiline
           placeholder="Add a comment...."
         />
-        <TouchableOpacity
-          // style={styles.iconframe}
-          onPress={handleSendButtonPress}
-        >
+        <TouchableOpacity onPress={handleSendButtonPress}>
           <Image
             source={require("../../assets/images/PostCardImages/sendBtn.png")}
             style={styles.sendIcon}
@@ -177,8 +175,8 @@ const PostCard = (props) => {
         <TouchableWithoutFeedback onPress={handleModalClose}>
           <View style={[styles.modalBG, StyleSheet.absoluteFillObject]} />
         </TouchableWithoutFeedback>
-      </View>
-
+      </View> */}
+      {/* 
       <ScrollView style={{ marginBottom: 25 }}>
         <View>
           {commentList.map((item) => (
@@ -190,7 +188,7 @@ const PostCard = (props) => {
             />
           ))}
         </View>
-      </ScrollView>
+      </ScrollView> */}
     </View>
   );
 };
@@ -215,10 +213,9 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
   },
   imageframe: {
-    height: 60,
-    width: 60,
+    height: 35,
+    width: 35,
     borderColor: "white",
-    borderWidth: 4,
     borderRadius: 50,
     marginRight: 15,
     overflow: "hidden",
@@ -246,7 +243,7 @@ const styles = StyleSheet.create({
     color: "#5C677D",
   },
   des: {
-    fontSize: 13,
+    fontSize: 14,
     fontWeight: "400",
     color: "#5C677D",
   },
@@ -261,41 +258,45 @@ const styles = StyleSheet.create({
     width: 20,
     marginRight: 25,
   },
-  content3: {
-    flex: 1,
-    padding: 8,
-    flexDirection: "row",
-    alignItems: "center",
-    alignSelf: "center",
-  },
-  textinput: {
-    width: "90%",
-    borderBottomWidth: 1,
-    borderColor: "#E7E7E7",
-    marginBottom: 15,
-  },
-  iconframe: {
-    height: 30,
-    width: 30,
-    backgroundColor: "#3498db",
-    borderRadius: 50,
-    overflow: "hidden",
-    justifyContent: "center",
-    alignContent: "center",
-    alignItems: "center",
-  },
-  sendIcon: {
-    width: "60%",
-    height: "60%",
-    resizeMode: "cover",
-    position: "absolute",
-    alignSelf: "center",
-  },
 
-  modalBG: {
-    flex: 1,
-    zIndex: -1,
+  commentIcon: {
+    width: 25,
+    height: 25,
+    margin: 10,
   },
+  toucharea: {
+    width: 45,
+    height: 35,
+    borderWidth: 3,
+    borderColor: "red",
+    alignItems: "center",
+    justifyContent: "center",
+    alignSelf: "flex-end",
+  },
+  // content3: {
+  //   padding: 15,
+  //   flexDirection: "row",
+  //   alignItems: "center",
+  //   justifyContent: "space-between",
+  // },
+  // textinput: {
+  //   width: "80%",
+  //   borderBottomWidth: 1,
+  //   borderColor: "#E7E7E7",
+  //   marginBottom: 15,
+  // },
+
+  // sendIcon: {
+  //   width: 40,
+  //   height: 40,
+  //   alignSelf: "center",
+  //   opacity: 0.8,
+  // },
+
+  // modalBG: {
+  //   flex: 1,
+  //   zIndex: -1,
+  // },
 });
 
 export default PostCard;

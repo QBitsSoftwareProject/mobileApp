@@ -9,17 +9,21 @@ import {
   Keyboard,
   TouchableWithoutFeedback,
 } from "react-native";
-import { getAPost, updatePost } from "../../services/postServices/postServices";
 
-const EditPopupMessage = ({ message, onClose, id, onUpdate }) => {
-  const [editedPostDescription, setEditedPostDescription] = useState("");
+import {
+  getAComment,
+  updateComment,
+} from "../../services/commentServices/commentServices";
 
-  const [onePost, setOnePost] = useState("");
+const CommentEditPopupMessage = ({ message, onClose, commentId, onUpdate }) => {
+  const [editedComment, setEditedComment] = useState("");
 
-  const fetchAPostData = async () => {
+  const [oneComment, setOneComment] = useState("");
+
+  const fetchACommentData = async () => {
     try {
-      const res = await getAPost(id);
-      setOnePost(res);
+      const res = await getAComment(commentId);
+      setOneComment(res);
     } catch (error) {
       console.log(error);
     }
@@ -28,10 +32,10 @@ const EditPopupMessage = ({ message, onClose, id, onUpdate }) => {
   const handleSaveButtonPress = async () => {
     try {
       onClose();
-      if (editedPostDescription === "") {
-        await updatePost(id, onePost.description);
+      if (editedComment === "") {
+        await updateComment(commentId, oneComment.content);
       } else {
-        await updatePost(id, editedPostDescription);
+        await updateComment(commentId, editedComment);
         onUpdate();
       }
     } catch (error) {
@@ -40,14 +44,14 @@ const EditPopupMessage = ({ message, onClose, id, onUpdate }) => {
   };
 
   useEffect(() => {
-    fetchAPostData();
+    fetchACommentData();
   }, []);
 
   const handleModalClose = () => {
     Keyboard.dismiss();
   };
 
-  if (!onePost) {
+  if (!oneComment) {
     return null;
   }
 
@@ -59,10 +63,10 @@ const EditPopupMessage = ({ message, onClose, id, onUpdate }) => {
 
           <TextInput
             style={styles.textinput}
-            defaultValue={onePost.description}
+            defaultValue={oneComment.content}
             onChangeText={(text) => {
               // editedPostDescription(text);
-              setEditedPostDescription(text);
+              setEditedComment(text);
             }}
             multiline
           />
@@ -131,4 +135,4 @@ const styles = StyleSheet.create({
     zIndex: -1,
   },
 });
-export default EditPopupMessage;
+export default CommentEditPopupMessage;

@@ -2,19 +2,10 @@ import React, { useEffect, useState } from "react";
 import { View, Text, StyleSheet, ScrollView, Dimensions } from "react-native";
 import PostCard from "../../components/CFCard/PostCard";
 import ProfileCover from "../../components/ComForumCover/ComForumCover";
-import ButtonGroup from "../../components/Button/ButtonGroup";
 import { getPost } from "../../services/postServices/postServices";
 
 const ProfileScreen = () => {
-  const screenHeight = Dimensions.get("window").height - 275;
-
   const [postList, setPostList] = useState();
-
-  // const [isChange, setIsChange] = useState(false);
-
-  // const change = () => {
-  //   setIsChange(!isChange);
-  // };
 
   const fetchPostData = async () => {
     try {
@@ -47,20 +38,23 @@ const ProfileScreen = () => {
 
   return (
     <View style={styles.contains}>
-      {/* <HeaderSub proPic={profilePicture} /> */}
-      <ProfileCover proPic={profilePicture} />
-      <View
-        style={{ height: screenHeight, paddingHorizontal: 25, paddingTop: 15 }}
-      >
-        <View style={styles.contains2}>
-          <Text style={styles.header}>Thishakya Perera</Text>
-          <Text style={styles.des}>
-            If people like me, it’s great. If they don’t, it’s great. I like
-            myself. It’s the only thing that matters.
-          </Text>
-        </View>
+      <ScrollView>
+        {/* <HeaderSub proPic={profilePicture} /> */}
+        <ProfileCover proPic={profilePicture} />
+        <View
+          style={{
+            paddingHorizontal: 25,
+            paddingTop: 15,
+          }}
+        >
+          <View style={styles.contains2}>
+            <Text style={styles.header}>Thishakya Perera</Text>
+            <Text style={styles.des}>
+              If people like me, it’s great. If they don’t, it’s great. I like
+              myself. It’s the only thing that matters.
+            </Text>
+          </View>
 
-        <ScrollView ScrollView style={{ height: "100%", marginBottom: 25 }}>
           {/* post cards list*/}
           <View>
             {postList.map((item) => (
@@ -78,15 +72,16 @@ const ProfileScreen = () => {
               />
             ))}
           </View>
-        </ScrollView>
-      </View>
+        </View>
+      </ScrollView>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   contains: {
-    zIndex: 100,
+    flex: 1,
+    paddingBottom: 80,
   },
   image: {
     height: 62.5,

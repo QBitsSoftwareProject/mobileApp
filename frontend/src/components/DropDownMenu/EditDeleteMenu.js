@@ -60,23 +60,25 @@ const EditDeletMenu = (props) => {
           onPress={() => handleEdit()}
           style={[styles.contains1, { gap: 25 }]}
         >
-          <Text style={styles.DPtext}>{props.DPtext1}</Text>
+          <Text style={styles.DPtext}>Edit</Text>
         </TouchableOpacity>
 
         <TouchableOpacity
           onPress={displayDeleteAlert}
           style={[styles.contains1, { gap: 15 }]}
         >
-          <Text style={styles.DPtext}>{props.DPtext2}</Text>
+          <Text style={styles.DPtext}>Delete</Text>
         </TouchableOpacity>
 
-        <EditPopupMessage
-          id={props.postId}
-          message={popupMessage}
-          onConfirm={confirmMessage}
-          onClose={closeMessage}
-          onUpdate={props.onUpdate}
-        />
+        {popupMessage != "" && (
+          <EditPopupMessage
+            id={props.postId}
+            message={popupMessage}
+            onConfirm={confirmMessage}
+            onClose={closeMessage}
+            onUpdate={props.onUpdate}
+          />
+        )}
       </View>
     </View>
   );

@@ -1,7 +1,8 @@
 import { TouchableOpacity, View, Text, StyleSheet, Alert } from "react-native";
 import React, { useState } from "react";
-import EditPopupMessage from "../CF Pop-up/EditPop-up";
+
 import { deleteAComment } from "../../services/commentServices/commentServices";
+import CommentEditPopupMessage from "../CF Pop-up/CommentEditPop-up";
 
 const CommentEditDeletMenu = (props) => {
   const [popupMessage, setPopupMessage] = useState("");
@@ -25,10 +26,9 @@ const CommentEditDeletMenu = (props) => {
 
   const deleteComment = async () => {
     try {
-      console.log("Deleting comment with ID:", props.commentId);
-      props.onClose(false);
       await deleteAComment(props.commentId);
-      console.log(props.commentId);
+      props.onClose(false);
+
       if (props.onDelete) {
         props.onDelete(props.commentId);
       }
@@ -62,23 +62,25 @@ const CommentEditDeletMenu = (props) => {
           onPress={() => handleEdit()}
           style={[styles.contains1, { gap: 25 }]}
         >
-          <Text style={styles.DPtext}>{props.DPtext1}</Text>
+          <Text style={styles.DPtext}>Edit</Text>
         </TouchableOpacity>
 
         <TouchableOpacity
           onPress={displayDeleteAlert}
           style={[styles.contains1, { gap: 15 }]}
         >
-          <Text style={styles.DPtext}>{props.DPtext2}</Text>
+          <Text style={styles.DPtext}>Delete</Text>
         </TouchableOpacity>
-
-        <EditPopupMessage
-          id={props.commentId}
-          message={popupMessage}
-          onConfirm={confirmMessage}
-          onClose={closeMessage}
-          onUpdate={props.onUpdate}
-        />
+        {popupMessage != "" && (
+          <CommentEditPopupMessage
+            commentId={props.commentId}
+            postId={props.postId}
+            message={popupMessage}
+            onConfirm={confirmMessage}
+            onClose={closeMessage}
+            onUpdate={props.onUpdate}
+          />
+        )}
       </View>
     </View>
   );
@@ -92,10 +94,12 @@ const styles = StyleSheet.create({
     elevation: 3,
     padding: 10,
     top: 25,
+    position: "absolute",
+    justifyContent: "center",
     alignItems: "center",
     alignSelf: "flex-end",
-    justifyContent: "center",
-    // position: "absolute",
+    position: "absolute",
+    zIndex: 100,
   },
   container: {
     flex: 1,

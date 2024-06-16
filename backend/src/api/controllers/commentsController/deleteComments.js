@@ -2,10 +2,12 @@ const commentsSchema = require("../../models/comments/commentsModels");
 
 exports.deletecomments = async (req, res) => {
   const { postId } = req.params;
+  const { commentId } = req.params;
 
   try {
     // Finding and deleting the comment by id
     const deletedcomment = await commentsSchema.findByIdAndDelete({
+      _id: commentId,
       postId: postId,
     });
 

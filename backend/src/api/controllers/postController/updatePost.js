@@ -16,8 +16,6 @@ exports.updatePost = async (req, res) => {
     // Finding and updating the post by ID
     await postSchema.findByIdAndUpdate(postId, updatePost, { new: true });
 
-    console.log("update Post:", updatePost);
-
     if (!updatePost) {
       return res.status(404).json({ message: "Post not found" });
     }

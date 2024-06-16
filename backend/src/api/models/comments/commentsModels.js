@@ -15,11 +15,7 @@ const commentsSchema = new Schema(
       ref: "posts",
       required: true,
     },
-    // createdAt: {
-    //   type: Date,
-    //   default: Date.now,
-    //   required: true,
-    // },
+
     content: {
       type: String,
       required: true,
