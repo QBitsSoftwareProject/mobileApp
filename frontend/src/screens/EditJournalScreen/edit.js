@@ -152,9 +152,7 @@ export const EditJournal = ({ navigation, route }) => {
         </SafeAreaView>
       </ScrollView>
 
-      <View style={{ top: 0, left: 0, right: 0 }}>
-        <TabBar />
-      </View>
+      <View style={{ top: 0, left: 0, right: 0 }}></View>
     </View>
   );
 };
