@@ -9,7 +9,7 @@ const{
     getQuestionById,
     getAllQuestionIds
     
-} = require("../controllers/question.controller");
+} = require("../../api/controllers/stressQuestionsController/question.controller");
 
 router.post("/create-question", createQuestionWithOptions);
 router.get("/get-all-questions",getAllQuestions);

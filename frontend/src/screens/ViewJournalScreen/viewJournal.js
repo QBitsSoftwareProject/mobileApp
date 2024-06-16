@@ -74,8 +74,6 @@ export const ViewJournal = ({ navigation }) => {
 
         <FloatingButton btnCreate={handleFlotingPointButton}></FloatingButton>
       </View>
-
-      {/* <TabBar/> */}
     </View>
   );
 };

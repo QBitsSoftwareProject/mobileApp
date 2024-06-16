@@ -9,6 +9,7 @@ import MethodSuggessionStack from "./MindRelaxingMethodStack";
 import FeedbackStack from "./FeedbackStack";
 import JournalStack from "./JournalStack";
 import MoodAnalysisStack from "./MoodAnalysisStack";
+import CurrentMoodInput from "./ImmediateMoodInputStack";
 
 const Stack = createNativeStackNavigator();
 
@@ -42,6 +43,7 @@ const HomeStack = ({ route }) => {
         name="MindRelaxingMethod"
         component={MethodSuggessionStack}
       />
+      <Stack.Screen name="CurrentMoodInputStack" component={CurrentMoodInput} />
       <Stack.Screen name="FeedbackStack" component={FeedbackStack} />
       <Stack.Screen name="JournalStack" component={JournalStack} />
       <Stack.Screen name="MoodAnalysisStack" component={MoodAnalysisStack} />

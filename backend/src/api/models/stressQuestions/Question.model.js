@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
-const Option = require("./Options.model");
-const OptionsModel = require('./Options.model');
+const Option = require("../../models/stressOptions/Options.model");
+const OptionsModel = require('../stressOptions/Options.model');
 
 const Schema = mongoose.Schema;
 

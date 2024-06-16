@@ -25,6 +25,7 @@ app.use("/method", methodRouter);
 
 const questionRouter = require("./api/routes/question.route.js");
 const markRouter = require("./api/routes/mark.route.js");
+const currentMood = require("./api/routes/currentMoodInput.js")
 
 // app.use("/questions",questionRouter);
 //app.use("/options",optionRouter);
@@ -34,6 +35,7 @@ app.use("/mark", markRouter);
 
 //set router to question router
 app.use("/question", questionRouter);
+app.use("/currentmood", currentMood);
 
 //endpoints
 app.use("/api/v1/user", regularUserRoute);

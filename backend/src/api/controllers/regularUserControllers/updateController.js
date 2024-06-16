@@ -22,9 +22,9 @@ exports.updateRegularUser = async (req, res) => {
       password = encryptedPwd;
     }
 
-    if (email) {
-      email = email.toLowerCase();
-    }
+    // if (email) {
+    //   email = email.toLowerCase();
+    // }
 
     // Creating an object with updated user details
     const updateUser = {

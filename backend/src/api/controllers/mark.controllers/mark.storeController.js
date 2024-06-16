@@ -1,11 +1,15 @@
-const markService = require("../../services/mark.service");
+const markService = require("../../services/stressMarks/mark.service");
 const asyncHandler = require('express-async-handler');
 
 // controller to store mark
 
 const storeMark = asyncHandler(async (req, res) => {
     try {
-        const { userid, mark, date, time } = req.body;
+        const { mark, date, time } = req.body;
+
+        const userid = req.user.user_id;
+
+        
 
         console.log('Received Mark:', mark);
         console.log('Received date', date);

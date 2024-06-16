@@ -1,8 +1,9 @@
-const markModel = require("../models/mark.model");
+const markModel = require("../../models/stressMark/mark.model");
 
 // service for store mark
 const storeMark =  (userid, mark, date, time) => {
     try {
+      
         if (!mark || !date || !time || !userid) {
             throw new Error('Mark is required');
         }

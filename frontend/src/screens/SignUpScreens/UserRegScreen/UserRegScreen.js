@@ -21,6 +21,7 @@ import FilePicker from "../../../components/GetImages/FilePicker";
 import loadingGif from "../../../assets/animation/loading.gif";
 import { checkExistsUser } from "../../../services/userServices/checkExistsUser";
 
+
 const UserRegScreen = () => {
   const navigation = useNavigation();
 
@@ -164,6 +165,7 @@ const UserRegScreen = () => {
 
       if (userData != null) {
         navigation.navigate("LoginScreen");
+        
       }
     } catch (error) {
       console.log(error);
@@ -183,7 +185,7 @@ const UserRegScreen = () => {
         <KeyboardAvoidingView
           behavior={Platform.OS === "ios" ? "padding" : null}
         >
-          <ScrollView contentContainerStyle={{flexGrow: 1}} >
+          <ScrollView >
 
             
             <View style={{ alignItems: "left" } }>

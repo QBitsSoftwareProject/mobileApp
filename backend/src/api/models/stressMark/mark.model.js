@@ -3,8 +3,9 @@ const mongoose = require('mongoose');
 const MarkSchema = mongoose.Schema({
 
   userid: {
-    type: String,
-    required:true
+    type: mongoose.Schema.Types.ObjectId,
+    required:true,
+    ref: "RegularUser",
   },
   mark: {
     type: Number,

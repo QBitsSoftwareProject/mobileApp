@@ -1,25 +1,21 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import Mindrelaxinmethod from '../../screens/MindRelaxingMethodScreen.js/mindrelaxinmethod';
-
-
+import ImmediateCurrentMoodInput from "../../screens/ImmeidateMoodInputScrren/MoodInputScreen"
 
 
 const stack = createNativeStackNavigator();
 
-const MindRelaxingMethodStack = () => {
+const CurrentMoodInput = () => {
 
   return (
 
     <stack.Navigator screenOptions={{ headerStyle: { flex:1,backgroundColor: 'transparent' }, headerShown:false }}>
       
-      <stack.Screen name='MindrelaxinmethodScreen' component={Mindrelaxinmethod} /> 
-      
-      
+      <stack.Screen name='CurrentMoodInputScreen' component={ImmediateCurrentMoodInput} /> 
       
     </stack.Navigator>
 
   )
 }
 
-export default MindRelaxingMethodStack
+export default CurrentMoodInput
 

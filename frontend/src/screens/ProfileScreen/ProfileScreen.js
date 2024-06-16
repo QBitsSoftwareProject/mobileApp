@@ -30,8 +30,11 @@ import {
   updateADoctor,
 } from "../../services/doctorServices/doctorService";
 import SchedulePopUp from "./ScheduleUpdatePopUp";
+import { useNavigation } from "@react-navigation/native";
 
 const ProfileScreen = () => {
+  const navigation = useNavigation();
+
   const [isPopupVisibleName, setPopupVisibleName] = useState(false);
   const [isPopupVisibleUserName, setPopupVisibleUserName] = useState(false);
   const [isPopupVisibleEmail, setPopupVisibleEmail] = useState(false);
@@ -156,6 +159,9 @@ const ProfileScreen = () => {
       }
     }
   }, [user]);
+  const handlebackBtn = () => {
+    navigation.navigate("HomeScreen");
+  };
 
   const handleUpdateFullName = async (newFullName) => {
     try {
@@ -211,7 +217,7 @@ const ProfileScreen = () => {
       console.log("email updated successfully:");
     } catch (error) {
       // Handle error
-      console.error("Failed to update name:", error.message);
+      console.error("Failed to update Email:", error.message);
     }
   };
 
@@ -474,7 +480,7 @@ const ProfileScreen = () => {
   return (
     <View>
       <View>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={handlebackBtn}>
           <Image
             source={require("../../assets/images/backProfile.png")}
             style={{ marginTop: 50, marginLeft: 25, width: 50, height: 50 }}

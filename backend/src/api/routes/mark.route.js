@@ -1,6 +1,8 @@
 const express = require("express");
 const router = express.Router();
 
+const auth = require("../middlewares/auth");
+
 // const{
 //     storeMark,
 //     getMarkById
@@ -19,8 +21,8 @@ const{
 } = require("../controllers/mark.controllers/mark.getSorted");
 
 
-router.post("/add-mark", storeMark);
-router.get("/get-mark-by-id/:userid",getMarkById);
-router.get("/get-sorted-mark-by-id/:userid",getSortedMarkById);
+router.post("/add-mark",auth,storeMark);
+router.get("/get-mark-by-id",auth,getMarkById);
+router.get("/get-sorted-mark-by-id",auth,getSortedMarkById);
 
-module.exports = router;
+module.exports = router; 
