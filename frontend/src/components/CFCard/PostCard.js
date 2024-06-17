@@ -1,18 +1,17 @@
 import { StyleSheet, TouchableOpacity, View, Image, Text } from "react-native";
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import EditDeletMenu from "../../components/DropDownMenu/EditDeleteMenu";
 import ReportMenu from "../DropDownMenu/ReportMenu";
 import { useNavigation } from "@react-navigation/native";
+import { getCommentsCount } from "../../services/commentServices/commentServices";
 
 const PostCard = (props) => {
   const [isPress, setIsPress] = useState(false);
 
   const navigation = useNavigation();
 
-  // const [comment, setComment] = useState();
-
-  // const [commentList, setCommentList] = useState();
+  const [commentCount, setCommentCount] = useState(0);
 
   const formatTimestamp = (timestamp) => {
     const date = new Date(timestamp);
@@ -51,34 +50,18 @@ const PostCard = (props) => {
     navigation.navigate("CommentPage", { postId: props.postId });
   };
 
-  // const handleModalClose = () => {
-  //   Keyboard.dismiss();
-  // };
+  const fetchCommentCount = async () => {
+    try {
+      const res = await getCommentsCount(props.postId);
+      setCommentCount(res);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
-  // const handleSendButtonPress = async () => {
-  //   try {
-  //     await createComment(props.postId, comment);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
-
-  // const fetchComment = async () => {
-  //   try {
-  //     const res = await getComments(props.postId);
-  //     setCommentList(res);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   fetchComment();
-  // }, []);
-
-  // if (!commentList) {
-  //   return;
-  // }
+  useEffect(() => {
+    fetchCommentCount();
+  }, []);
 
   const handlePress = () => {
     setIsPress(!isPress);
@@ -89,13 +72,13 @@ const PostCard = (props) => {
       <View style={styles.content1}>
         <View style={{ flexDirection: "row", alignItems: "center" }}>
           <View style={styles.imageframe}>
-            <Image source={{ uri: props.image }} style={styles.image} />
+            {/* <Image source={{ uri: props.image }} style={styles.image} /> */}
           </View>
 
           <View style={styles.content2}>
             <Text style={styles.title}>{props.title}</Text>
 
-            <Text style={styles.sub}>{formattedDate}</Text>
+            <Text style={styles.date}>{formattedDate}</Text>
           </View>
         </View>
         <View
@@ -146,49 +129,25 @@ const PostCard = (props) => {
         </View>
       </View>
 
-      <TouchableOpacity
-        style={styles.toucharea}
-        onPress={handleCommentSectionNavigation}
+      <View
+        style={{
+          padding: 10,
+          flexDirection: "row",
+          alignItems: "center",
+          justifyContent: "flex-end",
+        }}
       >
-        <Image
-          source={require("../../assets/images/CommentSecImages/comment.png")}
-          style={styles.commentIcon}
-        />
-      </TouchableOpacity>
-      {/* <View style={styles.content3}>
-        <TextInput
-          style={styles.textinput}
-          value={comment}
-          onChangeText={(text) => {
-            setComment(text);
-          }}
-          multiline
-          placeholder="Add a comment...."
-        />
-        <TouchableOpacity onPress={handleSendButtonPress}>
+        <Text>{commentCount}</Text>
+        <TouchableOpacity
+          style={styles.toucharea}
+          onPress={handleCommentSectionNavigation}
+        >
           <Image
-            source={require("../../assets/images/PostCardImages/sendBtn.png")}
-            style={styles.sendIcon}
+            source={require("../../assets/images/CommentSecImages/comment.png")}
+            style={styles.commentIcon}
           />
         </TouchableOpacity>
-
-        <TouchableWithoutFeedback onPress={handleModalClose}>
-          <View style={[styles.modalBG, StyleSheet.absoluteFillObject]} />
-        </TouchableWithoutFeedback>
-      </View> */}
-      {/* 
-      <ScrollView style={{ marginBottom: 25 }}>
-        <View>
-          {commentList.map((item) => (
-            <CommentCard
-              commentId={item._id}
-              key={item._id}
-              postId={item.postId}
-              content={item.content}
-            />
-          ))}
-        </View>
-      </ScrollView> */}
+      </View>
     </View>
   );
 };
@@ -215,11 +174,11 @@ const styles = StyleSheet.create({
   imageframe: {
     height: 35,
     width: 35,
-    borderColor: "white",
     borderRadius: 50,
     marginRight: 15,
     overflow: "hidden",
-    elevation: 1,
+    backgroundColor: "gray",
+    opacity: 0.5,
   },
   image: {
     width: "100%",
@@ -237,7 +196,7 @@ const styles = StyleSheet.create({
     color: "#40495B",
   },
 
-  sub: {
+  date: {
     fontSize: 12,
     fontWeight: "500",
     color: "#5C677D",
@@ -256,22 +215,18 @@ const styles = StyleSheet.create({
   navMenu: {
     height: 20,
     width: 20,
-    marginRight: 25,
   },
 
   commentIcon: {
     width: 25,
     height: 25,
-    margin: 10,
+    opacity: 0.6,
   },
   toucharea: {
     width: 45,
     height: 35,
-    borderWidth: 3,
-    borderColor: "red",
     alignItems: "center",
     justifyContent: "center",
-    alignSelf: "flex-end",
   },
   // content3: {
   //   padding: 15,

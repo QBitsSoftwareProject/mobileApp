@@ -1,22 +1,33 @@
-import { Image, Pressable, TextInput, View } from "react-native";
-import React, { Component } from "react";
-import styles from "./SearchBarStyles";
-
-// seach icon
-import search_icon from "../../assets/images/icons/searchBar/search_icon.png";
-// seach icon
-
-// library search bar
-// import SearchBar from "react-native-dynamic-search-bar";
-// library search bar
+import {
+  Image,
+  Pressable,
+  TextInput,
+  View,
+  TouchableOpacity,
+} from "react-native";
+import React from "react";
+import styles from "./styles";
 
 const SearchBarComponent = () => {
   return (
-    <View style={styles.searchBar}>
-      <TextInput placeholder="Search..." style={{ width: "90%" }} />
-      <Pressable>
-        <Image source={search_icon} />
-      </Pressable>
+    <View style={styles.content1}>
+      <TextInput style={styles.textinput} placeholder="Search here...." />
+      <TouchableOpacity
+        style={{
+          backgroundColor: "white",
+          height: 45,
+          alignItems: "center",
+          justifyContent: "center",
+          borderTopRightRadius: 10,
+          borderBottomRightRadius: 10,
+        }}
+        onPress={""}
+      >
+        <Image
+          source={require("../../assets/images/SearchBarIcons/search.png")}
+          style={styles.sendIcon}
+        />
+      </TouchableOpacity>
     </View>
   );
 };

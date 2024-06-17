@@ -1,6 +1,5 @@
 import { TouchableOpacity, View, Text, StyleSheet, Alert } from "react-native";
 import React, { useState } from "react";
-
 import { deleteAComment } from "../../services/commentServices/commentServices";
 import CommentEditPopupMessage from "../CF Pop-up/CommentEditPop-up";
 
@@ -98,7 +97,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     alignSelf: "flex-end",
-    position: "absolute",
     zIndex: 100,
   },
   container: {

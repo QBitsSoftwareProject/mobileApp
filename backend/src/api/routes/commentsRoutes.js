@@ -6,6 +6,7 @@ const {
   getComments,
   getAComment,
   getUpdatedComment,
+  getCommentsCount,
 } = require("../controllers/commentsController/getComments");
 const {
   updateComment,
@@ -20,6 +21,7 @@ const router = express.Router();
 
 router.post("/", createComment);
 router.get("/view-comments/:postId", getComments);
+router.get("/get-comment-count/:postId", getCommentsCount);
 router.get("/view-one-comment/:commentId", getAComment);
 router.get("/view-updated-comment/:commentId", getUpdatedComment);
 router.put("/update-comment/:commentId", updateComment);

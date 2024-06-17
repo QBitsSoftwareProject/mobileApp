@@ -41,7 +41,7 @@ const CommentCard = (props) => {
   };
 
   const formattedDate = formatTimestamp(props.Date);
-  // console.log(formattedDate);
+
   return (
     <View style={styles.cardBox}>
       <View style={styles.content1}>
@@ -52,7 +52,7 @@ const CommentCard = (props) => {
 
           <View style={styles.content2}>
             <Text style={styles.title}>{props.title}</Text>
-            <Text style={styles.sub}>{formattedDate}</Text>
+            <Text style={styles.date}>{formattedDate}</Text>
 
             <Text>{props.content}</Text>
           </View>
@@ -75,8 +75,6 @@ const CommentCard = (props) => {
             <CommentEditDeleteMenu
               commentId={props.commentId}
               postId={props.postId}
-              DPtext1={"Edit"}
-              DPtext2={"Delete"}
               onClose={setIsPress}
               onDelete={props.onDelete}
               onUpdate={props.onUpdate}
@@ -94,26 +92,22 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     width: "100%",
     height: "auto",
-    backgroundColor: "white",
     alignSelf: "center",
-    marginBottom: 20,
-    paddingBottom: 40,
+    marginBottom: 15,
   },
   content1: {
-    display: "flex",
     flexDirection: "row",
     alignItems: "center",
-    padding: 10,
     justifyContent: "space-between",
   },
   imageframe: {
     height: 35,
     width: 35,
-    borderColor: "white",
+    backgroundColor: "gray",
+    opacity: 0.5,
     borderRadius: 50,
     marginRight: 15,
     overflow: "hidden",
-    elevation: 1,
   },
   image: {
     width: "100%",
@@ -131,7 +125,7 @@ const styles = StyleSheet.create({
     color: "#40495B",
   },
 
-  sub: {
+  date: {
     fontSize: 12,
     fontWeight: "500",
     color: "#5C677D",
@@ -150,7 +144,6 @@ const styles = StyleSheet.create({
   navMenu: {
     height: 20,
     width: 20,
-    marginRight: 25,
   },
   content3: {
     flex: 1,

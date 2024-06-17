@@ -43,6 +43,25 @@ export const getComments = async (postId) => {
   }
 };
 
+export const getCommentsCount = async (postId) => {
+  try {
+    const token = await AsyncStorage.getItem("authToken");
+
+    const response = await axios.get(
+      URL + "/get-comment-count/" + postId,
+
+      {
+        headers: { authtoken: token },
+      }
+    );
+
+    return response.data;
+  } catch (error) {
+    console.log(error);
+    throw new Error("Error during request setup");
+  }
+};
+
 export const getAComment = async (id) => {
   try {
     const token = await AsyncStorage.getItem("authToken");
@@ -54,6 +73,7 @@ export const getAComment = async (id) => {
         headers: { authtoken: token },
       }
     );
+    return response.data;
   } catch (error) {
     console.log(error);
     throw new Error("Error during request setup");

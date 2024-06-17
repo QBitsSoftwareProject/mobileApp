@@ -10,7 +10,7 @@ export default styles = StyleSheet.create({
     fontSize: 14,
     fontWeight: "400",
     color: "#40495B",
-    marginBottom: 7,
+    // marginBottom: 7,
   },
   imageBtn: {
     width: 170,
@@ -34,7 +34,7 @@ export default styles = StyleSheet.create({
   image: {
     width: 300,
     height: 200,
-    marginBottom: 20,
+
     borderRadius: 10,
   },
 });

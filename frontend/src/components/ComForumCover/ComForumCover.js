@@ -1,13 +1,46 @@
+import { useNavigation } from "@react-navigation/native";
 import React from "react";
-import { View, Image, StyleSheet, ImageBackground } from "react-native";
+import {
+  View,
+  Image,
+  StyleSheet,
+  ImageBackground,
+  TouchableOpacity,
+} from "react-native";
 
 const ProfileCover = (props) => {
+  const navigation = useNavigation();
+
+  const handleBackToHome = () => {
+    navigation.navigate("HomePage");
+  };
+
   return (
     <View style={styles.bckImg}>
       <Image
         source={require("../../assets/images/PostCardImages/cover.jpg")}
         style={styles.cover}
       />
+      <View
+        style={{
+          width: "100%",
+          height: "100%",
+          backgroundColor: "black",
+          position: "absolute",
+          borderBottomLeftRadius: 40,
+          borderBottomRightRadius: 40,
+          opacity: 0.4,
+          zIndex: 1,
+        }}
+      >
+        <TouchableOpacity onPress={handleBackToHome}>
+          <Image
+            source={require("../../assets/images/BackWhite.png")}
+            style={styles.backWhiteImg}
+          />
+        </TouchableOpacity>
+      </View>
+
       <View
         style={{
           alignItems: "center",
@@ -54,6 +87,10 @@ const styles = StyleSheet.create({
     width: "100%",
     height: "100%",
     resizeMode: "cover",
+  },
+  backWhiteImg: {
+    position: "absolute",
+    margin: 30,
   },
 });
 

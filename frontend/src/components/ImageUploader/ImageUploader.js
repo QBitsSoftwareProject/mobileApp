@@ -61,15 +61,16 @@ const ImageUploader = (props) => {
 
   return (
     <View style={{ marginBottom: 32 }}>
-      <TouchableOpacity style={styles.imageBtn} onPress={pickImage}>
-        <Text style={styles.btnText}>Upload your image here... </Text>
-      </TouchableOpacity>
-
       <View style={styles.imageContainer}>
         {selectedImage ? (
           <Image source={{ uri: selectedImage.uri }} style={styles.image} />
         ) : (
-          <Text style={{ color: "#979DAC" }}>{props.errMsg}</Text>
+          <>
+            <TouchableOpacity style={styles.imageBtn} onPress={pickImage}>
+              <Text style={styles.btnText}>Upload your image here... </Text>
+            </TouchableOpacity>
+            <Text style={{ color: "#979DAC" }}>{props.errMsg}</Text>
+          </>
         )}
       </View>
     </View>

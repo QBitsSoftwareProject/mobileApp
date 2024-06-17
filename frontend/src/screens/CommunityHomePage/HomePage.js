@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { View, StyleSheet, ScrollView, Dimensions } from "react-native";
 import CFHeaderSub from "../../components/ComForumHeader/CFHeader";
 import PostCard from "../../components/CFCard/PostCard";
@@ -37,8 +37,8 @@ const HomePage = () => {
   }
 
   return (
-    <View>
-      <View style={style.contains}>
+    <View style={{ paddingBottom: 110 }}>
+      <View>
         <CFHeaderSub
           headLine={"Thishakya Perera"}
           subHeadLine={"80 total post"}
@@ -55,7 +55,7 @@ const HomePage = () => {
       >
         <ScrollView ScrollView style={{ height: "100%", marginBottom: 25 }}>
           {/* post cards list*/}
-          <View>
+          <View style={{ paddingBottom: 70 }}>
             {postList.map((item) => (
               <PostCard
                 postId={item._id}
@@ -76,13 +76,5 @@ const HomePage = () => {
     </View>
   );
 };
-
-const style = StyleSheet.create({
-  image: {
-    height: 62.5,
-    width: 62.5,
-    position: "relative",
-  },
-});
 
 export default HomePage;

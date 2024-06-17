@@ -19,9 +19,6 @@ const TemporyCard = (props) => {
   const [image, setImage] = useState(null);
 
   useEffect(() => {
-    // if (image) {
-    //   setPost({ image }); // Update post state with the selected image
-    // }
     props.selectedImage(image);
   }, [image]);
 
@@ -90,13 +87,12 @@ const styles = StyleSheet.create({
     gap: 15,
   },
   imageframe: {
-    height: 60,
-    width: 60,
-    borderColor: "white",
-    borderWidth: 4,
+    height: 35,
+    width: 35,
+    backgroundColor: "gray",
+    opacity: 0.5,
     borderRadius: 50,
     overflow: "hidden",
-    elevation: 1,
   },
 
   image: {
@@ -109,11 +105,7 @@ const styles = StyleSheet.create({
     fontWeight: "500",
     color: "#40495B",
   },
-  arrow: {
-    width: 20,
-    height: 20,
-    marginVertical: 20,
-  },
+
   status: {
     width: 15,
     height: 15,
@@ -134,8 +126,7 @@ const styles = StyleSheet.create({
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    position: "relative",
-    backgroundColor: "red",
+    // position: "relative",
   },
 
   modalBG: {

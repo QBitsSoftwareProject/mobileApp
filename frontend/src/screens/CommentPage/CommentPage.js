@@ -3,7 +3,6 @@ import {
   TouchableOpacity,
   View,
   Image,
-  TouchableWithoutFeedback,
   TextInput,
   Keyboard,
   ScrollView,
@@ -15,7 +14,8 @@ import {
   createComment,
   getComments,
 } from "../../services/commentServices/commentServices";
-import { useRoute } from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
+
 import CommentCard from "../../components/CFCard/CommentCard";
 
 const CommentPage = () => {
@@ -27,8 +27,12 @@ const CommentPage = () => {
 
   const [commentList, setCommentList] = useState();
 
-  const handleModalClose = () => {
-    Keyboard.dismiss();
+  const [isKeyboardVisible, setKeyboardVisible] = useState(false);
+
+  const navigation = useNavigation();
+
+  const goBackFromComment = () => {
+    navigation.navigate("CommunityProfile");
   };
 
   const handleSendButtonPress = async () => {
@@ -53,6 +57,24 @@ const CommentPage = () => {
 
   useEffect(() => {
     fetchComment();
+    const keyboardDidShowListener = Keyboard.addListener(
+      "keyboardDidShow",
+      () => {
+        setKeyboardVisible(true);
+      }
+    );
+
+    const keyboardDidHideListener = Keyboard.addListener(
+      "keyboardDidHide",
+      () => {
+        setKeyboardVisible(false);
+      }
+    );
+
+    return () => {
+      keyboardDidShowListener.remove();
+      keyboardDidHideListener.remove();
+    };
   }, []);
 
   const handleUpdate = () => {
@@ -70,59 +92,86 @@ const CommentPage = () => {
   }
 
   return (
-    <SafeAreaView style={{ flex: 1 }}>
-      <ScrollView style={{ marginVertical: 50 }}>
+    <SafeAreaView
+      style={{
+        paddingTop: 35,
+        paddingBottom: isKeyboardVisible ? 50 : 130,
+        flex: 1,
+      }}
+    >
+      <TouchableOpacity onPress={goBackFromComment}>
+        <Image
+          source={require("../../assets/images/BackBlack.png")}
+          style={styles.backBlackImg}
+        />
+      </TouchableOpacity>
+
+      <ScrollView style={{ paddingHorizontal: 25, paddingTop: 80 }}>
         <View>
           {commentList.map((item) => (
             <CommentCard
               commentId={item._id}
               key={item._id}
               postId={postId}
+              Date={item.createdAt}
               content={item.content}
               onDelete={onDeleteComment}
               onUpdate={handleUpdate}
             />
           ))}
         </View>
-
-        <View style={styles.content3}>
-          <TextInput
-            style={styles.textinput}
-            value={comment}
-            onChangeText={(text) => {
-              setComment(text);
-            }}
-            multiline
-            placeholder="Add a comment...."
-          />
-          <TouchableOpacity onPress={handleSendButtonPress}>
-            <Image
-              source={require("../../assets/images/CommentSecImages/sendBtn.png")}
-              style={styles.sendIcon}
-            />
-          </TouchableOpacity>
-
-          <TouchableWithoutFeedback onPress={handleModalClose}>
-            <View style={[styles.modalBG, StyleSheet.absoluteFillObject]} />
-          </TouchableWithoutFeedback>
-        </View>
       </ScrollView>
+      <View style={[styles.content1, { bottom: isKeyboardVisible ? 0 : 85 }]}>
+        <TextInput
+          style={styles.textinput}
+          value={comment}
+          onChangeText={(text) => {
+            setComment(text);
+          }}
+          multiline
+          placeholder="Add a comment...."
+        />
+        <TouchableOpacity
+          style={{
+            backgroundColor: "white",
+            height: 45,
+            alignItems: "center",
+            justifyContent: "center",
+            borderTopRightRadius: 10,
+            borderBottomRightRadius: 10,
+          }}
+          onPress={handleSendButtonPress}
+        >
+          <Image
+            source={require("../../assets/images/CommentSecImages/sendBtn.png")}
+            style={styles.sendIcon}
+          />
+        </TouchableOpacity>
+      </View>
     </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
-  content3: {
-    padding: 15,
+  content1: {
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
+    position: "absolute",
+    width: "100%",
+    zIndex: 10,
+    justifyContent: "space-between",
+    paddingHorizontal: 25,
+    paddingVertical: 5,
   },
   textinput: {
-    width: "80%",
-    borderBottomWidth: 1,
+    width: "90%",
+    height: 45,
     borderColor: "#E7E7E7",
-    marginBottom: 15,
+    backgroundColor: "white",
+    borderTopLeftRadius: 10,
+    borderBottomLeftRadius: 10,
+    padding: 10,
   },
 
   sendIcon: {
@@ -132,9 +181,9 @@ const styles = StyleSheet.create({
     opacity: 0.8,
   },
 
-  modalBG: {
-    flex: 1,
-    zIndex: -1,
+  backBlackImg: {
+    position: "absolute",
+    margin: 15,
   },
 });
 

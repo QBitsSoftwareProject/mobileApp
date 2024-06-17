@@ -19,17 +19,35 @@ exports.getComments = async (req, res) => {
   }
 };
 
+exports.getCommentsCount = async (req, res) => {
+  try {
+    const { postId } = req.params;
+
+    const Comments = await commentsSchema.find({ postId: postId });
+
+    if (!Comments) {
+      return res.status(404).json({ message: "Comments not found!" });
+    }
+    const count = Comments.length;
+
+    return res.status(201).json(count);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Failed to fetch!", error: err });
+  }
+};
+
 exports.getAComment = async (req, res) => {
-  const { CommentId } = req.params;
+  const { commentId } = req.params;
 
   try {
-    const Comment = await commentsSchema.findById(CommentId);
+    const comment = await commentsSchema.findById(commentId);
 
-    if (!Comment) {
+    if (!comment) {
       return res.status(404).json({ message: "Comment not found!" });
     }
 
-    return res.status(201).json(Comment);
+    return res.status(201).json(comment);
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: "Failed to fetch!", error: err });
