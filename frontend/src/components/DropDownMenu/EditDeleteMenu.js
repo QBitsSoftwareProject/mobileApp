@@ -56,17 +56,11 @@ const EditDeletMenu = (props) => {
   return (
     <View style={styles.DropPop}>
       <View style={styles.container}>
-        <TouchableOpacity
-          onPress={() => handleEdit()}
-          style={[styles.contains1, { gap: 25 }]}
-        >
+        <TouchableOpacity onPress={() => handleEdit()} style={styles.contains1}>
           <Text style={styles.DPtext}>Edit</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity
-          onPress={displayDeleteAlert}
-          style={[styles.contains1, { gap: 15 }]}
-        >
+        <TouchableOpacity onPress={displayDeleteAlert} style={styles.contains1}>
           <Text style={styles.DPtext}>Delete</Text>
         </TouchableOpacity>
 
@@ -96,6 +90,7 @@ const styles = StyleSheet.create({
     alignSelf: "flex-end",
     justifyContent: "center",
     position: "absolute",
+    zIndex: 100,
   },
   container: {
     flex: 1,
@@ -110,10 +105,14 @@ const styles = StyleSheet.create({
     lineHeight: 35,
   },
   contains1: {
+    width: 75,
+    height: 35,
     flex: 1,
     flexDirection: "row",
     alignItems: "center",
-    justifyContent: "space-between",
+    justifyContent: "center",
+    borderWidth: 2,
+    borderColor: "blue",
   },
 });
 

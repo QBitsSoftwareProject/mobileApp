@@ -61,7 +61,6 @@ const EditPopupMessage = ({ message, onClose, id, onUpdate }) => {
             style={styles.textinput}
             defaultValue={onePost.description}
             onChangeText={(text) => {
-              // editedPostDescription(text);
               setEditedPostDescription(text);
             }}
             multiline
@@ -111,14 +110,20 @@ const styles = StyleSheet.create({
   textinput: {
     borderBottomWidth: 1,
     borderColor: "#3498db",
-    padding: 10,
+    padding: 5,
   },
   modalContainer2: {
     flexDirection: "row",
+    paddingTop: 20,
   },
   popupButton: {
-    paddingTop: 20,
-    marginHorizontal: 50,
+    marginHorizontal: 20,
+    width: 100,
+    height: 35,
+    alignItems: "center",
+    justifyContent: "center",
+    // borderColor: "red",
+    // borderWidth: 2,
   },
   popupButtonText: {
     color: "#101318",

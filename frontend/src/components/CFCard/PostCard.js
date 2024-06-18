@@ -228,30 +228,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
-  // content3: {
-  //   padding: 15,
-  //   flexDirection: "row",
-  //   alignItems: "center",
-  //   justifyContent: "space-between",
-  // },
-  // textinput: {
-  //   width: "80%",
-  //   borderBottomWidth: 1,
-  //   borderColor: "#E7E7E7",
-  //   marginBottom: 15,
-  // },
-
-  // sendIcon: {
-  //   width: 40,
-  //   height: 40,
-  //   alignSelf: "center",
-  //   opacity: 0.8,
-  // },
-
-  // modalBG: {
-  //   flex: 1,
-  //   zIndex: -1,
-  // },
 });
 
 export default PostCard;

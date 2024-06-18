@@ -94,6 +94,7 @@ const styles = StyleSheet.create({
     height: "auto",
     alignSelf: "center",
     marginBottom: 15,
+    backgroundColor: "red",
   },
   content1: {
     flexDirection: "row",

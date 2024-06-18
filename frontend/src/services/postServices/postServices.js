@@ -57,17 +57,20 @@ export const getAPost = async (id) => {
   }
 };
 
-export const getUpdatedPost = async (id) => {
+export const getSearchProfile = async (searchText) => {
   try {
     const token = await AsyncStorage.getItem("authToken");
 
     const response = await axios.get(
-      URL + "/view-updated-post/" + id,
-
+      URL + "/view-search-result/",
+      {
+        userName: searchText,
+      },
       {
         headers: { authtoken: token },
       }
     );
+    return response.data;
   } catch (error) {
     console.log(error);
     throw new Error("Error during request setup");

@@ -32,16 +32,27 @@ exports.getAPost = async (req, res) => {
   }
 };
 
-exports.getUpdatedPost = async (req, res) => {
+exports.getSearchProfile = async (req, res) => {
   try {
-    const { userId } = req.params;
-    const Posts = await postSchema.findById({ userId: userId });
+    const userNameText = req.body.userName;
 
-    if (!Posts) {
-      return res.status(404).json({ message: "Post not found!" });
+    const searchProfile = await postSchema.find({
+      userName: new RegExp(userNameText, "i"),
+    });
+
+    if (!searchProfile) {
+      return res.status(404).json({ message: "User not found!" });
     }
+    const userData = [];
 
-    return res.status(201).json(Posts);
+    searchProfile.map((item) => {
+      userData.push({
+        userId: item._id,
+        userName: item.userName,
+        userProPic: item.proPic,
+      });
+    });
+    return res.status(201).json(userData);
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: "Failed to fetch!", error: err });

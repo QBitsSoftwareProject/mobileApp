@@ -1,5 +1,7 @@
 {
   "dependencies": {
+    "@rneui/base": "^4.0.0-rc.8",
+    "@rneui/themed": "^4.0.0-rc.8",
     "expo-image-picker": "^15.0.5",
     "firebase": "^10.12.2",
     "react-native-uuid": "^2.0.2",

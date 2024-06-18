@@ -13,15 +13,10 @@ import { getDownloadURL, uploadBytes, ref } from "firebase/storage";
 
 const CreatePost = ({ route }) => {
   const { postCat } = route.params;
-
   const screenHeight = Dimensions.get("window").height - 275;
-
   const navigation = useNavigation();
-
   const [popupMessage, setPopupMessage] = useState("");
-
   const [description, setDescription] = useState();
-
   const [selectedImage, setSelectedImage] = useState();
 
   const handlePostImageButtonPress = async () => {
