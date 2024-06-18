@@ -1,4 +1,4 @@
-import { View, Text, FlatList, Dimensions, Image } from "react-native";
+import { View, Text,Dimensions, Image } from "react-native";
 import React from "react";
 import styles from "./CarouselStyles";
 import Swipper from "react-native-swiper";

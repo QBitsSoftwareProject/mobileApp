@@ -3,7 +3,7 @@ export default [
     id: "1",
     name: "empty your mind",
     author: "bruce lee",
-    file: "../../../assets/audios/categories/breathing/be_like_water.mp3",
+    file: require("../../../assets/audios/categories/breathing/be_like_water.mp3"),
     tags: [
       {
         id: "1",
@@ -20,7 +20,7 @@ export default [
     id: "2",
     name: "empty your mind",
     author: "bruce lee",
-    file: "../../../assets/audios/categories/breathing/be_like_water.mp3",
+    file: require("../../../assets/audios/categories/breathing/be_like_water.mp3"),
     tags: [
       {
         id: "1",
@@ -37,7 +37,7 @@ export default [
     id: "3",
     name: "empty your mind",
     author: "bruce lee",
-    file: "../../../assets/audios/categories/breathing/be_like_water.mp3",
+    file: require("../../../assets/audios/categories/breathing/be_like_water.mp3"),
     tags: [
       {
         id: "1",
@@ -54,7 +54,7 @@ export default [
     id: "4",
     name: "empty your mind",
     author: "bruce lee",
-    file: "../../../assets/audios/categories/breathing/be_like_water.mp3",
+    file: require("../../../assets/audios/categories/breathing/be_like_water.mp3"),
     tags: [
       {
         id: "1",
@@ -71,7 +71,7 @@ export default [
     id: "5",
     name: "empty your mind",
     author: "bruce lee",
-    file: "../../../assets/audios/categories/breathing/be_like_water.mp3",
+    file: require("../../../assets/audios/categories/breathing/be_like_water.mp3"),
     tags: [
       {
         id: "1",
@@ -88,7 +88,7 @@ export default [
     id: "6",
     name: "empty your mind",
     author: "bruce lee",
-    file: "../../../assets/audios/categories/breathing/be_like_water.mp3",
+    file: require("../../../assets/audios/categories/breathing/be_like_water.mp3"),
     tags: [
       {
         id: "1",

@@ -1,17 +1,53 @@
-import { View, Text, Image, TouchableOpacity, FlatList } from "react-native";
-import React from "react";
+import { View, Text, Image, TouchableOpacity } from "react-native";
+import React, { useState, useEffect } from "react";
 import styles from "./articleStyle";
 
+import noPreviewAvailableImg from "../../../assets/images/no-image-avaliable.jpg";
+import { useNavigation } from "@react-navigation/native";
+
 const Article = ({ item }) => {
+
+  const navigation = useNavigation();
+
+  const navigateToScreen = () => {
+    navigation.navigate("SelectedArticleScreen", { article: item });
+  };
+
+  const [isImagePresent, setIsImagePresent] = useState(false);
+  const [imageParagraphId, setImageParagraphId] = useState(null);
+
+  useEffect(() => {
+    // Reset state before checking paragraphs
+    setIsImagePresent(false);
+    setImageParagraphId(null);
+
+    // Iterate over paragraphs to find the first image
+    item.paragraphs.some((paragraph, index) => {
+      if (paragraph.image) {
+        setIsImagePresent(true);
+        setImageParagraphId(index);
+        return true; // Exit loop early
+      }
+      return false;
+    });
+  }, [item]);
+
   return (
     <View style={styles.article}>
       <View>
-        <Image
-          source={item.thumbnail_loc}
-          style={{ width: "100%", height: "100%", borderRadius: 7 }}
-        />
+        {isImagePresent ? (
+          <Image
+            source={{ uri: item.paragraphs[imageParagraphId].image.url }}
+            style={{ width: "100%", height: "100%", borderRadius: 7 }}
+          />
+        ) : (
+          <Image
+            source={noPreviewAvailableImg}
+            style={{ width: "100%", height: "100%", borderRadius: 7 }}
+          />
+        )}
       </View>
-      <View style={styles.articleDetails}>
+      <View style={[styles.articleDetails, { paddingHorizontal: 10 }]}>
         <View style={{ flex: 1, alignSelf: "stretch", alignItems: "center" }}>
           <Image
             source={item.author_profile}
@@ -25,31 +61,39 @@ const Article = ({ item }) => {
         </View>
         <View
           style={{
+            width: "100%",
             display: "flex",
-            justifyContent: "center",
+            flexDirection: "row",
+            justifyContent: "space-between",
           }}
         >
-          <Text style={{ fontWeight: "500", textTransform: "uppercase" }}>
-            Meditation for Beginners
-          </Text>
-          <Text style={{ color: "#596C79", fontSize: 12 }}>
-            By Andrew Huberman
-          </Text>
-        </View>
-        <View style={{ display: "flex", justifyContent: "center", margin: 7 }}>
-          <TouchableOpacity>
-            <View style={styles.readMoreBtn}>
-              <Image
-                source={require("../../../assets/images/articleThumbnails/bi_eye-fill.png")}
-              />
-              <Text
-                style={{ fontSize: 10, color: "white", fontWeight: "500" }}
-              >
-                {" "}
-                READ MORE
-              </Text>
-            </View>
-          </TouchableOpacity>
+          <View
+            style={{
+              width: "70%",
+              display: "flex",
+              justifyContent: "center",
+            }}
+          >
+            <Text style={{ fontWeight: "500", textTransform: "uppercase" }}>
+              {item.title}
+            </Text>
+            <Text style={{ color: "#596C79", fontSize: 12 }}>{item.author}</Text>
+          </View>
+          <View
+            style={{ display: "flex", justifyContent: "center", width: "30%" }}
+          >
+            <TouchableOpacity onPress={navigateToScreen}>
+              <View style={styles.readMoreBtn}>
+                <Image
+                  source={require("../../../assets/images/articleThumbnails/bi_eye-fill.png")}
+                />
+                <Text style={{ fontSize: 10, color: "white", fontWeight: "500" }}>
+                  {" "}
+                  READ MORE
+                </Text>
+              </View>
+            </TouchableOpacity>
+          </View>
         </View>
       </View>
     </View>

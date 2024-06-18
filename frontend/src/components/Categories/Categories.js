@@ -1,5 +1,5 @@
 import React from "react";
-import { Text, View, FlatList, Dimensions } from "react-native";
+import { View, FlatList, Dimensions } from "react-native";
 import categoryStyles from "../Categories/CategoryStyles";
 
 // data import

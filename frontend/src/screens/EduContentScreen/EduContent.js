@@ -19,12 +19,11 @@ const EduContent = () => {
           data={[{ key: "unique-key" }]}
           renderItem={() => {
             return (
-              <View style={{marginBottom:90}}>
+              <View style={{ marginBottom: 90 }}>
                 <View style={{ zIndex: 100 }}>
-                  {/* search and categories */}
-                  <SearchBarComponent />
+                  {/*categories */}
                   <SearchAndCategories currentView={"HomeScreen"} />
-                  {/* search and categories */}
+                  {/*categories */}
                 </View>
                 <SafeAreaView>
                   <Text style={styles.mainHeading}>Featured Resurces</Text>

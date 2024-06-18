@@ -9,13 +9,12 @@ const styles = StyleSheet.create({
   VideoItem: {
     marginLeft: "auto",
     marginRight: "auto",
-    marginBottom:20,
-    marginTop: 70,
+    marginBottom: 40,
     backgroundColor: "white",
-    height: 190,
+    height: 260,
     borderRadius: 10,
-    width: "90%",
-    flex: 1,
+    width: "100%",
+    padding: 20,
   },
   VideoItemDetails: {
     position: "absolute",
@@ -38,6 +37,19 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "flex-end",
   },
+  imgContainer: {
+    backgroundColor: "white",
+    borderColor: "#5485DF",
+    borderStyle: "solid",
+    borderWidth: 5,
+    width: 54,
+    height: 54,
+    elevation: 50,
+    shadowColor: "#5485DF",
+    justifyContent: "center",
+    alignItems: "center",
+    borderRadius: "1000" / PixelRatio.get(),
+  },
   playBtn: {
     height: 50,
     width: 50,
@@ -52,6 +64,16 @@ const styles = StyleSheet.create({
     marginRight: "auto",
     borderColor: "#4A90BF",
     borderWidth: 4,
+  },
+  VideoItem: {
+    marginBottom: 20,
+    backgroundColor: "#fff",
+    borderRadius: 10,
+    overflow: "hidden",
+  },
+  playButtonText: {
+    color: 'white',
+    fontSize: 16,
   },
 });
 

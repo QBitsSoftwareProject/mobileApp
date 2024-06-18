@@ -40,7 +40,8 @@ const styles = StyleSheet.create({
     paddingHorizontal: 5,
   },
   AudioItemContainer: {
-    marginBottom:100,
+    marginTop: 10,
+    height: 480,
   },
 });
 

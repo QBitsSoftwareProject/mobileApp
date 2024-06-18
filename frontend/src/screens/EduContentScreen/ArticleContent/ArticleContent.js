@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   View,
   Text,
@@ -24,14 +24,35 @@ import SearchAndCategories from "../../../components/SearchAndCategories/SearchA
 
 // navigation
 import { useNavigation } from "@react-navigation/native";
+import { getArticleTags, getArticles } from "../../../services/educationalServices/educationalServices.js";
 // navigation
 
 const ArticleContent = () => {
+
+  const [articles, setArticles] = useState([]);
+  const [articleTagList, setArticleTagList] = useState([]);
+
   const navigation = useNavigation();
 
   const navigateToScreen = (screen) => {
     navigation.navigate(screen);
   };
+
+  useEffect(() => {
+
+    const fetchArticles = async () => {
+      try {
+        const articles = await getArticles();
+        const articleTags = await getArticleTags();
+        setArticles(articles.data.slice(0, 5));
+        setArticleTagList(["All Articles", ...articleTags.data.tags]);
+      } catch (error) {
+        console.error("Error fetching articles:", error);
+      }
+    };
+    fetchArticles();
+
+  }, []);
 
   return (
     <SafeAreaView>
@@ -42,7 +63,9 @@ const ArticleContent = () => {
             {/* Your existing content */}
             <View style={{ zIndex: 100, marginTop: 40 }}>
               {/* search and categories */}
-              <SearchBarComponent />
+              <View style={{ paddingHorizontal: 25 }}>
+                <SearchBarComponent />
+              </View>
               <SearchAndCategories currentView={"ArticleStack"} />
               {/* search and categories */}
             </View>
@@ -70,16 +93,15 @@ const ArticleContent = () => {
             </View>
             <View style={styles.articleCategories}>
               <FlatList
-                data={ArticleCategories}
+                data={articleTagList}
                 horizontal
                 renderItem={({ item }) => {
                   return <ArticleCategoryBtn item={item} />;
                 }}
               />
             </View>
-
             <Text style={{ fontSize: 20, padding: 10, marginTop: 20 }}>
-              Some recent articles
+              Some articles
             </Text>
             <View
               style={[
@@ -88,7 +110,7 @@ const ArticleContent = () => {
               ]}
             >
               <FlatList
-                data={ArticleData}
+                data={articles}
                 renderItem={({ item }) => {
                   return <Article item={item} />;
                 }}
