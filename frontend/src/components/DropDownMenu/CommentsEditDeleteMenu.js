@@ -19,14 +19,12 @@ const CommentEditDeletMenu = (props) => {
   };
 
   const closeMessage = () => {
-    props.onClose(false);
     setPopupMessage("");
   };
 
   const deleteComment = async () => {
     try {
       await deleteAComment(props.commentId);
-      props.onClose(false);
 
       if (props.onDelete) {
         props.onDelete(props.commentId);
@@ -43,9 +41,7 @@ const CommentEditDeletMenu = (props) => {
       [
         {
           text: "cancel",
-          onPress: () => {
-            props.onClose(false);
-          },
+          onPress: () => {},
           style: "cancel",
         },
         { text: "Delete", onPress: () => deleteComment() },

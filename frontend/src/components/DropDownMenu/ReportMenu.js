@@ -1,19 +1,15 @@
 import { TouchableOpacity, View, Text, Image, StyleSheet } from "react-native";
 import React, { useState } from "react";
-import { useNavigation } from "@react-navigation/native";
-
-import EditPopupMessage from "../CF Pop-up/EditPop-up";
+import ReportPopupMessage from "../CF Pop-up/ReportPop-up";
 
 const ReportMenu = (props) => {
-  const navigation = useNavigation();
-
   const [popupMessage, setPopupMessage] = useState("");
 
   const [press, setPress] = useState(false);
 
   const handleReport = async () => {
     try {
-      setPopupMessage("Report");
+      setPopupMessage("Report comment");
       handlePress();
     } catch (error) {
       console.log(error);
@@ -21,20 +17,17 @@ const ReportMenu = (props) => {
   };
 
   const confirmMessage = async () => {
-    // navigation.navigate("");
+    setPopupMessage("");
   };
 
   const closeMessage = () => {
+    props.onClose(false);
     setPopupMessage("");
   };
 
   const handlePress = () => {
     setPress(true);
   };
-
-  if (press) {
-    return null; // Dismiss the component
-  }
 
   return (
     <View style={styles.DropPop}>
@@ -43,14 +36,14 @@ const ReportMenu = (props) => {
           onPress={() => handleReport()}
           style={[styles.contains1, { gap: 25 }]}
         >
-          <Text style={styles.DPtext}>{props.DPtext}</Text>
+          <Text style={styles.DPtext}>Report</Text>
           <Image
             source={require("../../assets/images/PostCardImages/report.png")}
             style={styles.reportImg}
           />
         </TouchableOpacity>
 
-        <EditPopupMessage
+        <ReportPopupMessage
           message={popupMessage}
           onConfirm={confirmMessage}
           onClose={closeMessage}

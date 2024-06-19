@@ -62,7 +62,7 @@ export const getSearchProfile = async (searchText) => {
     const token = await AsyncStorage.getItem("authToken");
 
     const response = await axios.get(
-      URL + "/view-search-result/",
+      URL + "/view-search-profile",
       {
         userName: searchText,
       },

@@ -20,19 +20,15 @@ import CommentCard from "../../components/CFCard/CommentCard";
 
 const CommentPage = () => {
   const route = useRoute();
-
-  const { postId } = route.params;
+  const { postId, previousScreen } = route.params;
 
   const [comment, setComment] = useState();
-
   const [commentList, setCommentList] = useState();
-
   const [isKeyboardVisible, setKeyboardVisible] = useState(false);
-
   const navigation = useNavigation();
 
   const goBackFromComment = () => {
-    navigation.navigate("CommunityProfile");
+    navigation.navigate(previousScreen);
   };
 
   const handleSendButtonPress = async () => {
@@ -99,11 +95,8 @@ const CommentPage = () => {
         flex: 1,
       }}
     >
-      <TouchableOpacity onPress={goBackFromComment}>
-        <Image
-          source={require("../../assets/images/BackBlack.png")}
-          style={styles.backBlackImg}
-        />
+      <TouchableOpacity onPress={goBackFromComment} style={styles.backButton}>
+        <Image source={require("../../assets/images/BackBlack.png")} />
       </TouchableOpacity>
 
       <ScrollView style={{ paddingHorizontal: 25, paddingTop: 80 }}>
@@ -180,10 +173,10 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     opacity: 0.8,
   },
-
-  backBlackImg: {
+  backButton: {
     position: "absolute",
-    margin: 15,
+    margin: 35,
+    zIndex: 20,
   },
 });
 

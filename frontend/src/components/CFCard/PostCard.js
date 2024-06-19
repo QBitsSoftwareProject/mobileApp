@@ -47,7 +47,11 @@ const PostCard = (props) => {
   const formattedDate = formatTimestamp(props.Date);
 
   const handleCommentSectionNavigation = () => {
-    navigation.navigate("CommentPage", { postId: props.postId });
+    navigation.navigate("CommentPage", {
+      postId: props.postId,
+      previousScreen:
+        props.cardName === "HomePageCard" ? "HomePage" : "ProfileScreen",
+    });
   };
 
   const fetchCommentCount = async () => {
@@ -99,11 +103,7 @@ const PostCard = (props) => {
           </TouchableOpacity>
 
           {props.cardName == "HomePageCard" && isPress && (
-            <ReportMenu
-              postId={props.postId}
-              DPtext={"Report"}
-              onClose={setIsPress}
-            />
+            <ReportMenu postId={props.postId} onClose={setIsPress} />
           )}
 
           {props.cardName == "MyProfileCard" && isPress && (

@@ -1,12 +1,65 @@
-import { useState } from "react";
-import { StyleSheet, TouchableOpacity, View, Image, Text } from "react-native";
-import CommentEditDeleteMenu from "../../components/DropDownMenu/CommentsEditDeleteMenu";
+import React, { useState } from "react";
+import {
+  StyleSheet,
+  TouchableOpacity,
+  View,
+  Image,
+  Text,
+  Alert,
+} from "react-native";
+import { ListItem } from "@rneui/themed";
+import CommentEditPopupMessage from "../../components/CF Pop-up/CommentEditPop-up";
+import { deleteAComment } from "../../services/commentServices/commentServices";
 
 const CommentCard = (props) => {
-  const [isPress, setIsPress] = useState(false);
+  const [popupMessage, setPopupMessage] = useState("");
 
-  const handlePress = () => {
-    setIsPress(!isPress);
+  const handleEdit = async () => {
+    try {
+      setPopupMessage("Edit your Comment");
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const confirmMessage = async () => {
+    setPopupMessage("");
+  };
+
+  const closeMessage = () => {
+    // props.onClose(false);
+    setPopupMessage("");
+  };
+
+  const handleDelete = async () => {
+    try {
+      await deleteAComment(props.commentId);
+      // props.onClose(false);
+
+      if (props.onDelete) {
+        props.onDelete(props.commentId);
+      }
+    } catch (error) {
+      console.error("Failed to delete comment:", error);
+    }
+  };
+
+  const displayDeleteAlert = () => {
+    Alert.alert(
+      "Are you sure!",
+      "This action will delete your comment permanently!",
+      [
+        {
+          text: "cancel",
+          onPress: () => {
+            // props.onClose(false);
+          },
+          style: "cancel",
+        },
+        { text: "Delete", onPress: () => handleDelete() },
+      ],
+      { cancelable: true }
+    );
   };
 
   const formatTimestamp = (timestamp) => {
@@ -43,46 +96,83 @@ const CommentCard = (props) => {
   const formattedDate = formatTimestamp(props.Date);
 
   return (
-    <View style={styles.cardBox}>
-      <View style={styles.content1}>
-        <View style={{ flexDirection: "row", alignItems: "center" }}>
-          <View style={styles.imageframe}>
-            <Image source={{ uri: props.image }} style={styles.image} />
-          </View>
-
-          <View style={styles.content2}>
-            <Text style={styles.title}>{props.title}</Text>
-            <Text style={styles.date}>{formattedDate}</Text>
-
-            <Text>{props.content}</Text>
-          </View>
-        </View>
+    <ListItem.Swipeable
+      rightContent={(reset) => (
         <View
           style={{
-            flexDirection: "column",
+            alignItems: "center",
             justifyContent: "center",
-            zIndex: 10,
+            backgroundColor: "#B0B4C0",
+            borderRadius: 20,
           }}
         >
-          <TouchableOpacity onPress={() => handlePress("")}>
+          <TouchableOpacity
+            onPress={() => {
+              displayDeleteAlert();
+              reset();
+            }}
+            style={styles.button}
+          >
             <Image
-              source={require("../../assets/images/PostCardImages/dots.png")}
-              style={styles.navMenu}
+              source={require("../../assets/images/CommentSecImages/mdi_delete.png")}
+              style={styles.delImg}
             />
           </TouchableOpacity>
 
-          {isPress && (
-            <CommentEditDeleteMenu
-              commentId={props.commentId}
-              postId={props.postId}
-              onClose={setIsPress}
-              onDelete={props.onDelete}
-              onUpdate={props.onUpdate}
+          <TouchableOpacity
+            onPress={() => {
+              handleEdit();
+              reset();
+            }}
+            style={styles.button}
+          >
+            <Image
+              source={require("../../assets/images/CommentSecImages/mdi_edit.png")}
+              style={styles.editImg}
             />
-          )}
+          </TouchableOpacity>
         </View>
-      </View>
-    </View>
+      )}
+      rightStyle={styles.deleteBtn}
+      containerStyle={styles.cardContainer}
+    >
+      <ListItem.Content>
+        <TouchableOpacity
+          onPress={() => {
+            handlePress(props.commentId);
+            // handleReload();
+          }}
+          style={{ width: "100%" }}
+        ></TouchableOpacity>
+
+        <View style={styles.cardBox}>
+          <View style={styles.content1}>
+            <View style={{ flexDirection: "row", alignItems: "center" }}>
+              <View style={styles.imageframe}>
+                <Image source={{ uri: props.image }} style={styles.image} />
+              </View>
+
+              <View style={styles.content2}>
+                <Text style={styles.title}>{props.title}</Text>
+                <Text style={styles.date}>{formattedDate}</Text>
+                <Text>{props.content}</Text>
+              </View>
+            </View>
+
+            {popupMessage != "" && (
+              <CommentEditPopupMessage
+                commentId={props.commentId}
+                postId={props.postId}
+                message={popupMessage}
+                onConfirm={confirmMessage}
+                onClose={closeMessage}
+                onUpdate={props.onUpdate}
+              />
+            )}
+          </View>
+        </View>
+      </ListItem.Content>
+    </ListItem.Swipeable>
   );
 };
 
@@ -95,6 +185,11 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     marginBottom: 15,
     backgroundColor: "red",
+  },
+  cardContainer: {
+    backgroundColor: "white",
+    height: "auto",
+    borderRadius: 20,
   },
   content1: {
     flexDirection: "row",
@@ -131,55 +226,22 @@ const styles = StyleSheet.create({
     fontWeight: "500",
     color: "#5C677D",
   },
-  des: {
-    fontSize: 13,
-    fontWeight: "400",
-    color: "#5C677D",
-  },
-  postImage: {
-    width: "100%",
-    height: 200,
-    borderBottomLeftRadius: 20,
-    borderBottomRightRadius: 20,
-  },
-  navMenu: {
-    height: 20,
-    width: 20,
-  },
-  content3: {
-    flex: 1,
-    padding: 8,
-    flexDirection: "row",
-    alignItems: "center",
-    alignSelf: "center",
-  },
-  textinput: {
-    width: "90%",
-    borderBottomWidth: 1,
-    borderColor: "#E7E7E7",
-    marginBottom: 15,
-  },
-  iconframe: {
-    height: 30,
-    width: 30,
-    backgroundColor: "#3498db",
-    borderRadius: 50,
-    overflow: "hidden",
-    justifyContent: "center",
-    alignContent: "center",
-    alignItems: "center",
-  },
-  sendIcon: {
-    width: "60%",
-    height: "60%",
-    resizeMode: "cover",
-    position: "absolute",
-    alignSelf: "center",
-  },
 
-  modalBG: {
-    flex: 1,
-    zIndex: -1,
+  delImg: {
+    width: 40,
+    height: 40,
+  },
+  editImg: {
+    width: 35,
+    height: 35,
+  },
+  button: {
+    height: 45,
+    width: 120,
+    borderRadius: 10,
+    marginVertical: 2,
+    alignItems: "center",
+    justifyContent: "center",
   },
 });
 

@@ -5,10 +5,11 @@ import {
   TouchableOpacity,
   FlatList,
   Text,
+  ScrollView,
 } from "react-native";
 import React, { useEffect, useState } from "react";
 import styles from "./styles";
-import { getSearchProfile } from "../../services/postServices/postServices";
+import getSearchProfile from "../../services/postServices/postServices";
 
 //dummyData
 
@@ -31,11 +32,7 @@ const DummyList = [
   },
   {
     _id: 5,
-    userName: "pahan",
-  },
-  {
-    _id: 6,
-    userName: "dilaa",
+    userName: "pasan",
   },
 ];
 
@@ -63,7 +60,7 @@ const SearchBarComponent = () => {
   };
 
   return (
-    <View style={{ backgroundColor: "red", flex: 1 }}>
+    <View style={{ flex: 1 }}>
       <View style={styles.content1}>
         <View style={{ flex: 1 }}>
           <TextInput
@@ -76,56 +73,28 @@ const SearchBarComponent = () => {
           />
         </View>
 
-        <TouchableOpacity
-          style={{
-            height: 45,
-            alignItems: "center",
-            justifyContent: "center",
-            backgroundColor: "white",
-            padding: 5,
-            borderTopRightRadius: 10,
-            borderBottomRightRadius: 10,
-          }}
-        >
+        <TouchableOpacity style={styles.searchBtn}>
           <Image
             source={require("../../assets/images/SearchBarIcons/search.png")}
-            style={styles.sendIcon}
+            style={styles.searchIcon}
           />
         </TouchableOpacity>
       </View>
       {textInputValue !== "" && (
-        <View
-          style={{
-            flex: 1,
-            height: 200,
-            width: "100%",
-            backgroundColor: "white",
-            position: "absolute",
-            top: 60,
-          }}
-        >
-          <FlatList
-            data={DummyList}
-            keyExtractor={(item) => item._id.toString()}
-            renderItem={({ item }) => (
+        <View style={styles.resultContainer}>
+          <ScrollView>
+            {DummyList.map((item) => (
               <TouchableOpacity
                 onPress={() => {
                   handleNavigateToProfile(item._id);
                 }}
-                style={{
-                  flexDirection: "row",
-                  height: 40,
-                  width: "100%",
-                  borderWidth: 1,
-                  padding: 10,
-                  marginVertical: 5,
-                }}
+                style={styles.resultItem}
               >
                 <Image style={styles.image} source={item.proPic} />
                 <Text style={styles.userName}>{item.userName}</Text>
               </TouchableOpacity>
-            )}
-          />
+            ))}
+          </ScrollView>
         </View>
       )}
     </View>
