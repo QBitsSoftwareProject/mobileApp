@@ -429,7 +429,7 @@ const ProfileScreen = () => {
     setPopupVisibleProPic(!isPopupVisibleProPic);
   };
 
-  const [proPic, setProPic] = useState(null);
+  const [proPic, setProPic] = useState(profilePicture);
   const [proPicUrl, setProPicUrl] = useState("");
   const [loader, setLoader] = useState(false);
 
@@ -444,7 +444,6 @@ const ProfileScreen = () => {
         setProPicUrl(newProPicUrl);
         return newProPicUrl;
       } else {
-        console.error("Profile picture is not selected");
         return null;
       }
     } catch (error) {
@@ -454,7 +453,7 @@ const ProfileScreen = () => {
   };
 
   const handleProPicUpload = async () => {
-    console.log("uploading");
+    
     const imageUrl = await firebaseUpload();
     if (imageUrl) {
       console.log("Profile picture uploaded successfully:", imageUrl);
@@ -463,7 +462,7 @@ const ProfileScreen = () => {
       setprofilePicture(imageUrl);
       togglePopupProPic();
     } else {
-      console.error("Failed to get profile picture URL");
+      togglePopupProPic();
     }
   };
 
@@ -510,7 +509,7 @@ const ProfileScreen = () => {
                 <View style={{ height: "100%" }}>
                   <TouchableOpacity onPress={togglePopupProPic}>
                     <Image
-                      source={require("../../assets/images/ProfileIcons/imageEdit.png")}
+                      source={require("../../assets/images/ProfileIcons/profileLayout.png")}
                       style={{ width: 130, height: 130 }}
                     ></Image>
                   </TouchableOpacity>
