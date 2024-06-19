@@ -45,6 +45,7 @@ const Question = () => {
     const fetchId = async () => {
       try {
         const fetchIds = await fetchQuestionIds();
+
         if (fetchIds) {
           setIds(fetchIds);
         }
@@ -118,7 +119,7 @@ const Question = () => {
 
       setTimeout(() => {
         setIsLoadingImage(false);
-      }, 500); // Delay for one second (500 milliseconds)
+      },500); // Delay for one second (500 milliseconds)
     }
   };
 
@@ -187,6 +188,7 @@ const Question = () => {
       <ScrollView>
         <TouchableOpacity onPress={handleBackButton}>
           <Image
+         
             source={require("../../assets/images/backProfile.png")}
             style={{ width: 53, height: 53, marginLeft: 25 }}
           />
@@ -226,6 +228,7 @@ const Question = () => {
                   />
                 ) : (
                   <Image
+                    key={question.imgurl}
                     source={{ uri: question.imgurl }}
                     style={{
                       width: 180,

@@ -11,6 +11,10 @@ exports.updateGoal = async (req, res) => {
       completness,
       length,
       objectivesState,
+      duration,
+      category,
+      currentRating,
+      ratingCount,
     } = req.body;
 
     // Extracting the user ID from request parameters
@@ -25,6 +29,10 @@ exports.updateGoal = async (req, res) => {
       completness,
       length,
       objectivesState,
+      duration,
+      category,
+      currentRating,
+      ratingCount,
     };
 
     // Finding and updating the user by ID

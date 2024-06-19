@@ -29,8 +29,14 @@ export const submitMarksToDatabase = async (totMark) => {
           const currentDate = new Date();
       
           // Extract date and time parts
-          const formattedDate = currentDate.toLocaleDateString();
+          
           const formattedTime = currentDate.toLocaleTimeString();
+
+          const day = currentDate.getDate();
+          const month = currentDate.getMonth() + 1;
+          const year = currentDate.getFullYear();
+
+          const formattedDate = `${year}-${month}-${day}`;
       
           // Prepare the payload with mark converted to a number
           const payload = {

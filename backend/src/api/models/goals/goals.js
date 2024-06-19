@@ -38,6 +38,20 @@ const goalSchema = new schema({
     required: true,
   },
 
+  category: {
+    type: String,
+    enum: [
+      "meditation",
+      "physicalActivity",
+      "socialConnection",
+      "creativeExpression",
+      "personalGrowth",
+      "relaxation",
+      "inspirationalContent",
+    ],
+    require: true,
+  },
+
   isComplete: {
     type: Boolean,
     default: false,
@@ -45,6 +59,16 @@ const goalSchema = new schema({
 
   dueDate: {
     type: String,
+  },
+
+  currentRating: {
+    type: Number,
+    default: 10.0,
+  },
+
+  ratingCount: {
+    type: Number,
+    default: 1,
   },
 });
 

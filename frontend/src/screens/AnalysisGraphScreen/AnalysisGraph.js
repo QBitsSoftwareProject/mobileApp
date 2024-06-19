@@ -24,7 +24,7 @@ const AnalysisGraph = () => {
   const [worriedHeight, setWorriedHeight] = useState(0);
   const [boringHeight, setBoringHeight] = useState(0);
   const [neutralHeight, setNeutralHeight] = useState(0);
-  const [dizzyHeight, setDizzyHeight] = useState(0);
+  const [OverWhelmedHeight, setOverWhelmedHeight] = useState(0);
   const [happyHeight, setHappyHeight] = useState(0);
 
   const [data, setData] = useState([]);
@@ -33,7 +33,7 @@ const AnalysisGraph = () => {
   const [sadCount, setSadCount] = useState("");
   const [worriedCount, setWorriedCount] = useState("");
   const [neutralCount, setNeutralCount] = useState("");
-  const [dizzyCount, setDizzyCount] = useState("");
+  const [OverWhelmedCount, setOverWhelmedCount] = useState("");
   const [happyCount, setHappyCount] = useState("");
   const [lovelyCount, setLovelyCount] = useState("");
   const [totalCount, setTotalCount] = useState("");
@@ -79,7 +79,7 @@ const AnalysisGraph = () => {
 
   useEffect(() => {
     const dayBYWeek = filterDataByWeek(data, "date");
-    console.log(dayBYWeek);
+    // console.log(dayBYWeek);
 
     countEmoji(dayBYWeek);
     const lastIndex = dayBYWeek.length - 1;
@@ -106,8 +106,10 @@ const AnalysisGraph = () => {
     const neutral = dataArray.filter((item) => item.moodText === "Neutral");
     setNeutralCount(neutral.length);
 
-    const dizzy = dataArray.filter((item) => item.moodText === "Dizzy");
-    setDizzyCount(dizzy.length);
+    const oerWhelmed = dataArray.filter(
+      (item) => item.moodText === "OverWhelmed"
+    );
+    setOverWhelmedCount(oerWhelmed.length);
 
     const happy = dataArray.filter((item) => item.moodText === "Happy");
     setHappyCount(happy.length);
@@ -154,7 +156,7 @@ const AnalysisGraph = () => {
       AngryCount +
       sadCount +
       neutralCount +
-      dizzyCount +
+      OverWhelmedCount +
       worriedCount +
       happyCount +
       lovelyCount;
@@ -180,8 +182,8 @@ const AnalysisGraph = () => {
       const neutralheight = parseFloat(neutralCount / total) * 250.0;
       setNeutralHeight(neutralheight);
 
-      const dizzyheight = parseFloat(dizzyCount / total) * 250.0;
-      setDizzyHeight(dizzyheight);
+      const overWhelmedheight = parseFloat(OverWhelmedCount / total) * 250.0;
+      setOverWhelmedHeight(overWhelmedheight);
 
       const happyheight = parseFloat(happyCount / total) * 250.0;
       setHappyHeight(happyheight);
@@ -191,7 +193,7 @@ const AnalysisGraph = () => {
     AngryCount,
     sadCount,
     neutralCount,
-    dizzyCount,
+    OverWhelmedCount,
     worriedCount,
     happyCount,
     lovelyCount,
@@ -218,7 +220,7 @@ const AnalysisGraph = () => {
       angryHeight,
       worriedHeight,
       neutralHeight,
-      dizzyHeight,
+      OverWhelmedHeight,
       happyHeight,
       loveheight,
     ];
@@ -230,7 +232,7 @@ const AnalysisGraph = () => {
     angryHeight,
     worriedHeight,
     neutralHeight,
-    dizzyHeight,
+    OverWhelmedHeight,
     happyHeight,
     loveheight,
   ]);
@@ -277,7 +279,7 @@ const AnalysisGraph = () => {
       setImageSource(
         require("../../assets/images/analysisMood/nutralPicture.png")
       );
-    } else if (lastMoodText === "Dizzy") {
+    } else if (lastMoodText === "OverWhelmed") {
       setEmoji("😨");
       setImageSource(
         require("../../assets/images/analysisMood/scaredPicture.png")
@@ -346,7 +348,7 @@ const AnalysisGraph = () => {
                 />
                 <MoodProgressBars
                   selectedEmoji={"😨"}
-                  barHeight={dizzyHeight}
+                  barHeight={OverWhelmedHeight}
                 />
                 <MoodProgressBars
                   selectedEmoji={"😄"}

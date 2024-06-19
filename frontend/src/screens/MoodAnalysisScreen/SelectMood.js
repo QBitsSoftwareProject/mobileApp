@@ -54,7 +54,7 @@ const MoodAnalysis = () => {
     },
     {
       emoji: "😨",
-      moodText: "Dizzy",
+      moodText: "OverWhelmed",
       imageSource: require("../../assets/images/analysisMood/scaredPicture.png"),
     },
   ];

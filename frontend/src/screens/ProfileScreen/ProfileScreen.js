@@ -163,7 +163,7 @@ const ProfileScreen = () => {
     navigation.navigate("HomeScreen");
   };
 
-  const handleUpdateFullName = async (newFullName) => {
+  const handleUpdateFullName = async (newFullName) => { 
     try {
       let updatedUser;
 
