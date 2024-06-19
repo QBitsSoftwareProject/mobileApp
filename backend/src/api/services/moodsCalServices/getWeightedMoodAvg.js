@@ -42,7 +42,7 @@ exports.getWeightedMoodAvg = async (userId) => {
     });
 
     //set the moods count
-    pastRecentMoods.map((item) => {
+    allMoods.map((item) => {
       checkMood(item.moodText);
 
       moodCount.total += 1;
