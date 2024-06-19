@@ -26,8 +26,6 @@ const storeMoodEntry = asyncHandler(async (req, res) => {
       count
     );
 
-    console.log("New MoodEntry:", newMoodEntry);
-
     res.status(201).json({
       message: "Mood added successfully",
       moodEntry: newMoodEntry,

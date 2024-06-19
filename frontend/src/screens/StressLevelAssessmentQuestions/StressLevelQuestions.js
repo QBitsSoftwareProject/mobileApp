@@ -45,6 +45,7 @@ const Question = () => {
     const fetchId = async () => {
       try {
         const fetchIds = await fetchQuestionIds();
+
         if (fetchIds) {
           setIds(fetchIds);
         }
