@@ -4,6 +4,7 @@ import { View, Text, StyleSheet } from 'react-native';
 
 export const GetMonthAndDate = ({ fulldate,color}) => {
   const dateObject = new Date(fulldate);
+ 
 
   if (isNaN(dateObject.getTime())) {
 
