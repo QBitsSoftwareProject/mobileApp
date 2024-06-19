@@ -285,14 +285,14 @@ const Question = () => {
 
 const styles = StyleSheet.create({
   quesnum: {
-    marginLeft: 22,
+    marginHorizontal: 22,
     marginTop: 15,
     color: "#4ABFB4",
     fontSize: 12,
   },
 
   quetext: {
-    marginLeft: 22,
+    marginHorizontal: 22,
     marginTop: 20,
     color: "black",
     fontSize: 24,
