@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { View, Text, StyleSheet, ScrollView, Dimensions } from "react-native";
-import axios from "axios";
 import { getMoodsByUserId } from "../../services/moodAnalysisServices/moodAnalysisServices";
 
 const screenWidth = Dimensions.get("window").width;
@@ -9,30 +8,63 @@ const CustomBarChart = ({ positiveMoods, negativeMoods }) => {
   const [chartData, setChartData] = useState([]);
   const [yAxisMaxValue, setYAxisMaxValue] = useState(0);
 
-  // call the get mood input function
+  const getStartOfMonth = (date) => {
+    const start = new Date(date);
+
+    start.setHours(0, 0, 0, 0); // Set time to 00:00:00
+    return start;
+  };
+
+  const getEndOfMonth = (date) => {
+    const end = new Date(date);
+    end.setMonth(end.getMonth() + 30); // Move to next month
+
+    end.setHours(23, 59, 59, 999); // Set time to 23:59:59.999
+    return end;
+  };
+
+  const filterDataByMonth = (data, dateField) => {
+    const startDate = getStartOfMonth(new Date());
+    // console.log("Start of Month:", startDate);
+
+    const endDate = getEndOfMonth(new Date());
+    // console.log("End of Month:", endDate);
+
+    return data.filter((item) => {
+      const itemDate = new Date(item[dateField]);
+      // console.log("Item Date:", itemDate);
+      return itemDate >= startDate && itemDate <= endDate;
+    });
+  };
+
   useEffect(() => {
     const fetchMoodInputs = async () => {
       try {
         const moodData = await getMoodsByUserId();
-        // console.log("Mood data fetched:", moodData);
-        // const responseData = moodData.data;
+
+        // console.log("Fetched Mood Data:", moodData);
 
         if (!Array.isArray(moodData)) {
           throw new Error("Invalid response data format");
         }
 
-        // get the mood inputs by date
-        const emojisByDate = {};
+        // Filter data for the current month
+        const dataByMonth = filterDataByMonth(moodData, "date");
+        // console.log("Filtered Data by Month:", dataByMonth);
 
-        moodData.forEach((entry) => {
-          const [day, month, year] = entry.date.split("/");
-          const formattedDate = new Date(
-            `${year}-${month}-${day}`
-          ).toLocaleDateString("en-US", {
-            day: "numeric",
-            month: "short",
-            year: "numeric",
-          });
+        // Get the mood inputs by date
+        const emojisByDate = {};
+        dataByMonth.forEach((entry) => {
+          const formattedDate = new Date(entry.date).toLocaleDateString(
+            "en-US",
+            {
+              day: "numeric",
+              month: "short",
+              year: "numeric",
+            }
+          );
+
+          // console.log("date ", formattedDate);
 
           if (!emojisByDate[formattedDate]) {
             emojisByDate[formattedDate] = [];

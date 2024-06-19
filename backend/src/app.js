@@ -14,7 +14,6 @@ const FeedbackRoute = require("./api/routes/feedback.route.js");
 const journalRoute = require("./api/routes/Journal.route.js");
 const questionRoute = require("./api/routes/questionRoute.js");
 const moodEntryRoute = require("./api/routes/moodsInputroutes.js");
-
 const app = express();
 
 const methodRouter = require("./api/routes/method.route.js");
@@ -25,7 +24,7 @@ app.use("/method", methodRouter);
 
 const questionRouter = require("./api/routes/question.route.js");
 const markRouter = require("./api/routes/mark.route.js");
-const currentMood = require("./api/routes/currentMoodInput.js")
+const currentMood = require("./api/routes/currentMoodInput.js");
 
 // app.use("/questions",questionRouter);
 //app.use("/options",optionRouter);

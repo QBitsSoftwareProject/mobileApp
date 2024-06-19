@@ -9,10 +9,13 @@ import {
 } from "react-native";
 import HeaderSubAnalysis from "./HeaderAnalysis";
 import MoodProgressBars from "./Chart";
+import YAxisLabels from "./yAxis";
 import { useRoute, useNavigation } from "@react-navigation/native";
 
 import { getMoodsByUserId } from "../../services/moodAnalysisServices/moodAnalysisServices";
 import { getAUser } from "../../services/userServices/userService";
+import { getSuggestedGoals } from "../../services/goalsService/goalsService";
+import { getTime } from "../TaskScreens/WelcomeScreen/GetTime";
 
 const AnalysisGraph = () => {
   const [bHeight, setBHeight] = useState(0);
@@ -38,6 +41,54 @@ const AnalysisGraph = () => {
   const [lastInputData, setLastInputData] = useState(null);
   const [lastdata, setlast] = useState("");
   const [username, setUsername] = useState("");
+  const [dateandtime, setDateAndTime] = "";
+
+  const [distinctHeights, setDistinctHeights] = useState([]);
+
+  const getStartOfWeek = (date) => {
+    const start = new Date(date);
+    const day = start.getDay(); // 0 (Sunday) to 6 (Saturday)
+    const diff = start.getDate() + 1;
+    start.setDate(diff);
+    start.setHours(0, 0, 0, 0); // Set time to 00:00:00
+    return start;
+  };
+
+  const getEndOfWeek = (date) => {
+    const end = new Date(date);
+    const day = end.getDay();
+    const diff = end.getDate() - 6;
+    end.setDate(diff);
+    end.setHours(23, 59, 59, 999); // Set time to 23:59:59.999
+    return end;
+  };
+
+  const filterDataByWeek = (data, dateField) => {
+    const todayDate = new Date();
+
+    const startDate = getEndOfWeek(todayDate);
+    console.log(startDate);
+
+    const endDate = getStartOfWeek(todayDate);
+
+    return data.filter((item) => {
+      const todayDate = new Date(item[dateField]);
+      return todayDate >= startDate && todayDate <= endDate;
+    });
+  };
+
+  useEffect(() => {
+    const dayBYWeek = filterDataByWeek(data, "date");
+    console.log(dayBYWeek);
+
+    countEmoji(dayBYWeek);
+    const lastIndex = dayBYWeek.length - 1;
+    const lastInputData = dayBYWeek[lastIndex];
+    if (lastInputData) {
+      // console.log(lastInputData.moodText);
+      setLastInputData(lastInputData.moodText); // Update lastInputData state
+    }
+  }, [data]);
 
   const countEmoji = (dataArray) => {
     const boring = dataArray.filter((item) => item.moodText === "Boring");
@@ -94,15 +145,8 @@ const AnalysisGraph = () => {
     getName();
   }, []);
 
-  useEffect(() => {
-    countEmoji(data);
-    const lastIndex = data.length - 1;
-    const lastInputData = data[lastIndex];
-    if (lastInputData) {
-      // console.log(lastInputData.moodText);
-      setLastInputData(lastInputData.moodText); // Update lastInputData state
-    }
-  }, [data]);
+  // call the getTime (good morning, evening)
+  const dateValue = getTime();
 
   useEffect(() => {
     const total =
@@ -118,28 +162,28 @@ const AnalysisGraph = () => {
     setTotalCount(total);
 
     if (total !== 0) {
-      const Loveheight = parseFloat(lovelyCount / total) * 200.0;
+      const Loveheight = parseFloat(lovelyCount / total) * 250.0;
       setLoveHeight(Loveheight);
 
-      const sadheight = parseFloat(sadCount / total) * 200.0;
+      const sadheight = parseFloat(sadCount / total) * 250.0;
       setSadHeight(sadheight);
 
-      const angryheight = parseFloat(AngryCount / total) * 200.0;
+      const angryheight = parseFloat(AngryCount / total) * 250.0;
       setAngryHeight(angryheight);
 
-      const worriedheight = parseFloat(worriedCount / total) * 200.0;
+      const worriedheight = parseFloat(worriedCount / total) * 250.0;
       setWorriedHeight(worriedheight);
 
-      const boringheight = parseFloat(boringCount / total) * 200.0;
+      const boringheight = parseFloat(boringCount / total) * 250.0;
       setBoringHeight(boringheight);
 
-      const neutralheight = parseFloat(neutralCount / total) * 200.0;
+      const neutralheight = parseFloat(neutralCount / total) * 250.0;
       setNeutralHeight(neutralheight);
 
-      const dizzyheight = parseFloat(dizzyCount / total) * 200.0;
+      const dizzyheight = parseFloat(dizzyCount / total) * 250.0;
       setDizzyHeight(dizzyheight);
 
-      const happyheight = parseFloat(happyCount / total) * 200.0;
+      const happyheight = parseFloat(happyCount / total) * 250.0;
       setHappyHeight(happyheight);
     }
   }, [
@@ -157,9 +201,6 @@ const AnalysisGraph = () => {
   const { selectedEmoji, count, moodText, ImageSource, moodIndex } =
     route.params;
 
-  // console.log("Initial moodtext:", moodText);
-  // console.log("Initial lastInputData:", lastInputData);
-
   const [lastMoodText, setLastMoodText] = useState(moodText ?? lastInputData);
 
   useEffect(() => {
@@ -169,6 +210,30 @@ const AnalysisGraph = () => {
       setLastMoodText(lastInputData);
     }
   }, [moodText, lastInputData]);
+
+  useEffect(() => {
+    const heights = [
+      boringHeight,
+      sadHeight,
+      angryHeight,
+      worriedHeight,
+      neutralHeight,
+      dizzyHeight,
+      happyHeight,
+      loveheight,
+    ];
+    const distinctHeights = [...new Set(heights)].sort((a, b) => b - a);
+    setDistinctHeights(distinctHeights);
+  }, [
+    boringHeight,
+    sadHeight,
+    angryHeight,
+    worriedHeight,
+    neutralHeight,
+    dizzyHeight,
+    happyHeight,
+    loveheight,
+  ]);
 
   // console.log("Initial lastMoodText:", lastMoodText);
 
@@ -233,7 +298,7 @@ const AnalysisGraph = () => {
     <View style={{ flex: 1 }}>
       <ScrollView>
         <HeaderSubAnalysis
-          headLine={"Good Morning " + username}
+          headLine={"Good" + " " + dateValue + " " + username}
           subheadLine={"You are feeling " + lastMoodText + " today"}
         />
         <View style={[styles.selectedEmojiContainer, { opacity: 0.2 }]}>
@@ -245,21 +310,49 @@ const AnalysisGraph = () => {
         <ScrollView horizontal>
           <View style={styles.graphContainer}>
             <Image style={styles.image} source={image} />
-            <View style={styles.bar}>
-              <MoodProgressBars selectedEmoji={"😍"} barHeight={loveheight} />
-              <MoodProgressBars selectedEmoji={"😭"} barHeight={sadHeight} />
-              <MoodProgressBars selectedEmoji={"😡"} barHeight={angryHeight} />
-              <MoodProgressBars
-                selectedEmoji={"😟"}
-                barHeight={worriedHeight}
-              />
-              <MoodProgressBars selectedEmoji={"🥱"} barHeight={boringHeight} />
-              <MoodProgressBars
-                selectedEmoji={"😐"}
-                barHeight={neutralHeight}
-              />
-              <MoodProgressBars selectedEmoji={"😨"} barHeight={dizzyHeight} />
-              <MoodProgressBars selectedEmoji={"😄"} barHeight={happyHeight} />
+
+            <View style={styles.barWithAxis}>
+              <View style={styles.left}>
+                <Text style={{ fontSize: 10 }}>100%</Text>
+                <Text style={{ fontSize: 10, color: "#7D8597" }}>90%</Text>
+                <Text style={{ fontSize: 10, color: "#7D8597" }}>80%</Text>
+                <Text style={{ fontSize: 10, color: "#7D8597" }}>70%</Text>
+                <Text style={{ fontSize: 10, color: "#7D8597" }}>60%</Text>
+                <Text style={{ fontSize: 10 }}>50%</Text>
+                <Text style={{ fontSize: 10, color: "#7D8597" }}>40%</Text>
+                <Text style={{ fontSize: 10, color: "#7D8597" }}>30%</Text>
+                <Text style={{ fontSize: 10, color: "#7D8597" }}>20%</Text>
+                <Text style={{ fontSize: 10, color: "#7D8597" }}>10%</Text>
+                <Text style={{ fontSize: 10 }}>0%</Text>
+              </View>
+              <View style={styles.right}>
+                <MoodProgressBars selectedEmoji={"😍"} barHeight={loveheight} />
+                <MoodProgressBars selectedEmoji={"😭"} barHeight={sadHeight} />
+                <MoodProgressBars
+                  selectedEmoji={"😡"}
+                  barHeight={angryHeight}
+                />
+                <MoodProgressBars
+                  selectedEmoji={"😟"}
+                  barHeight={worriedHeight}
+                />
+                <MoodProgressBars
+                  selectedEmoji={"🥱"}
+                  barHeight={boringHeight}
+                />
+                <MoodProgressBars
+                  selectedEmoji={"😐"}
+                  barHeight={neutralHeight}
+                />
+                <MoodProgressBars
+                  selectedEmoji={"😨"}
+                  barHeight={dizzyHeight}
+                />
+                <MoodProgressBars
+                  selectedEmoji={"😄"}
+                  barHeight={happyHeight}
+                />
+              </View>
             </View>
           </View>
         </ScrollView>
@@ -309,11 +402,10 @@ const styles = StyleSheet.create({
     marginTop: 10,
     alignSelf: "center",
   },
-  graphContainer: {},
-  bar: {
-    flexDirection: "row",
-    alignItems: "flex-end",
-  },
+  // graphContainer: {
+  //   backgroundColor: "yellow",
+  // },
+  bar: {},
   continueButton: {
     backgroundColor: "#FFFFFF",
     width: 250,
@@ -321,14 +413,41 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     alignSelf: "center",
-    marginBottom: 100,
+    marginBottom: 50,
     borderRadius: 75,
     borderColor: "#4ABFB4",
     borderWidth: 2,
+    marginTop: 15,
   },
   continue: {
     color: "#101318",
     fontSize: 16,
+  },
+  // graphContent: {
+  //   flexDirection: "row",
+  //   alignItems: "flex-end",
+  //   paddingRight: 5,
+  //   paddingLeft: 15,
+  // },
+
+  barWithAxis: {
+    flexDirection: "row",
+    marginTop: -250,
+  },
+  left: {
+    flex: 1,
+    alignItems: "flex-end",
+    rowGap: 12,
+    paddingLeft: 5,
+    marginLeft: 15,
+  },
+  right: {
+    flex: 1,
+    columnGap: 20,
+    flexDirection: "row",
+    alignItems: "flex-end",
+    paddingRight: 15,
+    paddingLeft: 10,
   },
 });
 

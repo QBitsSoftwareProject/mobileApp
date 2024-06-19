@@ -15,7 +15,7 @@ const getMoodEntryByUserId = asyncHandler(async (req, res) => {
 
     if (existingMoodEntry) {
       res.status(200).json(existingMoodEntry);
-      console.log(existingMoodEntry);
+      // console.log(existingMoodEntry);
     } else {
       res.status(404).json({ error: "Mood Entry not found" });
     }
