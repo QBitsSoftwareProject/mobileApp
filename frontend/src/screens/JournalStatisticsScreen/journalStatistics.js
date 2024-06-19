@@ -98,7 +98,9 @@ export const JournalStatistics = ({ navigation }) => {
           </View>
         </View>
       </ScrollView>
-      <View style={{ top: 0, left: 0, right: 0 }}></View>
+      {/* <View style={{  top:0, left: 0, right: 0 }}>
+        <TabBar/>
+        </View> */}
     </View>
   );
 };

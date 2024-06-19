@@ -22,7 +22,7 @@ export const JournalCalendar = () => {
     { emoji: "40", category: "positive" },
     { emoji: "50", category: "negative" },
     { emoji: "60", category: "negative" },
-    { emoji: "70", category: "positive" },
+    { emoji: "70", category: "negative" },
     { emoji: "80", category: "negative" },
   ];
 

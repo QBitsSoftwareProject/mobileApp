@@ -8,6 +8,7 @@ import {
   Text,
   TouchableOpacity,
   View,
+  SafeAreaView
 } from "react-native";
 import styles from "./styles";
 import HomeCard from "../../components/HomeCard/HomeCard";
@@ -67,6 +68,8 @@ const HomeScreen = (props) => {
 
   const [user, setUser] = useState(null);
 
+  
+
   const winWidth = Dimensions.get("window").width - 60;
 
   useEffect(() => {
@@ -103,10 +106,14 @@ const HomeScreen = (props) => {
       }
 
       setUser(currentUser);
+       
     } catch (error) {
       console.log(error);
     }
   };
+
+ 
+
 
   if (!user) {
     // Render loading state or placeholder if user is not yet fetched
@@ -126,7 +133,9 @@ const HomeScreen = (props) => {
   }
 
   return (
+   
     <View style={{ flex: 1, paddingBottom: 80 }}>
+      <SafeAreaView>
       <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
         <View>
           <HomeTop
@@ -275,7 +284,10 @@ const HomeScreen = (props) => {
           </View>
         </View>
       </ScrollView>
+      </SafeAreaView>
     </View>
+   
+    
   );
 };
 

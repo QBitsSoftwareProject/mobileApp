@@ -6,49 +6,36 @@ import axiosInstance from '../../api/axios';
 import { GetMonthAndDate } from '../StressLevelAssessmentQuestions/convertdatetime';
 import TabBar from "../../components/TabBar/TabBar";
 import { useNavigation } from '@react-navigation/native';
+import {fetchHistoryDataByUserId} from "../../services/stressMarksServices/stressMarkServices"
 
-
-
-
-
-const StressLevelHistory = ({route}) => {
+const StressLevelHistory = () => {
   const [historyData, setHistoryData] = useState([]);
-  const [userID, setUserId] = useState('');
+  const [userID, setUserId] = useState(''); 
 
-  const { user_id } = route.params;
 
+  
   //get history of stress level by newest first and groupde by date
-  const fetchHistoryData = async (userid) => {
+  const fetchHistoryData = async () => {
     try {
-      const response = await axiosInstance.get(`/mark/get-sorted-mark-by-id/${userid}`);
-      const userData = response.data;
-
-      // console.log(userData)
-
-      // Transform userData into an array of objects
+      const response = await fetchHistoryDataByUserId();
+      const userData = response;
 
       const historyDataArray = Object.entries(userData).map(([date, items]) => ({
         date,
         items
       }));
 
- 
-      // console.log(userData)
-
-      
-
       setHistoryData(historyDataArray);
 
     } catch (err) {
-      console.log(err);
+      console.log(err); 
     }
   };
 
   useEffect(() => {
-    setUserId(user_id);
-    // console.log("id is", userID);
-    fetchHistoryData(user_id); // Call fetchHistoryData here
-  }, [user_id]);
+  
+    fetchHistoryData(); 
+  }, []);
 
   const navigation = useNavigation();
 

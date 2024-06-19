@@ -6,7 +6,7 @@ const{
     getAllMethods,
     updateMethod
     
-} = require("../controllers/method.controller");
+} = require("../controllers/mindRelaxingMethodController/method.controller");
 
 router.post("/add-method", storeMethod);
 router.get("/get-method",getAllMethods);

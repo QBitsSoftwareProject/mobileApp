@@ -3,46 +3,24 @@ import { Text, View ,FlatList,TouchableOpacity, ScrollView} from 'react-native'
 import HeaderSub from '../../components/HeaderSub/HeaderSub'
 import ExpandableCard from '../../components/MindRelaxingMethod/ExpandCard'
 import { CustomButton } from '../../components/MindRelaxingMethod/DoubleButton';
-import axios from 'axios';
 import { useNavigation } from '@react-navigation/native';
-import axiosInstance from "../../api/axios";
+import { fetchMindRelaxingMethod } from '../../services/mindRelaxingMethodService/mindRelaxingMethodService';
+
 
 const Mindrelaxinmethod =() => {
 
   const [userID, setUserId] = useState('');
-    const [lastMark,setLastMark] = useState('');
-
-    
+  
 
     useEffect(() => {
+
   setUserId('214012H'); 
-  fetchMark(userID);
   
 }, [userID]);
 
 const navigation = useNavigation();
 
 
-const fetchMark = async (userID) => {
-  // const userid = userID;
-  try {
-    console.log('Fetching mark for userID:', userID);
-    const response = await axiosInstance.get(`/mark/get-mark-by-id/${userID}`);
-    
-    const userData = response.data;
-
-
-    if (userData.length > 0) {
-      const mostRecentMark = userData[userData.length - 1].mark;
-      console.log('Most Recent Mark:', mostRecentMark);
-      setLastMark(mostRecentMark);
-    } else {
-      console.log('No user data found.');
-    }
-  } catch (err) {
-    console.log('Error fetching mark:', err);
-  }
-};
 
   //still not merge to stress level assessment branch so assing a valu yo stress level
   let yourMark;
@@ -56,10 +34,10 @@ const fetchMark = async (userID) => {
       const fetchData = async () => {
       try{
           
-          const response = await axiosInstance.get(`/method/get-method`);
+          const response = await fetchMindRelaxingMethod();
 
           
-          setData(response.data);
+          setData(response);
 
       }catch(error){
           console.log(error);
@@ -68,15 +46,16 @@ const fetchMark = async (userID) => {
 
   fetchData();
 
-  // console.log(Data)
+  
      
   },[])
 
   //filter method according to the stress level
-  const filteredData = Data.filter(item => item.mark === yourMark);
+  const filteredData = Data.filter(item => item.mark === yourMark);   
 
   const resultBtnFunction = () => {
-    navigation.navigate('DisplayResultScreen');
+    // navigation.navigate('DisplayResultScreen');
+    navigation.navigate("StressLevel", { screen: 'DisplayResultScreen' });
   };
 
   const handleTryLaterBtn = () => {
