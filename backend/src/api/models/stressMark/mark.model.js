@@ -1,28 +1,25 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 const MarkSchema = mongoose.Schema({
-
   userid: {
     type: mongoose.Schema.Types.ObjectId,
-    required:true,
+    required: true,
     ref: "RegularUser",
   },
   mark: {
     type: Number,
-    required: true
+    required: true,
   },
 
   date: {
-    type: String,
-    required:true
+    type: Date,
+    required: true,
   },
 
   time: {
-    type:String,
-    required:true
-  }
-
-
+    type: String,
+    required: true,
+  },
 });
 
-module.exports = mongoose.model('Mark', MarkSchema);
+module.exports = mongoose.model("Mark", MarkSchema);

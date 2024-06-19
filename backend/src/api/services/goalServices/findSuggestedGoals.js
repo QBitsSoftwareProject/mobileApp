@@ -196,7 +196,7 @@ exports.findSuggestedGoals = async (
     stressLevelRating.inspirationalContent * stressLevel +
     moodRating.inspirationalContent * averageMoodWeight;
 
-  console.log(findLargestThreeCategories(suggestionTable));
+  return findLargestThreeCategories(suggestionTable);
 };
 
 //function for calculate the sum

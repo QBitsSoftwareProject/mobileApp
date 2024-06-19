@@ -85,7 +85,12 @@ const averageTotalWeight = () => {
     weights.worried * moodCount.worried +
     weights.lovely * moodCount.lovely +
     weights.boring * moodCount.boring +
+    weights.overWhelmed * moodCount.overWhelmed +
     weights.angry * moodCount.angry;
+
+  if (moodCount.total === 0) {
+    return 1;
+  }
 
   return total / moodCount.total;
 };
