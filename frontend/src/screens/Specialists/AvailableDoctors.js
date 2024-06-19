@@ -51,7 +51,7 @@ const AvailableDoctor = () => {
         back={"HomeScreen"}
       />
 
-      <SafeAreaView style={{ margin: 25 }}>
+      <SafeAreaView style={{ padding: 20 }}>
         <ScrollView style={{ height: 500 }}>
           <TwoButtonGroup type={"list"} />
 

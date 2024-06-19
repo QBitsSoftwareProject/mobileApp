@@ -67,6 +67,7 @@ const ViewGoalScreen = () => {
             tab2={"Suggested"}
             tab3={"Completed"}
             select={setSelectedTab}
+            change={selectedTab}
           />
         </View>
       </View>
@@ -109,7 +110,8 @@ const ViewGoalScreen = () => {
                     goalId={item._id}
                     objectives={item.objectivesState}
                     completness={item.completeness}
-                    change={(id) => setIsChange(!isChange)}
+                    // change={(id) => setIsChange(!isChange)}
+                    select={setSelectedTab}
                   />
                 ) : selectedTab == 2 ? (
                   <HistoryGoalCard
