@@ -31,6 +31,8 @@ import {
 } from "../../services/doctorServices/doctorService";
 import SchedulePopUp from "./ScheduleUpdatePopUp";
 import { useNavigation } from "@react-navigation/native";
+import Toast from 'react-native-toast-message';
+
 
 const ProfileScreen = () => {
   const navigation = useNavigation();
@@ -175,11 +177,16 @@ const ProfileScreen = () => {
         throw new Error("Invalid user role");
       }
 
-      // Handle success, maybe update local state with the updated user data
-      console.log("Name updated successfully:");
+      Toast.show({
+        type: 'success',
+        text1: 'Name updated successfully!',
+        
+      });
     } catch (error) {
-      // Handle error
-      console.error("Failed to update name:", error.message);
+      Toast.show({
+        type: 'error',
+        text1: 'Name updated unsuccessfully!',
+      });
     }
   };
 
@@ -194,10 +201,19 @@ const ProfileScreen = () => {
       } else {
         throw new Error("Invalid user role");
       }
-      console.log("username updated successfully:");
+      
+      Toast.show({
+        type: 'success',
+        text1: 'Username updated successfully!',
+      });
+    
+
     } catch (error) {
       // Handle error
-      console.error("Failed to update name:", error.message);
+      Toast.show({
+        type: 'error',
+        text1: 'Username updated unsuccessfully!',
+      });
     }
   };
 
@@ -214,10 +230,17 @@ const ProfileScreen = () => {
       } else {
         throw new Error("Invalid user role");
       }
-      console.log("email updated successfully:");
+      
+      Toast.show({
+        type: 'success',
+        text1: 'Email updated successfully!',
+      });
+
     } catch (error) {
-      // Handle error
-      console.error("Failed to update Email:", error.message);
+      Toast.show({
+        type: 'error',
+        text1: 'Email updated unsuccessfully!',
+      });
     }
   };
 
@@ -232,10 +255,15 @@ const ProfileScreen = () => {
       } else {
         throw new Error("Invalid user role");
       }
-      console.log("Contact number updated successfully:");
+      Toast.show({
+        type: 'success',
+        text1: 'Contact number updated successfully!',
+      });
     } catch (error) {
-      // Handle error
-      console.error("Failed to update name:", error.message);
+      Toast.show({
+        type: 'error',
+        text1: 'Contact number updated unsuccessfully!',
+      });
     }
   };
 
@@ -250,10 +278,17 @@ const ProfileScreen = () => {
       } else {
         throw new Error("Invalid user role");
       }
-      console.log("address updated successfully:");
+      
+      Toast.show({
+        type: 'success',
+        text1: 'Address updated successfully!',
+      });
+
     } catch (error) {
-      // Handle error
-      console.error("Failed to update name:", error.message);
+      Toast.show({
+        type: 'error',
+        text1: 'Address updated unsuccessfully!',
+      });
     }
   };
 
@@ -268,9 +303,15 @@ const ProfileScreen = () => {
       } else {
         throw new Error("Invalid user role");
       }
+      Toast.show({
+        type: 'success',
+        text1: 'City updated successfully!',
+      });
     } catch (error) {
-      // Handle error
-      console.error("Failed to update name:", error.message);
+      Toast.show({
+        type: 'error',
+        text1: 'City updated unsuccessfully!',
+      });
     }
   };
 
@@ -285,11 +326,15 @@ const ProfileScreen = () => {
       } else {
         throw new Error("Invalid user role");
       }
-
-      console.log("Country updated successfully:");
+      Toast.show({
+        type: 'success',
+        text1: 'Country updated successfully!',
+      });
     } catch (error) {
-      // Handle error
-      console.error("Failed to update name:", error.message);
+      Toast.show({
+        type: 'error',
+        text1: 'country updated unsuccessfully!',
+      });
     }
   };
 
@@ -304,21 +349,30 @@ const ProfileScreen = () => {
       } else {
         throw new Error("Invalid user role");
       }
-      console.log("Profile Picture updated successfully:");
+      Toast.show({
+        type: 'success',
+        text1: 'Profile picture updated successfully!',
+      });
     } catch (error) {
-      // Handle error
-      console.error("Failed to update name:", error.message);
+      Toast.show({
+        type: 'error',
+        text1: 'Profile picture updated unsuccessfully!',
+      });
     }
   };
 
   const handleUpdateBio = async (newBio) => {
     try {
       const updatedUser = await updateADoctor({ bio: newBio });
-      // Handle success, maybe update local state with the updated user data
-      console.log("Profile Bio updated successfully:");
+      Toast.show({
+        type: 'success',
+        text1: 'Bio updated successfully!',
+      });
     } catch (error) {
-      // Handle error
-      console.error("Failed to update name:", error.message);
+      Toast.show({
+        type: 'error',
+        text1: 'Bio updated unsuccessfully!',
+      });
     }
   };
 
@@ -327,11 +381,15 @@ const ProfileScreen = () => {
       const updatedUser = await updateADoctor({
         specialization: newSpecialization,
       });
-      // Handle success, maybe update local state with the updated user data
-      console.log("Profile Bio updated successfully:");
+      Toast.show({
+        type: 'success',
+        text1: 'Specialization updated successfully!',
+      });
     } catch (error) {
-      // Handle error
-      console.error("Failed to update name:", error.message);
+      Toast.show({
+        type: 'error',
+        text1: 'Specialization updated unsuccessfully!',
+      });
     }
   };
 
@@ -340,11 +398,17 @@ const ProfileScreen = () => {
       const updatedUser = await updateADoctor({
         qualification: newQalification,
       });
-      // Handle success, maybe update local state with the updated user data
-      console.log("Qalification updated successfully:");
+      
+      Toast.show({
+        type: 'success',
+        text1: 'Qualification updated successfully!',
+      });
+
     } catch (error) {
-      // Handle error
-      console.error("Failed to update name:", error.message);
+      Toast.show({
+        type: 'error',
+        text1: 'Qualification updated unsuccessfully!',
+      });
     }
   };
 
@@ -370,12 +434,17 @@ const ProfileScreen = () => {
         sunday: newSunday,
       });
 
-      console.log("Qalification updated successfully:");
+      Toast.show({
+        type: 'success',
+        text1: 'Schedule updated successfully!',
+      });
 
       togglePopupSchedule();
     } catch (error) {
-      // Handle error
-      console.error("Failed to update name:", error.message);
+      Toast.show({
+        type: 'error',
+        text1: 'Shedule updated unsuccessfully!',
+      });
     }
   };
 

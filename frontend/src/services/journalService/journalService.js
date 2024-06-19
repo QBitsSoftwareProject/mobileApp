@@ -107,8 +107,9 @@ export const updateJournal = async (
 };
 
 //delete journal by id
-export const deleteJournal = async (id) => {
+export const deleteJournal = async(id) => {
   try {
+    console.log("id id",id);
     const token = await AsyncStorage.getItem("authToken");
 
     const response = await axios.delete(`${URL}/delete-journal/${id}`, {
@@ -118,6 +119,6 @@ export const deleteJournal = async (id) => {
     return response.data;
   } catch (error) {
     console.log(error);
-    throw new Error("errr");
+    throw new Error("errr"); 
   }
 };

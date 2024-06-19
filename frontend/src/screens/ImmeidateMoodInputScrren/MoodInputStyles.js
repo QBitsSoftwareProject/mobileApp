@@ -3,7 +3,8 @@ import { StyleSheet } from "react-native";
 const styles = StyleSheet.create({
     backBtn:{
         // marginTop:50,
-        margin:25
+        marginLeft:25,
+        marginBottom:25
         
     },
 
@@ -85,8 +86,9 @@ const styles = StyleSheet.create({
       },
 
       optionImg : {
-        width:70,
-        height:70,
+        width:60,
+        height:60,
+        marginBottom:5
       },
 
       submitBtn : {

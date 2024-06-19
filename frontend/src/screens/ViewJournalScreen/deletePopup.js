@@ -13,10 +13,13 @@ import { deleteJournal } from "../../services/journalService/journalService";
 export const Overlay = ({ item, isVisible, onClose }) => {
   const handleDeleteButton = async () => {
     try {
-      await deleteJournal(item);
+      const id = await item
+      if(id){
+      const responce = await deleteJournal(id); 
+      }
       onClose(); // Close the modal after successful deletion
-    } catch (error) {
-      console.error("Error deleting journal:", error);
+    } catch (err) {
+      console.error("Error deleting journal:", err);
     }
   };
 
