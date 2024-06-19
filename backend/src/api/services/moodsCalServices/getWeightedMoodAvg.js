@@ -25,12 +25,24 @@ const moodCount = {
 exports.getWeightedMoodAvg = async (userId) => {
   try {
     //find all inputs moods relevent to the user
-    const allMoods = await moodsModel.find({
-      userId: userId,
+    const allMoods = await moodsModel
+      .find({
+        userId: userId,
+      })
+      .sort({ date: -1 });
+
+    // Calculate the date 7 days ago from today
+    const sevenDaysAgo = new Date();
+    sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7);
+
+    // Filter the moods to get the past 7 days' recent moods
+    const pastRecentMoods = allMoods.filter((item) => {
+      const itemDate = new Date(item.date);
+      return itemDate >= sevenDaysAgo;
     });
 
     //set the moods count
-    allMoods.map((item) => {
+    pastRecentMoods.map((item) => {
       checkMood(item.moodText);
 
       moodCount.total += 1;

@@ -26,6 +26,7 @@ exports.getSuggestedGoals = async (req, res) => {
 
     //get the stressLevel score and decay value
     const stressLevelData = await getStressData(req.user.user_id);
+    console.log(stressLevelData, averageMoodWeight);
 
     let suggestedGoalList = await findSuggestedGoals(
       stressLevelData.decayValue,
@@ -33,7 +34,7 @@ exports.getSuggestedGoals = async (req, res) => {
       averageMoodWeight
     );
 
-    // console.log(suggestedGoalList);
+    console.log(suggestedGoalList);
 
     // Find goals in the goals collection that do not match the extracted goal IDs
     const unselectedGoals = await goals

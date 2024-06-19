@@ -8,7 +8,10 @@ exports.getStressData = async (userId) => {
       .sort({ date: -1 });
 
     if (!stressLevels[0]) {
-      stressLevels.push({ mark: 0 });
+      return {
+        decayValue: 1,
+        score: 2.5,
+      };
     }
 
     const mostRecentStressLevelDate = new Date(stressLevels[0].date);
