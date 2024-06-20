@@ -120,7 +120,7 @@ const DoctorRegScreen4 = ({ route }) => {
       const licenseSide2 = await AsyncStorage.getItem("licenseSide2");
       const specialization = await AsyncStorage.getItem("specialization");
       const qualification = await AsyncStorage.getItem("qualification");
-
+      console.log(monday);
       const userData = await doctorRegistration(
         fullName,
         userName,

@@ -39,6 +39,8 @@ const DoctorRegScreen3 = () => {
   const [availableTimesDay6, setAvailableTimesDay6] = useState([]);
   const [availableTimesDay7, setAvailableTimesDay7] = useState([]);
 
+  console.log(availableTimesDay1);
+
   // Effect for managing keyboard visibility
   useEffect(() => {
     const keyboardDidShowListener = Keyboard.addListener(

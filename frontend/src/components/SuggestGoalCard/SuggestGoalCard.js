@@ -5,7 +5,14 @@ import { useNavigation } from "@react-navigation/native";
 import { updateAUser } from "../../services/userServices/userService";
 import { addAGoal } from "../../services/goalsService/goalsService";
 
-const SuggestGoalCard = ({ title, subTitle, goalId, objectives, change }) => {
+const SuggestGoalCard = ({
+  title,
+  subTitle,
+  goalId,
+  objectives,
+
+  select,
+}) => {
   const navigation = useNavigation();
 
   const date = new Date();
@@ -25,7 +32,7 @@ const SuggestGoalCard = ({ title, subTitle, goalId, objectives, change }) => {
   const handleAdd = async () => {
     try {
       await addAGoal({ selectedGoals: updatedData });
-      change(goalId);
+      select(0);
     } catch (error) {
       console.log(error);
     }

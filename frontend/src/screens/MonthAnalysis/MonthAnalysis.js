@@ -11,9 +11,6 @@ const MonthAnalysis = () => {
   const { selectedEmoji, moodText, imageSource, moodIndex } =
     route.params || {};
 
-  const suggestionButton = () => {
-    navigation.navigate("SuggestionsScreen");
-  };
   const inputYourMoodBtn = () => {
     navigation.navigate("MoodAnaysisScreen");
   };
@@ -67,15 +64,6 @@ const MonthAnalysis = () => {
           title="Monthly analysis of your moods 📈 "
           subtitle="Track Your Mood Changes monthly"
           onPress={monthlyAnalysisGraph}
-        />
-      </View>
-
-      <View style={{ paddingLeft: 24, paddingRight: 24, paddingTop: 15 }}>
-        <Card
-          imageSource={require("../../assets/images/analysisMood/suggestions.png")}
-          title="Suggestions 💡 "
-          subtitle="Recommendations for Enhancing Mood and Well-being"
-          onPress={suggestionButton}
         />
       </View>
     </View>

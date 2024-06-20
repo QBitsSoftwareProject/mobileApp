@@ -34,6 +34,7 @@ const Feedback = () => {
   const [fTime, setTime] = useState("");
   const [data, setData] = useState([]);
   const [submitTriggered, setSubmitTriggered] = useState(false);
+  const [resetKey, setResetKey] = useState(0);
 
   useEffect(() => {
     if (qOne !== null) {
@@ -104,11 +105,6 @@ const Feedback = () => {
   const handleSubmit = async () => {
     if (submitTriggered) return; // Prevent multiple submissions
     getDeviceTimeAndDate();
-    setQone(0);
-    setQtwo(0);
-    setQthree(0);
-    setQfour(0);
-    setQfive(0);
   };
 
   const getDeviceTimeAndDate = () => {
@@ -118,6 +114,28 @@ const Feedback = () => {
     setDate(date);
     setTime(time);
     setSubmitTriggered(true);
+  };
+
+  const resetForm = () => {
+    setSatisfaction("");
+    setFinterfaceValue("");
+    setDesign("");
+    setSpeed("");
+    setConsumption("");
+    setPrivacy("");
+    setComments("");
+    setQuestionSix("");
+    setQone(0);
+    setQtwo(0);
+    setQthree(0);
+    setQfour(0);
+    setQfive(0);
+    setRateValue(0);
+    setUserRate("");
+    setDate("");
+    setTime("");
+    setSubmitTriggered(false);
+    setResetKey((prevKey) => prevKey + 1); // Force re-render
   };
 
   const storeData = async () => {
@@ -135,18 +153,8 @@ const Feedback = () => {
       );
 
       console.log("Data saved successfully");
-      setUserRate("");
-      setFinterfaceValue("");
-      setPrivacy("");
-      setSpeed("");
-      setConsumption("");
-      setDesign("");
-      setQuestionSix("");
-      setDate("");
-      setTime("");
-
       alert("Thank you for your Feedback!!");
-      setSubmitTriggered(false); // Reset submitTriggered after successful submission
+      resetForm();
     } catch (error) {
       console.log("Error saving data:", error);
       setSubmitTriggered(false); // Reset submitTriggered on error
@@ -181,27 +189,35 @@ const Feedback = () => {
           application?
         </Text>
 
-        <SplitButton rateFunction={setRateValue} />
+        <SplitButton
+          rateFunction={setRateValue}
+          submitTriggered={submitTriggered}
+        />
 
         <QuestionButton
           qtext="1. Is the user interface intuitive and easy to navigate?"
           btnFunction={setQone}
+          key={`${resetKey}-q1`}
         />
         <QuestionButton
           qtext="2. Are there any privacy settings or permissions that seem excessive or insufficient?"
           btnFunction={setQtwo}
+          key={`${resetKey}-q2`}
         />
         <QuestionButton
           qtext="3. Is the app slow to load or respond?"
           btnFunction={setQthree}
+          key={`${resetKey}-q3`}
         />
         <QuestionButton
           qtext="4. Does it consume excessive battery or data?"
           btnFunction={setQfour}
+          key={`${resetKey}-q4`}
         />
         <QuestionButton
           qtext="5. Are there any elements of the design that are confusing or difficult to use?"
           btnFunction={setQfive}
+          key={`${resetKey}-q5`}
         />
 
         <TextInput

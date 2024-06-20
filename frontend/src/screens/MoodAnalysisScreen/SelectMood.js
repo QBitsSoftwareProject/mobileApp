@@ -72,13 +72,7 @@ const MoodAnalysis = () => {
       return;
     }
 
-    const currentDate = new Date();
-    const formattedDate = currentDate.toLocaleDateString();
-    const formattedTime = currentDate.toLocaleTimeString();
-    setDate(formattedDate);
-    setTime(formattedTime);
-
-    await storedata(formattedDate, formattedTime);
+    await storedata();
 
     navigation.navigate("AnalysisGraphScreen", {
       selectedEmoji,
@@ -90,14 +84,13 @@ const MoodAnalysis = () => {
   };
 
   // call the add mood function
-  const storedata = async (currentDate, currentTime) => {
+  const storedata = async () => {
     const count = 10;
     try {
       await addMood(
         selectedEmoji,
         emojis[moodIndex].moodText,
-        currentTime,
-        currentDate,
+
         count
       );
     } catch (error) {

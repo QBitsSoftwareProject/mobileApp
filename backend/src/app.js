@@ -14,7 +14,6 @@ const FeedbackRoute = require("./api/routes/feedback.route.js");
 const journalRoute = require("./api/routes/Journal.route.js");
 const questionRoute = require("./api/routes/questionRoute.js");
 const moodEntryRoute = require("./api/routes/moodsInputroutes.js");
-
 const app = express();
 
 const methodRouter = require("./api/routes/method.route.js");

@@ -3,6 +3,7 @@ import { View, StyleSheet, Text } from "react-native";
 
 const MoodProgressBars = ({ selectedEmoji, barHeight }) => {
   const [bheight, setBheight] = useState("");
+
   useEffect(() => {
     // Parse the barHeight string to a number
     const parsedHeight = parseFloat(barHeight);
@@ -26,8 +27,8 @@ const styles = StyleSheet.create({
   progressBarsContainer: {
     alignSelf: "flex-end",
 
-    marginLeft: 25,
-    marginBottom: 10,
+    // marginLeft: 25,
+
     marginTop: -265,
   },
 
