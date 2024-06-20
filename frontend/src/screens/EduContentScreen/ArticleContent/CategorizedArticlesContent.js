@@ -57,6 +57,11 @@ const CategorizedArticlesContent = () => {
                         <View>
                             <HeaderSub back={"ArticleScreen"} headLine={(category == "All Articles") ? (category) : (category + " articles")} />
                         </View>
+                        {(category == "All Articles") ? (
+                            <View style={{ paddingHorizontal: 20, marginTop: 10 }}>
+                                <SearchBarComponent keyword={setKeyWord} />
+                            </View>
+                        ) : (null)}
                         <View
                             style={[
                                 styles.articleSection,

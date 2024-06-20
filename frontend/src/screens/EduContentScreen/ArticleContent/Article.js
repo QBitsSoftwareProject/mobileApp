@@ -47,6 +47,7 @@ const Article = ({ item }) => {
 
   return (
     <View style={styles.article}>
+      {console.log(item.paragraphs[0].image.url)}
       <View>
         {isImagePresent ? (
           <Image
