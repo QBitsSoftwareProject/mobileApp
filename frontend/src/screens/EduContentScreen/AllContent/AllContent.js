@@ -16,11 +16,11 @@ function AllContent() {
       <View>
         <Carousel />
       </View>
-      <Text style={styles.mainHeading2}>Read articles about</Text>
+      <Text style={styles.mainHeading2}>Watch Videos about</Text>
       <View>
         <Categories />
       </View>
-      <Text style={[styles.mainHeading2,{marginTop:40}]}>Follow Along</Text>
+      <Text style={[styles.mainHeading2,{marginTop:40}]}>Listen to Calm yourself</Text>
       <View>
         <Audios/>
       </View>

@@ -4,6 +4,7 @@ import styles from "./articleStyle";
 
 import noPreviewAvailableImg from "../../../assets/images/no-image-avaliable.jpg";
 import { useNavigation } from "@react-navigation/native";
+import { getAuthorInfo } from "../../../services/educationalServices/educationalServices";
 
 const Article = ({ item }) => {
 
@@ -15,21 +16,33 @@ const Article = ({ item }) => {
 
   const [isImagePresent, setIsImagePresent] = useState(false);
   const [imageParagraphId, setImageParagraphId] = useState(null);
+  const [author, setAuthor] = useState([]);
 
   useEffect(() => {
-    // Reset state before checking paragraphs
-    setIsImagePresent(false);
-    setImageParagraphId(null);
 
-    // Iterate over paragraphs to find the first image
-    item.paragraphs.some((paragraph, index) => {
-      if (paragraph.image) {
-        setIsImagePresent(true);
-        setImageParagraphId(index);
-        return true; // Exit loop early
+    const fetchArticleData = async () => {
+      try {
+        const authorInfo = await getAuthorInfo(item.author);
+        setAuthor(authorInfo.data);
+      } catch (err) {
+        console.error("Error fetching article and author details:", err);
       }
-      return false;
-    });
+      // Reset state before checking paragraphs
+      setIsImagePresent(false);
+      setImageParagraphId(null);
+
+      // Iterate over paragraphs to find the first image
+      item.paragraphs.some((paragraph, index) => {
+        if (paragraph.image) {
+          setIsImagePresent(true);
+          setImageParagraphId(index);
+          return true; // Exit loop early
+        }
+        return false;
+      });
+      
+    }
+    fetchArticleData();
   }, [item]);
 
   return (
@@ -37,7 +50,7 @@ const Article = ({ item }) => {
       <View>
         {isImagePresent ? (
           <Image
-            source={{ uri: item.paragraphs[imageParagraphId].image.url }}
+            source={{ uri: item.paragraphs[0].image.url }}
             style={{ width: "100%", height: "100%", borderRadius: 7 }}
           />
         ) : (
@@ -77,7 +90,7 @@ const Article = ({ item }) => {
             <Text style={{ fontWeight: "500", textTransform: "uppercase" }}>
               {item.title}
             </Text>
-            <Text style={{ color: "#596C79", fontSize: 12 }}>{item.author}</Text>
+            <Text style={{ color: "#596C79", fontSize: 12, marginTop: 5 }}>{author.name}</Text>
           </View>
           <View
             style={{ display: "flex", justifyContent: "center", width: "30%" }}

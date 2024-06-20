@@ -17,7 +17,7 @@ export default function Audios() {
     const fetchAudioData = async () => {
       try {
         const response = await getAudios();
-        setAudioData(response.data);
+        setAudioData(response.data.slice(0,5));
       } catch (error) {
         console.error('Error fetching audio data:', error);
       }

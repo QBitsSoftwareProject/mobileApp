@@ -12,8 +12,12 @@ import styles from "./SelectedArticleContentStyles.js";
 
 // navigation
 import { useNavigation, useRoute } from "@react-navigation/native";
+import { getAuthorInfo } from "../../../services/educationalServices/educationalServices.js";
 
 const SelectedArticleContent = () => {
+
+    const [author, setAuthor] = useState([]);
+
     const route = useRoute();
     const articleResource = route.params.article;
 
@@ -22,6 +26,20 @@ const SelectedArticleContent = () => {
     const handleBackPress = () => {
         navigation.navigate("ArticleScreen");
     };
+
+    useEffect(() => {
+
+        const fetchAuthorData = async () => {
+            try {
+                const authorInfo = await getAuthorInfo(articleResource.author);
+                setAuthor(authorInfo.data);
+            } catch (err) {
+                console.error("Error fetching article and author details:", err);
+            }
+        }
+
+        fetchAuthorData();
+    }, []);
 
     return (
         <SafeAreaView>
@@ -39,7 +57,7 @@ const SelectedArticleContent = () => {
                                 {articleResource.title}
                             </Text>
                             <Text style={{ color: "white", fontSize: 18, marginTop: 15, textAlign: "left" }}>
-                                {articleResource.author}
+                                By {author.name}
                             </Text>
                         </ImageBackground>
                     </View>
@@ -60,7 +78,7 @@ const SelectedArticleContent = () => {
                                 </View>
                             </View>
                         ))}
-                        <Text style={{ textAlign: "center", fontSize: 13,marginTop:12 }}>*********END OF ARTICLE*********</Text>
+                        <Text style={{ textAlign: "center", fontSize: 13, marginTop: 12 }}>*********END OF ARTICLE*********</Text>
                     </View>
                 </View>
             </ScrollView>

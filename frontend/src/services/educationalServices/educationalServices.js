@@ -74,7 +74,6 @@ export const getFilteredVideos = async (category) => {
 export const getVideosBySearch = async (keyword) => {
     try {
         const response = await axios.get(URL + '/video/search/' + keyword);
-        console.log(response.data);
         return response;
     } catch (err) {
         console.log("error video fetch , error:" + err.message);
@@ -90,9 +89,32 @@ export const getArticles = async () => {
     }
 }
 
+export const getArticlesBySearch = async (keyword) => {
+    try {
+        const response = await axios.get(URL + '/article/article-search/' + keyword);
+        return response;
+    } catch (err) {
+        console.log("error article fetch , error:" + err.message);
+    }
+}
+
 export const getCategorizedArticles = async (category) => {
     try {
-        const response = await axios.get(URL + '/article//categorizedArticles/' + category);
+        const response = await axios.get(URL + '/article/categorizedArticles/' + category);
+        return response;
+    } catch (err) {
+        console.log("error article fetch , error:" + err.message);
+    }
+}
+
+export const getCategorizedArticlesBySearch = async (keyword, category) => {
+    try {
+        const response = await axios.get(`${URL}/article/categorizedArticlesBysearch/`, {
+            params: {
+                keyword,
+                category
+            }
+        });
         return response;
     } catch (err) {
         console.log("error article fetch , error:" + err.message);
@@ -105,6 +127,42 @@ export const getArticleTags = async () => {
         return response;
     } catch (err) {
         console.log("error article tag fetch , error:" + err.message);
+    }
+}
+
+export const getAuthors = async () => {
+    try {
+        const response = await axios.get(URL + '/author/');
+        return response;
+    } catch (err) {
+        console.log("error author fetch , error:" + err.message);
+    }
+}
+
+export const getAuthorArticles = async (authorId) => {
+    try {
+        const response = await axios.get(URL + '/article/authors-articles/' + authorId);
+        return response;
+    } catch (err) {
+        console.log("error author fetch , error:" + err.message);
+    }
+}
+
+export const getAuthorInfo = async (authorId) => {
+    try {
+        const response = await axios.get(URL + '/author/get-authorInfo/' + authorId);
+        return response;
+    } catch (err) {
+        console.log("error author info fetch , error:" + err.message);
+    }
+}
+
+export const getAuthorArticleCount = async (authorId) => {
+    try {
+        const response = await axios.get(URL + '/article/authors-article-count/' + authorId);
+        return response;
+    } catch (err) {
+        console.log("error author count fetch , error:" + err.message);
     }
 }
 

@@ -1,6 +1,6 @@
 const author = require("../../models/authorModel/author");
 
-// create new author
+// register new author
 exports.createAuthor = async (req, res) => {
     try {
 
@@ -8,7 +8,7 @@ exports.createAuthor = async (req, res) => {
 
         const newAuthor = new author({
             name,
-            profileImgURL
+            profileImg: profileImgURL
         });
 
         await newAuthor.save();

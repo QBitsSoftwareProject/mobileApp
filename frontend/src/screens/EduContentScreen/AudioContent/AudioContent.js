@@ -31,8 +31,7 @@ const AudioContent = () => {
       try {
         // const Audios = await getAudios();
         const tags = await getAudioTags();
-
-        const filteredAudios = await getFilteredAudios(selectedCategory);
+        // const filteredAudios = await getFilteredAudios(selectedCategory);
         let response;
         if (keyword != "") {
           setSelectedCategory("All Audios");

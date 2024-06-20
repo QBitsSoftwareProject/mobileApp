@@ -1,1 +1,1 @@
-export const BACKEND_URI = "http://192.168.8.112:3000/api/v1";
+export const BACKEND_URI = "http://10.10.15.49:3000/api/v1";

@@ -16,10 +16,12 @@ const styles = StyleSheet.create({
     marginRight: "auto",
     padding: 10,
     elevation: 2,
+    height: "auto",
   },
   CardImageSection: {
     display: "flex",
     flexDirection: "row",
+    justifyContent: "space-evenly"
   },
   AuthorDescription: {
     marginLeft: "20%",
@@ -29,18 +31,19 @@ const styles = StyleSheet.create({
     borderColor: "#263552",
     borderWidth: 2.5,
     padding: 5,
-    borderRadius: 30,
-    width: 140,
+    borderRadius: 40,
+    width: 100,
   },
   ViewBtn: {
     backgroundColor: "#4A90BF",
     padding: 6,
-    borderRadius: 17,
+    borderRadius: 40,
   },
   ViewBtnText: {
     marginLeft: "auto",
     marginRight: "auto",
     color: "white",
+    fontSize: 11,
     fontWeight: "500",
   },
 });

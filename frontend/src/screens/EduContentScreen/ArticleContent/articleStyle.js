@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
     paddingTop: 50,
     paddingBottom: 30,
     borderBottomWidth: 1,
-    borderBottomColor: "#928C8C",
+    borderBottomColor: "rgba(146, 140, 140, 0.5)",
     display: "flex",
     justifyContent: "space-evenly",
     alignItems: "center",
@@ -68,12 +68,11 @@ const styles = StyleSheet.create({
     marginRight: "auto",
     borderRadius: 7,
     position: "relative",
-    marginVertical:20,
+    marginVertical: 20,
     shadowOffset: { width: -2, height: 4 },
     shadowColor: "#171717",
     shadowOpacity: 0.2,
     shadowRadius: 3,
-    elevation: 2,
   },
   articleDetails: {
     width: "100%",
@@ -89,8 +88,8 @@ const styles = StyleSheet.create({
     borderBottomLeftRadius: 7,
   },
   articleSection: {
-    display:"flex",
-    flexDirection:"column",
+    display: "flex",
+    flexDirection: "column",
   },
   readMoreBtn: {
     display: "flex",
@@ -128,7 +127,8 @@ const styles = StyleSheet.create({
     borderBottomRightRadius: 40,
   },
   articleList: {
-    marginTop: "15%",
+    width: "100%",
+    marginTop: "10%",
     display: "flex",
     flexDirection: "column",
     justifyContent: "space-evenly",

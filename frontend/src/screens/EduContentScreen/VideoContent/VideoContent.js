@@ -24,7 +24,6 @@ const VideoContent = () => {
   useEffect(() => {
     const fetchVideos = async () => {
       try {
-
         let response;
         if (keyword == "") {
           response = await getVideos();

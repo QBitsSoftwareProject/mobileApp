@@ -3,7 +3,7 @@ const audio = require("../../models/audioResources/audio");
 // getting all audios
 exports.getAllAudios = async (req, res) => {
   try {
-    const allAudios = await audio.find();
+    const allAudios = await audio.find().sort({ createdAt: -1 });
     if (!allAudios) {
       return res.status(404).json({ msg: "audio not found" });
     }
