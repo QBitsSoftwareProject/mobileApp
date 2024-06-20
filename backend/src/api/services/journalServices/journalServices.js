@@ -60,9 +60,9 @@ const getJournalByDate = async (userId, date) => {
 };
 
 // delete journal
-const deleteJournal = async (id) => {
+const deleteJournal = async (userId) => {
   try {
-    const deleteJournalById = await createJournal.findById(id);
+    const deleteJournalById = await createJournal.findById({ userId: userId });
     if (!deleteJournalById) {
       throw new Error("Journal entry not found");
     }

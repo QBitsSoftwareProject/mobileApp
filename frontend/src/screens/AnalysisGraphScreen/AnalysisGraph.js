@@ -67,12 +67,14 @@ const AnalysisGraph = () => {
     const todayDate = new Date();
 
     const startDate = getEndOfWeek(todayDate);
-    console.log(startDate);
+    // console.log(todayDate);
 
     const endDate = getStartOfWeek(todayDate);
+    // console.log("end", endDate);
 
     return data.filter((item) => {
       const todayDate = new Date(item[dateField]);
+
       return todayDate >= startDate && todayDate <= endDate;
     });
   };

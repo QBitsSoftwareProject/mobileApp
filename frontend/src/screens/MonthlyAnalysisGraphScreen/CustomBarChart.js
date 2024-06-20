@@ -9,25 +9,23 @@ const CustomBarChart = ({ positiveMoods, negativeMoods }) => {
   const [yAxisMaxValue, setYAxisMaxValue] = useState(0);
 
   const getStartOfMonth = (date) => {
-    const start = new Date(date);
-
+    const start = new Date(date.getFullYear(), date.getMonth(), 1);
     start.setHours(0, 0, 0, 0); // Set time to 00:00:00
     return start;
   };
 
   const getEndOfMonth = (date) => {
-    const end = new Date(date);
-    end.setMonth(end.getMonth() + 30); // Move to next month
-
+    const end = new Date(date.getFullYear(), date.getMonth() + 1, 0);
     end.setHours(23, 59, 59, 999); // Set time to 23:59:59.999
     return end;
   };
 
   const filterDataByMonth = (data, dateField) => {
-    const startDate = getStartOfMonth(new Date());
+    const todayDate = new Date();
+    const startDate = getStartOfMonth(todayDate);
     // console.log("Start of Month:", startDate);
 
-    const endDate = getEndOfMonth(new Date());
+    const endDate = getEndOfMonth(todayDate);
     // console.log("End of Month:", endDate);
 
     return data.filter((item) => {
@@ -41,7 +39,6 @@ const CustomBarChart = ({ positiveMoods, negativeMoods }) => {
     const fetchMoodInputs = async () => {
       try {
         const moodData = await getMoodsByUserId();
-
         // console.log("Fetched Mood Data:", moodData);
 
         if (!Array.isArray(moodData)) {
@@ -63,8 +60,6 @@ const CustomBarChart = ({ positiveMoods, negativeMoods }) => {
               year: "numeric",
             }
           );
-
-          // console.log("date ", formattedDate);
 
           if (!emojisByDate[formattedDate]) {
             emojisByDate[formattedDate] = [];

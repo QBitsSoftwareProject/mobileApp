@@ -117,7 +117,6 @@ export const deleteJournal = async (id) => {
 
     return response.data;
   } catch (error) {
-    console.log(error);
     throw new Error("errr");
   }
 };

@@ -14,6 +14,7 @@ export const Overlay = ({ item, isVisible, onClose }) => {
   const handleDeleteButton = async () => {
     try {
       await deleteJournal(item);
+
       onClose(); // Close the modal after successful deletion
     } catch (error) {
       console.error("Error deleting journal:", error);
