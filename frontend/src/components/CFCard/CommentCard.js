@@ -184,12 +184,12 @@ const styles = StyleSheet.create({
     height: "auto",
     alignSelf: "center",
     marginBottom: 15,
-    backgroundColor: "red",
   },
   cardContainer: {
     backgroundColor: "white",
     height: "auto",
     borderRadius: 20,
+    marginBottom: 10,
   },
   content1: {
     flexDirection: "row",
