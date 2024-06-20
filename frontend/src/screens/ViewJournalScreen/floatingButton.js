@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
     position: "absolute",
     // top: "80%",
     right: 0,
-    bottom: 85,
+    bottom: 100,
   },
   floatingbutton: {
     resizeMode: "contain",

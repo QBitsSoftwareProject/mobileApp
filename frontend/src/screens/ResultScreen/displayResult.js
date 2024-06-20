@@ -17,7 +17,8 @@ import {
   Image,
   TouchableOpacity,
   ActivityIndicator,
-  ImageBackground
+  ImageBackground,
+  ScrollView
 
 } from "react-native";
 
@@ -93,6 +94,7 @@ const DisplayResultScreen = () => {
             setVal(1);
           } else {
             console.log('No user data found.');
+            
           }
         } catch (err) {
           console.log('Error fetching mark:', err);
@@ -117,6 +119,8 @@ const DisplayResultScreen = () => {
 
     <CustomButton  suggessionBtnFunction ={suggessionBtnFunction}></CustomButton>
 
+    <ScrollView contentContainerStyle={{ flexGrow: 1, paddingBottom: 500 }}>
+
     <Text style = {styles.pccText}>
     This numerical assessment reflects your 
     current stress quotient measured via the 
@@ -140,14 +144,25 @@ const DisplayResultScreen = () => {
       </Text>
 
     <View style = {styles.container}>
+      {lastMark ? (
       <Text style = {styles.text}>
       {lastMark}
       </Text>
+      ) : (
+        <Text style = {{fontSize:11}}>
+      Not Attempt
+      </Text>
+      )}
     </View>
 
-    <Text style = {styles.textStressLvl2}>
+    {lastMark && (
+      <Text style = {styles.textStressLvl2}>
       You have {level} level of stress
       </Text>
+      ) }
+    
+
+   
 
       </ImageBackground>
 
@@ -171,7 +186,7 @@ const DisplayResultScreen = () => {
 
     </View>
 
-    
+    </ScrollView>
 
       
     </View>

@@ -6,8 +6,9 @@ const asyncHandler = require("express-async-handler");
 // delete journal
 const deleteJournal = asyncHandler(async (req, res) => {
   try {
-    const deleteJournal = await journalModel.findByIdAndDelete(req.params.id);
-
+    const id = req.params.id;
+    console.log(id);
+    const deleteJournal = await journalModel.findByIdAndDelete(id);
     if (!deleteJournal) {
       return res.status(404).json({ message: "Journal entry not found" });
     }

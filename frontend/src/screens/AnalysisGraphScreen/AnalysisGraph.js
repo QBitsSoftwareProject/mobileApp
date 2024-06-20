@@ -133,7 +133,7 @@ const AnalysisGraph = () => {
 
     fetchMoodInputs();
     // fetchUserData();
-  }, []);
+  }, [data]);
 
   // call the getAuser function for find username
   useEffect(() => {
@@ -299,75 +299,66 @@ const AnalysisGraph = () => {
   };
 
   return (
-    <View style={{ flex: 1 }}>
-      <ScrollView>
-        <HeaderSubAnalysis
-          headLine={"Good" + " " + dateValue + " " + username}
-          subheadLine={"You are feeling " + lastMoodText + " today"}
-        />
-        <View style={[styles.selectedEmojiContainer, { opacity: 0.2 }]}>
-          <Text style={styles.selectedEmojiLeft}>{emoji}</Text>
-          <Text style={styles.selectedEmojiRight}>{emoji}</Text>
-        </View>
-        <Text style={styles.selectedEmoji}>{emoji}</Text>
-        <Text style={styles.moodText}>{lastMoodText}</Text>
-        <ScrollView horizontal>
-          <View style={styles.graphContainer}>
-            <Image style={styles.image} source={image} />
+    <ScrollView>
+      <HeaderSubAnalysis
+        headLine={"Good" + " " + dateValue + " " + username}
+        subheadLine={"You are feeling " + lastMoodText + " today"}
+      />
 
-            <View style={styles.barWithAxis}>
-              <View style={styles.left}>
-                <Text style={{ fontSize: 10 }}>100%</Text>
-                <Text style={{ fontSize: 10, color: "#7D8597" }}>90%</Text>
-                <Text style={{ fontSize: 10, color: "#7D8597" }}>80%</Text>
-                <Text style={{ fontSize: 10, color: "#7D8597" }}>70%</Text>
-                <Text style={{ fontSize: 10, color: "#7D8597" }}>60%</Text>
-                <Text style={{ fontSize: 10 }}>50%</Text>
-                <Text style={{ fontSize: 10, color: "#7D8597" }}>40%</Text>
-                <Text style={{ fontSize: 10, color: "#7D8597" }}>30%</Text>
-                <Text style={{ fontSize: 10, color: "#7D8597" }}>20%</Text>
-                <Text style={{ fontSize: 10, color: "#7D8597" }}>10%</Text>
-                <Text style={{ fontSize: 10 }}>0%</Text>
-              </View>
-              <View style={styles.right}>
-                <MoodProgressBars selectedEmoji={"😍"} barHeight={loveheight} />
-                <MoodProgressBars selectedEmoji={"😭"} barHeight={sadHeight} />
-                <MoodProgressBars
-                  selectedEmoji={"😡"}
-                  barHeight={angryHeight}
-                />
-                <MoodProgressBars
-                  selectedEmoji={"😟"}
-                  barHeight={worriedHeight}
-                />
-                <MoodProgressBars
-                  selectedEmoji={"🥱"}
-                  barHeight={boringHeight}
-                />
-                <MoodProgressBars
-                  selectedEmoji={"😐"}
-                  barHeight={neutralHeight}
-                />
-                <MoodProgressBars
-                  selectedEmoji={"😨"}
-                  barHeight={OverWhelmedHeight}
-                />
-                <MoodProgressBars
-                  selectedEmoji={"😄"}
-                  barHeight={happyHeight}
-                />
-              </View>
+      <View style={[styles.selectedEmojiContainer, { opacity: 0.2 }]}>
+        <Text style={styles.selectedEmojiLeft}>{emoji}</Text>
+        <Text style={styles.selectedEmojiRight}>{emoji}</Text>
+      </View>
+      <Text style={styles.selectedEmoji}>{emoji}</Text>
+      <Text style={styles.moodText}>{lastMoodText}</Text>
+
+      <ScrollView horizontal>
+        <View style={styles.graphContainer}>
+          <Image style={styles.image} source={image} />
+
+          <View style={styles.barWithAxis}>
+            <View style={styles.left}>
+              <Text style={{ fontSize: 10 }}>100%</Text>
+              <Text style={{ fontSize: 10, color: "#7D8597" }}>90%</Text>
+              <Text style={{ fontSize: 10, color: "#7D8597" }}>80%</Text>
+              <Text style={{ fontSize: 10, color: "#7D8597" }}>70%</Text>
+              <Text style={{ fontSize: 10, color: "#7D8597" }}>60%</Text>
+              <Text style={{ fontSize: 10 }}>50%</Text>
+              <Text style={{ fontSize: 10, color: "#7D8597" }}>40%</Text>
+              <Text style={{ fontSize: 10, color: "#7D8597" }}>30%</Text>
+              <Text style={{ fontSize: 10, color: "#7D8597" }}>20%</Text>
+              <Text style={{ fontSize: 10, color: "#7D8597" }}>10%</Text>
+              <Text style={{ fontSize: 10 }}>0%</Text>
+            </View>
+            <View style={styles.right}>
+              <MoodProgressBars selectedEmoji={"😍"} barHeight={loveheight} />
+              <MoodProgressBars selectedEmoji={"😭"} barHeight={sadHeight} />
+              <MoodProgressBars selectedEmoji={"😡"} barHeight={angryHeight} />
+              <MoodProgressBars
+                selectedEmoji={"😟"}
+                barHeight={worriedHeight}
+              />
+              <MoodProgressBars selectedEmoji={"🥱"} barHeight={boringHeight} />
+              <MoodProgressBars
+                selectedEmoji={"😐"}
+                barHeight={neutralHeight}
+              />
+              <MoodProgressBars
+                selectedEmoji={"😨"}
+                barHeight={OverWhelmedHeight}
+              />
+              <MoodProgressBars selectedEmoji={"😄"} barHeight={happyHeight} />
             </View>
           </View>
-        </ScrollView>
-        <TouchableOpacity
-          style={styles.continueButton}
-          onPress={handleContinuePress}
-        >
-          <Text style={styles.continue}>Continue</Text>
-        </TouchableOpacity>
+        </View>
       </ScrollView>
-    </View>
+      <TouchableOpacity
+        style={styles.continueButton}
+        onPress={handleContinuePress}
+      >
+        <Text style={styles.continue}>Continue</Text>
+      </TouchableOpacity>
+    </ScrollView>
   );
 };
 
@@ -403,12 +394,11 @@ const styles = StyleSheet.create({
   image: {
     width: 369,
     height: 280,
-    marginTop: 10,
+    left: 15,
     alignSelf: "center",
+    marginTop: -10,
   },
-  // graphContainer: {
-  //   backgroundColor: "yellow",
-  // },
+
   bar: {},
   continueButton: {
     backgroundColor: "#FFFFFF",
@@ -417,7 +407,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     alignSelf: "center",
-    marginBottom: 50,
+    marginBottom: 100,
     borderRadius: 75,
     borderColor: "#4ABFB4",
     borderWidth: 2,

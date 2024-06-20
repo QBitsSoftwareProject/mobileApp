@@ -8,16 +8,23 @@ import {
 } from "react-native";
 
 import { deleteJournal } from "../../services/journalService/journalService";
+import Toast from "react-native-toast-message";
 
 // call the delete function
 export const Overlay = ({ item, isVisible, onClose }) => {
   const handleDeleteButton = async () => {
     try {
-      await deleteJournal(item);
-
+      const id = await item;
+      if (id) {
+        const responce = await deleteJournal(id);
+      }
       onClose(); // Close the modal after successful deletion
-    } catch (error) {
-      console.error("Error deleting journal:", error);
+      Toast.show({
+        type: "success",
+        text1: "Journal Successfully Deleted!",
+      });
+    } catch (err) {
+      console.error("Error deleting journal:", err);
     }
   };
 
