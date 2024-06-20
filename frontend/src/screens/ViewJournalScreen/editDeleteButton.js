@@ -32,7 +32,7 @@ export const EditDeletebutton = (props) => {
   const handleDeletePress = () => {
     // props.deleteFunction(props.item);
     setIsOverlayVisible(true);
-    deleteJournal(id);
+    // deleteJournal(id);
   };
 
   return (

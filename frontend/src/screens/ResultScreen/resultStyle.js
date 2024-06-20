@@ -66,6 +66,12 @@ const ResultScreenStyle = StyleSheet.create({
         marginTop:15,
     },
 
+    textNullStressLvl: {
+        alignSelf:'center',
+        fontSize: 14,
+        marginTop:15,
+    },
+
     historybtn : {
         flexDirection: 'row', 
         justifyContent: 'space-between', 

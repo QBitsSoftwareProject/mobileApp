@@ -60,7 +60,7 @@ const getJournalByDate = async (userId, date) => {
 };
 
 // delete journal
-const deleteJournal = async (id) => {
+const deleteJournal = async (userId) => {
   try {
     const deleteJournalById = await createJournal.findById(id);
     if (!deleteJournalById) {

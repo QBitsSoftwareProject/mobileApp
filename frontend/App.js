@@ -9,6 +9,7 @@ import { AddNewJournal } from "./src/screens/AddNewJournalScreen/addNewJournal";
 import { ViewJournal } from "./src/screens/ViewJournalScreen/viewJournal";
 import { JournalStatistics } from "./src/screens/JournalStatisticsScreen/journalStatistics";
 
+
 const Stack = createNativeStackNavigator();
 
 export default function App() {

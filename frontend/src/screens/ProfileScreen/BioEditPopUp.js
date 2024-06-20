@@ -84,6 +84,7 @@ const BioEditPopUp = ({ isVisible, onClose, previousText, title, update, updateF
         } else if(title === "Edit Country"){
 
             if(!query.trim()){
+                
                 alert('cannot set empty')
             }else{
             update(newCountry);
@@ -99,7 +100,7 @@ const BioEditPopUp = ({ isVisible, onClose, previousText, title, update, updateF
 
     };
 
-    const [displayCountries, setDisplayCountries] = useState(true);
+const [displayCountries, setDisplayCountries] = useState(true);
   const [query, setQuery] = useState(previousText);
   const [newCountry, setNewCountry] = useState('')
 
