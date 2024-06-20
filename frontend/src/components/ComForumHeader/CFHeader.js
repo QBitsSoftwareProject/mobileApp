@@ -9,8 +9,7 @@ import {
 } from "react-native";
 
 import { useNavigation } from "@react-navigation/core";
-
-import SearchBarComponent from "../../components/SearchBar/SearchBar";
+import SearchBar from "../../components/SearchBar/SearchBar";
 
 const CFHeaderSub = (props) => {
   const navigation = useNavigation();
@@ -48,7 +47,7 @@ const CFHeaderSub = (props) => {
             </View>
           </View>
 
-          <SearchBarComponent />
+          {/* <SearchBar /> */}
         </View>
       </ImageBackground>
     </View>

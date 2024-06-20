@@ -23,7 +23,7 @@ const EditDeletMenu = (props) => {
     setPopupMessage("");
   };
 
-  const deletePost = async () => {
+  const handleDelete = async () => {
     try {
       props.onClose(false);
       await deleteAPost(props.postId);
@@ -47,7 +47,7 @@ const EditDeletMenu = (props) => {
           },
           style: "cancel",
         },
-        { text: "Delete", onPress: () => deletePost() },
+        { text: "Delete", onPress: () => handleDelete() },
       ],
       { cancelable: true }
     );

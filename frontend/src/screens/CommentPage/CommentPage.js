@@ -21,7 +21,6 @@ import CommentCard from "../../components/CFCard/CommentCard";
 const CommentPage = () => {
   const route = useRoute();
   const { postId, previousScreen } = route.params;
-
   const [comment, setComment] = useState();
   const [commentList, setCommentList] = useState();
   const [isKeyboardVisible, setKeyboardVisible] = useState(false);
@@ -29,7 +28,7 @@ const CommentPage = () => {
   const navigation = useNavigation();
 
   const goBackFromComment = () => {
-    navigation.navigate(previousScreen);
+    navigation.navigate(previousScreen, { refresh: true });
   };
 
   const handleSendButtonPress = async () => {
@@ -37,7 +36,6 @@ const CommentPage = () => {
     try {
       await createComment(postId, comment);
       setComment("");
-      setIscomment(!isComment);
       fetchComment();
     } catch (error) {
       console.log(error);
@@ -75,7 +73,7 @@ const CommentPage = () => {
     };
   }, []);
 
-  const handleUpdate = () => {
+  const onUpdateComment = () => {
     fetchComment();
   };
 
@@ -111,7 +109,7 @@ const CommentPage = () => {
               Date={item.createdAt}
               content={item.content}
               onDelete={onDeleteComment}
-              onUpdate={handleUpdate}
+              onUpdate={onUpdateComment}
             />
           ))}
         </View>

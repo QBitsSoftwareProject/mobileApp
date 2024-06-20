@@ -1,9 +1,9 @@
 import { StyleSheet, TouchableOpacity, View, Image, Text } from "react-native";
-import React, { useEffect } from "react";
+import React from "react";
 import { useState } from "react";
 import EditDeletMenu from "../../components/DropDownMenu/EditDeleteMenu";
 import ReportMenu from "../DropDownMenu/ReportMenu";
-import { useNavigation } from "@react-navigation/native";
+import { useFocusEffect, useNavigation } from "@react-navigation/native";
 import { getCommentsCount } from "../../services/commentServices/commentServices";
 
 const PostCard = (props) => {
@@ -63,9 +63,11 @@ const PostCard = (props) => {
     }
   };
 
-  useEffect(() => {
-    fetchCommentCount();
-  }, []);
+  useFocusEffect(
+    React.useCallback(() => {
+      fetchCommentCount();
+    }, [])
+  );
 
   const handlePress = () => {
     setIsPress(!isPress);

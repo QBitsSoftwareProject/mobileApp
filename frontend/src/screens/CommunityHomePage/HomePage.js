@@ -1,20 +1,32 @@
-import React, { useState } from "react";
-import { View, StyleSheet, ScrollView, Dimensions } from "react-native";
+import React, { useEffect, useState } from "react";
+import { View, ScrollView, Dimensions } from "react-native";
 import CFHeaderSub from "../../components/ComForumHeader/CFHeader";
 import PostCard from "../../components/CFCard/PostCard";
 import FloatingButton from "../../components/FloatingButton/FloatingButton";
-import { useFocusEffect, useNavigation } from "@react-navigation/native";
+import {
+  useFocusEffect,
+  useNavigation,
+  useRoute,
+} from "@react-navigation/native";
 import { getPost } from "../../services/postServices/postServices";
+import { getAUser } from "../../services/userServices/userService";
 
 const HomePage = () => {
   const screenHeight = Dimensions.get("window").height - 275;
 
   const navigation = useNavigation();
+  const route = useRoute();
 
   const [postList, setPostList] = useState([]);
+  const [userData, setUserData] = useState();
 
   const fetchPostData = async () => {
     try {
+      //getUser
+      const user = await getAUser();
+      setUserData(user);
+
+      //  getPosts
       const res = await getPost();
       setPostList(res);
     } catch (error) {
@@ -24,15 +36,22 @@ const HomePage = () => {
 
   useFocusEffect(
     React.useCallback(() => {
-      fetchPostData();
-    }, [])
+      if (route.params?.refresh) {
+        fetchPostData();
+        navigation.setParams({ refresh: false }); // Reset the refresh param
+      }
+    }, [route.params?.refresh])
   );
+
+  useEffect(() => {
+    fetchPostData();
+  }, []);
 
   const addNew = () => {
     navigation.navigate("PostCategory");
   };
 
-  if (!postList) {
+  if (!postList || !userData) {
     return;
   }
 
@@ -61,8 +80,8 @@ const HomePage = () => {
                 postId={item._id}
                 key={item._id}
                 cardName={"HomePageCard"}
-                // image={item.user.proPic}
-                // title={item.user.userName}
+                image={item.userId.proPic}
+                title={item.userId.userName}
                 Date={item.createdAt}
                 description={item.description}
                 postImage={item.image}

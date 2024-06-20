@@ -1,12 +1,18 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, StyleSheet, ScrollView, Dimensions } from "react-native";
+import { View, Text, StyleSheet, ScrollView } from "react-native";
 import PostCard from "../../components/CFCard/PostCard";
 import ProfileCover from "../../components/ComForumCover/ComForumCover";
 import { getProfilePost } from "../../services/postServices/postServices";
 import { getAUser } from "../../services/userServices/userService";
-import { useRoute } from "@react-navigation/native";
+import {
+  useFocusEffect,
+  useNavigation,
+  useRoute,
+} from "@react-navigation/native";
 
 const ProfileScreen = () => {
+  const navigation = useNavigation();
+  const route = useRoute();
   const [postList, setPostList] = useState();
   const [userData, setUserData] = useState();
 
@@ -24,11 +30,20 @@ const ProfileScreen = () => {
     }
   };
 
+  useFocusEffect(
+    React.useCallback(() => {
+      if (route.params?.refresh) {
+        fetchData();
+        navigation.setParams({ refresh: false }); // Reset the refresh param
+      }
+    }, [route.params?.refresh])
+  );
+
   useEffect(() => {
     fetchData();
   }, []);
 
-  const handleUpdate = () => {
+  const onUpdatePost = () => {
     fetchData();
   };
 
@@ -45,7 +60,6 @@ const ProfileScreen = () => {
   return (
     <View style={styles.contains}>
       <ScrollView>
-        {/* <HeaderSub proPic={profilePicture} /> */}
         <ProfileCover proPic={{ uri: userData.proPic }} />
         <View
           style={{
@@ -70,7 +84,7 @@ const ProfileScreen = () => {
                 description={item.description}
                 postImage={item.image}
                 onDelete={onDeletePost}
-                onUpdate={handleUpdate}
+                onUpdate={onUpdatePost}
               />
             ))}
           </View>

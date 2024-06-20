@@ -27,15 +27,12 @@ const CommentCard = (props) => {
   };
 
   const closeMessage = () => {
-    // props.onClose(false);
     setPopupMessage("");
   };
 
   const handleDelete = async () => {
     try {
       await deleteAComment(props.commentId);
-      // props.onClose(false);
-
       if (props.onDelete) {
         props.onDelete(props.commentId);
       }
@@ -51,9 +48,7 @@ const CommentCard = (props) => {
       [
         {
           text: "cancel",
-          onPress: () => {
-            // props.onClose(false);
-          },
+          onPress: () => {},
           style: "cancel",
         },
         { text: "Delete", onPress: () => handleDelete() },
@@ -140,7 +135,6 @@ const CommentCard = (props) => {
         <TouchableOpacity
           onPress={() => {
             handlePress(props.commentId);
-            // handleReload();
           }}
           style={{ width: "100%" }}
         ></TouchableOpacity>

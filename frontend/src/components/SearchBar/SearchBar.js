@@ -3,36 +3,14 @@ import {
   TextInput,
   View,
   TouchableOpacity,
-  FlatList,
   Text,
   ScrollView,
 } from "react-native";
 import React, { useEffect, useState } from "react";
 import styles from "./styles";
-import getSearchProfile from "../../services/postServices/postServices";
+import { getSearchProfile } from "../../../../backend/src/api/controllers/postController/getPost";
 
-//dummyData
-
-const DummyList = [
-  {
-    _id: 1,
-    userName: "piyumi",
-  },
-  {
-    _id: 2,
-    userName: "ravindu",
-  },
-  {
-    _id: 3,
-    userName: "dinul",
-  },
-  {
-    _id: 4,
-    userName: "nipuni",
-  },
-];
-
-const SearchBarComponent = () => {
+const SearchBar = () => {
   const [textInputValue, setTextInputValue] = useState("");
   const [userList, setUserList] = useState([]);
 
@@ -69,25 +47,27 @@ const SearchBarComponent = () => {
           />
         </View>
 
-        <TouchableOpacity style={styles.searchBtn}>
+        <TouchableOpacity onPress={fetchSearchResult} style={styles.searchBtn}>
           <Image
             source={require("../../assets/images/SearchBarIcons/search.png")}
             style={styles.searchIcon}
           />
         </TouchableOpacity>
       </View>
+
       {textInputValue !== "" && (
         <View style={styles.resultContainer}>
           <ScrollView>
-            {DummyList.map((item) => (
+            {userList.map((item) => (
               <TouchableOpacity
+                key={item.userId}
                 onPress={() => {
                   handleNavigateToProfile(item._id);
                 }}
                 style={styles.resultItem}
               >
-                <Image style={styles.image} source={item.proPic} />
-                <Text style={styles.userName}>{item.userName}</Text>
+                <Image style={styles.image} source={item.userId.proPic} />
+                <Text style={styles.userName}>{item.userId.userName}</Text>
               </TouchableOpacity>
             ))}
           </ScrollView>
@@ -97,4 +77,4 @@ const SearchBarComponent = () => {
   );
 };
 
-export default SearchBarComponent;
+export default SearchBar;
