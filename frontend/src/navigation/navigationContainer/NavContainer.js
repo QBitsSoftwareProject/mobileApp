@@ -4,8 +4,8 @@ import LoginStack from "../routes/LoginStack";
 import MainStack from "../routes/MainStack";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { BackgroundMusicProvider } from "../../components/SettingScreen/BackgroundMusicProvider";
-import Toast from 'react-native-toast-message';
-import toastConfig from '../../components/ToastMessage/toastConfig';
+import Toast from "react-native-toast-message";
+import toastConfig from "../../components/ToastMessage/toastConfig";
 
 const NavContainer = () => {
   const [userId, setUserId] = useState();
