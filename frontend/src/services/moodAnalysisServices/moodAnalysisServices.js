@@ -5,17 +5,35 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 const URL = BACKEND_URI + "/moodEntries";
 
 // add mood
-export const addMood = async (selectedEmoji, moodText, time, date, count) => {
+export const addMood = async (selectedEmoji, moodText, count) => {
   try {
     const token = await AsyncStorage.getItem("authToken");
+
+    const currentDate = new Date();
+
+    const formattedTime = currentDate.toLocaleTimeString();
+
+    const getDate = currentDate.getDate();
+    const getMonth = currentDate.getMonth() + 1;
+    const getYear = currentDate.getFullYear();
+
+    const formattedDate = `${getYear}-${getMonth}-${getDate}`;
+
+    console.log(currentDate);
+    console.log(formattedDate);
+    console.log(formattedTime);
+    console.log(selectedEmoji);
+    console.log(moodText);
+    console.log(count);
 
     const response = await axios.post(
       `${URL}/mood-create`,
       {
         selectedEmoji,
         moodText,
-        time,
-        date,
+        time: formattedTime,
+        date: formattedDate,
+
         count,
       },
       {

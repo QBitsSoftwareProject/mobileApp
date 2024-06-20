@@ -1,11 +1,14 @@
-import React, { useState , useEffect} from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import ToggleSwitch from 'toggle-switch-react-native';
+import React, { useState, useEffect } from "react";
+import { StyleSheet, Text, View } from "react-native";
+import ToggleSwitch from "toggle-switch-react-native";
 
 export const QuestionButton = ({ qtext, btnFunction, reet }) => {
   const [on, setOn] = useState(false);
 
- 
+  useEffect(() => {
+    setOn(false);
+  }, [btnFunction]); // Reset toggle switch when `btnFunction` changes
+
   return (
     <View style={styles.questionSection}>
       <View style={styles.left}>
@@ -16,7 +19,7 @@ export const QuestionButton = ({ qtext, btnFunction, reet }) => {
           isOn={on}
           onColor="#4ABFB4"
           offColor="#979DAC"
-          labelStyle={{ color: 'black', fontWeight: '900' }}
+          labelStyle={{ color: "black", fontWeight: "900" }}
           size="medium"
           onToggle={(isOn) => {
             setOn(isOn);
@@ -34,8 +37,8 @@ const styles = StyleSheet.create({
     paddingRight: 35,
   },
   questionSection: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
+    flexDirection: "row",
+    justifyContent: "space-between",
     marginBottom: 15,
   },
   left: {
