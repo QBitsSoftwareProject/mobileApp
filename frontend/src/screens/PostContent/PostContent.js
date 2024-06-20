@@ -17,7 +17,7 @@ const post = {
   id: 1,
   image: require("../../assets/images/PostCardImages/boydp.jpg"),
   title: "Chethiya Bandara",
-  sub: "public  10 min ago",
+  time: "10 min ago",
   description:
     "“You don't have to see the whole staircase, just take the first step.” – Martin Luther King.",
   Postimage: require("../../assets/images/PostCardImages/fooddish.jpg"),
@@ -53,17 +53,23 @@ const PostContent = (props) => {
   return (
     <View>
       <View style={style.contains}>
-        <HeaderSub headLine={"Post Content"} subHeadLine={""} back={HomePage} />
+        <HeaderSub headLine={"Post Content"} back={HomePage} />
       </View>
 
-      <View style={{ height: screenHeight, paddingHorizontal: 25 }}>
+      <View
+        style={{
+          height: screenHeight,
+          paddingHorizontal: 25,
+          paddingTop: 15,
+        }}
+      >
         <ScrollView ScrollView style={{ height: "100%", marginBottom: 25 }}>
           <View>
             <PostCard
               key={post.id}
               image={post.image}
               title={post.title}
-              sub={post.sub}
+              time={post.time}
               description={post.description}
               Postimage={post.Postimage}
             />

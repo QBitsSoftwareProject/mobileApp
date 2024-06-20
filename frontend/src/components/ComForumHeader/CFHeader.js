@@ -10,6 +10,8 @@ import {
 
 import { useNavigation } from "@react-navigation/core";
 
+import SearchBarComponent from "../../components/SearchBar/SearchBar";
+
 const CFHeaderSub = (props) => {
   const navigation = useNavigation();
 
@@ -24,19 +26,29 @@ const CFHeaderSub = (props) => {
         style={styles.backImg}
       >
         <View style={styles.container1}>
-          <TouchableOpacity onPress={handlePress}>
-            <View style={styles.imageframe}>
-              <Image
-                source={require("../../assets/images/PostCardImages/manprofile.jpg")}
-                style={styles.image}
-              />
-            </View>
-          </TouchableOpacity>
+          <View
+            style={{
+              flexDirection: "row",
+              width: "100%",
+              marginTop: 50,
+            }}
+          >
+            <TouchableOpacity onPress={handlePress}>
+              <View style={styles.imageframe}>
+                <Image
+                  source={require("../../assets/images/PostCardImages/manprofile.jpg")}
+                  style={styles.image}
+                />
+              </View>
+            </TouchableOpacity>
 
-          <View>
-            <Text style={styles.headlineTxt}>{props.headLine}</Text>
-            <Text style={styles.subHeadlineTxt}>{props.subHeadLine}</Text>
+            <View>
+              <Text style={styles.headlineTxt}>{props.headLine}</Text>
+              <Text style={styles.subHeadlineTxt}>{props.subHeadLine}</Text>
+            </View>
           </View>
+
+          <SearchBarComponent />
         </View>
       </ImageBackground>
     </View>
@@ -45,11 +57,16 @@ const CFHeaderSub = (props) => {
 
 const styles = StyleSheet.create({
   contains: {
+    flexDirection: "column",
     height: 240,
     backgroundColor: "#4A90BF",
-    color: "red",
+    width: "100%",
     borderBottomLeftRadius: 40,
     borderBottomRightRadius: 40,
+    marginBottom: 15,
+    alignItems: "center",
+    justifyContent: "center",
+    zIndex: 100,
   },
   imageframe: {
     height: 80,
@@ -69,24 +86,24 @@ const styles = StyleSheet.create({
     fontWeight: "600",
     fontSize: 32,
     color: "white",
-    marginTop: 15,
   },
   subHeadlineTxt: {
     fontWeight: "500",
     fontSize: 18,
     color: "white",
-    marginTop: 7,
   },
   backImg: {
-    paddingRight: 25,
-    paddingLeft: 25,
     height: 240,
+    width: "100%",
   },
   container1: {
-    flex: 1,
-    flexDirection: "row",
+    height: "100%",
+    width: "100%",
+    flexDirection: "column",
     alignItems: "center",
-    justifyContent: "flex-start",
+    justifyContent: "center",
+    paddingHorizontal: 25,
+    gap: 25,
   },
 });
 

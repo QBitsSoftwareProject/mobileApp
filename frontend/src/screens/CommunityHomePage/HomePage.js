@@ -1,61 +1,44 @@
-import React from "react";
+import React, { useState } from "react";
 import { View, StyleSheet, ScrollView, Dimensions } from "react-native";
 import CFHeaderSub from "../../components/ComForumHeader/CFHeader";
-import PostCatBtn from "../../components/CFButton/PostCatBtn";
 import PostCard from "../../components/CFCard/PostCard";
 import FloatingButton from "../../components/FloatingButton/FloatingButton";
-import { useNavigation } from "@react-navigation/native";
-
-// Mock data for post categories
-const PostCatList = [
-  { id: 1, PstCat: "Trending" },
-  { id: 2, PstCat: "Stress" },
-  { id: 3, PstCat: "Calm" },
-];
-
-// Mock data for posts
-const postList = [
-  {
-    id: 1,
-    image: require("../../assets/images/PostCardImages/boydp.jpg"),
-    title: "Chethiya Bandara",
-    sub: "public  10 min ago",
-    description:
-      "“You don't have to see the whole staircase, just take the first step.” – Martin Luther King.",
-    Postimage: require("../../assets/images/PostCardImages/post1image.jpg"),
-  },
-  {
-    id: 2,
-    image: require("../../assets/images/PostCardImages/girldp.jpg"),
-    title: "Piyumi Amarasinghe",
-    sub: "public  22 min ago",
-    description:
-      "“Success usually comes to those who are too busy looking for it.” — Henry David Thoreau",
-    Postimage: null,
-  },
-  {
-    id: 3,
-    image: require("../../assets/images/PostCardImages/boydp.jpg"),
-    title: "Chethiya Bandara",
-    sub: "public  1 hour ago",
-    description:
-      "“You don't have to see the whole staircase, just take the first step.” – Martin Luther King.",
-    Postimage: require("../../assets/images/PostCardImages/post2image.jpg"),
-  },
-];
+import { useFocusEffect, useNavigation } from "@react-navigation/native";
+import { getPost } from "../../services/postServices/postServices";
 
 const HomePage = () => {
   const screenHeight = Dimensions.get("window").height - 275;
 
   const navigation = useNavigation();
 
+  const [postList, setPostList] = useState([]);
+
+  const fetchPostData = async () => {
+    try {
+      const res = await getPost();
+      setPostList(res);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useFocusEffect(
+    React.useCallback(() => {
+      fetchPostData();
+    }, [])
+  );
+
   const addNew = () => {
     navigation.navigate("PostCategory");
   };
 
+  if (!postList) {
+    return;
+  }
+
   return (
-    <View>
-      <View style={style.contains}>
+    <View style={{ paddingBottom: 110 }}>
+      <View>
         <CFHeaderSub
           headLine={"Thishakya Perera"}
           subHeadLine={"80 total post"}
@@ -63,25 +46,26 @@ const HomePage = () => {
         />
       </View>
 
-      <View style={{ height: screenHeight, paddingHorizontal: 25 }}>
+      <View
+        style={{
+          height: screenHeight,
+          paddingHorizontal: 25,
+          paddingTop: 15,
+        }}
+      >
         <ScrollView ScrollView style={{ height: "100%", marginBottom: 25 }}>
-          {/* posts category*/}
-          <View style={{ flexDirection: "row", flexWrap: "wrap" }}>
-            {PostCatList.map((item, index) => (
-              <PostCatBtn key={index} PstCat={item.PstCat} />
-            ))}
-          </View>
-
           {/* post cards list*/}
-          <View>
+          <View style={{ paddingBottom: 70 }}>
             {postList.map((item) => (
               <PostCard
-                key={item.id}
-                image={item.image}
-                title={item.title}
-                sub={item.sub}
+                postId={item._id}
+                key={item._id}
+                cardName={"HomePageCard"}
+                // image={item.user.proPic}
+                // title={item.user.userName}
+                Date={item.createdAt}
                 description={item.description}
-                Postimage={item.Postimage}
+                postImage={item.image}
               />
             ))}
           </View>
@@ -92,13 +76,5 @@ const HomePage = () => {
     </View>
   );
 };
-
-const style = StyleSheet.create({
-  image: {
-    height: 62.5,
-    width: 62.5,
-    position: "relative",
-  },
-});
 
 export default HomePage;

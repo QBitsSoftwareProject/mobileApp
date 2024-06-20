@@ -1,115 +1,100 @@
 import {
-  StyleSheet,
-  View,
+  Image,
   TextInput,
+  View,
   TouchableOpacity,
+  FlatList,
   Text,
+  ScrollView,
 } from "react-native";
 import React, { useEffect, useState } from "react";
-import Feather from "react-native-vector-icons/Feather";
+import styles from "./styles";
+import getSearchProfile from "../../services/postServices/postServices";
 
-const docList = [
+//dummyData
+
+const DummyList = [
   {
-    id: 1,
-    image: require("../../assets/images/kitharringtonhair.jpg"),
-    title: "Dr. B.M. Weerasinghe.",
-    university: "MBBS, University of Colombo.",
-    regno: "234589.",
-    hospital: "Anuradhapura Genaral Hospital.",
+    _id: 1,
+    userName: "piyumi",
   },
   {
-    id: 2,
-    image: require("../../assets/images/kitharringtonhair.jpg"),
-    title: "Dr. B.M. Amarasinghe.",
-    university: "MBBS, University of Colombo.",
-    regno: "234589.",
-    hospital: "Anuradhapura Genaral Hospital.",
+    _id: 2,
+    userName: "ravindu",
   },
   {
-    id: 3,
-    image: require("../../assets/images/kitharringtonhair.jpg"),
-    title: "Dr. B.M. Samarasinghe.",
-    university: "MBBS, University of Colombo.",
-    regno: "234589.",
-    hospital: "Anuradhapura Genaral Hospital.",
+    _id: 3,
+    userName: "dinul",
   },
   {
-    id: 4,
-    image: require("../../assets/images/kitharringtonhair.jpg"),
-    title: "Dr. B.M. Jayasinghe.",
-    university: "MBBS, University of Colombo.",
-    regno: "234589.",
-    hospital: "Anuradhapura Genaral Hospital.",
-  },
-  {
-    id: 5,
-    image: require("../../assets/images/kitharringtonhair.jpg"),
-    title: "Dr. B.M. Ranasinghe.",
-    university: "MBBS, University of Colombo.",
-    regno: "234589.",
-    hospital: "Anuradhapura Genaral Hospital.",
+    _id: 4,
+    userName: "nipuni",
   },
 ];
 
-const SearchBar = (props) => {
-  const [newFilteredData, setNewFilteredData] = useState();
+const SearchBarComponent = () => {
+  const [textInputValue, setTextInputValue] = useState("");
+  const [userList, setUserList] = useState([]);
 
-  const handleSearch = (text) => {
-    const lowerCaseText = text.toLowerCase();
-    const filteredData = docList.filter((item) =>
-      item.title.toLowerCase().includes(lowerCaseText)
-    );
-    setNewFilteredData(filteredData);
+  const fetchSearchResult = async () => {
+    try {
+      const res = await getSearchProfile(textInputValue);
+      setUserList(res);
+    } catch (error) {
+      console.error("Error searching users:", error);
+    }
+  };
+
+  useEffect(() => {
+    if (textInputValue !== "") {
+      fetchSearchResult();
+    }
+  }, [textInputValue]);
+
+  const handleNavigateToProfile = (x) => {
+    console.log(x);
   };
 
   return (
-    <View style={{ margin: 25 }}>
-      <View style={styles.containerBox}>
-        <View style={{ flex: 8 }}>
+    <View style={{ flex: 1 }}>
+      <View style={styles.content1}>
+        <View style={{ flex: 1 }}>
           <TextInput
-            style={styles.input}
-            placeholder="Search"
-            clearButtonMode="always"
-            autoCapitalize="none"
-            autoCorrect={false}
-            onChangeText={(text) => handleSearch(text)}
+            style={styles.textinput}
+            placeholder="Search here...."
+            value={textInputValue}
+            onChangeText={(text) => {
+              setTextInputValue(text);
+            }}
           />
         </View>
 
-        <View style={{ flex: 1, justifyContent: "center" }}>
-          <TouchableOpacity
-            onPress={() => {
-              props.press(true);
-              props.newData(newFilteredData);
-            }}
-          >
-            <Feather style={styles.icon} name="search" size={20} />
-          </TouchableOpacity>
-        </View>
+        <TouchableOpacity style={styles.searchBtn}>
+          <Image
+            source={require("../../assets/images/SearchBarIcons/search.png")}
+            style={styles.searchIcon}
+          />
+        </TouchableOpacity>
       </View>
+      {textInputValue !== "" && (
+        <View style={styles.resultContainer}>
+          <ScrollView>
+            {DummyList.map((item) => (
+              <TouchableOpacity
+                onPress={() => {
+                  handleNavigateToProfile(item._id);
+                }}
+                style={styles.resultItem}
+              >
+                <Image style={styles.image} source={item.proPic} />
+                <Text style={styles.userName}>{item.userName}</Text>
+              </TouchableOpacity>
+            ))}
+          </ScrollView>
+        </View>
+      )}
     </View>
   );
 };
 
-const styles = StyleSheet.create({
-  containerBox: {
-    width: 300,
-    height: 40,
-    backgroundColor: "#fff",
-    borderWidth: 1,
-    borderColor: "#C0C0C0",
-    borderRadius: 40,
-    flex: 1,
-    flexDirection: "row",
-  },
-  input: {
-    marginLeft: 10,
-    marginTop: 5,
-  },
-
-  icon: {
-    borderColor: "#5296C5",
-  },
-});
-
-export default SearchBar;
+export default SearchBarComponent;

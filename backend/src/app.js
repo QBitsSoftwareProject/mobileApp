@@ -14,6 +14,8 @@ const FeedbackRoute = require("./api/routes/feedback.route.js");
 const journalRoute = require("./api/routes/Journal.route.js");
 const questionRoute = require("./api/routes/questionRoute.js");
 const moodEntryRoute = require("./api/routes/moodsInputroutes.js");
+const postRoutes = require("./api/routes/postRoutes.js");
+const commentsRoutes = require("./api/routes/commentsRoutes.js");
 const app = express();
 
 const methodRouter = require("./api/routes/method.route.js");
@@ -47,6 +49,8 @@ app.use("/api/v1/Feedback", FeedbackRoute);
 app.use("/api/v1/journal", journalRoute);
 app.use("/api/v1/question", questionRoute);
 app.use("/api/v1/moodEntries", moodEntryRoute);
+app.use("/api/v1/posts", postRoutes);
+app.use("/api/v1/comments", commentsRoutes);
 
 app.listen(PORT, () => {
   console.log(`server is running on port ${PORT}`);

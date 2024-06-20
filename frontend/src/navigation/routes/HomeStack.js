@@ -10,6 +10,8 @@ import FeedbackStack from "./FeedbackStack";
 import JournalStack from "./JournalStack";
 import MoodAnalysisStack from "./MoodAnalysisStack";
 import CurrentMoodInput from "./ImmediateMoodInputStack";
+import CommunityHomeStack from "./CommunityHomeStack";
+
 
 const Stack = createNativeStackNavigator();
 
@@ -47,6 +49,8 @@ const HomeStack = ({ route }) => {
       <Stack.Screen name="FeedbackStack" component={FeedbackStack} />
       <Stack.Screen name="JournalStack" component={JournalStack} />
       <Stack.Screen name="MoodAnalysisStack" component={MoodAnalysisStack} />
+      <Stack.Screen name="CommunityStack" component={CommunityHomeStack} />
+
     </Stack.Navigator>
   );
 };

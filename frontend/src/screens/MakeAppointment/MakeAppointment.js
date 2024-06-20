@@ -1,5 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, Image, ScrollView, TouchableOpacity } from "react-native";
+import {
+  View,
+  Text,
+  Image,
+  ScrollView,
+  TouchableOpacity,
+  Alert,
+} from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import styles from "./styles";
 import DateCard from "../../components/DateCard/DateCard";
@@ -71,7 +78,11 @@ const MakeAppointment = ({ route }) => {
   const navigation = useNavigation();
 
   const showMessage = (message) => {
-    setPopupMessage(message);
+    if (getTime) {
+      setPopupMessage(message);
+    } else {
+      Alert.alert("Error!", "Date and Time is requied!");
+    }
   };
 
   const confirmMessage = async () => {
