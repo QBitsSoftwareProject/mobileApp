@@ -44,6 +44,7 @@ exports.getSuggestedGoals = async (req, res) => {
       })
       .sort({ currentRating: -1 });
 
+    //categorize unselected goals array
     const goalsByCategory = unselectedGoals.reduce((acc, goal) => {
       if (!acc[goal.category]) {
         acc[goal.category] = [];
