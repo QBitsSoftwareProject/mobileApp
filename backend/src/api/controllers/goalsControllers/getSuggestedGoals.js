@@ -26,7 +26,7 @@ exports.getSuggestedGoals = async (req, res) => {
 
     //get the stressLevel score and decay value
     const stressLevelData = await getStressData(req.user.user_id);
-    console.log(stressLevelData, averageMoodWeight);
+    // console.log(stressLevelData, averageMoodWeight);
 
     let suggestedGoalList = await findSuggestedGoals(
       stressLevelData.decayValue,

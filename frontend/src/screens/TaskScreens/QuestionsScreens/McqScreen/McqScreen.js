@@ -107,6 +107,7 @@ const McqScreen = ({ navigation, route }) => {
                       style={styles.inputBox}
                       value={answer}
                       onChangeText={setAnswer}
+                      multiline
                     />
                   )}
                 </View>

@@ -36,4 +36,4 @@ const questionSchema = new schema({
 });
 
 // Exporting the mongoose model for questions based on the defined schema
-module.exports = mongoose.model("Questions", questionSchema);
+module.exports = mongoose.model("TaskQuestions", questionSchema);
