@@ -20,7 +20,7 @@ exports.updateDoctor = async (req, res) => {
       availableDays,
       monday,
       tuesday,
-      wednesday,
+      wednessday,
       thursday,
       friday,
       saturday,
@@ -32,14 +32,24 @@ exports.updateDoctor = async (req, res) => {
     // Extracting the user ID from request parameters
     const { id } = req.params;
 
-    const encryptedPwd = await bcrypt.hash(password, 10);
+    if(password){
+      const encryptedPwd = await bcrypt.hash(password, 10);
+      
+    }
+
+    // if(email){
+    //   const newemail = email.toLowerCase();
+    // }
+
 
     // Creating an object with updated user details
     const updateUser = {
       fullName,
       userName,
-      email: email.toLowerCase(),
-      password: encryptedPwd,
+      email,
+      password,
+      email,
+      password,
       contactNumber,
       address,
       city,
@@ -51,7 +61,7 @@ exports.updateDoctor = async (req, res) => {
       availableDays,
       monday,
       tuesday,
-      wednesday,
+      wednessday,
       thursday,
       friday,
       saturday,
@@ -69,11 +79,14 @@ exports.updateDoctor = async (req, res) => {
     // Handling validation errors
     if (err.name === "ValidationError") {
       const validationErrors = err.message;
-      return res
-        .status(400)
-        .json({ error: "User update failed", details: validationErrors });
+      return res.status(400).json({
+        error: "User update failed. Validation Error",
+        details: validationErrors,
+      });
     } else {
-      res.status(500).json({ error: "User update failed", details: err });
+      res
+        .status(500)
+        .json({ error: "User update failed", details: err.message });
     }
   }
 };

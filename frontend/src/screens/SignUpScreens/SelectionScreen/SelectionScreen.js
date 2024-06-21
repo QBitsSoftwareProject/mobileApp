@@ -20,7 +20,7 @@ const SelectionScreen = () => {
     <View style={styles.conatiner}>
       <TouchableOpacity onPress={handleBackPress}>
         <Image
-          source={require("../../../assets/images/backBlack.png")}
+          source={require("../../../assets/images/blackBack.png")}
           style={{ marginTop: 55 }}
         />
       </TouchableOpacity>

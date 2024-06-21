@@ -4,9 +4,12 @@ import GoalsStack from "./GoalsStack";
 import TaskStack from "./TaskStack";
 import AppointmentStack from "../routes/AppointmentStack";
 import DocHomeStack from "../routes/DocHomeStack";
-
-// import EduContent from '../../screens/EduContentScreen/EduContent';
-import EducationalStack from '../../navigation/routes/EducationalStack';
+import StressLevelStack from "./StressLevelStack";
+import MethodSuggessionStack from "./MindRelaxingMethodStack";
+import FeedbackStack from "./FeedbackStack";
+import JournalStack from "./JournalStack";
+import MoodAnalysisStack from "./MoodAnalysisStack";
+import CurrentMoodInput from "./ImmediateMoodInputStack";
 
 const Stack = createNativeStackNavigator();
 
@@ -35,7 +38,15 @@ const HomeStack = ({ route }) => {
       <Stack.Screen name="GoalsStack" component={GoalsStack} />
       <Stack.Screen name="AppointmentStack" component={AppointmentStack} />
       <Stack.Screen name="TaskStack" component={TaskStack} />
-      <Stack.Screen name='EducationalStack' component={EducationalStack} />
+      <Stack.Screen name="StressLevel" component={StressLevelStack} />
+      <Stack.Screen
+        name="MindRelaxingMethod"
+        component={MethodSuggessionStack}
+      />
+      <Stack.Screen name="CurrentMoodInputStack" component={CurrentMoodInput} />
+      <Stack.Screen name="FeedbackStack" component={FeedbackStack} />
+      <Stack.Screen name="JournalStack" component={JournalStack} />
+      <Stack.Screen name="MoodAnalysisStack" component={MoodAnalysisStack} />
     </Stack.Navigator>
 
   );

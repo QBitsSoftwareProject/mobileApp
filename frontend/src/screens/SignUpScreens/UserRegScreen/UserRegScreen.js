@@ -21,6 +21,7 @@ import FilePicker from "../../../components/GetImages/FilePicker";
 import loadingGif from "../../../assets/animation/loading.gif";
 import { checkExistsUser } from "../../../services/userServices/checkExistsUser";
 
+
 const UserRegScreen = () => {
   const navigation = useNavigation();
 
@@ -165,6 +166,7 @@ const UserRegScreen = () => {
 
       if (userData != null) {
         navigation.navigate("LoginScreen");
+        
       }
     } catch (error) {
       console.log(error);
@@ -175,7 +177,7 @@ const UserRegScreen = () => {
     <View style={styles.conatiner}>
       <TouchableOpacity onPress={handleBackPress}>
         <Image
-          source={require("../../../assets/images/backBlack.png")}
+          source={require("../../../assets/images/blackBack.png")}
           style={{ marginTop: 55 }}
         />
       </TouchableOpacity>
@@ -184,17 +186,24 @@ const UserRegScreen = () => {
         <KeyboardAvoidingView
           behavior={Platform.OS === "ios" ? "padding" : null}
         >
-          <ScrollView>
-            <View style={{ alignItems: "left" }}>
+          <ScrollView >
+
+            
+            <View style={{ alignItems: "left" } }>
               <Text style={styles.headerText}>
                 Please fill the following form with correct details.
               </Text>
+
+              
 
               <InputField
                 placeHolder={"B.M. Weerasinghe"}
                 label={"Full name / Name with initial :"}
                 onChangeText={setName}
               />
+
+
+              
               <InputField
                 placeHolder={"Bimsara Madusha"}
                 label={"User name :"}

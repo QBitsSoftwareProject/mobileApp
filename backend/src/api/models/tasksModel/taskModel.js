@@ -18,7 +18,7 @@ const taskSchema = new schema({
     required: true,
   },
   steps: {
-    type: Object,
+    type: Array,
     required: true,
   },
   duration: {

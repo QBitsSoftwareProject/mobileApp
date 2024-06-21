@@ -15,8 +15,14 @@ const HomeCard = (props) => {
       navigation.navigate("AppointmentStack");
     } else if (cardName == "stressManagement") {
       navigation.navigate("TaskStack");
+    } else if (cardName == "feedback") {
+      navigation.navigate("FeedbackStack");
+    } else if (cardName == "journal") {
+      navigation.navigate("JournalStack");
     } else if (cardName == "meditation") {
-      // navigation.navigate("");
+      navigation.navigate("CurrentMoodInputStack");
+    } else if (cardName == "mood") {
+      navigation.navigate("MoodAnalysisStack");
     }
   };
 

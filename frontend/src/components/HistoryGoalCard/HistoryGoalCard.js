@@ -27,7 +27,7 @@ const HistoryGoalCard = ({ title, cNumber, length, dueDate }) => {
   };
 
   return (
-    <TouchableOpacity style={styles.cardContainer}>
+    <View style={styles.cardContainer}>
       <View>
         <Text style={styles.title}>{title}</Text>
         <Text style={styles.subTitle}>Completeness</Text>
@@ -44,7 +44,7 @@ const HistoryGoalCard = ({ title, cNumber, length, dueDate }) => {
           {completedDate.getUTCDate()}
         </Text>
       </View>
-    </TouchableOpacity>
+    </View>
   );
 };
 

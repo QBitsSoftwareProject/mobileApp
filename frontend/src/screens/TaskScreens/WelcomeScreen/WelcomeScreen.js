@@ -6,28 +6,59 @@ import {
   TouchableOpacity,
   Image,
 } from "react-native";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./styles";
 import { LinearGradient } from "expo-linear-gradient";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { getTime } from "./GetTime";
+import { useNavigation } from "@react-navigation/native";
+import { getSuggestedMotivation } from "../../../services/motivationServices/motivation";
+import { getAUser } from "../../../services/userServices/userService";
+import { getDailyQuestion } from "../../../services/questionServices/questionServices";
+import loadingGif from "../../../assets/animation/loading.gif";
 
-const WelcomeScreen = ({ navigation }) => {
-  // Data object containing information to be displayed on the screen
-  const data = {
-    currentDay: "01",
-    userName: "kovida",
-    dayTime: getTime(), // Current time of the day obtained from getTime function
-    isAnswered: false,
-    descrptionTxt:
-      "It's a brand new day, and we're here to help you on your path to a stress-free life.Remember, you're not alone on this journey. We believe in your strength and resilience. Take it one day at a time, and trust the process. Each day brings you closer to a more relaxed and happier you. Stay committed, stay positive, and let's conquer stress together! ",
+const WelcomeScreen = ({ route }) => {
+  const navigation = useNavigation();
+  const [data, setData] = useState(null);
+  const [questionData, setQuestionData] = useState(null);
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  const fetchData = async () => {
+    try {
+      const motivation = await getSuggestedMotivation();
+      const question = await getDailyQuestion();
+
+      setData(motivation);
+      setQuestionData(question);
+    } catch (error) {
+      console.log(error);
+    }
   };
+
+  if (!data || !questionData) {
+    return (
+      <View
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          height: "100%",
+        }}
+      >
+        <Image source={loadingGif} />
+      </View>
+    );
+  }
 
   const presshandler = () => {
     // Navigate to McqScreen if a question is not answered, otherwise navigate to TaskListScreen
-    if (data.isAnswered) {
+    if (questionData.isAnswered) {
       navigation.navigate("TaskListScreen");
-    } else navigation.navigate("McqScreen");
+    } else
+      navigation.navigate("McqScreen", { questions: questionData.questions });
   };
 
   return (
@@ -40,18 +71,22 @@ const WelcomeScreen = ({ navigation }) => {
           <TouchableOpacity
             style={styles.backbtn}
             onPress={() => {
-              navigation.navigate("HomeScreen");
+              navigation.navigate("TaskTypeScreen");
             }}
           >
             <Image source={require("../../../assets/images/BackWhite.png")} />
           </TouchableOpacity>
 
           <Text style={styles.headertxt}>Welcome</Text>
-          <Text style={styles.daytxt}>Day {data.currentDay}</Text>
+
+          <Text style={styles.daytxt}>Day {data.motivation.day}</Text>
+
           <Text style={styles.greetingtxt}>
-            Good {data.dayTime} {data.userName}!{" "}
+            Good {getTime()} {data.userName}!{" "}
           </Text>
-          <Text style={styles.descriptiontxt}>{data.descrptionTxt}</Text>
+          <Text style={styles.descriptiontxt}>
+            {data.motivation.description}
+          </Text>
 
           <View
             style={{ flex: 1, flexDirection: "column", alignItems: "center" }}

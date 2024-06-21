@@ -14,7 +14,7 @@ const DocPop = (props) => {
         <TouchableOpacity onPress={() => handlePress("Rejected")}>
           <Text style={styles.DPtext}>Rejected</Text>
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => handlePress("Canceled")}>
+        <TouchableOpacity onPress={() => handlePress("Cancelled")}>
           <Text style={styles.DPtext}>Canceled</Text>
         </TouchableOpacity>
       </View>

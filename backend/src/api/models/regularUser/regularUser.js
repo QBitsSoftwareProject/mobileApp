@@ -23,6 +23,23 @@ const userTaskSchema = new schema({
     enum: ["short-term", "medium-term", "long-term"],
     required: true,
   },
+  assignedDate: {
+    type: Date,
+    require: true,
+  },
+});
+
+// Subdocument schema for user responses
+const userResponseSchema = new schema({
+  questionId: {
+    type: schema.Types.ObjectId,
+    ref: "Questions",
+    required: true,
+  },
+  answer: {
+    type: String,
+    default: "",
+  },
 });
 
 // Defining the schema for regular users
@@ -84,6 +101,10 @@ const regularUserSchema = new schema({
 
   tasks: [userTaskSchema],
 
+  taskTakenDate: {
+    type: Date,
+  },
+
   currentShortTermDay: {
     type: Number,
     default: 0,
@@ -103,6 +124,15 @@ const regularUserSchema = new schema({
     type: String,
     enum: ["short-term", "medium-term", "long-term"],
     default: "short-term",
+  },
+
+  response: [userResponseSchema],
+
+  answeredDate: {
+    type: Date,
+    default: function () {
+      return new Date();
+    },
   },
 });
 

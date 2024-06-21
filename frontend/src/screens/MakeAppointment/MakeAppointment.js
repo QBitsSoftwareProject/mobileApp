@@ -133,7 +133,7 @@ const MakeAppointment = ({ route }) => {
     <SafeAreaView style={{ margin: 25 }}>
       <View style={{ marginBottom: 20 }}>
         <TouchableOpacity style={styles.backBtn} onPress={goBack}>
-          <Image source={require("../../assets/images/backBlack.png")} />
+          <Image source={require("../../assets/images/blackBack.png")} />
         </TouchableOpacity>
       </View>
 

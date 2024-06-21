@@ -15,44 +15,6 @@ import {
 } from "../../services/goalsService/goalsService";
 import { useFocusEffect } from "@react-navigation/native";
 
-const completedGoalsList = [
-  {
-    id: 1,
-    title: "Mindfulness Moments",
-    completeness: 3,
-    length: 6,
-    completedDate: "12.11.2024",
-  },
-  {
-    id: 2,
-    title: "Connect and Smile",
-    completeness: 5,
-    length: 6,
-    completedDate: "12.11.2024",
-  },
-  {
-    id: 3,
-    title: "Write it Out",
-    completeness: 1,
-    length: 6,
-    completedDate: "12.11.2024",
-  },
-  {
-    id: 4,
-    title: "Mindfulness Moments",
-    completeness: 2,
-    length: 6,
-    completedDate: "12.11.2024",
-  },
-  {
-    id: 5,
-    title: "Connect and Smile",
-    completeness: 3,
-    length: 10,
-    completedDate: "12.11.2024",
-  },
-];
-
 const ViewGoalScreen = () => {
   const [selectedTab, setSelectedTab] = useState(0);
   const [data, setData] = useState([]);
@@ -105,6 +67,7 @@ const ViewGoalScreen = () => {
             tab2={"Suggested"}
             tab3={"Completed"}
             select={setSelectedTab}
+            change={selectedTab}
           />
         </View>
       </View>
@@ -147,7 +110,8 @@ const ViewGoalScreen = () => {
                     goalId={item._id}
                     objectives={item.objectivesState}
                     completness={item.completeness}
-                    change={(id) => setIsChange(!isChange)}
+                    // change={(id) => setIsChange(!isChange)}
+                    select={setSelectedTab}
                   />
                 ) : selectedTab == 2 ? (
                   <HistoryGoalCard
@@ -159,6 +123,7 @@ const ViewGoalScreen = () => {
                 ) : null}
               </View>
             )}
+            keyExtractor={(item) => item._id}
           />
         ) : (
           <View

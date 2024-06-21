@@ -35,10 +35,10 @@ const {
 
 const router = express.Router();
 
-router.post("/", createGoal);
+router.post("/create", createGoal);
 router.put("/update/:id", updateGoal);
-router.delete("/:id", deleteGoal);
-router.get("/", getGoals);
+router.delete("/delete/:id", deleteGoal);
+router.get("/get-all", getGoals);
 router.get("/get-goal/:id", getAGoal);
 
 router.post("/add-goal", auth, addSelectedGoal);

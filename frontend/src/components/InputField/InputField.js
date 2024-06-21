@@ -24,7 +24,7 @@ const InputField = (props) => {
   };
 
   return (
-    <View style={{ marginBottom: 32 }}>
+    <View style={{ marginBottom: 32}}>
       <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
         <Text
           style={{

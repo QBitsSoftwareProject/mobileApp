@@ -10,6 +10,8 @@ exports.createGoal = async (req, res) => {
       completness,
       length,
       objectivesState,
+      duration,
+      category,
     } = req.body;
 
     const newGoal = await goalModel.create({
@@ -20,6 +22,8 @@ exports.createGoal = async (req, res) => {
       completness,
       length,
       objectivesState,
+      duration,
+      category,
     });
 
     return res.status(201).json({ message: "Goal created successfull" });

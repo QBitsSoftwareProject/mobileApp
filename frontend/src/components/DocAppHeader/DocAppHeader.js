@@ -1,6 +1,5 @@
 import React from "react";
 import { View, Text, Image, ImageBackground, StyleSheet } from "react-native";
-import DocDropDown from "../../components/DropDownMenu/DocDropDown";
 
 const DocAppHeader = (props) => {
   return (
@@ -20,16 +19,14 @@ const DocAppHeader = (props) => {
           <Text style={styles.subHeadlineTxt}>{props.subHeadLine}</Text>
         </View>
 
-        <View style={styles.container}>
-          <View>
-            <View style={styles.profileFrame}>
-              <Image source={props.proPic} style={styles.profileImage} />
-            </View>
-          </View>
-          <View style={styles.DDM}>
-            <DocDropDown DDMtext={"Switch to"} />
+        <View>
+          <View style={styles.profileFrame}>
+            <Image source={props.proPic} style={styles.profileImage} />
           </View>
         </View>
+        {/* <View style={styles.DDM}>
+            <DocDropDown DDMtext={"Switch to"} />
+          </View> */}
       </ImageBackground>
     </View>
   );
