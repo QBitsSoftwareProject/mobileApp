@@ -1,38 +1,82 @@
-import React from "react";
-import { View, Image, StyleSheet, ImageBackground } from "react-native";
+import { useNavigation } from "@react-navigation/native";
+import React, { useEffect, useState } from "react";
+import { View, Image, StyleSheet, TouchableOpacity } from "react-native";
 
 const ProfileCover = (props) => {
+  const navigation = useNavigation();
+  const [coverImage, setCoverImage] = useState(null);
+
+  // useEffect(() => {
+  //   fetchUserData();
+  //   props.selectedImage(coverImage);
+  // }, [coverImage]);
+
+  const handleBackToHome = () => {
+    navigation.navigate("HomePage");
+  };
+
   return (
-    <View style={styles.backgroundFrame}>
-      <View style={styles.wrapper}>
-        <ImageBackground
-          source={require("../../assets/images/PostCardImages/cover.jpg")}
-          style={styles.backImg}
-        >
-          <View style={{ alignItems: "center", zIndex: 101 }}>
-            <View style={styles.profileFrame}>
-              <Image source={props.proPic} style={styles.profileImage} />
-            </View>
-          </View>
-        </ImageBackground>
+    <View style={styles.bckImg}>
+      <Image
+        source={require("../../assets/images/PostCardImages/cover.jpg")}
+        style={styles.cover}
+      />
+
+      {/* <ImageUploader selectedImg={setCoverImage} /> */}
+
+      <View
+        style={{
+          width: "100%",
+          height: "100%",
+          backgroundColor: "black",
+          position: "absolute",
+          borderBottomLeftRadius: 40,
+          borderBottomRightRadius: 40,
+          opacity: 0.4,
+          zIndex: 100,
+        }}
+      >
+        <TouchableOpacity onPress={handleBackToHome}>
+          <Image
+            source={require("../../assets/images/BackWhite.png")}
+            style={styles.backWhiteImg}
+          />
+        </TouchableOpacity>
+      </View>
+
+      <View
+        style={{
+          alignItems: "center",
+          zIndex: 101,
+          position: "absolute",
+          flex: 1,
+          width: "100%",
+          bottom: -50,
+        }}
+      >
+        <View style={styles.profileFrame}>
+          <Image source={props.proPic} style={styles.profileImage} />
+        </View>
       </View>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  backgroundFrame: {
-    height: 250,
+  bckImg: {
+    height: 200,
     width: "100%",
-    zIndex: 100,
-    borderColor: "white",
+    borderBottomLeftRadius: 40,
+    borderBottomRightRadius: 40,
+    zIndex: 10,
+    marginBottom: 30,
+  },
+  cover: {
+    width: "100%",
+    height: "100%",
     borderBottomLeftRadius: 40,
     borderBottomRightRadius: 40,
     overflow: "hidden",
-  },
-  wrapper: {
-    borderBottomLeftRadius: 40,
-    borderBottomRightRadius: 40,
   },
   backImg: {
     paddingRight: 25,
@@ -47,12 +91,15 @@ const styles = StyleSheet.create({
     overflow: "hidden",
     borderWidth: 4,
     borderColor: "white",
-    marginTop: 200,
   },
   profileImage: {
     width: "100%",
     height: "100%",
     resizeMode: "cover",
+  },
+  backWhiteImg: {
+    position: "absolute",
+    margin: 30,
   },
 });
 

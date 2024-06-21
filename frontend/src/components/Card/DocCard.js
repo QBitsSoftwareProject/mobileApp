@@ -31,7 +31,9 @@ const docCard = (props) => {
               <Text style={styles.title}>{props.title}</Text>
 
               <View>
-                <Text style={styles.description}>Time: {props.time}</Text>
+                <Text style={styles.description}>
+                  Time: {props.time.from} - {props.time.to}
+                </Text>
                 <Text style={styles.description}>Date: {props.date}</Text>
                 {props.cardName == "Pending" && (
                   <Text style={styles.description}>

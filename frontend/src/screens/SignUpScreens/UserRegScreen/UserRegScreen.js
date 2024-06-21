@@ -21,7 +21,6 @@ import FilePicker from "../../../components/GetImages/FilePicker";
 import loadingGif from "../../../assets/animation/loading.gif";
 import { checkExistsUser } from "../../../services/userServices/checkExistsUser";
 
-
 const UserRegScreen = () => {
   const navigation = useNavigation();
 
@@ -131,6 +130,7 @@ const UserRegScreen = () => {
       setIsPhoneNumValid(true);
       setUnCheckedColor("#40495B");
 
+      console.log("click");
       const checkUser = await checkExistsUser(email);
 
       if (checkUser.user != null) {
@@ -165,7 +165,6 @@ const UserRegScreen = () => {
 
       if (userData != null) {
         navigation.navigate("LoginScreen");
-        
       }
     } catch (error) {
       console.log(error);
@@ -185,15 +184,11 @@ const UserRegScreen = () => {
         <KeyboardAvoidingView
           behavior={Platform.OS === "ios" ? "padding" : null}
         >
-          <ScrollView >
-
-            
-            <View style={{ alignItems: "left" } }>
+          <ScrollView>
+            <View style={{ alignItems: "left" }}>
               <Text style={styles.headerText}>
                 Please fill the following form with correct details.
               </Text>
-
-              
 
               <InputField
                 placeHolder={"B.M. Weerasinghe"}
@@ -201,8 +196,6 @@ const UserRegScreen = () => {
                 onChangeText={setName}
               />
 
-
-              
               <InputField
                 placeHolder={"Bimsara Madusha"}
                 label={"User name :"}

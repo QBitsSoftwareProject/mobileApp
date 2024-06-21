@@ -1,5 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, Image, ScrollView, TouchableOpacity } from "react-native";
+import {
+  View,
+  Text,
+  Image,
+  ScrollView,
+  TouchableOpacity,
+  Alert,
+} from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import styles from "./styles";
 import DateCard from "../../components/DateCard/DateCard";
@@ -8,10 +15,7 @@ import PopupMessage from "../../components/Pop-up/Pop-upScreen";
 import RegularButton from "../../components/Button/RegularButton";
 import { useNavigation } from "@react-navigation/native";
 import { createAppointment } from "../../services/appointmentServices/AppointmentServices";
-import {
-  getADoctor,
-  viewADoctor,
-} from "../../services/doctorServices/doctorService";
+import { viewADoctor } from "../../services/doctorServices/doctorService";
 import loardingGIF from "../../assets/animation/loading.gif";
 
 const MakeAppointment = ({ route }) => {
@@ -71,7 +75,11 @@ const MakeAppointment = ({ route }) => {
   const navigation = useNavigation();
 
   const showMessage = (message) => {
-    setPopupMessage(message);
+    if (getTime) {
+      setPopupMessage(message);
+    } else {
+      Alert.alert("Error!", "Date and Time is requied!");
+    }
   };
 
   const confirmMessage = async () => {

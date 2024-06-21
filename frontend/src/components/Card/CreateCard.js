@@ -18,7 +18,7 @@ const CreateCard = (props) => {
             {props.cardName == "AvailableDoc" && (
               <View>
                 <Text style={styles.description}>{props.university}</Text>
-                <Text style={styles.description}>REG NO-{props.regno}</Text>
+                {/* <Text style={styles.description}>REG NO-{props.regno}</Text> */}
                 <Text style={styles.description}>{props.hospital}</Text>
               </View>
             )}
@@ -61,7 +61,7 @@ const styles = StyleSheet.create({
     padding: 20,
     backgroundColor: "white",
     borderRadius: 20,
-    elevation: 1,
+
     flexDirection: "row",
     alignSelf: "center",
     marginBottom: 15,

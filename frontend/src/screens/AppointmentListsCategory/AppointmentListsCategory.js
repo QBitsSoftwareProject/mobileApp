@@ -10,6 +10,7 @@ import CompletedList from "../../screens/AppointmentListsCategory/CompletedList"
 const AppointmentList = () => {
   const profilePicture = require("../../assets/images/PostCardImages/manprofile.jpg");
   const [selectedTab, setSelectedTab] = useState(0);
+  // const [doctorData, setDoctorData] = useState()
 
   return (
     <View>
