@@ -23,7 +23,7 @@ export const SwipableList = (props) => {
     };
 
     fetchJournals();
-  }, []);
+  }, [journalDisplay]);
 
   useEffect(() => {
     if (props.arrayController === 1) {

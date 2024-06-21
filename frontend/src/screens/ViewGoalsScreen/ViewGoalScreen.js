@@ -99,7 +99,9 @@ const ViewGoalScreen = () => {
                     title={item.title}
                     subTitle={item.subTitle}
                     cNumber={item.completeness}
-                    length={item.length}
+                    length={
+                      item.objectives.length * item.objectivesState.length
+                    }
                     goalId={item._id}
                     change={(id) => setIsChange(!isChange)}
                   />
@@ -117,7 +119,9 @@ const ViewGoalScreen = () => {
                   <HistoryGoalCard
                     title={item.title}
                     cNumber={item.completeness}
-                    length={item.length}
+                    length={
+                      item.objectives.length * item.objectivesState.length
+                    }
                     dueDate={item.dueDate}
                   />
                 ) : null}

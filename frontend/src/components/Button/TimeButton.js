@@ -45,18 +45,19 @@ const TimeButton = (props) => {
 
 const styles = StyleSheet.create({
   Tbutton: {
-    width: 100,
-    height: 30,
+    flexDirection: "column",
+    padding: 5,
     borderColor: "#4A90BF",
     borderWidth: 1,
     borderRadius: 15,
     backgroundColor: "transparent",
-    marginVertical: 8,
-    marginHorizontal: 7,
+    justifyContent: "center",
+    marginTop: 10,
+    marginRight: 10,
   },
   time: {
     color: "#4A90BF",
-    fontSize: 14,
+    fontSize: 13,
     fontWeight: "600",
     textAlign: "center",
     paddingVertical: 5,

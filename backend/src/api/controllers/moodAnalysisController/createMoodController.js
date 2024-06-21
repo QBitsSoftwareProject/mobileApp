@@ -9,6 +9,7 @@ const storeMoodEntry = asyncHandler(async (req, res) => {
     const { selectedEmoji, moodText, time, date, count } = req.body;
 
     const userId = req.user.user_id;
+    console.log(userId);
     const userName = req.user.userName;
 
     // console.log("recived selectedEmoji: ", selectedEmoji);
