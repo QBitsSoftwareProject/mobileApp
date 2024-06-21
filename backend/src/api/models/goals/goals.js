@@ -24,10 +24,6 @@ const goalSchema = new schema({
     type: Number,
     default: 0,
   },
-  length: {
-    type: Number,
-    required: true,
-  },
   objectivesState: {
     type: Array,
     required: true,

@@ -4,7 +4,7 @@ exports.updateGoal = async (req, res) => {
   try {
     // Destructuring the request body to extract user details
     const {
-      tittle,
+      title,
       subTitle,
       description,
       objectives,
@@ -22,7 +22,7 @@ exports.updateGoal = async (req, res) => {
 
     // Creating an object with updated user details
     const updateGoal = {
-      tittle,
+      title,
       subTitle,
       description,
       objectives,
