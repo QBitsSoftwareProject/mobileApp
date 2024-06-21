@@ -15,7 +15,6 @@ const taskSchema = new schema({
   },
   iconUrl: {
     type: String,
-    required: true,
   },
   steps: {
     type: Array,
@@ -29,6 +28,16 @@ const taskSchema = new schema({
   day: {
     type: String,
     required: true,
+  },
+
+  feature: {
+    type: String,
+    enum: ["resource", "journal", "community", "none"],
+  },
+
+  taskNumber: {
+    type: String,
+    require: true,
   },
 });
 

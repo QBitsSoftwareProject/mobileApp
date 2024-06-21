@@ -130,6 +130,7 @@ const UserRegScreen = () => {
       setIsPhoneNumValid(true);
       setUnCheckedColor("#40495B");
 
+      console.log("click");
       const checkUser = await checkExistsUser(email);
 
       if (checkUser.user != null) {

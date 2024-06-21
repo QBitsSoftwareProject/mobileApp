@@ -20,6 +20,7 @@ const TaskDescriptionScreen = () => {
   const [taskDetails, setTaskDetails] = useState(null);
 
   const { taskId, completeness, index } = route.params;
+  console.log(completeness);
 
   const screenHeight = Dimensions.get("screen").height;
 
@@ -121,7 +122,7 @@ const TaskDescriptionScreen = () => {
 
             {/* btn ......................................................................................................................... */}
 
-            {completeness === "incomplete" && (
+            {!completeness && (
               <View
                 style={{
                   flexDirection: "row",

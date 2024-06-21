@@ -16,6 +16,10 @@ const questionRoute = require("./api/routes/questionRoute.js");
 const moodEntryRoute = require("./api/routes/moodsInputroutes.js");
 const postRoutes = require("./api/routes/postRoutes.js");
 const commentsRoutes = require("./api/routes/commentsRoutes.js");
+const videoRouter = require("./api/routes/resourcesRoute/videoRoute.js");
+const audioRouter = require("./api/routes/resourcesRoute/audioRoute.js");
+const articleRouter = require("./api/routes/resourcesRoute/articleRoute.js");
+const authorRouter = require("./api/routes/resourcesRoute/authorRoute.js");
 const app = express();
 
 const methodRouter = require("./api/routes/method.route.js");
@@ -51,6 +55,11 @@ app.use("/api/v1/question", questionRoute);
 app.use("/api/v1/moodEntries", moodEntryRoute);
 app.use("/api/v1/posts", postRoutes);
 app.use("/api/v1/comments", commentsRoutes);
+app.use("/api/v1/resources/video", videoRouter); //video-routes
+app.use("/api/v1/resources/audio", audioRouter); //audio-routes
+app.use("/api/v1/resources/article", articleRouter); //article-routes
+
+app.use("/api/v1/resources/author", authorRouter); //author-routes
 
 app.listen(PORT, () => {
   console.log(`server is running on port ${PORT}`);

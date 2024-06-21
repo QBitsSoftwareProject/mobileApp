@@ -68,8 +68,7 @@ const CompletedAppointment = () => {
             flex: 1,
             flexDirection: "row",
             alignItems: "baseline",
-            justifyContent: "flex-end",
-            gap: 120,
+            justifyContent: "space-between",
           }}
         >
           <Text style={styles.descript2}>Completed List.</Text>

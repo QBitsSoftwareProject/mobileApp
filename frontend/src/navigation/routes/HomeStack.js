@@ -11,7 +11,11 @@ import JournalStack from "./JournalStack";
 import MoodAnalysisStack from "./MoodAnalysisStack";
 import CurrentMoodInput from "./ImmediateMoodInputStack";
 import CommunityHomeStack from "./CommunityHomeStack";
-
+import EduContent from "../../screens/EduContentScreen/EduContent";
+import EducationalStack from "../../navigation/routes/EducationalStack";
+import ArticleStack from "./ArticleStack";
+import VideoStack from "./VideoStack";
+import AudioContent from "../../screens/EduContentScreen/AudioContent/AudioContent";
 
 const Stack = createNativeStackNavigator();
 
@@ -50,7 +54,10 @@ const HomeStack = ({ route }) => {
       <Stack.Screen name="JournalStack" component={JournalStack} />
       <Stack.Screen name="MoodAnalysisStack" component={MoodAnalysisStack} />
       <Stack.Screen name="CommunityStack" component={CommunityHomeStack} />
-
+      <Stack.Screen name="EducationalStack" component={EducationalStack} />
+      <Stack.Screen name="ArticleStack" component={ArticleStack} />
+      <Stack.Screen name="VideoScreen" component={VideoStack} />
+      <Stack.Screen name="AudioScreen" component={AudioContent} />
     </Stack.Navigator>
   );
 };

@@ -11,7 +11,7 @@ const images = {
   meditation: require("../../../assets/images/TaskIcons/meditation.png"),
   friends: require("../../../assets/images/TaskIcons/friends.png"),
   journal: require("../../../assets/images/TaskIcons/journal.png"),
-  story: require("../../../assets/images/TaskIcons/story.png"),
+  default: require("../../../assets/images/TaskIcons/7day.png"),
 };
 
 const TaskListScreen = () => {
@@ -65,6 +65,22 @@ const TaskListScreen = () => {
     }
   });
 
+  const setIcon = (type) => {
+    switch (type) {
+      case "journal":
+        return images.journal;
+
+      case "resource":
+        return images.meditation;
+
+      case "community":
+        return images.friends;
+
+      default:
+        return images.default;
+    }
+  };
+
   return (
     <View style={{ flex: 1, paddingBottom: 85 }}>
       <HeaderSub
@@ -102,8 +118,8 @@ const TaskListScreen = () => {
                 <TaskCard
                   headText={item.taskId.headText}
                   subText={item.taskId.subText}
-                  completeness={item.iscomplete}
-                  icon={images.meditation}
+                  completeness={item.isComplete}
+                  icon={setIcon(item.taskId.feature)}
                   taskId={item.taskId._id}
                   index={index + 1}
                 />

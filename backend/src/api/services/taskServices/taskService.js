@@ -1,5 +1,10 @@
 const userModel = require("../../models/regularUser/regularUser");
 const taskModel = require("../../models/tasksModel/taskModel");
+const {
+  getWeightedMoodAvg,
+} = require("../moodsCalServices/getWeightedMoodAvg");
+const { getStressData } = require("../stressMarks/getDecayValue");
+const { findSuggestedTasks } = require("./findSuggestedTasks");
 
 const getOrAssignTask = async (userId) => {
   const user = await userModel.findById(userId);
@@ -9,17 +14,37 @@ const getOrAssignTask = async (userId) => {
   // currentDate.setDate(10);
   const taskTakenDate = new Date(user.taskTakenDate);
 
+  //if already assigned task to user
   if (isSameDay(taskTakenDate, currentDate)) {
     return await getTasksForToday(user, currentDate);
   }
 
   const taskDay = getCurrentTaskDay(user);
-  const suggestedTasks = await taskModel.find({
+
+  //get average mood weight
+  const averageMoodWeight = await getWeightedMoodAvg(userId);
+
+  //get the stressLevel score and decay value
+  const stressLevelData = await getStressData(userId);
+  console.log(stressLevelData, averageMoodWeight);
+
+  const suggestedTasks = await findSuggestedTasks(
+    stressLevelData.decayValue,
+    stressLevelData.score,
+    averageMoodWeight
+  );
+
+  console.log(suggestedTasks);
+
+  //all task for each day
+  const selectedTasks = await taskModel.find({
     day: taskDay,
     duration: user.currentTaskType,
+    taskNumber: { $in: suggestedTasks },
   });
 
-  addTasksToUser(user, suggestedTasks, taskDay, currentDate);
+  //if task not assign yet
+  addTasksToUser(user, selectedTasks, taskDay, currentDate);
   user.taskTakenDate = currentDate;
   await user.save();
 

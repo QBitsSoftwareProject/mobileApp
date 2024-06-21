@@ -51,7 +51,7 @@ const TaskCard = (props) => {
                   : "rgba(151,157,172,0.5)",
               },
             ]}
-            onPress={() => handlePress(props.taskId, props.isComplete)}
+            onPress={() => handlePress(props.taskId, props.completeness)}
           >
             {!props.completeness && <Text style={styles.btnText}>Take</Text>}
 
