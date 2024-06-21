@@ -1,75 +1,49 @@
-import React, { useState, useEffect } from "react";
-import { View, Text, Image, TouchableOpacity } from "react-native";
+import React, { useState } from "react";
+import { View, Text, Image, TouchableOpacity, FlatList } from "react-native";
 import styles from "./AudioStyles";
-import { Audio } from "expo-av";
 
 import playImg from "../../assets/images/icons/player/play.png";
-import pauseImg from "../../assets/images/icons/player/pause.png";
 
-function AudioItem({ item }) {
-  // const [sound, setSound] = useState();
-  // const [isPlaying, setIsPlaying] = useState(false);
+// audio player modal
+import AudioPlayerModal from "../../screens/EduContentScreen/MediaComponents/Resource_AudioPlayerModal.js";
+// audio player modal
 
-  // useEffect(() => {
-  //   return () => {
-  //     if (sound) {
-  //       sound.unloadAsync();
-  //     }
-  //   };
-  // }, [sound]);
+function AudioItem({ item, onPlayPause }) {
+  const [modalVisible, setModalVisible] = useState(false);
 
-  // const playPauseSound = async () => {
-  //   if (sound) {
-  //     if (isPlaying) {
-  //       await sound.pauseAsync();
-  //     } else {
-  //       await sound.playAsync();
-  //     }
-  //     setIsPlaying(!isPlaying);
-  //   }
-  // };
+  const handlePlayPause = () => {
+    setModalVisible(true);
+    onPlayPause();
+  };
 
-  // const loadSound = async () => {
-  //   try {
-  //     const { sound } = await Audio.Sound.createAsync(
-  //       { uri:item.file },
-  //       { shouldPlay: false }
-  //     );
-  //     setSound(sound);
-  //   } catch (error) {
-  //     console.error("Error loading audio:", error);
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   loadSound();
-  //   return () => {
-  //     if (sound) {
-  //       sound.unloadAsync();
-  //     }
-  //   };
-  // }, []);
+  const handleCloseModal = () => {
+    setModalVisible(false);
+  };
 
   return (
     <View style={styles.audioItem}>
       <View style={styles.playBtnSection}>
-        <TouchableOpacity>
-          {/* <TouchableOpacity onPress={playPauseSound}> */}
+        <TouchableOpacity onPress={handlePlayPause}>
           <View style={styles.imgContainer}>
             <Image
               source={playImg}
-              // source={isPlaying ? pauseImg : playImg}
               style={styles.image}
             />
           </View>
         </TouchableOpacity>
       </View>
       <View style={styles.descriptionSection}>
-        <Text style={styles.audioTxt1}>{item.name}</Text>
-        <Text>{item.author}</Text>
-        <Text>{item.file}</Text>
-        <Text>{item.duration}</Text>
+        <Text style={styles.audioTxt1}>{item.title}</Text>
       </View>
+      <View style={[styles.timeDuration, { position: "absolute", marginLeft: 335, marginTop: 50 }]}>
+        <Text style={{ textAlign: "right", margin: 10 }}>{item.duration}</Text>
+      </View>
+      <AudioPlayerModal
+        visible={modalVisible}
+        onClose={handleCloseModal}
+        audioSource={item}
+        name={item.name}
+      />
     </View>
   );
 }

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   View,
   Text,
@@ -10,11 +10,8 @@ import styles from "./articleStyle";
 import ProfilePic from "../ProfilePic/ProfilePic";
 
 // data imports
-import Authors from "./Authors.js";
-import ArticleCategories from "./ArticleCategories/ArticleCategories.js";
 import ArticleCategoryBtn from "./ArticleCategories/ArticleCategoryBtn.js";
 import Article from "./Article.js";
-import ArticleData from "./ArticleData.js";
 // data imports
 
 // components
@@ -24,14 +21,36 @@ import SearchAndCategories from "../../../components/SearchAndCategories/SearchA
 
 // navigation
 import { useNavigation } from "@react-navigation/native";
+import { getArticleTags, getArticles, getAuthors } from "../../../services/educationalServices/educationalServices.js";
 // navigation
 
 const ArticleContent = () => {
+
+  const [articles, setArticles] = useState([]);
+  const [articleTagList, setArticleTagList] = useState([]);
+  const [authorList, setAuthorList] = useState([]);
+
   const navigation = useNavigation();
 
   const navigateToScreen = (screen) => {
     navigation.navigate(screen);
   };
+
+  useEffect(() => {
+    const fetchArticleContentData = async () => {
+      try {
+        const articleList = await getArticles();
+        const articleTags = await getArticleTags();
+        const authors = await getAuthors();
+        setArticles(articleList.data.slice(0, 5));
+        setAuthorList(authors.data.slice(0, 4));
+        setArticleTagList(["All Articles", ...articleTags.data.tags]);
+      } catch (error) {
+        console.error("Error fetching article content:", error);
+      }
+    };
+    fetchArticleContentData();
+  }, []);
 
   return (
     <SafeAreaView>
@@ -41,10 +60,9 @@ const ArticleContent = () => {
           <View>
             {/* Your existing content */}
             <View style={{ zIndex: 100, marginTop: 40 }}>
-              {/* search and categories */}
-              <SearchBarComponent />
+              {/* categories */}
               <SearchAndCategories currentView={"ArticleStack"} />
-              {/* search and categories */}
+              {/* categories */}
             </View>
             <View style={styles.authorSections}>
               <View style={styles.authorSection1}>
@@ -58,7 +76,7 @@ const ArticleContent = () => {
               </View>
               <View style={styles.authorSection2}>
                 <FlatList
-                  data={Authors}
+                  data={authorList}
                   style={{ display: "flex", flexDirection: "column" }}
                   horizontal
                   renderItem={({ item }) => {
@@ -70,16 +88,15 @@ const ArticleContent = () => {
             </View>
             <View style={styles.articleCategories}>
               <FlatList
-                data={ArticleCategories}
+                data={articleTagList}
                 horizontal
                 renderItem={({ item }) => {
                   return <ArticleCategoryBtn item={item} />;
                 }}
               />
             </View>
-
             <Text style={{ fontSize: 20, padding: 10, marginTop: 20 }}>
-              Some recent articles
+              Some articles
             </Text>
             <View
               style={[
@@ -88,7 +105,7 @@ const ArticleContent = () => {
               ]}
             >
               <FlatList
-                data={ArticleData}
+                data={articles}
                 renderItem={({ item }) => {
                   return <Article item={item} />;
                 }}

@@ -6,7 +6,7 @@ import {
   Image,
   FlatList,
 } from "react-native";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./AllAuthorScreenStyles";
 
 // navigation
@@ -18,14 +18,32 @@ import AuthorCard from "./AuthorCard";
 
 // Author details
 import Authors from "../Authors";
+import { getAuthors } from "../../../../services/educationalServices/educationalServices";
 // Author details
 
+
 const AllAuthorScreen = () => {
+
+  const [authorList, setAuthorList] = useState([]);
+
+  useEffect(() => {
+    const fetchAuthors = async () => {
+      try {
+        const authors = await getAuthors();
+        setAuthorList(authors.data);
+      } catch (err) {
+        console.error("Error fetching author:", err);
+      }
+    }
+    fetchAuthors();
+  }, []);
+
   const navigation = useNavigation();
 
   const goBack = () => {
     navigation.goBack();
   };
+
   return (
     <SafeAreaView>
       {/* HeaderSub */}
@@ -66,7 +84,7 @@ const AllAuthorScreen = () => {
                   marginBottom: 220,
                 }}
               >
-                {Authors.map((item, index) => {
+                {authorList.map((item, index) => {
                   return <AuthorCard key={index} item={item} />;
                 })}
               </View>

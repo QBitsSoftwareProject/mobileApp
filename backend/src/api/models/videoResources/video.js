@@ -12,8 +12,17 @@ const videoSchema = new schema({
     // required: true,
   },
   tags: {
-    type: Array,
-    required: true,
+    type: [{
+      type: String,
+      enum: [
+        "meditation and mindfulness",
+        "physical exercise and yoga",
+        "nature and relaxation",
+        "positive affirmations and inspirational content",
+        "music and sound therapy"
+      ]
+    }],
+    required: true
   },
   ifWatch: {
     type: Boolean,
@@ -22,10 +31,14 @@ const videoSchema = new schema({
     type: Number,
     // required: true,
   },
-  downloadURL:{
-    type:String,
+  downloadURL: {
+    type: String,
     // required:true,
+  },
+  rating: {
+    type: Number,
+    default: 10
   }
-});
+}, { timestamps: true });
 
 module.exports = mongoose.model("videoResources", videoSchema);

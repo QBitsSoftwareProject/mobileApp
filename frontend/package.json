@@ -70,6 +70,10 @@
     "react-native-svg": "^14.2.0",
     "react-native-swipe-gestures": "^1.0.5",
     "react-native-swipe-list-view": "^3.2.9",
+        "react-native-dynamic-search-bar": "^2.0.2",
+        "react-native-snap-carousel": "^3.9.1",
+    "react-native-spinkit": "^1.5.1",
+
     "react-native-swiper": "^1.6.0",
     "react-native-toast-message": "^2.2.0",
     "react-native-web": "^0.19.10",

@@ -6,11 +6,11 @@ import styles from "./ProfileStyles";
 import { useNavigation } from "@react-navigation/native";
 // navigation
 
-const ProfilePic = ({item}) => {
+const ProfilePic = ({ item }) => {
   const navigation = useNavigation();
 
   const navigateToScreen = () => {
-    navigation.navigate("AuthorScreen", { authorId: item.id });
+    navigation.navigate("AuthorScreen", { authorId: item._id });
   };
 
   if (!item) {
@@ -24,16 +24,17 @@ const ProfilePic = ({item}) => {
         navigateToScreen();
       }}
     >
-      <View style={{ alignItems: "center" }}>
+      <View style={{ alignItems: "center"}}>
         <View>
-          <Image source={item.image} />
+          <Image source={{ uri: item.profileImg }} style={{ width: 60, height: 60, borderRadius: 100 }} />
         </View>
         <Text
           style={{
             textAlign: "center",
-            marginTop: 10,
+            marginTop: 5,
             color: "#596C79",
             fontWeight: "500",
+            width:80,
           }}
         >
           {item.name}

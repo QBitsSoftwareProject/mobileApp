@@ -7,7 +7,7 @@ const styles = StyleSheet.create({
     shadowColor: "#282828",
     cancelIconColor: "#fdfdfd",
     backgroundColor: "white",
-    width: "90%",
+    width: "100%",
     marginTop: 10,
     height: 40,
     marginLeft: "auto",

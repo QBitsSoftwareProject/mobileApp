@@ -2,7 +2,17 @@ const mongoose = require("mongoose");
 
 const schema = mongoose.Schema;
 
-// the schema for paragraphs
+const imageSchema = new schema({
+  about: {
+    type: String,
+    required: true,
+  },
+  url: {
+    type: String,
+    required: true,
+  },
+});
+
 const paragraphSchema = new schema({
   name: {
     type: String,
@@ -13,30 +23,33 @@ const paragraphSchema = new schema({
     required: true,
   },
   image: {
-    about: {
-      type: String,
-      default: "",
-    },
-    url: {
-      type: String,
-      default: "",
-    },
+    type: imageSchema,
+    required: false,
   },
 });
 
-// the schema for articles
-const articleSchema = new schema(
-  {
-    title: {
-      type: String,
-      required: true,
-    },
-    paragraphs: {
-      type: [paragraphSchema],
-      required: true,
-    },
+const articleSchema = new schema({
+  title: {
+    type: String,
+    required: true,
   },
-  { timestamps: true } // createdAt and updatedAt fields
-);
+  author: {
+    type: schema.Types.ObjectId,
+    ref: "Author",
+    required: true,
+  },
+  paragraphs: {
+    type: [paragraphSchema],
+    required: true,
+  },
+  tags: {
+    type: Array,
+    required: true,
+  },
+  rating: {
+    type: Number,
+    default: 10
+  }
+});
 
-module.exports = mongoose.model("ArticleResource", articleSchema);
+module.exports = mongoose.model("Article", articleSchema);

@@ -10,10 +10,12 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: "row",
     width: "auto",
-    height: 100,
+    height: 90,
     borderRadius: 15,
     marginVertical: 10,
     marginHorizontal: 10,
+    elevation: 3,
+    padding:15,
   },
   imgContainer: {
     backgroundColor: "white",
@@ -22,6 +24,8 @@ const styles = StyleSheet.create({
     borderWidth: 5,
     width: 54,
     height: 54,
+    elevation:50,
+    shadowColor:"#5485DF",
     justifyContent: "center",
     alignItems: "center",
     borderRadius: "1000" / PixelRatio.get(),
@@ -35,10 +39,11 @@ const styles = StyleSheet.create({
   descriptionSection: {
     width: "80%",
     height: "100%",
-    justifyContent: "center",
+    display: "flex",
   },
   audioTxt1: {
     fontSize: 18,
+    fontWeight: "500",
   }
 });
 

@@ -3,12 +3,11 @@ const audio = require("../../models/audioResources/audio");
 // getting all audios
 exports.getAllAudios = async (req, res) => {
   try {
-    const allAudios = await audio.find();
-
+    const allAudios = await audio.find().sort({ createdAt: -1 });
+    console.log(allAudios);
     if (!allAudios) {
       return res.status(404).json({ msg: "audio not found" });
     }
-
     return res.status(201).json(allAudios);
   } catch (err) {
     return res.status(500).json({ errorMsg: "failed to fetch audios", error: err });
@@ -28,6 +27,6 @@ exports.getAnAudio = async (req, res) => {
     return res.status(201).json(getAudio);
 
   } catch (err) {
-    return res.status(500).json({errorMsg:"failed to fetch audio",error:err});
+    return res.status(500).json({ errorMsg: "failed to fetch audio", error: err });
   }
 };

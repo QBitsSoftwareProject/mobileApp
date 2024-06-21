@@ -1,13 +1,16 @@
 import { View, Text, TouchableOpacity } from "react-native";
-import React from "react";
+import React, { useState } from "react";
 import styles from "./AudioCategoryItemStyles";
 
-const AudioCategoryItem = ({ item }) => {
+const AudioCategoryItem = ({ item, selectedTagFunction, selectedTag }) => {
+
   return (
-    <TouchableOpacity>
-      <View style={styles.categoryItem}>
-        <Text style={{ textAlign: "center", color: "white" }}>
-          {item.name}{" "}
+    <TouchableOpacity onPress={() => {
+      selectedTagFunction(item)
+    }}>
+      <View style={[styles.categoryItem, { opacity: (selectedTag === item ? 1 : 0.7) }]}>
+        <Text style={{ textAlign: "center", color: "white", fontWeight: "500" }}>
+          {item}{" "}
         </Text>
       </View>
     </TouchableOpacity>

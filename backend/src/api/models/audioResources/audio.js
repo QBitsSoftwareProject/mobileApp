@@ -26,6 +26,10 @@ const audioSchema = new schema({
     type: String,
     // required: true,
   },
-});
+  rating: {
+    type: Number,
+    default: 10
+  }
+}, { timestamps: true });
 
 module.exports = mongoose.model("audioResources", audioSchema);

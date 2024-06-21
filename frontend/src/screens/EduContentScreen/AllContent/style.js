@@ -52,7 +52,7 @@ const styles = StyleSheet.create({
   },
   mainHeading2: {
     color: "black",
-    marginTop: 20,
+    marginTop: 10,
     marginLeft: 10,
     fontSize: 20,
   },
