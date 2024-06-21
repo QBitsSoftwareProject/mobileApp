@@ -19,8 +19,7 @@ const TaskDescriptionScreen = () => {
   const [boxHeight, setBoxHeight] = useState(0);
   const [taskDetails, setTaskDetails] = useState(null);
 
-  const { taskId, completeness, index } = route.params;
-  console.log(completeness);
+  const { taskId, completeness, index, type } = route.params;
 
   const screenHeight = Dimensions.get("screen").height;
 
@@ -35,6 +34,23 @@ const TaskDescriptionScreen = () => {
       setTaskDetails(response);
     } catch (error) {
       console.log(error);
+    }
+  };
+
+  const taskNavigation = () => {
+    console.log(type);
+    switch (type) {
+      case "journal":
+        navigation.navigate("JournalStack", { taskId: taskId });
+        break;
+
+      case "resource":
+        navigation.navigate("EducationStack", { taskId: taskId });
+        break;
+
+      case "community":
+        navigation.navigate("CommunityStack", { taskId: taskId });
+        break;
     }
   };
 
@@ -130,9 +146,15 @@ const TaskDescriptionScreen = () => {
                   marginVertical: 32,
                 }}
               >
-                <TouchableOpacity style={styles.btn}>
-                  <Text style={styles.btnText}>Start</Text>
-                </TouchableOpacity>
+                {type === "none" ? (
+                  <TouchableOpacity style={styles.btn}>
+                    <Text style={styles.btnText}>Mark As completed</Text>
+                  </TouchableOpacity>
+                ) : (
+                  <TouchableOpacity style={styles.btn} onPress={taskNavigation}>
+                    <Text style={styles.btnText}>Start</Text>
+                  </TouchableOpacity>
+                )}
               </View>
             )}
           </ScrollView>

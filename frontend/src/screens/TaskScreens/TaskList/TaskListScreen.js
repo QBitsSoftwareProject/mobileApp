@@ -122,6 +122,7 @@ const TaskListScreen = () => {
                   icon={setIcon(item.taskId.feature)}
                   taskId={item.taskId._id}
                   index={index + 1}
+                  type = {item.taskId.feature}
                 />
               </View>
             )}
