@@ -51,7 +51,7 @@ const MonthAnalysis = () => {
 
       <View style={{ paddingLeft: 24, paddingRight: 24, paddingTop: 15 }}>
         <Card
-          imageSource={require("../../assets/images/analysisMood/days.png")}
+          imageSource={require("../../assets/images/TaskIcons/7day.png")}
           title="Weekly input moods 📅 "
           subtitle="Track Your Mood Changes Weekly"
           onPress={weeklyAnalysisGraph}

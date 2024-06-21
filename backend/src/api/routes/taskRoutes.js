@@ -11,6 +11,9 @@ const {
 } = require("../controllers/taskControllers/selectedTask");
 const auth = require("../middlewares/auth");
 const { checkTheTerm } = require("../controllers/taskControllers/checkTheTerm");
+const {
+  taskCompletenessUpdate,
+} = require("../controllers/taskControllers/completenessUpdate");
 
 const router = express.Router();
 
@@ -23,5 +26,6 @@ router.delete("/delete/:id", deleteTask);
 
 router.get("/suggested-task", auth, getOrAssignTask);
 router.get("/check-term", auth, checkTheTerm);
+router.get("/update-completeness/:taskId", auth, taskCompletenessUpdate);
 
 module.exports = router;

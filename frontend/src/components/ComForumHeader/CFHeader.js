@@ -51,6 +51,7 @@ const CFHeaderSub = (props) => {
               flexDirection: "row",
               width: "100%",
               marginTop: 50,
+              alignItems: "center",
             }}
           >
             <TouchableOpacity onPress={handlePress}>

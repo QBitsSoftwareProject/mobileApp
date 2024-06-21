@@ -26,10 +26,10 @@ const CreateCard = (props) => {
             {props.cardName === "AppointmentStatus" && (
               <View>
                 <Text style={styles.description}>
-                  Time:{props.time.from}-{props.time.to}
+                  Time: {props.time.from}-{props.time.to}
                 </Text>
                 <Text style={styles.description}>
-                  Date:{currentDate.getUTCFullYear()}-
+                  Date: {currentDate.getUTCFullYear()}-
                   {currentDate.getUTCMonth()}-{currentDate.getUTCDate()}
                 </Text>
                 <Text
@@ -77,7 +77,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: "500",
     color: "#40495B",
-    marginBottom: 7,
+    marginBottom: 2,
   },
   description: {
     fontSize: 12,

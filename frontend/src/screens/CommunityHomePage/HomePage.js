@@ -52,8 +52,7 @@ const HomePage = () => {
     <View style={{ paddingBottom: 110 }}>
       <View>
         <CFHeaderSub
-          headLine={"Thishakya Perera"}
-          // subHeadLine={"80 total post"}
+          subHeadLine={"Community Home Page"}
           profile={"ProfileScreen"}
         />
       </View>

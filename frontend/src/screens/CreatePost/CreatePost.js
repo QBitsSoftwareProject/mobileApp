@@ -10,11 +10,12 @@ import HomePage from "../../screens/CommunityHomePage/HomePage";
 import { createPost } from "../../services/postServices/postServices";
 import { storage } from "../../config/firebase";
 import { getDownloadURL, uploadBytes, ref } from "firebase/storage";
+import { updateTaskCompleteness } from "../../services/taskServices/taskservice";
 
 const loadingGIF = require("../../assets/animation/loading.gif");
 
 const CreatePost = ({ route }) => {
-  const { postCat } = route.params;
+  const { postCat, taskId } = route.params;
   const screenHeight = Dimensions.get("window").height - 275;
   const navigation = useNavigation();
   const [popupMessage, setPopupMessage] = useState("");
@@ -25,6 +26,7 @@ const CreatePost = ({ route }) => {
   const handlePostImageButtonPress = async () => {
     try {
       const imgResponse = await fireBaseUpload();
+      await updateTaskCompleteness(taskId);
       await createPost(postCat, description, imgResponse);
       setPopupMessage("Post Successful!");
     } catch (error) {

@@ -43,7 +43,9 @@ const AvailableDoctor = () => {
         <ScrollView style={{ height: 500 }}>
           <TwoButtonGroup type={"list"} />
 
-          <SearchBar />
+          <View style={{ paddingVertical: 15 }}>
+            <SearchBar />
+          </View>
 
           <View style={{ marginHorizontal: 15 }}>
             <Text style={style.descript2}>Available Doctors.</Text>
