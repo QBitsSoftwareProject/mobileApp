@@ -2,7 +2,6 @@ import { Text, ScrollView, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import style from "./style";
 import CreateCard from "../../components/Card/CreateCard";
-
 import HeaderSub from "../../components/HeaderSub/HeaderSub";
 import { useNavigation } from "@react-navigation/native";
 import SearchBar from "../../components/SearchBar/SearchBar";

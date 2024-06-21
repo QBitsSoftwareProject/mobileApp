@@ -7,10 +7,9 @@ import { useFocusEffect, useNavigation } from "@react-navigation/native";
 import { getCommentsCount } from "../../services/commentServices/commentServices";
 
 const PostCard = (props) => {
-  const [isPress, setIsPress] = useState(false);
-
   const navigation = useNavigation();
 
+  const [isPress, setIsPress] = useState(false);
   const [commentCount, setCommentCount] = useState(0);
 
   const formatTimestamp = (timestamp) => {

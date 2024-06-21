@@ -15,10 +15,7 @@ import PopupMessage from "../../components/Pop-up/Pop-upScreen";
 import RegularButton from "../../components/Button/RegularButton";
 import { useNavigation } from "@react-navigation/native";
 import { createAppointment } from "../../services/appointmentServices/AppointmentServices";
-import {
-  getADoctor,
-  viewADoctor,
-} from "../../services/doctorServices/doctorService";
+import { viewADoctor } from "../../services/doctorServices/doctorService";
 import loardingGIF from "../../assets/animation/loading.gif";
 
 const MakeAppointment = ({ route }) => {

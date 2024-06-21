@@ -57,10 +57,15 @@ exports.getProfilePost = async (req, res) => {
 exports.getSearchProfile = async (req, res) => {
   try {
     const userNameText = req.body.userName;
+    console.log(`Searching for user with name: ${userNameText}`); // Added logging
 
-    const searchProfile = await postSchema.find({
-      userName: new RegExp(userNameText, "i"),
-    });
+    const searchProfile = await postSchema
+      .find({
+        userName: new RegExp(userNameText, "i"),
+      })
+      .populate("userId");
+
+    console.log(`Search results: ${JSON.stringify(searchProfile)}`); // Added logging
 
     if (!searchProfile) {
       return res.status(404).json({ message: "User not found!" });
@@ -74,6 +79,7 @@ exports.getSearchProfile = async (req, res) => {
         userProPic: item.proPic,
       });
     });
+    console.log(`User data to be returned: ${JSON.stringify(userData)}`);
     return res.status(201).json(userData);
   } catch (err) {
     console.error(err);

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   View,
   Text,
@@ -10,9 +10,30 @@ import {
 
 import { useNavigation } from "@react-navigation/core";
 import SearchBar from "../../components/SearchBar/SearchBar";
+import { getAUser } from "../../services/userServices/userService";
 
 const CFHeaderSub = (props) => {
   const navigation = useNavigation();
+
+  const [userData, setUserData] = useState();
+
+  const fetchUserData = async () => {
+    try {
+      //getUser
+      const user = await getAUser();
+      setUserData(user);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    fetchUserData();
+  }, []);
+
+  if (!userData) {
+    return;
+  }
 
   const handlePress = () => {
     navigation.navigate(props.profile);
@@ -34,15 +55,12 @@ const CFHeaderSub = (props) => {
           >
             <TouchableOpacity onPress={handlePress}>
               <View style={styles.imageframe}>
-                <Image
-                  source={require("../../assets/images/PostCardImages/manprofile.jpg")}
-                  style={styles.image}
-                />
+                <Image source={{ uri: userData.proPic }} style={styles.image} />
               </View>
             </TouchableOpacity>
 
             <View>
-              <Text style={styles.headlineTxt}>{props.headLine}</Text>
+              <Text style={styles.headlineTxt}>{userData.userName}</Text>
               <Text style={styles.subHeadlineTxt}>{props.subHeadLine}</Text>
             </View>
           </View>

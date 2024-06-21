@@ -6,9 +6,10 @@ import {
   Text,
   ScrollView,
 } from "react-native";
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import styles from "./styles";
 import { getSearchProfile } from "../../services/postServices/postServices";
+import debounce from "lodash/debounce";
 
 const SearchBar = () => {
   const [textInputValue, setTextInputValue] = useState("");
@@ -47,7 +48,10 @@ const SearchBar = () => {
           />
         </View>
 
-        <TouchableOpacity onPress={fetchSearchResult} style={styles.searchBtn}>
+        <TouchableOpacity
+          onPress={() => fetchSearchResult(textInputValue)}
+          style={styles.searchBtn}
+        >
           <Image
             source={require("../../assets/images/SearchBarIcons/search.png")}
             style={styles.searchIcon}
@@ -66,7 +70,10 @@ const SearchBar = () => {
                 }}
                 style={styles.resultItem}
               >
-                <Image style={styles.image} source={item.userId.proPic} />
+                <Image
+                  style={styles.image}
+                  source={{ uri: item.userId.proPic }}
+                />
                 <Text style={styles.userName}>{item.userId.userName}</Text>
               </TouchableOpacity>
             ))}

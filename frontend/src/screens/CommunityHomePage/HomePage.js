@@ -9,7 +9,6 @@ import {
   useRoute,
 } from "@react-navigation/native";
 import { getPost } from "../../services/postServices/postServices";
-import { getAUser } from "../../services/userServices/userService";
 
 const HomePage = () => {
   const screenHeight = Dimensions.get("window").height - 275;
@@ -18,15 +17,9 @@ const HomePage = () => {
   const route = useRoute();
 
   const [postList, setPostList] = useState([]);
-  const [userData, setUserData] = useState();
 
   const fetchPostData = async () => {
     try {
-      //getUser
-      const user = await getAUser();
-      setUserData(user);
-
-      //  getPosts
       const res = await getPost();
       setPostList(res);
     } catch (error) {
@@ -51,7 +44,7 @@ const HomePage = () => {
     navigation.navigate("PostCategory");
   };
 
-  if (!postList || !userData) {
+  if (!postList) {
     return;
   }
 
@@ -60,7 +53,7 @@ const HomePage = () => {
       <View>
         <CFHeaderSub
           headLine={"Thishakya Perera"}
-          subHeadLine={"80 total post"}
+          // subHeadLine={"80 total post"}
           profile={"ProfileScreen"}
         />
       </View>

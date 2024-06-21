@@ -36,6 +36,12 @@ const PendingAppointment = () => {
       </View>
     );
   }
+  const getapDate = (date) => {
+    const apDate = new Date(date);
+    let stringDate =
+      apDate.getFullYear() + "-" + apDate.getMonth() + "-" + apDate.getDate();
+    return stringDate;
+  };
 
   return (
     <View>
@@ -53,9 +59,8 @@ const PendingAppointment = () => {
               image={item.userId.proPic}
               title={item.userId.fullName}
               cardName={"Pending"}
-              // time={item.time}
-              // time={props.time.from}-{props.time.to}
-              date={item.date}
+              date={getapDate(item.date)}
+              time={item.time}
               contactNo={item.contactNo}
             />
           ))}

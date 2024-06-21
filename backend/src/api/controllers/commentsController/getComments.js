@@ -6,7 +6,8 @@ exports.getComments = async (req, res) => {
 
     const Comments = await commentsSchema
       .find({ postId: postId })
-      .sort({ createdAt: -1 });
+      .sort({ createdAt: -1 })
+      .populate("userId");
     if (!Comments) {
       return res.status(404).json({ message: "Comments not found!" });
     }

@@ -15,7 +15,6 @@ import {
   getComments,
 } from "../../services/commentServices/commentServices";
 import { useNavigation, useRoute } from "@react-navigation/native";
-
 import CommentCard from "../../components/CFCard/CommentCard";
 
 const CommentPage = () => {
@@ -53,6 +52,7 @@ const CommentPage = () => {
 
   useEffect(() => {
     fetchComment();
+
     const keyboardDidShowListener = Keyboard.addListener(
       "keyboardDidShow",
       () => {
@@ -106,6 +106,8 @@ const CommentPage = () => {
               commentId={item._id}
               key={item._id}
               postId={postId}
+              image={item.userId.proPic}
+              title={item.userId.userName}
               Date={item.createdAt}
               content={item.content}
               onDelete={onDeleteComment}

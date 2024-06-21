@@ -1,15 +1,15 @@
 import { useNavigation } from "@react-navigation/native";
-import React from "react";
-import {
-  View,
-  Image,
-  StyleSheet,
-  ImageBackground,
-  TouchableOpacity,
-} from "react-native";
+import React, { useEffect, useState } from "react";
+import { View, Image, StyleSheet, TouchableOpacity } from "react-native";
 
 const ProfileCover = (props) => {
   const navigation = useNavigation();
+  const [coverImage, setCoverImage] = useState(null);
+
+  // useEffect(() => {
+  //   fetchUserData();
+  //   props.selectedImage(coverImage);
+  // }, [coverImage]);
 
   const handleBackToHome = () => {
     navigation.navigate("HomePage");
@@ -21,6 +21,9 @@ const ProfileCover = (props) => {
         source={require("../../assets/images/PostCardImages/cover.jpg")}
         style={styles.cover}
       />
+
+      {/* <ImageUploader selectedImg={setCoverImage} /> */}
+
       <View
         style={{
           width: "100%",
@@ -30,7 +33,7 @@ const ProfileCover = (props) => {
           borderBottomLeftRadius: 40,
           borderBottomRightRadius: 40,
           opacity: 0.4,
-          zIndex: 1,
+          zIndex: 100,
         }}
       >
         <TouchableOpacity onPress={handleBackToHome}>
@@ -65,7 +68,7 @@ const styles = StyleSheet.create({
     width: "100%",
     borderBottomLeftRadius: 40,
     borderBottomRightRadius: 40,
-    zIndex: 100,
+    zIndex: 10,
     marginBottom: 30,
   },
   cover: {

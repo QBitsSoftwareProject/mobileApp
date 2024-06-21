@@ -10,15 +10,26 @@ import {
 import React, { useEffect } from "react";
 import { useState } from "react";
 import ImageUploader from "../../components/ImageUploader/ImageUploader";
+import { getAUser } from "../../services/userServices/userService";
 
 const TemporyCard = (props) => {
   const [post, setPost] = useState(null);
-
   const [postdescription, setPostDescription] = useState("");
-
   const [image, setImage] = useState(null);
+  const [userData, setUserData] = useState();
+
+  const fetchUserData = async () => {
+    try {
+      //getUser
+      const user = await getAUser();
+      setUserData(user);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   useEffect(() => {
+    fetchUserData();
     props.selectedImage(image);
   }, [image]);
 
@@ -26,16 +37,19 @@ const TemporyCard = (props) => {
     Keyboard.dismiss();
   };
 
+  if (!userData) {
+    return;
+  }
   return (
     <View style={[styles.cardBox]}>
       <View style={{ display: "flex", flexDirection: "column", padding: 15 }}>
         <View style={styles.content1}>
           <View style={styles.imageframe}>
-            <Image source={{ uri: props.image }} style={styles.image} />
+            <Image source={{ uri: userData.proPic }} style={styles.image} />
           </View>
 
           <View>
-            <Text style={styles.title}>{props.title}</Text>
+            <Text style={styles.title}>{userData.userName}</Text>
           </View>
         </View>
 
