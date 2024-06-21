@@ -155,14 +155,12 @@ const MakeAppointment = ({ route }) => {
         </View>
 
         <View style={styles.boxcontainer}>
-          <View>
-            <Image
-              source={{
-                uri: doctor.proPic,
-              }}
-              style={styles.Image}
-            />
-          </View>
+          <Image
+            source={{
+              uri: doctor.proPic,
+            }}
+            style={styles.Image}
+          />
 
           <View style={styles.description}>
             <Text style={styles.docDetails}>{doctor.qualification}</Text>
@@ -181,7 +179,7 @@ const MakeAppointment = ({ route }) => {
         <View style={{ marginBottom: 20 }}>
           <Text style={styles.title}>Select Date{"\n"}</Text>
 
-          <View style={{ flexDirection: "row" }}>
+          <ScrollView style={{ flexDirection: "row" }} horizontal>
             {Array.from({ length: 7 }).map((item, index) => (
               <View key={index} style={{ paddingBottom: 10 }}>
                 <DateCard
@@ -200,14 +198,20 @@ const MakeAppointment = ({ route }) => {
                 />
               </View>
             ))}
-          </View>
+          </ScrollView>
         </View>
 
         {/* Time selection */}
         <View style={{ marginBottom: 20 }}>
           <Text style={styles.title}>Available Time Slot</Text>
 
-          <View style={{ flexDirection: "row", flexWrap: "wrap" }}>
+          <View
+            style={{
+              flexDirection: "row",
+              flexWrap: "wrap",
+              justifyContent: "space-between",
+            }}
+          >
             {doctor.availableTimes[pressDay].map((item, index) => (
               <TimeButton
                 key={index}

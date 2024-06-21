@@ -8,7 +8,7 @@ import {
 } from "react-native";
 import React, { useEffect, useState } from "react";
 import styles from "./styles";
-import { getSearchProfile } from "../../../../backend/src/api/controllers/postController/getPost";
+import { getSearchProfile } from "../../services/postServices/postServices";
 
 const SearchBar = () => {
   const [textInputValue, setTextInputValue] = useState("");
@@ -29,8 +29,8 @@ const SearchBar = () => {
     }
   }, [textInputValue]);
 
-  const handleNavigateToProfile = (x) => {
-    console.log(x);
+  const handleNavigateToProfile = (userId) => {
+    console.log(userId);
   };
 
   return (
@@ -62,7 +62,7 @@ const SearchBar = () => {
               <TouchableOpacity
                 key={item.userId}
                 onPress={() => {
-                  handleNavigateToProfile(item._id);
+                  handleNavigateToProfile(item.userId);
                 }}
                 style={styles.resultItem}
               >

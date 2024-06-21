@@ -107,9 +107,10 @@ const MoodInputScreen = () => {
         />
       </TouchableOpacity>
 
+
       <View style={styles.horivontalBar}></View>
       <View style={{ height: screenHeight - 282 }}>
-        <ScrollView>
+        <ScrollView contentContainerStyle={{ flexGrow: 1, paddingBottom: 100 }}>
           <View style={styles.textArea}>
             <Text style={styles.textOne}>Hey there!</Text>
             <Text style={styles.textOne}>Ready to capture your mood? </Text>
@@ -137,6 +138,7 @@ const MoodInputScreen = () => {
                 source={require("../../assets/images/ImmediatMoodInput/sad2.png")}
                 style={styles.optionImg}
               />
+              <Text>Sad</Text>
             </TouchableOpacity>
 
             <TouchableOpacity
@@ -150,6 +152,7 @@ const MoodInputScreen = () => {
                 source={require("../../assets/images/ImmediatMoodInput/happy.png")}
                 style={styles.optionImg}
               />
+              <Text>Happy</Text>
             </TouchableOpacity>
           </View>
 
@@ -165,6 +168,7 @@ const MoodInputScreen = () => {
                 source={require("../../assets/images/ImmediatMoodInput/worried.png")}
                 style={styles.optionImg}
               />
+              <Text>Worried</Text>
             </TouchableOpacity>
 
             <TouchableOpacity
@@ -178,6 +182,7 @@ const MoodInputScreen = () => {
                 source={require("../../assets/images/ImmediatMoodInput/neutral2.png")}
                 style={styles.optionImg}
               />
+              <Text>Neutral</Text>
             </TouchableOpacity>
           </View>
 

@@ -72,8 +72,10 @@ const DoctorRegScreen3 = () => {
   const handleNext = () => {
     setIsNext(true);
 
+    const avbDays = updateAvailableDays();
+
     navigation.navigate("DoctorRegScreen4", {
-      availableDays: updateAvailableDays(),
+      availableDays: avbDays,
       monday: availableTimesDay1,
       tuesday: availableTimesDay2,
       wednesday: availableTimesDay3,

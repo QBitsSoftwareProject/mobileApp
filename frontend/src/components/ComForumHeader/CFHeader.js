@@ -47,7 +47,7 @@ const CFHeaderSub = (props) => {
             </View>
           </View>
 
-          {/* <SearchBar /> */}
+          <SearchBar />
         </View>
       </ImageBackground>
     </View>

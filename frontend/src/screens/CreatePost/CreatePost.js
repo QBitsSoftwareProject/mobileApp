@@ -11,6 +11,8 @@ import { createPost } from "../../services/postServices/postServices";
 import { storage } from "../../config/firebase";
 import { getDownloadURL, uploadBytes, ref } from "firebase/storage";
 
+const loadingGIF = require("../../assets/animation/loading.gif");
+
 const CreatePost = ({ route }) => {
   const { postCat } = route.params;
   const screenHeight = Dimensions.get("window").height - 275;
@@ -18,6 +20,7 @@ const CreatePost = ({ route }) => {
   const [popupMessage, setPopupMessage] = useState("");
   const [description, setDescription] = useState();
   const [selectedImage, setSelectedImage] = useState();
+  const [isLoading, setIsLoading] = useState();
 
   const handlePostImageButtonPress = async () => {
     try {
@@ -27,6 +30,7 @@ const CreatePost = ({ route }) => {
     } catch (error) {
       console.log(error);
     }
+    setIsLoading(false);
   };
 
   const confirmMessage = async () => {
@@ -65,6 +69,7 @@ const CreatePost = ({ route }) => {
       return value.toString(16);
     });
   };
+
   return (
     <View>
       <View>
@@ -92,6 +97,7 @@ const CreatePost = ({ route }) => {
 
           <View style={styles.buttonContainer}>
             <RegularButton name={"post"} onPress={handlePostImageButtonPress} />
+            {isLoading && <Image source={loadingGIF} />}
             <PopupMessage
               message={popupMessage}
               onConfirm={confirmMessage}

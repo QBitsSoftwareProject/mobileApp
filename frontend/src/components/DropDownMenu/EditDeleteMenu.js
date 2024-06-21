@@ -111,8 +111,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
-    borderWidth: 2,
-    borderColor: "blue",
   },
 });
 

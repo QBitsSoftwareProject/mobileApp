@@ -36,7 +36,7 @@ const DoctorRegScreen4 = ({ route }) => {
     sunday,
   } = route.params;
 
-  // console.log(availableDays);
+  // console.log(monday, tuesday, wednesday, thursday, friday, saturday, sunday);
 
   // State variables for managing screen padding, additional details, and form validation
   const [screenPadding, setScreenPadding] = useState(0);

@@ -122,8 +122,6 @@ const styles = StyleSheet.create({
     height: 35,
     alignItems: "center",
     justifyContent: "center",
-    // borderColor: "red",
-    // borderWidth: 2,
   },
   popupButtonText: {
     color: "#101318",

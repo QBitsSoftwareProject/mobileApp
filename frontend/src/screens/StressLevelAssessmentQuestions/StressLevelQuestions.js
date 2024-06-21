@@ -185,13 +185,14 @@ const Question = () => {
 
   return (
     <SafeAreaView>
-      <ScrollView>
+      
         <TouchableOpacity onPress={handleBackButton}>
           <Image
             source={require("../../assets/images/backProfile.png")}
             style={{ width: 53, height: 53, marginLeft: 25 }}
           />
         </TouchableOpacity>
+        <ScrollView contentContainerStyle={{ flexGrow: 1, paddingBottom: 100 }}>
         {isLoading ? (
           <ActivityIndicator
             size="large"
@@ -211,7 +212,12 @@ const Question = () => {
                 height: 10,
                 borderRadius: 15,
               }}
+
+             
             />
+
+
+            
             {question && question.question && (
               <>
                 <Text style={styles.quesnum}>
@@ -248,8 +254,10 @@ const Question = () => {
                 selectedMark={mark}
               />
             </View>
+            
           </>
         )}
+        
 
         {submit ? (
           <TouchableOpacity
@@ -278,7 +286,8 @@ const Question = () => {
             </Text>
           </TouchableOpacity>
         )}
-      </ScrollView>
+        </ScrollView>
+        
     </SafeAreaView>
   );
 };

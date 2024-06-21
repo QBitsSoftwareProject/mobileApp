@@ -19,12 +19,12 @@ export const addMood = async (selectedEmoji, moodText, count) => {
 
     const formattedDate = `${getYear}-${getMonth}-${getDate}`;
 
-    console.log(currentDate);
-    console.log(formattedDate);
-    console.log(formattedTime);
-    console.log(selectedEmoji);
-    console.log(moodText);
-    console.log(count);
+    // console.log(currentDate);
+    // console.log( formattedDate);
+    // console.log(formattedTime);
+    // console.log(selectedEmoji);
+    // console.log(moodText);
+    // console.log(count);
 
     const response = await axios.post(
       `${URL}/mood-create`,
