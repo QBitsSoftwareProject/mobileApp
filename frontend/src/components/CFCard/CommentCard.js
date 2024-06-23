@@ -132,38 +132,27 @@ const CommentCard = (props) => {
       containerStyle={styles.cardContainer}
     >
       <ListItem.Content>
-        <TouchableOpacity
-          onPress={() => {
-            handlePress(props.commentId);
-          }}
-          style={{ width: "100%" }}
-        ></TouchableOpacity>
-
-        <View style={styles.cardBox}>
-          <View style={styles.content1}>
-            <View style={{ flexDirection: "row", alignItems: "center" }}>
-              <View style={styles.imageframe}>
-                <Image source={{ uri: props.image }} style={styles.image} />
-              </View>
-
-              <View style={styles.content2}>
-                <Text style={styles.title}>{props.title}</Text>
-                <Text style={styles.date}>{formattedDate}</Text>
-                <Text>{props.content}</Text>
-              </View>
-            </View>
-
-            {popupMessage != "" && (
-              <CommentEditPopupMessage
-                commentId={props.commentId}
-                postId={props.postId}
-                message={popupMessage}
-                onConfirm={confirmMessage}
-                onClose={closeMessage}
-                onUpdate={props.onUpdate}
-              />
-            )}
+        <View style={styles.content1}>
+          <View style={styles.imageframe}>
+            <Image source={{ uri: props.image }} style={styles.image} />
           </View>
+
+          <View style={styles.content2}>
+            <Text style={styles.title}>{props.title}</Text>
+            <Text style={styles.date}>{formattedDate}</Text>
+            <Text>{props.content}</Text>
+          </View>
+
+          {popupMessage != "" && (
+            <CommentEditPopupMessage
+              commentId={props.commentId}
+              postId={props.postId}
+              message={popupMessage}
+              onConfirm={confirmMessage}
+              onClose={closeMessage}
+              onUpdate={props.onUpdate}
+            />
+          )}
         </View>
       </ListItem.Content>
     </ListItem.Swipeable>
@@ -171,15 +160,8 @@ const CommentCard = (props) => {
 };
 
 const styles = StyleSheet.create({
-  cardBox: {
-    display: "flex",
-    flexDirection: "column",
-    width: "100%",
-    height: "auto",
-    alignSelf: "center",
-    marginBottom: 15,
-  },
   cardContainer: {
+    flexDirection: "row",
     backgroundColor: "white",
     height: "auto",
     borderRadius: 20,
@@ -187,14 +169,13 @@ const styles = StyleSheet.create({
   },
   content1: {
     flexDirection: "row",
-    alignItems: "center",
+
     justifyContent: "space-between",
   },
   imageframe: {
     height: 35,
     width: 35,
-    backgroundColor: "gray",
-    opacity: 0.5,
+
     borderRadius: 50,
     marginRight: 15,
     overflow: "hidden",
@@ -206,6 +187,7 @@ const styles = StyleSheet.create({
   },
   content2: {
     display: "flex",
+    width: "90%",
     flexDirection: "column",
     gap: 2,
   },
@@ -216,9 +198,10 @@ const styles = StyleSheet.create({
   },
 
   date: {
-    fontSize: 12,
-    fontWeight: "500",
+    fontSize: 10,
+    fontWeight: "400",
     color: "#5C677D",
+    marginBottom: 5,
   },
 
   delImg: {

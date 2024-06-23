@@ -15,6 +15,7 @@ const ProfileScreen = () => {
   const route = useRoute();
   const [postList, setPostList] = useState();
   const [userData, setUserData] = useState();
+  const [refresh, setRefresh] = useState(false);
 
   const fetchData = async () => {
     try {
@@ -47,7 +48,7 @@ const ProfileScreen = () => {
 
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [refresh]);
 
   const onUpdatePost = () => {
     fetchData();
@@ -69,6 +70,8 @@ const ProfileScreen = () => {
         <ProfileCover
           coverImage={{ uri: userData.coverImage }}
           proPic={{ uri: userData.proPic }}
+          refreshState={refresh}
+          isRefresh={setRefresh}
         />
         <View
           style={{

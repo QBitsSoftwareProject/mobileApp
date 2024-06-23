@@ -161,7 +161,7 @@ const styles = StyleSheet.create({
     height: "auto",
     backgroundColor: "white",
     borderRadius: 20,
-    elevation: 2,
+
     alignSelf: "center",
     marginBottom: 20,
   },
@@ -178,8 +178,6 @@ const styles = StyleSheet.create({
     borderRadius: 50,
     marginRight: 15,
     overflow: "hidden",
-    backgroundColor: "gray",
-    opacity: 0.5,
   },
   image: {
     width: "100%",
