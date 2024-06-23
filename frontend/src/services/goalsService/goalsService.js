@@ -98,3 +98,17 @@ export const getCompletedGoals = async () => {
     throw new Error("Error during request setup");
   }
 };
+
+export const updateAGoal = async (goalId, data) => {
+  try {
+    const token = await AsyncStorage.getItem("authToken");
+    const response = await axios.put(URL + "/update/" + goalId, data, {
+      headers: { authtoken: token },
+    });
+    // console.log(response.data);
+    return response.data;
+  } catch (error) {
+    console.log(error);
+    throw new Error("Error during request setup");
+  }
+};

@@ -32,7 +32,7 @@ const McqScreen = ({ navigation, route }) => {
   // Handler for moving to the next question
   const pressHandlerNext = async () => {
     try {
-      if (qNumber < questions.length) {
+      if (qNumber < questions.length && answer != "") {
         if (
           selectedButtonIndex !== null ||
           currentQuestion.questionType !== "mcq"
@@ -41,7 +41,8 @@ const McqScreen = ({ navigation, route }) => {
           setSelectedButtonIndex(null);
         }
         await updateAnswer(qId, answer);
-      } else {
+        setAnswer("");
+      } else if (answer != "") {
         await updateAnswer(qId, answer);
         navigation.navigate("TaskListScreen"); // Navigating to the task list screen when all questions are answered
       }

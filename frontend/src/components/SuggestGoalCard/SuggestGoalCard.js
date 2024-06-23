@@ -23,6 +23,7 @@ const SuggestGoalCard = ({
     completeness: 0,
     isComplete: false,
     selectedDate: date,
+    isRated: false,
   };
 
   const handlePress = (goalId) => {

@@ -8,17 +8,18 @@ import {
   Text,
   TouchableOpacity,
   View,
-  SafeAreaView
+  SafeAreaView,
 } from "react-native";
 import styles from "./styles";
 import HomeCard from "../../components/HomeCard/HomeCard";
 import { LinearGradient } from "expo-linear-gradient";
 import Swiper from "react-native-swiper";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
 import { getAUser, getUser } from "../../services/userServices/userService";
 import { getADoctor } from "../../services/doctorServices/doctorService";
 import loadingGif from "../../assets/animation/loading.gif";
 import { BackgroundMusicContext } from "../../components/SettingScreen/BackgroundMusicProvider";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 // const proPic = require('../../assets/images/doc.jpg')
 
@@ -68,8 +69,6 @@ const HomeScreen = (props) => {
 
   const [user, setUser] = useState(null);
 
-
-
   const winWidth = Dimensions.get("window").width - 60;
 
   useEffect(() => {
@@ -103,7 +102,7 @@ const HomeScreen = (props) => {
     } else if (index == 2) {
       navigation.navigate("AudioScreen");
     }
-  }
+  };
 
   //fetch user from database
   const fetchUser = async (checkRole) => {
@@ -117,14 +116,10 @@ const HomeScreen = (props) => {
       }
 
       setUser(currentUser);
-
     } catch (error) {
-      console.log(error);
+      console.log(error.message);
     }
   };
-
-
-
 
   if (!user) {
     // Render loading state or placeholder if user is not yet fetched
@@ -144,7 +139,6 @@ const HomeScreen = (props) => {
   }
 
   return (
-
     <View style={{ flex: 1, paddingBottom: 80 }}>
       <SafeAreaView>
         <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
@@ -168,18 +162,25 @@ const HomeScreen = (props) => {
                 }}
               >
                 <Text style={styles.topicText}>Wellness Knowledge</Text>
-                <TouchableOpacity style={styles.viewBtn} onPress={() => {
-                  navigation.navigate("EducationalStack");
-                }}>
+                <TouchableOpacity
+                  style={styles.viewBtn}
+                  onPress={() => {
+                    navigation.navigate("EducationalStack");
+                  }}
+                >
                   <Text style={styles.viewText}>View All</Text>
                 </TouchableOpacity>
               </View>
 
               <Swiper style={styles.wrapper} showsButtons={false}>
                 {images.map((image, index) => (
-                  <TouchableOpacity style={styles.slide} key={index} onPress={() => {
-                    screenNavigator(index)
-                  }}>
+                  <TouchableOpacity
+                    style={styles.slide}
+                    key={index}
+                    onPress={() => {
+                      screenNavigator(index);
+                    }}
+                  >
                     <View style={styles.blackBox}></View>
 
                     <Image
@@ -254,10 +255,15 @@ const HomeScreen = (props) => {
                 onPress={handleStressLevelPress}
               >
                 <LinearGradient
-                  colors={["#00453E", "rgba(73,177,247,0.7)rgba(73,177,247,0.7)"]}
+                  colors={[
+                    "#00453E",
+                    "rgba(73,177,247,0.7)rgba(73,177,247,0.7)",
+                  ]}
                   style={styles.blueCard}
                 >
-                  <Text style={styles.bluCardText1}>Stress Level Assesment</Text>
+                  <Text style={styles.bluCardText1}>
+                    Stress Level Assesment
+                  </Text>
                   <Text style={styles.bluCardText2}>
                     Assess stress levels, find peace. Your stress guide for a
                     balanced life.
@@ -301,8 +307,6 @@ const HomeScreen = (props) => {
         </ScrollView>
       </SafeAreaView>
     </View>
-
-
   );
 };
 

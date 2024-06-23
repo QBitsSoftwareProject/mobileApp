@@ -14,6 +14,7 @@ import {
   getSuggestedGoals,
 } from "../../services/goalsService/goalsService";
 import { useFocusEffect } from "@react-navigation/native";
+import RatingPopUp from "../../components/RatingPopUp/RatingPopUp";
 
 const ViewGoalScreen = () => {
   const [selectedTab, setSelectedTab] = useState(0);
@@ -45,6 +46,10 @@ const ViewGoalScreen = () => {
       fetchData();
     }, [selectedTab, isChange])
   );
+
+  const onClose = () => {
+    setIsChange(!isChange);
+  };
 
   return (
     <View
@@ -115,7 +120,7 @@ const ViewGoalScreen = () => {
                     // change={(id) => setIsChange(!isChange)}
                     select={setSelectedTab}
                   />
-                ) : selectedTab == 2 ? (
+                ) : selectedTab == 2 && item.isRated ? (
                   <HistoryGoalCard
                     title={item.title}
                     cNumber={item.completeness}
@@ -123,6 +128,12 @@ const ViewGoalScreen = () => {
                       item.objectives.length * item.objectivesState.length
                     }
                     dueDate={item.dueDate}
+                  />
+                ) : selectedTab == 2 && !item.isRated ? (
+                  <RatingPopUp
+                    message={"How satisfy you are?"}
+                    goalId={item._id}
+                    onClose={onClose}
                   />
                 ) : null}
               </View>

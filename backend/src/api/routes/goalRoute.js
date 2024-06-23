@@ -36,7 +36,7 @@ const {
 const router = express.Router();
 
 router.post("/create", createGoal);
-router.put("/update/:id", updateGoal);
+router.put("/update/:id", auth, updateGoal);
 router.delete("/delete/:id", deleteGoal);
 router.get("/get-all", getGoals);
 router.get("/get-goal/:id", getAGoal);
