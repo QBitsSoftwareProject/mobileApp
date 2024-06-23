@@ -86,6 +86,20 @@ export const getAUser = async () => {
   }
 };
 
+export const getUserById = async (userId) => {
+  try {
+    const token = await AsyncStorage.getItem("authToken");
+    const response = await axios.get(`${URL}/user-by-id/` + userId, {
+      headers: { authtoken: token },
+    });
+    // console.log(response.data)
+    return response.data;
+  } catch (error) {
+    console.log(error);
+    throw new Error("Error during request setup");
+  }
+};
+
 export const updateAUser = async (updates) => {
   try {
     const token = await AsyncStorage.getItem("authToken");
@@ -100,4 +114,3 @@ export const updateAUser = async (updates) => {
     throw new Error("Error during request setup");
   }
 };
-

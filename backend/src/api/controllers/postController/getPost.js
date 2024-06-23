@@ -1,5 +1,5 @@
 const postSchema = require("../../models/posts/postsModels");
-
+const userSchema = require("../../models/regularUser/regularUser");
 exports.getPost = async (req, res) => {
   try {
     const Posts = await postSchema
@@ -57,15 +57,13 @@ exports.getProfilePost = async (req, res) => {
 exports.getSearchProfile = async (req, res) => {
   try {
     const userNameText = req.body.userName;
-    console.log(`Searching for user with name: ${userNameText}`); // Added logging
+    console.log(userNameText);
 
-    const searchProfile = await postSchema
-      .find({
-        userName: new RegExp(userNameText, "i"),
-      })
-      .populate("userId");
+    const searchProfile = await userSchema.find({
+      userName: new RegExp(userNameText, "i"),
+    });
 
-    console.log(`Search results: ${JSON.stringify(searchProfile)}`); // Added logging
+    console.log(searchProfile);
 
     if (!searchProfile) {
       return res.status(404).json({ message: "User not found!" });
@@ -79,7 +77,7 @@ exports.getSearchProfile = async (req, res) => {
         userProPic: item.proPic,
       });
     });
-    console.log(`User data to be returned: ${JSON.stringify(userData)}`);
+
     return res.status(201).json(userData);
   } catch (err) {
     console.error(err);

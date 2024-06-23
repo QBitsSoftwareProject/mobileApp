@@ -9,16 +9,20 @@ import {
 import React, { useCallback, useEffect, useState } from "react";
 import styles from "./styles";
 import { getSearchProfile } from "../../services/postServices/postServices";
-import debounce from "lodash/debounce";
+import { useNavigation } from "@react-navigation/native";
 
 const SearchBar = () => {
   const [textInputValue, setTextInputValue] = useState("");
   const [userList, setUserList] = useState([]);
 
+  const navigation = useNavigation();
+
   const fetchSearchResult = async () => {
     try {
       const res = await getSearchProfile(textInputValue);
+
       setUserList(res);
+      console.log(res);
     } catch (error) {
       console.error("Error searching users:", error);
     }
@@ -31,7 +35,7 @@ const SearchBar = () => {
   }, [textInputValue]);
 
   const handleNavigateToProfile = (userId) => {
-    console.log(userId);
+    navigation.navigate("ProfileScreen", { userId: userId });
   };
 
   return (
@@ -70,11 +74,8 @@ const SearchBar = () => {
                 }}
                 style={styles.resultItem}
               >
-                <Image
-                  style={styles.image}
-                  source={{ uri: item.userId.proPic }}
-                />
-                <Text style={styles.userName}>{item.userId.userName}</Text>
+                <Image style={styles.image} source={{ uri: item.proPic }} />
+                <Text style={styles.userName}>{item.userName}</Text>
               </TouchableOpacity>
             ))}
           </ScrollView>
@@ -82,7 +83,6 @@ const SearchBar = () => {
       )}
     </View>
   );
-
 };
 
 export default SearchBar;

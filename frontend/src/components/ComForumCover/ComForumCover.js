@@ -26,10 +26,14 @@ const ProfileCover = (props) => {
 
   return (
     <View style={styles.bckImg}>
-      <Image
-        source={require("../../assets/images/PostCardImages/cover.jpg")}
-        style={styles.cover}
-      />
+      {props.coverImage ? (
+        <Image source={props.coverImage} style={styles.cover} />
+      ) : (
+        <Image
+          source={require("../../assets/images/PostCardImages/cover.jpg")}
+          style={styles.cover}
+        />
+      )}
 
       <View
         style={{

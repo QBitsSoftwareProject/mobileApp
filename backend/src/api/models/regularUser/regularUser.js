@@ -94,6 +94,10 @@ const regularUserSchema = new schema({
     type: String,
     required: true,
   },
+  coverImage: {
+    type: String,
+    required: false,
+  },
 
   selectedGoals: {
     type: Array,

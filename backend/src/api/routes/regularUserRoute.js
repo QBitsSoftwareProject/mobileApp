@@ -14,6 +14,7 @@ const {
 const {
   getRegularUsers,
   getARegularUser,
+  getRegularUserById,
 } = require("../controllers/regularUserControllers/getController");
 
 const {
@@ -29,6 +30,7 @@ const router = express.Router();
 //user operations routes
 router.get("/", getRegularUsers);
 router.get("/one-user", auth, getARegularUser);
+router.get("/user-by-id/:userId", auth, getRegularUserById);
 router.put("/", auth, updateRegularUser);
 router.delete("/:id", deleteRegularUser);
 

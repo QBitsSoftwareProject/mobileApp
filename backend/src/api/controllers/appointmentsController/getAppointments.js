@@ -5,8 +5,6 @@ exports.getUserAppointments = async (req, res) => {
   try {
     const userId = req.user.user_id;
 
-    // const doctor = await doctorSchema.findById(doctorId);
-
     const relevantAppointments = await appointmentSchema
       .find({
         userId: userId,

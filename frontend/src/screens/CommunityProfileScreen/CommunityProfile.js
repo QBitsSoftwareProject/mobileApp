@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, ScrollView } from "react-native";
 import PostCard from "../../components/CFCard/PostCard";
 import ProfileCover from "../../components/ComForumCover/ComForumCover";
 import { getProfilePost } from "../../services/postServices/postServices";
-import { getAUser } from "../../services/userServices/userService";
+import { getAUser, getUserById } from "../../services/userServices/userService";
 import {
   useFocusEffect,
   useNavigation,
@@ -19,7 +19,13 @@ const ProfileScreen = () => {
   const fetchData = async () => {
     try {
       //getUser
-      const user = await getAUser();
+      let user;
+      if (!route.params.userId) {
+        user = await getAUser();
+      } else {
+        user = await getUserById(route.params.userId);
+      }
+
       setUserData(user);
 
       //getPost
@@ -60,7 +66,10 @@ const ProfileScreen = () => {
   return (
     <View style={styles.contains}>
       <ScrollView>
-        <ProfileCover proPic={{ uri: userData.proPic }} />
+        <ProfileCover
+          coverImage={{ uri: userData.coverImage }}
+          proPic={{ uri: userData.proPic }}
+        />
         <View
           style={{
             paddingHorizontal: 25,
