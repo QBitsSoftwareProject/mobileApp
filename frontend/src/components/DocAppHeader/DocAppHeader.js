@@ -16,7 +16,7 @@ const DocAppHeader = (props) => {
           }}
         >
           <Text style={styles.headlineTxt}>{props.headLine}</Text>
-          <Text style={styles.subHeadlineTxt}>{props.subHeadLine}</Text>
+          <Text style={styles.subHeadlineTxt}>{props.docName}</Text>
         </View>
 
         <View>

@@ -1,15 +1,24 @@
 import { useNavigation } from "@react-navigation/native";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { View, Image, StyleSheet, TouchableOpacity } from "react-native";
+import CoverPhotoUploader from "../CoverPhotoUploader/CoverPhotoUploader";
 
 const ProfileCover = (props) => {
   const navigation = useNavigation();
-  const [coverImage, setCoverImage] = useState(null);
+  const [popupVisible, setPopupVisible] = useState(false);
 
-  // useEffect(() => {
-  //   fetchUserData();
-  //   props.selectedImage(coverImage);
-  // }, [coverImage]);
+  const confirmMessage = async () => {
+    setPopupVisible(false);
+  };
+
+  const closeMessage = () => {
+    setPopupVisible(false);
+  };
+
+  const handleEditIconPress = () => {
+    console.log("Edit icon pressed");
+    setPopupVisible(true);
+  };
 
   const handleBackToHome = () => {
     navigation.navigate("HomePage");
@@ -22,8 +31,6 @@ const ProfileCover = (props) => {
         style={styles.cover}
       />
 
-      {/* <ImageUploader selectedImg={setCoverImage} /> */}
-
       <View
         style={{
           width: "100%",
@@ -35,6 +42,12 @@ const ProfileCover = (props) => {
           opacity: 0.4,
           zIndex: 100,
         }}
+      ></View>
+
+      <View
+        style={{
+          zIndex: 101,
+        }}
       >
         <TouchableOpacity onPress={handleBackToHome}>
           <Image
@@ -42,6 +55,24 @@ const ProfileCover = (props) => {
             style={styles.backWhiteImg}
           />
         </TouchableOpacity>
+      </View>
+
+      <View style={{ zIndex: 110 }}>
+        <TouchableOpacity
+          onPress={handleEditIconPress}
+          style={{ position: "absolute", bottom: 80, right: 30 }}
+        >
+          <Image
+            source={require("../../assets/images/NavigationIcons/mdi_camera.png")}
+            style={styles.editIcon}
+          />
+        </TouchableOpacity>
+
+        <CoverPhotoUploader
+          isVisible={popupVisible}
+          onConfirm={confirmMessage}
+          onClose={closeMessage}
+        />
       </View>
 
       <View
@@ -97,9 +128,15 @@ const styles = StyleSheet.create({
     height: "100%",
     resizeMode: "cover",
   },
+
   backWhiteImg: {
-    position: "absolute",
-    margin: 30,
+    bottom: 170,
+    left: 25,
+  },
+  editIcon: {
+    width: 25,
+    height: 20,
+    opacity: 0.8,
   },
 });
 
