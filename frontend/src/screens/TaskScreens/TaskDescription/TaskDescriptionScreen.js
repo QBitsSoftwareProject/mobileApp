@@ -10,7 +10,10 @@ import React, { useEffect, useState } from "react";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import styles from "./styles";
-import { viewASelectedTask } from "../../../services/taskServices/taskservice";
+import {
+  updateTaskCompleteness,
+  viewASelectedTask,
+} from "../../../services/taskServices/taskservice";
 import loadingGif from "../../../assets/animation/loading.gif";
 
 const TaskDescriptionScreen = () => {
@@ -18,9 +21,10 @@ const TaskDescriptionScreen = () => {
   const navigation = useNavigation();
   const [boxHeight, setBoxHeight] = useState(0);
   const [taskDetails, setTaskDetails] = useState(null);
+  const [bgColor, setBgColor] = useState({});
+  const [isDisabled, setIsDisabled] = useState(false);
 
-  const { taskId, completeness, index } = route.params;
-  console.log(completeness);
+  const { taskId, completeness, index, type } = route.params;
 
   const screenHeight = Dimensions.get("screen").height;
 
@@ -35,6 +39,30 @@ const TaskDescriptionScreen = () => {
       setTaskDetails(response);
     } catch (error) {
       console.log(error);
+    }
+  };
+
+  const taskNavigation = () => {
+    switch (type) {
+      case "journal":
+        navigation.navigate("JournalStack", {
+          screen: "AddNewJournal",
+          params: { taskId: taskId },
+        });
+        break;
+
+      case "resource":
+        navigation.navigate("EducationStack", {
+          params: { taskId: taskId },
+        });
+        break;
+
+      case "community":
+        navigation.navigate("CommunityStack", {
+          screen: "CreatePost",
+          params: { taskId: taskId, postCat: "Supportive" },
+        });
+        break;
     }
   };
 
@@ -65,6 +93,23 @@ const TaskDescriptionScreen = () => {
   };
 
   const scrollHeight = Dimensions.get("window").height;
+
+  //task completenss update
+  const taskUpdate = async () => {
+    try {
+      setBgColor({
+        backgroundColor: "#4ABFB4",
+        borderColor: "white",
+
+        color: "white",
+      });
+
+      setIsDisabled(true);
+      await updateTaskCompleteness(taskId);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <View style={styles.container}>
@@ -130,9 +175,25 @@ const TaskDescriptionScreen = () => {
                   marginVertical: 32,
                 }}
               >
-                <TouchableOpacity style={styles.btn}>
-                  <Text style={styles.btnText}>Start</Text>
-                </TouchableOpacity>
+                {type === "none" ? (
+                  <TouchableOpacity
+                    style={[styles.btn, bgColor]}
+                    onPress={taskUpdate}
+                    disabled={isDisabled}
+                  >
+                    {!isDisabled ? (
+                      <Text style={[styles.btnText]}>Mark As completed</Text>
+                    ) : (
+                      <Text style={[styles.btnText, { color: bgColor.color }]}>
+                        completed
+                      </Text>
+                    )}
+                  </TouchableOpacity>
+                ) : (
+                  <TouchableOpacity style={styles.btn} onPress={taskNavigation}>
+                    <Text style={styles.btnText}>Start</Text>
+                  </TouchableOpacity>
+                )}
               </View>
             )}
           </ScrollView>

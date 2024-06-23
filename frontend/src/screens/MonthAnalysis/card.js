@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     borderRadius: 15,
     alignItems: "center",
-    gap: 15,
+    gap: 5,
   },
   column: {
     flex: 1,

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   View,
   Text,
@@ -15,7 +15,7 @@ import { CustomButtonView } from "./viewSwitch";
 import { Calendar } from "./calender";
 import { SwipableList } from "./viewInputJournal";
 import { FloatingButton } from "./floatingButton";
-import TabBar from "../../components/TabBar/TabBar";
+
 import HeaderSub from "../../components/HeaderSub/HeaderSub";
 import { createStackNavigator } from "@react-navigation/stack";
 import moment from "moment";

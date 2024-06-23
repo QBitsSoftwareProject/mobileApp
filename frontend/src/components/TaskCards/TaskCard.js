@@ -21,6 +21,7 @@ const TaskCard = (props) => {
       taskId,
       completeness,
       index: props.index,
+      type: props.type,
     });
   };
 

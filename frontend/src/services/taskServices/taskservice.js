@@ -45,3 +45,17 @@ export const checkTheTerm = async () => {
     throw new Error("Error during request setup");
   }
 };
+
+export const updateTaskCompleteness = async (taskId) => {
+  try {
+    const token = await AsyncStorage.getItem("authToken");
+    const response = await axios.get(URL + "/update-completeness/" + taskId, {
+      headers: { authtoken: token },
+    });
+
+    // return response.data;
+  } catch (error) {
+    console.log(error);
+    throw new Error("Error during request setup");
+  }
+};

@@ -80,8 +80,8 @@ const styles = StyleSheet.create({
     lineHeight: 20,
     paddingTop: 22,
     paddingHorizontal: 25,
-    fontSize: 13,
-    fontWeight: "200",
+    fontSize: 14,
+    fontWeight: "400",
   },
 
   button: {

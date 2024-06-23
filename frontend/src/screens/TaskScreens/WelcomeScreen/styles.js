@@ -63,6 +63,7 @@ const styles = StyleSheet.create({
     borderRadius: 50,
     alignItems: "center",
     paddingHorizontal: 20,
+    marginBottom: 10,
   },
   buttontxt: {
     color: "#40495B",

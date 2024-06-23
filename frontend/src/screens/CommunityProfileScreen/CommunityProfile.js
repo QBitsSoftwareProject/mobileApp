@@ -20,7 +20,7 @@ const ProfileScreen = () => {
     try {
       //getUser
       let user;
-      if (!route.params.userId) {
+      if (!route.params) {
         user = await getAUser();
       } else {
         user = await getUserById(route.params.userId);
@@ -78,6 +78,7 @@ const ProfileScreen = () => {
         >
           <View style={styles.contains2}>
             <Text style={styles.header}>{userData.userName}</Text>
+            <Text style={styles.subHeader}>{postList.length} total posts</Text>
           </View>
 
           {/* post cards list*/}
@@ -119,6 +120,13 @@ const styles = StyleSheet.create({
     fontWeight: "500",
     alignSelf: "center",
   },
+  subHeader: {
+    fontSize: 14,
+    color: "#5C677D",
+    fontWeight: "400",
+    textAlign: "center",
+    marginBottom: 10,
+  },
   des: {
     fontSize: 14,
     color: "#5C677D",
@@ -128,7 +136,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 5,
     paddingTop: 10,
     paddingBottom: 25,
-    gap: 10,
   },
 });
 
