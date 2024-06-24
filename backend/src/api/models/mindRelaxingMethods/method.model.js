@@ -7,8 +7,8 @@ const MethodSchema = mongoose.Schema(
         required: true
     },
 
-    mark:{
-        type: Number,
+    category:{
+        type: String,
         required: true
     },
 

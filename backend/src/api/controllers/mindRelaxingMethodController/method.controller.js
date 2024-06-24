@@ -5,14 +5,12 @@ const methodModel = require('../../models/mindRelaxingMethods/method.model')
 
 const storeMethod = asyncHandler(async (req, res) => {
     try {
-        const { methodType, mark, resouceName, discription,imageURL,resourceURL } = req.body;
+        const { methodType, category, resouceName, discription,imageURL,resourceURL } = req.body;
 
-        // console.log('Received Mark:', mark);
-        // console.log('Received date', date);
-        // console.log('Received Time', time);
-        // console.log('Received id', userid);
+        console.log(category);
+        
 
-        const newMethod = await methodService.storeMethod(methodType, mark, resouceName, discription,imageURL,resourceURL);
+        const newMethod = await methodService.storeMethod(methodType, category, resouceName, discription,imageURL,resourceURL);
 
         console.log('New Method:', newMethod);
 

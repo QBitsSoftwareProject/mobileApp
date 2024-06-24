@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState , useEffect} from "react";
 import {
   View,
   Text,
@@ -42,6 +42,8 @@ export const ViewJournal = ({ navigation }) => {
       itemText,
       itemEmoji,
     });
+
+    
   };
 
   return (

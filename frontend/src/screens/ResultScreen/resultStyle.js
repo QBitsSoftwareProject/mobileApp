@@ -33,7 +33,7 @@ const ResultScreenStyle = StyleSheet.create({
         
         alignSelf:'center',
         fontSize: 16,
-        marginTop:20,
+        marginTop:32,
         marginHorizontal:25,
         color:'#101318',
 
@@ -75,7 +75,7 @@ const ResultScreenStyle = StyleSheet.create({
     historybtn : {
         flexDirection: 'row', 
         justifyContent: 'space-between', 
-        marginTop: 20,
+        marginTop: 50,
         paddingVertical: 10,
         width: 144,
         height: 48,

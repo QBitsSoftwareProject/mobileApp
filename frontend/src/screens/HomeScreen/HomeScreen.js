@@ -19,6 +19,7 @@ import { getAUser, getUser } from "../../services/userServices/userService";
 import { getADoctor } from "../../services/doctorServices/doctorService";
 import loadingGif from "../../assets/animation/loading.gif";
 import { BackgroundMusicContext } from "../../components/SettingScreen/BackgroundMusicProvider";
+import { fetchHistoryDataByUserId } from "../../services/stressMarksServices/stressMarkServices";
 
 // const proPic = require('../../assets/images/doc.jpg')
 
@@ -90,9 +91,22 @@ const HomeScreen = (props) => {
     };
   }, []);
 
-  const handleStressLevelPress = () => {
-    navigation.navigate("StressLevel");
-  };
+
+  const handleStressLevelPress = async () => {
+    try {
+        const resolvedStressLevel = await fetchHistoryDataByUserId(); // Await the resolution of the Promise
+        console.log(resolvedStressLevel);
+        
+        if (resolvedStressLevel && Object.keys(resolvedStressLevel).length > 0) {
+          navigation.navigate("StressLevel", { screen: 'DisplayResultScreen' });
+      } else {
+          navigation.navigate("StressLevel");
+      }
+    } catch (error) {
+        console.error("Failed to resolve stressLevel:", error);
+       
+    }
+};
 
   //fetch user from database
   const fetchUser = async (checkRole) => {

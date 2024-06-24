@@ -25,6 +25,7 @@ import {
 } from "react-native";
 
 import { ProgressBar } from "react-native-paper";
+import Toast from 'react-native-toast-message';
 
 import axios from "axios";
 
@@ -97,6 +98,7 @@ const Question = () => {
   const [allMarks, setAllMarks] = useState([]);
 
   const handleNextQuestion = () => {
+    
     if (selectedOption) {
       setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
       setSelectedOption(null); // Reset selected option when moving to the next question
@@ -121,6 +123,7 @@ const Question = () => {
         setIsLoadingImage(false);
       }, 500); // Delay for one second (500 milliseconds)
     }
+    
   };
 
   useEffect(() => {
