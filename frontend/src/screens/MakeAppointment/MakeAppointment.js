@@ -19,7 +19,8 @@ import { viewADoctor } from "../../services/doctorServices/doctorService";
 import loardingGIF from "../../assets/animation/loading.gif";
 
 const MakeAppointment = ({ route }) => {
-  const [numColumns, setNumColumns] = useState(2); // Number of columns for layout
+  const { id } = route.params;
+
   const [timeBtnpress, setTimebtnPress] = useState(false); // State to track time button press
   const [dateBtnPress, setDateBtnPress] = useState(false); // State to track date button press
   const [popupMessage, setPopupMessage] = useState(""); // State for popup message
@@ -27,7 +28,6 @@ const MakeAppointment = ({ route }) => {
   const [getDate, setGetDate] = useState();
   const [doctor, setDoctor] = useState();
   const [pressDay, setPressDay] = useState(6);
-  const { id } = route.params;
 
   const dateIncrement = (number) => {
     const currentDate = new Date();

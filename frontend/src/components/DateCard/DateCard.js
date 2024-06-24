@@ -12,20 +12,18 @@ const DateCard = (props) => {
   const [pressDateCard, setPressDateCard] = useState(false);
   const [cardKey, setCardKey] = useState("");
 
-  const handleDatePress = () => {
-    if (!props.change) {
-      setPressDateCard(true);
-      props.press(true);
-      setCardKey(props.indexKey);
-
-      props.getDate(props.date);
-    } else if (props.indexKey === cardKey) {
-      setPressDateCard(false);
-      props.press(false);
-      setCardKey("");
-
-      props.getDate(null);
-    }
+  const handleDatePress = (index) => {
+    // if (props.indexKey !== index) {
+    //   setPressDateCard(true);
+    //   props.press(true);
+    //   setCardKey(index);
+    //   props.getDate(props.date);
+    // } else {
+    //   setPressDateCard(false);
+    //   props.press(false);
+    //   setCardKey("");
+    //   props.getDate(null);
+    // }
   };
 
   return (

@@ -22,6 +22,13 @@ const AcceptedAppointment = () => {
     fetchAccAppointment();
   }, []);
 
+  const getapDate = (date) => {
+    const apDate = new Date(date);
+    let stringDate =
+      apDate.getFullYear() + "-" + apDate.getMonth() + "-" + apDate.getDate();
+    return stringDate;
+  };
+
   if (!acceptedData) {
     return (
       <View
@@ -54,8 +61,8 @@ const AcceptedAppointment = () => {
               title={item.userId.fullName}
               cardName={"Accepted"}
               time={item.time}
-              date={item.date}
-              contactNo={item.contactNo}
+              date={getapDate(item.date)}
+              contactNo={item.userId.contactNumber}
             />
           ))}
         </View>

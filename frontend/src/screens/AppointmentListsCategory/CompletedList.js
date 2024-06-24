@@ -86,7 +86,7 @@ const CompletedAppointment = () => {
               cardName={"Completed"}
               time={item.time}
               date={getapDate(item.date)}
-              status={item.status}
+              contactNo={item.userId.contactNumber}
             />
           ))}
         </View>
