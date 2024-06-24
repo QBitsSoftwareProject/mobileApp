@@ -23,7 +23,7 @@ const ViewGoalScreen = () => {
   const [resultCompleted, setResultCompleted] = useState([]);
   const [isChange, setIsChange] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [noFound, setNotFound] = useState(false);
+  const [notFound, setNotFound] = useState(false);
 
   const fetchData = async () => {
     try {
@@ -33,6 +33,7 @@ const ViewGoalScreen = () => {
 
       if (selectedTab === 0) {
         result = await getSelectedGoals();
+
         setResultSelected(result);
       } else if (selectedTab === 1) {
         result = await getSuggestedGoals();
@@ -40,6 +41,12 @@ const ViewGoalScreen = () => {
       } else if (selectedTab === 2) {
         result = await getCompletedGoals();
         setResultCompleted(result);
+      }
+
+      if (result.length == 0) {
+        setNotFound(true);
+      } else {
+        setNotFound(false);
       }
 
       setIsLoading(false);
@@ -91,7 +98,21 @@ const ViewGoalScreen = () => {
         </View>
       </View>
       <View style={{ flex: 1 }}>
-        {isLoading == true ? (
+        {notFound && (
+          <View
+            style={{
+              alignItems: "center",
+              width: "100%",
+            }}
+          >
+            <Image
+              source={notFoundGif}
+              style={{ width: "60%", height: 250, opacity: 0.3 }}
+            />
+          </View>
+        )}
+
+        {isLoading == true && !notFound ? (
           <View
             style={{
               display: "flex",

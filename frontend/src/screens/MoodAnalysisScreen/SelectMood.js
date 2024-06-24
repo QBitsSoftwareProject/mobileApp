@@ -112,7 +112,7 @@ const MoodAnalysis = () => {
       position: "relative",
       alignContent: "center",
       alignSelf: "center",
-      marginTop: 150,
+      marginTop: 170,
       marginRight: 65,
       justifyContent: "center",
     },
@@ -123,7 +123,7 @@ const MoodAnalysis = () => {
       alignSelf: "center",
     },
     emojiText: {
-      fontSize: 60,
+      fontSize: 55,
     },
     selectemoji: {
       fontSize: 90,
@@ -131,7 +131,7 @@ const MoodAnalysis = () => {
     setMood: {
       justifyContent: "center",
       alignSelf: "center",
-      marginTop: 281,
+      marginTop: 300,
       marginBottom: 48,
       width: 250,
       height: 58,
