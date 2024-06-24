@@ -161,7 +161,7 @@ const styles = StyleSheet.create({
     height: "auto",
     backgroundColor: "white",
     borderRadius: 20,
-
+    elevation: 1,
     alignSelf: "center",
     marginBottom: 20,
   },

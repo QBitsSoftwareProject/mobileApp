@@ -99,6 +99,7 @@ const CommentCard = (props) => {
             justifyContent: "center",
             backgroundColor: "#B0B4C0",
             borderRadius: 20,
+            height: "90%",
           }}
         >
           <TouchableOpacity
@@ -140,7 +141,9 @@ const CommentCard = (props) => {
           <View style={styles.content2}>
             <Text style={styles.title}>{props.title}</Text>
             <Text style={styles.date}>{formattedDate}</Text>
-            <Text>{props.content}</Text>
+            <Text style={{ fontSize: 14, fontWeight: "400" }}>
+              {props.content}
+            </Text>
           </View>
 
           {popupMessage != "" && (

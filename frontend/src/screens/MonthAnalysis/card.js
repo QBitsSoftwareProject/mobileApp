@@ -23,32 +23,33 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     width: "100%",
     height: 110,
-    padding: 15,
+    padding: 20,
     backgroundColor: "white",
     borderRadius: 15,
-    alignItems: "center",
-    gap: 5,
+
+    gap: 25,
+    elevation: 1,
   },
   column: {
-    flex: 1,
     alignItems: "center",
   },
   middleColumn: {
-    flex: 2,
-    width: "65%",
+    width: "80%",
   },
   title: {
     fontSize: 18,
-    color: "#101318",
+    fontWeight: "500",
+    color: "#40495B",
   },
   subtitle: {
-    marginTop: 5,
     fontSize: 12,
-    color: "#5C677D",
+    fontWeight: "500",
+    color: "#979DAC",
+    width: "90%",
   },
   image: {
-    width: 50,
-    height: 50,
+    width: 60,
+    height: 60,
   },
 });
 
