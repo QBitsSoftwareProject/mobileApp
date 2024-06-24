@@ -18,26 +18,33 @@ import RatingPopUp from "../../components/RatingPopUp/RatingPopUp";
 
 const ViewGoalScreen = () => {
   const [selectedTab, setSelectedTab] = useState(0);
-  const [data, setData] = useState([]);
+  const [resultSelected, setResultSelected] = useState([]);
+  const [resultSuggested, setResultSuggested] = useState([]);
+  const [resultCompleted, setResultCompleted] = useState([]);
   const [isChange, setIsChange] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [noFound, setNotFound] = useState(false);
 
   const fetchData = async () => {
     try {
       setIsLoading(true);
+
       let result = [];
+
       if (selectedTab === 0) {
         result = await getSelectedGoals();
+        setResultSelected(result);
       } else if (selectedTab === 1) {
         result = await getSuggestedGoals();
+        setResultSuggested(result);
       } else if (selectedTab === 2) {
         result = await getCompletedGoals();
+        setResultCompleted(result);
       }
-      setData(result || []);
+
       setIsLoading(false);
     } catch (error) {
       console.log(error);
-      setData([]);
     }
   };
 
@@ -50,6 +57,13 @@ const ViewGoalScreen = () => {
   const onClose = () => {
     setIsChange(!isChange);
   };
+
+  // if(
+  //   (selectedTab == 2 && !resultCompleted) ||
+  //         (selectedTab == 0 && !resultSelected) ||
+  //         (selectedTab == 1 && !resultSuggested) ) {
+  //         setNotFound(true)
+  //         }
 
   return (
     <View
@@ -88,71 +102,87 @@ const ViewGoalScreen = () => {
           >
             <Image source={loadingGif} />
           </View>
-        ) : data && data.length > 0 ? (
+        ) : selectedTab == 0 ? (
           <FlatList
-            data={data}
+            data={resultSelected}
             renderItem={({ item, index }) => (
               <View
                 style={{
                   marginHorizontal: 25,
                   marginTop: 15,
-                  marginBottom: index === data.length - 1 ? 32 : 0,
+                  marginBottom: index === resultSelected.length - 1 ? 32 : 0,
                 }}
               >
-                {selectedTab == 0 ? (
-                  <ViewGoalCard
-                    title={item.title}
-                    subTitle={item.subTitle}
-                    cNumber={item.completeness}
-                    length={
-                      item.objectives.length * item.objectivesState.length
-                    }
-                    goalId={item._id}
-                    change={(id) => setIsChange(!isChange)}
-                  />
-                ) : selectedTab == 1 ? (
-                  <SuggestGoalCard
-                    title={item.title}
-                    subTitle={item.description}
-                    goalId={item._id}
-                    objectives={item.objectivesState}
-                    completness={item.completeness}
-                    // change={(id) => setIsChange(!isChange)}
-                    select={setSelectedTab}
-                  />
-                ) : selectedTab == 2 && item.isRated ? (
+                <ViewGoalCard
+                  title={item.goalId.title}
+                  subTitle={item.goalId.subTitle}
+                  cNumber={item.completeness}
+                  length={
+                    item.goalId.objectives.length *
+                    item.goalId.objectivesState.length
+                  }
+                  goalId={item.goalId._id}
+                  change={(id) => setIsChange(!isChange)}
+                />
+              </View>
+            )}
+          />
+        ) : selectedTab == 1 ? (
+          <FlatList
+            data={resultSuggested}
+            renderItem={({ item, index }) => (
+              <View
+                style={{
+                  marginHorizontal: 25,
+                  marginTop: 15,
+                  marginBottom: index === resultSuggested.length - 1 ? 32 : 0,
+                }}
+              >
+                <SuggestGoalCard
+                  title={item.title}
+                  subTitle={item.description}
+                  goalId={item._id}
+                  objectives={item.objectivesState}
+                  completness={item.completeness}
+                  // change={(id) => setIsChange(!isChange)}
+                  select={setSelectedTab}
+                />
+              </View>
+            )}
+          />
+        ) : selectedTab == 2 ? (
+          <FlatList
+            data={resultCompleted}
+            renderItem={({ item, index }) => (
+              <View
+                style={{
+                  marginHorizontal: 25,
+                  marginTop: 15,
+                  marginBottom: index === resultCompleted.length - 1 ? 32 : 0,
+                }}
+              >
+                {item.isRated ? (
                   <HistoryGoalCard
-                    title={item.title}
+                    title={item.goalId.title}
                     cNumber={item.completeness}
                     length={
-                      item.objectives.length * item.objectivesState.length
+                      item.goalId.objectives.length *
+                      item.objectivesState.length
                     }
                     dueDate={item.dueDate}
                   />
-                ) : selectedTab == 2 && !item.isRated ? (
+                ) : (
                   <RatingPopUp
-                    message={"How satisfy you are?"}
-                    goalId={item._id}
                     onClose={onClose}
+                    message={"How satisfied are you with your progress on, "}
+                    goalId={item.goalId._id}
+                    title={item.goalId.title}
                   />
-                ) : null}
+                )}
               </View>
             )}
-            keyExtractor={(item) => item._id}
           />
-        ) : (
-          <View
-            style={{
-              alignItems: "center",
-              width: "100%",
-            }}
-          >
-            <Image
-              source={notFoundGif}
-              style={{ width: "60%", height: 250, opacity: 0.3 }}
-            />
-          </View>
-        )}
+        ) : null}
       </View>
     </View>
   );

@@ -38,17 +38,21 @@ export const getSelectedGoals = async () => {
 
     return response.data;
   } catch (error) {
-    console.log(error);
+    console.log(error.response.data);
     throw new Error("Error during request setup");
   }
 };
 
-export const addAGoal = async (goal) => {
+export const addAGoal = async (goalId) => {
   try {
     const token = await AsyncStorage.getItem("authToken");
-    const response = await axios.post(URL + "/add-goal", goal, {
-      headers: { authtoken: token },
-    });
+    const response = await axios.post(
+      URL + "/add-goal",
+      { goalId },
+      {
+        headers: { authtoken: token },
+      }
+    );
     // console.log(response);
     // return response;
   } catch (error) {
@@ -110,5 +114,20 @@ export const updateAGoal = async (goalId, data) => {
   } catch (error) {
     console.log(error);
     throw new Error("Error during request setup");
+  }
+};
+
+export const userGoalRating = async (goalId) => {
+  try {
+    const token = await AsyncStorage.getItem("authToken");
+    const response = await axios.post(
+      URL + "/goal-rating",
+      { goalId },
+      {
+        headers: { authtoken: token },
+      }
+    );
+  } catch (error) {
+    throw new Error(error.response.data);
   }
 };

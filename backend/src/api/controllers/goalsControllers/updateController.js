@@ -9,7 +9,7 @@ exports.updateGoal = async (req, res) => {
       description,
       objectives,
       completness,
-      length,
+
       objectivesState,
       duration,
       category,
@@ -44,7 +44,7 @@ exports.updateGoal = async (req, res) => {
       description,
       objectives,
       completness,
-      length,
+
       objectivesState,
       duration,
       category,

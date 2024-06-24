@@ -15,7 +15,7 @@ exports.objectiveStateUpdate = async (req, res) => {
 
     // Find the relevant goal index based on goalId
     const goalIndex = getUser.selectedGoals.findIndex(
-      (goal) => goal.goalId === goalId
+      (goal) => goal.goalId == goalId
     );
 
     // If goal is not found, return an error response

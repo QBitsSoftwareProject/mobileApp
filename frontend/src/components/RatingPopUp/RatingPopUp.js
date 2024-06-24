@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import { StyleSheet, View, Text, Modal, TouchableOpacity } from "react-native";
-import { RadioButton } from "react-native-paper";
 import { SplitButton } from "../../screens/FeedbackScreen/ProgressBar";
 import { updateAUser } from "../../services/userServices/userService";
-import { updateAGoal } from "../../services/goalsService/goalsService";
+import {
+  updateAGoal,
+  userGoalRating,
+} from "../../services/goalsService/goalsService";
 
-const RatingPopUp = ({ message, onClose, goalId }) => {
+const RatingPopUp = ({ message, onClose, goalId, title }) => {
   const [select, setSelect] = useState();
   const [rateValue, setRateValue] = useState(0);
 
@@ -15,6 +17,9 @@ const RatingPopUp = ({ message, onClose, goalId }) => {
         currentRating: rateValue,
         ratingCount: 1,
       });
+
+      //update user rating state
+      await userGoalRating(goalId);
       onClose();
     } catch (error) {
       console.log(error);
@@ -26,16 +31,17 @@ const RatingPopUp = ({ message, onClose, goalId }) => {
       <View style={styles.modalBackground}>
         <View style={styles.modalContainer1}>
           <Text style={styles.messageText}>{message}</Text>
+          <Text
+            style={{ fontWeight: "500", textAlign: "center", fontSize: 20 }}
+          >
+            {title}
+          </Text>
 
           <View style={styles.options}>
             <SplitButton rateFunction={setRateValue} />
           </View>
 
           <View style={styles.modalContainer2}>
-            <TouchableOpacity onPress={onClose} style={styles.popupButton}>
-              <Text style={styles.popupButtonText}>Cancel</Text>
-            </TouchableOpacity>
-
             <TouchableOpacity
               onPress={handleSaveButtonPress}
               style={styles.popupButton}
@@ -63,7 +69,7 @@ const styles = StyleSheet.create({
     width: "90%",
   },
   messageText: {
-    fontSize: 20,
+    fontSize: 16,
     fontWeight: "400",
     color: "#40495B",
     textAlign: "center",
@@ -72,7 +78,7 @@ const styles = StyleSheet.create({
 
   modalContainer2: {
     flexDirection: "row",
-    justifyContent: "space-between",
+    justifyContent: "center",
   },
   popupButton: {
     width: 100,

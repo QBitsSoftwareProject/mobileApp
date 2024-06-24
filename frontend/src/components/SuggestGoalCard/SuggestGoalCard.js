@@ -5,26 +5,8 @@ import { useNavigation } from "@react-navigation/native";
 import { updateAUser } from "../../services/userServices/userService";
 import { addAGoal } from "../../services/goalsService/goalsService";
 
-const SuggestGoalCard = ({
-  title,
-  subTitle,
-  goalId,
-  objectives,
-
-  select,
-}) => {
+const SuggestGoalCard = ({ title, subTitle, goalId, select }) => {
   const navigation = useNavigation();
-
-  const date = new Date();
-
-  const updatedData = {
-    goalId: goalId,
-    objectivesState: objectives,
-    completeness: 0,
-    isComplete: false,
-    selectedDate: date,
-    isRated: false,
-  };
 
   const handlePress = (goalId) => {
     navigation.navigate("InsideGoalsScreen", { goalId, tab: "suggestGoal" });
@@ -32,7 +14,7 @@ const SuggestGoalCard = ({
 
   const handleAdd = async () => {
     try {
-      await addAGoal({ selectedGoals: updatedData });
+      await addAGoal(goalId);
       select(0);
     } catch (error) {
       console.log(error);
