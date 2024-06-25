@@ -13,18 +13,21 @@ const RegularButton = (props) => {
 
 const styles = StyleSheet.create({
   button: {
-    width: "100%",
+    width: 250,
     height: 50,
+    borderWidth: 1,
+    borderColor: "#4A90BF",
     backgroundColor: "#4A90BF",
     borderRadius: 20,
     marginVertical: 15,
     alignItems: "center",
     justifyContent: "center",
+    alignSelf: "center",
   },
   buttonText: {
-    color: "#fff",
+    color: "white",
     fontSize: 16,
-    fontWeight: "600",
+    fontWeight: "400",
   },
 });
 

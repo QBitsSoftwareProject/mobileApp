@@ -22,7 +22,7 @@ exports.createRegularUser = async (req, res) => {
     const newUser = await regularUser.create({
       fullName,
       userName,
-      email,
+      email: email.toLowerCase(),
       password: encryptedPwd,
       contactNumber,
       address,

@@ -5,6 +5,8 @@ import {
   ImageBackground,
   TouchableOpacity,
   Image,
+  ScrollView,
+  Dimensions,
 } from "react-native";
 import React, { useEffect, useState } from "react";
 import styles from "./styles";
@@ -21,6 +23,8 @@ const WelcomeScreen = ({ route }) => {
   const navigation = useNavigation();
   const [data, setData] = useState(null);
   const [questionData, setQuestionData] = useState(null);
+
+  const screenHeight = Dimensions.get("window").height;
 
   useEffect(() => {
     fetchData();
@@ -77,35 +81,43 @@ const WelcomeScreen = ({ route }) => {
             <Image source={require("../../../assets/images/BackWhite.png")} />
           </TouchableOpacity>
 
-          <Text style={styles.headertxt}>Welcome</Text>
+          <View style={{ height: screenHeight - 110 }}>
+            <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
+              <Text style={styles.headertxt}>Welcome</Text>
 
-          <Text style={styles.daytxt}>Day {data.motivation.day}</Text>
+              <Text style={styles.daytxt}>Day {data.motivation.day}</Text>
 
-          <Text style={styles.greetingtxt}>
-            Good {getTime()} {data.userName}!{" "}
-          </Text>
-          <Text style={styles.descriptiontxt}>
-            {data.motivation.description}
-          </Text>
+              <Text style={styles.greetingtxt}>
+                Good {getTime()} {data.userName}!{" "}
+              </Text>
+              <Text style={styles.descriptiontxt}>
+                {data.motivation.description}
+              </Text>
 
-          <View
-            style={{ flex: 1, flexDirection: "column", alignItems: "center" }}
-          >
-            <TouchableOpacity style={styles.button} onPress={presshandler}>
               <View
                 style={{
                   flex: 1,
-                  flexDirection: "row",
-                  justifyContent: "center",
+                  flexDirection: "column",
+                  alignItems: "center",
                 }}
               >
-                <Text style={styles.buttontxt}>Next</Text>
+                <TouchableOpacity style={styles.button} onPress={presshandler}>
+                  <View
+                    style={{
+                      flex: 1,
+                      flexDirection: "row",
+                      justifyContent: "center",
+                    }}
+                  >
+                    <Text style={styles.buttontxt}>Next</Text>
+                  </View>
+                  <Image
+                    source={require("../../../assets/images/right-arrow.png")}
+                    style={styles.icon}
+                  />
+                </TouchableOpacity>
               </View>
-              <Image
-                source={require("../../../assets/images/right-arrow.png")}
-                style={styles.icon}
-              />
-            </TouchableOpacity>
+            </ScrollView>
           </View>
         </SafeAreaView>
       </ImageBackground>

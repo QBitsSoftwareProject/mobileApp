@@ -31,12 +31,12 @@ const DisplayResultScreen = () => {
 
     
     useEffect ( () => {
-      if(val !== null){
+      
       fetchMark();
-      }
-    },[val])    
+      
+    },[lastMark])    
         
-
+  
         let level;
 
         if(lastMark >= 0 && lastMark < 15){
@@ -80,24 +80,27 @@ const DisplayResultScreen = () => {
        };
 
        // get last stress level of the user
+
+
        const fetchMark = async () => {
          
         try {
           
           const response = await fetchMarkById();
           const userData = response 
+          
       
-          if (userData.length > 0) {
+          if (response.length >= 0) {
             const mostRecentMark = userData[userData.length - 1].mark;
-            console.log('Most Recent Mark:', mostRecentMark);
+            
             setLastMark(mostRecentMark);
-            setVal(1);
+            setVal(1); 
           } else {
-            console.log('No user data found.');
+            console.log('No user data found.'); 
             
           }
         } catch (err) {
-          console.log('Error fetching mark:', err);
+          console.log('Error fetching mark:', err); 
         }
       }; 
 
@@ -115,9 +118,9 @@ const DisplayResultScreen = () => {
     <View>
     <View>
       <HeaderSub headLine = 'Result' subHeadLine = 'understand and manage your stress better.' back = 'HomeScreen'/>
-    </View>
+    </View> 
 
-    <CustomButton  suggessionBtnFunction ={suggessionBtnFunction}></CustomButton>
+    {/* <CustomButton  suggessionBtnFunction ={suggessionBtnFunction}></CustomButton> */}
 
     <ScrollView contentContainerStyle={{ flexGrow: 1, paddingBottom: 500 }}>
 
@@ -144,22 +147,16 @@ const DisplayResultScreen = () => {
       </Text>
 
     <View style = {styles.container}>
-      {lastMark ? (
       <Text style = {styles.text}>
       {lastMark}
       </Text>
-      ) : (
-        <Text style = {{fontSize:11}}>
-      Not Attempt
-      </Text>
-      )}
     </View>
 
-    {lastMark && (
+    
       <Text style = {styles.textStressLvl2}>
       You have {level} level of stress
       </Text>
-      ) }
+      
     
 
    

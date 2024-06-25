@@ -110,7 +110,7 @@ export const EditJournal = ({ navigation, route }) => {
 
       <ScrollView height={470}>
         <SafeAreaView style={styles.container}>
-          <Text style={styles.Text}>Feeling with...</Text>
+          <Text style={styles.Text}>Feeling with</Text>
 
           <EmojiPicker onEmojiPress={handleEmojiPress} value={emoji} />
 

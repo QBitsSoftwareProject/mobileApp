@@ -3,13 +3,31 @@ const taskModel = require("../../models/tasksModel/taskModel");
 exports.updateTask = async (req, res) => {
   try {
     // Destructuring the request body to extract user details
-    const { headText, subText, iconUrl, steps, duration, day } = req.body;
+    const {
+      headText,
+      subText,
+      iconUrl,
+      steps,
+      duration,
+      day,
+      feature,
+      taskNumber,
+    } = req.body;
 
     // Extracting the Task ID from request parameters
     const { id } = req.params;
 
     // Creating an object with updated Task details
-    const updateTask = { headText, subText, iconUrl, steps, duration, day };
+    const updateTask = {
+      headText,
+      subText,
+      iconUrl,
+      steps,
+      duration,
+      day,
+      feature,
+      taskNumber,
+    };
 
     // Finding and updating the Task by ID
     await taskModel.findByIdAndUpdate(id, updateTask);

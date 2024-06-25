@@ -1,87 +1,102 @@
-import { View, Text, Image, Dimensions, TouchableOpacity } from 'react-native'
-import React, { useState, useEffect } from 'react'
-import { LinearGradient } from 'expo-linear-gradient'
-import styles from './styles'
-import Swiper from 'react-native-swiper'
-import { useNavigation } from '@react-navigation/native'
+import { View, Text, Image, Dimensions, TouchableOpacity } from "react-native";
+import React, { useState, useEffect } from "react";
+import { LinearGradient } from "expo-linear-gradient";
+import styles from "./styles";
+import Swiper from "react-native-swiper";
+import { useNavigation } from "@react-navigation/native";
 
 // Array of quotes to display in the Swiper component
 const quotes = [
-    "Remember, your mental health matters take a moment to breathe, reflect, and prioritize your inner peace.",
-    "In the journey of life, your mental well-being is the compass. Take a moment to recalibrate, reflect, and cherish your inner peace.",
-    "Welcome to a space where your mental health takes center stage. Breathe deeply, reflect mindfully, and let tranquility guide your path.",
-]
+  "Remember, your mental health matters take a moment to breathe, reflect, and prioritize your inner peace.",
+  "In the journey of life, your mental well-being is the compass. Take a moment to recalibrate, reflect, and cherish your inner peace.",
+  "Welcome to a space where your mental health takes center stage. Breathe deeply, reflect mindfully, and let tranquility guide your path.",
+];
 
 const WelcomeScreen = () => {
-    // Calculate frame dimensions based on screen width and height
-    const frameWidth = Dimensions.get("window").width * 0.8
-    const frameHeight = Dimensions.get("window").height * 0.8
+  // Calculate frame dimensions based on screen width and height
+  const frameWidth = Dimensions.get("window").width * 0.8;
+  const frameHeight = Dimensions.get("window").height * 0.8;
 
-    const navigation = useNavigation();
-    const [activeIndex, setActiveIndex] = useState(0); 
+  const navigation = useNavigation();
+  const [activeIndex, setActiveIndex] = useState(0);
 
-    // useEffect(() => {
-        
-    //     const intervalId = setInterval(() => {
-    //         setActiveIndex((prevIndex) => (prevIndex + 1) % quotes.length);
-    //     }, 2000); 
+  // useEffect(() => {
 
-        
-    //     return () => clearInterval(intervalId);
-    // }, []);
+  //     const intervalId = setInterval(() => {
+  //         setActiveIndex((prevIndex) => (prevIndex + 1) % quotes.length);
+  //     }, 2000);
 
-    const handleLogin = () => {
-        navigation.navigate("LoginScreen");
-    }
+  //     return () => clearInterval(intervalId);
+  // }, []);
 
-    const handleGuest = () => {
-        navigation.navigate('TabBar')
-    }
+  const handleLogin = () => {
+    navigation.navigate("LoginScreen");
+  };
 
-    const handleSingUp = () => {
-        navigation.navigate('SelectionScreen')
-    }
+  const handleGuest = () => {
+    navigation.navigate("TabBar");
+  };
 
-    return (
-        <LinearGradient colors={['#49B1F7', '#00453E']} style={{ flex: 1 }}>
-            <Image source={require('../../assets/images/bgSquare.png')} style={styles.bgImage} />
+  const handleSingUp = () => {
+    navigation.navigate("SelectionScreen");
+  };
 
-            <View style={styles.container}>
-                <View style={[styles.logoFrame, { height: frameHeight, width: frameWidth }]}>
-                    <Text style={styles.logoText}>LOGO</Text>
-                </View>
+  return (
+    <LinearGradient colors={["#49B1F7", "#00453E"]} style={{ flex: 1 }}>
+      <Image
+        source={require("../../assets/images/bgSquare.png")}
+        style={styles.bgImage}
+      />
 
-                <Text style={styles.headText}>Make a better mindset</Text>
+      <View style={styles.container}>
+        <View
+          style={[styles.logoFrame, { height: frameHeight, width: frameWidth }]}
+        >
+          <Text style={styles.logoText}>LOGO</Text>
+        </View>
 
-                <View style={{ height: 250 }}>
-                    <Swiper style={styles.wrapper} showsButtons={false} paginationStyle={styles.pagination} dotColor='white' index={activeIndex}>
-                        {quotes.map((quote, index) => (
-                            <View key={index} style={styles.slideBox}>
-                                <Text style={styles.quoteText}>{quote}</Text>
-                            </View>
-                        ))}
-                    </Swiper>
-                </View>
+        <Text style={styles.headText}>Make a better mindset</Text>
 
-                <View style={styles.btnBox}>
-                    <TouchableOpacity style={[styles.btn, { backgroundColor: '#45B4FF' }]} onPress={handleSingUp}>
-                        <Text style={styles.btnText}>Sign Up</Text>
-                    </TouchableOpacity>
+        <View style={{ height: 250 }}>
+          <Swiper
+            style={styles.wrapper}
+            showsButtons={false}
+            paginationStyle={styles.pagination}
+            dotColor="white"
+            index={activeIndex}
+          >
+            {quotes.map((quote, index) => (
+              <View key={index} style={styles.slideBox}>
+                <Text style={styles.quoteText}>{quote}</Text>
+              </View>
+            ))}
+          </Swiper>
+        </View>
 
-                    <TouchableOpacity style={[styles.btn, { backgroundColor: '#4ABFB4' }]} onPress={handleLogin}>
-                        <Text style={styles.btnText}>Login</Text>
-                    </TouchableOpacity>
-                </View>
+        <View style={styles.btnBox}>
+          <TouchableOpacity
+            style={[styles.btn, { backgroundColor: "#45B4FF" }]}
+            onPress={handleSingUp}
+          >
+            <Text style={styles.btnText}>Sign Up</Text>
+          </TouchableOpacity>
 
-                <TouchableOpacity onPress={handleGuest}>
-                    <Text style={styles.guestText}>Use as a guest</Text>
-                </TouchableOpacity>
+          <TouchableOpacity
+            style={[styles.btn, { backgroundColor: "#4ABFB4" }]}
+            onPress={handleLogin}
+          >
+            <Text style={styles.btnText}>Login</Text>
+          </TouchableOpacity>
+        </View>
 
-                <Text style={styles.bottomText}>Please use an earphone</Text>
+        <TouchableOpacity onPress={handleGuest}>
+          <Text style={styles.guestText}>Use as a guest</Text>
+        </TouchableOpacity>
 
-            </View>
-        </LinearGradient>
-    )
-}
+        <Text style={styles.bottomText}>Please use an earphone</Text>
+      </View>
+    </LinearGradient>
+  );
+};
 
-export default WelcomeScreen
+export default WelcomeScreen;

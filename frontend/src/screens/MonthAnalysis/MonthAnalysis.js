@@ -38,7 +38,7 @@ const MonthAnalysis = () => {
         back="HomeScreen"
       />
 
-      <View style={{ paddingLeft: 24, paddingRight: 24, paddingTop: 15 }}>
+      <View style={{ paddingLeft: 24, paddingRight: 24, paddingTop: 32 }}>
         <Card
           imageSource={require("../../assets/images/analysisMood/Moood.png")}
           title="Input Your Mood 😍"

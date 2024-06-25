@@ -66,7 +66,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 25,
     lineHeight: 20,
     fontSize: 14,
-    fontWeight: "200",
+    fontWeight: "400",
     flex: 1,
     marginRight: 25,
   },

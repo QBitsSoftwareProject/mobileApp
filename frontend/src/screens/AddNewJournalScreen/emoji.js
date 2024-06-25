@@ -255,7 +255,7 @@ const styles = StyleSheet.create({
   container: {
     justifyContent: "center",
     alignItems: "center",
-    marginBottom: 15,
+    marginBottom: 32,
   },
   scrollViewContent: {
     flexDirection: "row",
@@ -271,6 +271,6 @@ const styles = StyleSheet.create({
     borderColor: "#5296C5",
   },
   emoji: {
-    fontSize: 40,
+    fontSize: 30,
   },
 });

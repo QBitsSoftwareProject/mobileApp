@@ -21,7 +21,7 @@ function auth(req, res, next) {
     next();
   } catch (err) {
     // If token verification fails, sending a 401 Unauthorized status with an error message
-    res.status(401).send({ messege: "Invalid Token" });
+    res.status(401).send("Invalid Token");
   }
 }
 

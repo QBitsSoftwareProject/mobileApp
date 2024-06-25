@@ -1,87 +1,115 @@
-import React from "react";
-import { View, Text, StyleSheet, ScrollView, Dimensions } from "react-native";
+import React, { useEffect, useState } from "react";
+import { View, Text, StyleSheet, ScrollView } from "react-native";
 import PostCard from "../../components/CFCard/PostCard";
 import ProfileCover from "../../components/ComForumCover/ComForumCover";
-import { useNavigation } from "@react-navigation/native";
-import ButtonGroup from "../../components/Button/ButtonGroup";
-
-// Mock data for posts
-const postList = [
-  {
-    id: 1,
-    image: require("../../assets/images/PostCardImages/manprofile.jpg"),
-    title: "Chethiya Bandara",
-    sub: "public  10 min ago",
-    description:
-      "“You don't have to see the whole staircase, just take the first step.” – Martin Luther King.",
-    Postimage: require("../../assets/images/PostCardImages/post3image.jpg"),
-  },
-  {
-    id: 2,
-    image: require("../../assets/images/PostCardImages/manprofile.jpg"),
-    title: "Piyumi Amarasinghe",
-    sub: "public  22 min ago",
-    description:
-      "“Success usually comes to those who are too busy looking for it.” — Henry David Thoreau",
-    Postimage: null,
-  },
-  {
-    id: 3,
-    image: require("../../assets/images/PostCardImages/manprofile.jpg"),
-    title: "Chethiya Bandara",
-    sub: "public  1 hour ago",
-    description:
-      "“You don't have to see the whole staircase, just take the first step.” – Martin Luther King.",
-    Postimage: require("../../assets/images/PostCardImages/post4image.jpg"),
-  },
-];
+import { getProfilePost } from "../../services/postServices/postServices";
+import { getAUser, getUserById } from "../../services/userServices/userService";
+import {
+  useFocusEffect,
+  useNavigation,
+  useRoute,
+} from "@react-navigation/native";
 
 const ProfileScreen = () => {
-  const profilePicture = require("../../assets/images/PostCardImages/manprofile.jpg");
-  const screenHeight = Dimensions.get("window").height - 275;
-
   const navigation = useNavigation();
+  const route = useRoute();
+  const [postList, setPostList] = useState();
+  const [userData, setUserData] = useState();
+  const [refresh, setRefresh] = useState(false);
+
+  const fetchData = async () => {
+    try {
+      //getUser
+      let user;
+      if (!route.params) {
+        user = await getAUser();
+      } else {
+        user = await getUserById(route.params.userId);
+      }
+      setUserData(user);
+
+      //getPost
+      const res = await getProfilePost(user._id);
+      setPostList(res);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useFocusEffect(
+    React.useCallback(() => {
+      if (route.params?.refresh) {
+        fetchData();
+        navigation.setParams({ refresh: false }); // Reset the refresh param
+      }
+    }, [route.params?.refresh])
+  );
+
+  useEffect(() => {
+    fetchData();
+  }, [refresh]);
+
+  const onUpdatePost = () => {
+    fetchData();
+  };
+
+  const onDeletePost = (postId) => {
+    setPostList((prevPostList) =>
+      prevPostList.filter((post) => post._id !== postId)
+    );
+  };
+
+  if (!postList || !userData) {
+    return;
+  }
 
   return (
     <View style={styles.contains}>
-      {/* <HeaderSub proPic={profilePicture} /> */}
-      <ProfileCover proPic={profilePicture} />
-      <View style={{ height: screenHeight, paddingHorizontal: 25 }}>
-        <View style={styles.contains2}>
-          <Text style={styles.header}>Thishakya Perera</Text>
-          <Text style={styles.des}>
-            If people like me, it’s great. If they don’t, it’s great. I like
-            myself. It’s the only thing that matters.
-          </Text>
-        </View>
+      <ScrollView>
+        <ProfileCover
+          coverImage={{ uri: userData.coverImage }}
+          proPic={{ uri: userData.proPic }}
+          refreshState={refresh}
+          isRefresh={setRefresh}
+        />
+        <View
+          style={{
+            paddingHorizontal: 25,
+            paddingTop: 15,
+          }}
+        >
+          <View style={styles.contains2}>
+            <Text style={styles.header}>{userData.userName}</Text>
+            <Text style={styles.subHeader}>{postList.length} total posts</Text>
+          </View>
 
-        <View style={styles.contains3}>
-          <ButtonGroup />
-        </View>
-
-        <ScrollView ScrollView style={{ height: "100%", marginBottom: 25 }}>
           {/* post cards list*/}
           <View>
             {postList.map((item) => (
               <PostCard
-                key={item.id}
-                image={item.image}
-                title={item.title}
-                sub={item.sub}
+                postId={item._id}
+                key={item._id}
+                cardName={"MyProfileCard"}
+                image={item.userId.proPic}
+                title={item.userId.userName}
+                Date={item.createdAt}
                 description={item.description}
-                Postimage={item.Postimage}
+                postImage={item.image}
+                onDelete={onDeletePost}
+                onUpdate={onUpdatePost}
               />
             ))}
           </View>
-        </ScrollView>
-      </View>
+        </View>
+      </ScrollView>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   contains: {
-    zIndex: 100,
+    flex: 1,
+    paddingBottom: 80,
   },
   image: {
     height: 62.5,
@@ -94,6 +122,13 @@ const styles = StyleSheet.create({
     fontWeight: "500",
     alignSelf: "center",
   },
+  subHeader: {
+    fontSize: 14,
+    color: "#5C677D",
+    fontWeight: "400",
+    textAlign: "center",
+    marginBottom: 10,
+  },
   des: {
     fontSize: 14,
     color: "#5C677D",
@@ -101,12 +136,8 @@ const styles = StyleSheet.create({
   },
   contains2: {
     paddingHorizontal: 5,
-    paddingTop: 30,
-    paddingBottom: 15,
-    gap: 10,
-  },
-  contains3: {
-    paddingVertical: 15,
+    paddingTop: 10,
+    paddingBottom: 25,
   },
 });
 

@@ -1,9 +1,18 @@
 import { StyleSheet, TouchableOpacity, View, Image, Text } from "react-native";
 import React from "react";
+import { useNavigation } from "@react-navigation/native";
 
 const RegularCard = (props) => {
+  const navigation = useNavigation();
+
+  const pressHandler = () => {
+    navigation.navigate("CreatePost", {
+      postCat: props.title,
+    });
+  };
+
   return (
-    <TouchableOpacity style={styles.cardBox} onPress={props.forword}>
+    <TouchableOpacity style={styles.cardBox} onPress={pressHandler}>
       <View>
         <View style={styles.imageframe}>
           <Image source={props.image} style={styles.image} />
@@ -45,13 +54,12 @@ const styles = StyleSheet.create({
     height: 70,
     width: 70,
     borderColor: "white",
-    borderWidth: 4,
+
     borderRadius: 100,
     overflow: "hidden",
-    elevation: 2,
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "white",
+    backgroundColor: "rgba(93,174,229,0.2)",
   },
 
   image: {

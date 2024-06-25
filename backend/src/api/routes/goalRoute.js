@@ -32,11 +32,14 @@ const {
 const {
   getCompletedGoals,
 } = require("../controllers/goalsControllers/getCompletedGoals");
+const {
+  userRatingUpdate,
+} = require("../controllers/goalsControllers/userGoalRatingUpdate");
 
 const router = express.Router();
 
 router.post("/create", createGoal);
-router.put("/update/:id", updateGoal);
+router.put("/update/:id", auth, updateGoal);
 router.delete("/delete/:id", deleteGoal);
 router.get("/get-all", getGoals);
 router.get("/get-goal/:id", getAGoal);
@@ -47,4 +50,6 @@ router.put("/update-completeness", auth, objectiveStateUpdate);
 router.put("/delete-selected-goal", auth, deleteSelectedGoal);
 router.get("/suggested-goals", auth, getSuggestedGoals);
 router.get("/completed-goals", auth, getCompletedGoals);
+router.post("/goal-rating", auth, userRatingUpdate);
+
 module.exports = router;

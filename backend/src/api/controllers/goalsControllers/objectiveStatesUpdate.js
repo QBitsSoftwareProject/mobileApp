@@ -15,7 +15,7 @@ exports.objectiveStateUpdate = async (req, res) => {
 
     // Find the relevant goal index based on goalId
     const goalIndex = getUser.selectedGoals.findIndex(
-      (goal) => goal.goalId === goalId
+      (goal) => goal.goalId == goalId
     );
 
     // If goal is not found, return an error response
@@ -25,7 +25,7 @@ exports.objectiveStateUpdate = async (req, res) => {
 
     // Find the relevant day index based on day
     const dayIndex = getUser.selectedGoals[goalIndex].objectivesState.findIndex(
-      (obj) => obj.day == day
+      (obj) => obj.day == day || obj.week == day
     );
 
     // If day is not found, return an error response

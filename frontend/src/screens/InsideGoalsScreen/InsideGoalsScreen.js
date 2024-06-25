@@ -112,7 +112,9 @@ const InsideGoalsScreen = ({ route }) => {
 
             {selectedGoal.objectivesState.map((item, index) => (
               <View key={index} style={styles.itemComponent}>
-                <Text style={styles.dayText}>Day 0{index + 1}</Text>
+                <Text style={styles.dayText}>
+                  {item.day ? "day" : "week"} {index + 1}
+                </Text>
 
                 {goal.objectives.map((obj, num) => (
                   <View key={num} style={styles.objComponent}>

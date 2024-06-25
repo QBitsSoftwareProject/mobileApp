@@ -13,9 +13,11 @@ exports.deleteSelectedGoal = async (req, res) => {
       return res.status(404).json({ message: "User not found" });
     }
 
+    console.log(goalId);
+
     // Find the relevant goal index based on goalId
     const goalIndex = getUser.selectedGoals.findIndex(
-      (goal) => goal.goalId === goalId
+      (goal) => goal.goalId == goalId
     );
 
     // If goal is not found, return an error response
