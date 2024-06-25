@@ -5,6 +5,7 @@ import {
   Dimensions,
   PanResponder,
   Animated,
+  StyleSheet,
 } from "react-native";
 import CFHeaderSub from "../../components/ComForumHeader/CFHeader";
 import PostCard from "../../components/CFCard/PostCard";
@@ -18,12 +19,15 @@ import { getPost } from "../../services/postServices/postServices";
 
 const HomePage = () => {
   const screenHeight = Dimensions.get("window").height - 275;
+  const screenWidth = Dimensions.get("window").width;
 
   const navigation = useNavigation();
   const route = useRoute();
 
   const [postList, setPostList] = useState([]);
-
+  const pan = useState(
+    new Animated.ValueXY({ x: screenWidth - 70, y: screenHeight - 80 })
+  )[0];
   const fetchPostData = async () => {
     try {
       const res = await getPost();
@@ -50,32 +54,43 @@ const HomePage = () => {
     navigation.navigate("PostCategory");
   };
 
-  const pan = useState(new Animated.ValueXY())[0];
-
   const panResponder = useState(
     PanResponder.create({
       onMoveShouldSetPanResponder: () => true,
       onPanResponderGrant: () => {
         pan.setOffset({
           x: pan.x._value,
-          y: pan.y._value,
+          y: 0,
         });
+        pan.setValue({ x: 0, y: 0 });
       },
-      onPanResponderMove: Animated.event([null, { dx: pan.x, dy: pan.y }], {
+      onPanResponderMove: Animated.event([null, { dx: pan.x }], {
         useNativeDriver: false,
       }),
       onPanResponderRelease: () => {
         pan.flattenOffset();
+        // Ensure the button stays within screen bounds
+        if (pan.x._value < 0) {
+          Animated.spring(pan.x, {
+            toValue: 0,
+            useNativeDriver: false,
+          }).start();
+        } else if (pan.x._value > screenWidth - 70) {
+          Animated.spring(pan.x, {
+            toValue: screenWidth - 70,
+            useNativeDriver: false,
+          }).start();
+        }
       },
     })
   )[0];
 
   if (!postList) {
-    return;
+    return null;
   }
 
   return (
-    <View style={{ paddingBottom: 110 }}>
+    <View style={styles.container}>
       <View>
         <CFHeaderSub
           subHeadLine={"Community Home Page"}
@@ -90,7 +105,7 @@ const HomePage = () => {
           paddingTop: 15,
         }}
       >
-        <ScrollView ScrollView style={{ height: "100%", marginBottom: 25 }}>
+        <ScrollView style={{ height: "100%" }}>
           {/* post cards list*/}
           <View style={{ paddingBottom: 70 }}>
             {postList.map((item) => (
@@ -110,13 +125,8 @@ const HomePage = () => {
 
         <Animated.View
           style={[
-            pan.getLayout(),
-            {
-              position: "absolute",
-              bottom: 100,
-              right: 30,
-              zIndex: 10,
-            },
+            { transform: [{ translateX: pan.x }] },
+            styles.floatingButtonContainer,
           ]}
           {...panResponder.panHandlers}
         >
@@ -126,5 +136,20 @@ const HomePage = () => {
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+  floatingButtonContainer: {
+    position: "absolute",
+    bottom: 25,
+    justifyContent: "center",
+    alignItems: "center",
+    width: 60,
+    height: 60,
+    backgroundColor: "red",
+  },
+});
 
 export default HomePage;

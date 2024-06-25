@@ -15,8 +15,7 @@ const FloatingButton = ({ addNew }) => {
 const styles = StyleSheet.create({
   touchableOpacity: {
     position: "absolute",
-    bottom: 40,
-    right: 25,
+    bottom: 70,
   },
   floatingbutton: {
     resizeMode: "contain",

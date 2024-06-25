@@ -222,10 +222,12 @@ const styles = StyleSheet.create({
     opacity: 0.6,
   },
   toucharea: {
-    width: 45,
+    width: 65,
     height: 35,
     alignItems: "center",
     justifyContent: "center",
+    borderWidth: 1,
+    borderColor: "red",
   },
 });
 
