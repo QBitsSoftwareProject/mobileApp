@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { View, Modal, Text, TouchableOpacity } from "react-native";
-import { storage } from "../../config/fireBase";
+import { storage } from "../../config/firebase";
 import { getDownloadURL, uploadBytes, ref } from "firebase/storage";
 import FilePicker from "../../components/GetImages/FilePicker";
 import { updateAUser } from "../../services/userServices/userService";

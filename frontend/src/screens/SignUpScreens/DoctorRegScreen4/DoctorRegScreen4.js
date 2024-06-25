@@ -15,7 +15,7 @@ import CheckBox from "expo-checkbox";
 import FilePicker from "../../../components/GetImages/FilePicker";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { doctorRegistration } from "../../../services/doctorServices/doctorService";
-import { imageDb } from "../../../config/fireBase";
+import { imageDb } from "../../../config/firebase";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import "react-native-get-random-values";
 import { v4 } from "uuid";

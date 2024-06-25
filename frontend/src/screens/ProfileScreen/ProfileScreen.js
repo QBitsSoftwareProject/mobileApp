@@ -15,7 +15,7 @@ import BioEditPopUp from "./BioEditPopUp";
 import React, { useEffect, useContext, useState } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { getAUser, updateAUser } from "../../services/userServices/userService";
-import { imageDb } from "../../config/fireBase";
+import { imageDb } from "../../config/firebase";
 import {
   getDownloadURL,
   ref,
