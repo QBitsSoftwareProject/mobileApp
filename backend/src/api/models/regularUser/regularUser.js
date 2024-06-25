@@ -42,6 +42,41 @@ const userResponseSchema = new schema({
   },
 });
 
+// Subdocument schema for user goals
+const userGoals = new schema({
+  goalId: {
+    type: schema.Types.ObjectId,
+    ref: "Goals",
+    required: true,
+  },
+  isComplete: {
+    type: Boolean,
+    default: false,
+  },
+
+  selectedDate: {
+    type: Date,
+    require: true,
+  },
+
+  dueDate: {
+    type: Date,
+    require: true,
+  },
+  isRated: {
+    type: Boolean,
+    default: false,
+  },
+  completeness: {
+    type: Number,
+    default: 0,
+  },
+  objectivesState: {
+    type: Array,
+    require: true,
+  },
+});
+
 // Defining the schema for regular users
 const regularUserSchema = new schema({
   fullName: {
@@ -99,9 +134,7 @@ const regularUserSchema = new schema({
     required: false,
   },
 
-  selectedGoals: {
-    type: Array,
-  },
+  selectedGoals: [userGoals],
 
   tasks: [userTaskSchema],
 

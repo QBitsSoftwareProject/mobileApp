@@ -11,7 +11,6 @@ const getOrAssignTask = async (userId) => {
   if (!user) throw new Error("User not found");
 
   const currentDate = new Date();
-  // currentDate.setDate(10);
   const taskTakenDate = new Date(user.taskTakenDate);
 
   //if already assigned task to user

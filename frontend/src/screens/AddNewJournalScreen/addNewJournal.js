@@ -134,7 +134,7 @@ export const AddNewJournal = ({ navigation }) => {
 
       <ScrollView height={470}>
         <SafeAreaView style={styles.container}>
-          <Text style={styles.Text}>Feeling with...</Text>
+          <Text style={styles.Text}>Select Your Mood</Text>
 
           <EmojiPicker onEmojiPress={handleEmojiPress} />
 

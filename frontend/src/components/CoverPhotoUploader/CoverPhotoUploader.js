@@ -39,6 +39,7 @@ const CoverPhotoUploader = ({ isVisible, onClose }) => {
 
   const handleComfirmButtonPress = async () => {
     try {
+      onClose();
       const imgResponse = await fireBaseUpload();
 
       await updateAUser({ coverImage: imgResponse });
@@ -82,21 +83,43 @@ const CoverPhotoUploader = ({ isVisible, onClose }) => {
             ></FilePicker>
           </View>
 
-          <TouchableOpacity
-            onPress={handleComfirmButtonPress}
-            style={{
-              alignSelf: "center",
-              backgroundColor: "#4A90BF",
-              width: 150,
-              height: 45,
-              justifyContent: "center",
-              borderRadius: 15,
-            }}
-          >
-            <Text style={{ alignSelf: "center", fontSize: 16, color: "white" }}>
-              Confirm
-            </Text>
-          </TouchableOpacity>
+          {selectedImage ? (
+            <TouchableOpacity
+              onPress={handleComfirmButtonPress}
+              style={{
+                alignSelf: "center",
+                backgroundColor: "#4A90BF",
+                width: 150,
+                height: 45,
+                justifyContent: "center",
+                borderRadius: 15,
+              }}
+            >
+              <Text
+                style={{ alignSelf: "center", fontSize: 16, color: "white" }}
+              >
+                Confirm
+              </Text>
+            </TouchableOpacity>
+          ) : (
+            <TouchableOpacity
+              onPress={handleComfirmButtonPress}
+              style={{
+                alignSelf: "center",
+
+                width: 150,
+                height: 45,
+                justifyContent: "center",
+                borderRadius: 15,
+              }}
+            >
+              <Text
+                style={{ alignSelf: "center", fontSize: 16, color: "#40495B" }}
+              >
+                Cancel
+              </Text>
+            </TouchableOpacity>
+          )}
         </View>
       </View>
     </Modal>

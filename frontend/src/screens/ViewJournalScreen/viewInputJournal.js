@@ -142,7 +142,8 @@ const styles = StyleSheet.create({
     backgroundColor: "#FFFFFF",
     width: 350,
     height: 127,
-    elevation: 2,
+
+    elevation: 1,
     alignSelf: "flex-end",
     borderRadius: 20,
     marginBottom: 15,
@@ -152,9 +153,8 @@ const styles = StyleSheet.create({
     flexDirection: "row",
   },
   journalText: {
-    color: "#101318",
-    fontWeight: "200",
-    lineHeight: 20,
+    fontSize: 14,
+    fontWeight: "400",
     paddingTop: 5,
     padding: 15,
     fontSize: 14,
@@ -163,9 +163,10 @@ const styles = StyleSheet.create({
     flex: 2,
   },
   journalTittle: {
-    color: "#101318",
-    fontWeight: "300",
-    lineHeight: 20,
+    fontSize: 18,
+    fontWeight: "500",
+    color: "#40495B",
+
     paddingTop: 15,
     paddingBottom: 5,
     paddingLeft: 15,
@@ -186,7 +187,8 @@ const styles = StyleSheet.create({
     alignItems: "flex-end",
     alignSelf: "flex-end",
     marginRight: 15,
-    fontWeight: "100",
     fontSize: 10,
+    fontWeight: "400",
+    color: "#5C677D",
   },
 });

@@ -1,5 +1,6 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import HomeScreen from "../../screens/HomeScreen/HomeScreen";
+import LoginStack from "./LoginStack";
 import GoalsStack from "./GoalsStack";
 import TaskStack from "./TaskStack";
 import AppointmentStack from "../routes/AppointmentStack";
@@ -41,6 +42,7 @@ const HomeStack = ({ route }) => {
         <Stack.Screen name="DocHomeStack" component={DocHomeStack} />
       )}
 
+      <Stack.Screen name="LoginStack" component={LoginStack} />
       <Stack.Screen name="GoalsStack" component={GoalsStack} />
       <Stack.Screen name="AppointmentStack" component={AppointmentStack} />
       <Stack.Screen name="TaskStack" component={TaskStack} />

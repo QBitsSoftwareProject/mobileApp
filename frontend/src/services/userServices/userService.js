@@ -21,7 +21,7 @@ export const userLogin = async (email, password) => {
 
     return response.data;
   } catch (err) {
-    console.log(err);
+    console.log(err.response.data);
     throw new Error("Error during request setup");
   }
 };
@@ -53,7 +53,7 @@ export const userRegistration = async (
     // console.log(response)
     return response.data;
   } catch (error) {
-    console.log(error);
+    console.log(error.response.data);
     throw new Error("Error during request setup");
   }
 };
@@ -67,7 +67,7 @@ export const getUser = async () => {
     // console.log(response.data)
     return response.data;
   } catch (error) {
-    console.log(error);
+    console.log(error.response.data);
     throw new Error("Error during request setup");
   }
 };
@@ -78,11 +78,10 @@ export const getAUser = async () => {
     const response = await axios.get(`${URL}/one-user`, {
       headers: { authtoken: token },
     });
-    // console.log(response.data)
+
     return response.data;
-  } catch (error) {
-    console.log(error);
-    throw new Error("Error during request setup");
+  } catch (err) {
+    throw new Error(err.response.status);
   }
 };
 
@@ -94,8 +93,8 @@ export const getUserById = async (userId) => {
     });
 
     return response.data;
-  } catch (error) {
-    console.log(error);
+  } catch (err) {
+    console.log(err.response.data);
     throw new Error("Error during request setup");
   }
 };
@@ -110,7 +109,7 @@ export const updateAUser = async (updates) => {
     // console.log(response);
     // return response;
   } catch (error) {
-    console.log(error);
+    console.log(error.response.data);
     throw new Error("Error during request setup");
   }
 };

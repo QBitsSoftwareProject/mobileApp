@@ -12,11 +12,11 @@ const ProfileCover = (props) => {
   };
 
   const closeMessage = () => {
+    props.isRefresh(!props.refreshState);
     setPopupVisible(false);
   };
 
   const handleEditIconPress = () => {
-    console.log("Edit icon pressed");
     setPopupVisible(true);
   };
 

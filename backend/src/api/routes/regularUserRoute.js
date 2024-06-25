@@ -40,4 +40,7 @@ router.post("/checkExistsUser", checkExistsUser);
 router.post("/login", loginUser);
 router.post("/register", createRegularUser);
 
+//token expiring check
+router.get("/token-check", auth);
+
 module.exports = router;
