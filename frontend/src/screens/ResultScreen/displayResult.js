@@ -88,11 +88,11 @@ const DisplayResultScreen = () => {
           
           const response = await fetchMarkById();
           const userData = response 
-          console.log(userData)
+          
       
           if (response.length >= 0) {
             const mostRecentMark = userData[userData.length - 1].mark;
-            console.log('Most Recent Mark:', mostRecentMark);
+            
             setLastMark(mostRecentMark);
             setVal(1); 
           } else {
