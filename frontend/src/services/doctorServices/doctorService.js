@@ -19,13 +19,13 @@ export const doctorRegistration = async (
   specialization,
   qualification,
   availableDays,
-  availableTimesDay1,
-  availableTimesDay2,
-  availableTimesDay3,
-  availableTimesDay4,
-  availableTimesDay5,
-  availableTimesDay6,
-  availableTimesDay7,
+  monday,
+  tuesday,
+  wednesday,
+  thursday,
+  friday,
+  saturday,
+  sunday,
   proPic,
   bio
 ) => {
@@ -44,13 +44,13 @@ export const doctorRegistration = async (
       specialization,
       qualification,
       availableDays,
-      availableTimesDay1,
-      availableTimesDay2,
-      availableTimesDay3,
-      availableTimesDay4,
-      availableTimesDay5,
-      availableTimesDay6,
-      availableTimesDay7,
+      monday,
+      tuesday,
+      wednesday,
+      thursday,
+      friday,
+      saturday,
+      sunday,
       proPic,
       bio,
     });
@@ -82,7 +82,7 @@ export const getADoctor = async () => {
     const response = await axios.get(`${URL}/one-doctor`, {
       headers: { authtoken: token },
     });
-    // console.log(response.data)
+
     return response.data;
   } catch (error) {
     console.log(error);
@@ -107,8 +107,6 @@ export const viewADoctor = async (doctorId) => {
 export const updateADoctor = async (updates) => {
   try {
     const token = await AsyncStorage.getItem("authToken");
-
-    
 
     const response = await axios.put(`${URL}`, updates, {
       headers: { authtoken: token },

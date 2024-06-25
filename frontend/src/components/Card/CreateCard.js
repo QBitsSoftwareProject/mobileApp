@@ -18,7 +18,7 @@ const CreateCard = (props) => {
             {props.cardName == "AvailableDoc" && (
               <View>
                 <Text style={styles.description}>{props.university}</Text>
-                <Text style={styles.description}>REG NO-{props.regno}</Text>
+                {/* <Text style={styles.description}>REG NO-{props.regno}</Text> */}
                 <Text style={styles.description}>{props.hospital}</Text>
               </View>
             )}
@@ -26,10 +26,10 @@ const CreateCard = (props) => {
             {props.cardName === "AppointmentStatus" && (
               <View>
                 <Text style={styles.description}>
-                  Time:{props.time.from}-{props.time.to}
+                  Time: {props.time.from}-{props.time.to}
                 </Text>
                 <Text style={styles.description}>
-                  Date:{currentDate.getUTCFullYear()}-
+                  Date: {currentDate.getUTCFullYear()}-
                   {currentDate.getUTCMonth()}-{currentDate.getUTCDate()}
                 </Text>
                 <Text
@@ -61,7 +61,7 @@ const styles = StyleSheet.create({
     padding: 20,
     backgroundColor: "white",
     borderRadius: 20,
-    elevation: 1,
+
     flexDirection: "row",
     alignSelf: "center",
     marginBottom: 15,
@@ -77,7 +77,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: "500",
     color: "#40495B",
-    marginBottom: 7,
+    marginBottom: 2,
   },
   description: {
     fontSize: 12,
@@ -92,7 +92,6 @@ const styles = StyleSheet.create({
     borderRadius: 50,
     marginRight: 20,
     overflow: "hidden",
-    elevation: 2,
   },
 
   image: {

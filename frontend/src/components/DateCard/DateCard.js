@@ -29,7 +29,7 @@ const DateCard = (props) => {
   };
 
   return (
-    <ScrollView
+    <View
       style={[
         styles.cardBox,
         { borderRadius: 20, borderWidth: pressDateCard === true ? 1 : 0 },
@@ -42,7 +42,7 @@ const DateCard = (props) => {
         <Text style={styles.date}>{props.day}</Text>
         <Text style={styles.date}>{props.date}</Text>
       </TouchableOpacity>
-    </ScrollView>
+    </View>
   );
 };
 

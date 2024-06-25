@@ -107,7 +107,7 @@ export const updateJournal = async (
 };
 
 //delete journal by id
-export const deleteJournal = async(id) => {
+export const deleteJournal = async (id) => {
   try {
     
     const token = await AsyncStorage.getItem("authToken");
@@ -119,6 +119,6 @@ export const deleteJournal = async(id) => {
     return response.data;
   } catch (error) {
     console.log(error);
-    throw new Error("errr"); 
+    throw new Error("errr");
   }
 };

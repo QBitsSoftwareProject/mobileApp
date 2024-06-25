@@ -21,9 +21,13 @@ import HeaderSub from "../../components/HeaderSub/HeaderSub";
 import axios from "axios";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { addNewJournal } from "../../services/journalService/journalService";
+import { useRoute } from "@react-navigation/native";
+import { updateTaskCompleteness } from "../../services/taskServices/taskservice";
 
 //AddNewJournal function
 export const AddNewJournal = ({ navigation }) => {
+  const route = useRoute();
+
   const [isOverlayVisible, setOverlayVisible] = useState(false); //set state to visible popup
   const [selectedEmojiMarks, setSelectedEmojiMarks] = useState(""); //set marks in selected emoji
   const [tittle, setTittle] = useState("");
@@ -103,6 +107,19 @@ export const AddNewJournal = ({ navigation }) => {
     // } catch (error) {
     //   console.log(error);
     // }
+
+    if (route.params.taskId) {
+      taskUpdate();
+    }
+  };
+
+  //task completenss update
+  const taskUpdate = async () => {
+    try {
+      await updateTaskCompleteness(route.params.taskId);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -117,7 +134,7 @@ export const AddNewJournal = ({ navigation }) => {
 
       <ScrollView height={470}>
         <SafeAreaView style={styles.container}>
-          <Text style={styles.Text}>Feeling with...</Text>
+          <Text style={styles.Text}>Select Your Mood</Text>
 
           <EmojiPicker onEmojiPress={handleEmojiPress} />
 

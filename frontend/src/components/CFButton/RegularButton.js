@@ -1,7 +1,7 @@
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import React from "react";
 
-const TransparentButton = (props) => {
+const RegularButton = (props) => {
   return (
     <TouchableOpacity style={styles.btn} onPress={props.onPress}>
       <Text style={styles.btnText}>{props.name}</Text>
@@ -11,19 +11,21 @@ const TransparentButton = (props) => {
 
 const styles = StyleSheet.create({
   btn: {
-    width: 334,
+    width: 250,
     height: 58,
-    backgroundColor: "#5296C5",
-    borderRadius: 10,
+    borderRadius: 50,
+    backgroundColor: "white",
+    borderWidth: 1,
+    borderColor: "#4A90BF",
     justifyContent: "center",
     alignItems: "center",
     marginTop: 15,
   },
   btnText: {
-    color: "#fff",
+    color: "#40495B",
     fontSize: 16,
     fontWeight: "500",
   },
 });
 
-export default TransparentButton;
+export default RegularButton;

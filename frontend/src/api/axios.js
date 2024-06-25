@@ -1,7 +1,8 @@
 import axios from "axios";
+import { BASE_URI } from "../config/env";
 
 const axiosInstance = axios.create({
-  baseURL: "http://192.168.1.26:3000",
+  baseURL: BASE_URI,
   headers: {
     "Content-Type": "application/json",
   },

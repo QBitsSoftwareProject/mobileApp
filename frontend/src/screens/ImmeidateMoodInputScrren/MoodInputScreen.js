@@ -39,7 +39,6 @@ const MoodInputScreen = () => {
     const windowHeight = windowSize.height;
     setScreenHeight(windowHeight);
 
-    console.log(optionValue);
     setUserId("214224J");
 
     if (optionValue === "happy") {
@@ -65,11 +64,6 @@ const MoodInputScreen = () => {
     } else {
       console.log("wrong value");
     }
-
-    console.log(happy);
-    console.log(sad);
-    console.log(neutral);
-    console.log(worried);
   }, [optionValue]);
 
   const getdata = async () => {
@@ -107,12 +101,18 @@ const MoodInputScreen = () => {
         />
       </TouchableOpacity>
 
-
-      <View style={styles.horivontalBar}></View>
-      <View style={{ height: screenHeight - 282 }}>
-        <ScrollView contentContainerStyle={{ flexGrow: 1, paddingBottom: 100 }}>
+      <View style={{ height: screenHeight - 165 }}>
+        <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
+          <View style={styles.horivontalBar}></View>
           <View style={styles.textArea}>
-            <Text style={styles.textOne}>Hey there!</Text>
+            <Text
+              style={[
+                styles.textOne,
+                { fontSize: 24, textAlign: "center", fontWeight: "500" },
+              ]}
+            >
+              Hey there!
+            </Text>
             <Text style={styles.textOne}>Ready to capture your mood? </Text>
             <Text style={styles.textOne}>
               Pick one emoji that perfectly sums up how you're feeling at this
@@ -120,10 +120,10 @@ const MoodInputScreen = () => {
             </Text>
           </View>
           <View style={styles.imageArea}>
-            <Image
+            {/* <Image
               source={require("../../assets/images/ImmediatMoodInput/moodinput.png")}
               style={styles.mainImage}
-            />
+            /> */}
           </View>
 
           <View style={styles.imojiRow}>

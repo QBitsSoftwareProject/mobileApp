@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import RadioButton from "./optionfetch";
+import loadingGif from "../../assets/animation/loading.gif";
 import { useNavigation } from "@react-navigation/native";
 import DisplayResultScreen from "../ResultScreen/displayResult";
 import TabBar from "../../components/TabBar/TabBar";
@@ -188,20 +189,23 @@ const Question = () => {
 
   return (
     <SafeAreaView>
-      
-        <TouchableOpacity onPress={handleBackButton}>
-          <Image
-            source={require("../../assets/images/backProfile.png")}
-            style={{ width: 53, height: 53, marginLeft: 25 }}
-          />
-        </TouchableOpacity>
-        <ScrollView contentContainerStyle={{ flexGrow: 1, paddingBottom: 100 }}>
+      <TouchableOpacity onPress={handleBackButton}>
+        <Image
+          source={require("../../assets/images/backProfile.png")}
+          style={{ width: 53, height: 53, marginLeft: 25 }}
+        />
+      </TouchableOpacity>
+      <ScrollView contentContainerStyle={{ flexGrow: 1, paddingBottom: 100 }}>
         {isLoading ? (
-          <ActivityIndicator
-            size="large"
-            color="#4ABFB4"
-            style={{ marginTop: 40 }}
-          />
+          <View
+            style={{
+              marginTop: 40,
+              alignItems: "center",
+              height: "100%",
+            }}
+          >
+            <Image source={loadingGif} />
+          </View>
         ) : (
           <>
             <ProgressBar
@@ -215,12 +219,8 @@ const Question = () => {
                 height: 10,
                 borderRadius: 15,
               }}
-
-             
             />
 
-
-            
             {question && question.question && (
               <>
                 <Text style={styles.quesnum}>
@@ -229,11 +229,15 @@ const Question = () => {
                 <Text style={styles.quetext}>{question.question}</Text>
 
                 {isLoadingImage ? (
-                  <ActivityIndicator
-                    size="large"
-                    color="#4ABFB4"
-                    style={{ marginTop: 89, marginBottom: 88 }}
-                  />
+                  <View
+                    style={{
+                      marginTop: 40,
+                      alignItems: "center",
+                      height: "100%",
+                    }}
+                  >
+                    <Image source={loadingGif} />
+                  </View>
                 ) : (
                   <Image
                     key={question.imgurl}
@@ -257,10 +261,8 @@ const Question = () => {
                 selectedMark={mark}
               />
             </View>
-            
           </>
         )}
-        
 
         {submit ? (
           <TouchableOpacity
@@ -289,8 +291,7 @@ const Question = () => {
             </Text>
           </TouchableOpacity>
         )}
-        </ScrollView>
-        
+      </ScrollView>
     </SafeAreaView>
   );
 };

@@ -11,7 +11,7 @@ const images = {
   meditation: require("../../../assets/images/TaskIcons/meditation.png"),
   friends: require("../../../assets/images/TaskIcons/friends.png"),
   journal: require("../../../assets/images/TaskIcons/journal.png"),
-  story: require("../../../assets/images/TaskIcons/story.png"),
+  default: require("../../../assets/images/TaskIcons/7day.png"),
 };
 
 const TaskListScreen = () => {
@@ -49,21 +49,37 @@ const TaskListScreen = () => {
   // Counting remaining incomplete tasks
   let remaining = 0;
   const count = taskList.filter((item) => {
-    if (!item.iscomplete) {
+    if (!item.isComplete) {
       remaining++;
     }
   });
 
   // Sorting the task list with incomplete tasks first
   const sortedTaskList = [...taskList].sort((a, b) => {
-    if (!a.iscomplete && b.iscomplete) {
+    if (!a.isComplete && b.isComplete) {
       return -1;
-    } else if (a.iscomplete && !b.iscomplete) {
+    } else if (a.isComplete && !b.isComplete) {
       return 1;
     } else {
       return 0;
     }
   });
+
+  const setIcon = (type) => {
+    switch (type) {
+      case "journal":
+        return images.journal;
+
+      case "resource":
+        return images.meditation;
+
+      case "community":
+        return images.friends;
+
+      default:
+        return images.default;
+    }
+  };
 
   return (
     <View style={{ flex: 1, paddingBottom: 85 }}>
@@ -102,10 +118,11 @@ const TaskListScreen = () => {
                 <TaskCard
                   headText={item.taskId.headText}
                   subText={item.taskId.subText}
-                  completeness={item.iscomplete}
-                  icon={images.meditation}
+                  completeness={item.isComplete}
+                  icon={setIcon(item.taskId.feature)}
                   taskId={item.taskId._id}
                   index={index + 1}
+                  type={item.taskId.feature}
                 />
               </View>
             )}

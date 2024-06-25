@@ -25,6 +25,7 @@ const MonthlyAnalysisGraph = () => {
         headLine="Monthly Analysis"
         subHeadLine="Track your monthly mood inputs"
       />
+      <Text style={styles.text}>Analysis of your past 30 days mood inputs</Text>
       <ScrollView height={470}>
         <CustomBarChart
           positiveMoods={positiveMoods}
@@ -61,6 +62,12 @@ const styles = StyleSheet.create({
     borderColor: "#599CCA",
     borderWidth: 2,
     marginBottom: 75,
+  },
+  text: {
+    alignSelf: "center",
+    fontSize: 16,
+    marginBottom: 5,
+    fontWeight: "500",
   },
 });
 

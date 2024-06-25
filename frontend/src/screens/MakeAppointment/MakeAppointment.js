@@ -1,5 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, Image, ScrollView, TouchableOpacity } from "react-native";
+import {
+  View,
+  Text,
+  Image,
+  ScrollView,
+  TouchableOpacity,
+  Alert,
+} from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import styles from "./styles";
 import DateCard from "../../components/DateCard/DateCard";
@@ -8,10 +15,7 @@ import PopupMessage from "../../components/Pop-up/Pop-upScreen";
 import RegularButton from "../../components/Button/RegularButton";
 import { useNavigation } from "@react-navigation/native";
 import { createAppointment } from "../../services/appointmentServices/AppointmentServices";
-import {
-  getADoctor,
-  viewADoctor,
-} from "../../services/doctorServices/doctorService";
+import { viewADoctor } from "../../services/doctorServices/doctorService";
 import loardingGIF from "../../assets/animation/loading.gif";
 
 const MakeAppointment = ({ route }) => {
@@ -71,7 +75,11 @@ const MakeAppointment = ({ route }) => {
   const navigation = useNavigation();
 
   const showMessage = (message) => {
-    setPopupMessage(message);
+    if (getTime) {
+      setPopupMessage(message);
+    } else {
+      Alert.alert("Error!", "Date and Time is requied!");
+    }
   };
 
   const confirmMessage = async () => {
@@ -144,14 +152,12 @@ const MakeAppointment = ({ route }) => {
         </View>
 
         <View style={styles.boxcontainer}>
-          <View>
-            <Image
-              source={{
-                uri: doctor.proPic,
-              }}
-              style={styles.Image}
-            />
-          </View>
+          <Image
+            source={{
+              uri: doctor.proPic,
+            }}
+            style={styles.Image}
+          />
 
           <View style={styles.description}>
             <Text style={styles.docDetails}>{doctor.qualification}</Text>
@@ -170,7 +176,7 @@ const MakeAppointment = ({ route }) => {
         <View style={{ marginBottom: 20 }}>
           <Text style={styles.title}>Select Date{"\n"}</Text>
 
-          <View style={{ flexDirection: "row" }}>
+          <ScrollView style={{ flexDirection: "row" }} horizontal>
             {Array.from({ length: 7 }).map((item, index) => (
               <View key={index} style={{ paddingBottom: 10 }}>
                 <DateCard
@@ -189,14 +195,20 @@ const MakeAppointment = ({ route }) => {
                 />
               </View>
             ))}
-          </View>
+          </ScrollView>
         </View>
 
         {/* Time selection */}
         <View style={{ marginBottom: 20 }}>
           <Text style={styles.title}>Available Time Slot</Text>
 
-          <View style={{ flexDirection: "row", flexWrap: "wrap" }}>
+          <View
+            style={{
+              flexDirection: "row",
+              flexWrap: "wrap",
+              justifyContent: "space-between",
+            }}
+          >
             {doctor.availableTimes[pressDay].map((item, index) => (
               <TimeButton
                 key={index}

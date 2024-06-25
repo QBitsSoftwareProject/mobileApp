@@ -22,7 +22,6 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   frontBar: {
-    position: "relative",
     backgroundColor: "#4ABFB4",
     height: 10,
     borderRadius: 15,

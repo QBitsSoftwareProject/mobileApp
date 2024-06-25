@@ -11,7 +11,7 @@ const styles = StyleSheet.create({
   textarea: {
     borderWidth: 0,
     borderRadius: 20,
-    padding: 19,
+    padding: 15,
     height: 100,
     textAlignVertical: "top",
     color: "#979DAC",
@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
   buttonContainer: {
     flex: 1,
     justifyContent: "flex-end",
-    marginBottom: 75,
+    marginBottom: 150,
     marginLeft: 80,
     marginTop: 30,
   },

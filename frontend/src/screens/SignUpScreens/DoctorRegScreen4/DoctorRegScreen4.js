@@ -36,7 +36,7 @@ const DoctorRegScreen4 = ({ route }) => {
     sunday,
   } = route.params;
 
-  // console.log(availableDays);
+  // console.log(monday, tuesday, wednesday, thursday, friday, saturday, sunday);
 
   // State variables for managing screen padding, additional details, and form validation
   const [screenPadding, setScreenPadding] = useState(0);
@@ -120,7 +120,7 @@ const DoctorRegScreen4 = ({ route }) => {
       const licenseSide2 = await AsyncStorage.getItem("licenseSide2");
       const specialization = await AsyncStorage.getItem("specialization");
       const qualification = await AsyncStorage.getItem("qualification");
-
+      console.log(monday);
       const userData = await doctorRegistration(
         fullName,
         userName,

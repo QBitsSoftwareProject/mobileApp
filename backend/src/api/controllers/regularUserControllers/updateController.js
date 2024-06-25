@@ -14,6 +14,7 @@ exports.updateRegularUser = async (req, res) => {
       city,
       country,
       proPic,
+      coverImage,
       selectedGoals,
     } = req.body;
 
@@ -37,6 +38,7 @@ exports.updateRegularUser = async (req, res) => {
       city,
       country,
       proPic,
+      coverImage,
       selectedGoals,
     };
 

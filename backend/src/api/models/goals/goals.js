@@ -24,10 +24,7 @@ const goalSchema = new schema({
     type: Number,
     default: 0,
   },
-  length: {
-    type: Number,
-    required: true,
-  },
+
   objectivesState: {
     type: Array,
     required: true,
@@ -50,15 +47,6 @@ const goalSchema = new schema({
       "inspirationalContent",
     ],
     require: true,
-  },
-
-  isComplete: {
-    type: Boolean,
-    default: false,
-  },
-
-  dueDate: {
-    type: String,
   },
 
   currentRating: {

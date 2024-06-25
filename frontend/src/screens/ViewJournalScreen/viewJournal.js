@@ -8,6 +8,7 @@ import {
   SafeAreaView,
   TextInput,
   Button,
+  Image,
 } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import styles from "./viewStyles";
@@ -15,7 +16,7 @@ import { CustomButtonView } from "./viewSwitch";
 import { Calendar } from "./calender";
 import { SwipableList } from "./viewInputJournal";
 import { FloatingButton } from "./floatingButton";
-import TabBar from "../../components/TabBar/TabBar";
+import loadingGif from "../../assets/animation/loading.gif";
 import HeaderSub from "../../components/HeaderSub/HeaderSub";
 import { createStackNavigator } from "@react-navigation/stack";
 import moment from "moment";
@@ -64,6 +65,7 @@ export const ViewJournal = ({ navigation }) => {
           setJournalArray={setJournalArray}
           setArrayController={setArrayController}
         ></Calendar>
+
         <SwipableList
           editFunction={handleEditButton}
           journalArray={journalArray}

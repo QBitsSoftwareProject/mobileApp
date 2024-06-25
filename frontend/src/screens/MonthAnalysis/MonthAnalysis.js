@@ -40,10 +40,10 @@ const MonthAnalysis = () => {
         back="HomeScreen"
       />
 
-      <View style={{ paddingLeft: 24, paddingRight: 24, paddingTop: 15 }}>
+      <View style={{ paddingLeft: 24, paddingRight: 24, paddingTop: 32 }}>
         <Card
-          imageSource={require("../../assets/images/analysisMood/moodInput.png")}
-          title="Input your Mood 😍"
+          imageSource={require("../../assets/images/analysisMood/Moood.png")}
+          title="Input your Mood"
           subtitle="Let Your Emotions Paint the Canvas of Your Day!"
           onPress={inputYourMoodBtn}
         />
@@ -51,8 +51,8 @@ const MonthAnalysis = () => {
 
       <View style={{ paddingLeft: 24, paddingRight: 24, paddingTop: 15 }}>
         <Card
-          imageSource={require("../../assets/images/analysisMood/weeklyInputs.png")}
-          title="Weekly input moods 📅 "
+          imageSource={require("../../assets/images/TaskIcons/7day.png")}
+          title="Weekly input moods"
           subtitle="Track Your Mood Changes Weekly"
           onPress={weeklyAnalysisGraph}
         />
@@ -60,8 +60,8 @@ const MonthAnalysis = () => {
 
       <View style={{ paddingLeft: 24, paddingRight: 24, paddingTop: 15 }}>
         <Card
-          imageSource={require("../../assets/images/analysisMood/analysis.png")}
-          title="Monthly analysis of your moods 📈 "
+          imageSource={require("../../assets/images/analysisMood/Growth.png")}
+          title="Monthly analysis of your moods "
           subtitle="Track Your Mood Changes monthly"
           onPress={monthlyAnalysisGraph}
         />

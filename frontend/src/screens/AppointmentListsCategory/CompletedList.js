@@ -51,7 +51,12 @@ const CompletedAppointment = () => {
     );
   }
 
-  // console.log(checkPage);
+  const getapDate = (date) => {
+    const apDate = new Date(date);
+    let stringDate =
+      apDate.getFullYear() + "-" + apDate.getMonth() + "-" + apDate.getDate();
+    return stringDate;
+  };
 
   return (
     <View>
@@ -63,8 +68,7 @@ const CompletedAppointment = () => {
             flex: 1,
             flexDirection: "row",
             alignItems: "baseline",
-            justifyContent: "flex-end",
-            gap: 120,
+            justifyContent: "space-between",
           }}
         >
           <Text style={styles.descript2}>Completed List.</Text>
@@ -80,8 +84,8 @@ const CompletedAppointment = () => {
               image={item.userId.proPic}
               title={item.userId.fullName}
               cardName={"Completed"}
-              // time={item.time}
-              date={item.date}
+              time={item.time}
+              date={getapDate(item.date)}
               status={item.status}
             />
           ))}

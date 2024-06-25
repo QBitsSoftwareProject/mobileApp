@@ -15,6 +15,7 @@ import { QuestionButton } from "./Switch";
 import HeaderSub from "../../components/HeaderSub/HeaderSub";
 import axiosInstance from "../../api/axios";
 import { addFeedback } from "../../services/feedbackServices/feedbackServices";
+import Toast from "react-native-toast-message";
 
 const Feedback = () => {
   const [satisfaction, setSatisfaction] = useState("");
@@ -155,7 +156,10 @@ const Feedback = () => {
       );
 
       console.log("Data saved successfully");
-      alert("Thank you for your Feedback!!");
+      Toast.show({
+        type: "success",
+        text1: "Thank you for your Feedback!!",
+      });
       resetForm();
     } catch (error) {
       console.log("Error saving data:", error);

@@ -34,7 +34,7 @@ const DisplayResultScreen = () => {
       
       fetchMark();
       
-    },[])    
+    },[lastMark])    
         
   
         let level;
@@ -118,7 +118,7 @@ const DisplayResultScreen = () => {
     <View>
     <View>
       <HeaderSub headLine = 'Result' subHeadLine = 'understand and manage your stress better.' back = 'HomeScreen'/>
-    </View>
+    </View> 
 
     {/* <CustomButton  suggessionBtnFunction ={suggessionBtnFunction}></CustomButton> */}
 

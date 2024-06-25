@@ -3,7 +3,16 @@ const taskModel = require("../../models/tasksModel/taskModel");
 exports.createTask = async (req, res) => {
   try {
     // Destructuring user data from request body
-    const { headText, subText, iconUrl, steps, duration, day } = req.body;
+    const {
+      headText,
+      subText,
+      iconUrl,
+      steps,
+      duration,
+      day,
+      feature,
+      taskNumber,
+    } = req.body;
 
     // Creating a new task using the task model and the provided data
     const newUser = await taskModel.create({
@@ -13,6 +22,8 @@ exports.createTask = async (req, res) => {
       steps,
       duration,
       day,
+      feature,
+      taskNumber,
     });
 
     // Sending success response with status code 201 and a success message

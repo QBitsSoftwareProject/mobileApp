@@ -11,6 +11,7 @@ const AcceptedAppointment = () => {
   const fetchAccAppointment = async () => {
     try {
       const response = await getDoctorAcceptedAppointments();
+
       setAcceptedData(response);
     } catch (error) {
       console.log(error);
@@ -52,7 +53,7 @@ const AcceptedAppointment = () => {
               image={item.userId.proPic}
               title={item.userId.fullName}
               cardName={"Accepted"}
-              // time={item.time}
+              time={item.time}
               date={item.date}
               contactNo={item.contactNo}
             />
