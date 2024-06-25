@@ -1,7 +1,7 @@
 import { StyleSheet } from "react-native";
 const styles = StyleSheet.create({
   container: {
-    flexDirection: "row",
+    flex: 1,
     backgroundColor: "#F2F3F5",
     alignItems: "center",
     justifyContent: "center",
@@ -77,6 +77,16 @@ const styles = StyleSheet.create({
     lineHeight: 22,
     marginTop: 32,
   },
+  scrollContainer: {
+    flexGrow: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    padding: 16,
+  },
+  innerContainer: {
+    flex: 1,
+    width: "100%",
+  }
 });
 
 export default styles;
