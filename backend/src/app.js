@@ -22,15 +22,13 @@ const articleRouter = require("./api/routes/resourcesRoute/articleRoute.js");
 const authorRouter = require("./api/routes/resourcesRoute/authorRoute.js");
 const app = express();
 
-const methodRouter = require("./api/routes/method.route.js");
-
 app.use(cors());
 app.use(bodyParser.json());
-app.use("/method", methodRouter);
 
 const questionRouter = require("./api/routes/question.route.js");
 const markRouter = require("./api/routes/mark.route.js");
 const currentMood = require("./api/routes/currentMoodInput.js");
+const methodRouter = require("./api/routes/method.route.js");
 
 // app.use("/questions",questionRouter);
 //app.use("/options",optionRouter);
@@ -58,8 +56,8 @@ app.use("/api/v1/comments", commentsRoutes);
 app.use("/api/v1/resources/video", videoRouter); //video-routes
 app.use("/api/v1/resources/audio", audioRouter); //audio-routes
 app.use("/api/v1/resources/article", articleRouter); //article-routes
-
 app.use("/api/v1/resources/author", authorRouter); //author-routes
+app.use("/api/v1/method", methodRouter);
 
 app.listen(PORT, () => {
   console.log(`server is running on port ${PORT}`);
