@@ -14,7 +14,7 @@ import InputField from "../../../components/InputField/InputField";
 import { Picker } from "@react-native-picker/picker";
 import FilePicker from "../../../components/GetImages/FilePicker";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { imageDb } from "../../../config/firebase";
+import { imageDb } from "../../../config/fireBase";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import "react-native-get-random-values";
 import { v4 } from "uuid";

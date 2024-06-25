@@ -92,7 +92,7 @@ export const getUserById = async (userId) => {
     const response = await axios.get(`${URL}/user-by-id/` + userId, {
       headers: { authtoken: token },
     });
-    // console.log(response.data)
+
     return response.data;
   } catch (error) {
     console.log(error);

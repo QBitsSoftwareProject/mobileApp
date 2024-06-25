@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { View, Modal, Text, TouchableOpacity } from "react-native";
-import { storage } from "../../config/firebase";
+import { storage } from "../../config/fireBase";
 import { getDownloadURL, uploadBytes, ref } from "firebase/storage";
 import FilePicker from "../../components/GetImages/FilePicker";
 import { updateAUser } from "../../services/userServices/userService";
@@ -40,7 +40,7 @@ const CoverPhotoUploader = ({ isVisible, onClose }) => {
   const handleComfirmButtonPress = async () => {
     try {
       const imgResponse = await fireBaseUpload();
-      console.log(imgResponse);
+
       await updateAUser({ coverImage: imgResponse });
     } catch (error) {
       console.log(error);

@@ -14,7 +14,7 @@ import { useNavigation } from "@react-navigation/native";
 import InputField from "../../../components/InputField/InputField";
 import CheckBox from "expo-checkbox";
 import { userRegistration } from "../../../services/userServices/userService";
-import { imageDb } from "../../../config/firebase";
+import { imageDb } from "../../../config/fireBase";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { v4 } from "uuid";
 import FilePicker from "../../../components/GetImages/FilePicker";

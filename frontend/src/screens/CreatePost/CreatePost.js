@@ -8,7 +8,7 @@ import PopupMessage from "../../components/CF Pop-up/Pop-up";
 import { useState } from "react";
 import HomePage from "../../screens/CommunityHomePage/HomePage";
 import { createPost } from "../../services/postServices/postServices";
-import { storage } from "../../config/firebase";
+import { storage } from "../../config/fireBase";
 import { getDownloadURL, uploadBytes, ref } from "firebase/storage";
 import { updateTaskCompleteness } from "../../services/taskServices/taskservice";
 

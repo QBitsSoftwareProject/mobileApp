@@ -5,9 +5,10 @@ import {
   TouchableOpacity,
   Text,
   ScrollView,
+  StyleSheet,
 } from "react-native";
-import React, { useCallback, useEffect, useState } from "react";
-import styles from "./styles";
+import React, { useEffect, useState } from "react";
+// import styles from "./styles";
 import { getSearchProfile } from "../../services/postServices/postServices";
 import { useNavigation } from "@react-navigation/native";
 
@@ -20,9 +21,7 @@ const SearchBar = () => {
   const fetchSearchResult = async () => {
     try {
       const res = await getSearchProfile(textInputValue);
-
       setUserList(res);
-      console.log(res);
     } catch (error) {
       console.error("Error searching users:", error);
     }
@@ -74,8 +73,22 @@ const SearchBar = () => {
                 }}
                 style={styles.resultItem}
               >
-                <Image style={styles.image} source={{ uri: item.proPic }} />
-                <Text style={styles.userName}>{item.userName}</Text>
+                <View
+                  style={{
+                    flexDirection: "row",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                  }}
+                >
+                  <View style={styles.imageframe}>
+                    <Image
+                      style={styles.image}
+                      source={{ uri: item.userProPic }}
+                    />
+                  </View>
+
+                  <Text style={styles.userName}>{item.userName}</Text>
+                </View>
               </TouchableOpacity>
             ))}
           </ScrollView>
@@ -84,5 +97,70 @@ const SearchBar = () => {
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  content1: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    width: "100%",
+    paddingVertical: 5,
+  },
+  textinput: {
+    height: 45,
+    fontSize: 18,
+    borderColor: "#E7E7E7",
+    backgroundColor: "white",
+    borderTopLeftRadius: 10,
+    borderBottomLeftRadius: 10,
+    padding: 10,
+  },
+
+  searchBtn: {
+    height: 45,
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "white",
+    padding: 5,
+    borderTopRightRadius: 10,
+    borderBottomRightRadius: 10,
+  },
+
+  searchIcon: {
+    width: 35,
+    height: 35,
+    opacity: 0.8,
+  },
+
+  resultContainer: {
+    width: "100%",
+    backgroundColor: "white",
+    position: "absolute",
+    borderRadius: 15,
+    top: 60,
+    marginBottom: 20,
+  },
+  resultItem: {
+    flexDirection: "row",
+    height: 40,
+    width: "100%",
+    padding: 10,
+    marginVertical: 7.5,
+  },
+  imageframe: {
+    height: 35,
+    width: 35,
+    backgroundColor: "gray",
+    opacity: 0.5,
+    borderRadius: 50,
+    marginRight: 15,
+    overflow: "hidden",
+  },
+  image: {
+    width: "100%",
+    height: "100%",
+    resizeMode: "cover",
+  },
+});
 
 export default SearchBar;
