@@ -12,7 +12,7 @@ import { useNavigation, useRoute } from "@react-navigation/native";
 const HeaderSubAnalysis = (props) => {
   const navigation = useNavigation();
   const backbtn = () => {
-    navigation.navigate("MoodAnaysisScreen");
+    navigation.navigate("MonthAnalysisScreen");
   };
 
   return (
@@ -36,14 +36,14 @@ const styles = StyleSheet.create({
     borderBottomRightRadius: 40,
   },
   backBtn: {
-    marginTop: 50,
+    marginTop: 25,
     marginLeft: 25,
   },
   headlineTxt: {
     fontWeight: "600",
     fontSize: 36,
     color: "#1E1E1E",
-    marginTop: 15,
+    marginTop: 10,
     textAlign: "center",
     paddingLeft: 50,
     paddingRight: 50,

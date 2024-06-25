@@ -4,6 +4,7 @@ import HeaderSub from "../../screens/MoodAnalysisScreen/Header";
 import { useNavigation } from "@react-navigation/native";
 import { addMood } from "../../services/moodAnalysisServices/moodAnalysisServices";
 import { ScrollView } from "react-native-gesture-handler";
+import Toast from "react-native-toast-message";
 
 const MoodAnalysis = () => {
   const navigation = useNavigation();
@@ -68,7 +69,10 @@ const MoodAnalysis = () => {
 
   const handlePressButton = async () => {
     if (!selectedEmoji) {
-      alert("Emoji is required");
+      Toast.show({
+        type: "success",
+        text1: "Select your current mood!",
+      });
       return;
     }
 
@@ -112,8 +116,8 @@ const MoodAnalysis = () => {
       position: "relative",
       alignContent: "center",
       alignSelf: "center",
-      marginTop: 150,
-      marginRight: 65,
+      marginTop: 130,
+      marginRight: 55,
       justifyContent: "center",
     },
     emojiWrapper: {
@@ -123,7 +127,7 @@ const MoodAnalysis = () => {
       alignSelf: "center",
     },
     emojiText: {
-      fontSize: 60,
+      fontSize: 50,
     },
     selectemoji: {
       fontSize: 90,
@@ -131,7 +135,7 @@ const MoodAnalysis = () => {
     setMood: {
       justifyContent: "center",
       alignSelf: "center",
-      marginTop: 281,
+      marginTop: 270,
       marginBottom: 48,
       width: 250,
       height: 58,
@@ -155,7 +159,7 @@ const MoodAnalysis = () => {
   return (
     <View>
       <HeaderSub headLine={"How are you feeling today!"} />
-
+      <View></View>
       <View style={styles.circleContainer}>
         {emojis.map((emoji, index) => {
           const x = radiusX * Math.cos(index * angle);

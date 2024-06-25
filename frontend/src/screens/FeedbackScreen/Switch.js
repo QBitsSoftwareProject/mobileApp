@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import ToggleSwitch from "toggle-switch-react-native";
 
-export const QuestionButton = ({ qtext, btnFunction, reet }) => {
+export const QuestionButton = ({ qtext, btnFunction }) => {
   const [on, setOn] = useState(false);
 
   useEffect(() => {
