@@ -37,7 +37,7 @@ exports.getAPost = async (req, res) => {
 
 exports.getProfilePost = async (req, res) => {
   try {
-    const userId = req.user.user_id;
+    const userId = req.query.userId || req.user.user_id;
 
     const posts = await postSchema
       .find({ userId: userId })
@@ -57,13 +57,13 @@ exports.getProfilePost = async (req, res) => {
 exports.getSearchProfile = async (req, res) => {
   try {
     const userNameText = req.body.userName;
-    console.log(userNameText);
+    // console.log(userNameText);
 
     const searchProfile = await userSchema.find({
       userName: new RegExp(userNameText, "i"),
     });
 
-    console.log(searchProfile);
+    // console.log(searchProfile);
 
     if (!searchProfile) {
       return res.status(404).json({ message: "User not found!" });

@@ -31,8 +31,7 @@ import {
 } from "../../services/doctorServices/doctorService";
 import SchedulePopUp from "./ScheduleUpdatePopUp";
 import { useNavigation } from "@react-navigation/native";
-import Toast from 'react-native-toast-message';
-
+import Toast from "react-native-toast-message";
 
 const ProfileScreen = () => {
   const navigation = useNavigation();
@@ -165,7 +164,7 @@ const ProfileScreen = () => {
     navigation.navigate("HomeScreen");
   };
 
-  const handleUpdateFullName = async (newFullName) => { 
+  const handleUpdateFullName = async (newFullName) => {
     try {
       let updatedUser;
 
@@ -178,14 +177,13 @@ const ProfileScreen = () => {
       }
 
       Toast.show({
-        type: 'success',
-        text1: 'Name updated successfully!',
-        
+        type: "success",
+        text1: "Name updated successfully!",
       });
     } catch (error) {
       Toast.show({
-        type: 'error',
-        text1: 'Name updated unsuccessfully!',
+        type: "error",
+        text1: "Name updated unsuccessfully!",
       });
     }
   };
@@ -201,18 +199,16 @@ const ProfileScreen = () => {
       } else {
         throw new Error("Invalid user role");
       }
-      
-      Toast.show({
-        type: 'success',
-        text1: 'Username updated successfully!',
-      });
-    
 
+      Toast.show({
+        type: "success",
+        text1: "Username updated successfully!",
+      });
     } catch (error) {
       // Handle error
       Toast.show({
-        type: 'error',
-        text1: 'Username updated unsuccessfully!',
+        type: "error",
+        text1: "Username updated unsuccessfully!",
       });
     }
   };
@@ -230,16 +226,15 @@ const ProfileScreen = () => {
       } else {
         throw new Error("Invalid user role");
       }
-      
-      Toast.show({
-        type: 'success',
-        text1: 'Email updated successfully!',
-      });
 
+      Toast.show({
+        type: "success",
+        text1: "Email updated successfully!",
+      });
     } catch (error) {
       Toast.show({
-        type: 'error',
-        text1: 'Email updated unsuccessfully!',
+        type: "error",
+        text1: "Email updated unsuccessfully!",
       });
     }
   };
@@ -256,13 +251,13 @@ const ProfileScreen = () => {
         throw new Error("Invalid user role");
       }
       Toast.show({
-        type: 'success',
-        text1: 'Contact number updated successfully!',
+        type: "success",
+        text1: "Contact number updated successfully!",
       });
     } catch (error) {
       Toast.show({
-        type: 'error',
-        text1: 'Contact number updated unsuccessfully!',
+        type: "error",
+        text1: "Contact number updated unsuccessfully!",
       });
     }
   };
@@ -278,16 +273,15 @@ const ProfileScreen = () => {
       } else {
         throw new Error("Invalid user role");
       }
-      
-      Toast.show({
-        type: 'success',
-        text1: 'Address updated successfully!',
-      });
 
+      Toast.show({
+        type: "success",
+        text1: "Address updated successfully!",
+      });
     } catch (error) {
       Toast.show({
-        type: 'error',
-        text1: 'Address updated unsuccessfully!',
+        type: "error",
+        text1: "Address updated unsuccessfully!",
       });
     }
   };
@@ -304,13 +298,13 @@ const ProfileScreen = () => {
         throw new Error("Invalid user role");
       }
       Toast.show({
-        type: 'success',
-        text1: 'City updated successfully!',
+        type: "success",
+        text1: "City updated successfully!",
       });
     } catch (error) {
       Toast.show({
-        type: 'error',
-        text1: 'City updated unsuccessfully!',
+        type: "error",
+        text1: "City updated unsuccessfully!",
       });
     }
   };
@@ -327,13 +321,13 @@ const ProfileScreen = () => {
         throw new Error("Invalid user role");
       }
       Toast.show({
-        type: 'success',
-        text1: 'Country updated successfully!',
+        type: "success",
+        text1: "Country updated successfully!",
       });
     } catch (error) {
       Toast.show({
-        type: 'error',
-        text1: 'country updated unsuccessfully!',
+        type: "error",
+        text1: "country updated unsuccessfully!",
       });
     }
   };
@@ -350,13 +344,13 @@ const ProfileScreen = () => {
         throw new Error("Invalid user role");
       }
       Toast.show({
-        type: 'success',
-        text1: 'Profile picture updated successfully!',
+        type: "success",
+        text1: "Profile picture updated successfully!",
       });
     } catch (error) {
       Toast.show({
-        type: 'error',
-        text1: 'Profile picture updated unsuccessfully!',
+        type: "error",
+        text1: "Profile picture updated unsuccessfully!",
       });
     }
   };
@@ -365,13 +359,13 @@ const ProfileScreen = () => {
     try {
       const updatedUser = await updateADoctor({ bio: newBio });
       Toast.show({
-        type: 'success',
-        text1: 'Bio updated successfully!',
+        type: "success",
+        text1: "Bio updated successfully!",
       });
     } catch (error) {
       Toast.show({
-        type: 'error',
-        text1: 'Bio updated unsuccessfully!',
+        type: "error",
+        text1: "Bio updated unsuccessfully!",
       });
     }
   };
@@ -382,13 +376,13 @@ const ProfileScreen = () => {
         specialization: newSpecialization,
       });
       Toast.show({
-        type: 'success',
-        text1: 'Specialization updated successfully!',
+        type: "success",
+        text1: "Specialization updated successfully!",
       });
     } catch (error) {
       Toast.show({
-        type: 'error',
-        text1: 'Specialization updated unsuccessfully!',
+        type: "error",
+        text1: "Specialization updated unsuccessfully!",
       });
     }
   };
@@ -398,16 +392,15 @@ const ProfileScreen = () => {
       const updatedUser = await updateADoctor({
         qualification: newQalification,
       });
-      
-      Toast.show({
-        type: 'success',
-        text1: 'Qualification updated successfully!',
-      });
 
+      Toast.show({
+        type: "success",
+        text1: "Qualification updated successfully!",
+      });
     } catch (error) {
       Toast.show({
-        type: 'error',
-        text1: 'Qualification updated unsuccessfully!',
+        type: "error",
+        text1: "Qualification updated unsuccessfully!",
       });
     }
   };
@@ -435,15 +428,15 @@ const ProfileScreen = () => {
       });
 
       Toast.show({
-        type: 'success',
-        text1: 'Schedule updated successfully!',
+        type: "success",
+        text1: "Schedule updated successfully!",
       });
 
       togglePopupSchedule();
     } catch (error) {
       Toast.show({
-        type: 'error',
-        text1: 'Shedule updated unsuccessfully!',
+        type: "error",
+        text1: "Shedule updated unsuccessfully!",
       });
     }
   };
@@ -522,7 +515,6 @@ const ProfileScreen = () => {
   };
 
   const handleProPicUpload = async () => {
-    
     const imageUrl = await firebaseUpload();
     if (imageUrl) {
       console.log("Profile picture uploaded successfully:", imageUrl);

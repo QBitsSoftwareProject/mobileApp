@@ -29,15 +29,15 @@ const DocDropDown = (props) => {
 
 const styles = StyleSheet.create({
   DropDown: {
-    width: 90,
+    width: 95,
     height: 30,
     backgroundColor: "white",
     borderRadius: 20,
     elevation: 1,
     marginHorizontal: 5,
     marginTop: 18,
-    marginBottom: 5,
     alignItems: "center",
+    justifyContent: "center",
   },
   container: {
     flex: 1,

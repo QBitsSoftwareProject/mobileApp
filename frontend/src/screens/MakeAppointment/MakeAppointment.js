@@ -19,7 +19,8 @@ import { viewADoctor } from "../../services/doctorServices/doctorService";
 import loardingGIF from "../../assets/animation/loading.gif";
 
 const MakeAppointment = ({ route }) => {
-  const [numColumns, setNumColumns] = useState(2); // Number of columns for layout
+  const { id } = route.params;
+
   const [timeBtnpress, setTimebtnPress] = useState(false); // State to track time button press
   const [dateBtnPress, setDateBtnPress] = useState(false); // State to track date button press
   const [popupMessage, setPopupMessage] = useState(""); // State for popup message
@@ -27,7 +28,7 @@ const MakeAppointment = ({ route }) => {
   const [getDate, setGetDate] = useState();
   const [doctor, setDoctor] = useState();
   const [pressDay, setPressDay] = useState(6);
-  const { id } = route.params;
+  const [selectedDateIndex, setSelectedDateIndex] = useState(null);
 
   const dateIncrement = (number) => {
     const currentDate = new Date();
@@ -123,7 +124,7 @@ const MakeAppointment = ({ route }) => {
     } else if (item == "Tuesday") {
       setPressDay(1);
     } else if (item == "Wednesday") {
-      setPressDay(0);
+      setPressDay(2);
     } else if (item == "Thursday") {
       setPressDay(3);
     } else if (item == "Friday") {
@@ -184,11 +185,16 @@ const MakeAppointment = ({ route }) => {
                   date={dateIncrement(index)}
                   day={dayIncrement(index)}
                   indexKey={index}
+                  selected={selectedDateIndex === index}
+                  onPress={(idx) => {
+                    setSelectedDateIndex(idx); // Update selected date index
+                    handleDatePress(dayIncrement(index), true); // Ensure only one card is selected at a time
+                  }}
                   press={(value) => {
                     let day = dayIncrement(index);
                     handleDatePress(day, value);
                   }}
-                  change={dateBtnPress}
+                  change={dateBtnPress && selectedDateIndex === index}
                   getDate={(date) => {
                     setAppointmentDate(date);
                   }}

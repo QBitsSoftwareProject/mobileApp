@@ -6,6 +6,8 @@ import {
   TextInput,
   TouchableOpacity,
   ScrollView,
+  KeyboardAvoidingView,
+  Platform
 } from "react-native";
 import { SplitButton } from "./ProgressBar";
 import styles from "./feedbackStyles";
@@ -187,7 +189,14 @@ const Feedback = () => {
         subHeadLine={"Feel free to drop us your feedback."}
         back="HomeScreen"
       />
+
+    
+      
+      
       <ScrollView height={500}>
+      
+      
+      
         <Text style={styles.question1}>
           How satisfied are you overall with the support of our mental health
           application?
@@ -223,7 +232,7 @@ const Feedback = () => {
           btnFunction={setQfive}
           key={`${resetKey}-q5`}
         />
-
+          
         <TextInput
           style={styles.textarea}
           multiline={true}
@@ -238,7 +247,9 @@ const Feedback = () => {
             <Text style={styles.buttonText}>Send Feedback</Text>
           </TouchableOpacity>
         </View>
+        
       </ScrollView>
+      
     </View>
   );
 };

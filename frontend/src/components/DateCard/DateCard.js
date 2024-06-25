@@ -1,32 +1,29 @@
-import {
-  StyleSheet,
-  TouchableOpacity,
-  View,
-  Text,
-  ScrollView,
-} from "react-native";
-import { useState } from "react";
+import { StyleSheet, TouchableOpacity, View, Text } from "react-native";
+import { useEffect, useState } from "react";
 import React from "react";
 
 const DateCard = (props) => {
   const [pressDateCard, setPressDateCard] = useState(false);
-  const [cardKey, setCardKey] = useState("");
 
   const handleDatePress = () => {
     if (!props.change) {
       setPressDateCard(true);
       props.press(true);
-      setCardKey(props.indexKey);
-
+      props.onPress(props.indexKey);
       props.getDate(props.date);
-    } else if (props.indexKey === cardKey) {
+    } else {
       setPressDateCard(false);
       props.press(false);
-      setCardKey("");
-
+      props.onPress(props.indexKey);
       props.getDate(null);
     }
   };
+
+  useEffect(() => {
+    if (!props.change) {
+      setPressDateCard(false);
+    }
+  }, [props.change]);
 
   return (
     <View

@@ -26,11 +26,10 @@ const ProfileScreen = () => {
       } else {
         user = await getUserById(route.params.userId);
       }
-
       setUserData(user);
 
       //getPost
-      const res = await getProfilePost();
+      const res = await getProfilePost(user._id);
       setPostList(res);
     } catch (error) {
       console.log(error);

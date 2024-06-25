@@ -57,12 +57,13 @@ export const getAPost = async (id) => {
   }
 };
 
-export const getProfilePost = async () => {
+export const getProfilePost = async (userId) => {
   try {
     const token = await AsyncStorage.getItem("authToken");
 
     const response = await axios.get(URL + "/view-profile-post", {
       headers: { authtoken: token },
+      params: { userId: userId },
     });
     return response.data;
   } catch (error) {
@@ -84,6 +85,7 @@ export const getSearchProfile = async (searchText) => {
         headers: { authtoken: token },
       }
     );
+
     return response.data;
   } catch (error) {
     console.log(error);

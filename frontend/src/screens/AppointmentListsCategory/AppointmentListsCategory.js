@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { ScrollView, View } from "react-native";
+import { Dimensions, ScrollView, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import ButtonGroup from "../../components/Button/ButtonGroup";
 import DocAppHeader from "../../components/DocAppHeader/DocAppHeader";
@@ -9,6 +9,8 @@ import CompletedList from "../../screens/AppointmentListsCategory/CompletedList"
 import { getADoctor } from "../../services/doctorServices/doctorService";
 
 const AppointmentList = () => {
+  const screenHeight = Dimensions.get("window").height - 275;
+
   const [selectedTab, setSelectedTab] = useState(0);
   const [doctorData, setDoctorData] = useState();
 
@@ -16,7 +18,6 @@ const AppointmentList = () => {
     try {
       //getdoctor
       const doctor = await getADoctor();
-
       setDoctorData(doctor);
     } catch (error) {
       console.log(error);
@@ -37,8 +38,14 @@ const AppointmentList = () => {
         docName={doctorData.fullName}
         proPic={{ uri: doctorData.proPic }}
       />
-      <SafeAreaView style={{ margin: 25 }}>
-        <ScrollView style={{ height: 500 }}>
+      <SafeAreaView
+        style={{
+          height: screenHeight,
+          paddingHorizontal: 25,
+          paddingTop: 15,
+        }}
+      >
+        <ScrollView ScrollView style={{ height: "100%", marginBottom: 25 }}>
           <ButtonGroup
             tab1={"New"}
             tab2={"Accepted"}

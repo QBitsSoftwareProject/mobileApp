@@ -21,7 +21,7 @@ export const userLogin = async (email, password) => {
 
     return response.data;
   } catch (err) {
-    console.log(err.response.data);
+    console.log(err.response);
     throw new Error("Error during request setup");
   }
 };
@@ -91,7 +91,7 @@ export const getUserById = async (userId) => {
     const response = await axios.get(`${URL}/user-by-id/` + userId, {
       headers: { authtoken: token },
     });
-    // console.log(response.data)
+
     return response.data;
   } catch (err) {
     console.log(err.response.data);

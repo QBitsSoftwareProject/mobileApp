@@ -1,5 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { View, ScrollView, Dimensions } from "react-native";
+import {
+  View,
+  ScrollView,
+  Dimensions,
+  PanResponder,
+  Animated,
+} from "react-native";
 import CFHeaderSub from "../../components/ComForumHeader/CFHeader";
 import PostCard from "../../components/CFCard/PostCard";
 import FloatingButton from "../../components/FloatingButton/FloatingButton";
@@ -44,6 +50,26 @@ const HomePage = () => {
     navigation.navigate("PostCategory");
   };
 
+  const pan = useState(new Animated.ValueXY())[0];
+
+  const panResponder = useState(
+    PanResponder.create({
+      onMoveShouldSetPanResponder: () => true,
+      onPanResponderGrant: () => {
+        pan.setOffset({
+          x: pan.x._value,
+          y: pan.y._value,
+        });
+      },
+      onPanResponderMove: Animated.event([null, { dx: pan.x, dy: pan.y }], {
+        useNativeDriver: false,
+      }),
+      onPanResponderRelease: () => {
+        pan.flattenOffset();
+      },
+    })
+  )[0];
+
   if (!postList) {
     return;
   }
@@ -82,7 +108,20 @@ const HomePage = () => {
           </View>
         </ScrollView>
 
-        <FloatingButton addNew={addNew} />
+        <Animated.View
+          style={[
+            pan.getLayout(),
+            {
+              position: "absolute",
+              bottom: 100,
+              right: 30,
+              zIndex: 10,
+            },
+          ]}
+          {...panResponder.panHandlers}
+        >
+          <FloatingButton addNew={addNew} />
+        </Animated.View>
       </View>
     </View>
   );

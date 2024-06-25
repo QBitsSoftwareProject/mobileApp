@@ -24,11 +24,11 @@ const DocPop = (props) => {
 const styles = StyleSheet.create({
   DropPop: {
     width: 105,
-    height: 80,
+    height: "auto",
+    paddingVertical: 5,
     backgroundColor: "white",
     borderRadius: 5,
     elevation: 1,
-    marginHorizontal: 7,
     alignItems: "center",
     justifyContent: "center",
     position: "absolute",
@@ -39,6 +39,7 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: "column",
     alignItems: "center",
+    justifyContent: "center",
   },
   DPtext: {
     color: "#40495B",

@@ -109,7 +109,7 @@ export const updateJournal = async (
 //delete journal by id
 export const deleteJournal = async (id) => {
   try {
-    console.log("id id", id);
+    
     const token = await AsyncStorage.getItem("authToken");
 
     const response = await axios.delete(`${URL}/delete-journal/${id}`, {

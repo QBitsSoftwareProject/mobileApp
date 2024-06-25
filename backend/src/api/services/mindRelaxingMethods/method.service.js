@@ -1,15 +1,15 @@
 const methodModel = require("../../models/mindRelaxingMethods/method.model");
 const asyncHandler = require('express-async-handler');
 
-const storeMethod =  (methodType, mark, resouceName, discription,imageURL,resourceURL) => {
+const storeMethod =  (methodType, category, resouceName, discription,imageURL,resourceURL) => {
     try {
-        if (!methodType || !mark || !resouceName || !discription ||!imageURL || !resourceURL) {
+        if (!methodType || !category || !resouceName || !discription ||!imageURL || !resourceURL) {
             throw new Error('Method is incomplete');
         }
 
         const newMethod =  methodModel.create({
             methodType: methodType,
-            mark: mark,
+            category: category,
             resouceName: resouceName,
             discription: discription,
             imageURL: imageURL,
