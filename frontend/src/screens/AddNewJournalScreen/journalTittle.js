@@ -59,12 +59,12 @@ const styles = StyleSheet.create({
   },
 
   input: {
+    height: 69,
     backgroundColor: "white",
-    borderRadius: 10,
+    borderRadius: 20,
     // width: ,
-    padding: 10,
-    height: 45,
-
+    paddingHorizontal: 25,
+    lineHeight: 20,
     fontSize: 14,
     fontWeight: "400",
     flex: 1,

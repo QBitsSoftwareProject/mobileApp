@@ -245,6 +245,7 @@ const AnalysisGraph = () => {
   const [image, setImageSource] = useState("");
 
   useEffect(() => {
+    // Logic to set emoji and image based on lastMoodText
     if (lastMoodText === "Happy") {
       setEmoji("😄");
       setImageSource(
@@ -294,9 +295,9 @@ const AnalysisGraph = () => {
 
   const navigation = useNavigation();
 
-  const handleContinuePress = () => {
-    navigation.navigate("MonthAnalysisScreen", {});
-  };
+  // const handleContinuePress = () => {
+  //   navigation.navigate("MonthAnalysisScreen", {});
+  // };
 
   return (
     <ScrollView>
@@ -352,12 +353,12 @@ const AnalysisGraph = () => {
           </View>
         </View>
       </ScrollView>
-      <TouchableOpacity
+      {/* <TouchableOpacity
         style={styles.continueButton}
         onPress={handleContinuePress}
       >
         <Text style={styles.continue}>Continue</Text>
-      </TouchableOpacity>
+      </TouchableOpacity> */}
     </ScrollView>
   );
 };
@@ -390,6 +391,9 @@ const styles = StyleSheet.create({
     color: "#40495B",
     alignSelf: "center",
     marginTop: 10,
+  },
+  graphContainer: {
+    marginTop: 30,
   },
   image: {
     width: 369,

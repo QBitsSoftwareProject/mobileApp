@@ -2,78 +2,67 @@ import React, { useCallback, useState, useEffect } from "react";
 import {
   View,
   Text,
-  StyleSheet,
   ScrollView,
   TouchableOpacity,
   SafeAreaView,
-  TextInput,
-  Button,
 } from "react-native";
 import { EmojiPicker } from "./emoji";
 import styles from "../AddNewJournalScreen/styles";
 import { CustomButton } from "./switch";
 import { JournalTittle } from "./journalTittle";
 import { JournalEntry } from "./journalEntry";
-
 import { Overlay } from "./AddNewPopup";
-import TabBar from "../../components/TabBar/TabBar";
 import HeaderSub from "../../components/HeaderSub/HeaderSub";
-import axios from "axios";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import { addNewJournal } from "../../services/journalService/journalService";
+import Toast from "react-native-toast-message";
+
 import { useRoute } from "@react-navigation/native";
 import { updateTaskCompleteness } from "../../services/taskServices/taskservice";
 
 //AddNewJournal function
 export const AddNewJournal = ({ navigation }) => {
   const route = useRoute();
-
-  const [isOverlayVisible, setOverlayVisible] = useState(false); //set state to visible popup
-  const [selectedEmojiMarks, setSelectedEmojiMarks] = useState(""); //set marks in selected emoji
+  const [isOverlayVisible, setOverlayVisible] = useState(false); // Set state to visible popup
+  const [selectedEmojiMarks, setSelectedEmojiMarks] = useState(""); // Set marks in selected emoji
   const [tittle, setTittle] = useState("");
   const [journalEntry, setJournalEntry] = useState("");
   const [emoji, setEmoji] = useState("");
-  const [date, setdate] = useState("");
-  const [time, settime] = useState("");
+  const [date, setDate] = useState("");
+  const [time, setTime] = useState("");
 
-  // popup visible function
+  // Popup visible function
   const toggleOverlay = () => {
     setOverlayVisible(!isOverlayVisible);
   };
 
-  // navigate to viewJournal
+  // Navigate to viewJournal
   const handleViewButton = () => {
-    navigation.navigate("ViewJournal", {});
+    navigation.navigate("ViewJournal");
   };
 
-  // handle the emoji press
+  // Handle the emoji press
   const handleEmojiPress = ({ emoji, mark, category }) => {
     setSelectedEmojiMarks(
-      (prevMarks) => prevMarks + `${emoji}(${mark}) (${category})`
+      (prevMarks) => `${prevMarks}${emoji}(${mark}) (${category})`
     );
-    setEmoji(mark);
-    // console.log(category);
+    setEmoji(mark); // Fix to set the emoji state
   };
 
   const getDate = useCallback(() => {
     const currentDate = new Date();
-
     const year = currentDate.getFullYear();
     const month = currentDate.toLocaleString("default", { month: "long" });
     const day = currentDate.getDate().toString().padStart(2, "0");
 
     const formattedDate = `${day}, ${month}, ${year}`;
-    //  console.log(formattedDate);
-
     const formattedTime = currentDate.toLocaleTimeString();
 
-    setdate(formattedDate);
-    settime(formattedTime);
+    setDate(formattedDate);
+    setTime(formattedTime);
   }, []);
 
   useEffect(() => {
     if (date && time) {
-      // Ensure date and time are set before calling addNewJournal
       const createJournal = async () => {
         try {
           await addNewJournal(emoji, tittle, journalEntry, time, date);
@@ -84,19 +73,23 @@ export const AddNewJournal = ({ navigation }) => {
       };
       createJournal();
     }
-  }, [date, time]);
+  }, [date, time, emoji, tittle, journalEntry]);
 
-  // handle createbutton
+  // Handle create button
   const handleCreateButton = async () => {
-    // synchronize funtion
-
     if (!emoji) {
-      alert("Emoji is required");
+      Toast.show({
+        type: "error",
+        text1: "Your current feeling mood is required",
+      });
       return;
     }
 
     if (!journalEntry) {
-      alert("Journal is required");
+      Toast.show({
+        type: "error",
+        text1: "Your journal entry is required",
+      });
       return;
     }
 
@@ -126,19 +119,22 @@ export const AddNewJournal = ({ navigation }) => {
     <View>
       <HeaderSub
         headLine={"Add New Journal"}
-        subHeadLine={"Wellcome to our mindful haven"}
-        back={"ViewJournal"}
+        subHeadLine={"Welcome to our mindful haven"}
+        back={"HomeScreen"}
       />
 
-      <CustomButton btnView={handleViewButton}></CustomButton>
+      <CustomButton btnView={handleViewButton} />
 
       <ScrollView height={470}>
         <SafeAreaView style={styles.container}>
           <Text style={styles.Text}>Select Your Mood</Text>
 
-          <EmojiPicker onEmojiPress={handleEmojiPress} />
+          <EmojiPicker
+            onEmojiPress={handleEmojiPress}
+            imoji={emoji} // Pass the current emoji state to the EmojiPicker
+          />
 
-          <Text style={styles.Text1}>Journal Tittle</Text>
+          <Text style={styles.Text1}>Journal Title</Text>
 
           <JournalTittle
             style={styles.tittlejournal}

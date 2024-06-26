@@ -1,91 +1,90 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import {
   View,
   Text,
-  StyleSheet,
   ScrollView,
   TouchableOpacity,
   SafeAreaView,
-  TextInput,
-  Button,
 } from "react-native";
 import { EmojiPicker } from "../AddNewJournalScreen/emoji";
 import styles from "../AddNewJournalScreen/styles";
 import { CustomButton } from "../AddNewJournalScreen/switch";
 import { JournalTittle } from "../AddNewJournalScreen/journalTittle";
 import { JournalEntry } from "../AddNewJournalScreen/journalEntry";
-import { createStackNavigator } from "@react-navigation/stack";
 import { Overlay } from "../EditJournalScreen/editPopup";
-import TabBar from "../../components/TabBar/TabBar";
 import HeaderSub from "../../components/HeaderSub/HeaderSub";
-import getJournal from "./fetchJournal";
-import axios from "axios";
-import {
-  addNewJournal,
-  updateJournal,
-} from "../../services/journalService/journalService";
+import Toast from "react-native-toast-message";
+import { updateJournal } from "../../services/journalService/journalService";
 
 export const EditJournal = ({ navigation, route }) => {
-  const stack = createStackNavigator();
   const { item, itemTittle, itemText, itemEmoji } = route.params;
 
   const [title, setTitle] = useState(itemTittle);
   const [entry, setEntry] = useState(itemText);
-  const [selectemoji, setSelectEmoji] = useState(itemEmoji);
+  const [newMood, setNewMood] = useState(itemEmoji);
 
   const [selectedEmojiMarks, setSelectedEmojiMarks] = useState("");
-  const [emoji, setEmoji] = useState("");
-  const [date, setdate] = useState("");
-  const [time, settime] = useState("");
+  const [emoji, setEmoji] = useState(String(itemEmoji));
+  const [date, setDate] = useState("");
+  const [time, setTime] = useState("");
 
   // Ensure itemID is defined
   useEffect(() => {
     if (!item) {
       console.error("Error: item is undefined");
-    } else {
-      // console.log("itemID:", item);
     }
   }, [item]);
 
-  const handleEditButton = async () => {
-    // update the journal
-    if (!emoji) {
-      alert("Emoji is required");
-    }
-
-    if (!entry) {
-      alert("Journal is required");
-    }
-
+  const getDate = useCallback(() => {
     const currentDate = new Date();
+    const year = currentDate.getFullYear();
+    const month = currentDate.toLocaleString("default", { month: "long" });
+    const day = currentDate.getDate().toString().padStart(2, "0");
 
-    const formattedDate = currentDate.toLocaleDateString();
+    const formattedDate = `${day}, ${month}, ${year}`;
     const formattedTime = currentDate.toLocaleTimeString();
 
-    setdate(formattedDate);
-    settime(formattedTime);
+    setDate(formattedDate);
+    setTime(formattedTime);
+  }, []);
 
-    try {
-      const journalID = item;
-      const response = await updateJournal(
-        journalID,
-        emoji,
-        title,
-        entry,
-        formattedTime,
-        formattedDate
-      );
-      if (response) {
-        // console.log("Data updated", response);
-        toggleOverlay();
-      }
-    } catch (error) {
-      console.error("Error:", error);
+  const handleEditButton = async () => {
+    if (!emoji) {
+      Toast.show({
+        type: "error",
+        text1: "Your current feeling mood is required",
+      });
+      return;
+    }
+
+    getDate();
+
+    if (!entry) {
+      Toast.show({
+        type: "error",
+        text1: "Your current feeling journal entry is required",
+      });
+      return;
     }
   };
 
+  useEffect(() => {
+    if (date && time) {
+      const journalID = item;
+      const updateJournalEntry = async () => {
+        try {
+          await updateJournal(journalID, emoji, title, entry, time, date);
+          toggleOverlay();
+        } catch (error) {
+          console.error("Error:", error);
+        }
+      };
+      updateJournalEntry();
+    }
+  }, [date, time]);
+
   const handleEmojiPress = ({ emoji, mark }) => {
-    setSelectedEmojiMarks((prevMarks) => prevMarks + `${emoji}(${mark})`);
+    setSelectedEmojiMarks((prevMarks) => `${prevMarks}${emoji}(${mark})`);
     setEmoji(mark);
   };
 
@@ -104,18 +103,18 @@ export const EditJournal = ({ navigation, route }) => {
       <HeaderSub
         headLine={"Edit Journal"}
         subHeadLine={"Edit your journals"}
-        back={"ViewJournal"}
+        back={"HomeScreen"}
       />
 
-      <CustomButton btnView={handleViewButton}></CustomButton>
+      <CustomButton btnView={handleViewButton} />
 
       <ScrollView height={470}>
         <SafeAreaView style={styles.container}>
           <Text style={styles.Text}>Feeling with</Text>
 
-          <EmojiPicker onEmojiPress={handleEmojiPress} imoji={selectemoji} />
+          <EmojiPicker onEmojiPress={handleEmojiPress} value={emoji} />
 
-          <Text style={styles.Text1}>Journal Tittle</Text>
+          <Text style={styles.Text1}>Journal Title</Text>
 
           <JournalTittle value={title} newText={setTitle} />
 
@@ -136,10 +135,6 @@ export const EditJournal = ({ navigation, route }) => {
           </View>
         </SafeAreaView>
       </ScrollView>
-
-      {/* <View style={{ top: 0, left: 0, right: 0 }}>
-        <TabBar />
-      </View> */}
     </View>
   );
 };

@@ -141,9 +141,7 @@ const CommentCard = (props) => {
           <View style={styles.content2}>
             <Text style={styles.title}>{props.title}</Text>
             <Text style={styles.date}>{formattedDate}</Text>
-            <Text style={{ fontSize: 14, fontWeight: "400" }}>
-              {props.content}
-            </Text>
+            <Text style={styles.commentContent}>{props.content}</Text>
           </View>
 
           {popupMessage != "" && (
@@ -205,6 +203,10 @@ const styles = StyleSheet.create({
     fontWeight: "400",
     color: "#5C677D",
     marginBottom: 5,
+  },
+  commentContent: {
+    fontSize: 14,
+    fontWeight: "400",
   },
 
   delImg: {
