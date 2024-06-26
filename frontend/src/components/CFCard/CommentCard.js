@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   StyleSheet,
   TouchableOpacity,
@@ -10,13 +10,36 @@ import {
 import { ListItem } from "@rneui/themed";
 import CommentEditPopupMessage from "../../components/CF Pop-up/CommentEditPop-up";
 import { deleteAComment } from "../../services/commentServices/commentServices";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const CommentCard = (props) => {
   const [popupMessage, setPopupMessage] = useState("");
+  const [checkUser, setCheckUser] = useState(false);
+
+  const checkOwnership = async () => {
+    try {
+      const currentUserId = await AsyncStorage.getItem("userId");
+      if (!currentUserId) {
+        console.log("userId not found in AsyncStorage");
+        return;
+      }
+      // console.log("Current User ID:", currentUserId);
+      // console.log("Relevant User ID:", props.relevantUserId);
+      setCheckUser(currentUserId == props.relevantUserId);
+    } catch (error) {
+      console.log("Error retrieving user ID:", error);
+    }
+  };
+
+  useEffect(() => {
+    checkOwnership();
+  }, [props.relevantUserId]);
 
   const handleEdit = async () => {
     try {
-      setPopupMessage("Edit your Comment");
+      if (checkUser) {
+        setPopupMessage("Edit your Comment");
+      }
     } catch (error) {
       console.log(error);
     }
@@ -102,31 +125,35 @@ const CommentCard = (props) => {
             height: "90%",
           }}
         >
-          <TouchableOpacity
-            onPress={() => {
-              displayDeleteAlert();
-              reset();
-            }}
-            style={styles.button}
-          >
-            <Image
-              source={require("../../assets/images/CommentSecImages/mdi_delete.png")}
-              style={styles.delImg}
-            />
-          </TouchableOpacity>
+          {checkUser && (
+            <>
+              <TouchableOpacity
+                onPress={() => {
+                  displayDeleteAlert();
+                  reset();
+                }}
+                style={styles.button}
+              >
+                <Image
+                  source={require("../../assets/images/CommentSecImages/mdi_delete.png")}
+                  style={styles.delImg}
+                />
+              </TouchableOpacity>
 
-          <TouchableOpacity
-            onPress={() => {
-              handleEdit();
-              reset();
-            }}
-            style={styles.button}
-          >
-            <Image
-              source={require("../../assets/images/CommentSecImages/mdi_edit.png")}
-              style={styles.editImg}
-            />
-          </TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => {
+                  handleEdit();
+                  reset();
+                }}
+                style={styles.button}
+              >
+                <Image
+                  source={require("../../assets/images/CommentSecImages/mdi_edit.png")}
+                  style={styles.editImg}
+                />
+              </TouchableOpacity>
+            </>
+          )}
         </View>
       )}
       rightStyle={styles.deleteBtn}
@@ -144,7 +171,7 @@ const CommentCard = (props) => {
             <Text style={styles.commentContent}>{props.content}</Text>
           </View>
 
-          {popupMessage != "" && (
+          {popupMessage !== "" && (
             <CommentEditPopupMessage
               commentId={props.commentId}
               postId={props.postId}

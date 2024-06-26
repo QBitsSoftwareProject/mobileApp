@@ -28,6 +28,7 @@ const HomePage = () => {
   const pan = useState(
     new Animated.ValueXY({ x: screenWidth - 70, y: screenHeight - 80 })
   )[0];
+
   const fetchPostData = async () => {
     try {
       const res = await getPost();
@@ -113,6 +114,7 @@ const HomePage = () => {
                 postId={item._id}
                 key={item._id}
                 cardName={"HomePageCard"}
+                relevantUserId={item.userId._id}
                 image={item.userId.proPic}
                 title={item.userId.userName}
                 Date={item.createdAt}
@@ -148,7 +150,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     width: 60,
     height: 60,
-    backgroundColor: "red",
+    backgroundColor: "transparent",
   },
 });
 

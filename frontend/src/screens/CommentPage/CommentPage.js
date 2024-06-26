@@ -20,6 +20,7 @@ import CommentCard from "../../components/CFCard/CommentCard";
 const CommentPage = () => {
   const route = useRoute();
   const { postId, previousScreen } = route.params;
+
   const [comment, setComment] = useState();
   const [commentList, setCommentList] = useState();
   const [isKeyboardVisible, setKeyboardVisible] = useState(false);
@@ -106,6 +107,7 @@ const CommentPage = () => {
               commentId={item._id}
               key={item._id}
               postId={postId}
+              relevantUserId={item.userId._id}
               image={item.userId.proPic}
               title={item.userId.userName}
               Date={item.createdAt}

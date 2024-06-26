@@ -12,7 +12,7 @@ exports.deletecomments = async (req, res) => {
       return res.status(404).json({ message: "comment not found" });
     }
 
-    // console.log(relevantComment.userId, userId);
+    console.log(relevantComment.userId, userId);
 
     if (relevantComment.userId == userId) {
       // Finding and deleting the comment by id

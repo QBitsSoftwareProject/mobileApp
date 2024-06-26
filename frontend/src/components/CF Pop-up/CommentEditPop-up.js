@@ -17,12 +17,12 @@ import {
 
 const CommentEditPopupMessage = ({ message, onClose, commentId, onUpdate }) => {
   const [editedComment, setEditedComment] = useState("");
-
   const [oneComment, setOneComment] = useState("");
 
   const fetchACommentData = async () => {
     try {
       const res = await getAComment(commentId);
+      // console.log(res);
       setOneComment(res);
     } catch (error) {
       console.log(error);
@@ -32,9 +32,11 @@ const CommentEditPopupMessage = ({ message, onClose, commentId, onUpdate }) => {
   const handleSaveButtonPress = async () => {
     try {
       onClose();
+      // console.log(commentId);
       if (editedComment === "") {
         await updateComment(commentId, oneComment.content);
       } else {
+        // console.log(commentId);
         await updateComment(commentId, editedComment);
         onUpdate();
       }

@@ -8,12 +8,11 @@ exports.deletePost = async (req, res) => {
     const relevantPost = await postSchema.findById(postId);
 
     if (!relevantPost) {
-      // If post is not found, return a 404 error response
       return res.status(404).json({ message: "Post not found" });
     }
 
     if (relevantPost.userId == userId) {
-      const deletedPost = await postSchema.findByIdAndDelete(postId);
+      await postSchema.findByIdAndDelete({ _id: postId });
 
       // Sending success response with status code 201 and a success message
       return res.status(201).json({ message: "Post deleted successfully" });
