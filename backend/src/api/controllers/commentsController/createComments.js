@@ -1,4 +1,6 @@
 const commentsSchema = require("../../models/comments/commentsModels");
+const notificationSchema = require("../../models/notification/notification");
+
 exports.createComment = async (req, res) => {
   try {
     const { postId, content } = req.body;
@@ -15,6 +17,18 @@ exports.createComment = async (req, res) => {
     });
 
     await newComment.save();
+
+    //create a notification
+    const newNotification = new notificationSchema({
+      recipientId: userId,
+      recipientModel: "RegularUser",
+      message: "commented on your post.",
+      type: "comment",
+      referenceId: postId,
+      referenceModel: "Comments",
+    });
+
+    await newNotification.save();
 
     return res.status(201).json("New comment succesfully created!");
   } catch (error) {

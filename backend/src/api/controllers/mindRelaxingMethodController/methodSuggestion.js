@@ -16,7 +16,6 @@ const {
 
 exports.methodSuggestion = async (req, res) => {
   try {
-    const userId = req.user.user_id;
     const { inputMood } = req.body;
 
     if (!inputMood) {
