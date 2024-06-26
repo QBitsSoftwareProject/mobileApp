@@ -21,7 +21,7 @@ const ProfileCover = (props) => {
   };
 
   const handleBackToHome = () => {
-    navigation.navigate("HomePage");
+    navigation.navigate("HomePage", { refresh: true });
   };
 
   return (

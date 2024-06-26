@@ -9,7 +9,6 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const PostCard = (props) => {
   const navigation = useNavigation();
-  // console.log(props.relevantUserId);
 
   const [isPress, setIsPress] = useState(false);
   const [commentCount, setCommentCount] = useState(0);
@@ -74,8 +73,6 @@ const PostCard = (props) => {
   const handlePress = async () => {
     try {
       const currentUserId = await AsyncStorage.getItem("userId");
-      // console.log(currentUserId);
-      // console.log(props.relevantUserId);
       if (currentUserId == props.relevantUserId) {
         setCheckUser(true);
       } else {
@@ -125,8 +122,8 @@ const PostCard = (props) => {
           {checkUser && isPress && (
             <EditDeletMenu
               postId={props.postId}
-              onDelete={props.onDelete}
               onClose={setIsPress}
+              onDelete={props.onDelete}
               onUpdate={props.onUpdate}
             />
           )}

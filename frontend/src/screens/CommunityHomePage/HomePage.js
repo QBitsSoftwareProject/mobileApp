@@ -25,6 +25,7 @@ const HomePage = () => {
   const route = useRoute();
 
   const [postList, setPostList] = useState([]);
+
   const pan = useState(
     new Animated.ValueXY({ x: screenWidth - 70, y: screenHeight - 80 })
   )[0];
@@ -50,6 +51,16 @@ const HomePage = () => {
   useEffect(() => {
     fetchPostData();
   }, []);
+
+  const onUpdatePost = () => {
+    fetchPostData();
+  };
+
+  const onDeletePost = (postId) => {
+    setPostList((prevPostList) =>
+      prevPostList.filter((post) => post._id !== postId)
+    );
+  };
 
   const addNew = () => {
     navigation.navigate("PostCategory");
@@ -120,6 +131,8 @@ const HomePage = () => {
                 Date={item.createdAt}
                 description={item.description}
                 postImage={item.image}
+                onDelete={onDeletePost}
+                onUpdate={onUpdatePost}
               />
             ))}
           </View>

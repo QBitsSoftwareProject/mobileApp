@@ -23,8 +23,6 @@ const CommentCard = (props) => {
         console.log("userId not found in AsyncStorage");
         return;
       }
-      // console.log("Current User ID:", currentUserId);
-      // console.log("Relevant User ID:", props.relevantUserId);
       setCheckUser(currentUserId == props.relevantUserId);
     } catch (error) {
       console.log("Error retrieving user ID:", error);
@@ -116,7 +114,9 @@ const CommentCard = (props) => {
   return (
     <ListItem.Swipeable
       rightContent={(reset) => (
-        <View style={styles.rightContainer}>
+        <View
+          style={[styles.rightContainer1, !checkUser && styles.rightContainer2]}
+        >
           {checkUser && (
             <>
               <TouchableOpacity
@@ -225,12 +225,15 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontWeight: "400",
   },
-  rightContainer: {
+  rightContainer1: {
     alignItems: "center",
     justifyContent: "center",
     backgroundColor: "#B0B4C0",
     borderRadius: 20,
     height: "90%",
+  },
+  rightContainer2: {
+    backgroundColor: "transparent",
   },
   delImg: {
     width: 40,
