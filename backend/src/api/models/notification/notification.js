@@ -33,7 +33,7 @@ const notificationSchema = new mongoose.Schema({
   referenceModel: {
     type: String,
     required: true,
-    enum: ["userAppointments", "Comments"],
+    enum: ["userAppointments", "Post"],
   },
 
   status: {

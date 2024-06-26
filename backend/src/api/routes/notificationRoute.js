@@ -11,6 +11,6 @@ const {
 const router = express.Router();
 
 router.get("/get-notification", auth, getNotification);
-router.post("/status-update", auth, notificationStatusUpdate);
+router.post("/status-update/:notificationId", auth, notificationStatusUpdate);
 
 module.exports = router;

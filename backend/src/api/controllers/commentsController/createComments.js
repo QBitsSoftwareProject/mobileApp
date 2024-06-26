@@ -25,7 +25,7 @@ exports.createComment = async (req, res) => {
       message: "commented on your post.",
       type: "comment",
       referenceId: postId,
-      referenceModel: "Comments",
+      referenceModel: "Post",
     });
 
     await newNotification.save();
