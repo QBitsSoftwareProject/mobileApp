@@ -64,5 +64,8 @@ const findLargestCategories = (obj) => {
   // Sort the array based on the values in descending order
   entries.sort((a, b) => b[1] - a[1]);
 
-  return entries[0];
+  // Extract the first three elements from the sorted array
+  const largestThree = entries.slice(0, 2);
+
+  return largestThree.map((entry) => entry[0]);
 };

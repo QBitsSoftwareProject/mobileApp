@@ -116,6 +116,7 @@ const HomePage = () => {
               bottom: 100,
               right: 30,
               zIndex: 10,
+              backgroundColor: "red",
             },
           ]}
           {...panResponder.panHandlers}

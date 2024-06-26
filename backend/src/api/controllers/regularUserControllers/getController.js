@@ -34,7 +34,7 @@ exports.getARegularUser = async (req, res) => {
     // Sending success response with status code 200 and the user object
     return res.status(201).json(getUser);
   } catch (err) {
-    res.status(500).json({ error: "User fetch failed", error: err.message });
+    res.status(500).send(err);
   }
 };
 

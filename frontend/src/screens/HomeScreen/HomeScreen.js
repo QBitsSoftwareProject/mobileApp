@@ -90,22 +90,20 @@ const HomeScreen = (props) => {
     };
   }, []);
 
-
   const handleStressLevelPress = async () => {
     try {
-        const resolvedStressLevel = await fetchHistoryDataByUserId(); // Await the resolution of the Promise
-        console.log(resolvedStressLevel);
-        
-        if (resolvedStressLevel && Object.keys(resolvedStressLevel).length > 0) {
-          navigation.navigate("StressLevel", { screen: 'DisplayResultScreen' });
+      const resolvedStressLevel = await fetchHistoryDataByUserId(); // Await the resolution of the Promise
+      console.log(resolvedStressLevel);
+
+      if (resolvedStressLevel && Object.keys(resolvedStressLevel).length > 0) {
+        navigation.navigate("StressLevel", { screen: "DisplayResultScreen" });
       } else {
-          navigation.navigate("StressLevel");
+        navigation.navigate("StressLevel");
       }
     } catch (error) {
-        console.error("Failed to resolve stressLevel:", error);
-       
+      console.error("Failed to resolve stressLevel:", error);
     }
-};
+  };
 
   //fetch user from database
   const fetchUser = async (checkRole) => {
@@ -121,6 +119,17 @@ const HomeScreen = (props) => {
       setUser(currentUser);
     } catch (error) {
       console.log(error.message);
+    }
+  };
+
+  const screenNavigator = (index) => {
+    console.log(index);
+    if (index == 0) {
+      navigation.navigate("VideoScreen");
+    } else if (index == 1) {
+      navigation.navigate("ArticleStack");
+    } else if (index == 2) {
+      navigation.navigate("AudioScreen");
     }
   };
 
