@@ -23,7 +23,7 @@ router.post("/", auth, createComment);
 router.get("/view-comments/:postId", auth, getComments);
 router.get("/get-comment-count/:postId", auth, getCommentsCount);
 router.get("/view-one-comment/:commentId", auth, getAComment);
-router.get("/view-updated-comment/:commentId", auth, getUpdatedComment);
+// router.get("/view-updated-comment/:commentId", auth, getUpdatedComment);
 router.put("/update-comment/:commentId", auth, updateComment);
 router.delete("/delete-comment/:commentId", auth, deletecomments);
 

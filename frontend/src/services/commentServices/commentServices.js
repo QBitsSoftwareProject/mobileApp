@@ -97,12 +97,12 @@ export const getUpdatedComment = async (id) => {
   }
 };
 
-export const updateComment = async (id, newComment) => {
+export const updateComment = async (commentId, newComment) => {
   try {
     const token = await AsyncStorage.getItem("authToken");
 
     const response = await axios.put(
-      URL + "/update-comment/" + id,
+      URL + "/update-comment/" + commentId,
       {
         newComment,
       },
@@ -119,10 +119,11 @@ export const updateComment = async (id, newComment) => {
 export const deleteAComment = async (commentId) => {
   try {
     const token = await AsyncStorage.getItem("authToken");
-    console.log(commentId);
+
     const response = await axios.delete(URL + "/delete-comment/" + commentId, {
       headers: { authtoken: token },
     });
+    console.log(response.data);
     return response.data;
   } catch (error) {
     console.log(error);

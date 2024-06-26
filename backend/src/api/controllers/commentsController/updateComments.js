@@ -3,7 +3,6 @@ const commentsSchema = require("../../models/comments/commentsModels");
 exports.updateComment = async (req, res) => {
   try {
     const { commentId } = req.params;
-
     const userId = req.user.user_id;
 
     const relevantComment = await commentsSchema.findById(commentId);

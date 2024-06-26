@@ -13,7 +13,6 @@ import { getAPost, updatePost } from "../../services/postServices/postServices";
 
 const EditPopupMessage = ({ message, onClose, id, onUpdate }) => {
   const [editedPostDescription, setEditedPostDescription] = useState("");
-
   const [onePost, setOnePost] = useState("");
 
   const fetchAPostData = async () => {

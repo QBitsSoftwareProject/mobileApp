@@ -64,7 +64,7 @@ const EditDeletMenu = (props) => {
           <Text style={styles.DPtext}>Delete</Text>
         </TouchableOpacity>
 
-        {popupMessage != "" && (
+        {popupMessage !== "" && (
           <EditPopupMessage
             id={props.postId}
             message={popupMessage}

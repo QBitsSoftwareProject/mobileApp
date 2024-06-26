@@ -17,7 +17,6 @@ import {
 
 const CommentEditPopupMessage = ({ message, onClose, commentId, onUpdate }) => {
   const [editedComment, setEditedComment] = useState("");
-
   const [oneComment, setOneComment] = useState("");
 
   const fetchACommentData = async () => {

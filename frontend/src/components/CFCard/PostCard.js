@@ -5,12 +5,14 @@ import EditDeletMenu from "../../components/DropDownMenu/EditDeleteMenu";
 import ReportMenu from "../DropDownMenu/ReportMenu";
 import { useFocusEffect, useNavigation } from "@react-navigation/native";
 import { getCommentsCount } from "../../services/commentServices/commentServices";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const PostCard = (props) => {
   const navigation = useNavigation();
 
   const [isPress, setIsPress] = useState(false);
   const [commentCount, setCommentCount] = useState(0);
+  const [checkUser, setCheckUser] = useState(false);
 
   const formatTimestamp = (timestamp) => {
     const date = new Date(timestamp);
@@ -68,8 +70,18 @@ const PostCard = (props) => {
     }, [])
   );
 
-  const handlePress = () => {
-    setIsPress(!isPress);
+  const handlePress = async () => {
+    try {
+      const currentUserId = await AsyncStorage.getItem("userId");
+      if (currentUserId == props.relevantUserId) {
+        setCheckUser(true);
+      } else {
+        setCheckUser(false);
+      }
+      setIsPress(!isPress);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -95,7 +107,7 @@ const PostCard = (props) => {
         >
           <TouchableOpacity
             style={styles.toucharea}
-            onPress={() => handlePress("")}
+            onPress={() => handlePress()}
           >
             <Image
               source={require("../../assets/images/PostCardImages/dots.png")}
@@ -103,15 +115,15 @@ const PostCard = (props) => {
             />
           </TouchableOpacity>
 
-          {props.cardName == "HomePageCard" && isPress && (
+          {!checkUser && isPress && (
             <ReportMenu postId={props.postId} onClose={setIsPress} />
           )}
 
-          {props.cardName == "MyProfileCard" && isPress && (
+          {checkUser && isPress && (
             <EditDeletMenu
               postId={props.postId}
-              onDelete={props.onDelete}
               onClose={setIsPress}
+              onDelete={props.onDelete}
               onUpdate={props.onUpdate}
             />
           )}
@@ -226,8 +238,7 @@ const styles = StyleSheet.create({
     height: 35,
     alignItems: "center",
     justifyContent: "center",
-    borderWidth: 1,
-    borderColor: "red",
+    // borderWidth: 1,
   },
 });
 
