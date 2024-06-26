@@ -39,6 +39,7 @@ const Feedback = () => {
   const [submitTriggered, setSubmitTriggered] = useState(false);
   const [resetKey, setResetKey] = useState(0);
 
+  //useEffect to upadte the values based on questions
   useEffect(() => {
     if (qOne !== null) {
       const value =
@@ -99,16 +100,18 @@ const Feedback = () => {
     }
   }, [rateValue]);
 
+  //submit the feedback
+  const handleSubmit = async () => {
+    if (submitTriggered) return; // Prevent multiple submissions
+    getDeviceTimeAndDate();
+  };
+
+  // if only the slip button pressed then also can give a feedback
   useEffect(() => {
     if (submitTriggered) {
       storeData();
     }
   }, [submitTriggered]);
-
-  const handleSubmit = async () => {
-    if (submitTriggered) return; // Prevent multiple submissions
-    getDeviceTimeAndDate();
-  };
 
   const getDeviceTimeAndDate = () => {
     const now = new Date();
@@ -119,6 +122,7 @@ const Feedback = () => {
     setSubmitTriggered(true);
   };
 
+  //reset the form
   const resetForm = () => {
     setSatisfaction("");
     setFinterfaceValue("");
@@ -141,6 +145,7 @@ const Feedback = () => {
     setResetKey((prevKey) => prevKey + 1); // Force re-render
   };
 
+  //store data to the database, called the addFeedback
   const storeData = async () => {
     try {
       await addFeedback(
@@ -163,6 +168,10 @@ const Feedback = () => {
       resetForm();
     } catch (error) {
       console.log("Error saving data:", error);
+      Toast.show({
+        type: "success",
+        text1: "Please input your satisfication rate!!",
+      });
       setSubmitTriggered(false); // Reset submitTriggered on error
     }
   };

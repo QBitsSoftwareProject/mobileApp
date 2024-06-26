@@ -16,7 +16,13 @@ export const FloatingButton = (props) => {
     alert("floating button pressed");
   };
   return (
-    <TouchableOpacity style={styles.touchableOpacity} onPress={props.btnCreate}>
+    <TouchableOpacity
+      style={[
+        styles.touchableOpacity,
+        props.isVisible ? styles.visible : styles.hidden,
+      ]}
+      onPress={props.btnCreate}
+    >
       <Image
         style={styles.floatingbutton}
         source={require("../../assets/images/journal/floatingButton.png")}
@@ -26,15 +32,19 @@ export const FloatingButton = (props) => {
 };
 
 const styles = StyleSheet.create({
-  touchableOpacity: {
+  visible: {
     position: "absolute",
-    // top: "80%",
+    top: "62%",
     right: 0,
-    bottom: 100,
   },
   floatingbutton: {
     resizeMode: "contain",
     width: 70,
     height: 70,
+  },
+  hidden: {
+    position: "absolute",
+    top: "79%",
+    right: 0,
   },
 });

@@ -116,15 +116,7 @@ const CommentCard = (props) => {
   return (
     <ListItem.Swipeable
       rightContent={(reset) => (
-        <View
-          style={{
-            alignItems: "center",
-            justifyContent: "center",
-            backgroundColor: "#B0B4C0",
-            borderRadius: 20,
-            height: "90%",
-          }}
-        >
+        <View style={styles.rightContainer}>
           {checkUser && (
             <>
               <TouchableOpacity
@@ -197,13 +189,11 @@ const styles = StyleSheet.create({
   },
   content1: {
     flexDirection: "row",
-
     justifyContent: "space-between",
   },
   imageframe: {
     height: 35,
     width: 35,
-
     borderRadius: 50,
     marginRight: 15,
     overflow: "hidden",
@@ -235,7 +225,13 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontWeight: "400",
   },
-
+  rightContainer: {
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "#B0B4C0",
+    borderRadius: 20,
+    height: "90%",
+  },
   delImg: {
     width: 40,
     height: 40,
@@ -251,7 +247,9 @@ const styles = StyleSheet.create({
     marginVertical: 2,
     alignItems: "center",
     justifyContent: "center",
+    // borderWidth: 1,
   },
+  deleteBtn: {},
 });
 
 export default CommentCard;

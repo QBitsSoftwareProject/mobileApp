@@ -80,8 +80,9 @@ export const getAUser = async () => {
     });
 
     return response.data;
-  } catch (err) {
-    throw new Error(err.response.status);
+  } catch (error) {
+    console.log(error);
+    throw new Error(error.response.status);
   }
 };
 

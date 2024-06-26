@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
     borderBottomRightRadius: 40,
   },
   backBtn: {
-    marginTop: 50,
+    marginTop: 25,
     marginLeft: 25,
   },
   headlineTxt: {

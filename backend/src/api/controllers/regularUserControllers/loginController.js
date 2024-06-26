@@ -8,7 +8,7 @@ const { TOKEN_KEY } = require("../../../config/env");
 exports.loginUser = async (req, res) => {
   try {
     const { email, password } = req.body;
-    console.log(email, password);
+
     if (!(email && password)) {
       return res.status(400).send("All inputs are required");
     }
