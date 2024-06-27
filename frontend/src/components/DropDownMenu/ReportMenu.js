@@ -4,7 +4,6 @@ import ReportPopupMessage from "../CF Pop-up/ReportPop-up";
 
 const ReportMenu = (props) => {
   const [popupMessage, setPopupMessage] = useState("");
-
   const [press, setPress] = useState(false);
 
   const handleReport = async () => {
@@ -47,6 +46,7 @@ const ReportMenu = (props) => {
           message={popupMessage}
           onConfirm={confirmMessage}
           onClose={closeMessage}
+          postId={props.postId}
         />
       </View>
     </View>

@@ -15,7 +15,6 @@ const styles = StyleSheet.create({
     fontWeight: "600",
     fontSize: 32,
     color: "white",
-    marginTop: 50,
   },
   subHeadlineTxt: {
     fontWeight: "500",

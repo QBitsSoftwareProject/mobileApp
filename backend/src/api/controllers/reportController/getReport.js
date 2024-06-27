@@ -1,12 +1,8 @@
-const reportSchema = require("../../models/");
+const reportSchema = require("../../models/reportModel/report");
 
-exports.getPost = async (req, res) => {
+exports.getReport = async (req, res) => {
   try {
-    const { postId } = req.params;
-
-    const report = await reportSchema
-      .find({ postId: postId })
-      .populate("userId");
+    const report = await reportSchema.find();
 
     if (!report) {
       return res.status(404).json({ message: "Report not found!" });
