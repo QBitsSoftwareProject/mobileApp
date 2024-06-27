@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, StyleSheet, ScrollView } from "react-native";
+import { View, Text, StyleSheet, ScrollView, Image } from "react-native";
 import PostCard from "../../components/CFCard/PostCard";
 import ProfileCover from "../../components/ComForumCover/ComForumCover";
 import { getProfilePost } from "../../services/postServices/postServices";
@@ -9,6 +9,7 @@ import {
   useNavigation,
   useRoute,
 } from "@react-navigation/native";
+import loadingGif from "../../assets/animation/loading.gif";
 
 const ProfileScreen = () => {
   const navigation = useNavigation();
@@ -60,7 +61,17 @@ const ProfileScreen = () => {
   };
 
   if (!postList || !userData) {
-    return;
+    return (
+      <View
+        style={{
+          justifyContent: "center",
+          alignItems: "center",
+          height: "100%",
+        }}
+      >
+        <Image source={loadingGif} />
+      </View>
+    );
   }
 
   return (
@@ -110,7 +121,7 @@ const ProfileScreen = () => {
 const styles = StyleSheet.create({
   contains: {
     flex: 1,
-    paddingBottom: 80,
+    paddingBottom: 70,
   },
   image: {
     height: 62.5,

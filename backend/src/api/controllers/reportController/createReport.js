@@ -1,19 +1,22 @@
-const reportSchema = require("../../models/");
+const reportSchema = require("../../models/reportModel/report");
+const postsModel = require("../../models/posts/postsModels");
 
 exports.createReport = async (req, res) => {
   try {
     const { reportedPostId, reportStatement } = req.body;
-    const reportedUserId = req.user.user_id;
     const reportingUserId = req.user.user_id;
 
-    const createdAt = new Date();
+    //find repoted user's userId
+    const post = await postsModel.findById(reportedPostId);
+    const reportedUserId = post.userId;
+
+    console.log(reportedUserId);
 
     const newReport = new reportSchema({
-      reportedUserId,
-      reportingUserId,
-      reportedPostId,
-      reportStatement,
-      createdAt: createdAt,
+      ReportingUser: reportingUserId,
+      ReportedUser: reportedUserId,
+      ReportedPost: reportedPostId,
+      ReportStatement: reportStatement,
     });
 
     await newReport.save();

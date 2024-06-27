@@ -9,6 +9,7 @@ import { getMark } from "../ResultScreen/getStressLevel";
 import { submitMarksToDatabase } from "../../services/stressMarksServices/stressMarkServices.js";
 import axiosInstance from "../../api/axios.js";
 import { BackgroundMusicContext } from "../../components/SettingScreen/BackgroundMusicProvider";
+
 import { useFocusEffect } from "@react-navigation/native";
 import {
   fetchQuestionIds,
@@ -26,7 +27,7 @@ import {
 } from "react-native";
 
 import { ProgressBar } from "react-native-paper";
-import Toast from 'react-native-toast-message';
+import Toast from "react-native-toast-message";
 
 import axios from "axios";
 
@@ -99,7 +100,6 @@ const Question = () => {
   const [allMarks, setAllMarks] = useState([]);
 
   const handleNextQuestion = () => {
-    
     if (selectedOption) {
       setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
       setSelectedOption(null); // Reset selected option when moving to the next question
@@ -124,7 +124,6 @@ const Question = () => {
         setIsLoadingImage(false);
       }, 500); // Delay for one second (500 milliseconds)
     }
-    
   };
 
   useEffect(() => {
@@ -143,8 +142,6 @@ const Question = () => {
   }, [currentQuestionIndex, ids.length]);
 
   const navigation = useNavigation();
-
-  const id1 = "214012H";
 
   const handleSubmitButton = () => {
     if (selectedOption) {
@@ -187,12 +184,27 @@ const Question = () => {
     }
   };
 
+  if (!question) {
+    return (
+      <View
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          height: "100%",
+        }}
+      >
+        <Image source={loadingGif} />
+      </View>
+    );
+  }
+
   return (
     <SafeAreaView>
       <TouchableOpacity onPress={handleBackButton}>
         <Image
           source={require("../../assets/images/backProfile.png")}
-          style={{ width: 53, height: 53, marginLeft: 25 }}
+          style={{ width: 53, height: 53, marginTop: 25, marginLeft: 25 }}
         />
       </TouchableOpacity>
       <ScrollView contentContainerStyle={{ flexGrow: 1, paddingBottom: 100 }}>
@@ -318,7 +330,7 @@ const styles = StyleSheet.create({
     height: 48,
     borderRadius: 20,
     alignSelf: "center",
-    borderWidth: 2,
+    borderWidth: 1,
     borderColor: "#4A90BF",
     backgroundColor: "white",
     marginBottom: 100,

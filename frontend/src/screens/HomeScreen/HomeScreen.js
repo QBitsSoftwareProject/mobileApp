@@ -93,7 +93,6 @@ const HomeScreen = (props) => {
   const handleStressLevelPress = async () => {
     try {
       const resolvedStressLevel = await fetchHistoryDataByUserId(); // Await the resolution of the Promise
-      console.log(resolvedStressLevel);
 
       if (resolvedStressLevel && Object.keys(resolvedStressLevel).length > 0) {
         navigation.navigate("StressLevel", { screen: "DisplayResultScreen" });
@@ -151,7 +150,7 @@ const HomeScreen = (props) => {
   }
 
   return (
-    <View style={{ flex: 1, paddingBottom: 80 }}>
+    <View style={{ flex: 1, paddingBottom: 65 }}>
       <SafeAreaView>
         <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
           <View>

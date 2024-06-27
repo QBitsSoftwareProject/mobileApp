@@ -8,11 +8,10 @@ import {
   StyleSheet,
 } from "react-native";
 import React, { useEffect, useState } from "react";
-// import styles from "./styles";
 import { getSearchProfile } from "../../services/postServices/postServices";
 import { useNavigation } from "@react-navigation/native";
 
-const SearchBar = () => {
+const SearchBar = ({ schema }) => {
   const [textInputValue, setTextInputValue] = useState("");
   const [userList, setUserList] = useState([]);
 
@@ -20,7 +19,7 @@ const SearchBar = () => {
 
   const fetchSearchResult = async () => {
     try {
-      const res = await getSearchProfile(textInputValue);
+      const res = await getSearchProfile(textInputValue, schema);
       setUserList(res);
     } catch (error) {
       console.error("Error searching users:", error);
@@ -139,6 +138,8 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     top: 60,
     marginBottom: 20,
+    maxHeight: 230,
+    elevation: 1,
   },
   resultItem: {
     flexDirection: "row",
@@ -150,8 +151,7 @@ const styles = StyleSheet.create({
   imageframe: {
     height: 35,
     width: 35,
-    backgroundColor: "gray",
-    opacity: 0.5,
+
     borderRadius: 50,
     marginRight: 15,
     overflow: "hidden",

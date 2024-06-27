@@ -8,6 +8,7 @@ import {
   ScrollView,
   KeyboardAvoidingView,
   Platform,
+  Dimensions,
 } from "react-native";
 import { SplitButton } from "./ProgressBar";
 import styles from "./feedbackStyles";
@@ -38,6 +39,8 @@ const Feedback = () => {
   const [data, setData] = useState([]);
   const [submitTriggered, setSubmitTriggered] = useState(false);
   const [resetKey, setResetKey] = useState(0);
+
+  const screenHeight = Dimensions.get("window").height;
 
   //useEffect to upadte the values based on questions
   useEffect(() => {
@@ -169,7 +172,7 @@ const Feedback = () => {
         back="HomeScreen"
       />
 
-      <ScrollView height={500}>
+      <ScrollView height={screenHeight - 190}>
         <Text style={styles.question1}>
           How satisfied are you overall with the support of our mental health
           application?

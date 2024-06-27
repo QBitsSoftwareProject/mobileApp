@@ -96,10 +96,10 @@ const TabBar = ({ route, user, userRole }) => {
           tabBarShowLabel: false,
           tabBarStyle: {
             position: "absolute",
-            height: isKeyboardVisible ? 0 : 85,
+            height: isKeyboardVisible ? 0 : 65,
             overflow: isKeyboardVisible ? "hidden" : "visible",
-            borderTopLeftRadius: 40,
-            borderTopRightRadius: 40,
+            borderTopLeftRadius: 30,
+            borderTopRightRadius: 30,
             marginTop: 32,
           },
           headerShown: false,

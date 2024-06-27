@@ -1,15 +1,21 @@
-import { Text, ScrollView, View } from "react-native";
+import {
+  Text,
+  ScrollView,
+  View,
+  TouchableOpacity,
+  Dimensions,
+} from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import style from "./style";
 import CreateCard from "../../components/Card/CreateCard";
-import HeaderSub from "../../components/HeaderSub/HeaderSub";
 import { useNavigation } from "@react-navigation/native";
-import SearchBar from "../../components/SearchBar/SearchBar";
 import { useEffect, useState } from "react";
-import TwoButtonGroup from "../../components/Button/2ButtonGroup";
 import { getDoctors } from "../../services/doctorServices/doctorService";
+import AppointmentHeader from "../../components/AppointmentHeader/AppointmentHeader";
+import loadingGif from "../../assets/animation/loading.gif";
 
 const AvailableDoctor = () => {
+  const screenHeight = Dimensions.get("window").height;
   const navigation = useNavigation();
 
   const [docList, setDocList] = useState([]);
@@ -31,20 +37,43 @@ const AvailableDoctor = () => {
     navigation.navigate("MakeAppointment", { id: docId });
   };
 
+  if (!docList) {
+    return (
+      <View
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          height: "100%",
+        }}
+      >
+        <Image source={loadingGif} />
+      </View>
+    );
+  }
+
   return (
     <View>
-      <HeaderSub
-        headLine={"Doctor appointment"}
-        subHeadLine={"Explore and find the perfect specialist."}
-        back={"HomeScreen"}
-      />
+      <AppointmentHeader headLine={"Specialists"} back={"HomeScreen"} />
+      <SafeAreaView
+        style={{
+          height: screenHeight,
+          paddingHorizontal: 25,
 
-      <SafeAreaView style={{ padding: 20 }}>
-        <ScrollView style={{ height: 500 }}>
-          {/* <TwoButtonGroup type={"list"} /> */}
-
-          <View style={{ marginHorizontal: 15 }}>
+          zIndex: -1,
+        }}
+      >
+        <ScrollView style={{ height: screenHeight - 190, paddingTop: 15 }}>
+          <View style={style.content1}>
             <Text style={style.descript2}>Available Doctors.</Text>
+            <TouchableOpacity
+              style={style.viewBtn}
+              onPress={() => {
+                navigation.navigate("AppointmentStatus");
+              }}
+            >
+              <Text style={style.viewText}>My Appointments</Text>
+            </TouchableOpacity>
           </View>
 
           {/* available doctors */}

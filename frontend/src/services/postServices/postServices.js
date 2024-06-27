@@ -72,7 +72,7 @@ export const getProfilePost = async (userId) => {
   }
 };
 
-export const getSearchProfile = async (searchText) => {
+export const getSearchProfile = async (searchText, list) => {
   try {
     const token = await AsyncStorage.getItem("authToken");
 
@@ -80,6 +80,7 @@ export const getSearchProfile = async (searchText) => {
       URL + "/view-search-profile",
       {
         userName: searchText,
+        list,
       },
       {
         headers: { authtoken: token },
@@ -88,7 +89,7 @@ export const getSearchProfile = async (searchText) => {
 
     return response.data;
   } catch (error) {
-    console.log(error);
+    console.log(error.response.data);
     throw new Error("Error during request setup");
   }
 };
