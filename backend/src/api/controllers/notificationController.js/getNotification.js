@@ -7,24 +7,29 @@ exports.getNotification = async (req, res) => {
     //get all notifications
     const allNotifications = await notificationSchema
       .find({ recipientId: userId })
-      .populate("recipientId");
+      .populate("senderId")
+      .sort({ createdAt: -1 });
 
     const releventData = [];
 
     allNotifications.map((item) => {
       const obj = {
         _id: item._id,
-        recipientId: item.recipientId._id,
-        userName: item.recipientId.userName,
-        proPic: item.recipientId.proPic,
+        senderId: item.senderId._id,
+
+        userName: item.senderId.userName,
+        proPic: item.senderId.proPic,
         message: item.message,
         type: item.type,
         referenceId: item.referenceId,
         status: item.status,
+        createdAt: item.createdAt,
       };
 
       releventData.push(obj);
     });
+
+    // console.log(releventData);
 
     res.status(201).json(releventData);
   } catch (error) {

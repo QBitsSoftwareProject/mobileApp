@@ -7,6 +7,12 @@ const notificationSchema = new mongoose.Schema({
     refPath: "recipientModel",
   },
 
+  senderId: {
+    type: mongoose.Schema.Types.ObjectId,
+    required: true,
+    refPath: "recipientModel",
+  },
+
   recipientModel: {
     type: String,
     required: true,

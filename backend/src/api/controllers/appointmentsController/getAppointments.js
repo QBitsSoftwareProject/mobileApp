@@ -9,7 +9,8 @@ exports.getUserAppointments = async (req, res) => {
       .find({
         userId: userId,
       })
-      .populate("doctorId");
+      .populate("doctorId")
+      .sort({ createdAt: -1 });
 
     if (!relevantAppointments) {
       return res.status(404).json({ message: "Appointments not found!" });

@@ -108,12 +108,12 @@ const styles = StyleSheet.create({
   },
   textinput: {
     height: 45,
-    fontSize: 18,
+    fontSize: 16,
     borderColor: "#E7E7E7",
     backgroundColor: "white",
-    borderTopLeftRadius: 10,
-    borderBottomLeftRadius: 10,
-    padding: 10,
+    borderTopLeftRadius: 30,
+    borderBottomLeftRadius: 30,
+    paddingHorizontal: 15,
   },
 
   searchBtn: {
@@ -122,8 +122,8 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     backgroundColor: "white",
     padding: 5,
-    borderTopRightRadius: 10,
-    borderBottomRightRadius: 10,
+    borderTopRightRadius: 30,
+    borderBottomRightRadius: 30,
   },
 
   searchIcon: {

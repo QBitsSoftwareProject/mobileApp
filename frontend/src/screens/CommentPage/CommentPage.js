@@ -14,8 +14,13 @@ import {
   createComment,
   getComments,
 } from "../../services/commentServices/commentServices";
-import { useNavigation, useRoute } from "@react-navigation/native";
+import {
+  useFocusEffect,
+  useNavigation,
+  useRoute,
+} from "@react-navigation/native";
 import CommentCard from "../../components/CFCard/CommentCard";
+import loadingGif from "../../assets/animation/loading.gif";
 
 const CommentPage = () => {
   const route = useRoute();
@@ -28,7 +33,7 @@ const CommentPage = () => {
   const navigation = useNavigation();
 
   const goBackFromComment = () => {
-    navigation.navigate(previousScreen, { refresh: true });
+    navigation.navigate(previousScreen);
   };
 
   const handleSendButtonPress = async () => {
@@ -52,6 +57,7 @@ const CommentPage = () => {
   };
 
   useEffect(() => {
+    setCommentList(null);
     fetchComment();
 
     const keyboardDidShowListener = Keyboard.addListener(
@@ -72,7 +78,7 @@ const CommentPage = () => {
       keyboardDidShowListener.remove();
       keyboardDidHideListener.remove();
     };
-  }, []);
+  }, [postId]);
 
   const onUpdateComment = () => {
     fetchComment();
@@ -85,7 +91,18 @@ const CommentPage = () => {
   };
 
   if (!commentList) {
-    return;
+    return (
+      <View
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          height: "100%",
+        }}
+      >
+        <Image source={loadingGif} />
+      </View>
+    );
   }
 
   return (

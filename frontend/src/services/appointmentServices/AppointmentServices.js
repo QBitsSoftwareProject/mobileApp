@@ -121,7 +121,7 @@ export const updateStatusAppointments = async (appId, appStatus) => {
       }
     );
   } catch (error) {
-    console.log(error);
+    console.log(error.response.data);
     throw new Error("Error during request setup");
   }
 };
