@@ -11,6 +11,8 @@ const {
   getDoctorCompletedAppointments,
   getDoctorRejectedAppointments,
   getDoctorCancelledAppointments,
+  getDoctorAppointmentCount,
+  getDoctorCompletedAppointmentCount,
 } = require("../controllers/appointmentsController/getAppointments");
 const {
   updateDocAppointment,
@@ -20,9 +22,10 @@ const router = express.Router();
 
 router.post("/", auth, createAppointment);
 router.get("/user-appointment", auth, getUserAppointments);
-
 router.get("/doctor-pending-appointment", auth, getDoctorPendingAppointments);
 router.get("/doctor-accepted-appointment", auth, getDoctorAcceptedAppointments);
+router.get("/doctor-appointments/:id", getDoctorAppointmentCount);
+router.get("/doctor-completed-appointments/:id", getDoctorCompletedAppointmentCount);
 router.get(
   "/doctor-completed-appointment",
   auth,

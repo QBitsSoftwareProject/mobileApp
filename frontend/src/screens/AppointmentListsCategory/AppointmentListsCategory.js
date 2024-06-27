@@ -33,19 +33,23 @@ const AppointmentList = () => {
 
   return (
     <View>
-      <DocAppHeader
-        headLine={"Welcome"}
-        docName={doctorData.fullName}
-        proPic={{ uri: doctorData.proPic }}
-      />
-      <SafeAreaView
+      <View>
+        <DocAppHeader
+          headLine={"Welcome"}
+          docName={doctorData.fullName}
+          proPic={{ uri: doctorData.proPic }}
+        />
+      </View>
+
+      <View
         style={{
           height: screenHeight,
           paddingHorizontal: 25,
           paddingTop: 15,
+          // backgroundColor: "red",
         }}
       >
-        <ScrollView ScrollView style={{ height: "100%", marginBottom: 25 }}>
+        <ScrollView style={{ height: "100%", marginTop: 15 }}>
           <ButtonGroup
             tab1={"New"}
             tab2={"Accepted"}
@@ -54,7 +58,7 @@ const AppointmentList = () => {
           />
 
           {/* appointment status cards */}
-          <View style={{ marginBottom: 80 }}>
+          <View style={{ marginBottom: 70 }}>
             {selectedTab == 0 ? (
               <PendingAppointmentList />
             ) : selectedTab == 1 ? (
@@ -64,7 +68,7 @@ const AppointmentList = () => {
             ) : null}
           </View>
         </ScrollView>
-      </SafeAreaView>
+      </View>
     </View>
   );
 };

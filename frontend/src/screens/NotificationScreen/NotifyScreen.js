@@ -74,6 +74,7 @@ const NotifyScreen = () => {
             notificationList.map((item) => (
               <NotificationCard
                 key={item._id}
+                appId={item._id}
                 postId={item.referenceId}
                 image={item.proPic}
                 title={item.userName}

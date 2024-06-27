@@ -7,7 +7,6 @@ const {
 exports.createComment = async (req, res) => {
   try {
     const { postId, content } = req.body;
-
     const userId = req.user.user_id;
 
     const createdAt = new Date();

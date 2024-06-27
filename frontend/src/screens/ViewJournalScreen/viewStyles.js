@@ -30,6 +30,13 @@ const styles = StyleSheet.create({
   listContainer: {
     flex: 3,
   },
+
+  floatingButtonContainer: {
+    position: "absolute",
+    bottom: 100,
+    right: 0,
+    backgroundColor: "yellow",
+  },
 });
 
 export default styles;

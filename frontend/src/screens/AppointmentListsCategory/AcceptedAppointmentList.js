@@ -7,11 +7,11 @@ import loardingGIF from "../../assets/animation/loading.gif";
 
 const AcceptedAppointment = () => {
   const [acceptedData, setAcceptedData] = useState(null);
+  const [refresh, setRefresh] = useState(false);
 
   const fetchAccAppointment = async () => {
     try {
       const response = await getDoctorAcceptedAppointments();
-
       setAcceptedData(response);
     } catch (error) {
       console.log(error);
@@ -20,7 +20,11 @@ const AcceptedAppointment = () => {
 
   useEffect(() => {
     fetchAccAppointment();
-  }, []);
+  }, [refresh]);
+
+  const handleRefresh = () => {
+    setRefresh(!refresh);
+  };
 
   const getapDate = (date) => {
     const apDate = new Date(date);
@@ -31,14 +35,7 @@ const AcceptedAppointment = () => {
 
   if (!acceptedData) {
     return (
-      <View
-        style={{
-          width: "100%",
-          height: "100%",
-          alignItems: "center",
-          justifyContent: "center",
-        }}
-      >
+      <View style={styles.loarding}>
         <Image source={loardingGIF} />
       </View>
     );
@@ -46,7 +43,7 @@ const AcceptedAppointment = () => {
 
   return (
     <View>
-      <ScrollView style={{ height: 500 }}>
+      <ScrollView style={{ height: "100%" }}>
         <View style={{ marginHorizontal: 15, marginVertical: 15 }}>
           <Text style={styles.descript2}>Accepted Appointment List.</Text>
         </View>
@@ -63,6 +60,7 @@ const AcceptedAppointment = () => {
               time={item.time}
               date={getapDate(item.date)}
               contactNo={item.userId.contactNumber}
+              onStatusChange={handleRefresh}
             />
           ))}
         </View>

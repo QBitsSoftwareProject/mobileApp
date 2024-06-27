@@ -37,7 +37,7 @@ exports.getAllArticlesBySearch = async (req, res) => {
   }
 };
 
-// getting all articles
+// getting all articles by authors
 exports.getAuthorArticles = async (req, res) => {
 
   try {

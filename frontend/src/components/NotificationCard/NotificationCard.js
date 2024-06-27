@@ -9,6 +9,7 @@ import {
 } from "react-native";
 import { ListItem } from "@rneui/themed";
 import { useNavigation } from "@react-navigation/native";
+import { notificationStatusUpdate } from "../../services/notificationService/notificationService";
 
 const NotificationCard = (props) => {
   const navigation = useNavigation();
@@ -45,7 +46,15 @@ const NotificationCard = (props) => {
   };
 
   //navigate to relevent reference page
-  const handlePress = () => {
+  const handlePress = async () => {
+    //status update (as  read)
+    try {
+      await notificationStatusUpdate(props.appId);
+    } catch (error) {
+      console.log(error);
+    }
+
+    //navigation to relevent screen
     if (props.type == "comment") {
       navigation.navigate("CommunityStack", {
         screen: "CommentPage",
@@ -65,7 +74,11 @@ const NotificationCard = (props) => {
   return (
     <ListItem.Swipeable containerStyle={styles.cardContainer}>
       <ListItem.Content>
-        <TouchableOpacity style={styles.content1} onPress={handlePress}>
+        <TouchableOpacity
+          style={[styles.content1]}
+          onPress={handlePress}
+          disabled={props.status == "read" ? true : false}
+        >
           <View style={styles.imageframe}>
             <Image source={{ uri: props.image }} style={styles.image} />
           </View>
@@ -79,7 +92,26 @@ const NotificationCard = (props) => {
               <Text style={styles.commentContent}> {props.content}</Text>
             </Text>
 
-            <Text style={styles.date}>{formattedDate}</Text>
+            <View
+              style={{
+                flexDirection: "row",
+                justifyContent: "space-between",
+                alignItems: "center",
+              }}
+            >
+              <Text style={styles.date}>{formattedDate}</Text>
+
+              {props.status == "unread" && (
+                <View
+                  style={{
+                    height: 10,
+                    width: 10,
+                    borderRadius: 100,
+                    backgroundColor: "#4A90BF",
+                  }}
+                ></View>
+              )}
+            </View>
           </View>
         </TouchableOpacity>
       </ListItem.Content>

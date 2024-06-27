@@ -69,7 +69,6 @@ const styles = StyleSheet.create({
 
   inputContainer: {
     flexDirection: "row",
-    alignItems: "flex-start",
   },
 
   input: {
@@ -79,7 +78,7 @@ const styles = StyleSheet.create({
     width: 360,
     lineHeight: 20,
 
-    padding: 10,
+    padding: 15,
     fontSize: 14,
     fontWeight: "400",
   },
