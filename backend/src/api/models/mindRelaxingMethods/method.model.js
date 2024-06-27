@@ -19,11 +19,6 @@ const MethodSchema = mongoose.Schema({
     ],
   },
 
-  mark: {
-    type: Number,
-    required: true,
-  },
-
   resouceName: {
     type: String,
     required: true,

@@ -46,11 +46,11 @@ const EduContent = () => {
             return (
               <View style={{ marginBottom: 90 }}>
                 <View>
-                  <HeaderSub back={"HomeScreen"} />
+                  <HeaderSub back={"EducationalScreen"} headLine={"Educational content"} subHeadLine={"Enjoy featured resource to up your mood"} />
                 </View>
                 <View style={{ zIndex: 100 }}>
                   {/*categories */}
-                  <SearchAndCategories currentView={"HomeScreen"} />
+                  <SearchAndCategories currentView={"EducationalScreen"} />
                   {/*categories */}
                 </View>
                 <SafeAreaView>

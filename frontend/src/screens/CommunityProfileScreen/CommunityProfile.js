@@ -89,7 +89,8 @@ const ProfileScreen = () => {
               <PostCard
                 postId={item._id}
                 key={item._id}
-                cardName={"MyProfileCard"}
+                cardName={"ProfileScreenCard"}
+                relevantUserId={item.userId._id}
                 image={item.userId.proPic}
                 title={item.userId.userName}
                 Date={item.createdAt}

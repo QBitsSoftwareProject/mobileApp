@@ -2,7 +2,6 @@ const PostSchema = require("../../models/posts/postsModels");
 exports.createPost = async (req, res) => {
   try {
     const { postCategory, description, image } = req.body;
-
     const userId = req.user.user_id;
 
     const createdAt = new Date();

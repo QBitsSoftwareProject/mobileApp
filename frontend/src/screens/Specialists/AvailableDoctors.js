@@ -41,11 +41,7 @@ const AvailableDoctor = () => {
 
       <SafeAreaView style={{ padding: 20 }}>
         <ScrollView style={{ height: 500 }}>
-          <TwoButtonGroup type={"list"} />
-
-          <View style={{ paddingVertical: 15 }}>
-            <SearchBar />
-          </View>
+          {/* <TwoButtonGroup type={"list"} /> */}
 
           <View style={{ marginHorizontal: 15 }}>
             <Text style={style.descript2}>Available Doctors.</Text>

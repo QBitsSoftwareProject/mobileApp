@@ -13,6 +13,7 @@ const docCard = (props) => {
         await updateStatusAppointments(props.id, "Cancelled");
         // console.log("Updated to Cancel.", props.id, props.status);
       }
+      props.onStatusChange();
     } catch (error) {
       console.log(error);
     }
@@ -63,7 +64,11 @@ const docCard = (props) => {
             >
               <Text style={styles.rejectedStatus}>Reject</Text>
             </TouchableOpacity>
-            <AcptComBtn AcptCom={"Accept"} appId={props.id} />
+            <AcptComBtn
+              AcptCom={"Accept"}
+              appId={props.id}
+              onStatusChange={props.onStatusChange}
+            />
             <Text>{props.status}</Text>
           </View>
         )}
@@ -76,7 +81,11 @@ const docCard = (props) => {
             >
               <Text style={styles.rejectedStatus}>Cancel</Text>
             </TouchableOpacity>
-            <AcptComBtn AcptCom={"Complete"} appId={props.id} />
+            <AcptComBtn
+              AcptCom={"Complete"}
+              appId={props.id}
+              onStatusChange={props.onStatusChange}
+            />
             <Text>{props.status}</Text>
           </View>
         )}
@@ -139,8 +148,8 @@ const styles = StyleSheet.create({
     color: "#E82519",
   },
   imageframe: {
-    height: 70,
-    width: 70,
+    height: 60,
+    width: 60,
     borderRadius: 50,
     marginRight: 20,
     overflow: "hidden",

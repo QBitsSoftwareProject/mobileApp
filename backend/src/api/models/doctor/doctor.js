@@ -119,6 +119,16 @@ const doctorSchema = new schema({
     // required:true
   },
 
+  regStatus: {
+    type: Boolean,
+    default: false
+  },
+
+  access: {
+    type: Boolean,
+    default: true
+  },
+
   bio: {
     type: String,
     required: true,

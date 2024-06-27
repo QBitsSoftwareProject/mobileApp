@@ -7,8 +7,8 @@ import { getDoctorPendingAppointments } from "../../services/appointmentServices
 import loardingGIF from "../../assets/animation/loading.gif";
 
 const PendingAppointment = () => {
-  const screenHeight = Dimensions.get("window").height - 275;
   const [pendingData, setPendingData] = useState(null);
+  const [refresh, setRefresh] = useState(false);
 
   const fetchPendAppointment = async () => {
     try {
@@ -21,25 +21,12 @@ const PendingAppointment = () => {
 
   useEffect(() => {
     fetchPendAppointment();
-  }, []);
+  }, [refresh]);
 
-  if (!pendingData) {
-    return (
-      <View
-        style={{
-          // width: "100%",
-          // height: "100%",
-          // alignItems: "center",
-          // justifyContent: "center",
-          height: screenHeight,
-          paddingHorizontal: 25,
-          paddingTop: 15,
-        }}
-      >
-        <Image source={loardingGIF} />
-      </View>
-    );
-  }
+  const handleRefresh = () => {
+    setRefresh(!refresh);
+  };
+
   const getapDate = (date) => {
     const apDate = new Date(date);
     let stringDate =
@@ -47,15 +34,23 @@ const PendingAppointment = () => {
     return stringDate;
   };
 
+  if (!pendingData) {
+    return (
+      <View style={styles.loarding}>
+        <Image source={loardingGIF} />
+      </View>
+    );
+  }
+
   return (
     <View>
-      <ScrollView style={{ height: 500 }}>
+      <ScrollView style={{ height: "100%" }}>
         <View style={{ marginHorizontal: 15, marginVertical: 15 }}>
           <Text style={styles.descript2}>Pending Appointment List.</Text>
         </View>
 
         {/* appointment status cards */}
-        <View style={{ marginBottom: 80 }}>
+        <View>
           {pendingData.map((item) => (
             <DocCard
               id={item._id}
@@ -66,6 +61,7 @@ const PendingAppointment = () => {
               date={getapDate(item.date)}
               time={item.time}
               contactNo={item.userId.contactNumber}
+              onStatusChange={handleRefresh}
             />
           ))}
         </View>
