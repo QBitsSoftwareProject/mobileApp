@@ -18,21 +18,21 @@ const SearchAndCategories = ({ currentView }) => {
       <View style={styles.NavContainer}>
         <View style={styles.NavBar}>
           <Pressable
-            onPress={() => navigateToScreen("HomeScreen")}
+            onPress={() => navigateToScreen("EducationalScreen")}
             style={styles.NavBarElements}
             android_ripple={{ borderless: true, radius: 50, color: "#7CBDE8" }}
           >
             <View
               style={[
                 styles.NavBarElements,
-                currentView === "HomeScreen" &&
-                  styles.NavBarElements_currentBtn,
+                currentView === "EducationalScreen" &&
+                styles.NavBarElements_currentBtn,
               ]}
             >
               <Text
                 style={[
-                  currentView === "HomeScreen" &&
-                    styles.NavBarElements_currentText,
+                  currentView === "EducationalScreen" &&
+                  styles.NavBarElements_currentText,
                   styles.NavBarElementText,
                 ]}
               >
@@ -49,13 +49,13 @@ const SearchAndCategories = ({ currentView }) => {
               style={[
                 styles.NavBarElements,
                 currentView === "ArticleStack" &&
-                  styles.NavBarElements_currentBtn,
+                styles.NavBarElements_currentBtn,
               ]}
             >
               <Text
                 style={[
                   currentView === "ArticleStack" &&
-                    styles.NavBarElements_currentText,
+                  styles.NavBarElements_currentText,
                   styles.NavBarElementText,
                 ]}
               >
@@ -72,13 +72,13 @@ const SearchAndCategories = ({ currentView }) => {
               style={[
                 styles.NavBarElements,
                 currentView === "VideoScreen" &&
-                  styles.NavBarElements_currentBtn,
+                styles.NavBarElements_currentBtn,
               ]}
             >
               <Text
                 style={[
                   currentView === "VideoScreen" &&
-                    styles.NavBarElements_currentText,
+                  styles.NavBarElements_currentText,
                   styles.NavBarElementText,
                 ]}
               >
@@ -95,13 +95,13 @@ const SearchAndCategories = ({ currentView }) => {
               style={[
                 styles.NavBarElements,
                 currentView === "AudioScreen" &&
-                  styles.NavBarElements_currentBtn,
+                styles.NavBarElements_currentBtn,
               ]}
             >
               <Text
                 style={[
                   currentView === "AudioScreen" &&
-                    styles.NavBarElements_currentText,
+                  styles.NavBarElements_currentText,
                   styles.NavBarElementText,
                 ]}
               >

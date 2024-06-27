@@ -50,6 +50,6 @@ const articleSchema = new schema({
     type: Number,
     default: 10
   }
-});
+}, { timestamps: true });
 
 module.exports = mongoose.model("Article", articleSchema);
