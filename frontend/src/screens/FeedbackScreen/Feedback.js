@@ -7,7 +7,7 @@ import {
   TouchableOpacity,
   ScrollView,
   KeyboardAvoidingView,
-  Platform
+  Platform,
 } from "react-native";
 import { SplitButton } from "./ProgressBar";
 import styles from "./feedbackStyles";
@@ -42,50 +42,35 @@ const Feedback = () => {
   //useEffect to upadte the values based on questions
   useEffect(() => {
     if (qOne !== null) {
-      const value =
-        qOne === 0
-          ? "User interface is intuitive and easy to navigate"
-          : "User interface is not intuitive and easy to navigate";
+      const value = qOne === 0 ? "False" : "True";
       setFinterfaceValue(value);
     }
   }, [qOne]);
 
   useEffect(() => {
     if (qTwo !== null) {
-      const value =
-        qTwo === 0
-          ? "There are privacy settings or permissions that seem excessive or insufficient"
-          : "There are not privacy settings or permissions that seem excessive or insufficient";
+      const value = qTwo === 0 ? "False" : "True";
       setPrivacy(value);
     }
   }, [qTwo]);
 
   useEffect(() => {
     if (qThree !== null) {
-      const value =
-        qThree === 1
-          ? "App is slow to load or respond"
-          : "App is not slow to load or respond";
+      const value = qThree === 0 ? "False" : "True";
       setSpeed(value);
     }
   }, [qThree]);
 
   useEffect(() => {
     if (qFour !== null) {
-      const value =
-        qFour === 1
-          ? "This app consumes excessive battery or data"
-          : "This app does not consume excessive battery or data";
+      const value = qFour === 0 ? "False" : "True";
       setConsumption(value);
     }
   }, [qFour]);
 
   useEffect(() => {
     if (qFive !== null) {
-      const value =
-        qFive === 1
-          ? "There are elements of the design that are confusing or difficult to use"
-          : "There are not elements of the design that are confusing or difficult to use";
+      const value = qFive === 0 ? "False" : "True";
       setDesign(value);
     }
   }, [qFive]);
@@ -176,21 +161,6 @@ const Feedback = () => {
     }
   };
 
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     try {
-  //       const getResponse = await axiosInstance.get(
-  //         "/Feedback/getAll-feedback"
-  //       );
-  //       setData(getResponse.data);
-  //       console.log(data);
-  //     } catch (error) {
-  //       console.log(error);
-  //     }
-  //   };
-  //   fetchData();
-  // }, []);
-
   return (
     <View contentContainerStyle={styles.container}>
       <HeaderSub
@@ -199,13 +169,7 @@ const Feedback = () => {
         back="HomeScreen"
       />
 
-    
-      
-      
       <ScrollView height={500}>
-      
-      
-      
         <Text style={styles.question1}>
           How satisfied are you overall with the support of our mental health
           application?
@@ -241,7 +205,7 @@ const Feedback = () => {
           btnFunction={setQfive}
           key={`${resetKey}-q5`}
         />
-          
+
         <TextInput
           style={styles.textarea}
           multiline={true}
@@ -256,9 +220,7 @@ const Feedback = () => {
             <Text style={styles.buttonText}>Send Feedback</Text>
           </TouchableOpacity>
         </View>
-        
       </ScrollView>
-      
     </View>
   );
 };
