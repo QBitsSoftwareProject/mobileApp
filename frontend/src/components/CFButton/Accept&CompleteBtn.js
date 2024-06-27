@@ -10,6 +10,7 @@ const AcptComBtn = (props) => {
       } else if (props.AcptCom == "Complete") {
         await updateStatusAppointments(props.appId, "Completed");
       }
+      props.onStatusChange();
     } catch (error) {
       console.log(error);
     }

@@ -20,7 +20,6 @@ const router = express.Router();
 
 router.post("/", auth, createAppointment);
 router.get("/user-appointment", auth, getUserAppointments);
-
 router.get("/doctor-pending-appointment", auth, getDoctorPendingAppointments);
 router.get("/doctor-accepted-appointment", auth, getDoctorAcceptedAppointments);
 router.get(

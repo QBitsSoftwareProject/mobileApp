@@ -85,8 +85,8 @@ const styles = StyleSheet.create({
     color: "#5C677D",
   },
   imageframe: {
-    height: 70,
-    width: 70,
+    height: 60,
+    width: 60,
     borderColor: "white",
     borderWidth: 4,
     borderRadius: 50,

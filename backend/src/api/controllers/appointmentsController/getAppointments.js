@@ -1,5 +1,4 @@
 const appointmentSchema = require("../../models/appointments/appointmentsModels");
-const doctorSchema = require("../../models/doctor/doctor");
 
 exports.getUserAppointments = async (req, res) => {
   try {
@@ -26,8 +25,6 @@ exports.getDoctorPendingAppointments = async (req, res) => {
   try {
     const doctorId = req.user.user_id;
 
-    // const doctor = await doctorSchema.findById(doctorId);
-
     const relevantAppointments = await appointmentSchema
       .find({
         doctorId: doctorId,
@@ -49,8 +46,6 @@ exports.getDoctorPendingAppointments = async (req, res) => {
 exports.getDoctorAcceptedAppointments = async (req, res) => {
   try {
     const doctorId = req.user.user_id;
-
-    // const doctor = await doctorSchema.findById(doctorId);
 
     const relevantAppointments = await appointmentSchema
       .find({
@@ -74,8 +69,6 @@ exports.getDoctorCompletedAppointments = async (req, res) => {
   try {
     const doctorId = req.user.user_id;
 
-    // const doctor = await doctorSchema.findById(doctorId);
-
     const relevantAppointments = await appointmentSchema
       .find({
         doctorId: doctorId,
@@ -98,8 +91,6 @@ exports.getDoctorRejectedAppointments = async (req, res) => {
   try {
     const doctorId = req.user.user_id;
 
-    // const doctor = await doctorSchema.findById(doctorId);
-
     const relevantAppointments = await appointmentSchema
       .find({
         doctorId: doctorId,
@@ -121,8 +112,6 @@ exports.getDoctorRejectedAppointments = async (req, res) => {
 exports.getDoctorCancelledAppointments = async (req, res) => {
   try {
     const doctorId = req.user.user_id;
-
-    // const doctor = await doctorSchema.findById(doctorId);
 
     const relevantAppointments = await appointmentSchema
       .find({

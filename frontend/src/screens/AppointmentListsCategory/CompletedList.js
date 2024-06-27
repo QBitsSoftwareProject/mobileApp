@@ -13,6 +13,7 @@ import loardingGIF from "../../assets/animation/loading.gif";
 const CompletedAppointment = () => {
   const [completedData, setCompletedData] = useState(null);
   const [checkPage, setCheckPage] = useState("Completed");
+  const [refresh, setRefresh] = useState(false);
 
   const fetchComAppointment = async () => {
     try {
@@ -34,18 +35,15 @@ const CompletedAppointment = () => {
 
   useEffect(() => {
     fetchComAppointment();
-  }, [checkPage]);
+  }, [checkPage, refresh]);
+
+  const handleRefresh = () => {
+    setRefresh(!refresh);
+  };
 
   if (!completedData) {
     return (
-      <View
-        style={{
-          width: "100%",
-          height: "100%",
-          alignItems: "center",
-          justifyContent: "center",
-        }}
-      >
+      <View style={styles.loarding}>
         <Image source={loardingGIF} />
       </View>
     );
@@ -60,7 +58,7 @@ const CompletedAppointment = () => {
 
   return (
     <View>
-      <ScrollView style={{ height: 500 }}>
+      <ScrollView style={{ height: "100%" }}>
         <View
           style={{
             marginHorizontal: 15,
@@ -86,7 +84,8 @@ const CompletedAppointment = () => {
               cardName={"Completed"}
               time={item.time}
               date={getapDate(item.date)}
-              contactNo={item.userId.contactNumber}
+              status={item.status}
+              onStatusChange={handleRefresh}
             />
           ))}
         </View>
