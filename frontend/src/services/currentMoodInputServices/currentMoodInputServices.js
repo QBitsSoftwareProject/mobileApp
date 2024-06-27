@@ -77,13 +77,13 @@ export const updateCurrentMood = async (happy, sad, neutral, worried) => {
     );
 
         if (response.status >= 200 && response.status < 300) {
-            console.log("Data updated successfully");
+            
         } else {
             console.error(`Failed to update data on the server. Status: ${response.status}`);
         }
     } catch (error) {
         if (error.response && error.response.status === 404) {
-            console.log('Mood entry not found, creating a new one.');
+            
             await storeCurrentMood(happy, sad, neutral, worried);
         } else {
             console.error('Error updating current mood:', error.message);
@@ -97,10 +97,10 @@ export const checkAndUpsertMood = async (happy, sad, neutral, worried) => {
         const currentMood = await fetchCurrentMoodInput();
 
         if (currentMood) {
-            console.log('Updating existing mood entry');
+           
             await updateCurrentMood(happy, sad, neutral, worried);
         } else {
-            console.log('Storing new mood entry');
+            
             await storeCurrentMood(happy, sad, neutral, worried);
         }
     } catch (error) {

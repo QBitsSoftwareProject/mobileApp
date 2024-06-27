@@ -63,6 +63,8 @@ const AudioPlayer = ({ audioSource, onStop, imglink ,title}) => {
     }
   };
 
+  
+
   const pauseAudio = async () => {
     try {
       await soundObject.pauseAsync();
@@ -117,7 +119,7 @@ const AudioPlayer = ({ audioSource, onStop, imglink ,title}) => {
 
         <Text style={styles.title}>{name}</Text>
 
-<Image source={{ uri: img }} style={styles.img}></Image>
+<Image source={{ uri: imglink }} style={styles.img}></Image>
       
       <Slider
         style={styles.slider}

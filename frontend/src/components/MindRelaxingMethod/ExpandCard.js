@@ -69,11 +69,8 @@ const ExpandableCard = (props) => {
 
   let name;
   
- 
 
-
-
-  if (methodtype === 'music') {
+  if (methodtype === 'audio') {
     mimg = require('../../assets/images/MindRelaxingMethod/mp3.png');
     mtitle = 'Listen to Music';
     ibtn = require('../../assets/images/MindRelaxingMethod/mp3playbutton.png');
@@ -81,7 +78,7 @@ const ExpandableCard = (props) => {
     audioSource = props.rUrl;
     img = props.imgLink;
     name = props.methodname;
-  } else if (methodtype === 'story') {
+  } else if (methodtype === 'pdf') {
     mimg = require('../../assets/images/MindRelaxingMethod/story.png');
     mtitle = 'Read a Story';
     ibtn = require('../../assets/images/MindRelaxingMethod/read.png');
@@ -97,7 +94,7 @@ const ExpandableCard = (props) => {
     name = props.methodname;
   }
 
-  
+
 
   useEffect(() => {
     Animated.timing(heightAnim, {
@@ -175,7 +172,7 @@ const ExpandableCard = (props) => {
             </View>
             <View onLayout={onTextLayout}>
               <Text style={styles.contentText}>
-                {props.contentText}
+                {props.contentText} 
               </Text>
             </View>
           </View>
@@ -183,7 +180,7 @@ const ExpandableCard = (props) => {
       </View>
       
       <VideoPlayerModal visible={videoModalVisible} onClose={toggleVideoModal} videoSource={videoSource} name = {name} />
-      <AudioPlayerModal visible={audioModalVisible} onClose={toggleAudioModal} audioSource={audioSource} img ={img} name = {name}/>
+      <AudioPlayerModal visible={audioModalVisible} onClose={toggleAudioModal} audioSource={audioSource} img ={props.imgLink} name = {name}/>
       <PDFViewerModal visible={pdfModalVisible} onClose={togglePdfModal} pdfSource={pdfSource} name = {name}/>
     </View>
   );
