@@ -1,5 +1,5 @@
 import React from "react";
-import { ScrollView, View } from "react-native";
+import { ScrollView, View, Dimensions } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import HeaderSub from "../../components/HeaderSub/HeaderSub";
 import { useNavigation } from "@react-navigation/native";
@@ -52,11 +52,8 @@ const postCategoryList = [
 ];
 
 const PostCategory = () => {
+  const screenHeight = Dimensions.get("window").height - 275;
   const navigation = useNavigation();
-
-  const pressHandler = () => {
-    navigation.navigate("CreatePost");
-  };
 
   return (
     <View>
@@ -66,9 +63,15 @@ const PostCategory = () => {
         back={HomePage}
       />
 
-      <SafeAreaView style={{ margin: 25 }}>
-        <ScrollView style={{ height: 500 }}>
-          <View style={{ marginBottom: 80 }}>
+      <View
+        style={{
+          height: screenHeight,
+          paddingHorizontal: 25,
+          paddingTop: 15,
+        }}
+      >
+        <ScrollView ScrollView style={{ height: "100%", marginBottom: 25 }}>
+          <View>
             {postCategoryList.map((item) => (
               <RegularCard
                 key={item.id}
@@ -76,12 +79,11 @@ const PostCategory = () => {
                 title={item.title}
                 sub={item.sub}
                 arrow={item.arrow}
-                forword={pressHandler}
               />
             ))}
           </View>
         </ScrollView>
-      </SafeAreaView>
+      </View>
     </View>
   );
 };

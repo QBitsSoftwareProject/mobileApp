@@ -3,11 +3,9 @@ import { Text, ScrollView, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import CreateCard from "../../components/Card/CreateCard";
 import styles from "./styles";
-
 import HeaderSub from "../../components/HeaderSub/HeaderSub";
 import TwoButtonGroup from "../../components/Button/2ButtonGroup";
 import { getUserAppointments } from "../../services/appointmentServices/AppointmentServices";
-import { useNavigation } from "@react-navigation/native";
 
 const AppointmentStatus = () => {
   const [appointments, setAppointments] = useState(null);

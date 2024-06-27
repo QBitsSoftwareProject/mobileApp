@@ -23,6 +23,8 @@ const HomeCard = (props) => {
       navigation.navigate("CurrentMoodInputStack");
     } else if (cardName == "mood") {
       navigation.navigate("MoodAnalysisStack");
+    } else if (cardName == "community") {
+      navigation.navigate("CommunityStack");
     }
   };
 

@@ -75,13 +75,13 @@ const styles = StyleSheet.create({
   input: {
     height: 206,
     backgroundColor: "white",
-    borderRadius: 20,
+    borderRadius: 10,
     width: 360,
     lineHeight: 20,
-    paddingTop: 22,
-    paddingHorizontal: 25,
-    fontSize: 13,
-    fontWeight: "200",
+
+    padding: 10,
+    fontSize: 14,
+    fontWeight: "400",
   },
 
   button: {

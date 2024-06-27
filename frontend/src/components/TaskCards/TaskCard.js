@@ -21,6 +21,7 @@ const TaskCard = (props) => {
       taskId,
       completeness,
       index: props.index,
+      type: props.type,
     });
   };
 
@@ -37,9 +38,12 @@ const TaskCard = (props) => {
         </View>
 
         <View style={styles.bottomSection}>
-          <View style={{ flex: 1, flexDirection: "row" }}>
+          <View style={{ flex: 1, flexDirection: "row", alignItems: "center" }}>
             <Text style={styles.completnessText}>Completeness</Text>
-            <Image source={completenessImage} />
+            <Image
+              source={completenessImage}
+              style={{ width: 15, height: 15 }}
+            />
           </View>
 
           <TouchableOpacity

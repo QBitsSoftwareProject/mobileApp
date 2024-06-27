@@ -5,6 +5,7 @@ import {
   Text,
   StyleSheet,
   TouchableOpacity,
+  Image,
 } from "react-native";
 import CustomBarChart from "./CustomBarChart";
 import HeaderSubSug from "../SuggestionsScreen/HeaderSubSug";
@@ -24,6 +25,7 @@ const MonthlyAnalysisGraph = () => {
       <HeaderSubSug
         headLine="Monthly Analysis"
         subHeadLine="Track your monthly mood inputs"
+        back="HomeScreen"
       />
       <Text style={styles.text}>Analysis of your past 30 days mood inputs</Text>
       <ScrollView height={470}>
@@ -31,6 +33,30 @@ const MonthlyAnalysisGraph = () => {
           positiveMoods={positiveMoods}
           negativeMoods={negativeMoods}
         />
+
+        <View style={styles.grpahBelow}>
+          <View style={styles.pns}>
+            <View style={styles.align}>
+              <Image
+                source={require("../../assets/images/journal/negative.png")}
+              />
+            </View>
+            <View>
+              <Text style={styles.pnsTitle}>Positive Days</Text>
+            </View>
+          </View>
+
+          <View style={styles.pns}>
+            <View style={styles.align}>
+              <Image
+                source={require("../../assets/images/journal/purple.png")}
+              />
+            </View>
+            <View>
+              <Text style={styles.pnsTitle}>Negative Days</Text>
+            </View>
+          </View>
+        </View>
 
         <TouchableOpacity style={styles.setMood} onPress={handlePressButton}>
           <Text style={styles.mood}>Set mood</Text>
@@ -54,7 +80,7 @@ const styles = StyleSheet.create({
   setMood: {
     justifyContent: "center",
     alignSelf: "center",
-    marginTop: 15,
+    marginTop: 30,
     width: 250,
     height: 58,
     backgroundColor: "#FFFFFF",
@@ -68,6 +94,27 @@ const styles = StyleSheet.create({
     fontSize: 16,
     marginBottom: 5,
     fontWeight: "500",
+  },
+  grpahBelow: {
+    flexDirection: "row",
+    marginTop: 30,
+    marginLeft: -15,
+  },
+  pns: {
+    marginLeft: 25,
+    marginRight: 25,
+    alignItems: "center",
+    flexDirection: "row",
+    paddingHorizontal: 30,
+  },
+  align: {
+    alignItems: "center",
+  },
+  pnsTitle: {
+    fontSize: 11,
+    fontWeight: "300",
+    marginLeft: 10,
+    letterSpacing: 2,
   },
 });
 

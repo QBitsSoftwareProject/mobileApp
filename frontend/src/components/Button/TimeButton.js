@@ -12,7 +12,6 @@ const TimeButton = (props) => {
       setKey(props.indexKey);
 
       props.getTime(props.time);
-      // console.log(props.indexKey)
     } else if (props.indexKey === key) {
       setPressButton(false);
       props.press(false);

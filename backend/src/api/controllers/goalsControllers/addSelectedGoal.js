@@ -1,3 +1,4 @@
+const goalModel = require("../../models/goals/goals");
 const regularUser = require("../../models/regularUser/regularUser");
 
 // Function to add an item to the selectedGoals array
@@ -7,17 +8,47 @@ exports.addSelectedGoal = async (req, res) => {
     const userId = req.user.user_id;
 
     // Extract the goal to be added from the request body
-    const { selectedGoals } = req.body;
+    const { goalId } = req.body;
 
     // Ensure the goal is provided
-    if (!selectedGoals) {
+    if (!goalId) {
       return res.status(400).json({ error: "Goal is required" });
     }
+
+    //set selected Date
+    const selectedDate = new Date();
+
+    //find due Date
+    const goal = await goalModel.findById(goalId);
+    const durationParts = goal.duration.split(" ");
+    const durationValue = parseInt(durationParts[0], 10);
+    const durationUnit = durationParts[1];
+
+    const selectedDateObj = new Date(selectedDate);
+
+    if (durationUnit === "weeks") {
+      selectedDateObj.setDate(selectedDateObj.getDate() + durationValue * 7);
+    } else if (durationUnit === "days") {
+      selectedDateObj.setDate(selectedDateObj.getDate() + durationValue);
+    } else {
+      throw new Error("Unsupported duration unit");
+    }
+
+    let dueDate = selectedDateObj;
 
     // Find the user by ID and add the new goal to the selectedGoals array
     await regularUser.findByIdAndUpdate(
       userId,
-      { $push: { selectedGoals: selectedGoals } },
+      {
+        $push: {
+          selectedGoals: {
+            goalId,
+            selectedDate,
+            dueDate,
+            objectivesState: goal.objectivesState,
+          },
+        },
+      },
       { new: true }
     );
 

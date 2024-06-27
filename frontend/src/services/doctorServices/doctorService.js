@@ -82,7 +82,7 @@ export const getADoctor = async () => {
     const response = await axios.get(`${URL}/one-doctor`, {
       headers: { authtoken: token },
     });
-    // console.log(response.data)
+
     return response.data;
   } catch (error) {
     console.log(error);

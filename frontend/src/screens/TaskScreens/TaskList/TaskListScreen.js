@@ -49,16 +49,16 @@ const TaskListScreen = () => {
   // Counting remaining incomplete tasks
   let remaining = 0;
   const count = taskList.filter((item) => {
-    if (!item.iscomplete) {
+    if (!item.isComplete) {
       remaining++;
     }
   });
 
   // Sorting the task list with incomplete tasks first
   const sortedTaskList = [...taskList].sort((a, b) => {
-    if (!a.iscomplete && b.iscomplete) {
+    if (!a.isComplete && b.isComplete) {
       return -1;
-    } else if (a.iscomplete && !b.iscomplete) {
+    } else if (a.isComplete && !b.isComplete) {
       return 1;
     } else {
       return 0;
@@ -122,6 +122,7 @@ const TaskListScreen = () => {
                   icon={setIcon(item.taskId.feature)}
                   taskId={item.taskId._id}
                   index={index + 1}
+                  type={item.taskId.feature}
                 />
               </View>
             )}

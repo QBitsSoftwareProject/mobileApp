@@ -49,15 +49,6 @@ const goalSchema = new schema({
     require: true,
   },
 
-  isComplete: {
-    type: Boolean,
-    default: false,
-  },
-
-  dueDate: {
-    type: String,
-  },
-
   currentRating: {
     type: Number,
     default: 10.0,

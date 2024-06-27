@@ -11,6 +11,7 @@ const AcceptedAppointment = () => {
   const fetchAccAppointment = async () => {
     try {
       const response = await getDoctorAcceptedAppointments();
+
       setAcceptedData(response);
     } catch (error) {
       console.log(error);
@@ -20,6 +21,13 @@ const AcceptedAppointment = () => {
   useEffect(() => {
     fetchAccAppointment();
   }, []);
+
+  const getapDate = (date) => {
+    const apDate = new Date(date);
+    let stringDate =
+      apDate.getFullYear() + "-" + apDate.getMonth() + "-" + apDate.getDate();
+    return stringDate;
+  };
 
   if (!acceptedData) {
     return (
@@ -52,9 +60,9 @@ const AcceptedAppointment = () => {
               image={item.userId.proPic}
               title={item.userId.fullName}
               cardName={"Accepted"}
-              // time={item.time}
-              date={item.date}
-              contactNo={item.contactNo}
+              time={item.time}
+              date={getapDate(item.date)}
+              contactNo={item.userId.contactNumber}
             />
           ))}
         </View>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   View,
   Text,
@@ -8,6 +8,8 @@ import {
   SafeAreaView,
   TextInput,
   Button,
+  Animated,
+  Image,
 } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import styles from "./viewStyles";
@@ -15,16 +17,18 @@ import { CustomButtonView } from "./viewSwitch";
 import { Calendar } from "./calender";
 import { SwipableList } from "./viewInputJournal";
 import { FloatingButton } from "./floatingButton";
-import TabBar from "../../components/TabBar/TabBar";
+import loadingGif from "../../assets/animation/loading.gif";
 import HeaderSub from "../../components/HeaderSub/HeaderSub";
 import { createStackNavigator } from "@react-navigation/stack";
 import moment from "moment";
+import { color } from "@rneui/base";
 
 export const ViewJournal = ({ navigation }) => {
   const stack = createStackNavigator();
   const [before, setBefore] = useState("");
   const [arrayController, setArrayController] = useState(0);
   const [journalArray, setJournalArray] = useState([]);
+  const [isCalendarVisible, setIsCalendarVisible] = useState(true); // Add this state
 
   const handleButton = () => {
     navigation.navigate("JournalStatistics", {});
@@ -53,26 +57,24 @@ export const ViewJournal = ({ navigation }) => {
       />
 
       <View style={styles.container}>
-        {/* <SafeAreaView style={styles.container}> */}
-
         <CustomButtonView btnAnalysis={handleButton}></CustomButtonView>
-
-        {/* <View> */}
         <Calendar
           setJournalArray={setJournalArray}
           setArrayController={setArrayController}
+          isVisible={isCalendarVisible} // Pass the visibility state
         ></Calendar>
+
         <SwipableList
           editFunction={handleEditButton}
           journalArray={journalArray}
           arrayController={arrayController}
-          style={{ marginTop: 24.5, backgroundColor: "yellow" }}
+          setIsCalendarVisible={setIsCalendarVisible} // Pass the setter for calendar visibility
         />
-        {/* </View> */}
 
-        {/* </SafeAreaView>     */}
-
-        <FloatingButton btnCreate={handleFlotingPointButton}></FloatingButton>
+        <FloatingButton
+          btnCreate={handleFlotingPointButton}
+          isVisible={isCalendarVisible}
+        />
       </View>
     </View>
   );

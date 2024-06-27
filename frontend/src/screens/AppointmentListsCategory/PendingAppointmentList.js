@@ -1,5 +1,5 @@
 import React from "react";
-import { Text, ScrollView, View, Image } from "react-native";
+import { Text, ScrollView, View, Image, Dimensions } from "react-native";
 import { useEffect, useState } from "react";
 import DocCard from "../../components/Card/DocCard";
 import styles from "./styles";
@@ -7,6 +7,7 @@ import { getDoctorPendingAppointments } from "../../services/appointmentServices
 import loardingGIF from "../../assets/animation/loading.gif";
 
 const PendingAppointment = () => {
+  const screenHeight = Dimensions.get("window").height - 275;
   const [pendingData, setPendingData] = useState(null);
 
   const fetchPendAppointment = async () => {
@@ -26,16 +27,25 @@ const PendingAppointment = () => {
     return (
       <View
         style={{
-          width: "100%",
-          height: "100%",
-          alignItems: "center",
-          justifyContent: "center",
+          // width: "100%",
+          // height: "100%",
+          // alignItems: "center",
+          // justifyContent: "center",
+          height: screenHeight,
+          paddingHorizontal: 25,
+          paddingTop: 15,
         }}
       >
         <Image source={loardingGIF} />
       </View>
     );
   }
+  const getapDate = (date) => {
+    const apDate = new Date(date);
+    let stringDate =
+      apDate.getFullYear() + "-" + apDate.getMonth() + "-" + apDate.getDate();
+    return stringDate;
+  };
 
   return (
     <View>
@@ -53,10 +63,9 @@ const PendingAppointment = () => {
               image={item.userId.proPic}
               title={item.userId.fullName}
               cardName={"Pending"}
-              // time={item.time}
-              // time={props.time.from}-{props.time.to}
-              date={item.date}
-              contactNo={item.contactNo}
+              date={getapDate(item.date)}
+              time={item.time}
+              contactNo={item.userId.contactNumber}
             />
           ))}
         </View>

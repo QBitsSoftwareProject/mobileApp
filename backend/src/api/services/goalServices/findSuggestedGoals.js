@@ -162,41 +162,45 @@ exports.findSuggestedGoals = async (
   stressLevel,
   averageMoodWeight
 ) => {
-  //calculating ratings for moods
+  try {
+    //calculating ratings for moods
 
-  const moodRating = getSum(weightedMoodsData, "moods");
+    const moodRating = getSum(weightedMoodsData, "moods");
 
-  //calculating ratings for stress levels
-  const stressLevelRating = getSum(
-    weightedStressLevelData,
-    "stressLevel",
-    decayValue
-  );
+    //calculating ratings for stress levels
+    const stressLevelRating = getSum(
+      weightedStressLevelData,
+      "stressLevel",
+      decayValue
+    );
 
-  //set suggestion values for each category
-  suggestionTable.meditation =
-    stressLevelRating.meditation * stressLevel +
-    moodRating.meditation * averageMoodWeight;
-  suggestionTable.physicalActivity =
-    stressLevelRating.physicalActivity * stressLevel +
-    moodRating.physicalActivity * averageMoodWeight;
-  suggestionTable.socialConnection =
-    stressLevelRating.socialConnection * stressLevel +
-    moodRating.socialConnection * averageMoodWeight;
-  suggestionTable.creativeExpression =
-    stressLevelRating.creativeExpression * stressLevel +
-    moodRating.creativeExpression * averageMoodWeight;
-  suggestionTable.personalGrowth =
-    stressLevelRating.personalGrowth * stressLevel +
-    moodRating.personalGrowth * averageMoodWeight;
-  suggestionTable.relaxation =
-    stressLevelRating.relaxation * stressLevel +
-    moodRating.relaxation * averageMoodWeight;
-  suggestionTable.inspirationalContent =
-    stressLevelRating.inspirationalContent * stressLevel +
-    moodRating.inspirationalContent * averageMoodWeight;
+    //set suggestion values for each category
+    suggestionTable.meditation =
+      stressLevelRating.meditation * stressLevel +
+      moodRating.meditation * averageMoodWeight;
+    suggestionTable.physicalActivity =
+      stressLevelRating.physicalActivity * stressLevel +
+      moodRating.physicalActivity * averageMoodWeight;
+    suggestionTable.socialConnection =
+      stressLevelRating.socialConnection * stressLevel +
+      moodRating.socialConnection * averageMoodWeight;
+    suggestionTable.creativeExpression =
+      stressLevelRating.creativeExpression * stressLevel +
+      moodRating.creativeExpression * averageMoodWeight;
+    suggestionTable.personalGrowth =
+      stressLevelRating.personalGrowth * stressLevel +
+      moodRating.personalGrowth * averageMoodWeight;
+    suggestionTable.relaxation =
+      stressLevelRating.relaxation * stressLevel +
+      moodRating.relaxation * averageMoodWeight;
+    suggestionTable.inspirationalContent =
+      stressLevelRating.inspirationalContent * stressLevel +
+      moodRating.inspirationalContent * averageMoodWeight;
 
-  return findLargestThreeCategories(suggestionTable);
+    return findLargestThreeCategories(suggestionTable);
+  } catch (error) {
+    throw new Error(error);
+  }
 };
 
 //function for calculate the sum
