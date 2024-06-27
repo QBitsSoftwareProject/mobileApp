@@ -1,9 +1,10 @@
 // import React, { useEffect, useState, useRef } from "react";
-// import { StyleSheet, View, Text } from "react-native";
+// import { StyleSheet, View, Text, Animated } from "react-native";
 // import { SwipeListView } from "react-native-swipe-list-view";
 // import axios from "axios";
 // import { EditDeletebutton } from "./editDeleteButton";
 // import AsyncStorage from "@react-native-async-storage/async-storage";
+
 // import { getJournalsByUserId } from "../../services/journalService/journalService";
 
 // export const SwipableList = (props) => {
@@ -15,8 +16,7 @@
 //     const fetchJournals = async () => {
 //       try {
 //         const journalData = await getJournalsByUserId();
-//         setJournalDisplay(journalData);
-//         // console.log("display", journalDisplay);
+//         setJournalDisplay(journalData.reverse());
 //       } catch (err) {
 //         console.log("err" + err.message);
 //       }
@@ -33,20 +33,29 @@
 //     }
 //   }, [props.arrayController, journalDisplay, props.journalArray]);
 
-//   useEffect(() => {
-//     // Use a slight delay to ensure the list has rendered before attempting to scroll
-//     const scrollTimeout = setTimeout(() => {
-//       if (swipeListViewRef.current && swipeListViewRef.current._listView) {
-//         swipeListViewRef.current._listView.scrollToEnd({ animated: false });
-//       }
-//     }, 500); // 500ms delay
+//   // useEffect(() => {
+//   //   // Use a slight delay to ensure the list has rendered before attempting to scroll
+//   //   const scrollTimeout = setTimeout(() => {
+//   //     if (swipeListViewRef.current && swipeListViewRef.current._listView) {
+//   //       swipeListViewRef.current._listView.scrollToEnd({ animated: false });
+//   //     }
+//   //   }, 500); // 500ms delay
 
-//     // Clear timeout if the component unmounts or finalArray changes
-//     return () => clearTimeout(scrollTimeout);
-//   }, [finalArray]);
+//   //   // Clear timeout if the component unmounts or finalArray changes
+//   //   return () => clearTimeout(scrollTimeout);
+//   // }, [finalArray]);
+
+//   const handleFlotingPointButton = () => {
+//     navigation.navigate("AddNewJournal", {});
+//   };
 
 //   const handleEditPress = (item, itemTittle, itemText, itemEmoji, itemTime) => {
 //     props.editFunction(item, itemTittle, itemText, itemEmoji, itemTime);
+//     console.log(item);
+//     console.log(itemTittle);
+//     console.log(itemEmoji);
+//     console.log(itemText);
+//     console.log(itemTime);
 //   };
 
 //   const renderJournalItem = ({ item, index }) => {
@@ -99,16 +108,50 @@
 
 //   const renderHiddenItem = ({ item, index }) => {
 //     let mood = "";
-//     if (item.emoji === 10) mood = "😊";
+
+//     switch (item.emoji) {
+//       case 10:
+//         mood = "😊";
+//         break;
+//       case 20:
+//         mood = "😭";
+//         break;
+//       case 30:
+//         mood = "😡";
+//         break;
+//       case 40:
+//         mood = "😍";
+//         break;
+//       case 50:
+//         mood = "😨";
+//         break;
+//       case 60:
+//         mood = "😐";
+//         break;
+//       case 70:
+//         mood = "🥱";
+//         break;
+//       case 80:
+//         mood = "😟";
+//         break;
+//       default:
+//         mood = "";
+//     }
+
+//     // Create a new object with the updated mood
+//     const updatedItem = {
+//       ...item,
+//       mood,
+//     };
 
 //     return (
 //       <View style={styles.buttonContainer}>
 //         <EditDeletebutton
-//           item={item._id}
-//           itemText={item.journalEntry}
-//           itemTittle={item.tittle}
-//           itemTime={item.time}
-//           itemEmoji={item.emoji}
+//           item={updatedItem._id}
+//           itemText={updatedItem.journalEntry}
+//           itemTittle={updatedItem.tittle}
+//           itemTime={updatedItem.time}
+//           itemEmoji={updatedItem.mood} // Use updated mood here
 //           editFunction={(item, itemTittle, itemText, itemEmoji, itemTime) =>
 //             handleEditPress(item, itemTittle, itemText, itemEmoji, itemTime)
 //           }
@@ -119,7 +162,7 @@
 
 //   return (
 //     <SwipeListView
-//       style={{ height: 280 }}
+//       style={{ height: 420 }}
 //       ref={swipeListViewRef}
 //       data={finalArray}
 //       keyExtractor={(item) => item._id}
@@ -128,6 +171,10 @@
 //       leftOpenValue={0}
 //       rightOpenValue={-65}
 //       disableRightSwipe={true}
+//       onScroll={(event) => {
+//         const offsetY = event.nativeEvent.contentOffset.y;
+//         props.setIsCalendarVisible(offsetY <= 0);
+//       }}
 //     />
 //   );
 // };
@@ -142,7 +189,8 @@
 //     backgroundColor: "#FFFFFF",
 //     width: 350,
 //     height: 127,
-//     elevation: 2,
+
+//     elevation: 1,
 //     alignSelf: "flex-end",
 //     borderRadius: 20,
 //     marginBottom: 15,
@@ -152,9 +200,8 @@
 //     flexDirection: "row",
 //   },
 //   journalText: {
-//     color: "#101318",
-//     fontWeight: "200",
-//     lineHeight: 20,
+//     fontSize: 14,
+//     fontWeight: "400",
 //     paddingTop: 5,
 //     padding: 15,
 //     fontSize: 14,
@@ -163,9 +210,10 @@
 //     flex: 2,
 //   },
 //   journalTittle: {
-//     color: "#101318",
-//     fontWeight: "300",
-//     lineHeight: 20,
+//     fontSize: 18,
+//     fontWeight: "500",
+//     color: "#40495B",
+
 //     paddingTop: 15,
 //     paddingBottom: 5,
 //     paddingLeft: 15,
@@ -186,8 +234,9 @@
 //     alignItems: "flex-end",
 //     alignSelf: "flex-end",
 //     marginRight: 15,
-//     fontWeight: "100",
 //     fontSize: 10,
+//     fontWeight: "400",
+//     color: "#5C677D",
 //   },
 // });
 
@@ -244,6 +293,11 @@ export const SwipableList = (props) => {
 
   const handleEditPress = (item, itemTittle, itemText, itemEmoji, itemTime) => {
     props.editFunction(item, itemTittle, itemText, itemEmoji, itemTime);
+    console.log(item);
+    console.log(itemTittle);
+    console.log(itemEmoji);
+    console.log(itemText);
+    console.log(itemTime);
   };
 
   const renderJournalItem = ({ item, index }) => {
@@ -296,16 +350,50 @@ export const SwipableList = (props) => {
 
   const renderHiddenItem = ({ item, index }) => {
     let mood = "";
-    if (item.emoji === 10) mood = "😊";
+
+    switch (item.emoji) {
+      case 10:
+        mood = "😊";
+        break;
+      case 20:
+        mood = "😭";
+        break;
+      case 30:
+        mood = "😡";
+        break;
+      case 40:
+        mood = "😍";
+        break;
+      case 50:
+        mood = "😨";
+        break;
+      case 60:
+        mood = "😐";
+        break;
+      case 70:
+        mood = "🥱";
+        break;
+      case 80:
+        mood = "😟";
+        break;
+      default:
+        mood = "";
+    }
+
+    // Create a new object with the updated mood
+    const updatedItem = {
+      ...item,
+      mood,
+    };
 
     return (
       <View style={styles.buttonContainer}>
         <EditDeletebutton
-          item={item._id}
-          itemText={item.journalEntry}
-          itemTittle={item.tittle}
-          itemTime={item.time}
-          itemEmoji={item.emoji}
+          item={updatedItem._id}
+          itemText={updatedItem.journalEntry}
+          itemTittle={updatedItem.tittle}
+          itemTime={updatedItem.time}
+          itemEmoji={updatedItem.mood} // Use updated mood here
           editFunction={(item, itemTittle, itemText, itemEmoji, itemTime) =>
             handleEditPress(item, itemTittle, itemText, itemEmoji, itemTime)
           }
@@ -324,6 +412,9 @@ export const SwipableList = (props) => {
       renderHiddenItem={renderHiddenItem}
       leftOpenValue={0}
       rightOpenValue={-65}
+      friction={7} // Adjust friction for smoother swipe
+      tension={30} // Adjust tension for smoother swipe
+      useNativeDriver={true} // Use native driver for animations
       disableRightSwipe={true}
       onScroll={(event) => {
         const offsetY = event.nativeEvent.contentOffset.y;
