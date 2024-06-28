@@ -1,8 +1,32 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, Modal, Button, StyleSheet ,Text,TouchableOpacity} from 'react-native';
 import VideoPlayer from './VideoPlayer';
+import RatingPopUp from "./MindRelaxingMethodRatingPopUp"
+import Toast from "react-native-toast-message";
 
-const VideoPlayerModal = ({ visible, onClose, videoSource ,name}) => {
+const VideoPlayerModal = ({ visible, onClose, videoSource ,name,id}) => {
+
+  const [isPopUpVisible, setIsPopUpVisible] = useState(false)
+
+    const handleButtonClick = () => {
+      setIsPopUpVisible(true);
+    };
+  
+    const handleClosePopUp = () => {
+      setIsPopUpVisible(false);
+      setTimeout(() => {
+        Toast.show({
+          type: "success",
+          text1: "Thank you for watching",
+          text2: "Your rate is invaluable. Thank you!",
+        });
+      }, 200);
+    };
+
+  const handleRating = () => {
+    handleButtonClick()
+  }
+
   return (
     <Modal
       visible={visible}
@@ -15,10 +39,21 @@ const VideoPlayerModal = ({ visible, onClose, videoSource ,name}) => {
           <Text style={styles.title}>{name}</Text>
           <VideoPlayer videoSource={videoSource} />
           {/* <Button title="Close" onPress={onClose} /> */}
-          <TouchableOpacity style={styles.closeButton} onPress={onClose}>
+          <TouchableOpacity style={styles.closeButton} onPress={handleRating}>
             <Text style={styles.closeButtonText}>Close</Text>
           </TouchableOpacity>
         </View>
+
+        <RatingPopUp
+        message="Rate your experience"
+        onClose={handleClosePopUp}
+        methodId={id}
+        title="Rate this Video"
+        visible={isPopUpVisible}
+        close = {onClose}
+        >
+
+        </RatingPopUp>
       </View>
     </Modal>
   );

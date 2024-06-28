@@ -4,14 +4,37 @@ import { Audio } from 'expo-av';
 import Slider from '@react-native-community/slider';
 import { BackgroundMusicContext } from '../SettingScreen/BackgroundMusicProvider';
 import { useFocusEffect } from '@react-navigation/native';
+import RatingPopUp from "./MindRelaxingMethodRatingPopUp"
+import Toast from "react-native-toast-message";
 
-const AudioPlayer = ({ audioSource, onStop, imglink ,title}) => {
+const AudioPlayer = ({ audioSource, onStop, imglink ,title,id}) => {
   const [soundObject, setSoundObject] = useState(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [duration, setDuration] = useState(0);
   const [position, setPosition] = useState(0);
   const [img,setImg] = useState(imglink)
   const [name,setName] = useState(title)
+
+  const [isPopUpVisible, setIsPopUpVisible] = useState(false)
+
+    const handleButtonClick = () => {
+      setIsPopUpVisible(true);
+    };
+  
+    const handleClosePopUp = () => {
+      setIsPopUpVisible(false);
+      setTimeout(() => {
+      Toast.show({
+        type: "success",
+        text1: "Thank you for listning",
+        text2: "Your rate is invaluable. Thank you!",
+      });
+    }, 500);
+    };
+
+  const handleRating = () => {
+    handleButtonClick()
+  }
 
 
   const { setBackgroundMusicValid } = useContext(BackgroundMusicContext);
@@ -154,9 +177,20 @@ const AudioPlayer = ({ audioSource, onStop, imglink ,title}) => {
           
         )}
       </View>
-      <TouchableOpacity style={styles.closebtn}  onPress={stopAudio} >
+      <TouchableOpacity style={styles.closebtn}  onPress={handleRating} >
         <Text style={styles.closetext} >close</Text>
       </TouchableOpacity>
+
+      <RatingPopUp
+        message="Rate your experience"
+        onClose={handleClosePopUp}
+        methodId={id}
+        title="Rate this audio"
+        visible={isPopUpVisible}
+        close = {stopAudio}
+        >
+
+        </RatingPopUp>
     </View>
   );
 };
