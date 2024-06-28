@@ -13,13 +13,9 @@ export const EmojiPicker = ({ onEmojiPress, value }) => {
   const route = useRoute();
 
   const itemEmojiString = route.params ? route.params.itemEmoji : "";
-  console.log("itemEmojiString:", itemEmojiString); // Debug log
 
   const [selectedEmoji, setSelectedEmoji] = useState("");
   const [previousMood, setPreviousMood] = useState(itemEmojiString);
-
-  console.log("pre", itemEmojiString);
-  console.log("new", selectedEmoji);
 
   useEffect(() => {
     if (!selectedEmoji) {

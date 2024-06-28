@@ -3,6 +3,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     marginLeft: 25,
+    paddingTop: 32,
   },
 
   Text: {
@@ -28,7 +29,7 @@ const styles = StyleSheet.create({
   create: {
     backgroundColor: "#ffffff",
     borderColor: "#5FA1CE",
-    borderWidth: 2,
+    borderWidth: 1,
     width: 250,
     height: 58,
     borderRadius: 75,

@@ -11,6 +11,7 @@ import React, { useState } from "react";
 import { useNavigation, useFocusEffect } from "@react-navigation/native";
 import NotificationCard from "../../components/NotificationCard/NotificationCard";
 import { getNotification } from "../../services/notificationService/notificationService";
+import loadingGif from "../../assets/animation/loading.gif";
 
 const NotifyScreen = () => {
   const [notificationList, setNotificationList] = useState([]);
@@ -55,6 +56,20 @@ const NotifyScreen = () => {
       };
     }, [])
   );
+  if (!notificationList) {
+    return (
+      <View
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          height: "100%",
+        }}
+      >
+        <Image source={loadingGif} />
+      </View>
+    );
+  }
 
   return (
     <SafeAreaView

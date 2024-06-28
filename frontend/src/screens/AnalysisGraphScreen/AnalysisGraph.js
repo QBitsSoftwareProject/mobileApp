@@ -353,12 +353,6 @@ const AnalysisGraph = () => {
           </View>
         </View>
       </ScrollView>
-      {/* <TouchableOpacity
-        style={styles.continueButton}
-        onPress={handleContinuePress}
-      >
-        <Text style={styles.continue}>Continue</Text>
-      </TouchableOpacity> */}
     </ScrollView>
   );
 };
@@ -393,7 +387,8 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
   graphContainer: {
-    marginTop: 30,
+    marginTop: 32,
+    paddingBottom: 100,
   },
   image: {
     width: 369,

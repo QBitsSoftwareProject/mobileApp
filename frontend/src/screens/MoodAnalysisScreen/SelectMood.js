@@ -1,5 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, TouchableOpacity, Animated, Easing } from "react-native";
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  Animated,
+  Easing,
+  StyleSheet,
+} from "react-native";
 import HeaderSub from "../../screens/MoodAnalysisScreen/Header";
 import { useNavigation } from "@react-navigation/native";
 import { addMood } from "../../services/moodAnalysisServices/moodAnalysisServices";
@@ -111,84 +118,41 @@ const MoodAnalysis = () => {
     return (containerDimension - dimension) / 2;
   };
 
-  const styles = {
-    circleContainer: {
-      position: "relative",
-      alignContent: "center",
-      alignSelf: "center",
-      marginTop: 130,
-      marginRight: 55,
-      justifyContent: "center",
-    },
-    emojiWrapper: {
-      position: "absolute",
-      alignItems: "center",
-      justifyContent: "center",
-      alignSelf: "center",
-    },
-    emojiText: {
-      fontSize: 50,
-    },
-    selectemoji: {
-      fontSize: 90,
-    },
-    setMood: {
-      justifyContent: "center",
-      alignSelf: "center",
-      marginTop: 270,
-      marginBottom: 48,
-      width: 250,
-      height: 58,
-      backgroundColor: "#FFFFFF",
-      borderRadius: 75,
-      borderColor: "#4ABFB4",
-      borderWidth: 2,
-    },
-    mood: {
-      fontSize: 16,
-      alignSelf: "center",
-    },
-    moodtext: {
-      fontSize: 10,
-      alignSelf: "center",
-      fontweight: "50",
-      marginTop: 2.5,
-    },
-  };
-
   return (
-    <View>
+    <View style={{ height: "100%" }}>
       <HeaderSub headLine={"How are you feeling today!"} />
-      <View></View>
-      <View style={styles.circleContainer}>
-        {emojis.map((emoji, index) => {
-          const x = radiusX * Math.cos(index * angle);
-          const y = radiusY * Math.sin(index * angle);
 
-          return (
-            <TouchableOpacity
-              key={index}
-              onPress={() => handlePress(index)}
-              style={[styles.emojiWrapper, { left: x, top: y }]}
+      <View>
+        <View style={styles.circleContainer}>
+          {emojis.map((emoji, index) => {
+            const x = radiusX * Math.cos(index * angle);
+            const y = radiusY * Math.sin(index * angle);
+
+            return (
+              <TouchableOpacity
+                key={index}
+                onPress={() => handlePress(index)}
+                style={[styles.emojiWrapper, { left: x, top: y }]}
+              >
+                <Text style={styles.emojiText}>{emoji.emoji}</Text>
+                <Text style={styles.moodtext}>{emoji.moodText}</Text>
+              </TouchableOpacity>
+            );
+          })}
+          {selectedEmoji && (
+            <View
+              style={[
+                styles.emojiWrapper,
+                {
+                  left: getCenterPosition(330, 300),
+                  top: getCenterPosition(390, 350),
+                },
+              ]}
             >
-              <Text style={styles.emojiText}>{emoji.emoji}</Text>
-              <Text style={styles.moodtext}>{emoji.moodText}</Text>
-            </TouchableOpacity>
-          );
-        })}
-        {selectedEmoji && (
-          <View
-            style={[
-              styles.emojiWrapper,
-              {
-                left: getCenterPosition(330, 300),
-                top: getCenterPosition(390, 350),
-              },
-            ]}
-          >
-            <Text style={styles.selectemoji}>{selectedEmoji}</Text>
-          </View>
-        )}
+              <Text style={styles.selectemoji}>{selectedEmoji}</Text>
+            </View>
+          )}
+        </View>
       </View>
 
       <TouchableOpacity style={styles.setMood} onPress={handlePressButton}>
@@ -197,5 +161,50 @@ const MoodAnalysis = () => {
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  circleContainer: {
+    position: "relative",
+    alignContent: "center",
+    alignSelf: "center",
+    marginTop: 130,
+    marginRight: 55,
+    justifyContent: "center",
+  },
+  emojiWrapper: {
+    position: "absolute",
+    alignItems: "center",
+    justifyContent: "center",
+    alignSelf: "center",
+  },
+  emojiText: {
+    fontSize: 50,
+  },
+  selectemoji: {
+    fontSize: 90,
+  },
+  setMood: {
+    justifyContent: "center",
+    alignSelf: "center",
+    position: "absolute",
+    width: 250,
+    height: 58,
+    backgroundColor: "#FFFFFF",
+    borderRadius: 75,
+    borderColor: "#4ABFB4",
+    borderWidth: 1,
+    bottom: 5,
+  },
+  mood: {
+    fontSize: 16,
+    alignSelf: "center",
+  },
+  moodtext: {
+    fontSize: 10,
+    alignSelf: "center",
+    fontweight: "50",
+    marginTop: 2.5,
+  },
+});
 
 export default MoodAnalysis;

@@ -5,6 +5,7 @@ import {
   ScrollView,
   TouchableOpacity,
   SafeAreaView,
+  Dimensions,
 } from "react-native";
 import { EmojiPicker } from "../AddNewJournalScreen/emoji";
 import styles from "../AddNewJournalScreen/styles";
@@ -17,9 +18,9 @@ import Toast from "react-native-toast-message";
 import { updateJournal } from "../../services/journalService/journalService";
 
 export const EditJournal = ({ navigation, route }) => {
-  const { item, itemTittle, itemText, itemEmoji } = route.params;
+  const screenHeight = Dimensions.get("window").height;
 
-  console.log("geee", itemEmoji);
+  const { item, itemTittle, itemText, itemEmoji } = route.params;
 
   const [title, setTitle] = useState(itemTittle);
   const [entry, setEntry] = useState(itemText);
@@ -55,7 +56,6 @@ export const EditJournal = ({ navigation, route }) => {
   };
 
   const itemEmojiMark = emojiToMark(itemEmoji);
-  console.log("parsed itemEmojiEdit:", itemEmojiMark); // Debug log
 
   // Ensure itemID is defined
   useEffect(() => {
@@ -78,7 +78,7 @@ export const EditJournal = ({ navigation, route }) => {
   }, []);
 
   const handleEditButton = async () => {
-    if (!itemEmojiMark) {
+    if (!itemEmoji) {
       Toast.show({
         type: "error",
         text1: "Your current feeling mood is required",
@@ -87,6 +87,7 @@ export const EditJournal = ({ navigation, route }) => {
     }
 
     getDate();
+    updateJournalEntry();
 
     if (!entry) {
       Toast.show({
@@ -97,20 +98,14 @@ export const EditJournal = ({ navigation, route }) => {
     }
   };
 
-  useEffect(() => {
-    if (date && time) {
-      const journalID = item;
-      const updateJournalEntry = async () => {
-        try {
-          await updateJournal(journalID, emoji, title, entry, time, date);
-          toggleOverlay();
-        } catch (error) {
-          console.error("Error:", error);
-        }
-      };
-      updateJournalEntry();
+  const updateJournalEntry = async () => {
+    try {
+      await updateJournal(item._id, emoji, title, entry, time, date);
+      toggleOverlay();
+    } catch (error) {
+      console.error("Error:", error);
     }
-  }, [date, time]);
+  };
 
   const handleEmojiPress = ({ emoji, mark }) => {
     setSelectedEmojiMarks((prevMarks) => `${prevMarks}${emoji}(${mark})`);
@@ -132,38 +127,41 @@ export const EditJournal = ({ navigation, route }) => {
       <HeaderSub
         headLine={"Edit Journal"}
         subHeadLine={"Edit your journals"}
-        back={"HomeScreen"}
+        back={"ViewJournal"}
       />
 
-      <CustomButton btnView={handleViewButton} />
+      <View style={{ height: screenHeight - 190, paddingTop: 15 }}>
+        <ScrollView>
+          <SafeAreaView style={styles.container}>
+            <Text style={styles.Text}>Feeling with</Text>
 
-      <ScrollView height={470}>
-        <SafeAreaView style={styles.container}>
-          <Text style={styles.Text}>Feeling with</Text>
+            <EmojiPicker onEmojiPress={handleEmojiPress} value={emoji} />
 
-          <EmojiPicker onEmojiPress={handleEmojiPress} value={emoji} />
+            <Text style={styles.Text1}>Journal Title</Text>
 
-          <Text style={styles.Text1}>Journal Title</Text>
+            <JournalTittle value={title} newText={setTitle} />
 
-          <JournalTittle value={title} newText={setTitle} />
+            <Text style={styles.Text2}>Write your journal</Text>
 
-          <Text style={styles.Text2}>Write your journal</Text>
+            <JournalEntry value={entry} newText={setEntry} />
 
-          <JournalEntry value={entry} newText={setEntry} />
+            <View>
+              <TouchableOpacity
+                style={styles.create}
+                onPress={handleEditButton}
+              >
+                <Text style={styles.createText}>Edit Journal</Text>
+              </TouchableOpacity>
 
-          <View>
-            <TouchableOpacity style={styles.create} onPress={handleEditButton}>
-              <Text style={styles.createText}>Edit Journal</Text>
-            </TouchableOpacity>
-
-            <Overlay
-              isVisible={isOverlayVisible}
-              onClose={toggleOverlay}
-              propbtnfunction={handleViewButton}
-            />
-          </View>
-        </SafeAreaView>
-      </ScrollView>
+              <Overlay
+                isVisible={isOverlayVisible}
+                onClose={toggleOverlay}
+                propbtnfunction={handleViewButton}
+              />
+            </View>
+          </SafeAreaView>
+        </ScrollView>
+      </View>
     </View>
   );
 };
