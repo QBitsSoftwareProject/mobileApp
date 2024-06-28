@@ -34,6 +34,7 @@ const styles = StyleSheet.create({
     color: "red",
     borderBottomLeftRadius: 40,
     borderBottomRightRadius: 40,
+    marginBottom: 32,
   },
   backBtn: {
     marginTop: 25,

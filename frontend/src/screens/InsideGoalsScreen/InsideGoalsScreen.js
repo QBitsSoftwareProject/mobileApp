@@ -15,6 +15,7 @@ import {
   getAGoal,
   updateCompleteness,
 } from "../../services/goalsService/goalsService";
+import loadingGif from "../../assets/animation/loading.gif";
 import { getAUser } from "../../services/userServices/userService";
 
 const InsideGoalsScreen = ({ route }) => {
@@ -91,7 +92,18 @@ const InsideGoalsScreen = ({ route }) => {
   };
 
   if (!goal || (!selectedGoal && tab == "viewGoals")) {
-    return;
+    return (
+      <View
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          height: "100%",
+        }}
+      >
+        <Image source={loadingGif} />
+      </View>
+    );
   }
 
   return (

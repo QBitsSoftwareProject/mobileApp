@@ -6,12 +6,15 @@ import {
   StyleSheet,
   TouchableOpacity,
   Image,
+  Dimensions,
 } from "react-native";
 import CustomBarChart from "./CustomBarChart";
 import HeaderSubSug from "../SuggestionsScreen/HeaderSubSug";
 import { useNavigation } from "@react-navigation/native";
 
 const MonthlyAnalysisGraph = () => {
+  const screenHeight = Dimensions.get("window").height;
+
   const navigation = useNavigation();
   const positiveMoods = ["😄", "😍"]; // Add appropriate emojis for positive moods
   const negativeMoods = ["😐", "😭", "😡", "😟", "🥱", "😨"]; // Add appropriate emojis for negative moods
@@ -28,7 +31,7 @@ const MonthlyAnalysisGraph = () => {
         back="HomeScreen"
       />
       <Text style={styles.text}>Analysis of your past 30 days mood inputs</Text>
-      <ScrollView height={470}>
+      <ScrollView height={screenHeight - 300}>
         <CustomBarChart
           positiveMoods={positiveMoods}
           negativeMoods={negativeMoods}
@@ -80,7 +83,7 @@ const styles = StyleSheet.create({
   setMood: {
     justifyContent: "center",
     alignSelf: "center",
-    marginTop: 30,
+    marginTop: 42,
     width: 250,
     height: 58,
     backgroundColor: "#FFFFFF",

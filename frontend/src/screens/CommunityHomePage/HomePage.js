@@ -79,7 +79,7 @@ const HomePage = () => {
       >
         <ScrollView style={{ height: "100%", paddingTop: 15 }}>
           {/* post cards list*/}
-          <View style={{ paddingBottom: 20 }}>
+          <View style={{ paddingBottom: 50 }}>
             {postList.map((item) => (
               <PostCard
                 postId={item._id}

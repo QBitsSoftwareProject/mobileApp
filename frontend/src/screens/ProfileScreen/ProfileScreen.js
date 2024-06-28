@@ -16,6 +16,7 @@ import React, { useEffect, useContext, useState } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { getAUser, updateAUser } from "../../services/userServices/userService";
 import { imageDb } from "../../config/firebase";
+import loadingGif from "../../assets/animation/loading.gif";
 import {
   getDownloadURL,
   ref,
@@ -83,28 +84,6 @@ const ProfileScreen = () => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-
-  // useEffect(() => {
-  //   const fetchUser = async () => {
-  //     try {
-  //       if(userRole === 'regularUser'){
-  //       const userData = await getAUser();
-  //       setUser(userData);
-  //       }
-  //       if(userRole === 'doctor'){
-  //         const userData = await getADoctor();
-  //         setUser(userData);
-  //       }
-
-  //     } catch (err) {
-  //       setError(err.message);
-  //     } finally {
-  //       setLoading(false);
-  //     }
-  //   };
-
-  //   fetchUser();
-  // }, []);
 
   const [fullName, setFullName] = useState("");
   const [userName, setUserName] = useState("");
@@ -537,20 +516,45 @@ const ProfileScreen = () => {
     }
   };
 
+  if (!user) {
+    return (
+      <View
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          height: "100%",
+        }}
+      >
+        <Image source={loadingGif} />
+      </View>
+    );
+  }
+
   return (
-    <View>
-      <View>
-        <TouchableOpacity onPress={handlebackBtn}>
+    <SafeAreaView>
+      <View
+        style={{
+          flexDirection: "row",
+          alignItems: "center",
+          marginTop: 60,
+          marginBottom: 40,
+        }}
+      >
+        <TouchableOpacity
+          onPress={handlebackBtn}
+          style={{ position: "absolute" }}
+        >
           <Image
             source={require("../../assets/images/backProfile.png")}
-            style={{ marginTop: 50, marginLeft: 25, width: 50, height: 50 }}
+            style={{ marginLeft: 25, width: 50, height: 50 }}
           />
         </TouchableOpacity>
-      </View>
 
-      <Text style={{ alignSelf: "center", marginTop: 15, fontSize: 20 }}>
-        Profile
-      </Text>
+        <Text style={{ textAlign: "center", fontSize: 20, width: "100%" }}>
+          Profile
+        </Text>
+      </View>
 
       <View style={styles.imageEdit}>
         <View style={styles.imageEditLeft}>
@@ -571,7 +575,7 @@ const ProfileScreen = () => {
                   <TouchableOpacity onPress={togglePopupProPic}>
                     <Image
                       source={require("../../assets/images/ProfileIcons/profileLayout.png")}
-                      style={{ width: 130, height: 130 }}
+                      style={{ width: 130, height: 130, opacity: 0.7 }}
                     ></Image>
                   </TouchableOpacity>
                 </View>
@@ -592,7 +596,9 @@ const ProfileScreen = () => {
       </View>
 
       <View style={styles.editInfo}>
-        <Text style={{ fontSize: 18, marginBottom: 22 }}>Your Info</Text>
+        <Text style={{ fontSize: 18, marginBottom: 22, marginLeft: 15 }}>
+          Your Info
+        </Text>
         <ScrollView contentContainerStyle={{ flexGrow: 1, paddingBottom: 780 }}>
           {user && (
             <>
@@ -790,7 +796,7 @@ const ProfileScreen = () => {
         setavailableDays={setavailableDays}
         availableDays={availableDays}
       />
-    </View>
+    </SafeAreaView>
   );
 };
 

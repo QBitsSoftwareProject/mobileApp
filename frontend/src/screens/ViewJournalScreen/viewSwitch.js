@@ -44,10 +44,6 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 20,
     borderBottomLeftRadius: 20,
     borderBottomRightRadius: 20,
-    justifyContent: "center",
-    alignItems: "center",
-    left: 65,
-    marginBottom: 32,
   },
   veiwButton: {
     flex: 1,

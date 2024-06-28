@@ -103,6 +103,6 @@ const averageTotalWeight = () => {
   if (moodCount.total === 0) {
     return 1;
   }
-
-  return total / moodCount.total;
+  const avgWeight = total / moodCount.total;
+  return avgWeight.toFixed(3);
 };

@@ -38,9 +38,6 @@ export const JournalTittle = ({ newText, value }) => {
           value={inputTittle}
           onChangeText={handleInputChange}
         />
-        <TouchableOpacity style={styles.edit}>
-          <Image source={require("../../assets/images/journal/title.png")} />
-        </TouchableOpacity>
       </View>
     </View>
   );
@@ -59,12 +56,11 @@ const styles = StyleSheet.create({
   },
 
   input: {
-    height: 69,
     backgroundColor: "white",
-    borderRadius: 20,
+    borderRadius: 10,
     // width: ,
-    paddingHorizontal: 15,
-    lineHeight: 20,
+    padding: 15,
+
     fontSize: 14,
     fontWeight: "400",
     flex: 1,

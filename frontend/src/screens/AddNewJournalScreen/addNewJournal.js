@@ -5,6 +5,7 @@ import {
   ScrollView,
   TouchableOpacity,
   SafeAreaView,
+  Dimensions,
 } from "react-native";
 import { EmojiPicker } from "./emoji";
 import styles from "../AddNewJournalScreen/styles";
@@ -21,6 +22,8 @@ import { updateTaskCompleteness } from "../../services/taskServices/taskservice"
 
 //AddNewJournal function
 export const AddNewJournal = ({ navigation }) => {
+  const screenHeight = Dimensions.get("window").height;
+
   const route = useRoute();
   const [isOverlayVisible, setOverlayVisible] = useState(false); // Set state to visible popup
   const [selectedEmojiMarks, setSelectedEmojiMarks] = useState(""); // Set marks in selected emoji
@@ -120,48 +123,48 @@ export const AddNewJournal = ({ navigation }) => {
       <HeaderSub
         headLine={"Add New Journal"}
         subHeadLine={"Welcome to our mindful haven"}
-        back={"HomeScreen"}
+        back={"ViewJournal"}
       />
 
-      <CustomButton btnView={handleViewButton} />
+      <View style={{ height: screenHeight - 250 }}>
+        <ScrollView style={{ paddingTop: 15 }}>
+          <SafeAreaView style={styles.container}>
+            <Text style={styles.Text}>Select Your Mood</Text>
 
-      <ScrollView height={470}>
-        <SafeAreaView style={styles.container}>
-          <Text style={styles.Text}>Select Your Mood</Text>
-
-          <EmojiPicker
-            onEmojiPress={handleEmojiPress}
-            imoji={emoji} // Pass the current emoji state to the EmojiPicker
-          />
-
-          <Text style={styles.Text1}>Journal Title</Text>
-
-          <JournalTittle
-            style={styles.tittlejournal}
-            value={tittle}
-            newText={setTittle}
-          />
-
-          <Text style={styles.Text2}>Write your journal</Text>
-
-          <JournalEntry value={journalEntry} newText={setJournalEntry} />
-
-          <View>
-            <TouchableOpacity
-              style={styles.create}
-              onPress={handleCreateButton}
-            >
-              <Text style={styles.createText}>Create Journal</Text>
-            </TouchableOpacity>
-
-            <Overlay
-              isVisible={isOverlayVisible}
-              onClose={toggleOverlay}
-              propbtnfunction={handleViewButton}
+            <EmojiPicker
+              onEmojiPress={handleEmojiPress}
+              imoji={emoji} // Pass the current emoji state to the EmojiPicker
             />
-          </View>
-        </SafeAreaView>
-      </ScrollView>
+
+            <Text style={styles.Text1}>Journal Title</Text>
+
+            <JournalTittle
+              style={styles.tittlejournal}
+              value={tittle}
+              newText={setTittle}
+            />
+
+            <Text style={styles.Text2}>Write your journal</Text>
+
+            <JournalEntry value={journalEntry} newText={setJournalEntry} />
+
+            <View>
+              <TouchableOpacity
+                style={styles.create}
+                onPress={handleCreateButton}
+              >
+                <Text style={styles.createText}>Create Journal</Text>
+              </TouchableOpacity>
+
+              <Overlay
+                isVisible={isOverlayVisible}
+                onClose={toggleOverlay}
+                propbtnfunction={handleViewButton}
+              />
+            </View>
+          </SafeAreaView>
+        </ScrollView>
+      </View>
     </View>
   );
 };

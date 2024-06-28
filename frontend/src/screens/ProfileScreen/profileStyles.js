@@ -1,44 +1,35 @@
-import { StyleSheet } from 'react-native'
-
+import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
-  
-    imageEdit:{
-        width:"100%",
-        height:146,
-        backgroundColor:'white',
-        marginTop:15,
-        borderRadius:15,
-        flexDirection:'row'
-    },
+  imageEdit: {
+    width: "100%",
+    height: 146,
+    backgroundColor: "white",
+    marginBottom: 15,
+    borderRadius: 15,
+    flexDirection: "row",
+  },
 
-    imageEditRight:{
-        flex:7,
-        paddingTop:15
-        
-    },
+  imageEditRight: {
+    flex: 7,
+    paddingTop: 15,
+  },
 
-    imageEditLeft:{
-        flex:5,
+  imageEditLeft: {
+    flex: 5,
 
-        alignItems:'center',
-        justifyContent:'center'
-        
-    },
+    alignItems: "center",
+    justifyContent: "center",
+  },
 
+  editInfo: {
+    width: "100%",
+    height: "auto",
+    backgroundColor: "white",
+    marginTop: 15,
+    borderRadius: 15,
+    padding: 15,
+  },
+});
 
-    editInfo:{
-        width:"100%",
-        height:'auto',
-        backgroundColor:'white',
-        marginTop:15,
-        borderRadius:15,
-        padding:15,
-        
-    },
-
-
-
-})
-
-export default styles
+export default styles;

@@ -16,7 +16,7 @@ const styles = StyleSheet.create({
   nextBtn: {
     height: 58,
     width: 258,
-    borderRadius: 20,
+    borderRadius: 30,
     borderColor: "#4ABFB4",
     borderWidth: 2,
     alignItems: "center",
@@ -35,6 +35,7 @@ const styles = StyleSheet.create({
     marginBottom: 100,
     paddingLeft: 15,
     paddingRight: 15,
+    backgroundColor: "white",
   },
 });
 
