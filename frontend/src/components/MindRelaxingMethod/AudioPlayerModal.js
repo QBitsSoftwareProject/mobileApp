@@ -28,6 +28,8 @@ const AudioPlayerModal = ({ visible, onClose, audioSource,img, name }) => {
     onClose();
   };
 
+ 
+
   return (
     <Modal
       visible={visible}
@@ -37,7 +39,7 @@ const AudioPlayerModal = ({ visible, onClose, audioSource,img, name }) => {
     >
       <View style={styles.modalContainer}>
         <View style={styles.modalContent}>
-          <AudioPlayer audioSource={audioSource} onStop={handleStopAndClose}imglink = {imgLink} title = {name} />
+          <AudioPlayer audioSource={audioSource} onStop={handleStopAndClose}imglink = {img} title = {name} />
           <View style={styles.buttonContainer} >
             {/* <Button title="Stopp and Close" onPress={handleStopAndClose} /> */}
           </View>

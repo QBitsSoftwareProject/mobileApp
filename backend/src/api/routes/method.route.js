@@ -7,6 +7,8 @@ const {
   storeMethod,
   getAllMethods,
   updateMethod,
+  getMethodById,
+  deleteMethodById
 } = require("../controllers/mindRelaxingMethodController/method.controller");
 const {
   methodSuggestion,
@@ -14,9 +16,11 @@ const {
 
 router.post("/add-method", storeMethod);
 router.get("/get-method", getAllMethods);
-router.post("/update-method/:id", updateMethod);
+router.put("/update-method/:id", updateMethod);
+router.get("/get-methodbyid/:id", getMethodById);
+router.delete("/delete-methodbyid/:id", deleteMethodById);
 
-//method suggestion
+//method suggestion 
 router.post("/video-suggestion", auth, methodSuggestion);
 
 module.exports = router;

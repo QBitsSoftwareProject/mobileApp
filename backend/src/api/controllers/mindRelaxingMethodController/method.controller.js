@@ -37,13 +37,16 @@ const getAllMethods = asyncHandler (async (req,res) => {
 
  const updateMethod = asyncHandler(async(req,res) => {
     
-    const id = req.params.id
+    const {id} = req.params;
+
+    console.log(req.body)
 
     const checkInstance = await methodModel.findById(id);
 
     if(checkInstance){
 
-        const response = await methodModel.findByIdAndUpdate(id, {...req.body})
+        const response = await methodModel.findByIdAndUpdate(id, {...req.body},{ new: true })
+        
 
         if(response){
             res.status(200).json(response);
@@ -58,10 +61,46 @@ const getAllMethods = asyncHandler (async (req,res) => {
 
 })
 
+
+const getMethodById = asyncHandler(async (req, res) => {
+    const { id } = req.params;
+    
+    try {
+        const method = await methodModel.findById(id);
+        
+        if (method) {
+            res.status(200).json(method);
+        } else {
+            res.status(404).json({ message: "Method not found" });
+        }
+    } catch (error) {
+        res.status(500).json({ message: "Error retrieving method", error });
+    }
+});
+
+const deleteMethodById = asyncHandler(async (req, res) => {
+    const { id } = req.params;
+    
+    try {
+        const method = await methodModel.findByIdAndDelete(id);
+        
+        if (method) {
+            res.status(200).json({ message: "Method deleted successfully" });
+        } else {
+            res.status(404).json({ message: "Method not found" });
+        }
+    } catch (error) {
+        res.status(500).json({ message: "Error deleting method", error });
+    }
+})
+
+
 module.exports = {
     storeMethod,
     getAllMethods,
-    updateMethod
+    updateMethod,
+    getMethodById,
+    deleteMethodById
     
 };
 

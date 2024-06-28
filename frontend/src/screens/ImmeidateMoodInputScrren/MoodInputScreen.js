@@ -39,7 +39,7 @@ const MoodInputScreen = () => {
     const windowHeight = windowSize.height;
     setScreenHeight(windowHeight);
 
-    setUserId("214224J");
+    
 
     if (optionValue === "happy") {
       setHappy(1);
@@ -62,22 +62,10 @@ const MoodInputScreen = () => {
       setNeutral(0);
       setWorried(1);
     } else {
-      console.log("wrong value");
+      
     }
   }, [optionValue]);
 
-  const getdata = async () => {
-    try {
-      const data = await fetchCurrentMoodInput();
-      console.log(data);
-    } catch (error) {
-      console(error);
-    }
-  };
-
-  useEffect(() => {
-    getdata();
-  }, []);
 
   const handleSubmitBtn = async () => {
     if (optionValue) {

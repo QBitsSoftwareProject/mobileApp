@@ -14,12 +14,14 @@ const {
   findSuggestedAudio,
 } = require("../../services/mindRelaxingMethods/audioSuggestion");
 
-exports.methodSuggestion = async (req, res) => {
+const methodSuggestion = async (req, res) => {
   try {
     const { inputMood } = req.body;
 
+    console.log(inputMood)
+
     if (!inputMood) {
-      return res.status(400).send("Mood is required");
+      return res.status(400).send("Mood is required"); 
     }
 
     //get average mood weight
@@ -119,4 +121,10 @@ const topRatingMethod = (arr) => {
   return Object.values(arr).flatMap((item) => {
     return item.slice(0, 1);
   });
+};
+
+
+module.exports = {
+  methodSuggestion
+  
 };

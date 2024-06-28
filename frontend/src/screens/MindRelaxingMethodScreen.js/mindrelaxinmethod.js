@@ -11,8 +11,9 @@ import HeaderSub from "../../components/HeaderSub/HeaderSub";
 import ExpandableCard from "../../components/MindRelaxingMethod/ExpandCard";
 import { CustomButton } from "../../components/MindRelaxingMethod/DoubleButton";
 import { useNavigation } from "@react-navigation/native";
-import { fetchMindRelaxingMethod } from "../../services/mindRelaxingMethodService/mindRelaxingMethodService";
+import { fetchMindRelaxingMethod , fetchMindRelaxingMethodSuggestion} from "../../services/mindRelaxingMethodService/mindRelaxingMethodService";
 import loadingGif from "../../assets/animation/loading.gif";
+import { fetchCurrentMoodInput  } from "../../services/currentMoodInputServices/currentMoodInputServices";
 
 const Mindrelaxinmethod = () => {
   const [userID, setUserId] = useState("");
@@ -25,25 +26,95 @@ const Mindrelaxinmethod = () => {
   const navigation = useNavigation();
 
   //still not merge to stress level assessment branch so assing a valu yo stress level
-  let yourMark;
-  yourMark = 15;
+  
 
-  //to fetch methods by stress level
+  const [moodArray,setMoodArray] = useState('');
+  const [happy,setHappy] = useState();
+  const [sad,setSad] = useState();
+  const [neutral,setNeutral] = useState();
+  const [worried,setWorried] = useState();
+  const [currentMood,setCurrentMood] = useState('')
+
+  const getdata = async () => {
+    try {
+      const data = await fetchCurrentMoodInput();
+      setMoodArray(data)
+    } catch (error) {
+      console.log(error); 
+    } 
+  };
+
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetchMindRelaxingMethod();
+    getdata();
+  },[moodArray]);   
 
-        setData(response);
-      } catch (error) {
-        console.log(error);
-      }
-    };
+  useEffect(() => {
+ if(moodArray){
+    setHappy(moodArray[0].happy);
+    setSad(moodArray[0].sad) 
+    setNeutral(moodArray[0].neutral)
+    setWorried(moodArray[0].worried)
+      
+} 
+  },[moodArray]);  
+  
 
-    fetchData();
-  }, []);
 
-  if (!filteredData) {
+useEffect(() => {
+   let mood;
+    
+    if(happy === 1){
+      mood = 'happy'
+    }
+    if(sad === 1){
+      mood = 'sad'
+    }
+
+    if(neutral === 1){
+      mood = 'neutral'
+    }
+    if(worried === 1){
+      mood = 'worried'
+    }
+
+    setCurrentMood(mood)
+    
+   },[happy,sad,neutral,worried]); 
+
+    const [suggestionArray,setSuggestionArray] = useState('')
+    const [pdf,setPdf] = useState('')
+    const [video,setVideo] = useState('')
+    const [audio,setAudio] = useState('');
+    const [suggestion,setSuggestion] = useState('')
+
+   const getSuggestions = async () => {
+    try {
+      const response = await fetchMindRelaxingMethodSuggestion(currentMood)
+      setSuggestionArray(response) 
+      setPdf(response.pdf) 
+      setVideo(response.video)
+      setAudio(response.audio)
+   
+
+    } catch (error) {
+      // console.log(error); 
+    } 
+  };
+
+  useEffect(() => {
+    getSuggestions();
+  },[currentMood]);  
+  
+  useEffect(() => {
+
+  let combinedArray = pdf.concat(video, audio)
+    setSuggestion(combinedArray);
+  },[pdf,video,audio]);
+   
+
+ 
+
+  if (!suggestion) {
     return (
       <View
         style={{
@@ -51,7 +122,7 @@ const Mindrelaxinmethod = () => {
           justifyContent: "center",
           alignItems: "center",
           height: "100%",
-        }}
+        }} 
       >
         <Image source={loadingGif} />
       </View>
@@ -81,9 +152,9 @@ const Mindrelaxinmethod = () => {
       <ScrollView>
         <CustomButton resultBtnFunction={resultBtnFunction}></CustomButton>
 
-        {filteredData.map((item) => (
+        {suggestion.map((item,index) => (
           <ExpandableCard
-            key={item._id}
+            key={index}
             methodname={item.resouceName}
             contentText={item.discription}
             imgLink={item.imageURL}
