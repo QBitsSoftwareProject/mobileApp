@@ -19,14 +19,43 @@ import { updateJournal } from "../../services/journalService/journalService";
 export const EditJournal = ({ navigation, route }) => {
   const { item, itemTittle, itemText, itemEmoji } = route.params;
 
+  console.log("geee", itemEmoji);
+
   const [title, setTitle] = useState(itemTittle);
   const [entry, setEntry] = useState(itemText);
   const [newMood, setNewMood] = useState(itemEmoji);
 
   const [selectedEmojiMarks, setSelectedEmojiMarks] = useState("");
-  const [emoji, setEmoji] = useState(String(itemEmoji));
+  const [emoji, setEmoji] = useState(itemEmojiMark);
   const [date, setDate] = useState("");
   const [time, setTime] = useState("");
+
+  // Function to convert emoji to mark value
+  const emojiToMark = (emoji) => {
+    switch (emoji) {
+      case "😊":
+        return 10;
+      case "😭":
+        return 20;
+      case "😡":
+        return 30;
+      case "😍":
+        return 40;
+      case "😨":
+        return 50;
+      case "😐":
+        return 60;
+      case "🥱":
+        return 70;
+      case "😟":
+        return 80;
+      default:
+        return null;
+    }
+  };
+
+  const itemEmojiMark = emojiToMark(itemEmoji);
+  console.log("parsed itemEmojiEdit:", itemEmojiMark); // Debug log
 
   // Ensure itemID is defined
   useEffect(() => {
@@ -49,7 +78,7 @@ export const EditJournal = ({ navigation, route }) => {
   }, []);
 
   const handleEditButton = async () => {
-    if (!emoji) {
+    if (!itemEmojiMark) {
       Toast.show({
         type: "error",
         text1: "Your current feeling mood is required",

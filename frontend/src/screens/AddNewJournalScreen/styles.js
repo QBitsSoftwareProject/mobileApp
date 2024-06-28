@@ -9,20 +9,21 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: "400",
     color: "#101318",
-    marginBottom: 7,
+    marginBottom: 10,
   },
   Text1: {
     color: "#101318",
     fontSize: 18,
     fontWeight: "400",
     marginBottom: 15,
+    marginTop: 15,
   },
   Text2: {
     color: "#101318",
     fontSize: 18,
     fontWeight: "400",
     marginBottom: 15,
-    marginTop: 32,
+    marginTop: 15,
   },
   create: {
     backgroundColor: "#ffffff",

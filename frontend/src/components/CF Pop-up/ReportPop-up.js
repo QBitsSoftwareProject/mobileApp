@@ -1,13 +1,14 @@
 import React, { useState } from "react";
 import { StyleSheet, View, Text, Modal, TouchableOpacity } from "react-native";
 import { RadioButton } from "react-native-paper";
+import { createReport } from "../../services/reportServices/reportServices";
 
-const ReportPopupMessage = ({ message, onClose }) => {
+const ReportPopupMessage = ({ message, onClose, postId }) => {
   const [select, setSelect] = useState();
 
   const handleSaveButtonPress = async () => {
     try {
-      console.log("Selected option:", select);
+      await createReport(postId, select);
       onClose();
     } catch (error) {
       console.log(error);

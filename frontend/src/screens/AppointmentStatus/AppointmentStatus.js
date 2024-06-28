@@ -37,7 +37,7 @@ const AppointmentStatus = () => {
 
       <SafeAreaView style={{ margin: 25 }}>
         <ScrollView style={{ height: 500 }}>
-          <TwoButtonGroup type={"status"} />
+          {/* <TwoButtonGroup type={"status"} /> */}
           <View style={{ marginHorizontal: 15, marginVertical: 15 }}>
             <Text style={styles.descript2}>Appointment Status.</Text>
           </View>

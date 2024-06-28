@@ -34,7 +34,6 @@ const taskSchema = new schema({
     type: String,
     enum: ["resource", "journal", "community", "none"],
   },
-
   taskNumber: {
     type: String,
     require: true,

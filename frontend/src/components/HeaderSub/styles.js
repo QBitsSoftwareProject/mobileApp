@@ -15,13 +15,12 @@ const styles = StyleSheet.create({
     fontWeight: "600",
     fontSize: 32,
     color: "white",
-    marginTop: 15,
   },
   subHeadlineTxt: {
     fontWeight: "500",
     fontSize: 18,
     color: "white",
-    marginTop: 7,
+    marginVertical: 8,
   },
   backImg: {
     paddingRight: 25,

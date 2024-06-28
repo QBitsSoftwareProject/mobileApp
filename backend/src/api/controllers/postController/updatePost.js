@@ -5,6 +5,12 @@ exports.updatePost = async (req, res) => {
     const { postId } = req.params;
     const userId = req.user.user_id;
 
+    const relevantPost = await postSchema.findById(postId);
+
+    if (!relevantPost) {
+      return res.status(404).json({ message: "Post not found" });
+    }
+
     // Destructuring the request body to extract post details
     const { newDescription, newImage } = req.body;
 
@@ -13,12 +19,6 @@ exports.updatePost = async (req, res) => {
       description: newDescription,
       image: newImage,
     };
-
-    const relevantPost = await postSchema.findById(postId);
-
-    if (!updatePost) {
-      return res.status(404).json({ message: "Post not found" });
-    }
 
     if (relevantPost.userId == userId) {
       // Finding and updating the post by ID

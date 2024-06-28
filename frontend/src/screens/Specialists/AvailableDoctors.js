@@ -1,15 +1,20 @@
-import { Text, ScrollView, View } from "react-native";
+import {
+  Text,
+  ScrollView,
+  View,
+  TouchableOpacity,
+  Dimensions,
+} from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import style from "./style";
 import CreateCard from "../../components/Card/CreateCard";
-import HeaderSub from "../../components/HeaderSub/HeaderSub";
 import { useNavigation } from "@react-navigation/native";
-import SearchBar from "../../components/SearchBar/SearchBar";
 import { useEffect, useState } from "react";
-import TwoButtonGroup from "../../components/Button/2ButtonGroup";
 import { getDoctors } from "../../services/doctorServices/doctorService";
+import AppointmentHeader from "../../components/AppointmentHeader/AppointmentHeader";
 
 const AvailableDoctor = () => {
+  const screenHeight = Dimensions.get("window").height - 275;
   const navigation = useNavigation();
 
   const [docList, setDocList] = useState([]);
@@ -33,22 +38,25 @@ const AvailableDoctor = () => {
 
   return (
     <View>
-      <HeaderSub
-        headLine={"Doctor appointment"}
+      <AppointmentHeader
+        headLine={"Specialists"}
         subHeadLine={"Explore and find the perfect specialist."}
         back={"HomeScreen"}
       />
-
-      <SafeAreaView style={{ padding: 20 }}>
-        <ScrollView style={{ height: 500 }}>
-          <TwoButtonGroup type={"list"} />
-
-          <View style={{ paddingVertical: 15 }}>
-            <SearchBar />
-          </View>
-
-          <View style={{ marginHorizontal: 15 }}>
+      <SafeAreaView
+        style={{ height: screenHeight, paddingHorizontal: 25, paddingTop: 15 }}
+      >
+        <ScrollView style={{ height: "100%" }}>
+          <View style={style.content1}>
             <Text style={style.descript2}>Available Doctors.</Text>
+            <TouchableOpacity
+              style={style.viewBtn}
+              onPress={() => {
+                navigation.navigate("AppointmentStatus");
+              }}
+            >
+              <Text style={style.viewText}>History</Text>
+            </TouchableOpacity>
           </View>
 
           {/* available doctors */}

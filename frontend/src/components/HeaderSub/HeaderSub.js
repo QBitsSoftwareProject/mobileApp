@@ -22,12 +22,15 @@ const HeaderSub = (props) => {
         source={require("../../assets/images/blueSqures.png")}
         style={styles.backImg}
       >
-        <TouchableOpacity style={styles.backBtn} onPress={handleBackPress}>
-          <Image source={require("../../assets/images/BackWhite.png")} />
-        </TouchableOpacity>
-
-        <Text style={styles.headlineTxt}>{props.headLine}</Text>
-        <Text style={styles.subHeadlineTxt}>{props.subHeadLine}</Text>
+        <View>
+          <TouchableOpacity style={styles.backBtn} onPress={handleBackPress}>
+            <Image source={require("../../assets/images/BackWhite.png")} />
+          </TouchableOpacity>
+          <View>
+            <Text style={styles.headlineTxt}>{props.headLine}</Text>
+            <Text style={styles.subHeadlineTxt}>{props.subHeadLine}</Text>
+          </View>
+        </View>
       </ImageBackground>
     </View>
   );

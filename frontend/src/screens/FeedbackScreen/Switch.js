@@ -23,7 +23,7 @@ export const QuestionButton = ({ qtext, btnFunction }) => {
           size="medium"
           onToggle={(isOn) => {
             setOn(isOn);
-            btnFunction(isOn ? 0 : 1);
+            btnFunction(isOn ? 1 : 0);
           }}
         />
       </View>

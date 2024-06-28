@@ -8,7 +8,6 @@ import {
   StyleSheet,
 } from "react-native";
 import React, { useEffect, useState } from "react";
-// import styles from "./styles";
 import { getSearchProfile } from "../../services/postServices/postServices";
 import { useNavigation } from "@react-navigation/native";
 
@@ -20,7 +19,7 @@ const SearchBar = () => {
 
   const fetchSearchResult = async () => {
     try {
-      const res = await getSearchProfile(textInputValue);
+      const res = await getSearchProfile(textInputValue, "profile");
       setUserList(res);
     } catch (error) {
       console.error("Error searching users:", error);
