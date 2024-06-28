@@ -155,6 +155,7 @@ useEffect(() => {
         {suggestion.map((item,index) => (
           <ExpandableCard
             key={index}
+            methodId = {item._id}
             methodname={item.resouceName}
             contentText={item.discription}
             imgLink={item.imageURL}

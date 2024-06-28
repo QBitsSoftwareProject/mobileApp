@@ -8,7 +8,7 @@ const SuccessToast = ({ text1, text2 }) => (
   <View style={{ flexDirection: 'row', alignItems: 'center' }}>
     <BaseToast
       style={{ borderLeftColor: 'green', borderRadius: 15 }}
-      contentContainerStyle={{ paddingHorizontal: 15, flexDirection: 'row', alignItems: 'center' }}
+      contentContainerStyle={{ paddingHorizontal: 15, flexDirection: 'column', alignItems: 'center' }}
       text1={text1}
       text2={text2}
       text1Style={{
@@ -17,8 +17,8 @@ const SuccessToast = ({ text1, text2 }) => (
         
       }}
       text2Style={{
-        fontSize: 13,
-        color: 'green'
+        fontSize: 12,
+        color: 'gray'
       }}
     />
     
