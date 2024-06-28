@@ -27,35 +27,39 @@ export const EditJournal = ({ navigation, route }) => {
   const [newMood, setNewMood] = useState(itemEmoji);
 
   const [selectedEmojiMarks, setSelectedEmojiMarks] = useState("");
-  const [emoji, setEmoji] = useState(itemEmojiMark);
+  const [emoji, setEmoji] = useState(itemEmojiString);
   const [date, setDate] = useState("");
   const [time, setTime] = useState("");
 
+  // console.log("pre", itemEmoji);
+  // console.log("now", emoji);
+
   // Function to convert emoji to mark value
-  const emojiToMark = (emoji) => {
-    switch (emoji) {
-      case "😊":
-        return 10;
-      case "😭":
-        return 20;
-      case "😡":
-        return 30;
-      case "😍":
-        return 40;
-      case "😨":
-        return 50;
-      case "😐":
-        return 60;
-      case "🥱":
-        return 70;
-      case "😟":
-        return 80;
+  const markToEmoji = (mark) => {
+    switch (mark) {
+      case 10:
+        return "😊";
+      case 20:
+        return "😭";
+      case 30:
+        return "😡";
+      case 40:
+        return "😍";
+      case 50:
+        return "😨";
+      case 60:
+        return "😐";
+      case 70:
+        return "🥱";
+      case 80:
+        return "😟";
       default:
         return null;
     }
   };
 
-  const itemEmojiMark = emojiToMark(itemEmoji);
+  const itemEmojiString = markToEmoji(itemEmoji);
+  // console.log("prev", itemEmojiString);
 
   // Ensure itemID is defined
   useEffect(() => {
@@ -100,7 +104,7 @@ export const EditJournal = ({ navigation, route }) => {
 
   const updateJournalEntry = async () => {
     try {
-      await updateJournal(item._id, emoji, title, entry, time, date);
+      await updateJournal(item._id, emoji, title, entry, time);
       toggleOverlay();
     } catch (error) {
       console.error("Error:", error);
