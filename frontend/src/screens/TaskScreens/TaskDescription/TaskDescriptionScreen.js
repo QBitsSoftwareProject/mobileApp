@@ -26,8 +26,6 @@ const TaskDescriptionScreen = () => {
 
   const { taskId, completeness, index, type } = route.params;
 
-  const screenHeight = Dimensions.get("screen").height;
-
   useEffect(() => {
     fetchTask();
   }, []);

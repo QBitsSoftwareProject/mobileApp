@@ -16,7 +16,6 @@ const {
 
 const methodSuggestion = async (req, res) => {
   try {
-    const userId = req.user.user_id;
     const { inputMood } = req.body;
 
     console.log(inputMood)

@@ -9,18 +9,20 @@ import {
 
 const RatingPopUp = ({ message, onClose, goalId, title }) => {
   const [select, setSelect] = useState();
-  const [rateValue, setRateValue] = useState(0);
+  const [rateValue, setRateValue] = useState(null);
 
   const handleSaveButtonPress = async () => {
     try {
-      await updateAGoal(goalId, {
-        currentRating: rateValue,
-        ratingCount: 1,
-      });
+      if (rateValue) {
+        await updateAGoal(goalId, {
+          currentRating: rateValue,
+          ratingCount: 1,
+        });
 
-      //update user rating state
-      await userGoalRating(goalId);
-      onClose();
+        //update user rating state
+        await userGoalRating(goalId);
+        onClose();
+      }
     } catch (error) {
       console.log(error);
     }

@@ -28,7 +28,8 @@ const AppointmentHeader = (props) => {
             width: "100%",
             flexDirection: "row",
             alignItems: "center",
-            justifyContent: "space-between",
+            marginTop: 20,
+            gap: 32,
           }}
         >
           <TouchableOpacity style={styles.backBtn} onPress={handleBackPress}>
@@ -40,8 +41,8 @@ const AppointmentHeader = (props) => {
           </View>
         </View>
 
-        <View style={{ marginTop: 50 }}>
-          <SearchBar />
+        <View style={{ marginTop: 20 }}>
+          <SearchBar schema={"doctor"} />
         </View>
       </ImageBackground>
     </View>
@@ -56,9 +57,7 @@ const styles = StyleSheet.create({
     borderBottomLeftRadius: 40,
     borderBottomRightRadius: 40,
   },
-  backBtn: {
-    marginTop: 50,
-  },
+
   headlineTxt: {
     fontWeight: "600",
     fontSize: 32,

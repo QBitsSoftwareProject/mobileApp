@@ -20,6 +20,8 @@ const videoRouter = require("./api/routes/resourcesRoute/videoRoute.js");
 const audioRouter = require("./api/routes/resourcesRoute/audioRoute.js");
 const articleRouter = require("./api/routes/resourcesRoute/articleRoute.js");
 const authorRouter = require("./api/routes/resourcesRoute/authorRoute.js");
+const notificationRouter = require("./api/routes/notificationRoute.js");
+
 const reportRoute = require("./api/routes/reportRoute.js");
 const app = express();
 
@@ -59,6 +61,7 @@ app.use("/api/v1/resources/audio", audioRouter); //audio-routes
 app.use("/api/v1/resources/article", articleRouter); //article-routes
 app.use("/api/v1/resources/author", authorRouter); //author-routes
 app.use("/api/v1/method", methodRouter);
+app.use("/api/v1/notification", notificationRouter);
 app.use("/api/v1/report", reportRoute);
 
 app.listen(PORT, () => {

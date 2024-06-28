@@ -1,5 +1,5 @@
 import React from "react";
-import { View, StyleSheet, ScrollView, Dimensions } from "react-native";
+import { View, StyleSheet, ScrollView, Dimensions, Image } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import HeaderSub from "../../components/HeaderSub/HeaderSub";
 import RegularButton from "../../components/CFButton/RegularButton";
@@ -12,7 +12,7 @@ import { storage } from "../../config/firebase";
 import { getDownloadURL, uploadBytes, ref } from "firebase/storage";
 import { updateTaskCompleteness } from "../../services/taskServices/taskservice";
 
-const loadingGIF = require("../../assets/animation/loading.gif");
+const loadingGif = require("../../assets/animation/loading.gif");
 
 const CreatePost = ({ route }) => {
   const { postCat, taskId } = route.params;
@@ -21,12 +21,20 @@ const CreatePost = ({ route }) => {
   const [popupMessage, setPopupMessage] = useState("");
   const [description, setDescription] = useState();
   const [selectedImage, setSelectedImage] = useState();
-  const [isLoading, setIsLoading] = useState();
+  const [isLoading, setIsLoading] = useState(false);
 
   const handlePostImageButtonPress = async () => {
     try {
+      if (!description) {
+        return alert("you have to set a caption");
+      }
+      setIsLoading(true);
       const imgResponse = await fireBaseUpload();
-      await updateTaskCompleteness(taskId);
+
+      if (taskId) {
+        await updateTaskCompleteness(taskId);
+      }
+
       await createPost(postCat, description, imgResponse);
       setPopupMessage("Post Successful!");
     } catch (error) {
@@ -86,7 +94,7 @@ const CreatePost = ({ route }) => {
         style={{
           height: screenHeight,
           paddingHorizontal: 25,
-          paddingTop: 15,
+          paddingTop: 25,
         }}
       >
         <ScrollView ScrollView style={{ height: "100%", marginBottom: 25 }}>
@@ -98,8 +106,22 @@ const CreatePost = ({ route }) => {
           </View>
 
           <View style={styles.buttonContainer}>
-            <RegularButton name={"post"} onPress={handlePostImageButtonPress} />
-            {isLoading && <Image source={loadingGIF} />}
+            {isLoading ? (
+              <View
+                style={{
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+              >
+                <Image source={loadingGif} />
+              </View>
+            ) : (
+              <RegularButton
+                name={"post"}
+                onPress={handlePostImageButtonPress}
+              />
+            )}
+
             <PopupMessage
               message={popupMessage}
               onConfirm={confirmMessage}

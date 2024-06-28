@@ -5,7 +5,8 @@ const style = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "baseline",
-    marginHorizontal: 20,
+
+    marginBottom: 32,
   },
   descript2: {
     fontSize: 18,
@@ -14,14 +15,14 @@ const style = StyleSheet.create({
     marginBottom: 15,
   },
   viewBtn: {
-    width: 80,
     height: 35,
-    height: 35,
+
     borderRadius: 20,
     elevation: 2,
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: "white",
+    paddingHorizontal: 10,
   },
   viewText: {
     fontSize: 12,

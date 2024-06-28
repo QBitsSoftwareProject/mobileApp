@@ -1,5 +1,7 @@
 const postSchema = require("../../models/posts/postsModels");
 const userSchema = require("../../models/regularUser/regularUser");
+const doctorSchema = require("../../models/doctor/doctor");
+
 exports.getPost = async (req, res) => {
   try {
     const Posts = await postSchema
@@ -64,7 +66,7 @@ exports.getSearchProfile = async (req, res) => {
         userName: new RegExp(userName, "i"),
       });
     } else if (list == "doctor") {
-      searchResult = await userSchema.find({
+      searchResult = await doctorSchema.find({
         userName: new RegExp(userName, "i"),
       });
     }

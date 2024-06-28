@@ -30,6 +30,9 @@ const ViewGoalScreen = () => {
       setIsLoading(true);
 
       let result = [];
+      setResultSuggested([]);
+      setResultSelected([]);
+      setResultCompleted([]);
 
       if (selectedTab === 0) {
         result = await getSelectedGoals();
@@ -65,18 +68,11 @@ const ViewGoalScreen = () => {
     setIsChange(!isChange);
   };
 
-  // if(
-  //   (selectedTab == 2 && !resultCompleted) ||
-  //         (selectedTab == 0 && !resultSelected) ||
-  //         (selectedTab == 1 && !resultSuggested) ) {
-  //         setNotFound(true)
-  //         }
-
   return (
     <View
       style={{
         flex: 1,
-        paddingBottom: 80,
+        paddingBottom: 65,
       }}
     >
       <View>
@@ -87,7 +83,7 @@ const ViewGoalScreen = () => {
           }
           back={"HomeScreen"}
         />
-        <View style={{ marginVertical: 32 }}>
+        <View style={{ marginTop: 32 }}>
           <ButtonGroup
             tab1={"Your Goals"}
             tab2={"Suggested"}
@@ -98,21 +94,7 @@ const ViewGoalScreen = () => {
         </View>
       </View>
       <View style={{ flex: 1 }}>
-        {notFound && (
-          <View
-            style={{
-              alignItems: "center",
-              width: "100%",
-            }}
-          >
-            <Image
-              source={notFoundGif}
-              style={{ width: "60%", height: 250, opacity: 0.3 }}
-            />
-          </View>
-        )}
-
-        {isLoading == true && !notFound ? (
+        {isLoading == true && (
           <View
             style={{
               display: "flex",
@@ -123,14 +105,32 @@ const ViewGoalScreen = () => {
           >
             <Image source={loadingGif} />
           </View>
-        ) : selectedTab == 0 ? (
+        )}
+
+        {!isLoading && notFound && (
+          <View
+            style={{
+              justifyContent: "center",
+              alignItems: "center",
+              width: "100%",
+              marginTop: 32,
+            }}
+          >
+            <Image
+              source={notFoundGif}
+              style={{ width: "60%", height: 250, opacity: 0.3 }}
+            />
+          </View>
+        )}
+
+        {selectedTab == 0 ? (
           <FlatList
             data={resultSelected}
             renderItem={({ item, index }) => (
               <View
                 style={{
                   marginHorizontal: 25,
-                  marginTop: 15,
+                  paddingTop: 32,
                   marginBottom: index === resultSelected.length - 1 ? 32 : 0,
                 }}
               >
@@ -155,7 +155,7 @@ const ViewGoalScreen = () => {
               <View
                 style={{
                   marginHorizontal: 25,
-                  marginTop: 15,
+                  paddingTop: 32,
                   marginBottom: index === resultSuggested.length - 1 ? 32 : 0,
                 }}
               >
@@ -178,7 +178,7 @@ const ViewGoalScreen = () => {
               <View
                 style={{
                   marginHorizontal: 25,
-                  marginTop: 15,
+                  paddingTop: 32,
                   marginBottom: index === resultCompleted.length - 1 ? 32 : 0,
                 }}
               >

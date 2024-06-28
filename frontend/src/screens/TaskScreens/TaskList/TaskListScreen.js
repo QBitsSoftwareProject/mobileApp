@@ -82,7 +82,7 @@ const TaskListScreen = () => {
   };
 
   return (
-    <View style={{ flex: 1, paddingBottom: 85 }}>
+    <View style={{ flex: 1, paddingBottom: 65 }}>
       <HeaderSub
         headLine={"Daily Activities"}
         subHeadLine={remaining + " more to complete"}

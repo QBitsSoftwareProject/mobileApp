@@ -89,7 +89,7 @@ export const getSearchProfile = async (searchText, list) => {
 
     return response.data;
   } catch (error) {
-    console.log(error);
+    console.log(error.response.data);
     throw new Error("Error during request setup");
   }
 };

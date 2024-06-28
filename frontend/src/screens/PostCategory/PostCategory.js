@@ -67,10 +67,12 @@ const PostCategory = () => {
         style={{
           height: screenHeight,
           paddingHorizontal: 25,
-          paddingTop: 15,
         }}
       >
-        <ScrollView ScrollView style={{ height: "100%", marginBottom: 25 }}>
+        <ScrollView
+          ScrollView
+          style={{ height: "100%", marginBottom: 25, paddingTop: 15 }}
+        >
           <View>
             {postCategoryList.map((item) => (
               <RegularCard

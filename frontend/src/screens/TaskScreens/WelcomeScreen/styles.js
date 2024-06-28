@@ -36,15 +36,15 @@ const styles = StyleSheet.create({
     fontSize: 30,
     fontWeight: "600",
     textAlign: "center",
-    marginTop: 48,
+    marginTop: 32,
   },
   descriptiontxt: {
     color: "white",
-    fontSize: 16,
+    fontSize: 20,
     fontWeight: "400",
     textAlign: "center",
-    marginTop: 15,
-    height: 216,
+    marginTop: 32,
+
     lineHeight: 30,
   },
 

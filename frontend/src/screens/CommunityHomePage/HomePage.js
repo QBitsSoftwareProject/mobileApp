@@ -26,10 +26,6 @@ const HomePage = () => {
 
   const [postList, setPostList] = useState([]);
 
-  const pan = useState(
-    new Animated.ValueXY({ x: screenWidth - 70, y: screenHeight - 80 })
-  )[0];
-
   const fetchPostData = async () => {
     try {
       const res = await getPost();
@@ -66,41 +62,6 @@ const HomePage = () => {
     navigation.navigate("PostCategory");
   };
 
-  const panResponder = useState(
-    PanResponder.create({
-      onMoveShouldSetPanResponder: () => true,
-      onPanResponderGrant: () => {
-        pan.setOffset({
-          x: pan.x._value,
-          y: 0,
-        });
-        pan.setValue({ x: 0, y: 0 });
-      },
-      onPanResponderMove: Animated.event([null, { dx: pan.x }], {
-        useNativeDriver: false,
-      }),
-      onPanResponderRelease: () => {
-        pan.flattenOffset();
-        // Ensure the button stays within screen bounds
-        if (pan.x._value < 0) {
-          Animated.spring(pan.x, {
-            toValue: 0,
-            useNativeDriver: false,
-          }).start();
-        } else if (pan.x._value > screenWidth - 70) {
-          Animated.spring(pan.x, {
-            toValue: screenWidth - 70,
-            useNativeDriver: false,
-          }).start();
-        }
-      },
-    })
-  )[0];
-
-  if (!postList) {
-    return null;
-  }
-
   return (
     <View style={styles.container}>
       <View>
@@ -114,12 +75,11 @@ const HomePage = () => {
         style={{
           height: screenHeight,
           paddingHorizontal: 25,
-          paddingTop: 15,
         }}
       >
-        <ScrollView style={{ height: "100%" }}>
+        <ScrollView style={{ height: "100%", paddingTop: 15 }}>
           {/* post cards list*/}
-          <View style={{ paddingBottom: 70 }}>
+          <View style={{ paddingBottom: 20 }}>
             {postList.map((item) => (
               <PostCard
                 postId={item._id}
@@ -138,15 +98,7 @@ const HomePage = () => {
           </View>
         </ScrollView>
 
-        <Animated.View
-          style={[
-            { transform: [{ translateX: pan.x }] },
-            styles.floatingButtonContainer,
-          ]}
-          {...panResponder.panHandlers}
-        >
-          <FloatingButton addNew={addNew} />
-        </Animated.View>
+        <FloatingButton addNew={addNew} />
       </View>
     </View>
   );

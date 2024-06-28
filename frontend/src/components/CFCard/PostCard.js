@@ -1,4 +1,11 @@
-import { StyleSheet, TouchableOpacity, View, Image, Text } from "react-native";
+import {
+  StyleSheet,
+  TouchableOpacity,
+  View,
+  Image,
+  Text,
+  TouchableWithoutFeedback,
+} from "react-native";
 import React from "react";
 import { useState } from "react";
 import EditDeletMenu from "../../components/DropDownMenu/EditDeleteMenu";
@@ -85,83 +92,88 @@ const PostCard = (props) => {
   };
 
   return (
-    <View style={styles.cardBox}>
-      <View style={styles.content1}>
-        <View style={{ flexDirection: "row", alignItems: "center" }}>
-          <View style={styles.imageframe}>
-            <Image source={{ uri: props.image }} style={styles.image} />
+    <TouchableWithoutFeedback onPress={() => setIsPress(false)}>
+      <View style={styles.cardBox}>
+        <View style={styles.content1}>
+          <View style={{ flexDirection: "row", alignItems: "center" }}>
+            <View style={styles.imageframe}>
+              <Image source={{ uri: props.image }} style={styles.image} />
+            </View>
+
+            <View style={styles.content2}>
+              <Text style={styles.title}>{props.title}</Text>
+
+              <Text style={styles.date}>{formattedDate}</Text>
+            </View>
           </View>
+          <View
+            style={{
+              flexDirection: "column",
+              justifyContent: "center",
+              zIndex: 10,
+            }}
+          >
+            <TouchableOpacity
+              style={styles.toucharea}
+              onPress={() => handlePress()}
+            >
+              <Image
+                source={require("../../assets/images/PostCardImages/dots.png")}
+                style={styles.navMenu}
+              />
+            </TouchableOpacity>
 
-          <View style={styles.content2}>
-            <Text style={styles.title}>{props.title}</Text>
+            {!checkUser && isPress && (
+              <ReportMenu postId={props.postId} onClose={setIsPress} />
+            )}
 
-            <Text style={styles.date}>{formattedDate}</Text>
+            {checkUser && isPress && (
+              <EditDeletMenu
+                postId={props.postId}
+                onClose={setIsPress}
+                onDelete={props.onDelete}
+                onUpdate={props.onUpdate}
+              />
+            )}
           </View>
         </View>
+
+        <View style={{ paddingHorizontal: 15, marginBottom: 10 }}>
+          <Text style={styles.des}>{props.description}</Text>
+        </View>
+
+        <View>
+          <View>
+            {props.postImage != null && (
+              <Image
+                source={{ uri: props.postImage }}
+                style={styles.postImage}
+              />
+            )}
+          </View>
+        </View>
+
         <View
           style={{
-            flexDirection: "column",
-            justifyContent: "center",
-            zIndex: 10,
+            padding: 10,
+            flexDirection: "row",
+            alignItems: "center",
+            justifyContent: "flex-end",
           }}
         >
+          <Text>{commentCount}</Text>
           <TouchableOpacity
             style={styles.toucharea}
-            onPress={() => handlePress()}
+            onPress={handleCommentSectionNavigation}
           >
             <Image
-              source={require("../../assets/images/PostCardImages/dots.png")}
-              style={styles.navMenu}
+              source={require("../../assets/images/CommentSecImages/comment.png")}
+              style={styles.commentIcon}
             />
           </TouchableOpacity>
-
-          {!checkUser && isPress && (
-            <ReportMenu postId={props.postId} onClose={setIsPress} />
-          )}
-
-          {checkUser && isPress && (
-            <EditDeletMenu
-              postId={props.postId}
-              onClose={setIsPress}
-              onDelete={props.onDelete}
-              onUpdate={props.onUpdate}
-            />
-          )}
         </View>
       </View>
-
-      <View style={{ paddingHorizontal: 15, marginBottom: 10 }}>
-        <Text style={styles.des}>{props.description}</Text>
-      </View>
-
-      <View>
-        <View>
-          {props.postImage != null && (
-            <Image source={{ uri: props.postImage }} style={styles.postImage} />
-          )}
-        </View>
-      </View>
-
-      <View
-        style={{
-          padding: 10,
-          flexDirection: "row",
-          alignItems: "center",
-          justifyContent: "flex-end",
-        }}
-      >
-        <Text>{commentCount}</Text>
-        <TouchableOpacity
-          style={styles.toucharea}
-          onPress={handleCommentSectionNavigation}
-        >
-          <Image
-            source={require("../../assets/images/CommentSecImages/comment.png")}
-            style={styles.commentIcon}
-          />
-        </TouchableOpacity>
-      </View>
-    </View>
+    </TouchableWithoutFeedback>
   );
 };
 

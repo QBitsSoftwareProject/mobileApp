@@ -12,9 +12,10 @@ import { useNavigation } from "@react-navigation/native";
 import { useEffect, useState } from "react";
 import { getDoctors } from "../../services/doctorServices/doctorService";
 import AppointmentHeader from "../../components/AppointmentHeader/AppointmentHeader";
+import loadingGif from "../../assets/animation/loading.gif";
 
 const AvailableDoctor = () => {
-  const screenHeight = Dimensions.get("window").height - 275;
+  const screenHeight = Dimensions.get("window").height;
   const navigation = useNavigation();
 
   const [docList, setDocList] = useState([]);
@@ -36,17 +37,33 @@ const AvailableDoctor = () => {
     navigation.navigate("MakeAppointment", { id: docId });
   };
 
+  if (!docList) {
+    return (
+      <View
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          height: "100%",
+        }}
+      >
+        <Image source={loadingGif} />
+      </View>
+    );
+  }
+
   return (
     <View>
-      <AppointmentHeader
-        headLine={"Specialists"}
-        subHeadLine={"Explore and find the perfect specialist."}
-        back={"HomeScreen"}
-      />
+      <AppointmentHeader headLine={"Specialists"} back={"HomeScreen"} />
       <SafeAreaView
-        style={{ height: screenHeight, paddingHorizontal: 25, paddingTop: 15 }}
+        style={{
+          height: screenHeight,
+          paddingHorizontal: 25,
+
+          zIndex: -1,
+        }}
       >
-        <ScrollView style={{ height: "100%" }}>
+        <ScrollView style={{ height: screenHeight - 190, paddingTop: 15 }}>
           <View style={style.content1}>
             <Text style={style.descript2}>Available Doctors.</Text>
             <TouchableOpacity
@@ -55,7 +72,7 @@ const AvailableDoctor = () => {
                 navigation.navigate("AppointmentStatus");
               }}
             >
-              <Text style={style.viewText}>History</Text>
+              <Text style={style.viewText}>My Appointments</Text>
             </TouchableOpacity>
           </View>
 

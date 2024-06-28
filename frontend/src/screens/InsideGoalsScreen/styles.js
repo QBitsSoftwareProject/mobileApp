@@ -39,10 +39,10 @@ export default styles = StyleSheet.create({
   objComponent: {
     flexDirection: "row",
     backgroundColor: "white",
-    height: 50,
+
     justifyContent: "space-between",
     alignItems: "center",
-    paddingLeft: 15,
+    padding: 15,
     borderRadius: 10,
     marginBottom: 15,
   },
@@ -50,5 +50,6 @@ export default styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: "400",
     color: "#40495B",
+    width: "90%",
   },
 });

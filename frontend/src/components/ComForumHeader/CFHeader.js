@@ -11,6 +11,7 @@ import {
 import { useNavigation } from "@react-navigation/core";
 import SearchBar from "../../components/SearchBar/SearchBar";
 import { getAUser } from "../../services/userServices/userService";
+import loadingGif from "../../assets/animation/loading.gif";
 
 const CFHeaderSub = (props) => {
   const navigation = useNavigation();
@@ -32,11 +33,25 @@ const CFHeaderSub = (props) => {
   }, []);
 
   if (!userData) {
-    return;
+    return (
+      <View
+        style={{
+          justifyContent: "center",
+          alignItems: "center",
+          height: "100%",
+        }}
+      >
+        <Image source={loadingGif} />
+      </View>
+    );
   }
 
   const handlePress = () => {
     navigation.navigate(props.profile);
+  };
+
+  const handleBackPress = () => {
+    navigation.navigate("HomeScreen");
   };
 
   return (
@@ -48,25 +63,34 @@ const CFHeaderSub = (props) => {
         <View style={styles.container1}>
           <View
             style={{
-              flexDirection: "row",
               width: "100%",
               marginTop: 50,
-              alignItems: "center",
             }}
           >
-            <TouchableOpacity onPress={handlePress}>
-              <View style={styles.imageframe}>
-                <Image source={{ uri: userData.proPic }} style={styles.image} />
-              </View>
-            </TouchableOpacity>
+            <View style={{ flexDirection: "row", gap: 32 }}>
+              <TouchableOpacity
+                style={styles.backBtn}
+                onPress={handleBackPress}
+              >
+                <Image source={require("../../assets/images/BackWhite.png")} />
+              </TouchableOpacity>
 
-            <View>
-              <Text style={styles.headlineTxt}>{userData.userName}</Text>
-              <Text style={styles.subHeadlineTxt}>{props.subHeadLine}</Text>
+              <View>
+                <TouchableOpacity onPress={handlePress}>
+                  <View style={styles.imageframe}>
+                    <Image
+                      source={{ uri: userData.proPic }}
+                      style={styles.image}
+                    />
+                  </View>
+                </TouchableOpacity>
+                <Text style={styles.headlineTxt}>{userData.userName}</Text>
+                {/* <Text style={styles.subHeadlineTxt}>{props.subHeadLine}</Text> */}
+              </View>
             </View>
           </View>
 
-          <SearchBar />
+          <SearchBar schema={"profile"} />
         </View>
       </ImageBackground>
     </View>
@@ -81,18 +105,18 @@ const styles = StyleSheet.create({
     width: "100%",
     borderBottomLeftRadius: 40,
     borderBottomRightRadius: 40,
-    marginBottom: 15,
+
     alignItems: "center",
     justifyContent: "center",
     zIndex: 100,
   },
   imageframe: {
-    height: 80,
-    width: 80,
+    height: 85,
+    width: 85,
     borderColor: "white",
     borderWidth: 4,
     borderRadius: 50,
-    marginRight: 15,
+    alignSelf: "center",
     overflow: "hidden",
     elevation: 2,
   },
@@ -102,8 +126,9 @@ const styles = StyleSheet.create({
   },
   headlineTxt: {
     fontWeight: "600",
-    fontSize: 32,
+    fontSize: 24,
     color: "white",
+    textAlign: "center",
   },
   subHeadlineTxt: {
     fontWeight: "500",
@@ -121,7 +146,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     paddingHorizontal: 25,
-    gap: 25,
+    gap: 5,
   },
 });
 

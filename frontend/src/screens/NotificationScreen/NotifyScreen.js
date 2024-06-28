@@ -1,66 +1,101 @@
-import React from "react";
-import { ScrollView, View } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
-import HeaderSub from "../../components/HeaderSub/HeaderSub";
-import { useNavigation } from "@react-navigation/native";
-import RegularCard from "../../components/CFCard/RegularCard";
-import HomePage from "../CommunityHomePage/HomePage";
-
-const postCategoryList = [
-  {
-    id: 1,
-    image: require("../../assets/images/NotificationImages/Yoga.png"),
-    title: "Daily meditation ",
-    sub: "our daily meditation session begins in 45 minutes. Time to find your inner calm.",
-  },
-  {
-    id: 2,
-    image: require("../../assets/images/NotificationImages/Appointment.png"),
-    title: "Appointment Confirmation",
-    sub: "Your appointment with Dr. Smith has been confirmed for tomorrow at 10 AM.",
-  },
-
-  {
-    id: 3,
-    image: require("../../assets/images/NotificationImages/Comments.png"),
-    title: "Community Engagement",
-    sub: "Divya Rajapaksha commented on your post. Join the conversation!",
-  },
-  {
-    id: 4,
-    image: require("../../assets/images/NotificationImages/Clipboard.png"),
-    title: "Task Reminder",
-    sub: "Don't forget to complete your daily tasks today for a healthier you!",
-  },
-];
+import {
+  StyleSheet,
+  TouchableOpacity,
+  View,
+  Image,
+  ScrollView,
+  SafeAreaView,
+  Keyboard,
+} from "react-native";
+import React, { useState } from "react";
+import { useNavigation, useFocusEffect } from "@react-navigation/native";
+import NotificationCard from "../../components/NotificationCard/NotificationCard";
+import { getNotification } from "../../services/notificationService/notificationService";
 
 const NotifyScreen = () => {
+  const [notificationList, setNotificationList] = useState([]);
+  const [isKeyboardVisible, setKeyboardVisible] = useState(false);
+
   const navigation = useNavigation();
 
-  return (
-    <View>
-      <HeaderSub
-        headLine={"Notification"}
-        subHeadLine={"See your past notification"}
-        back={HomePage}
-      />
+  const goBackFromComment = () => {
+    navigation.navigate("HomeScreen");
+  };
 
-      <SafeAreaView style={{ margin: 25 }}>
-        <ScrollView style={{ height: 500 }}>
-          <View style={{ marginBottom: 80 }}>
-            {postCategoryList.map((item) => (
-              <RegularCard
-                key={item.id}
-                image={item.image}
-                title={item.title}
-                sub={item.sub}
+  const fetchNotification = async () => {
+    try {
+      const res = await getNotification();
+      setNotificationList(res);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useFocusEffect(
+    React.useCallback(() => {
+      fetchNotification();
+
+      const keyboardDidShowListener = Keyboard.addListener(
+        "keyboardDidShow",
+        () => {
+          setKeyboardVisible(true);
+        }
+      );
+
+      const keyboardDidHideListener = Keyboard.addListener(
+        "keyboardDidHide",
+        () => {
+          setKeyboardVisible(false);
+        }
+      );
+
+      return () => {
+        keyboardDidShowListener.remove();
+        keyboardDidHideListener.remove();
+      };
+    }, [])
+  );
+
+  return (
+    <SafeAreaView
+      style={{
+        paddingTop: 35,
+        paddingBottom: isKeyboardVisible ? 50 : 130,
+        flex: 1,
+      }}
+    >
+      <TouchableOpacity onPress={goBackFromComment} style={styles.backButton}>
+        <Image source={require("../../assets/images/BackBlack.png")} />
+      </TouchableOpacity>
+
+      <ScrollView style={{ paddingHorizontal: 25, paddingTop: 80 }}>
+        <View>
+          {notificationList &&
+            notificationList.map((item) => (
+              <NotificationCard
+                key={item._id}
+                appId={item._id}
+                postId={item.referenceId}
+                image={item.proPic}
+                title={item.userName}
+                Date={item.createdAt}
+                content={item.message}
+                status={item.status}
+                type={item.type}
               />
             ))}
-          </View>
-        </ScrollView>
-      </SafeAreaView>
-    </View>
+        </View>
+      </ScrollView>
+    </SafeAreaView>
   );
 };
+
+const styles = StyleSheet.create({
+  backButton: {
+    position: "absolute",
+    margin: 35,
+    zIndex: 20,
+  },
+});
 
 export default NotifyScreen;

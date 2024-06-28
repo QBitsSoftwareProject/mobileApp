@@ -103,8 +103,7 @@ const styles = StyleSheet.create({
   imageframe: {
     height: 35,
     width: 35,
-    backgroundColor: "gray",
-    opacity: 0.5,
+
     borderRadius: 50,
     overflow: "hidden",
   },

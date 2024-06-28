@@ -11,7 +11,7 @@ import React, { useEffect, useState } from "react";
 import { getSearchProfile } from "../../services/postServices/postServices";
 import { useNavigation } from "@react-navigation/native";
 
-const SearchBar = () => {
+const SearchBar = ({ schema }) => {
   const [textInputValue, setTextInputValue] = useState("");
   const [userList, setUserList] = useState([]);
 
@@ -19,7 +19,7 @@ const SearchBar = () => {
 
   const fetchSearchResult = async () => {
     try {
-      const res = await getSearchProfile(textInputValue, "profile");
+      const res = await getSearchProfile(textInputValue, schema);
       setUserList(res);
     } catch (error) {
       console.error("Error searching users:", error);
@@ -107,12 +107,12 @@ const styles = StyleSheet.create({
   },
   textinput: {
     height: 45,
-    fontSize: 18,
+    fontSize: 16,
     borderColor: "#E7E7E7",
     backgroundColor: "white",
-    borderTopLeftRadius: 10,
-    borderBottomLeftRadius: 10,
-    padding: 10,
+    borderTopLeftRadius: 30,
+    borderBottomLeftRadius: 30,
+    paddingHorizontal: 15,
   },
 
   searchBtn: {
@@ -121,8 +121,8 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     backgroundColor: "white",
     padding: 5,
-    borderTopRightRadius: 10,
-    borderBottomRightRadius: 10,
+    borderTopRightRadius: 30,
+    borderBottomRightRadius: 30,
   },
 
   searchIcon: {
@@ -138,6 +138,8 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     top: 60,
     marginBottom: 20,
+    maxHeight: 230,
+    elevation: 1,
   },
   resultItem: {
     flexDirection: "row",
@@ -149,8 +151,7 @@ const styles = StyleSheet.create({
   imageframe: {
     height: 35,
     width: 35,
-    backgroundColor: "gray",
-    opacity: 0.5,
+
     borderRadius: 50,
     marginRight: 15,
     overflow: "hidden",
