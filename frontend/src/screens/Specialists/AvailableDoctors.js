@@ -87,6 +87,7 @@ const AvailableDoctor = () => {
                 cardName={"AvailableDoc"}
                 university={item.qualification}
                 hospital={item.workingPlace}
+                contactNumber={item.contactNumber}
                 onPress={() => {
                   pressHandler(item._id);
                 }}

@@ -18,8 +18,11 @@ const CreateCard = (props) => {
             {props.cardName == "AvailableDoc" && (
               <View>
                 <Text style={styles.description}>{props.university}</Text>
-                {/* <Text style={styles.description}>REG NO-{props.regno}</Text> */}
+
                 <Text style={styles.description}>{props.hospital}</Text>
+                <Text style={styles.description}>
+                  Contact no:-{props.contactNumber}
+                </Text>
               </View>
             )}
 
