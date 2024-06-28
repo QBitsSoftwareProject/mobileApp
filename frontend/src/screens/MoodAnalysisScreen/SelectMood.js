@@ -122,7 +122,7 @@ const MoodAnalysis = () => {
     <View style={{ height: "100%" }}>
       <HeaderSub headLine={"How are you feeling today!"} />
 
-      <View>
+      <View style={{ height: "60%" }}>
         <View style={styles.circleContainer}>
           {emojis.map((emoji, index) => {
             const x = radiusX * Math.cos(index * angle);
@@ -186,14 +186,14 @@ const styles = StyleSheet.create({
   setMood: {
     justifyContent: "center",
     alignSelf: "center",
-    position: "absolute",
+    position: "relative",
     width: 250,
     height: 58,
     backgroundColor: "#FFFFFF",
     borderRadius: 75,
     borderColor: "#4ABFB4",
     borderWidth: 1,
-    bottom: 5,
+    bottom: 100,
   },
   mood: {
     fontSize: 16,

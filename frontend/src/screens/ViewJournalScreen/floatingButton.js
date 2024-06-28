@@ -78,7 +78,7 @@ export const FloatingButton = (props) => {
 const styles = StyleSheet.create({
   touchableOpacity: {
     position: "absolute",
-    bottom: 50,
+    bottom: 25,
     left: 25,
     zIndex: 100,
   },
