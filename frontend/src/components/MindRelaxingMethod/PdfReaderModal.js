@@ -1,9 +1,34 @@
 // PdfReaderModal.js
-import React from 'react';
+import React , { useState }from 'react';
 import { View, Modal, StyleSheet, TouchableOpacity, Text } from 'react-native';
 import PdfReader from './PdfReader';
+import RatingPopUp from "./MindRelaxingMethodRatingPopUp"
+import Toast from "react-native-toast-message";
 
-const PdfReaderModal = ({ visible, onClose, pdfSource,name }) => {
+const PdfReaderModal = ({ visible, onClose, pdfSource,name ,id}) => {
+
+  
+
+  const [isPopUpVisible, setIsPopUpVisible] = useState(false)
+
+    const handleButtonClick = () => {
+      setIsPopUpVisible(true);
+    };
+  
+    const handleClosePopUp = () => {
+      setIsPopUpVisible(false);
+      setTimeout(() => {
+        Toast.show({
+          type: "success",
+          text1: "Thank you for reading",
+          text2: "Your rate is invaluable. Thank you!",
+        });
+      }, 200);
+    };
+
+  const handleRating = () => {
+    handleButtonClick()
+  }
   return (
     <Modal
       visible={visible}
@@ -15,10 +40,21 @@ const PdfReaderModal = ({ visible, onClose, pdfSource,name }) => {
         <View style={styles.modalContent}>
           <Text style={styles.title}>{name}</Text>
           <PdfReader pdfSource={pdfSource} />
-          <TouchableOpacity style={styles.closeButton} onPress={onClose}>
+          <TouchableOpacity style={styles.closeButton} onPress={handleRating}>
             <Text style={styles.closeButtonText}>Close</Text>
           </TouchableOpacity>
         </View>
+
+        <RatingPopUp
+        message="Rate your experience"
+        onClose={handleClosePopUp}
+        methodId={id}
+        title="Rate this PDF"
+        visible={isPopUpVisible}
+        close = {onClose}
+        >
+
+        </RatingPopUp>
       </View>
     </Modal>
   );

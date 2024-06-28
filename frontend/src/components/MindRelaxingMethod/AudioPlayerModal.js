@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { View, Modal, Button, StyleSheet } from 'react-native';
 import AudioPlayer from './AudioPlayer';
+import RatingPopUp from "./MindRelaxingMethodRatingPopUp"
 
 
-const AudioPlayerModal = ({ visible, onClose, audioSource,img, name }) => {
+const AudioPlayerModal = ({ visible, onClose, audioSource,img, name ,id}) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [soundObject, setSoundObject] = useState(null);
   const [imgLink, setImgLink] = useState(img);
@@ -39,11 +40,12 @@ const AudioPlayerModal = ({ visible, onClose, audioSource,img, name }) => {
     >
       <View style={styles.modalContainer}>
         <View style={styles.modalContent}>
-          <AudioPlayer audioSource={audioSource} onStop={handleStopAndClose}imglink = {img} title = {name} />
+          <AudioPlayer audioSource={audioSource} onStop={handleStopAndClose}imglink = {img} title = {name} id = {id} />
           <View style={styles.buttonContainer} >
             {/* <Button title="Stopp and Close" onPress={handleStopAndClose} /> */}
           </View>
         </View>
+        
       </View>
     </Modal>
   );

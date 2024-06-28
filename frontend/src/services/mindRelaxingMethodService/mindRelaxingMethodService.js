@@ -35,3 +35,23 @@ export const fetchMindRelaxingMethod = async () => {
           console.log(err);
         }
       };
+
+
+      export const updateMethodRatingById = async (id, currentRating) => {
+        try {
+      
+          // Send PUT request using axiosInstance
+          const response = await axiosInstance.put(`/api/v1/method/update-method/${id}`, {
+            currentRating:currentRating
+          }
+          );
+      
+          if (response.status >= 200 && response.status < 300) {
+            console.log("Data updated successfully");
+          } else {
+            console.error(`Failed to update data on the server. Status: ${response.status}`);
+          }
+        } catch (error) {
+          console.error('Error updating method:', error.message);
+        }
+      };
