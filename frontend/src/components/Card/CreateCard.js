@@ -5,7 +5,7 @@ const CreateCard = (props) => {
   const currentDate = new Date(props.date);
 
   return (
-    <View style={styles.cardBox} onPress={props.onPress}>
+    <TouchableOpacity style={styles.cardBox} onPress={props.onPress}>
       <View style={{ flexDirection: "row" }}>
         <View style={styles.imageframe}>
           <Image source={{ uri: props.image }} style={styles.image} />
@@ -37,11 +37,15 @@ const CreateCard = (props) => {
                     styles.description,
                     {
                       color:
-                        props.status === "Accepted."
+                        props.status === "Accepted"
                           ? "#0AC112"
-                          : props.status === "Rejected."
+                          : props.status === "Rejected"
                           ? "#E82519"
-                          : "#4A90E2",
+                          : props.status === "Cancelled"
+                          ? "#FF5733"
+                          : props.status === "Pending"
+                          ? "#FFC107"
+                          : "black",
                     },
                   ]}
                 >
@@ -52,7 +56,7 @@ const CreateCard = (props) => {
           </View>
         </View>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 const styles = StyleSheet.create({

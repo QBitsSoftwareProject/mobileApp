@@ -1,12 +1,9 @@
 import { View, Text, TouchableOpacity } from "react-native";
 import React, { useEffect, useState } from "react";
 
-const ButtonGroup = ({ tab1, tab2, tab3, select, change }) => {
+const ButtonGroup = ({ tab1, tab2, tab3, select }) => {
   const [selectedTab, setSelectedTab] = useState(0);
 
-  useEffect(() => {
-    setSelectedTab(change);
-  }, [change]);
   return (
     <View
       style={{
@@ -15,6 +12,8 @@ const ButtonGroup = ({ tab1, tab2, tab3, select, change }) => {
         borderRadius: 25,
         flexDirection: "row",
         alignSelf: "center",
+
+        marginTop: 32,
       }}
     >
       <TouchableOpacity

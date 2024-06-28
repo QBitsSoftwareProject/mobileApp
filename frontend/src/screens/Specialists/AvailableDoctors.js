@@ -63,7 +63,7 @@ const AvailableDoctor = () => {
           zIndex: -1,
         }}
       >
-        <ScrollView style={{ height: screenHeight - 190, paddingTop: 15 }}>
+        <ScrollView style={{ height: screenHeight - 250, paddingTop: 32 }}>
           <View style={style.content1}>
             <Text style={style.descript2}>Available Doctors.</Text>
             <TouchableOpacity

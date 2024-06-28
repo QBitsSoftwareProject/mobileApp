@@ -1,25 +1,19 @@
 import React, { useState } from "react";
 import { StyleSheet, View, Text, Modal, TouchableOpacity } from "react-native";
 import { SplitButton } from "../../screens/FeedbackScreen/ProgressBar";
-import { updateAUser } from "../../services/userServices/userService";
-import {
-  updateAGoal,
-  userGoalRating,
-} from "../../services/goalsService/goalsService";
+import { updateMethodRatingById } from "../../services/mindRelaxingMethodService/mindRelaxingMethodService";
 
-const RatingPopUp = ({ message, onClose, goalId, title }) => {
+
+const RatingPopUp = ({ message, onClose, methodId, title ,visible, close}) => {
   const [select, setSelect] = useState();
   const [rateValue, setRateValue] = useState(0);
 
+  // console.log(methodId);
+
   const handleSaveButtonPress = async () => {
     try {
-      await updateAGoal(goalId, {
-        currentRating: rateValue,
-        ratingCount: 1,
-      });
-
-      //update user rating state
-      await userGoalRating(goalId);
+      await updateMethodRatingById(methodId,rateValue)
+      close()
       onClose();
     } catch (error) {
       console.log(error);
@@ -27,7 +21,7 @@ const RatingPopUp = ({ message, onClose, goalId, title }) => {
   };
 
   return (
-    <Modal transparent animationType="slide" visible={!!message}>
+    <Modal transparent animationType="slide" visible={visible}>
       <View style={styles.modalBackground}>
         <View style={styles.modalContainer1}>
           <Text style={styles.messageText}>{message}</Text>
