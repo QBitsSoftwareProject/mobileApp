@@ -95,12 +95,14 @@ const TabBar = ({ route, user, userRole }) => {
         screenOptions={{
           tabBarShowLabel: false,
           tabBarStyle: {
+            flexDirection: "row",
             position: "absolute",
             height: isKeyboardVisible ? 0 : 65,
             overflow: isKeyboardVisible ? "hidden" : "visible",
             borderTopLeftRadius: 30,
             borderTopRightRadius: 30,
             marginTop: 32,
+            alignItems: "center",
           },
           headerShown: false,
         }}
