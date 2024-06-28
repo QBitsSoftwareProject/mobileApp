@@ -10,7 +10,6 @@ const DocDropDown = (props) => {
 
   const handlePress = () => {
     setIsPress(!isPress);
-    props.check(selectedMenu);
   };
   return (
     <View>
@@ -22,25 +21,26 @@ const DocDropDown = (props) => {
           </View>
         </View>
       </TouchableOpacity>
-      {isPress && <DocNavPop selectedMenu={setSelectedMenu} />}
+      {isPress && (
+        <DocNavPop selectedMenu={props.check} setIsPress={setIsPress} />
+      )}
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   DropDown: {
-    width: 95,
-    height: 30,
+    width: 120,
+    height: 35,
     backgroundColor: "white",
     borderRadius: 20,
     elevation: 1,
     marginHorizontal: 5,
-    marginTop: 18,
+    paddingHorizontal: 15,
     alignItems: "center",
     justifyContent: "center",
   },
   container: {
-    flex: 1,
     flexDirection: "row",
     alignItems: "center",
     gap: 8,

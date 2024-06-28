@@ -33,22 +33,48 @@ const docCard = (props) => {
 
               <View>
                 <Text style={styles.description}>
-                  Time: {props.time.from} - {props.time.to}
+                  Time:{" "}
+                  <Text style={{ fontWeight: "800" }}>
+                    {props.time.from} - {props.time.to}
+                  </Text>
                 </Text>
-                <Text style={styles.description}>Date: {props.date}</Text>
+                <Text style={styles.description}>
+                  Date: <Text style={{ fontWeight: "800" }}>{props.date}</Text>
+                </Text>
+
                 {props.cardName == "Pending" && (
                   <Text style={styles.description}>
-                    Contact No: {props.contactNo}
+                    Contact No:
+                    <Text style={{ fontWeight: "800" }}>
+                      {" "}
+                      {props.contactNo}
+                    </Text>
                   </Text>
                 )}
                 {props.cardName == "Accepted" && (
                   <Text style={styles.description}>
-                    Contact No: {props.contactNo}
+                    Contact No:
+                    <Text style={{ fontWeight: "800" }}>{props.contactNo}</Text>
                   </Text>
                 )}
                 {props.cardName == "Completed" && (
-                  <Text style={styles.completedStatus}>
-                    Status: {props.status}
+                  <Text
+                    style={[
+                      styles.completedStatus,
+                      {
+                        color:
+                          props.status === "Completed"
+                            ? "#0AC112"
+                            : props.status === "Rejected"
+                            ? "#E82519"
+                            : props.status === "Cancelled"
+                            ? "#FFC107"
+                            : "black",
+                      },
+                    ]}
+                  >
+                    Status:
+                    <Text style={{ fontWeight: "800" }}>{props.status}</Text>
                   </Text>
                 )}
               </View>
@@ -95,7 +121,7 @@ const docCard = (props) => {
 };
 const styles = StyleSheet.create({
   cardBox: {
-    height: 150,
+    height: "auto",
     padding: 20,
     backgroundColor: "white",
     borderRadius: 20,
@@ -112,11 +138,9 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   content1: {
-    flex: 1,
     flexDirection: "row",
     alignSelf: "flex-start",
     justifyContent: "center",
-    alignItems: "center",
   },
   title: {
     fontSize: 18,
@@ -132,15 +156,15 @@ const styles = StyleSheet.create({
   completedStatus: {
     fontSize: 12,
     fontWeight: "500",
-    color: "#0AC112",
   },
   content2: {
-    flex: 1,
     flexDirection: "row",
-    marginTop: 15,
-    alignItems: "baseline",
-    alignSelf: "flex-end",
+    width: "100%",
+    alignItems: "center",
+    justifyContent: "flex-end",
     gap: 25,
+
+    marginTop: 15,
   },
   rejectedStatus: {
     fontSize: 15,

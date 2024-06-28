@@ -3,6 +3,7 @@ import React from "react";
 
 const DocPop = (props) => {
   const handlePress = (menuNumber) => {
+    props.setIsPress((prev) => !prev);
     props.selectedMenu(menuNumber);
   };
   return (
@@ -23,16 +24,16 @@ const DocPop = (props) => {
 };
 const styles = StyleSheet.create({
   DropPop: {
-    width: 105,
+    width: "100%",
     height: "auto",
     paddingVertical: 5,
     backgroundColor: "white",
     borderRadius: 5,
-    elevation: 1,
+    elevation: 2,
     alignItems: "center",
     justifyContent: "center",
     position: "absolute",
-    marginTop: 50,
+    marginTop: 40,
     zIndex: 10,
   },
   container: {
@@ -40,6 +41,7 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     alignItems: "center",
     justifyContent: "center",
+    gap: 5,
   },
   DPtext: {
     color: "#40495B",

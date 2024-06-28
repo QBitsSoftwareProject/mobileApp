@@ -37,15 +37,15 @@ const CreateCard = (props) => {
                     styles.description,
                     {
                       color:
-                        props.status === "Accepted."
+                        props.status === "Accepted"
                           ? "#0AC112"
-                          : props.status === "Rejected."
+                          : props.status === "Rejected"
                           ? "#E82519"
                           : props.status === "Cancelled"
                           ? "#FF5733"
                           : props.status === "Pending"
                           ? "#FFC107"
-                          : "#4A90E2",
+                          : "black",
                     },
                   ]}
                 >

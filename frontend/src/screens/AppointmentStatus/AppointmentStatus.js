@@ -49,7 +49,7 @@ const AppointmentStatus = () => {
       />
 
       <View style={{ paddingHorizontal: 25 }}>
-        <ScrollView style={{ height: screenHeight - 190 }}>
+        <ScrollView style={{ height: screenHeight - 250 }}>
           {/* <TwoButtonGroup type={"status"} /> */}
           <View style={{ marginHorizontal: 15, marginVertical: 32 }}>
             <Text style={styles.descript2}>Appointment Status.</Text>
