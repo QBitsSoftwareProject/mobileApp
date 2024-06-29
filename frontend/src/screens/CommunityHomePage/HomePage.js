@@ -1,12 +1,5 @@
 import React, { useEffect, useState } from "react";
-import {
-  View,
-  ScrollView,
-  Dimensions,
-  PanResponder,
-  Animated,
-  StyleSheet,
-} from "react-native";
+import { View, ScrollView, Dimensions, StyleSheet } from "react-native";
 import CFHeaderSub from "../../components/ComForumHeader/CFHeader";
 import PostCard from "../../components/CFCard/PostCard";
 import FloatingButton from "../../components/FloatingButton/FloatingButton";
@@ -19,7 +12,6 @@ import { getPost } from "../../services/postServices/postServices";
 
 const HomePage = () => {
   const screenHeight = Dimensions.get("window").height - 275;
-  const screenWidth = Dimensions.get("window").width;
 
   const navigation = useNavigation();
   const route = useRoute();

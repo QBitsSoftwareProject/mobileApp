@@ -9,14 +9,14 @@ import {
 } from "react-native";
 import React, { useEffect, useState } from "react";
 import { getSearchProfile } from "../../services/postServices/postServices";
-import { useNavigation } from "@react-navigation/native";
+import { useFocusEffect, useNavigation } from "@react-navigation/native";
 
 const SearchBar = ({ schema }) => {
   const [textInputValue, setTextInputValue] = useState("");
   const [userList, setUserList] = useState([]);
 
   const navigation = useNavigation();
-
+  // Function to fetch search results
   const fetchSearchResult = async () => {
     try {
       const res = await getSearchProfile(textInputValue, schema);
@@ -25,13 +25,24 @@ const SearchBar = ({ schema }) => {
       console.error("Error searching users:", error);
     }
   };
-
+  // Effect to fetch search results when text input value changes
   useEffect(() => {
     if (textInputValue !== "") {
       fetchSearchResult();
     }
   }, [textInputValue]);
 
+  // Reset text input and search results when navigating away from SearchBar
+  useFocusEffect(
+    React.useCallback(() => {
+      return () => {
+        setTextInputValue(""); // Clear text input value
+        setUserList([]); // Reset userList when navigating away from SearchBar
+      };
+    }, [])
+  );
+
+  // Function to handle navigation to profile screen
   const handleNavigateToProfile = (userId) => {
     navigation.navigate("ProfileScreen", { userId: userId });
   };

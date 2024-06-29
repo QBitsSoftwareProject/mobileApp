@@ -162,8 +162,10 @@ const MakeAppointment = ({ route }) => {
 
           <View style={styles.description}>
             <Text style={styles.docDetails}>{doctor.qualification}</Text>
-
             <Text style={styles.docDetails}>{doctor.workPlace}</Text>
+            <Text style={styles.docDetails}>
+              Contact no:-{doctor.contactNumber}
+            </Text>
           </View>
         </View>
 
