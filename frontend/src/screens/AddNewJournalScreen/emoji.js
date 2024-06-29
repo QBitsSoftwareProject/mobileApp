@@ -12,10 +12,38 @@ import { useRoute } from "@react-navigation/native";
 export const EmojiPicker = ({ onEmojiPress, value }) => {
   const route = useRoute();
 
-  const itemEmojiString = route.params ? route.params.itemEmoji : "";
+  const itemEmojiNumber = route.params ? route.params.itemEmoji : "";
+  // console.log("itememoji", itemEmojiNumber);
 
   const [selectedEmoji, setSelectedEmoji] = useState("");
   const [previousMood, setPreviousMood] = useState(itemEmojiString);
+
+  // Function to convert emoji to mark value
+  const markToEmoji = (mark) => {
+    switch (mark) {
+      case 10:
+        return "😊";
+      case 20:
+        return "😭";
+      case 30:
+        return "😡";
+      case 40:
+        return "😍";
+      case 50:
+        return "😨";
+      case 60:
+        return "😐";
+      case 70:
+        return "🥱";
+      case 80:
+        return "😟";
+      default:
+        return null;
+    }
+  };
+
+  const itemEmojiString = markToEmoji(itemEmojiNumber);
+  // console.log("prev", itemEmojiString);
 
   useEffect(() => {
     if (!selectedEmoji) {
@@ -54,7 +82,7 @@ export const EmojiPicker = ({ onEmojiPress, value }) => {
             styles.emojiButton,
             selectedEmoji === item.emoji ? styles.selectedEmoji : null,
             previousMood === item.emoji && selectedEmoji !== item.emoji
-              ? styles.selectedEmoji
+              ? styles.previousMood
               : null,
 
             // selectedEmoji === item.imoji ? styles.selectedEmoji : null,
@@ -91,6 +119,9 @@ const styles = StyleSheet.create({
     borderRadius: 5,
   },
   selectedEmoji: {
+    borderColor: "#5296C5",
+  },
+  previousMood: {
     borderColor: "#5296C5",
   },
   emoji: {

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Dimensions, ScrollView, View } from "react-native";
+import { Dimensions, Image, ScrollView, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import ButtonGroup from "../../components/Button/ButtonGroup";
 import DocAppHeader from "../../components/DocAppHeader/DocAppHeader";
@@ -7,6 +7,7 @@ import PendingAppointmentList from "../../screens/AppointmentListsCategory/Pendi
 import AcceptedAppointmentList from "../../screens/AppointmentListsCategory/AcceptedAppointmentList";
 import CompletedList from "../../screens/AppointmentListsCategory/CompletedList";
 import { getADoctor } from "../../services/doctorServices/doctorService";
+import loadingGif from "../../assets/animation/loading.gif";
 
 const AppointmentList = () => {
   const screenHeight = Dimensions.get("window").height - 275;
@@ -28,7 +29,18 @@ const AppointmentList = () => {
   }, []);
 
   if (!doctorData) {
-    return;
+    return (
+      <View
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          height: "100%",
+        }}
+      >
+        <Image source={loadingGif} />
+      </View>
+    );
   }
 
   return (
@@ -49,14 +61,13 @@ const AppointmentList = () => {
           // backgroundColor: "red",
         }}
       >
-        <ScrollView style={{ height: "100%", marginTop: 15 }}>
-          <ButtonGroup
-            tab1={"New"}
-            tab2={"Accepted"}
-            tab3={"History"}
-            select={setSelectedTab}
-          />
-
+        <ButtonGroup
+          tab1={"New"}
+          tab2={"Accepted"}
+          tab3={"History"}
+          select={setSelectedTab}
+        />
+        <ScrollView style={{ height: "100%", paddingTop: 15 }}>
           {/* appointment status cards */}
           <View style={{ marginBottom: 70 }}>
             {selectedTab == 0 ? (

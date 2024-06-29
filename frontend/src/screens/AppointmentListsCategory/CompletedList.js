@@ -63,9 +63,9 @@ const CompletedAppointment = () => {
           style={{
             marginHorizontal: 15,
             marginVertical: 15,
-            flex: 1,
+
             flexDirection: "row",
-            alignItems: "baseline",
+            alignItems: "center",
             justifyContent: "space-between",
           }}
         >

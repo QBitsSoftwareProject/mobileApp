@@ -10,6 +10,7 @@ import {
 import { ListItem } from "@rneui/themed";
 import { useNavigation } from "@react-navigation/native";
 import { deleteJournal } from "../../services/journalService/journalService";
+import { Overlay } from "@rneui/base";
 
 const JounalCard = ({ journal, setIsRefresh }) => {
   const navigation = useNavigation();
@@ -28,14 +29,14 @@ const JounalCard = ({ journal, setIsRefresh }) => {
       await deleteJournal(journal._id);
       setIsRefresh((prev) => prev + 1);
     } catch (error) {
-      console.error("Failed to delete comment:", error);
+      console.error("Failed to delete Journal:", error);
     }
   };
 
   const displayDeleteAlert = () => {
     Alert.alert(
       "Are you sure!",
-      "This action will delete your comment permanently!",
+      "This action will delete your Journal permanently!",
       [
         {
           text: "Cancel",

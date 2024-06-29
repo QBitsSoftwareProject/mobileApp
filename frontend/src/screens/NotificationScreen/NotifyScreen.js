@@ -15,7 +15,6 @@ import loadingGif from "../../assets/animation/loading.gif";
 
 const NotifyScreen = () => {
   const [notificationList, setNotificationList] = useState([]);
-  const [isKeyboardVisible, setKeyboardVisible] = useState(false);
 
   const navigation = useNavigation();
 
@@ -35,25 +34,6 @@ const NotifyScreen = () => {
   useFocusEffect(
     React.useCallback(() => {
       fetchNotification();
-
-      const keyboardDidShowListener = Keyboard.addListener(
-        "keyboardDidShow",
-        () => {
-          setKeyboardVisible(true);
-        }
-      );
-
-      const keyboardDidHideListener = Keyboard.addListener(
-        "keyboardDidHide",
-        () => {
-          setKeyboardVisible(false);
-        }
-      );
-
-      return () => {
-        keyboardDidShowListener.remove();
-        keyboardDidHideListener.remove();
-      };
     }, [])
   );
   if (!notificationList) {
@@ -75,7 +55,7 @@ const NotifyScreen = () => {
     <SafeAreaView
       style={{
         paddingTop: 35,
-        paddingBottom: isKeyboardVisible ? 50 : 130,
+        paddingBottom: 65,
         flex: 1,
       }}
     >
@@ -83,7 +63,7 @@ const NotifyScreen = () => {
         <Image source={require("../../assets/images/BackBlack.png")} />
       </TouchableOpacity>
 
-      <ScrollView style={{ paddingHorizontal: 25, paddingTop: 80 }}>
+      <ScrollView style={{ paddingHorizontal: 25 }}>
         <View>
           {notificationList &&
             notificationList.map((item) => (
@@ -107,8 +87,7 @@ const NotifyScreen = () => {
 
 const styles = StyleSheet.create({
   backButton: {
-    position: "absolute",
-    margin: 35,
+    margin: 25,
     zIndex: 20,
   },
 });

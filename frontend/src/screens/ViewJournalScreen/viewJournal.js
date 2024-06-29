@@ -9,6 +9,7 @@ import HeaderSub from "../../components/HeaderSub/HeaderSub";
 import { getJournalsByUserId } from "../../services/journalService/journalService";
 import JounalCard from "./JounalCard";
 import { useFocusEffect } from "@react-navigation/native";
+import { Overlay } from "@rneui/base";
 
 export const ViewJournal = ({ navigation }) => {
   const screenHeight = Dimensions.get("window").height;
