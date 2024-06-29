@@ -64,7 +64,7 @@ const CFHeaderSub = (props) => {
           <View
             style={{
               width: "100%",
-              marginTop: 50,
+              marginTop: 25,
             }}
           >
             <View style={{ flexDirection: "row", gap: 32 }}>
@@ -111,14 +111,13 @@ const styles = StyleSheet.create({
     zIndex: 100,
   },
   imageframe: {
-    height: 85,
-    width: 85,
+    height: 100,
+    width: 100,
     borderColor: "white",
     borderWidth: 4,
     borderRadius: 50,
     alignSelf: "center",
     overflow: "hidden",
-    elevation: 2,
   },
   image: {
     width: "100%",

@@ -83,7 +83,7 @@ const ViewGoalScreen = () => {
           }
           back={"HomeScreen"}
         />
-        <View style={{ marginTop: 32 }}>
+        <View style={{ marginTop: 5 }}>
           <ButtonGroup
             tab1={"Your Goals"}
             tab2={"Suggested"}

@@ -103,7 +103,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "space-between",
     width: "100%",
-    paddingVertical: 5,
+    paddingVertical: 15,
   },
   textinput: {
     height: 45,

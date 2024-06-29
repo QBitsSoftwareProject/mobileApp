@@ -1,24 +1,29 @@
-import React, { useState, useRef, useEffect } from 'react';
-import { Text, View, TouchableOpacity, Animated, Image, StyleSheet, ImageBackground, Modal } from 'react-native';
-import { Audio } from 'expo-av';
-import VideoPlayerModal from './VideoPlayerModal';
-import AudioPlayerModal from './AudioPlayerModal';
-import PDFViewerModal from './PdfReaderModal';
-
-
+import React, { useState, useRef, useEffect } from "react";
+import {
+  Text,
+  View,
+  TouchableOpacity,
+  Animated,
+  Image,
+  StyleSheet,
+  ImageBackground,
+  Modal,
+} from "react-native";
+import { Audio } from "expo-av";
+import VideoPlayerModal from "./VideoPlayerModal";
+import AudioPlayerModal from "./AudioPlayerModal";
+import PDFViewerModal from "./PdfReaderModal";
 
 // expand card component
 const ExpandableCard = (props) => {
-  const [isExpanded, setIsExpanded] = useState(true);
+  const [isExpanded, setIsExpanded] = useState(false);
   const heightAnim = useRef(new Animated.Value(0)).current;
   const [imageHeight, setImageHeight] = useState(0);
   const [textHeight, setTextHeight] = useState(0);
   const [modalVisible, setModalVisible] = useState(false);
-  
-  
 
   const toggleModal = () => {
-    console.log(resource)
+    console.log(resource);
     setModalVisible(!modalVisible);
   };
 
@@ -34,15 +39,12 @@ const ExpandableCard = (props) => {
   let ibtn;
   let btnfunction; // Declare btnfunction here
 
-  
-
-
   const [pdfModalVisible, setPdfModalVisible] = useState(false);
   // const videoSource = resource; // Replace with your video source
   let pdfSource;
 
   const togglePdfModal = () => {
-    console.log("pdf resource is"+pdfSource)
+    console.log("pdf resource is" + pdfSource);
     setPdfModalVisible(!pdfModalVisible);
   };
 
@@ -51,18 +53,17 @@ const ExpandableCard = (props) => {
   let videoSource;
 
   const toggleVideoModal = () => {
-    console.log("resource is"+videoSource)
+    console.log("resource is" + videoSource);
     setvideoModalVisible(!videoModalVisible);
   };
 
   const [audioModalVisible, setaudioModalVisible] = useState(false);
-  let audioSource ; // Replace with your audio file source
+  let audioSource; // Replace with your audio file source
 
   const toggleAudioModal = () => {
     setaudioModalVisible(!audioModalVisible);
   };
 
-  
   let resource;
 
   let img;
@@ -70,36 +71,33 @@ const ExpandableCard = (props) => {
   let name;
 
   let id;
-  
 
-  if (methodtype === 'audio') {
-    mimg = require('../../assets/images/MindRelaxingMethod/mp3.png');
-    mtitle = 'Listen to Music';
-    ibtn = require('../../assets/images/MindRelaxingMethod/mp3playbutton.png');
+  if (methodtype === "audio") {
+    mimg = require("../../assets/images/MindRelaxingMethod/mp3.png");
+    mtitle = "Listen to Music";
+    ibtn = require("../../assets/images/MindRelaxingMethod/mp3playbutton.png");
     btnfunction = toggleAudioModal; // Assign playAudio to btnfunction
     audioSource = props.rUrl;
     img = props.imgLink;
     name = props.methodname;
-    id = props.methodId
-  } else if (methodtype === 'pdf') {
-    mimg = require('../../assets/images/MindRelaxingMethod/story.png');
-    mtitle = 'Read a Story';
-    ibtn = require('../../assets/images/MindRelaxingMethod/read.png');
+    id = props.methodId;
+  } else if (methodtype === "pdf") {
+    mimg = require("../../assets/images/MindRelaxingMethod/story.png");
+    mtitle = "Read a Story";
+    ibtn = require("../../assets/images/MindRelaxingMethod/read.png");
     btnfunction = togglePdfModal;
     pdfSource = props.rUrl;
     name = props.methodname;
-    id = props.methodId
+    id = props.methodId;
   } else {
-    mimg = require('../../assets/images/MindRelaxingMethod/breathing.png');
-    mtitle = 'Breathing Exercise';
-    ibtn = require('../../assets/images/MindRelaxingMethod/mp3playbutton.png');
+    mimg = require("../../assets/images/MindRelaxingMethod/breathing.png");
+    mtitle = "Breathing Exercise";
+    ibtn = require("../../assets/images/MindRelaxingMethod/mp3playbutton.png");
     btnfunction = toggleVideoModal;
     videoSource = props.rUrl;
     name = props.methodname;
-    id = props.methodId
+    id = props.methodId;
   }
-
-
 
   useEffect(() => {
     Animated.timing(heightAnim, {
@@ -119,16 +117,18 @@ const ExpandableCard = (props) => {
 
   return (
     <View style={{ margin: 10 }}>
-      <View style={{
-        backgroundColor: 'white',
-        padding: 10,
-        borderRadius: isExpanded ? 20 : 20,
-        borderBottomLeftRadius: isExpanded ? 20 : 0,
-        borderBottomRightRadius: isExpanded ? 20 : 0,
-        flexDirection: 'row',
-        height: 112,
-        marginHorizontal: 10
-      }}>
+      <View
+        style={{
+          backgroundColor: "white",
+          padding: 10,
+          borderRadius: isExpanded ? 20 : 20,
+          borderBottomLeftRadius: isExpanded ? 20 : 0,
+          borderBottomRightRadius: isExpanded ? 20 : 0,
+          flexDirection: "row",
+          height: 112,
+          marginHorizontal: 10,
+        }}
+      >
         <View style={styles.expandImg}>
           <Image source={mimg} />
         </View>
@@ -142,8 +142,8 @@ const ExpandableCard = (props) => {
               <Image
                 source={
                   isExpanded
-                    ? require('../../assets/images/MindRelaxingMethod/expanddown.png')
-                    : require('../../assets/images/MindRelaxingMethod/Expandup.png')
+                    ? require("../../assets/images/MindRelaxingMethod/expanddown.png")
+                    : require("../../assets/images/MindRelaxingMethod/Expandup.png")
                 }
               />
             </TouchableOpacity>
@@ -153,18 +153,27 @@ const ExpandableCard = (props) => {
       <View>
         <Animated.View
           style={{
-            overflow: 'hidden',
+            overflow: "hidden",
             height: heightAnim,
-            backgroundColor: 'white',
+            backgroundColor: "white",
             borderBottomLeftRadius: 15,
             borderBottomRightRadius: 15,
             marginTop: -15,
-            marginHorizontal: 10
+            marginHorizontal: 10,
+            padding: 10,
           }}
         >
-          <View style={{ flexDirection: 'column' }}>
-            <View style={{ height: 160, paddingHorizontal: 80, marginTop: 10 }} onLayout={onImageLayout}>
-              <View style={{ flex: 1, borderRadius: 15, overflow: 'hidden' }}>
+          <View style={{ flexDirection: "column" }}>
+            <View
+              style={{
+                height: 160,
+                paddingHorizontal: 80,
+                marginTop: 10,
+                marginBottom: 10,
+              }}
+              onLayout={onImageLayout}
+            >
+              <View style={{ flex: 1, borderRadius: 15, overflow: "hidden" }}>
                 <ImageBackground
                   source={{ uri: imglink }}
                   style={styles.contentImage}
@@ -176,17 +185,34 @@ const ExpandableCard = (props) => {
               </View>
             </View>
             <View onLayout={onTextLayout}>
-              <Text style={styles.contentText}>
-                {props.contentText} 
-              </Text>
+              <Text style={styles.contentText}>{props.contentText}</Text>
             </View>
           </View>
         </Animated.View>
       </View>
-      
-      <VideoPlayerModal visible={videoModalVisible} onClose={toggleVideoModal} videoSource={videoSource} name = {name} id = {id} />
-      <AudioPlayerModal visible={audioModalVisible} onClose={toggleAudioModal} audioSource={audioSource} img ={props.imgLink} name = {name} id = {id}/>
-      <PDFViewerModal visible={pdfModalVisible} onClose={togglePdfModal} pdfSource={pdfSource} name = {name} id = {id}/>
+
+      <VideoPlayerModal
+        visible={videoModalVisible}
+        onClose={toggleVideoModal}
+        videoSource={videoSource}
+        name={name}
+        id={id}
+      />
+      <AudioPlayerModal
+        visible={audioModalVisible}
+        onClose={toggleAudioModal}
+        audioSource={audioSource}
+        img={props.imgLink}
+        name={name}
+        id={id}
+      />
+      <PDFViewerModal
+        visible={pdfModalVisible}
+        onClose={togglePdfModal}
+        pdfSource={pdfSource}
+        name={name}
+        id={id}
+      />
     </View>
   );
 };
@@ -194,12 +220,12 @@ const ExpandableCard = (props) => {
 const styles = StyleSheet.create({
   expandImg: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
   },
 
   expandTitle: {
-    flexDirection: 'row',
+    flexDirection: "row",
     flex: 3,
   },
 
@@ -216,28 +242,28 @@ const styles = StyleSheet.create({
 
   method: {
     fontSize: 18,
-    color: '#101318',
-    marginBottom: 5,
-    fontWeight: 'bold',
+    fontWeight: "500",
+    color: "#40495B",
   },
 
   methodName: {
     fontSize: 12,
-    color: '#5C677D',
+    fontWeight: "500",
+    color: "#979DAC",
   },
 
   contentImage: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
   },
 
   contentText: {
     marginHorizontal: 10,
-    marginVertical: 20,
-    color: '#5C677D',
+    marginBottom: 40,
     fontSize: 12,
-    lineHeight: 15,
+    fontWeight: "500",
+    color: "#979DAC",
   },
 });
 
