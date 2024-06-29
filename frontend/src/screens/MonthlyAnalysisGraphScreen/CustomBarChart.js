@@ -23,14 +23,14 @@ const CustomBarChart = ({ positiveMoods, negativeMoods }) => {
   const filterDataByMonth = (data, dateField) => {
     const todayDate = new Date();
     const startDate = getStartOfMonth(todayDate);
-    // console.log("Start of Month:", startDate);
+    console.log("Start of Month:", startDate);
 
     const endDate = getEndOfMonth(todayDate);
-    // console.log("End of Month:", endDate);
+    console.log("End of Month:", endDate);
 
     return data.filter((item) => {
       const itemDate = new Date(item[dateField]);
-      // console.log("Item Date:", itemDate);
+      console.log("Item Date:", itemDate);
       return itemDate >= startDate && itemDate <= endDate;
     });
   };

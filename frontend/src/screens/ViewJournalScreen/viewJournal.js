@@ -72,7 +72,7 @@ export const ViewJournal = ({ navigation }) => {
       >
         <CustomButtonView btnAnalysis={handleButton}></CustomButtonView>
       </View>
-      <View style={{ height: screenHeight - 345 }}>
+      <View style={{ height: screenHeight - 320 }}>
         <ScrollView
           style={{
             marginHorizontal: 25,
