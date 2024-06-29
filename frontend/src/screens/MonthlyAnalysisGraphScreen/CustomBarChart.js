@@ -117,7 +117,7 @@ const CustomBarChart = ({ positiveMoods, negativeMoods }) => {
           ))}
         </View>
       </View>
-      <ScrollView horizontal>
+      <ScrollView horizontal showsHorizontalScrollIndicator={false}>
         <View style={styles.chartContainer}>
           <View style={styles.chart}>
             <View style={styles.zeroLine} />
