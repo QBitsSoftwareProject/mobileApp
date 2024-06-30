@@ -1,7 +1,7 @@
 const express = require("express");
 const {
-  createReport,
-} = require("../controllers/reportController/CreateReport");
+  createReport
+} = require("../controllers/reportController/createReport");
 const { getReport } = require("../controllers/reportController/getReport");
 const auth = require("../middlewares/auth");
 

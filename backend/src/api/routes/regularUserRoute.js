@@ -5,6 +5,7 @@ const {
 
 const {
   updateRegularUser,
+  updateUserAccessStatus,
 } = require("../controllers/regularUserControllers/updateController");
 
 const {
@@ -15,6 +16,7 @@ const {
   getRegularUsers,
   getARegularUser,
   getRegularUserById,
+  getARegularUserById,
 } = require("../controllers/regularUserControllers/getController");
 
 const {
@@ -31,7 +33,9 @@ const router = express.Router();
 router.get("/", getRegularUsers);
 router.get("/one-user", auth, getARegularUser);
 router.get("/user-by-id/:userId", auth, getRegularUserById);
+router.get("/one-user-by-id/:userId", getARegularUserById);
 router.put("/", auth, updateRegularUser);
+router.put("/edit-user-access/:id", updateUserAccessStatus);
 router.delete("/:id", deleteRegularUser);
 
 router.post("/checkExistsUser", checkExistsUser);
