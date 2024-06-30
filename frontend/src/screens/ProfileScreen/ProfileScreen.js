@@ -140,7 +140,11 @@ const ProfileScreen = () => {
     }
   }, [user]);
   const handlebackBtn = () => {
-    navigation.navigate("HomeScreen");
+    if (userRole == "doctor") {
+      navigation.navigate("AppointmentListsCategory");
+    } else {
+      navigation.navigate("HomeScreen");
+    }
   };
 
   const handleUpdateFullName = async (newFullName) => {

@@ -33,10 +33,6 @@ const WelcomeScreen = () => {
     navigation.navigate("LoginScreen");
   };
 
-  const handleGuest = () => {
-    navigation.navigate("TabBar");
-  };
-
   const handleSingUp = () => {
     navigation.navigate("SelectionScreen");
   };
@@ -88,10 +84,6 @@ const WelcomeScreen = () => {
             <Text style={styles.btnText}>Login</Text>
           </TouchableOpacity>
         </View>
-
-        <TouchableOpacity onPress={handleGuest}>
-          <Text style={styles.guestText}>Use as a guest</Text>
-        </TouchableOpacity>
 
         <Text style={styles.bottomText}>Please use an earphone</Text>
       </View>
