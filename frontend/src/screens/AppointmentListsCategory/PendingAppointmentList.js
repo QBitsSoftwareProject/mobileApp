@@ -29,8 +29,26 @@ const PendingAppointment = () => {
 
   const getapDate = (date) => {
     const apDate = new Date(date);
+    const monthNames = [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December",
+    ];
     let stringDate =
-      apDate.getFullYear() + "-" + apDate.getMonth() + "-" + apDate.getDate();
+      apDate.getFullYear() +
+      "-" +
+      monthNames[apDate.getMonth()] +
+      "-" +
+      apDate.getDate();
     return stringDate;
   };
 

@@ -42,6 +42,6 @@ router.get(
   getDoctorCancelledAppointments
 );
 router.put("/appointment-status", auth, updateDocAppointment);
-router.get("/available-times/:doctorId", auth, getAvailableTimes);
+// router.get("/available-times/:doctorId", auth, getAvailableTimes);
 
 module.exports = router;

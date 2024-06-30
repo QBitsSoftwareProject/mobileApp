@@ -51,10 +51,24 @@ const CompletedAppointment = () => {
 
   const getapDate = (date) => {
     const apDate = new Date(date);
+    const monthNames = [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December",
+    ];
     let stringDate =
       apDate.getFullYear() +
       "-" +
-      (apDate.getMonth() + 1) +
+      monthNames[apDate.getMonth() + 1] +
       "-" +
       apDate.getDate();
     return stringDate;

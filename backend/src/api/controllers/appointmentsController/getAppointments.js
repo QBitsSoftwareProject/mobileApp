@@ -170,35 +170,35 @@ exports.getDoctorCompletedAppointmentCount = async (req, res) => {
   }
 };
 
-exports.getAvailableTimes = async (req, res) => {
-  const { doctorId, date } = req.params;
+// exports.getAvailableTimes = async (req, res) => {
+//   const { doctorId, date } = req.params;
 
-  try {
-    // Fetch all booked time slots for the given doctor and date
-    const bookedAppointments = await appointmentSchema.find({ doctorId, date });
-    console.log("Booked Appointments:", bookedAppointments);
+//   try {
+//     // Fetch all booked time slots for the given doctor and date
+//     const bookedAppointments = await appointmentSchema.find({ doctorId, date });
+//     console.log("Booked Appointments:", bookedAppointments);
 
-    // Get all available time slots for the doctor
-    const doctor = await doctorModel.findById(doctorId);
-    console.log("Doctor:", doctor);
+//     // Get all available time slots for the doctor
+//     const doctor = await doctorModel.findById(doctorId);
+//     console.log("Doctor:", doctor);
 
-    if (!doctor || !doctor.availableTimes) {
-      return res
-        .status(404)
-        .json({ message: "Doctor not found or no available times found." });
-    }
+//     if (!doctor || !doctor.availableTimes) {
+//       return res
+//         .status(404)
+//         .json({ message: "Doctor not found or no available times found." });
+//     }
 
-    const allTimes = doctor.availableTimes;
-    console.log("All Times:", allTimes);
+//     const allTimes = doctor.availableTimes;
+//     console.log("All Times:", allTimes);
 
-    // Filter out booked time slots
-    const availableTimes = allTimes.filter((time) => {
-      return !bookedAppointments.some((appt) => appt.selectedTimeSlot == time);
-    });
-    console.log("Available Times:", availableTimes);
-    res.status(200).json({ availableTimes });
-  } catch (error) {
-    console.error("Error fetching available times:", error);
-    res.status(500).json({ message: "Failed to fetch available times." });
-  }
-};
+//     // Filter out booked time slots
+//     const availableTimes = allTimes.filter((time) => {
+//       return !bookedAppointments.some((appt) => appt.selectedTimeSlot == time);
+//     });
+//     console.log("Available Times:", availableTimes);
+//     res.status(200).json({ availableTimes });
+//   } catch (error) {
+//     console.error("Error fetching available times:", error);
+//     res.status(500).json({ message: "Failed to fetch available times." });
+//   }
+// };

@@ -3,6 +3,20 @@ import React from "react";
 
 const CreateCard = (props) => {
   const currentDate = new Date(props.date);
+  const monthNames = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
 
   return (
     <TouchableOpacity style={styles.cardBox} onPress={props.onPress}>
@@ -31,8 +45,8 @@ const CreateCard = (props) => {
                   Time: {props.time.from}-{props.time.to}
                 </Text>
                 <Text style={styles.description}>
-                  Date: {currentDate.getUTCFullYear()}-
-                  {currentDate.getUTCMonth()}-{currentDate.getUTCDate()}
+                  Date: {currentDate.getFullYear()}-
+                  {monthNames[currentDate.getMonth()]}-{currentDate.getDate()}
                 </Text>
                 <Text
                   style={[
@@ -64,10 +78,9 @@ const CreateCard = (props) => {
 const styles = StyleSheet.create({
   cardBox: {
     height: 112,
-    padding: 20,
+    padding: 15,
     backgroundColor: "white",
     borderRadius: 20,
-
     flexDirection: "row",
     alignSelf: "center",
     marginBottom: 15,
@@ -89,6 +102,7 @@ const styles = StyleSheet.create({
     fontSize: 12,
     fontWeight: "500",
     color: "#5C677D",
+    lineHeight: 22,
   },
   imageframe: {
     height: 60,

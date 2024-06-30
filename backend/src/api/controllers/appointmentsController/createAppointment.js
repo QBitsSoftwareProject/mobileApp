@@ -9,25 +9,23 @@ exports.createAppointment = async (req, res) => {
     const userId = req.user.user_id;
     const doctor = await doctorSchema.findById(doctorId);
 
-    const existingAppointment = await appointmentSchema.findOne({
-      doctorId,
-      date,
-      selectedTimeSlot: time,
-    });
+    // const existingAppointment = await appointmentSchema.findOne({
+    //   doctorId,
+    //   date,
+    //   selectedTimeSlot: time,
+    // });
 
-    if (existingAppointment) {
-      return res
-        .status(400)
-        .json({ message: "This time slot is already booked." });
-    }
+    // if (existingAppointment) {
+    //   return res
+    //     .status(400)
+    //     .json({ message: "This time slot is already booked." });
+    // }
 
     const newAppointment = new appointmentSchema({
       doctorId: doctor._id,
       userId,
       date,
       time,
-      selectedTimeSlot: time,
-      // status: "Pending",
     });
 
     await newAppointment.save();
