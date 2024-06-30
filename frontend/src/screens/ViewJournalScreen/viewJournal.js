@@ -106,6 +106,7 @@ export const ViewJournal = ({ navigation }) => {
         <ScrollView
           style={{
             marginHorizontal: 25,
+            marginBottom: 30,
           }}
         >
           <Calendar setJournalArray={setJournalArray} />

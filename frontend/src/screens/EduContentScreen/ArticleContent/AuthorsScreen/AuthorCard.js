@@ -17,7 +17,7 @@ const AuthorCard = ({ item }) => {
       } catch (err) {
         console.error("Error fetching author:", err);
       }
-    }
+    };
     fetchAuthorArticleCount();
   }, []);
 
@@ -31,7 +31,13 @@ const AuthorCard = ({ item }) => {
         />
         <View style={{ marginLeft: 15, width: 180 }}>
           <Text style={{ fontSize: 18 }}>{item.name}</Text>
-          <Text style={{ fontSize: 16 }}>{(articleCount == 0) ? ("no articles") : ((articleCount == 1) ? (articleCount + " article") : (articleCount + " articles"))}</Text>
+          <Text style={{ fontSize: 16 }}>
+            {articleCount == 0
+              ? "no articles"
+              : articleCount == 1
+              ? articleCount + " article"
+              : articleCount + " articles"}
+          </Text>
         </View>
         {/* view article button section */}
         <View
@@ -59,7 +65,6 @@ const AuthorCard = ({ item }) => {
         {/* view article button section */}
       </View>
       {/* image,name and article count */}
-
     </View>
   );
 };

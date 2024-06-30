@@ -57,13 +57,11 @@ const AvailableDoctor = () => {
       <AppointmentHeader headLine={"Specialists"} back={"HomeScreen"} />
       <SafeAreaView
         style={{
-          height: screenHeight,
           paddingHorizontal: 25,
-
           zIndex: -1,
         }}
       >
-        <ScrollView style={{ height: screenHeight - 250, paddingTop: 32 }}>
+        <ScrollView style={{ height: screenHeight - 280, paddingTop: 32 }}>
           <View style={style.content1}>
             <Text style={style.descript2}>Available Doctors.</Text>
             <TouchableOpacity

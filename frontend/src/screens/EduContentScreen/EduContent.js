@@ -1,4 +1,12 @@
-import { View, Text, Pressable, ScrollView, FlatList } from "react-native";
+import {
+  View,
+  Text,
+  Pressable,
+  ScrollView,
+  FlatList,
+  Dimensions,
+  Image,
+} from "react-native";
 import React, { useEffect, useState } from "react";
 import styles from "../EduContentScreen/AllContent/style";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -13,13 +21,13 @@ import { getVideos } from "../../services/educationalServices/educationalService
 import VideoItem from "./VideoContent/VideoItem/VideoItem";
 import HeaderSub from "../../components/HeaderSub/HeaderSub";
 import { useNavigation } from "@react-navigation/native";
+import loadingGif from "../../assets/animation/loading.gif";
 // components
 
 const EduContent = () => {
+  const screenHeight = Dimensions.get("window").height;
 
-  const navigation = useNavigation();
-
-  const [videos, setVideos] = useState([]);
+  const [videos, setVideos] = useState();
 
   useEffect(() => {
     const fetchVideos = async () => {
@@ -37,50 +45,55 @@ const EduContent = () => {
     };
     fetchVideos();
   }, []);
+
+  if (!videos) {
+    return (
+      <View
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          height: "100%",
+        }}
+      >
+        <Image source={loadingGif} />
+      </View>
+    );
+  }
+
   return (
     <SafeAreaView>
-      <View style={styles.Container}>
-        <FlatList
-          data={[{ key: "unique-key" }]}
-          renderItem={() => {
-            return (
-              <View style={{ marginBottom: 90 }}>
-                <View>
-                  <HeaderSub back={"EducationalScreen"} headLine={"Educational content"} subHeadLine={"Enjoy featured resource to up your mood"} />
+      <HeaderSub
+        back={"HomeScreen"}
+        headLine={"Educational content"}
+        subHeadLine={"Enjoy featured resource to up your mood"}
+      />
+      <View style={[styles.Container, { height: screenHeight - 190 }]}>
+        <View>
+          <SearchAndCategories currentView={"EducationalScreen"} />
+        </View>
+
+        <ScrollView>
+          <View style={{ paddingHorizontal: 25, marginTop: 15 }}>
+            {/* <Text style={styles.mainHeading}>Featured Resources</Text> */}
+
+            {/* <Carousel /> */}
+
+            <Text style={styles.mainHeading2}>Recent Uploaded Videos</Text>
+
+            <View style={{ marginTop: 20 }}>
+              {videos.map((item, index) => (
+                <View key={index}>
+                  <VideoItem item={item} />
                 </View>
-                <View style={{ zIndex: 100 }}>
-                  {/*categories */}
-                  <SearchAndCategories currentView={"EducationalScreen"} />
-                  {/*categories */}
-                </View>
-                <SafeAreaView>
-                  <Text style={styles.mainHeading}>Featured Resurces</Text>
-                  <View>
-                    <Carousel />
-                  </View>
-                  <Text style={styles.mainHeading2}>Recent Uploaded Videos</Text>
-                  <View style={{ paddingHorizontal: 20, marginTop: 20 }}>
-                    <FlatList
-                      data={videos}
-                      renderItem={({ item }) => <VideoItem item={item} />}
-                      keyExtractor={(item) => {
-                        // Ensure each item has a unique key
-                        const key = item._id.toString();
-                        return key;
-                      }}
-                    />
-                  </View>
-                  <Text style={[styles.mainHeading2, { marginTop: 40 }]}>
-                    Listen to Calm yourself
-                  </Text>
-                  <View>
-                    <Audios />
-                  </View>
-                </SafeAreaView>
-              </View>
-            );
-          }}
-        />
+              ))}
+            </View>
+
+            <Text style={[styles.mainHeading2]}>Listen to Calm yourself</Text>
+
+            <Audios />
+          </View>
+        </ScrollView>
       </View>
     </SafeAreaView>
   );
