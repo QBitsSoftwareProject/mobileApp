@@ -18,14 +18,14 @@ const TabBarIcon = ({ focused, screenName, isNotification }) => (
     ) : screenName == "notification" && isNotification ? (
       <View
         style={{
-          height: 15,
-          width: 15,
+          height: 12,
+          width: 12,
           backgroundColor: "#FF0000",
           borderRadius: 100,
           position: "absolute",
           zIndex: 100,
-          top: -18,
-          right: -3,
+          top: -16,
+          right: -2,
         }}
       ></View>
     ) : null}
