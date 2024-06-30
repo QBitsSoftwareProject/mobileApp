@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
   CardImageSection: {
     display: "flex",
     flexDirection: "row",
-    justifyContent: "space-evenly"
+    justifyContent: "space-evenly",
   },
   AuthorDescription: {
     marginLeft: "20%",
@@ -29,14 +29,13 @@ const styles = StyleSheet.create({
   },
   ViewBtnBorder: {
     borderColor: "#263552",
-    borderWidth: 2.5,
-    padding: 5,
+
+    padding: 15,
     borderRadius: 40,
-    width: 100,
   },
   ViewBtn: {
     backgroundColor: "#4A90BF",
-    padding: 6,
+    padding: 10,
     borderRadius: 40,
   },
   ViewBtnText: {

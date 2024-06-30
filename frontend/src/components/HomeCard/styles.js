@@ -35,7 +35,7 @@ export default styles = StyleSheet.create({
     color: "#40495B",
   },
   subText: {
-    fontSize: 10,
+    fontSize: 12,
     fontWeight: "400",
     color: "#5C677D",
   },

@@ -5,14 +5,13 @@ const styles = StyleSheet.create({
   Container: {
     backgroundColor: "#F2F3F5",
     alignItems: "center",
-    height: "100%",
   },
   NavContainer: {
     position: "absolute",
     justifyContent: "center",
     alignItems: "center",
     marginTop: 80,
-    marginLeft:"8%",
+    marginLeft: "8%",
   },
   NavBar: {
     borderRadius: 100,
@@ -26,9 +25,9 @@ const styles = StyleSheet.create({
   NavBarElements: {
     color: "black",
     fontWeight: "900",
-    textAlign:"center",
-    marginLeft:"auto",
-    marginRight:"auto",
+    textAlign: "center",
+    marginLeft: "auto",
+    marginRight: "auto",
   },
   NavBarElements_currentBtn: {
     backgroundColor: "#4A90BF",
@@ -45,16 +44,18 @@ const styles = StyleSheet.create({
     marginTop: 120,
   },
   mainHeading: {
-    color: "black",
-    marginTop: 70,
+    fontSize: 18,
+    fontWeight: "400",
+    color: "#101318",
+
     marginLeft: 10,
-    fontSize: 20,
   },
   mainHeading2: {
-    color: "black",
+    fontSize: 18,
+    fontWeight: "400",
+    color: "#101318",
     marginTop: 10,
     marginLeft: 10,
-    fontSize: 20,
   },
 });
 

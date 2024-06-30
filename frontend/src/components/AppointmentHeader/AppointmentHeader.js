@@ -27,22 +27,22 @@ const AppointmentHeader = (props) => {
           style={{
             width: "100%",
             flexDirection: "row",
-            alignItems: "center",
+
             marginTop: 20,
-            gap: 32,
+            gap: 15,
           }}
         >
           <TouchableOpacity style={styles.backBtn} onPress={handleBackPress}>
             <Image source={require("../../assets/images/BackWhite.png")} />
           </TouchableOpacity>
-          <View>
-            <Text style={styles.headlineTxt}>{props.headLine}</Text>
-            <Text style={styles.subHeadlineTxt}>{props.subHeadLine}</Text>
-          </View>
+        </View>
+        <View>
+          <Text style={styles.headlineTxt}>{props.headLine}</Text>
+          <Text style={styles.subHeadlineTxt}>{props.subHeadLine}</Text>
         </View>
 
         <View style={{ marginTop: 20 }}>
-          <SearchBar schema={"doctor"} />
+          <SearchBar schema={props.schema} keyword={props.keyword} />
         </View>
       </ImageBackground>
     </View>
@@ -62,13 +62,12 @@ const styles = StyleSheet.create({
     fontWeight: "600",
     fontSize: 32,
     color: "white",
-    marginTop: 50,
   },
   subHeadlineTxt: {
     fontWeight: "500",
     fontSize: 18,
     color: "white",
-    marginVertical: 8,
+    marginTop: 8,
   },
   searchbar: {},
   backImg: {
