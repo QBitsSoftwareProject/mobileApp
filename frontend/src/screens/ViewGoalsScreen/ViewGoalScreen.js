@@ -1,5 +1,7 @@
 import { View, Text, FlatList, Image, TouchableOpacity } from "react-native";
 import React, { useCallback, useEffect, useState } from "react";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
 import HeaderSub from "../../components/HeaderSub/HeaderSub";
 import ButtonGroup from "../../components/Button/ButtonGroup";
 import ViewGoalCard from "../../components/ViewGoalCard/ViewGoalCard";
@@ -7,6 +9,7 @@ import HistoryGoalCard from "../../components/HistoryGoalCard/HistoryGoalCard";
 import SuggestGoalCard from "../../components/SuggestGoalCard/SuggestGoalCard";
 import notFoundGif from "../../assets/animation/not-found.png";
 import loadingGif from "../../assets/animation/loading.gif";
+import Toast from "react-native-toast-message";
 
 import {
   getCompletedGoals,
@@ -24,6 +27,35 @@ const ViewGoalScreen = () => {
   const [isChange, setIsChange] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [notFound, setNotFound] = useState(false);
+
+  useEffect(() => {
+    showSwipeToastOnceADay();
+  }, []);
+
+  const showSwipeToastOnceADay = async () => {
+    try {
+      const lastShown = await AsyncStorage.getItem("lastShown");
+      const currentTime = Date.now();
+
+      if (
+        !lastShown ||
+        currentTime - parseInt(lastShown, 10) >= 24 * 60 * 60 * 1000
+      ) {
+        // Show the toast message
+        Toast.show({
+          type: "info",
+          text1: "You can swipe goals to  delete",
+          text1Style: { fontSize: 16, fontWeight: "200" }, // Customize text style
+          visibilityTime: 4000, // 4 seconds
+        });
+
+        // Update AsyncStorage with current time
+        await AsyncStorage.setItem("lastShown", currentTime.toString());
+      }
+    } catch (error) {
+      console.error("Error accessing AsyncStorage:", error.message);
+    }
+  };
 
   const fetchData = async () => {
     try {

@@ -92,7 +92,7 @@ const VideoContent = () => {
         </View>
 
         {keyword == "" && (
-          <View style={[styles.VideoCategories, { marginBottom: 110 }]}>
+          <View style={[styles.VideoCategories, { marginBottom: 300 }]}>
             <Text style={{ fontSize: 18, marginTop: 12 }}>
               Search by Categories
             </Text>

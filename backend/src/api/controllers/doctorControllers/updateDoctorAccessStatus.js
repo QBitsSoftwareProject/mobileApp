@@ -11,8 +11,8 @@ exports.updateDoctorAccessStatus = async (req, res) => {
         await doctorModel.findByIdAndUpdate(doctorId.id, access);
 
         // Sending success response with status code 201 and a message
-        return res.status(201).json({ message: "User access level updated successfully" });
+        return res.status(201).json({ message: "Doctor access level updated successfully" });
     } catch (err) {
-        res.status(500).json({ error: "Error in updating doctor access leve", details: err });
+        res.status(500).json({ error: "Error in updating doctor access level", details: err });
     }
 };
