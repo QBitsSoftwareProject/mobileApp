@@ -10,12 +10,10 @@ const MarkSchema = mongoose.Schema({
     type: Number,
     required: true,
   },
-
   date: {
     type: Date,
     required: true,
   },
-
   time: {
     type: String,
     required: true,

@@ -15,6 +15,7 @@ exports.getStressData = async (userId) => {
     }
 
     const mostRecentStressLevelDate = new Date(stressLevels[0].date);
+    
     const currentDate = new Date();
 
     //difference in milli seconds
