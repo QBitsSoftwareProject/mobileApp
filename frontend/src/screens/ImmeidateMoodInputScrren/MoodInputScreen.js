@@ -12,12 +12,9 @@ import styles from "./MoodInputStyles";
 // import back from "../../assets/images/back.png";
 import { useNavigation } from "@react-navigation/native";
 import {
-  storeCurrentMood,
-  updateCurrentMood,
-  fetchCurrentMoodInput,
   checkAndUpsertMood,
 } from "../../services/currentMoodInputServices/currentMoodInputServices";
-import { getUserId } from "../../services/getUserIdService/getUserIdService";
+import { addMood } from "../../services/moodAnalysisServices/moodAnalysisServices";
 
 const MoodInputScreen = () => {
   const navigation = useNavigation();
@@ -69,7 +66,20 @@ const MoodInputScreen = () => {
 
   const handleSubmitBtn = async () => {
     if (optionValue) {
-      checkAndUpsertMood(happy, sad, neutral, worried);
+      await checkAndUpsertMood(happy, sad, neutral, worried);
+
+      if(optionValue === 'happy'){
+        await addMood("😄","Happy",10)
+      }
+      else if(optionValue === 'sad'){
+        await addMood("😭","Sad",10)
+      }
+      else if(optionValue === 'neutral'){
+        await addMood("😐","Neutral",10)
+      }
+      else if(optionValue === 'worried'){
+        await addMood("😟","Worried",10)
+      }
 
       navigation.navigate("MindRelaxingMethod");
     } else {
