@@ -68,11 +68,11 @@ const MakeAppointment = ({ route }) => {
     fetchDoctor();
   }, []);
 
-  // useEffect(() => {
-  //   if (getDate) {
-  //     fetchAvailableTimes(getDate);
-  //   }
-  // }, [getDate]);
+  useEffect(() => {
+    if (getDate) {
+      fetchAvailableTimes(getDate);
+    }
+  }, [getDate]);
 
   const fetchDoctor = async () => {
     try {
@@ -83,15 +83,15 @@ const MakeAppointment = ({ route }) => {
     }
   };
 
-  // const fetchAvailableTimes = async (date) => {
-  //   try {
-  //     const res = await getAvailableTimes(id, date.toISOString());
-  //     console.log(res.availableTimes);
-  //     setAvailableTimes(res.availableTimes);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
+  const fetchAvailableTimes = async (date) => {
+    try {
+      const res = await getAvailableTimes(id, date.toISOString());
+      console.log(res.availableTimes);
+      setAvailableTimes(res.availableTimes || []);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   // Hook for navigation
   const navigation = useNavigation();

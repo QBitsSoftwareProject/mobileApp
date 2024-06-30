@@ -70,6 +70,7 @@ const AvailableDoctor = () => {
 
           <ScrollView contentContainerStyle={{ paddingBottom: 80 }}>
             {docList.map((item) => (
+              // console.log(item)
               <CreateCard
                 key={item._id}
                 image={item.proPic}

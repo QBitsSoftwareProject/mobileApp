@@ -25,10 +25,10 @@ const appointmentSchema = new schema(
       type: Object,
       required: true,
     },
-    // selectedTimeSlot: {
-    //   type: Object,
-    //   required: true,
-    // },
+    selectedTimeSlot: {
+      type: Object,
+      required: true,
+    },
     status: {
       type: String,
       enum: ["Pending", "Accepted", "Completed", "Rejected", "Cancelled"],
