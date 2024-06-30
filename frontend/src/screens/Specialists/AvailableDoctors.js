@@ -53,7 +53,12 @@ const AvailableDoctor = () => {
 
   return (
     <View style={{ flex: 1 }}>
-      <AppointmentHeader headLine={"Specialists"} back={"HomeScreen"} />
+      <AppointmentHeader
+        headLine={"Specialists"}
+        subHeadLine={"Find your doctor."}
+        back={"HomeScreen"}
+        schema={"doctor"}
+      />
       <SafeAreaView style={{ flex: 1, paddingHorizontal: 25 }}>
         <View style={{ flex: 1 }}>
           <View style={style.content1}>
