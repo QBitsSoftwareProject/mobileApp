@@ -21,11 +21,15 @@ import SearchAndCategories from "../../../components/SearchAndCategories/SearchA
 
 // navigation
 import { useNavigation } from "@react-navigation/native";
-import { getArticleTags, getArticles, getAuthors } from "../../../services/educationalServices/educationalServices.js";
+import {
+  getArticleTags,
+  getArticles,
+  getAuthors,
+} from "../../../services/educationalServices/educationalServices.js";
+import HeaderSub from "../../../components/HeaderSub/HeaderSub.js";
 // navigation
 
 const ArticleContent = () => {
-
   const [articles, setArticles] = useState([]);
   const [articleTagList, setArticleTagList] = useState([]);
   const [authorList, setAuthorList] = useState([]);
@@ -54,16 +58,21 @@ const ArticleContent = () => {
 
   return (
     <SafeAreaView>
+      <HeaderSub
+        back={"HomeScreen"}
+        headLine={"Educational content"}
+        subHeadLine={"Enjoy featured resource to up your mood"}
+      />
+      <View style={{ zIndex: 100 }}>
+        {/* categories */}
+        <SearchAndCategories currentView={"ArticleStack"} />
+      </View>
       <FlatList
         data={[{ key: "unique-key" }]}
         renderItem={() => (
           <View>
             {/* Your existing content */}
-            <View style={{ zIndex: 100, marginTop: 40 }}>
-              {/* categories */}
-              <SearchAndCategories currentView={"ArticleStack"} />
-              {/* categories */}
-            </View>
+
             <View style={styles.authorSections}>
               <View style={styles.authorSection1}>
                 <Text style={{ fontSize: 20 }}>Read articles from</Text>
@@ -95,15 +104,12 @@ const ArticleContent = () => {
                 }}
               />
             </View>
-            <Text style={{ fontSize: 20, padding: 10, marginTop: 20 }}>
+            <Text
+              style={{ fontSize: 20, paddingHorizontal: 25, marginTop: 20 }}
+            >
               Some articles
             </Text>
-            <View
-              style={[
-                styles.articleSection,
-                { marginBottom: 100, marginTop: 10 },
-              ]}
-            >
+            <View style={[styles.articleSection, { marginBottom: 350 }]}>
               <FlatList
                 data={articles}
                 renderItem={({ item }) => {

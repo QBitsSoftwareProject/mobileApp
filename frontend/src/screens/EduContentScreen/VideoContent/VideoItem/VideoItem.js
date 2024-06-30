@@ -28,61 +28,95 @@ const VideoItem = ({ item }) => {
     setIsModalVisible(false);
   };
 
-
   const formatDuration = (seconds) => {
     const minutes = Math.floor(seconds / 60);
     const remainingSeconds = Math.floor(seconds % 60);
-    return `${minutes}:${remainingSeconds < 10 ? '0' : ''}${remainingSeconds}`;
+    return `${minutes}:${remainingSeconds < 10 ? "0" : ""}${remainingSeconds}`;
   };
 
   return (
-    <>
+    <View>
       <View style={[styles.VideoItem, { paddingBottom: 20 }]}>
-        <View>
-          <View style={{ position: "absolute", zIndex: 100, height: "100%", width: "100%", display: "flex", justifyContent: "center", alignItems: "center" }}>
-            <TouchableOpacity onPress={handlePlayPress}>
-              <View style={styles.imgContainer}>
-                <Image
-                  source={playImg}
-                  style={styles.image}
-                />
-              </View>
-            </TouchableOpacity>
-          </View>
-          <View>
-            <Video
-              ref={video}
-              source={{ uri: item.downloadURL }}
-              style={{ width: "100%", height: 200, borderTopLeftRadius: 10, borderTopRightRadius: 10 }} // Adjust height as needed
-              useNativeControls
-              isMuted={false}
-              isLooping
-              resizeMode="cover"
-              onPlaybackStatusUpdate={(status) => setStatus(() => status)}
-              onError={(e) => console.log("Video Error: ", e)}
-              onFullscreenUpdate={null} // Handle fullscreen updates
-            />
-            {status.isLoaded ? null : (
-              <Text style={{ position: "absolute", top: "50%", left: "50%", transform: [{ translateX: -50 }, { translateY: -50 }] }}>
-                Loading...
-              </Text>
-            )}
-          </View>
+        <View
+          style={{
+            position: "absolute",
+            zIndex: 100,
+            height: "100%",
+            width: "100%",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <TouchableOpacity onPress={handlePlayPress}>
+            <View style={styles.imgContainer}>
+              <Image source={playImg} style={styles.image} />
+            </View>
+          </TouchableOpacity>
         </View>
-        <View>
-          <Text style={{ textAlign: "left", fontSize: 15, marginLeft: 10, marginTop: 10, fontWeight: "500" }}>{item.title}</Text>
+        <View style={{ width: "100%" }}>
+          <Video
+            ref={video}
+            source={{ uri: item.downloadURL }}
+            style={{
+              height: 200,
+              borderTopLeftRadius: 10,
+              borderTopRightRadius: 10,
+              width: "100%",
+            }} // Adjust height as needed
+            useNativeControls
+            isMuted={false}
+            isLooping
+            onPlaybackStatusUpdate={(status) => setStatus(() => status)}
+            onError={(e) => console.log("Video Error: ", e)}
+            onFullscreenUpdate={null} // Handle fullscreen updates
+          />
+          {status.isLoaded ? null : (
+            <Text
+              style={{
+                position: "absolute",
+                top: "50%",
+                left: "50%",
+                transform: [{ translateX: -50 }, { translateY: -50 }],
+              }}
+            >
+              Loading...
+            </Text>
+          )}
         </View>
-        <View>
-          <Text style={{ textAlign: "right", fontSize: 15, marginRight: 10 }}>{formatDuration(duration)}</Text>
+        <View
+          style={{
+            flexDirection: "row",
+
+            justifyContent: "space-between",
+
+            width: "95%",
+            alignSelf: "center",
+            marginTop: 5,
+          }}
+        >
+          <Text
+            style={{
+              textAlign: "left",
+              fontSize: 15,
+              width: "80%",
+              fontWeight: "500",
+            }}
+          >
+            {item.title}
+          </Text>
+
+          <Text style={{ fontSize: 15 }}>{formatDuration(duration)}</Text>
         </View>
       </View>
+
       <VideoPlayerModal
         visible={isModalVisible}
         onClose={handleModalClose}
         videoSource={item.downloadURL}
         name={item.title}
       />
-    </>
+    </View>
   );
 };
 

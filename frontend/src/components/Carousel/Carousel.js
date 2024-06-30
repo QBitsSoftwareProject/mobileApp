@@ -12,7 +12,6 @@ import CarouselItem from "./CarouselItem";
 import { useNavigation } from "@react-navigation/native";
 
 const Carousel = () => {
-
   const navigation = useNavigation();
 
   const navigateToScreen = (screen) => {
@@ -27,13 +26,10 @@ const Carousel = () => {
     <View style={styles.container}>
       <Swipper>
         {carouselData.map((item, index) => (
-          <View key={index}>
+          <View key={index} style={styles.carouselContainer}>
             {/* Your existing content */}
             <View style={styles.imgContainer}>
-              <Image
-                source={item.image}
-                style={[styles.image, { width, resizeMode: "cover" }]}
-              />
+              <Image source={item.image} style={[styles.image]} />
             </View>
             <View
               style={{
@@ -44,26 +40,29 @@ const Carousel = () => {
                 borderBottomRightRadius: 20,
               }}
             >
-              <View style={{ display: "flex", flexDirection: "row", justifyContent: "space-between" }}>
+              <View
+                style={{
+                  display: "flex",
+                  flexDirection: "row",
+                  justifyContent: "space-between",
+                }}
+              >
                 <Text style={styles.title}>{item.title}</Text>
-                <View style={{ display: "flex", alignItems: "center", justifyContent: "center", paddingHorizontal: 5 }}>
-                  {/* <TouchableOpacity
-                    onPress={() => {
-                      console.log(item);
-                      navigateToScreen(item.screen)
-                    }}
-                    style={{ backgroundColor: "#4A90BF", width: 100, display: "flex", justifyContent: "center", alignItems: "center", padding: 5, borderRadius: 100 }}>
-                    <Text style={{ color: "white", fontSize: 12 }}>EXPLORE</Text>
-                  </TouchableOpacity> */}
-                </View>
+                <View
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    paddingHorizontal: 5,
+                  }}
+                ></View>
               </View>
               <Text style={styles.description}>{item.description}</Text>
             </View>
           </View>
-        ))
-        }
-      </Swipper >
-    </View >
+        ))}
+      </Swipper>
+    </View>
   );
 };
 

@@ -11,7 +11,7 @@ import React, { useEffect, useState } from "react";
 import { getSearchProfile } from "../../services/postServices/postServices";
 import { useFocusEffect, useNavigation } from "@react-navigation/native";
 
-const SearchBar = ({ schema }) => {
+const SearchBar = ({ schema, keyword }) => {
   const [textInputValue, setTextInputValue] = useState("");
   const [userList, setUserList] = useState([]);
 
@@ -27,8 +27,12 @@ const SearchBar = ({ schema }) => {
   };
   // Effect to fetch search results when text input value changes
   useEffect(() => {
-    if (textInputValue !== "") {
-      fetchSearchResult();
+    if (schema == "edu") {
+      keyword(textInputValue);
+    } else {
+      if (textInputValue !== "") {
+        fetchSearchResult();
+      }
     }
   }, [textInputValue]);
 
@@ -44,11 +48,15 @@ const SearchBar = ({ schema }) => {
 
   // Function to handle navigation to profile screen
   const handleNavigateToProfile = (userId) => {
-    navigation.navigate("ProfileScreen", { userId: userId });
+    if (schema == "profile") {
+      navigation.navigate("ProfileScreen", { userId: userId });
+    } else if (schema == "doctor") {
+      navigation.navigate("MakeAppointment", { id: userId });
+    }
   };
 
   return (
-    <View style={{ flex: 1 }}>
+    <View>
       <View style={styles.content1}>
         <View style={{ flex: 1 }}>
           <TextInput
@@ -114,7 +122,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "space-between",
     width: "100%",
-    paddingVertical: 15,
   },
   textinput: {
     height: 45,

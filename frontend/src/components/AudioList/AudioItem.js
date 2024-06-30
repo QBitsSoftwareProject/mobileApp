@@ -21,30 +21,36 @@ function AudioItem({ item, onPlayPause }) {
   };
 
   return (
-    <View style={styles.audioItem}>
+    <TouchableOpacity style={styles.audioItem} onPress={handlePlayPause}>
       <View style={styles.playBtnSection}>
-        <TouchableOpacity onPress={handlePlayPause}>
-          <View style={styles.imgContainer}>
-            <Image
-              source={playImg}
-              style={styles.image}
-            />
-          </View>
-        </TouchableOpacity>
+        <View style={styles.imgContainer}>
+          <Image source={playImg} style={styles.image} />
+        </View>
       </View>
-      <View style={styles.descriptionSection}>
-        <Text style={styles.audioTxt1}>{item.title}</Text>
+
+      <View
+        style={{
+          flexDirection: "row",
+
+          justifyContent: "space-between",
+        }}
+      >
+        <View style={styles.descriptionSection}>
+          <Text style={styles.audioTxt1}>{item.title}</Text>
+        </View>
+
+        <View style={{}}>
+          <Text>{item.duration}</Text>
+        </View>
       </View>
-      <View style={[styles.timeDuration, { position: "absolute", marginLeft: 335, marginTop: 50 }]}>
-        <Text style={{ textAlign: "right", margin: 10 }}>{item.duration}</Text>
-      </View>
+
       <AudioPlayerModal
         visible={modalVisible}
         onClose={handleCloseModal}
         audioSource={item}
         name={item.name}
       />
-    </View>
+    </TouchableOpacity>
   );
 }
 

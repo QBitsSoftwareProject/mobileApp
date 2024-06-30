@@ -28,18 +28,18 @@ const styles = StyleSheet.create({
     color: "white",
   },
   authorSections: {
-    marginTop: 120,
+    marginTop: 32,
   },
   authorSection1: {
     display: "flex",
     flexDirection: "row",
     justifyContent: "space-between",
     alignContent: "center",
-    paddingHorizontal: 15,
+    paddingHorizontal: 25,
   },
   authorSection2: {
-    paddingTop: 50,
-    paddingBottom: 30,
+    padding: 25,
+
     borderBottomWidth: 1,
     borderBottomColor: "rgba(146, 140, 140, 0.5)",
     display: "flex",
@@ -48,7 +48,7 @@ const styles = StyleSheet.create({
   },
   exploreBtn: {
     backgroundColor: "#4A90BF",
-    paddingHorizontal: 20,
+    paddingHorizontal: 25,
     paddingVertical: 8,
     borderRadius: 50,
   },

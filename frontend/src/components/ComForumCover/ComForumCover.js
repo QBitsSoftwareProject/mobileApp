@@ -13,7 +13,7 @@ const ProfileCover = (props) => {
   };
 
   const closeMessage = () => {
-    // props.isRefresh(!props.refreshState);
+    props.isRefresh((prev) => prev + 1);
     setPopupVisible(false);
   };
 

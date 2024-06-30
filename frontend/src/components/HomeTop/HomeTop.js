@@ -5,13 +5,14 @@ import {
   Touchable,
   TouchableOpacity,
   ImageBackground,
+  SafeAreaView,
 } from "react-native";
 import React from "react";
 import styles from "./styles";
 
 const HomeTop = (props) => {
   return (
-    <View style={styles.contains}>
+    <SafeAreaView style={styles.contains}>
       <ImageBackground
         source={require("../../assets/images/headerTop.png")}
         style={styles.backImg}
@@ -33,7 +34,7 @@ const HomeTop = (props) => {
           </View>
         </View>
       </ImageBackground>
-    </View>
+    </SafeAreaView>
   );
 };
 

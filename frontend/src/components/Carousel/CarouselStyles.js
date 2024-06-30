@@ -2,31 +2,35 @@ import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
   container: {
+    flexDirection: "row",
     marginTop: 15,
-    height: 370,
-    width: "100%",
+    height: "auto",
     borderRadius: 20,
+    height: 350,
+    justifyContent: "center",
+    alignItems: "center",
   },
   carouselContainer: {
-    display:"flex",
     justifyContent: "space-evenly",
     borderRadius: 20,
-    marginHorizontal:10,
+    marginHorizontal: 10,
   },
   imgContainer: {
-    height: 270,
+    width: "100%",
+    height: 250,
   },
   image: {
-    flex:1,
-    height: "auto",
-    borderRadius:20
+    height: "100%",
+    borderRadius: 20,
+    width: "100%",
+    resizeMode: "cover",
   },
   textContainer: {
     marginTop: -75,
     backgroundColor: "white",
     width: "100%",
-    borderBottomLeftRadius:20,
-    borderBottomRightRadius:20,
+    borderBottomLeftRadius: 20,
+    borderBottomRightRadius: 20,
   },
   title: {
     fontWeight: "500",

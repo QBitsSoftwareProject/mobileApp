@@ -1,12 +1,14 @@
 import React, { useState } from "react";
-import { View, Modal, Text, TouchableOpacity } from "react-native";
+import { View, Modal, Text, TouchableOpacity, Image } from "react-native";
 import { storage } from "../../config/firebase";
 import { getDownloadURL, uploadBytes, ref } from "firebase/storage";
 import FilePicker from "../../components/GetImages/FilePicker";
 import { updateAUser } from "../../services/userServices/userService";
+import loadingGif from "../../assets/animation/loading.gif";
 
 const CoverPhotoUploader = ({ isVisible, onClose, onUploadSuccess }) => {
   const [selectedImage, setSelectedImage] = useState();
+  const [isLoading, setIsLoading] = useState(false);
 
   const fireBaseUpload = async () => {
     try {
@@ -39,10 +41,11 @@ const CoverPhotoUploader = ({ isVisible, onClose, onUploadSuccess }) => {
 
   const handleComfirmButtonPress = async () => {
     try {
-      onClose();
+      setIsLoading(true);
       const imgResponse = await fireBaseUpload();
       await updateAUser({ coverImage: imgResponse });
-      onUploadSuccess(imgResponse);
+      setIsLoading(false);
+      onClose();
     } catch (error) {
       console.log(error);
     }
@@ -83,27 +86,53 @@ const CoverPhotoUploader = ({ isVisible, onClose, onUploadSuccess }) => {
             ></FilePicker>
           </View>
 
-          {selectedImage ? (
-            <TouchableOpacity
-              onPress={handleComfirmButtonPress}
+          {!isLoading && selectedImage ? (
+            <View
               style={{
-                alignSelf: "center",
-                backgroundColor: "#4A90BF",
-                width: 150,
-                height: 45,
-                justifyContent: "center",
-                borderRadius: 15,
+                flexDirection: "row",
+                alignItems: "center",
+                justifyContent: "space-evenly",
               }}
             >
-              <Text
-                style={{ alignSelf: "center", fontSize: 16, color: "white" }}
+              <TouchableOpacity
+                onPress={() => onClose()}
+                style={{
+                  width: 150,
+                  height: 45,
+                  justifyContent: "center",
+                  borderRadius: 15,
+                }}
               >
-                Confirm
-              </Text>
-            </TouchableOpacity>
-          ) : (
+                <Text
+                  style={{
+                    alignSelf: "center",
+                    fontSize: 16,
+                    color: "#40495B",
+                  }}
+                >
+                  Cancel
+                </Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                onPress={handleComfirmButtonPress}
+                style={{
+                  backgroundColor: "#4A90BF",
+                  width: 150,
+                  height: 45,
+                  justifyContent: "center",
+                  borderRadius: 15,
+                }}
+              >
+                <Text
+                  style={{ alignSelf: "center", fontSize: 16, color: "white" }}
+                >
+                  Confirm
+                </Text>
+              </TouchableOpacity>
+            </View>
+          ) : !isLoading && !selectedImage ? (
             <TouchableOpacity
-              onPress={handleComfirmButtonPress}
+              onPress={() => onClose()}
               style={{
                 alignSelf: "center",
 
@@ -119,7 +148,16 @@ const CoverPhotoUploader = ({ isVisible, onClose, onUploadSuccess }) => {
                 Cancel
               </Text>
             </TouchableOpacity>
-          )}
+          ) : isLoading ? (
+            <View
+              style={{
+                alignSelf: "center",
+              }}
+            >
+              <Text>Uploading...</Text>
+              <Image source={loadingGif} />
+            </View>
+          ) : null}
         </View>
       </View>
     </Modal>

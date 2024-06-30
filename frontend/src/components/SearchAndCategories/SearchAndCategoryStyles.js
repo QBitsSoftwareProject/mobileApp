@@ -2,19 +2,13 @@ import { StyleSheet } from "react-native";
 import { Font } from "expo-font";
 
 const styles = StyleSheet.create({
-  Container: {
-    backgroundColor: "#F2F3F5",
-    alignItems: "center",
-    height: "100%",
-    display: "flex",
-  },
   NavContainer: {
-    display: "flex",
-    position: "absolute",
+    alignSelf: "center",
     justifyContent: "center",
     alignItems: "center",
-    marginTop: 40,
+
     width: "100%",
+    marginTop: 32,
   },
   NavBar: {
     borderRadius: 100,
@@ -35,7 +29,7 @@ const styles = StyleSheet.create({
     borderRadius: 100,
   },
   NavBarElementText: {
-    fontWeight: "bold",
+    fontWeight: "500",
   },
   NavBarElements_currentBtn: {
     backgroundColor: "#4A90BF",

@@ -27,9 +27,10 @@ exports.checkTheTerm = async (req, res) => {
       user.currentLongTermDay = 0;
     }
 
-    await user.save();
+    await userModel.findByIdAndUpdate(userId, user);
     return res.status(200).json({ message: user.currentTaskType });
   } catch (error) {
+    console.log(error);
     return res.status(500).json({ error: error });
   }
 };
