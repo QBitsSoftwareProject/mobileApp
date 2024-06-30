@@ -7,12 +7,13 @@ const ProfileCover = (props) => {
   const navigation = useNavigation();
   const [popupVisible, setPopupVisible] = useState(false);
 
-  const confirmMessage = async () => {
+  const confirmMessage = async (newCoverImageUrl) => {
+    props.onCoverPhotoUpdated(newCoverImageUrl);
     setPopupVisible(false);
   };
 
   const closeMessage = () => {
-    props.isRefresh(!props.refreshState);
+    // props.isRefresh(!props.refreshState);
     setPopupVisible(false);
   };
 
@@ -62,20 +63,22 @@ const ProfileCover = (props) => {
       </View>
 
       <View style={{ zIndex: 110 }}>
-        <TouchableOpacity
-          onPress={handleEditIconPress}
-          style={{ position: "absolute", bottom: 80, right: 30 }}
-        >
-          <Image
-            source={require("../../assets/images/NavigationIcons/mdi_camera.png")}
-            style={styles.editIcon}
-          />
-        </TouchableOpacity>
-
+        {props.isOwnProfile && (
+          <TouchableOpacity
+            onPress={handleEditIconPress}
+            style={{ position: "absolute", bottom: 80, right: 30 }}
+          >
+            <Image
+              source={require("../../assets/images/NavigationIcons/mdi_camera.png")}
+              style={styles.editIcon}
+            />
+          </TouchableOpacity>
+        )}
         <CoverPhotoUploader
           isVisible={popupVisible}
           onConfirm={confirmMessage}
           onClose={closeMessage}
+          onUploadSuccess={confirmMessage}
         />
       </View>
 

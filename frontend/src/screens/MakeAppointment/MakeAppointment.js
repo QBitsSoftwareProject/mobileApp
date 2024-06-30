@@ -15,7 +15,10 @@ import PopupMessage from "../../components/Pop-up/Pop-upScreen";
 import RegularButton from "../../components/Button/RegularButton";
 import { useNavigation } from "@react-navigation/native";
 import { createAppointment } from "../../services/appointmentServices/AppointmentServices";
-import { viewADoctor } from "../../services/doctorServices/doctorService";
+import {
+  getAvailableTimes,
+  viewADoctor,
+} from "../../services/doctorServices/doctorService";
 import loardingGIF from "../../assets/animation/loading.gif";
 
 const MakeAppointment = ({ route }) => {
@@ -29,6 +32,7 @@ const MakeAppointment = ({ route }) => {
   const [doctor, setDoctor] = useState();
   const [pressDay, setPressDay] = useState(6);
   const [selectedDateIndex, setSelectedDateIndex] = useState(null);
+  const [availableTimes, setAvailableTimes] = useState([]);
 
   const dateIncrement = (number) => {
     const currentDate = new Date();
@@ -64,14 +68,33 @@ const MakeAppointment = ({ route }) => {
     fetchDoctor();
   }, []);
 
+  // useEffect(() => {
+  //     if (getDate) {
+  //       fetchAvailableTimes(getDate);
+  //     }
+  //   }, [getDate]);
+
   const fetchDoctor = async () => {
     try {
       const res = await viewADoctor({ doctorId: id });
       setDoctor(res);
+      // // Fetch available times for the initial date
+      // if (getDate) {
+      //   fetchAvailableTimes(getDate);
+      // }
     } catch (error) {
       console.log(error);
     }
   };
+
+  // const fetchAvailableTimes = async (date) => {
+  //   try {
+  //     const res = await getAvailableTimes(id, date);
+  //     setAvailableTimes(res);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
   // Hook for navigation
   const navigation = useNavigation();
 
@@ -116,7 +139,7 @@ const MakeAppointment = ({ route }) => {
     );
   }
 
-  const handleDatePress = (item, value) => {
+  const handleDatePress = (item, value, index) => {
     setDateBtnPress(value);
 
     if (item == "Monday") {
@@ -136,7 +159,17 @@ const MakeAppointment = ({ route }) => {
     } else {
       null;
     }
+    // fetchAvailableTimes(dateIncrement(index));
   };
+
+  // const handleDatePress = async (item, index) => {
+  //   setDateBtnPress(true);
+  //   setSelectedDateIndex(index);
+  //   setAppointmentDate(dateIncrement(index));
+
+  //   // Fetch available times for the selected date
+  //   fetchAvailableTimes(dateIncrement(index));
+  // };
 
   return (
     <SafeAreaView style={{ margin: 25 }}>

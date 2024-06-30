@@ -38,3 +38,36 @@ exports.getADoctor = async (req, res) => {
     res.status(500).json({ error: "User fetch failed", err: err.message });
   }
 };
+
+// exports.getAvailableTimes = async (req, res) => {
+//   try {
+//     const { doctorId, date } = req.query;
+
+//     const bookedAppointments = await appointmentSchema
+//       .find({
+//         doctorId,
+//         date: new Date(date),
+//         status: { $in: ["Pending", "Accepted"] }, // Consider only pending and accepted appointments
+//       })
+//       .select("time");
+
+//     const bookedTimes = bookedAppointments.map((app) => app.time);
+
+//     const doctor = await doctorSchema.findById(doctorId);
+
+//     const availableTimes = doctor.availableTimes[
+//       new Date(date).getDay()
+//     ].filter(
+//       (time) =>
+//         !bookedTimes.some(
+//           (bookedTime) =>
+//             bookedTime.from === time.from && bookedTime.to === time.to
+//         )
+//     );
+
+//     res.status(200).json({ availableTimes });
+//   } catch (err) {
+//     console.error(err);
+//     res.status(500).json({ error: "Failed to fetch available times!" });
+//   }
+// };

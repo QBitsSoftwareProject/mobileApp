@@ -77,6 +77,12 @@ const PostCard = (props) => {
     }, [])
   );
 
+  const navigateToProfile = async () => {
+    navigation.navigate("ProfileScreen", {
+      userId: props.relevantUserId,
+    });
+  };
+
   const handlePress = async () => {
     try {
       const currentUserId = await AsyncStorage.getItem("userId");
@@ -96,9 +102,12 @@ const PostCard = (props) => {
       <View style={styles.cardBox}>
         <View style={styles.content1}>
           <View style={{ flexDirection: "row", alignItems: "center" }}>
-            <View style={styles.imageframe}>
+            <TouchableOpacity
+              style={styles.imageframe}
+              onPress={navigateToProfile}
+            >
               <Image source={{ uri: props.image }} style={styles.image} />
-            </View>
+            </TouchableOpacity>
 
             <View style={styles.content2}>
               <Text style={styles.title}>{props.title}</Text>

@@ -5,7 +5,7 @@ import { getDownloadURL, uploadBytes, ref } from "firebase/storage";
 import FilePicker from "../../components/GetImages/FilePicker";
 import { updateAUser } from "../../services/userServices/userService";
 
-const CoverPhotoUploader = ({ isVisible, onClose }) => {
+const CoverPhotoUploader = ({ isVisible, onClose, onUploadSuccess }) => {
   const [selectedImage, setSelectedImage] = useState();
 
   const fireBaseUpload = async () => {
@@ -41,8 +41,8 @@ const CoverPhotoUploader = ({ isVisible, onClose }) => {
     try {
       onClose();
       const imgResponse = await fireBaseUpload();
-
       await updateAUser({ coverImage: imgResponse });
+      onUploadSuccess(imgResponse);
     } catch (error) {
       console.log(error);
     }

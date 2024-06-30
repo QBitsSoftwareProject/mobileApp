@@ -96,7 +96,7 @@ export const viewADoctor = async (doctorId) => {
     const response = await axios.post(`${URL}/view-doctor`, doctorId, {
       headers: { authtoken: token },
     });
-    // console.log(response.data);
+    // console.log(response.data)
     return response.data;
   } catch (error) {
     console.log(error);

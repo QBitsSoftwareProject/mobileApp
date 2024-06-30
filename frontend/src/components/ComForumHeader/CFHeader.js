@@ -46,7 +46,8 @@ const CFHeaderSub = (props) => {
     );
   }
 
-  const handlePress = () => {
+  const navigateToProfile = () => {
+    // console.log(props.profile);
     navigation.navigate(props.profile);
   };
 
@@ -76,7 +77,7 @@ const CFHeaderSub = (props) => {
               </TouchableOpacity>
 
               <View>
-                <TouchableOpacity onPress={handlePress}>
+                <TouchableOpacity onPress={navigateToProfile}>
                   <View style={styles.imageframe}>
                     <Image
                       source={{ uri: userData.proPic }}
@@ -85,7 +86,6 @@ const CFHeaderSub = (props) => {
                   </View>
                 </TouchableOpacity>
                 <Text style={styles.headlineTxt}>{userData.userName}</Text>
-                {/* <Text style={styles.subHeadlineTxt}>{props.subHeadLine}</Text> */}
               </View>
             </View>
           </View>
