@@ -70,14 +70,13 @@ const AvailableDoctor = () => {
 
           <ScrollView contentContainerStyle={{ paddingBottom: 80 }}>
             {docList.map((item) => (
-              // console.log(item)
               <CreateCard
                 key={item._id}
                 image={item.proPic}
                 title={item.userName}
                 cardName={"AvailableDoc"}
                 university={item.qualification}
-                hospital={item.workingPlace}
+                hospital={item.workplace}
                 contactNumber={item.contactNumber}
                 onPress={() => {
                   pressHandler(item._id);
