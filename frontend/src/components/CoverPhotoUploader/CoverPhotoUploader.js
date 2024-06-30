@@ -41,12 +41,15 @@ const CoverPhotoUploader = ({ isVisible, onClose }) => {
 
   const handleComfirmButtonPress = async () => {
     try {
-      setIsLoading(true);
-      const imgResponse = await fireBaseUpload();
+      if (selectedImage) {
+        setIsLoading(true);
+        const imgResponse = await fireBaseUpload();
 
-      await updateAUser({ coverImage: imgResponse });
-      setIsLoading(false);
-      onClose();
+        await updateAUser({ coverImage: imgResponse });
+        setIsLoading(false);
+        setSelectedImage(null);
+        onClose();
+      }
     } catch (error) {
       console.log(error);
     }

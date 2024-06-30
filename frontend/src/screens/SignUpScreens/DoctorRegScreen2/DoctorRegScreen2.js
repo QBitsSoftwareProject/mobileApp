@@ -33,7 +33,7 @@ const DoctorRegScreen2 = () => {
 
   const [qualification, setQualification] = useState("");
   const [isEmpty, setIsEmpty] = useState(false);
-  const [selectedValue, setSelectedValue] = useState("");
+  const [selectedValue, setSelectedValue] = useState(null);
   const [loader, setLoader] = useState(false);
 
   // State variable for adjusting screen padding when keyboard is open
@@ -107,7 +107,7 @@ const DoctorRegScreen2 = () => {
   const setItems = async () => {
     try {
       data = [
-        ["specialization", selectedValue],
+        ["workplace", selectedValue],
         ["qualification", qualification],
       ];
 
@@ -123,12 +123,10 @@ const DoctorRegScreen2 = () => {
     if (
       licenseSide1 === null ||
       licenseSide2 === null ||
-      qualification.trim() === ""
+      qualification.trim() === "" ||
+      selectedValue === null
     ) {
       setIsEmpty(true);
-    } else if (selectedValue === "" || selectedValue === "default") {
-      setSelectedValue("default");
-      setIsEmpty(false);
     } else {
       setIsEmpty(false);
 
@@ -178,34 +176,15 @@ const DoctorRegScreen2 = () => {
                   marginBottom: 7,
                 }}
               >
-                Specialization :
+                Workplace :
               </Text>
 
-              <View style={styles.wrapper}>
-                <Picker
-                  selectedValue={selectedValue}
-                  onValueChange={(itemValue, itemIndex) =>
-                    setSelectedValue(itemValue)
-                  }
-                  style={styles.picker}
-                >
-                  <Picker.Item
-                    label="Select your speciality"
-                    value="default"
-                    style={styles.pickerItem}
-                  />
-                  <Picker.Item
-                    label="Option 1"
-                    value="option1"
-                    style={styles.pickerItem}
-                  />
-                  <Picker.Item
-                    label="Option 2"
-                    value="option2"
-                    style={styles.pickerItem}
-                  />
-                </Picker>
-              </View>
+              <InputField
+                placeHolder={"ex_national hospital of Colombo"}
+                label={"WorkPlace :"}
+                onChangeText={selectedValue}
+                type={"textField"}
+              />
             </View>
 
             <InputField

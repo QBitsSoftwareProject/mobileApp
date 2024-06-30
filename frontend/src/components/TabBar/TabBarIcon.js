@@ -8,13 +8,26 @@ const IconMapping = {
   setting: require("../../assets/images/setting.png"),
 };
 
-const TabBarIcon = ({ focused, screenName }) => (
+const TabBarIcon = ({ focused, screenName, isNotification }) => (
   <View style={{ justifyContent: "center", alignItems: "center" }}>
     {focused ? (
       <Image
         source={require("../../assets/images/ellipse.png")}
         style={{ position: "absolute", tintColor: "#d5e4eb" }}
       />
+    ) : screenName == "notification" && isNotification ? (
+      <View
+        style={{
+          height: 15,
+          width: 15,
+          backgroundColor: "#FF0000",
+          borderRadius: 100,
+          position: "absolute",
+          zIndex: 100,
+          top: -18,
+          right: -3,
+        }}
+      ></View>
     ) : null}
     <Image source={IconMapping[screenName]} style={{ tintColor: "#9dabb3" }} />
   </View>

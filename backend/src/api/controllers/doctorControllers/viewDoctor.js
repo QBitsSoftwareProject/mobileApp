@@ -18,7 +18,7 @@ exports.viewADoctor = async (req, res) => {
         getDoctor.saturday,
         getDoctor.sunday,
       ],
-
+      workplace: getDoctor.workplace,
       proPic: getDoctor.proPic,
       bio: getDoctor.bio,
       qualification: getDoctor.qualification,
