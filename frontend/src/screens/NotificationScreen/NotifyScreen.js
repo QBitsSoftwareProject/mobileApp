@@ -14,7 +14,7 @@ import { getNotification } from "../../services/notificationService/notification
 import loadingGif from "../../assets/animation/loading.gif";
 
 const NotifyScreen = () => {
-  const [notificationList, setNotificationList] = useState([]);
+  const [notificationList, setNotificationList] = useState();
 
   const navigation = useNavigation();
 

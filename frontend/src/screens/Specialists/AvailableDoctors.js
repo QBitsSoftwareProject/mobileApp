@@ -58,6 +58,7 @@ const AvailableDoctor = () => {
         headLine={"Specialists"}
         subHeadLine={"Find your doctor."}
         back={"HomeScreen"}
+        schema={"doctor"}
       />
       <SafeAreaView
         style={{

@@ -4,7 +4,9 @@ const doctorModel = require("../../models/doctor/doctor");
 exports.getDoctors = async (req, res) => {
   try {
     // Finding all regular users
-    const getUser = await doctorModel.find();
+    const getUser = await doctorModel.find({
+      regStatus: true,
+    });
 
     // If no users are found, return a 404 error response
     if (!getUser) {
