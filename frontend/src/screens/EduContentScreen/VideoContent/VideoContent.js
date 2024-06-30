@@ -37,7 +37,6 @@ const VideoContent = () => {
         } else {
           response = await getVideosBySearch(keyword);
         }
-
         if (response) {
           setVideos(response.data);
         } else {

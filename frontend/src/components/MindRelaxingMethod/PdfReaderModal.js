@@ -15,13 +15,13 @@ const PdfReaderModal = ({ visible, onClose, pdfSource,name ,id}) => {
       setIsPopUpVisible(true);
     };
   
-    const handleClosePopUp = () => {
+    const handleClosePopUp = (text2) => {
       setIsPopUpVisible(false);
       setTimeout(() => {
         Toast.show({
           type: "success",
           text1: "Thank you for reading",
-          text2: "Your rate is invaluable. Thank you!",
+          text2: text2,
         });
       }, 200);
     };

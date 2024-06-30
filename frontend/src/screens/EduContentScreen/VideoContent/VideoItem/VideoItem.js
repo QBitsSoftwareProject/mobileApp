@@ -66,6 +66,7 @@ const VideoItem = ({ item }) => {
             }} // Adjust height as needed
             useNativeControls
             isMuted={false}
+            resizeMode="cover"
             isLooping
             onPlaybackStatusUpdate={(status) => setStatus(() => status)}
             onError={(e) => console.log("Video Error: ", e)}

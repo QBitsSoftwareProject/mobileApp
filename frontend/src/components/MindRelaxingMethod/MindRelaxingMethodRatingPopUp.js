@@ -14,6 +14,15 @@ const RatingPopUp = ({ message, onClose, methodId, title ,visible, close}) => {
     try {
       await updateMethodRatingById(methodId,rateValue)
       close()
+      onClose("Your rate is invaluable. Thank you!");
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleSipButtonPress =() => {
+    try {
+      close()
       onClose();
     } catch (error) {
       console.log(error);
@@ -36,12 +45,22 @@ const RatingPopUp = ({ message, onClose, methodId, title ,visible, close}) => {
           </View>
 
           <View style={styles.modalContainer2}>
+            <View style={styles.rate}>
             <TouchableOpacity
               onPress={handleSaveButtonPress}
               style={styles.popupButton}
             >
               <Text style={styles.popupButtonText}>Rate</Text>
             </TouchableOpacity>
+            </View>
+            <View style={styles.skip}>
+            <TouchableOpacity
+              onPress={handleSipButtonPress}
+              style={styles.popupButton}
+            >
+              <Text style={styles.popupButtonText}>Skip</Text>
+            </TouchableOpacity>
+            </View>
           </View>
         </View>
       </View>
@@ -86,6 +105,15 @@ const styles = StyleSheet.create({
     fontWeight: "400",
     textAlign: "center",
   },
+
+  skip:{
+    flex:1,
+    alignItems: "center",
+  },
+  rate:{
+    flex:1,
+    alignItems: "center",
+  }
 });
 
 export default RatingPopUp;

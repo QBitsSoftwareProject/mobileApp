@@ -54,7 +54,11 @@ const AvailableDoctor = () => {
 
   return (
     <View>
-      <AppointmentHeader headLine={"Specialists"} back={"HomeScreen"} />
+      <AppointmentHeader
+        headLine={"Specialists"}
+        subHeadLine={"Find your doctor."}
+        back={"HomeScreen"}
+      />
       <SafeAreaView
         style={{
           paddingHorizontal: 25,
@@ -84,7 +88,7 @@ const AvailableDoctor = () => {
                 title={item.userName}
                 cardName={"AvailableDoc"}
                 university={item.qualification}
-                hospital={item.workingPlace}
+                hospital={item.workplace}
                 onPress={() => {
                   pressHandler(item._id);
                 }}
