@@ -16,7 +16,7 @@ exports.checkNotifiaction = async (req, res) => {
 
     return res.status(203).json({ notify: false });
   } catch (error) {
-    console, log(error);
+    console.log(error);
     res.status(500).send(error.message);
   }
 };

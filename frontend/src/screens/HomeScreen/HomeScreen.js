@@ -293,6 +293,7 @@ const HomeScreen = (props) => {
               subHeadLine={
                 "Empathetic space connecting, sharing mental health journey companions."
               }
+              access={user.access}
             />
           </View>
 
