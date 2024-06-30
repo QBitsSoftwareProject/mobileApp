@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   StyleSheet,
   TouchableOpacity,
@@ -10,10 +10,11 @@ import {
 import { ListItem } from "@rneui/themed";
 import { useNavigation } from "@react-navigation/native";
 import { deleteJournal } from "../../services/journalService/journalService";
-import { Overlay } from "@rneui/base";
+import { Overlay } from "../ViewJournalScreen/deletePopup";
 
 const JounalCard = ({ journal, setIsRefresh }) => {
   const navigation = useNavigation();
+  const [isOverlayVisible, setIsOverlayVisible] = useState(false);
 
   const handleEdit = () => {
     navigation.navigate("EditJournal", {
@@ -24,29 +25,17 @@ const JounalCard = ({ journal, setIsRefresh }) => {
     });
   };
 
-  const handleDelete = async () => {
-    try {
-      await deleteJournal(journal._id);
-      setIsRefresh((prev) => prev + 1);
-    } catch (error) {
-      console.error("Failed to delete Journal:", error);
-    }
-  };
+  // const handleDelete = async () => {
+  //   try {
+  //     await deleteJournal(journal._id);
+  //     setIsRefresh((prev) => prev + 1);
+  //   } catch (error) {
+  //     console.error("Failed to delete Journal:", error);
+  //   }
+  // };
 
-  const displayDeleteAlert = () => {
-    Alert.alert(
-      "Are you sure!",
-      "This action will delete your Journal permanently!",
-      [
-        {
-          text: "Cancel",
-          onPress: () => {},
-          style: "cancel",
-        },
-        { text: "Delete", onPress: () => handleDelete() },
-      ],
-      { cancelable: true }
-    );
+  const displayDeleteOverlay = () => {
+    setIsOverlayVisible(true);
   };
 
   const findMoodIcon = () => {
@@ -87,56 +76,65 @@ const JounalCard = ({ journal, setIsRefresh }) => {
   const journalMood = findMoodIcon();
 
   return (
-    <ListItem.Swipeable
-      rightContent={(reset) => (
-        <View style={styles.rightContainer1}>
-          <TouchableOpacity
-            onPress={() => {
-              displayDeleteAlert();
-              reset();
-            }}
-            style={styles.button}
-          >
-            <Image
-              source={require("../../assets/images/CommentSecImages/mdi_delete.png")}
-              style={styles.delImg}
-            />
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={() => {
-              handleEdit();
-              reset();
-            }}
-            style={styles.button}
-          >
-            <Image
-              source={require("../../assets/images/CommentSecImages/mdi_edit.png")}
-              style={styles.editImg}
-            />
-          </TouchableOpacity>
-        </View>
-      )}
-      rightStyle={styles.deleteBtn}
-      containerStyle={styles.cardContainer}
-    >
-      <ListItem.Content>
-        <View style={styles.content1}>
-          <View
-            style={{
-              flexDirection: "row",
-              justifyContent: "space-between",
-            }}
-          >
-            <Text style={styles.title}>{journal.tittle}</Text>
-            <Text style={styles.mood}>{journalMood}</Text>
+    <>
+      <ListItem.Swipeable
+        rightContent={(reset) => (
+          <View style={styles.rightContainer1}>
+            <TouchableOpacity
+              onPress={() => {
+                displayDeleteOverlay();
+                reset();
+              }}
+              style={styles.button}
+            >
+              <Image
+                source={require("../../assets/images/CommentSecImages/mdi_delete.png")}
+                style={styles.delImg}
+              />
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => {
+                handleEdit();
+                reset();
+              }}
+              style={styles.button}
+            >
+              <Image
+                source={require("../../assets/images/CommentSecImages/mdi_edit.png")}
+                style={styles.editImg}
+              />
+            </TouchableOpacity>
           </View>
-          <View style={styles.content2}>
-            <Text style={styles.commentContent}>{journal.journalEntry}</Text>
+        )}
+        rightStyle={styles.deleteBtn}
+        containerStyle={styles.cardContainer}
+      >
+        <ListItem.Content>
+          <View style={styles.content1}>
+            <View
+              style={{
+                flexDirection: "row",
+                justifyContent: "space-between",
+              }}
+            >
+              <Text style={styles.title}>{journal.tittle}</Text>
+              <Text style={styles.mood}>{journalMood}</Text>
+            </View>
+            <View style={styles.content2}>
+              <Text style={styles.commentContent}>{journal.journalEntry}</Text>
+            </View>
+            <Text style={styles.date}>{journal.date}</Text>
           </View>
-          <Text style={styles.date}>{journal.date}</Text>
-        </View>
-      </ListItem.Content>
-    </ListItem.Swipeable>
+        </ListItem.Content>
+      </ListItem.Swipeable>
+
+      <Overlay
+        item={journal._id}
+        isVisible={isOverlayVisible}
+        onClose={() => setIsOverlayVisible(false)}
+        setIsRefresh={setIsRefresh}
+      />
+    </>
   );
 };
 
@@ -190,8 +188,8 @@ const styles = StyleSheet.create({
     height: 35,
   },
   button: {
-    height: 45,
-    width: 120,
+    height: 40,
+    // width: 0,
     borderRadius: 10,
     marginVertical: 2,
     alignItems: "center",

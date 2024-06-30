@@ -9,7 +9,6 @@ import HeaderSub from "../../components/HeaderSub/HeaderSub";
 import { getJournalsByUserId } from "../../services/journalService/journalService";
 import JounalCard from "./JounalCard";
 import { useFocusEffect } from "@react-navigation/native";
-import { Overlay } from "@rneui/base";
 
 export const ViewJournal = ({ navigation }) => {
   const screenHeight = Dimensions.get("window").height;
@@ -25,7 +24,8 @@ export const ViewJournal = ({ navigation }) => {
   const fetchJournals = async () => {
     try {
       const journalData = await getJournalsByUserId();
-      setJournalArray(journalData);
+      const reversedJournalData = journalData.reverse();
+      setJournalArray(reversedJournalData);
     } catch (err) {
       console.log("err" + err.message);
     }
@@ -72,7 +72,7 @@ export const ViewJournal = ({ navigation }) => {
       >
         <CustomButtonView btnAnalysis={handleButton}></CustomButtonView>
       </View>
-      <View style={{ height: screenHeight - 345 }}>
+      <View style={{ height: screenHeight - 320 }}>
         <ScrollView
           style={{
             marginHorizontal: 25,

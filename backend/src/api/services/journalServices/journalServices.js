@@ -3,7 +3,7 @@ const createJournal = require("../../models/journalModel/createJournal");
 // addnew Journal service
 const storeJournal = (userid, emoji, tittle, journalEntry, time, date) => {
   try {
-    if (!userid || !emoji || !tittle || !journalEntry || !time || !date) {
+    if (!userid || !emoji || !journalEntry || !time || !date) {
       throw new Error("not completed");
     }
 

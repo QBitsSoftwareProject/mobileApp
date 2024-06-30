@@ -362,7 +362,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
-    marginTop: 44,
+    marginTop: 55,
   },
   selectedEmoji: {
     fontSize: 130,
