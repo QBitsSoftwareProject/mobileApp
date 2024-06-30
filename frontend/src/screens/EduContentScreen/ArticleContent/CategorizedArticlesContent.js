@@ -75,7 +75,7 @@ const CategorizedArticlesContent = () => {
             </View>
             {category == "All Articles" ? (
               <View style={{ paddingHorizontal: 20, marginTop: 10 }}>
-                <SearchBarComponent keyword={setKeyWord} />
+                <SearchBarComponent keyword={setKeyWord} schema="edu" />
               </View>
             ) : null}
             <View
