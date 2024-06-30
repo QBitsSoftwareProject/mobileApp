@@ -37,9 +37,7 @@ const styles = StyleSheet.create({
   VideoList: {
     display: "flex",
     justifyContent: "center",
-    marginTop: 70,
-    // backgroundColor:"red",
-    paddingVertical:50,
+    marginTop: 32,
   },
   VideoItem: {
     marginLeft: "auto",

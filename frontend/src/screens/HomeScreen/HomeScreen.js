@@ -5,10 +5,10 @@ import {
   Dimensions,
   Image,
   ScrollView,
+  StatusBar,
   Text,
   TouchableOpacity,
   View,
-  SafeAreaView,
 } from "react-native";
 import styles from "./styles";
 import HomeCard from "../../components/HomeCard/HomeCard";
@@ -21,6 +21,7 @@ import loadingGif from "../../assets/animation/loading.gif";
 import { BackgroundMusicContext } from "../../components/SettingScreen/BackgroundMusicProvider";
 import { fetchHistoryDataByUserId } from "../../services/stressMarksServices/stressMarkServices";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 // const proPic = require('../../assets/images/doc.jpg')
 
@@ -150,174 +151,165 @@ const HomeScreen = (props) => {
   }
 
   return (
-    <View style={{ flex: 1, paddingBottom: 65 }}>
-      <SafeAreaView>
-        <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
-          <View>
-            <HomeTop
-              headLine={"Hi," + user.userName}
-              subHeadLine={
-                '"Your journey to wellness begins with a single step. Take it today."'
-              }
-              proPic={{ uri: user.proPic }}
-            />
-          </View>
+    <SafeAreaView style={{ flex: 1, paddingBottom: 65 }}>
+      <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
+        <HomeTop
+          headLine={"Hi," + user.userName}
+          subHeadLine={
+            '"Your journey to wellness begins with a single step. Take it today."'
+          }
+          proPic={{ uri: user.proPic }}
+        />
 
-          <View style={[styles.Container, { width: winWidth }]}>
-            <View>
-              <View
-                style={{
-                  flexDirection: "row",
-                  justifyContent: "space-between",
-                  alignItems: "center",
+        <View style={[styles.Container, { width: winWidth }]}>
+          <View>
+            <View
+              style={{
+                flexDirection: "row",
+                justifyContent: "space-between",
+                alignItems: "center",
+              }}
+            >
+              <Text style={styles.topicText}>Wellness Knowledge</Text>
+              <TouchableOpacity
+                style={styles.viewBtn}
+                onPress={() => {
+                  navigation.navigate("EducationalStack");
                 }}
               >
-                <Text style={styles.topicText}>Wellness Knowledge</Text>
-                <TouchableOpacity
-                  style={styles.viewBtn}
-                  onPress={() => {
-                    navigation.navigate("EducationalStack");
-                  }}
-                >
-                  <Text style={styles.viewText}>View All</Text>
-                </TouchableOpacity>
-              </View>
-
-              <Swiper style={styles.wrapper} showsButtons={false}>
-                {images.map((image, index) => (
-                  <TouchableOpacity
-                    style={styles.slide}
-                    key={index}
-                    onPress={() => {
-                      screenNavigator(index);
-                    }}
-                  >
-                    <View style={styles.blackBox}></View>
-
-                    <Image
-                      source={image.image}
-                      style={[styles.image, { width: winWidth }]}
-                    />
-
-                    <View
-                      style={{
-                        position: "absolute",
-                        marginLeft: 15,
-                        paddingBottom: 15,
-                        zIndex: 2,
-                      }}
-                    >
-                      <Text style={styles.sliderHeaderText}>
-                        {image.headerText}
-                      </Text>
-                      <Text style={styles.sliderSubText}>{image.subText}</Text>
-                    </View>
-                  </TouchableOpacity>
-                ))}
-              </Swiper>
-            </View>
-
-            {/* Healthful Balance section */}
-            <View>
-              <Text style={styles.topicText}>Healthful Balance</Text>
-              <HomeCard
-                image={medImg}
-                cardName={"meditation"}
-                headLine={"Mindful Meditation"}
-                subHeadLine={"Take a mindful pause for peace and tranquility."}
-              />
-              <HomeCard
-                image={mindImg}
-                cardName={"stressManagement"}
-                headLine={"Stress Management"}
-                subHeadLine={
-                  "Discover personalized tools and expert guidance for effective stress management."
-                }
-              />
-              <HomeCard
-                image={moodImg}
-                cardName={"mood"}
-                headLine={"Mood Tracking"}
-                subHeadLine={
-                  "Track your moods, find balance. Your emotional compass in one place."
-                }
-              />
-              <HomeCard
-                image={storyImg}
-                cardName={"journal"}
-                headLine={"Write Your Thoughts"}
-                subHeadLine={"Take a mindful pause for peace and tranquility."}
-              />
-              <HomeCard
-                image={goalsImg}
-                cardName={"goals"}
-                headLine={"Set your Goals"}
-                subHeadLine={
-                  "Chart your path to well-being by setting personalized health goals."
-                }
-              />
-            </View>
-
-            <View style={{ marginTop: 32 }}>
-              <Text style={styles.topicText}>Stress Level</Text>
-
-              <TouchableOpacity
-                style={{ borderRadius: 20, overflow: "hidden", marginTop: 15 }}
-                onPress={handleStressLevelPress}
-              >
-                <LinearGradient
-                  colors={[
-                    "#00453E",
-                    "rgba(73,177,247,0.7)rgba(73,177,247,0.7)",
-                  ]}
-                  style={styles.blueCard}
-                >
-                  <Text style={styles.bluCardText1}>
-                    Stress Level Assesment
-                  </Text>
-                  <Text style={styles.bluCardText2}>
-                    Assess stress levels, find peace. Your stress guide for a
-                    balanced life.
-                  </Text>
-                </LinearGradient>
+                <Text style={styles.viewText}>View All</Text>
               </TouchableOpacity>
             </View>
 
-            <View style={{ marginTop: 32 }}>
-              <Text style={styles.topicText}>Connect with Community</Text>
-              <HomeCard
-                image={docsImg}
-                cardName={"appointment"}
-                headLine={"Connect with Experts"}
-                subHeadLine={
-                  "Your Instant Link to Specialized Healthcare Experts."
-                }
-              />
-              <HomeCard
-                image={communityImg}
-                cardName={"community"}
-                headLine={"Social Community"}
-                subHeadLine={
-                  "Empathetic space connecting, sharing mental health journey companions."
-                }
-              />
-            </View>
+            <Swiper style={styles.wrapper} showsButtons={false}>
+              {images.map((image, index) => (
+                <TouchableOpacity
+                  style={styles.slide}
+                  key={index}
+                  onPress={() => {
+                    screenNavigator(index);
+                  }}
+                >
+                  <View style={styles.blackBox}></View>
 
-            <View style={{ marginVertical: 32 }}>
-              <Text style={styles.topicText}>Give your Ideas</Text>
-              <HomeCard
-                image={feedbackImg}
-                cardName={"feedback"}
-                headLine={"Feedback Form"}
-                subHeadLine={
-                  "Share your thoughts with us. Your feedback shapes a better experience."
-                }
-              />
-            </View>
+                  <Image
+                    source={image.image}
+                    style={[styles.image, { width: winWidth }]}
+                  />
+
+                  <View
+                    style={{
+                      position: "absolute",
+                      marginLeft: 15,
+                      paddingBottom: 15,
+                      zIndex: 2,
+                    }}
+                  >
+                    <Text style={styles.sliderHeaderText}>
+                      {image.headerText}
+                    </Text>
+                    <Text style={styles.sliderSubText}>{image.subText}</Text>
+                  </View>
+                </TouchableOpacity>
+              ))}
+            </Swiper>
           </View>
-        </ScrollView>
-      </SafeAreaView>
-    </View>
+
+          {/* Healthful Balance section */}
+          <View>
+            <Text style={styles.topicText}>Healthful Balance</Text>
+            <HomeCard
+              image={medImg}
+              cardName={"meditation"}
+              headLine={"Mindful Meditation"}
+              subHeadLine={"Take a mindful pause for peace and tranquility."}
+            />
+            <HomeCard
+              image={mindImg}
+              cardName={"stressManagement"}
+              headLine={"Stress Management"}
+              subHeadLine={
+                "Discover personalized tools and expert guidance for effective stress management."
+              }
+            />
+            <HomeCard
+              image={moodImg}
+              cardName={"mood"}
+              headLine={"Mood Tracking"}
+              subHeadLine={
+                "Track your moods, find balance. Your emotional compass in one place."
+              }
+            />
+            <HomeCard
+              image={storyImg}
+              cardName={"journal"}
+              headLine={"Write Your Thoughts"}
+              subHeadLine={"Take a mindful pause for peace and tranquility."}
+            />
+            <HomeCard
+              image={goalsImg}
+              cardName={"goals"}
+              headLine={"Set your Goals"}
+              subHeadLine={
+                "Chart your path to well-being by setting personalized health goals."
+              }
+            />
+          </View>
+
+          <View style={{ marginTop: 32 }}>
+            <Text style={styles.topicText}>Stress Level</Text>
+
+            <TouchableOpacity
+              style={{ borderRadius: 20, overflow: "hidden", marginTop: 15 }}
+              onPress={handleStressLevelPress}
+            >
+              <LinearGradient
+                colors={["#00453E", "rgba(73,177,247,0.7)rgba(73,177,247,0.7)"]}
+                style={styles.blueCard}
+              >
+                <Text style={styles.bluCardText1}>Stress Level Assesment</Text>
+                <Text style={styles.bluCardText2}>
+                  Assess stress levels, find peace. Your stress guide for a
+                  balanced life.
+                </Text>
+              </LinearGradient>
+            </TouchableOpacity>
+          </View>
+
+          <View style={{ marginTop: 32 }}>
+            <Text style={styles.topicText}>Connect with Community</Text>
+            <HomeCard
+              image={docsImg}
+              cardName={"appointment"}
+              headLine={"Connect with Experts"}
+              subHeadLine={
+                "Your Instant Link to Specialized Healthcare Experts."
+              }
+            />
+            <HomeCard
+              image={communityImg}
+              cardName={"community"}
+              headLine={"Social Community"}
+              subHeadLine={
+                "Empathetic space connecting, sharing mental health journey companions."
+              }
+            />
+          </View>
+
+          <View style={{ marginVertical: 32 }}>
+            <Text style={styles.topicText}>Give your Ideas</Text>
+            <HomeCard
+              image={feedbackImg}
+              cardName={"feedback"}
+              headLine={"Feedback Form"}
+              subHeadLine={
+                "Share your thoughts with us. Your feedback shapes a better experience."
+              }
+            />
+          </View>
+        </View>
+      </ScrollView>
+    </SafeAreaView>
   );
 };
 

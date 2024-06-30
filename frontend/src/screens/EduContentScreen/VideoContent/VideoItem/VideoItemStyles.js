@@ -3,18 +3,14 @@ import { PixelRatio, StyleSheet } from "react-native";
 const styles = StyleSheet.create({
   VideoList: {
     display: "flex",
+
     justifyContent: "center",
-    marginTop: 120,
   },
   VideoItem: {
-    marginLeft: "auto",
-    marginRight: "auto",
     marginBottom: 40,
     backgroundColor: "white",
-    height: 260,
+
     borderRadius: 10,
-    width: "100%",
-    padding: 20,
   },
   VideoItemDetails: {
     position: "absolute",
@@ -68,11 +64,11 @@ const styles = StyleSheet.create({
   VideoItem: {
     marginBottom: 20,
     backgroundColor: "#fff",
-    borderRadius: 10,
+    borderRadius: 20,
     overflow: "hidden",
   },
   playButtonText: {
-    color: 'white',
+    color: "white",
     fontSize: 16,
   },
 });

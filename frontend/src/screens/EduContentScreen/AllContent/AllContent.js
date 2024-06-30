@@ -11,7 +11,7 @@ import Audios from "../../../components/AudioList/Audios";
 
 function AllContent() {
   return (
-    <SafeAreaView>
+    <SafeAreaView style={{ marginHorizontal: 25 }}>
       <Text style={styles.mainHeading}>Featured Resurces</Text>
       <View>
         <Carousel />
@@ -20,9 +20,11 @@ function AllContent() {
       <View>
         <Categories />
       </View>
-      <Text style={[styles.mainHeading2,{marginTop:40}]}>Listen to Calm yourself</Text>
+      <Text style={[styles.mainHeading2, { marginTop: 40 }]}>
+        Listen to Calm yourself
+      </Text>
       <View>
-        <Audios/>
+        <Audios />
       </View>
     </SafeAreaView>
   );

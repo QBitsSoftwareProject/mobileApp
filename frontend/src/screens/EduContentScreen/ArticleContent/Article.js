@@ -7,7 +7,6 @@ import { useNavigation } from "@react-navigation/native";
 import { getAuthorInfo } from "../../../services/educationalServices/educationalServices";
 
 const Article = ({ item }) => {
-
   const navigation = useNavigation();
 
   const navigateToScreen = () => {
@@ -19,7 +18,6 @@ const Article = ({ item }) => {
   const [author, setAuthor] = useState([]);
 
   useEffect(() => {
-
     const fetchArticleData = async () => {
       try {
         const authorInfo = await getAuthorInfo(item.author);
@@ -40,14 +38,12 @@ const Article = ({ item }) => {
         }
         return false;
       });
-      
-    }
+    };
     fetchArticleData();
   }, [item]);
 
   return (
     <View style={styles.article}>
-      {console.log(item.paragraphs[0].image.url)}
       <View>
         {isImagePresent ? (
           <Image
@@ -91,7 +87,9 @@ const Article = ({ item }) => {
             <Text style={{ fontWeight: "500", textTransform: "uppercase" }}>
               {item.title}
             </Text>
-            <Text style={{ color: "#596C79", fontSize: 12, marginTop: 5 }}>{author.name}</Text>
+            <Text style={{ color: "#596C79", fontSize: 12, marginTop: 5 }}>
+              {author.name}
+            </Text>
           </View>
           <View
             style={{ display: "flex", justifyContent: "center", width: "30%" }}
@@ -101,7 +99,9 @@ const Article = ({ item }) => {
                 <Image
                   source={require("../../../assets/images/articleThumbnails/bi_eye-fill.png")}
                 />
-                <Text style={{ fontSize: 10, color: "white", fontWeight: "500" }}>
+                <Text
+                  style={{ fontSize: 10, color: "white", fontWeight: "500" }}
+                >
                   {" "}
                   READ MORE
                 </Text>

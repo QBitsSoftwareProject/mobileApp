@@ -54,7 +54,6 @@ const NotifyScreen = () => {
   return (
     <SafeAreaView
       style={{
-        paddingTop: 35,
         paddingBottom: 65,
         flex: 1,
       }}
@@ -88,6 +87,7 @@ const NotifyScreen = () => {
 const styles = StyleSheet.create({
   backButton: {
     margin: 25,
+
     zIndex: 20,
   },
 });

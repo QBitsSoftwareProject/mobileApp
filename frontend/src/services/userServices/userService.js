@@ -81,7 +81,7 @@ export const getAUser = async () => {
 
     return response.data;
   } catch (error) {
-    console.log(error);
+    console.log(error.response.data);
     throw new Error(error.response.status);
   }
 };

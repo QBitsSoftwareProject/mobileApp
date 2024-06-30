@@ -9,6 +9,8 @@ import {
   SafeAreaView,
 } from "react-native";
 import React, { useEffect } from "react";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
 import { useState } from "react";
 import {
   createComment,
@@ -21,6 +23,7 @@ import {
 } from "@react-navigation/native";
 import CommentCard from "../../components/CFCard/CommentCard";
 import loadingGif from "../../assets/animation/loading.gif";
+import Toast from "react-native-toast-message";
 
 const CommentPage = () => {
   const route = useRoute();
@@ -31,6 +34,10 @@ const CommentPage = () => {
   const [isKeyboardVisible, setKeyboardVisible] = useState(false);
 
   const navigation = useNavigation();
+
+  useEffect(() => {
+    showSwipeToastOnceADay();
+  }, []);
 
   const goBackFromComment = () => {
     navigation.navigate(previousScreen);
@@ -44,6 +51,31 @@ const CommentPage = () => {
       fetchComment();
     } catch (error) {
       console.log(error);
+    }
+  };
+
+  const showSwipeToastOnceADay = async () => {
+    try {
+      const lastShown = await AsyncStorage.getItem("lastShown");
+      const currentTime = Date.now();
+
+      if (
+        !lastShown ||
+        currentTime - parseInt(lastShown, 10) >= 24 * 60 * 60 * 1000
+      ) {
+        // Show the toast message
+        Toast.show({
+          type: "info",
+          text1: "You can swipe comment to edit and delete",
+          text1Style: { fontSize: 16, fontWeight: "200" }, // Customize text style
+          visibilityTime: 4000, // 4 seconds
+        });
+
+        // Update AsyncStorage with current time
+        await AsyncStorage.setItem("lastShown", currentTime.toString());
+      }
+    } catch (error) {
+      console.error("Error accessing AsyncStorage:", error.message);
     }
   };
 

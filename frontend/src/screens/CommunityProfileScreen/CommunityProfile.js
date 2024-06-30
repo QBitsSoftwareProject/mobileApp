@@ -16,7 +16,7 @@ const ProfileScreen = () => {
   const route = useRoute();
   const [postList, setPostList] = useState();
   const [userData, setUserData] = useState();
-  const [refresh, setRefresh] = useState(false);
+  const [refresh, setRefresh] = useState(0);
 
   const fetchData = async () => {
     try {
@@ -37,16 +37,9 @@ const ProfileScreen = () => {
     }
   };
 
-  useFocusEffect(
-    React.useCallback(() => {
-      if (route.params?.refresh) {
-        fetchData();
-        navigation.setParams({ refresh: false }); // Reset the refresh param
-      }
-    }, [route.params?.refresh])
-  );
-
   useEffect(() => {
+    console.log(refresh);
+
     fetchData();
   }, [refresh]);
 

@@ -1,28 +1,19 @@
 import React, { useEffect, useState } from "react";
-import {
-  View,
-  Text,
-  TouchableOpacity,
-  Animated,
-  Easing,
-  StyleSheet,
-} from "react-native";
+import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import HeaderSub from "../../screens/MoodAnalysisScreen/Header";
 import { useNavigation } from "@react-navigation/native";
 import { addMood } from "../../services/moodAnalysisServices/moodAnalysisServices";
-import { ScrollView } from "react-native-gesture-handler";
 import Toast from "react-native-toast-message";
 
 const MoodAnalysis = () => {
   const navigation = useNavigation();
-
   const [selectedEmoji, setSelectedEmoji] = useState(null);
   const [moodIndex, setMoodIndex] = useState(null);
-  const [date, setDate] = useState("");
-  const [time, setTime] = useState("");
   const [count, setCount] = useState(0);
   const [moodText, setMoodText] = useState("");
   const [ImageSource, setImageSource] = useState("");
+  const [isSettingMood, setIsSettingMood] = useState(false);
 
   const emojis = [
     {
@@ -83,7 +74,23 @@ const MoodAnalysis = () => {
       return;
     }
 
+    const currentTime = new Date().getTime();
+    const lastMoodTime = await AsyncStorage.getItem("lastMoodTime");
+
+    if (
+      lastMoodTime &&
+      currentTime - parseInt(lastMoodTime, 10) < 3 * 60 * 60 * 1000
+    ) {
+      Toast.show({
+        type: "error",
+        text1: "You can set your mood once in every 3 hours! ",
+      });
+
+      return;
+    }
+
     await storedata();
+    await AsyncStorage.setItem("lastMoodTime", currentTime.toString());
 
     navigation.navigate("AnalysisGraphScreen", {
       selectedEmoji,
@@ -98,12 +105,7 @@ const MoodAnalysis = () => {
   const storedata = async () => {
     const count = 10;
     try {
-      await addMood(
-        selectedEmoji,
-        emojis[moodIndex].moodText,
-
-        count
-      );
+      await addMood(selectedEmoji, emojis[moodIndex].moodText, count);
     } catch (error) {
       console.log(error);
     }

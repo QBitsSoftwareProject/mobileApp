@@ -16,6 +16,7 @@ const router = express.Router();
 router.post("/", auth, createPost);
 router.get("/view-post", auth, getPost);
 router.get("/view-one-post/:postId", auth, getAPost);
+router.get("/view-a-post/:postId", getAPost);
 router.get("/view-profile-post", auth, getProfilePost);
 router.post("/view-search-profile", auth, getSearchProfile);
 router.put("/update-post/:postId", auth, updatePost);
