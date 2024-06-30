@@ -6,7 +6,7 @@ import FilePicker from "../../components/GetImages/FilePicker";
 import { updateAUser } from "../../services/userServices/userService";
 import loadingGif from "../../assets/animation/loading.gif";
 
-const CoverPhotoUploader = ({ isVisible, onClose, onUploadSuccess }) => {
+const CoverPhotoUploader = ({ isVisible, onClose }) => {
   const [selectedImage, setSelectedImage] = useState();
   const [isLoading, setIsLoading] = useState(false);
 

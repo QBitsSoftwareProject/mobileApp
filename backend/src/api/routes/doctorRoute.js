@@ -23,9 +23,6 @@ const {
 const {
   updateDoctorAccessStatus,
 } = require("../controllers/doctorControllers/updateDoctorAccessStatus");
-// const {
-//   getAvailableTimes,
-// } = require("../../../../frontend/src/services/doctorServices/doctorService");
 
 const router = express.Router();
 
@@ -37,7 +34,7 @@ router.put("/updateRegStatus/:id", updateDoctorRegStatus);
 router.put("/updateAccessStatus/:id", updateDoctorAccessStatus);
 router.delete("/:id", deleteDoctor);
 router.post("/view-doctor", viewADoctor);
-// router.get("/available-times/:doctorId", getAvailableTimes);
+
 router.post("/checkExistsDoctor", checkExistsDoctor);
 
 //register route

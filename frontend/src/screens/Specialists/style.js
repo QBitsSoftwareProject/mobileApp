@@ -6,7 +6,7 @@ const style = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "baseline",
 
-    marginBottom: 32,
+    paddingVertical: 25,
   },
   descript2: {
     fontSize: 18,

@@ -14,11 +14,11 @@ import TimeButton from "../../components/Button/TimeButton";
 import PopupMessage from "../../components/Pop-up/Pop-upScreen";
 import RegularButton from "../../components/Button/RegularButton";
 import { useNavigation } from "@react-navigation/native";
-import { createAppointment } from "../../services/appointmentServices/AppointmentServices";
 import {
+  createAppointment,
   getAvailableTimes,
-  viewADoctor,
-} from "../../services/doctorServices/doctorService";
+} from "../../services/appointmentServices/AppointmentServices";
+import { viewADoctor } from "../../services/doctorServices/doctorService.js";
 import loardingGIF from "../../assets/animation/loading.gif";
 
 const MakeAppointment = ({ route }) => {
@@ -69,19 +69,15 @@ const MakeAppointment = ({ route }) => {
   }, []);
 
   // useEffect(() => {
-  //     if (getDate) {
-  //       fetchAvailableTimes(getDate);
-  //     }
-  //   }, [getDate]);
+  //   if (getDate) {
+  //     fetchAvailableTimes(getDate);
+  //   }
+  // }, [getDate]);
 
   const fetchDoctor = async () => {
     try {
       const res = await viewADoctor({ doctorId: id });
       setDoctor(res);
-      // // Fetch available times for the initial date
-      // if (getDate) {
-      //   fetchAvailableTimes(getDate);
-      // }
     } catch (error) {
       console.log(error);
     }
@@ -89,12 +85,14 @@ const MakeAppointment = ({ route }) => {
 
   // const fetchAvailableTimes = async (date) => {
   //   try {
-  //     const res = await getAvailableTimes(id, date);
-  //     setAvailableTimes(res);
+  //     const res = await getAvailableTimes(id, date.toISOString());
+  //     console.log(res.availableTimes);
+  //     setAvailableTimes(res.availableTimes);
   //   } catch (error) {
   //     console.log(error);
   //   }
   // };
+
   // Hook for navigation
   const navigation = useNavigation();
 
@@ -109,7 +107,6 @@ const MakeAppointment = ({ route }) => {
   const confirmMessage = async () => {
     try {
       await createAppointment(doctor._id, getDate, getTime);
-
       navigation.navigate("AppointmentStatus");
     } catch (error) {
       console.log(error);
@@ -139,37 +136,39 @@ const MakeAppointment = ({ route }) => {
     );
   }
 
+  // const handleDatePress = (item, value, index) => {
+  //   setDateBtnPress(value);
+
+  //   if (item == "Monday") {
+  //     setPressDay(0);
+  //   } else if (item == "Tuesday") {
+  //     setPressDay(1);
+  //   } else if (item == "Wednesday") {
+  //     setPressDay(2);
+  //   } else if (item == "Thursday") {
+  //     setPressDay(3);
+  //   } else if (item == "Friday") {
+  //     setPressDay(4);
+  //   } else if (item == "Saturday") {
+  //     setPressDay(5);
+  //   } else if (item == "Sunday") {
+  //     setPressDay(6);
+  //   } else {
+  //     null;
+  //   }
+
+  //   setSelectedDateIndex(index);
+  //   // setAppointmentDate(dateIncrement(index));
+  // };
+
   const handleDatePress = (item, value, index) => {
     setDateBtnPress(value);
+    setSelectedDateIndex(index);
+    setPressDay(index); // Update pressDay based on the selected index
 
-    if (item == "Monday") {
-      setPressDay(0);
-    } else if (item == "Tuesday") {
-      setPressDay(1);
-    } else if (item == "Wednesday") {
-      setPressDay(2);
-    } else if (item == "Thursday") {
-      setPressDay(3);
-    } else if (item == "Friday") {
-      setPressDay(4);
-    } else if (item == "Saturday") {
-      setPressDay(5);
-    } else if (item == "Sunday") {
-      setPressDay(6);
-    } else {
-      null;
-    }
-    // fetchAvailableTimes(dateIncrement(index));
+    // You might want to clear selected time when date changes
+    setGetTime(null);
   };
-
-  // const handleDatePress = async (item, index) => {
-  //   setDateBtnPress(true);
-  //   setSelectedDateIndex(index);
-  //   setAppointmentDate(dateIncrement(index));
-
-  //   // Fetch available times for the selected date
-  //   fetchAvailableTimes(dateIncrement(index));
-  // };
 
   return (
     <SafeAreaView style={{ margin: 25 }}>
@@ -223,11 +222,11 @@ const MakeAppointment = ({ route }) => {
                   selected={selectedDateIndex === index}
                   onPress={(idx) => {
                     setSelectedDateIndex(idx); // Update selected date index
-                    handleDatePress(dayIncrement(index), true); // Ensure only one card is selected at a time
+                    handleDatePress(dayIncrement(index), true, index); // Ensure only one card is selected at a time
                   }}
                   press={(value) => {
                     let day = dayIncrement(index);
-                    handleDatePress(day, value);
+                    handleDatePress(day, value, index);
                   }}
                   change={dateBtnPress && selectedDateIndex === index}
                   getDate={(date) => {

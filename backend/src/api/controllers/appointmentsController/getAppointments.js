@@ -1,4 +1,5 @@
 const appointmentSchema = require("../../models/appointments/appointmentsModels");
+const doctorModel = require("../../models/doctor/doctor");
 
 exports.getUserAppointments = async (req, res) => {
   try {
@@ -168,3 +169,25 @@ exports.getDoctorCompletedAppointmentCount = async (req, res) => {
     res.status(500).json({ error: "Failed to fetch!", error: err });
   }
 };
+
+// const getAvailableTimes = async (req, res) => {
+//   const { doctorId, date } = req.params;
+
+//   try {
+//     // Fetch all booked time slots for the given doctor and date
+//     const bookedAppointments = await UserAppointment.find({ doctorId, date });
+
+//     // Get all available time slots for the doctor
+//     const allTimes = []; // Fetch all available times logic based on your requirements
+
+//     // Filter out booked time slots
+//     const availableTimes = allTimes.filter((time) => {
+//       return !bookedAppointments.some((appt) => appt.selectedTimeSlot === time);
+//     });
+
+//     res.status(200).json({ availableTimes });
+//   } catch (error) {
+//     console.error("Error fetching available times:", error);
+//     res.status(500).json({ message: "Failed to fetch available times." });
+//   }
+// };

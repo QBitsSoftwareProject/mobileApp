@@ -17,6 +17,7 @@ const ProfileScreen = () => {
   const [postList, setPostList] = useState();
   const [userData, setUserData] = useState();
   const [refresh, setRefresh] = useState(0);
+  const [loggedInUserId, setLoggedInUserId] = useState();
 
   const fetchData = async () => {
     try {
@@ -57,13 +58,6 @@ const ProfileScreen = () => {
     );
   };
 
-  const handleCoverPhotoUpdated = (newCoverImageUrl) => {
-    setUserData((prevUserData) => ({
-      ...prevUserData,
-      coverImage: newCoverImageUrl,
-    }));
-  };
-
   if (!postList || !userData) {
     return (
       <View
@@ -86,7 +80,6 @@ const ProfileScreen = () => {
           proPic={{ uri: userData.proPic }}
           refreshState={refresh}
           isRefresh={setRefresh}
-          onCoverPhotoUpdated={handleCoverPhotoUpdated}
           isOwnProfile={loggedInUserId === userData._id}
         />
         <View

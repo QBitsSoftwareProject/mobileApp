@@ -7,8 +7,7 @@ const ProfileCover = (props) => {
   const navigation = useNavigation();
   const [popupVisible, setPopupVisible] = useState(false);
 
-  const confirmMessage = async (newCoverImageUrl) => {
-    props.onCoverPhotoUpdated(newCoverImageUrl);
+  const confirmMessage = async () => {
     setPopupVisible(false);
   };
 
