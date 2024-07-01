@@ -1,9 +1,28 @@
 const doctorModel = require("../../models/doctor/doctor");
 
-// Controller function to get all regular users
+// Controller function to get all doctors
 exports.getDoctors = async (req, res) => {
   try {
-    // Finding all regular users
+    // Finding all doctors
+    const getUser = await doctorModel.find();
+
+    // If no users are found, return a 404 error response
+    if (!getUser) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    // Sending success response with status code 200 and the list of users
+    return res.status(201).json(getUser);
+  } catch (err) {
+    // Handling internal server errors
+    res.status(500).json({ error: "Error fetching user", error: err.message });
+  }
+};
+
+// Controller function to get all doctors
+exports.getRegisteredDoctors = async (req, res) => {
+  try {
+    // Finding all doctors
     const getUser = await doctorModel.find({
       regStatus: true,
     });

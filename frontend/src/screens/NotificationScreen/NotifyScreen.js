@@ -12,6 +12,7 @@ import { useNavigation, useFocusEffect } from "@react-navigation/native";
 import NotificationCard from "../../components/NotificationCard/NotificationCard";
 import { getNotification } from "../../services/notificationService/notificationService";
 import loadingGif from "../../assets/animation/loading.gif";
+import notFoundGif from "../../assets/animation/not-found.png";
 
 const NotifyScreen = () => {
   const [notificationList, setNotificationList] = useState();
@@ -63,8 +64,24 @@ const NotifyScreen = () => {
       </TouchableOpacity>
 
       <ScrollView style={{ paddingHorizontal: 25 }}>
+        {notificationList.length == 0 && (
+          <View
+            style={{
+              justifyContent: "center",
+              alignItems: "center",
+              width: "100%",
+              marginTop: 32,
+            }}
+          >
+            <Image
+              source={notFoundGif}
+              style={{ width: "60%", height: 250, opacity: 0.3 }}
+            />
+          </View>
+        )}
+
         <View>
-          {notificationList &&
+          {notificationList.length > 0 &&
             notificationList.map((item) => (
               <NotificationCard
                 key={item._id}
