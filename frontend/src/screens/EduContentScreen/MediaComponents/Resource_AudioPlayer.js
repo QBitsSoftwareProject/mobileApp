@@ -1,7 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect,useContext } from 'react';
 import { View, StyleSheet, Text, Image, TouchableOpacity } from 'react-native';
 import { Audio } from 'expo-av';
 import Slider from '@react-native-community/slider';
+import { BackgroundMusicContext } from '../../../components/SettingScreen/BackgroundMusicProvider';
+import { useFocusEffect } from '@react-navigation/native';
 
 require("../../../assets/images/icons/player/play.png");
 require("../../../assets/images/icons/player/pause.png");
@@ -12,6 +14,21 @@ const AudioPlayer = ({ audioSource, onStop, title }) => {
     const [duration, setDuration] = useState(0);
     const [position, setPosition] = useState(0);
     const [name, setName] = useState(title);
+
+
+    const { setBackgroundMusicValid } = useContext(BackgroundMusicContext);
+
+  useFocusEffect(
+    React.useCallback(() => {
+      setBackgroundMusicValid(false);
+      
+
+      return () => {
+        setBackgroundMusicValid(true);
+        
+      };
+    }, [setBackgroundMusicValid])
+  );
 
     useEffect(() => {
         const loadAudio = async () => {

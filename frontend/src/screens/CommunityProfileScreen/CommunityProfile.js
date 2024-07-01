@@ -17,13 +17,18 @@ const ProfileScreen = () => {
   const [postList, setPostList] = useState();
   const [userData, setUserData] = useState();
   const [refresh, setRefresh] = useState(0);
+  const [loggedInUserId, setLoggedInUserId] = useState();
 
   const fetchData = async () => {
     try {
+      // Get the logged-in user's data
+      const loggedInUser = await getAUser();
+      setLoggedInUserId(loggedInUser._id);
+
       //getUser
       let user;
       if (!route.params) {
-        user = await getAUser();
+        user = loggedInUser;
       } else {
         user = await getUserById(route.params.userId);
       }
@@ -75,6 +80,7 @@ const ProfileScreen = () => {
           proPic={{ uri: userData.proPic }}
           refreshState={refresh}
           isRefresh={setRefresh}
+          isOwnProfile={loggedInUserId === userData._id}
         />
         <View
           style={{

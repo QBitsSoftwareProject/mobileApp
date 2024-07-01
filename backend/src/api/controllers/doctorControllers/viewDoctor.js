@@ -22,6 +22,7 @@ exports.viewADoctor = async (req, res) => {
       proPic: getDoctor.proPic,
       bio: getDoctor.bio,
       qualification: getDoctor.qualification,
+      contactNumber: getDoctor.contactNumber,
     };
     // console.log(getDoctor.monday);
 

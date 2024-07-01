@@ -7,6 +7,7 @@ import {
   ScrollView,
   Image,
   Dimensions,
+  SafeAreaView
 } from "react-native";
 import HeaderSub from "../../components/HeaderSub/HeaderSub";
 import ExpandableCard from "../../components/MindRelaxingMethod/ExpandCard";
@@ -137,6 +138,7 @@ const Mindrelaxinmethod = () => {
   };
 
   return (
+    
     <View>
       <HeaderSub
         headLine={"Suggestions"}

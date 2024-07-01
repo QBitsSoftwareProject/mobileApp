@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
     height: 50,
     borderWidth: 1,
     borderColor: "#4A90BF",
-    backgroundColor: "#4A90BF",
+    backgroundColor: "white",
     borderRadius: 20,
     marginVertical: 15,
     alignItems: "center",
@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
     alignSelf: "center",
   },
   buttonText: {
-    color: "white",
+    color: "#4A90BF",
     fontSize: 16,
     fontWeight: "400",
   },
