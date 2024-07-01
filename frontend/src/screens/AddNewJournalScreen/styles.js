@@ -7,24 +7,27 @@ const styles = StyleSheet.create({
   },
 
   Text: {
-    fontSize: 18,
+    fontSize: 16,
     fontWeight: "400",
     color: "#101318",
     marginBottom: 10,
+    opacity: 0.6,
   },
   Text1: {
     color: "#101318",
-    fontSize: 18,
+    fontSize: 16,
     fontWeight: "400",
     marginBottom: 15,
     marginTop: 15,
+    opacity: 0.6,
   },
   Text2: {
     color: "#101318",
-    fontSize: 18,
+    fontSize: 16,
     fontWeight: "400",
     marginBottom: 15,
-    marginTop: 15,
+    marginTop: 32,
+    opacity: 0.6,
   },
   create: {
     backgroundColor: "#ffffff",

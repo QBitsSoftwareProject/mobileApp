@@ -33,7 +33,7 @@ export const JournalTittle = ({ newText, value }) => {
       <View style={styles.inputContainer}>
         <TextInput
           style={styles.input}
-          placeholder="Feeling happy today..."
+          // placeholder="Feeling happy today..."
           multiline={true}
           value={inputTittle}
           onChangeText={handleInputChange}
@@ -56,12 +56,10 @@ const styles = StyleSheet.create({
   },
 
   input: {
-    backgroundColor: "white",
-    borderRadius: 10,
-    // width: ,
-    padding: 15,
-
-    fontSize: 14,
+    paddingBottom: 5,
+    borderBottomColor: "rgba(151,157,172,0.5)",
+    borderBottomWidth: 1,
+    fontSize: 24,
     fontWeight: "400",
     flex: 1,
     marginRight: 25,

@@ -125,11 +125,11 @@ const HomeScreen = (props) => {
   const screenNavigator = (index) => {
     console.log(index);
     if (index == 0) {
-      navigation.navigate("VideoScreen");
+      navigation.navigate("EducationalStack", { screen: "VideoScreen" });
     } else if (index == 1) {
-      navigation.navigate("ArticleStack");
+      navigation.navigate("EducationalStack", { screen: "ArticleStack" });
     } else if (index == 2) {
-      navigation.navigate("AudioScreen");
+      navigation.navigate("EducationalStack", { screen: "AudioScreen" });
     }
   };
 
