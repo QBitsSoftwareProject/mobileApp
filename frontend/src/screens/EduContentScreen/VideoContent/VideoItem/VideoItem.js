@@ -6,7 +6,7 @@ import styles from "./VideoItemStyles";
 
 import playImg from "../../../../assets/images/icons/player/play.png";
 
-const VideoItem = ({ item }) => {
+const VideoItem = ({ item, callTask }) => {
   const video = React.useRef(null);
   const [status, setStatus] = React.useState({});
   const [isFullscreen, setIsFullscreen] = useState(false);
@@ -21,6 +21,7 @@ const VideoItem = ({ item }) => {
   }, [status]);
 
   const handlePlayPress = () => {
+    callTask();
     setIsModalVisible(true);
   };
 

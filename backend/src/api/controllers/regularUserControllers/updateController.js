@@ -1,5 +1,8 @@
 const regularUser = require("../../models/regularUser/regularUser");
 const bcrypt = require("bcryptjs");
+const {
+  adminNotification,
+} = require("../../services/notificationService/notificationCreate");
 
 exports.updateRegularUser = async (req, res) => {
   try {
@@ -62,21 +65,21 @@ exports.updateRegularUser = async (req, res) => {
   }
 };
 
-
 exports.updateUserAccessStatus = async (req, res) => {
   try {
-    
     const access = req.body;
     const userId = req.params;
-
-    console.log(userId.id, access.access);
 
     // Finding and updating the user by ID
     await regularUser.findByIdAndUpdate(userId.id, access);
 
     // Sending success response with status code 201 and a message
-    return res.status(201).json({ message: "User access level updated successfully" });
+    return res
+      .status(201)
+      .json({ message: "User access level updated successfully" });
   } catch (err) {
-    res.status(500).json({ error: "Error in updating user access level", details: err });
+    res
+      .status(500)
+      .json({ error: "Error in updating user access level", details: err });
   }
 };

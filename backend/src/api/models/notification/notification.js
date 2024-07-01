@@ -9,13 +9,13 @@ const notificationSchema = new mongoose.Schema({
 
   senderId: {
     type: mongoose.Schema.Types.ObjectId,
-    required: true,
+
     refPath: "recipientModel",
   },
 
   recipientModel: {
     type: String,
-    required: true,
+
     enum: ["RegularUser", "Doctor"],
   },
 
@@ -32,13 +32,13 @@ const notificationSchema = new mongoose.Schema({
 
   referenceId: {
     type: mongoose.Schema.Types.ObjectId,
-    required: true,
+
     refPath: "referenceModel",
   },
 
   referenceModel: {
     type: String,
-    required: true,
+
     enum: ["userAppointments", "Post"],
   },
 

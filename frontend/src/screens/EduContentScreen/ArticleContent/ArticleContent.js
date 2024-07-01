@@ -5,9 +5,11 @@ import {
   TouchableOpacity,
   FlatList,
   SafeAreaView,
+  Image,
 } from "react-native";
 import styles from "./articleStyle";
 import ProfilePic from "../ProfilePic/ProfilePic";
+import loadingGif from "../../../assets/animation/loading.gif";
 
 // data imports
 import ArticleCategoryBtn from "./ArticleCategories/ArticleCategoryBtn.js";
@@ -30,9 +32,9 @@ import HeaderSub from "../../../components/HeaderSub/HeaderSub.js";
 // navigation
 
 const ArticleContent = () => {
-  const [articles, setArticles] = useState([]);
-  const [articleTagList, setArticleTagList] = useState([]);
-  const [authorList, setAuthorList] = useState([]);
+  const [articles, setArticles] = useState();
+  const [articleTagList, setArticleTagList] = useState();
+  const [authorList, setAuthorList] = useState();
 
   const navigation = useNavigation();
 
@@ -55,6 +57,21 @@ const ArticleContent = () => {
     };
     fetchArticleContentData();
   }, []);
+
+  if (!articles) {
+    return (
+      <View
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          height: "100%",
+        }}
+      >
+        <Image source={loadingGif} />
+      </View>
+    );
+  }
 
   return (
     <SafeAreaView>

@@ -2,6 +2,7 @@ const express = require("express");
 const {
   getDoctors,
   getADoctor,
+  getRegisteredDoctors,
 } = require("../controllers/doctorControllers/getController");
 const {
   updateDoctor,
@@ -28,6 +29,7 @@ const router = express.Router();
 
 //user operations routes
 router.get("/", getDoctors);
+router.get("/registered-docotors", auth, getRegisteredDoctors);
 router.get("/one-doctor", auth, getADoctor);
 router.put("/", auth, updateDoctor);
 router.put("/updateRegStatus/:id", updateDoctorRegStatus);
