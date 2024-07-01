@@ -126,6 +126,21 @@ export const updateStatusAppointments = async (appId, appStatus) => {
   }
 };
 
+export const deleteAllAppointments = async () => {
+  try {
+    const token = await AsyncStorage.getItem("authToken");
+
+    const response = await axios.delete(URL + "/delete-appointments/", {
+      headers: { authtoken: token },
+    });
+    // console.log(response.data);
+    return response.data;
+  } catch (error) {
+    console.log(error);
+    throw new Error("Error during request setup");
+  }
+};
+
 // export const getAvailableTimes = async (doctorId, date) => {
 //   try {
 //     const token = await AsyncStorage.getItem("authToken");

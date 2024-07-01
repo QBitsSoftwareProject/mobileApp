@@ -18,6 +18,9 @@ const {
 const {
   updateDocAppointment,
 } = require("../controllers/appointmentsController/updateAppointment");
+const {
+  deleteAllAppointments,
+} = require("../controllers/appointmentsController/deleteAppointment");
 
 const router = express.Router();
 
@@ -42,6 +45,7 @@ router.get(
   getDoctorCancelledAppointments
 );
 router.put("/appointment-status", auth, updateDocAppointment);
+router.delete("/delete-appointments", auth, deleteAllAppointments);
 // router.get("/available-times/:doctorId", auth, getAvailableTimes);
 
 module.exports = router;
