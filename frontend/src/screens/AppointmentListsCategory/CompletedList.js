@@ -19,11 +19,11 @@ const CompletedAppointment = () => {
     try {
       let response;
 
-      if (checkPage == "Completed") {
+      if (checkPage === "Completed") {
         response = await getDoctorCompletedAppointments();
-      } else if (checkPage == "Rejected") {
+      } else if (checkPage === "Rejected") {
         response = await getDoctorRejectedAppointments();
-      } else if (checkPage == "Cancelled") {
+      } else if (checkPage === "Cancelled") {
         response = await getDoctorCancelledAppointments();
       }
 
@@ -51,8 +51,26 @@ const CompletedAppointment = () => {
 
   const getapDate = (date) => {
     const apDate = new Date(date);
+    const monthNames = [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December",
+    ];
     let stringDate =
-      apDate.getFullYear() + "-" + apDate.getMonth() + "-" + apDate.getDate();
+      apDate.getFullYear() +
+      "-" +
+      monthNames[apDate.getMonth() + 1] +
+      "-" +
+      apDate.getDate();
     return stringDate;
   };
 
@@ -63,15 +81,13 @@ const CompletedAppointment = () => {
           style={{
             marginHorizontal: 15,
             marginVertical: 15,
-
             flexDirection: "row",
             alignItems: "center",
             justifyContent: "space-between",
           }}
         >
           <Text style={styles.descript2}>Completed List.</Text>
-
-          <DocNavDropDown check={setCheckPage} />
+          <DocNavDropDown checkPage={checkPage} setCheckPage={setCheckPage} />
         </View>
 
         {/* appointment status cards */}

@@ -62,20 +62,22 @@ const ProfileCover = (props) => {
       </View>
 
       <View style={{ zIndex: 110 }}>
-        <TouchableOpacity
-          onPress={handleEditIconPress}
-          style={{ position: "absolute", bottom: 80, right: 30 }}
-        >
-          <Image
-            source={require("../../assets/images/NavigationIcons/mdi_camera.png")}
-            style={styles.editIcon}
-          />
-        </TouchableOpacity>
-
+        {props.isOwnProfile && (
+          <TouchableOpacity
+            onPress={handleEditIconPress}
+            style={{ position: "absolute", bottom: 80, right: 30 }}
+          >
+            <Image
+              source={require("../../assets/images/NavigationIcons/mdi_camera.png")}
+              style={styles.editIcon}
+            />
+          </TouchableOpacity>
+        )}
         <CoverPhotoUploader
           isVisible={popupVisible}
           onConfirm={confirmMessage}
           onClose={closeMessage}
+          onUploadSuccess={confirmMessage}
         />
       </View>
 

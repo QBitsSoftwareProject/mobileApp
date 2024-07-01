@@ -17,6 +17,7 @@ import { useNavigation } from "@react-navigation/native";
 import { createAppointment } from "../../services/appointmentServices/AppointmentServices";
 import { viewADoctor } from "../../services/doctorServices/doctorService";
 import loardingGIF from "../../assets/animation/loading.gif";
+import Toast from "react-native-toast-message";
 
 const MakeAppointment = ({ route }) => {
   const { id } = route.params;
@@ -32,13 +33,13 @@ const MakeAppointment = ({ route }) => {
 
   const dateIncrement = (number) => {
     const currentDate = new Date();
-    currentDate.setDate(currentDate.getUTCDate() + number);
+    currentDate.setDate(currentDate.getDate() + number);
     return currentDate.getDate();
   };
 
   const dayIncrement = (number) => {
     const currentDate = new Date();
-    currentDate.setDate(currentDate.getUTCDate() + number);
+    currentDate.setDate(currentDate.getDate() + number);
     const day = currentDate.getDay();
 
     const weekdays = [
@@ -90,6 +91,15 @@ const MakeAppointment = ({ route }) => {
       navigation.navigate("AppointmentStatus");
     } catch (error) {
       console.log(error);
+      Toast.show({
+        type: "error",
+        text1: "Error",
+        text2: "Failed to create appointment",
+        text1Style: { fontSize: 16, fontWeight: "200" },
+        text2Style: { fontSize: 14, fontWeight: "200" },
+        visibilityTime: 2000,
+        position: "top",
+      });
     }
   };
 
@@ -137,7 +147,7 @@ const MakeAppointment = ({ route }) => {
       null;
     }
   };
-
+  // console.log(doctor);
   return (
     <SafeAreaView style={{ margin: 25 }}>
       <View style={{ marginBottom: 20 }}>
@@ -164,6 +174,9 @@ const MakeAppointment = ({ route }) => {
             <Text style={styles.docDetails}>{doctor.qualification}</Text>
 
             <Text style={styles.docDetails}>{doctor.workplace}</Text>
+            <Text style={styles.docDetails}>
+              Contact No: {doctor.contactNumber}
+            </Text>
           </View>
         </View>
 
@@ -240,6 +253,7 @@ const MakeAppointment = ({ route }) => {
             onConfirm={confirmMessage}
             onClose={closeMessage}
           />
+          <Toast />
         </View>
       </ScrollView>
     </SafeAreaView>

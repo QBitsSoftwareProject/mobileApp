@@ -49,15 +49,12 @@ export const ViewJournal = ({ navigation }) => {
       const lastShown = await AsyncStorage.getItem("lastShown");
       const currentTime = Date.now();
 
-      if (
-        !lastShown ||
-        currentTime - parseInt(lastShown, 10) >= 24 * 60 * 60 * 1000
-      ) {
+      if (!lastShown || currentTime - parseInt(lastShown, 10) >= 2 * 1000) {
         // Show the toast message
         Toast.show({
           type: "info",
           text1: "You can swipe journals to edit and delete",
-          text1Style: { fontSize: 16, fontWeight: "200" }, // Customize text style
+          text1Style: { fontSize: 16, fontWeight: "400" }, // Customize text style
           visibilityTime: 4000, // 4 seconds
         });
 

@@ -176,7 +176,7 @@ const regularUserSchema = new schema({
       return new Date();
     },
   },
-});
+}, { timestamps: true });
 
 // Exporting the mongoose model for regular users based on the defined schema
 module.exports = mongoose.model("RegularUser", regularUserSchema);
