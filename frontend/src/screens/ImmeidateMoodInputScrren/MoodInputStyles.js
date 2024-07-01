@@ -3,8 +3,7 @@ import { StyleSheet } from "react-native";
 const styles = StyleSheet.create({
   backBtn: {
     // marginTop:50,
-    marginLeft: 25,
-    marginBottom: 25,
+    margin: 25,
   },
 
   backPng: {

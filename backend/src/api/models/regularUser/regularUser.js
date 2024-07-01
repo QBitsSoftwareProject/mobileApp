@@ -163,6 +163,11 @@ const regularUserSchema = new schema({
     default: "short-term",
   },
 
+  access: {
+    type: Boolean,
+    default: true
+  },
+
   response: [userResponseSchema],
 
   answeredDate: {

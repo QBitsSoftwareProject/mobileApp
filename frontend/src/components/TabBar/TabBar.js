@@ -15,11 +15,16 @@ import {
   ActivityIndicator,
   Keyboard,
 } from "react-native";
+import { checkNotifiaction } from "../../services/notificationService/notificationService";
+import { useNavigation } from "@react-navigation/native";
 
 const Tab = createBottomTabNavigator();
 
 const TabBar = ({ route, user, userRole }) => {
   const [isKeyboardVisible, setKeyboardVisible] = useState(false);
+  const [isNotification, setIsNotification] = useState(false);
+  const [HomeStack, setHomeStack] = useState(null);
+  const navigation = useNavigation();
 
   useEffect(() => {
     const keyboardDidShowListener = Keyboard.addListener(
@@ -42,17 +47,36 @@ const TabBar = ({ route, user, userRole }) => {
     };
   }, []);
 
-  const [HomeStack, setHomeStack] = useState(null);
+  // Check unread notification
+  const checkNotify = async () => {
+    try {
+      const res = await checkNotifiaction();
+      setIsNotification(res.notify);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const loadHomeStack = async () => {
+    const { default: loadedHomeStack } = await import(
+      "../../navigation/routes/HomeStack"
+    );
+    setHomeStack(() => loadedHomeStack);
+  };
 
   useEffect(() => {
-    const loadHomeStack = async () => {
-      const { default: loadedHomeStack } = await import(
-        "../../navigation/routes/HomeStack"
-      );
-      setHomeStack(() => loadedHomeStack);
+    const runEffect = async () => {
+      await loadHomeStack();
+      checkNotify();
     };
-    loadHomeStack();
-  }, []);
+
+    const unsubscribe = navigation.addListener("state", runEffect);
+
+    // Run the effect initially
+    runEffect();
+
+    return unsubscribe;
+  }, [navigation]);
 
   let userId, role;
   let routeName = "LoginStack";
@@ -71,8 +95,6 @@ const TabBar = ({ route, user, userRole }) => {
   );
   const firebaseAudioUrl =
     "https://firebasestorage.googleapis.com/v0/b/uploadingfile-9e556.appspot.com/o/music%2FBlue%20Sky%20-%20Anime%20Piano%20%20Relaxation%20and%20Inspiration.mp3?alt=media&token=63f0612a-cfaf-41c7-ac6c-a001512b5369";
-
-  // const HomeStack = React.lazy(() => import('../../navigation/routes/HomeStack'));
 
   if (!HomeStack) {
     // Return a loading indicator or placeholder until HomeStack is loaded
@@ -133,7 +155,11 @@ const TabBar = ({ route, user, userRole }) => {
           component={NotifyScreen}
           options={{
             tabBarIcon: ({ focused }) => (
-              <TabBarIcon focused={focused} screenName={"notification"} />
+              <TabBarIcon
+                focused={focused}
+                screenName={"notification"}
+                isNotification={isNotification}
+              />
             ),
           }}
         />

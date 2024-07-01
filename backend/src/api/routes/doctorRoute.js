@@ -17,8 +17,12 @@ const {
 } = require("../controllers/doctorControllers/checkExistsDoctor");
 const auth = require("../middlewares/auth");
 const { viewADoctor } = require("../controllers/doctorControllers/viewDoctor");
-const { updateDoctorRegStatus } = require("../controllers/doctorControllers/updateDoctorRegStatus");
-const { updateDoctorAccessStatus } = require("../controllers/doctorControllers/updateDoctorAccessStatus");
+const {
+  updateDoctorRegStatus,
+} = require("../controllers/doctorControllers/updateDoctorRegStatus");
+const {
+  updateDoctorAccessStatus,
+} = require("../controllers/doctorControllers/updateDoctorAccessStatus");
 
 const router = express.Router();
 

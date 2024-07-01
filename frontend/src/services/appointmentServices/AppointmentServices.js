@@ -125,3 +125,19 @@ export const updateStatusAppointments = async (appId, appStatus) => {
     throw new Error("Error during request setup");
   }
 };
+
+// export const getAvailableTimes = async (doctorId, date) => {
+//   try {
+//     const token = await AsyncStorage.getItem("authToken");
+
+//     const response = await axios.get(URL + "/available-times/" + doctorId, {
+//       params: { date },
+//       headers: { authtoken: token },
+//     });
+//     console.log(response.data.availableTimes);
+//     return response.data.availableTimes;
+//   } catch (error) {
+//     console.log(error);
+//     throw new Error("Error fetching available times");
+//   }
+// };

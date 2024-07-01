@@ -4,7 +4,9 @@ const doctorModel = require("../../models/doctor/doctor");
 exports.getDoctors = async (req, res) => {
   try {
     // Finding all regular users
-    const getUser = await doctorModel.find();
+    const getUser = await doctorModel.find({
+      regStatus: true,
+    });
 
     // If no users are found, return a 404 error response
     if (!getUser) {
@@ -33,6 +35,7 @@ exports.getADoctor = async (req, res) => {
     }
 
     // Sending success response with status code 200 and the user object
+    console.log(getUser);
     return res.status(201).json(getUser);
   } catch (err) {
     res.status(500).json({ error: "User fetch failed", err: err.message });

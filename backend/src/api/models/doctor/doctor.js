@@ -64,7 +64,7 @@ const doctorSchema = new schema({
     // required:true
   },
 
-  specialization: {
+  workplace: {
     type: String,
     required: true,
   },
@@ -121,12 +121,12 @@ const doctorSchema = new schema({
 
   regStatus: {
     type: Boolean,
-    default: false
+    default: false,
   },
 
   access: {
     type: Boolean,
-    default: true
+    default: true,
   },
 
   bio: {

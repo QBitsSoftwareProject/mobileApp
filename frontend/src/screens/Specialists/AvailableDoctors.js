@@ -1,23 +1,22 @@
+import React, { useEffect, useState } from "react";
 import {
   Text,
   ScrollView,
   View,
   TouchableOpacity,
   Dimensions,
+  Image,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import style from "./style";
 import CreateCard from "../../components/Card/CreateCard";
 import { useNavigation } from "@react-navigation/native";
-import { useEffect, useState } from "react";
 import { getDoctors } from "../../services/doctorServices/doctorService";
 import AppointmentHeader from "../../components/AppointmentHeader/AppointmentHeader";
 import loadingGif from "../../assets/animation/loading.gif";
 
 const AvailableDoctor = () => {
-  const screenHeight = Dimensions.get("window").height;
   const navigation = useNavigation();
-
   const [docList, setDocList] = useState([]);
 
   useEffect(() => {
@@ -32,19 +31,19 @@ const AvailableDoctor = () => {
       console.log(error);
     }
   };
+
   // Function to handle navigation to appointment screen
   const pressHandler = (docId) => {
     navigation.navigate("MakeAppointment", { id: docId });
   };
 
-  if (!docList) {
+  if (!docList.length) {
     return (
       <View
         style={{
-          display: "flex",
+          flex: 1,
           justifyContent: "center",
           alignItems: "center",
-          height: "100%",
         }}
       >
         <Image source={loadingGif} />
@@ -53,15 +52,15 @@ const AvailableDoctor = () => {
   }
 
   return (
-    <View>
-      <AppointmentHeader headLine={"Specialists"} back={"HomeScreen"} />
-      <SafeAreaView
-        style={{
-          paddingHorizontal: 25,
-          zIndex: -1,
-        }}
-      >
-        <ScrollView style={{ height: screenHeight - 280, paddingTop: 32 }}>
+    <View style={{ flex: 1 }}>
+      <AppointmentHeader
+        headLine={"Specialists"}
+        subHeadLine={"Find your doctor."}
+        back={"HomeScreen"}
+        schema={"doctor"}
+      />
+      <SafeAreaView style={{ flex: 1, paddingHorizontal: 25 }}>
+        <View style={{ flex: 1 }}>
           <View style={style.content1}>
             <Text style={style.descript2}>Available Doctors.</Text>
             <TouchableOpacity
@@ -74,9 +73,7 @@ const AvailableDoctor = () => {
             </TouchableOpacity>
           </View>
 
-          {/* available doctors */}
-
-          <View style={{ marginBottom: 80 }}>
+          <ScrollView contentContainerStyle={{ paddingBottom: 80 }}>
             {docList.map((item) => (
               <CreateCard
                 key={item._id}
@@ -84,14 +81,15 @@ const AvailableDoctor = () => {
                 title={item.userName}
                 cardName={"AvailableDoc"}
                 university={item.qualification}
-                hospital={item.workingPlace}
+                hospital={item.workplace}
+                contactNumber={item.contactNumber}
                 onPress={() => {
                   pressHandler(item._id);
                 }}
               />
             ))}
-          </View>
-        </ScrollView>
+          </ScrollView>
+        </View>
       </SafeAreaView>
     </View>
   );

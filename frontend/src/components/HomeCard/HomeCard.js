@@ -2,6 +2,7 @@ import { View, Text, TouchableOpacity, Image } from "react-native";
 import React from "react";
 import styles from "./styles";
 import { useNavigation } from "@react-navigation/native";
+import Toast from "react-native-toast-message";
 
 const arrow = require("../../assets/images/HomeCards/arrow.png");
 
@@ -24,7 +25,14 @@ const HomeCard = (props) => {
     } else if (cardName == "mood") {
       navigation.navigate("MoodAnalysisStack");
     } else if (cardName == "community") {
-      navigation.navigate("CommunityStack");
+      if (props.access) {
+        navigation.navigate("CommunityStack");
+      } else {
+        Toast.show({
+          type: "error",
+          text1: "Your are blocked by Admin!",
+        });
+      }
     }
   };
 

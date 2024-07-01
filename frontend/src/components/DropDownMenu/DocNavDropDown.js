@@ -1,19 +1,23 @@
 import { TouchableOpacity, View, Text, StyleSheet, Image } from "react-native";
-import React from "react";
-import { useState } from "react";
+import React, { useEffect, useState } from "react";
 import DocNavPop from "../DropDownMenu/DocNavPop";
 
-const DocDropDown = (props) => {
+const DocDropDown = ({ checkPage, setCheckPage }) => {
   const [isPress, setIsPress] = useState(false);
-  const [selectedMenu, setSelectedMenu] = useState("Completed");
+  const [selectedMenu, setSelectedMenu] = useState(checkPage);
   const ddArrow = require("../../assets/images/PostCardImages/droparrow.png");
+
+  useEffect(() => {
+    setSelectedMenu(checkPage);
+  }, [checkPage]);
 
   const handlePress = () => {
     setIsPress(!isPress);
   };
+
   return (
     <View>
-      <TouchableOpacity onPress={() => handlePress()}>
+      <TouchableOpacity onPress={handlePress}>
         <View style={styles.DropDown}>
           <View style={styles.container}>
             <Text style={styles.DDMtext}>{selectedMenu}</Text>
@@ -22,7 +26,7 @@ const DocDropDown = (props) => {
         </View>
       </TouchableOpacity>
       {isPress && (
-        <DocNavPop selectedMenu={props.check} setIsPress={setIsPress} />
+        <DocNavPop selectedMenu={setCheckPage} setIsPress={setIsPress} />
       )}
     </View>
   );

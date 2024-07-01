@@ -15,7 +15,7 @@ exports.updateDoctor = async (req, res) => {
       country,
       licenseSide1,
       licenseSide2,
-      specialization,
+      workplace,
       qualification,
       availableDays,
       monday,
@@ -32,15 +32,13 @@ exports.updateDoctor = async (req, res) => {
     // Extracting the user ID from request parameters
     const { id } = req.params;
 
-    if(password){
+    if (password) {
       const encryptedPwd = await bcrypt.hash(password, 10);
-      
     }
 
     // if(email){
     //   const newemail = email.toLowerCase();
     // }
-
 
     // Creating an object with updated user details
     const updateUser = {
@@ -56,7 +54,7 @@ exports.updateDoctor = async (req, res) => {
       country,
       licenseSide1,
       licenseSide2,
-      specialization,
+      workplace,
       qualification,
       availableDays,
       monday,

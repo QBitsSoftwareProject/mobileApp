@@ -35,10 +35,6 @@ const CommentPage = () => {
 
   const navigation = useNavigation();
 
-  useEffect(() => {
-    showSwipeToastOnceADay();
-  }, []);
-
   const goBackFromComment = () => {
     navigation.navigate(previousScreen);
   };
@@ -91,7 +87,7 @@ const CommentPage = () => {
   useEffect(() => {
     setCommentList(null);
     fetchComment();
-
+    showSwipeToastOnceADay();
     const keyboardDidShowListener = Keyboard.addListener(
       "keyboardDidShow",
       () => {

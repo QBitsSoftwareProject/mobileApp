@@ -125,7 +125,10 @@ const ProfileScreen = () => {
 
       if (userRole === "doctor") {
         setBio(user.bio);
-        setSspecialization(user.specialization);
+        if (user.workplace) {
+          setSspecialization(user.workplace);
+        }
+
         setQualification(user.qualification);
         setavailableDays(user.availableDays);
         setMonday(user.monday);
@@ -140,7 +143,11 @@ const ProfileScreen = () => {
     }
   }, [user]);
   const handlebackBtn = () => {
-    navigation.navigate("HomeScreen");
+    if (userRole == "doctor") {
+      navigation.navigate("AppointmentListsCategory");
+    } else {
+      navigation.navigate("HomeScreen");
+    }
   };
 
   const handleUpdateFullName = async (newFullName) => {
@@ -352,7 +359,7 @@ const ProfileScreen = () => {
   const handleUpdateSpecialization = async (newSpecialization) => {
     try {
       const updatedUser = await updateADoctor({
-        specialization: newSpecialization,
+        workplace: newSpecialization,
       });
       Toast.show({
         type: "success",
@@ -661,7 +668,7 @@ const ProfileScreen = () => {
                   />
 
                   <TextCard
-                    title="specialization"
+                    title="Workplace"
                     subText={specialization}
                     icon={require("../../assets/images/ProfileIcons/specialization.png")}
                     function={togglePopupSpecialization}

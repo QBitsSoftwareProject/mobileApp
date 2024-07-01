@@ -43,7 +43,6 @@ const CoverPhotoUploader = ({ isVisible, onClose }) => {
     try {
       setIsLoading(true);
       const imgResponse = await fireBaseUpload();
-
       await updateAUser({ coverImage: imgResponse });
       setIsLoading(false);
       onClose();

@@ -8,21 +8,23 @@ const auth = require("../middlewares/auth");
 //     getMarkById
 // } = require("../controllers/mark.controller");
 
-const{
+const {
     storeMark,
 } = require("../controllers/mark.controllers/mark.storeController");
 
-const{
+const {
     getMarkById
 } = require("../controllers/mark.controllers/mark.getController");
 
-const{
+const {
     getSortedMarkById
 } = require("../controllers/mark.controllers/mark.getSorted");
 
+const { getAllMarks } = require("../controllers/markController/getMarks");
 
-router.post("/add-mark",auth,storeMark);
-router.get("/get-mark-by-id",auth,getMarkById);
-router.get("/get-sorted-mark-by-id",auth,getSortedMarkById);
+router.post("/add-mark", auth, storeMark);
+router.get("/get-mark-by-id", auth, getMarkById);
+router.get("/get-sorted-mark-by-id", auth, getSortedMarkById);
+router.get("/get-all-marks", getAllMarks);
 
 module.exports = router; 
