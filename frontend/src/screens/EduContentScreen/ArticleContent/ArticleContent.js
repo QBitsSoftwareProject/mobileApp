@@ -124,7 +124,7 @@ const ArticleContent = () => {
             <Text
               style={{ fontSize: 20, paddingHorizontal: 25, marginTop: 20 }}
             >
-              Some articles
+              Recent articles
             </Text>
             <View style={[styles.articleSection, { marginBottom: 350 }]}>
               <FlatList

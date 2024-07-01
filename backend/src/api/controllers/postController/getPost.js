@@ -69,6 +69,7 @@ exports.getSearchProfile = async (req, res) => {
       searchResult = await doctorSchema.find({
         userName: new RegExp(userName, "i"),
         regStatus: true,
+        access: true,
       });
     }
 
