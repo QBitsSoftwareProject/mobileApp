@@ -83,7 +83,7 @@ const MoodAnalysis = () => {
     ) {
       Toast.show({
         type: "error",
-        text1: "You can set your mood once in every 3 hours! ",
+        text1: "Set your mood After 3 hours! ",
       });
 
       return;
