@@ -18,7 +18,7 @@ const HeaderSubAnalysis = (props) => {
   return (
     <View style={styles.contains}>
       <TouchableOpacity onPress={backbtn} style={styles.backBtn}>
-        <Image source={require("../../assets/images/back.png")} />
+        <Image source={require("../../assets/images/Back.png")} />
       </TouchableOpacity>
 
       <Text style={styles.headlineTxt}>{props.headLine}</Text>

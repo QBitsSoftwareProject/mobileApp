@@ -8,29 +8,30 @@ const CustomBarChart = ({ positiveMoods, negativeMoods }) => {
   const [chartData, setChartData] = useState([]);
   const [yAxisMaxValue, setYAxisMaxValue] = useState(0);
 
-  const getStartOfMonth = (date) => {
-    const start = new Date(date.getFullYear(), date.getMonth(), 1);
-    start.setHours(0, 0, 0, 0); // Set time to 00:00:00
-    return start;
+  const getStartDate = (daysAgo) => {
+    const date = new Date();
+    date.setDate(date.getDate() - daysAgo);
+    date.setHours(0, 0, 0, 0); // Set time to 00:00:00
+    return date;
   };
 
-  const getEndOfMonth = (date) => {
-    const end = new Date(date.getFullYear(), date.getMonth() + 1, 0);
-    end.setHours(23, 59, 59, 999); // Set time to 23:59:59.999
-    return end;
+  const getEndDate = () => {
+    const date = new Date();
+    date.setHours(23, 59, 59, 999); // Set time to 23:59:59.999
+    return date;
   };
 
-  const filterDataByMonth = (data, dateField) => {
-    const todayDate = new Date();
-    const startDate = getStartOfMonth(todayDate);
-    console.log("Start of Month:", startDate);
-
-    const endDate = getEndOfMonth(todayDate);
-    console.log("End of Month:", endDate);
+  const filterDataByRange = (data, dateField) => {
+    const endDate = getEndDate();
+    const startDate = getStartDate(30);
+    console.log("Start Date:", startDate);
+    console.log("End Date:", endDate);
 
     return data.filter((item) => {
       const itemDate = new Date(item[dateField]);
-      console.log("Item Date:", itemDate);
+      itemDate.setHours(0, 0, 0, 0); // Adjust to start of the day
+      // console.log("Item Date:", itemDate);
+
       return itemDate >= startDate && itemDate <= endDate;
     });
   };
@@ -45,13 +46,13 @@ const CustomBarChart = ({ positiveMoods, negativeMoods }) => {
           throw new Error("Invalid response data format");
         }
 
-        // Filter data for the current month
-        const dataByMonth = filterDataByMonth(moodData, "date");
-        // console.log("Filtered Data by Month:", dataByMonth);
+        // Filter data for the last 30 days
+        const dataByRange = filterDataByRange(moodData, "date");
+        // console.log("Filtered Data by Range:", dataByRange);
 
         // Get the mood inputs by date
         const emojisByDate = {};
-        dataByMonth.forEach((entry) => {
+        dataByRange.forEach((entry) => {
           const formattedDate = new Date(entry.date).toLocaleDateString(
             "en-US",
             {

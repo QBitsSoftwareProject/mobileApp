@@ -63,7 +63,7 @@ const CommentPage = () => {
         Toast.show({
           type: "info",
           text1: "You can swipe comment to edit and delete",
-          text1Style: { fontSize: 16, fontWeight: "200" }, // Customize text style
+          text1Style: { fontSize: 16, fontWeight: "400" }, // Customize text style
           visibilityTime: 4000, // 4 seconds
         });
 
