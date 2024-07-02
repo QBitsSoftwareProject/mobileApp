@@ -17,7 +17,7 @@ exports.createNotification = async (
       userId = releventPost.userId;
     } else if (referenceModel == "userAppointments") {
       const releventAppointment = await appointmentSchema.findById(referenceId);
-      console.log("sad");
+
       userId = releventAppointment.userId;
     }
 
@@ -35,6 +35,24 @@ exports.createNotification = async (
       type,
       referenceId,
       referenceModel,
+    });
+
+    await newNotification.save();
+
+    return newNotification;
+  } catch (error) {
+    throw new Error(error);
+  }
+};
+
+exports.adminNotification = async (message, type, recipientId) => {
+  try {
+    //create a notification
+    const newNotification = new notificationSchema({
+      senderId: null,
+      recipientId,
+      message,
+      type,
     });
 
     await newNotification.save();

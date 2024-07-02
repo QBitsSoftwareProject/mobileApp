@@ -65,7 +65,7 @@ export const doctorRegistration = async (
 export const getDoctors = async () => {
   try {
     const token = await AsyncStorage.getItem("authToken");
-    const response = await axios.get(URL, {
+    const response = await axios.get(URL + "/registered-docotors", {
       headers: { authtoken: token },
     });
     // console.log(response.data)

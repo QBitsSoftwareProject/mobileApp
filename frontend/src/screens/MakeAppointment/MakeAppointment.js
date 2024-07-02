@@ -87,23 +87,16 @@ const MakeAppointment = ({ route }) => {
   const confirmMessage = async () => {
     try {
       await createAppointment(doctor._id, getDate, getTime);
-      Toast.show({
-        type: "success",
-        text1: "Success",
-        text2: "Appointment created successfully",
-        text2Style: { fontSize: 16, fontWeight: "200" },
-        visibilityTime: 2000,
-        position: "top",
-      });
-      setTimeout(() => {
-        navigation.navigate("AppointmentStatus");
-      }, 1000);
+
+      navigation.navigate("AppointmentStatus");
     } catch (error) {
       console.log(error);
       Toast.show({
         type: "error",
         text1: "Error",
         text2: "Failed to create appointment",
+        text1Style: { fontSize: 16, fontWeight: "200" },
+        text2Style: { fontSize: 14, fontWeight: "200" },
         visibilityTime: 2000,
         position: "top",
       });

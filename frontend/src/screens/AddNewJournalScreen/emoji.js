@@ -73,7 +73,7 @@ export const EmojiPicker = ({ onEmojiPress, value }) => {
     <ScrollView
       horizontal
       contentContainerStyle={styles.scrollViewContent}
-      showsHorizontalScrollIndicator={false}
+      showsHorizontalScrollIndicator={true}
     >
       {emojiData.map((item, index) => (
         <TouchableOpacity
@@ -107,10 +107,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginBottom: 32,
   },
-  scrollViewContent: {
-    flexDirection: "row",
-    // backgroundColor: "yellow",
-  },
+  scrollViewContent: {},
   emojiButton: {
     paddingLeft: 10,
     paddingRight: 10,

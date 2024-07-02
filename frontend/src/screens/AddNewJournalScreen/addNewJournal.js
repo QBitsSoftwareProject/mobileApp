@@ -131,10 +131,18 @@ export const AddNewJournal = ({ navigation }) => {
           <SafeAreaView style={styles.container}>
             <Text style={styles.Text}>Select Your Mood</Text>
 
-            <EmojiPicker
-              onEmojiPress={handleEmojiPress}
-              imoji={emoji} // Pass the current emoji state to the EmojiPicker
-            />
+            <View
+              style={{
+                // backgroundColor: "yellow",
+                width: "90%",
+                marginBottom: 15,
+              }}
+            >
+              <EmojiPicker
+                onEmojiPress={handleEmojiPress}
+                imoji={emoji} // Pass the current emoji state to the EmojiPicker
+              />
+            </View>
 
             <Text style={styles.Text1}>Journal Title</Text>
 

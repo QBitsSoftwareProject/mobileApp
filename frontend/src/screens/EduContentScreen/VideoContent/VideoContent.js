@@ -21,8 +21,12 @@ import {
   getVideosBySearch,
 } from "../../../services/educationalServices/educationalServices";
 import AppointmentHeader from "../../../components/AppointmentHeader/AppointmentHeader";
+import { useRoute } from "@react-navigation/native";
+import { updateTaskCompleteness } from "../../../services/taskServices/taskservice";
 
 const VideoContent = () => {
+  const route = useRoute();
+
   const [videos, setVideos] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -50,6 +54,22 @@ const VideoContent = () => {
     };
     fetchVideos();
   }, [keyword]);
+
+  //call task update if there is a task
+  const callTaskUpdate = () => {
+    if (route.params && route.params.taskId) {
+      taskUpdate();
+    }
+  };
+
+  //task completenss update
+  const taskUpdate = async () => {
+    try {
+      await updateTaskCompleteness(route.params.taskId);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   if (loading) {
     return (
@@ -85,7 +105,11 @@ const VideoContent = () => {
         <View style={styles.VideoList}>
           {videos.map((item, index) => (
             <View key={index}>
-              <VideoItem item={item} />
+              <VideoItem
+                item={item}
+                callTask={() => callTaskUpdate()}
+                screen={"videoStack"}
+              />
             </View>
           ))}
         </View>

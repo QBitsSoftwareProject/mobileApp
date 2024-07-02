@@ -45,6 +45,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     borderRadius: "1000" / PixelRatio.get(),
+    zIndex: 100,
   },
   playBtn: {
     height: 50,
@@ -62,10 +63,13 @@ const styles = StyleSheet.create({
     borderWidth: 4,
   },
   VideoItem: {
-    marginBottom: 20,
-    backgroundColor: "#fff",
+    marginBottom: 32,
+    backgroundColor: "white",
     borderRadius: 20,
     overflow: "hidden",
+    width: "90%",
+    alignSelf: "center",
+    elevation: 1,
   },
   playButtonText: {
     color: "white",

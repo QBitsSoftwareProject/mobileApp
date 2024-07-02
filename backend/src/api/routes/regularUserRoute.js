@@ -26,6 +26,7 @@ const {
   checkExistsUser,
 } = require("../controllers/regularUserControllers/checkExistsUser");
 const auth = require("../middlewares/auth");
+const { getUsersByMonth } = require("../controllers/regularUserControllers/getUsersByMonth");
 
 const router = express.Router();
 
@@ -34,6 +35,7 @@ router.get("/", getRegularUsers);
 router.get("/one-user", auth, getARegularUser);
 router.get("/user-by-id/:userId", auth, getRegularUserById);
 router.get("/one-user-by-id/:userId", getARegularUserById);
+router.get("/get-users-by-month/" , getUsersByMonth);
 router.put("/", auth, updateRegularUser);
 router.put("/edit-user-access/:id", updateUserAccessStatus);
 router.delete("/:id", deleteRegularUser);
