@@ -4,6 +4,7 @@ import {
   Image,
   TouchableOpacity,
   ImageBackground,
+  SafeAreaView
 } from "react-native";
 import React from "react";
 import styles from "./styles";

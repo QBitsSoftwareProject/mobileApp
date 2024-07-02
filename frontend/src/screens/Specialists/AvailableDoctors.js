@@ -47,15 +47,19 @@ const AvailableDoctor = () => {
 
   return (
     <View>
-      <AppointmentHeader
+      <View style = {{zIndex:1000}}>
+      <AppointmentHeader  
         headLine={"Specialists"}
         subHeadLine={"Find your doctor."}
         back={"HomeScreen"}
         schema={"doctor"}
+        
       />
+      </View>
       <View style={{ paddingHorizontal: 25 }}>
         <View style={style.content1}>
           <Text style={style.descript2}>Available Doctors.</Text>
+          
           <TouchableOpacity
             style={style.viewBtn}
             onPress={() => {
@@ -64,6 +68,7 @@ const AvailableDoctor = () => {
           >
             <Text style={style.viewText}>My Appointments</Text>
           </TouchableOpacity>
+          
         </View>
 
         <ScrollView style={{ height: screenHeight - 250 }}>
