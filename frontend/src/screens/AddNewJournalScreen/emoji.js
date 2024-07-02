@@ -105,7 +105,7 @@ const styles = StyleSheet.create({
   container: {
     justifyContent: "center",
     alignItems: "center",
-    marginBottom: 32,
+    // marginBottom: 32,
   },
   scrollViewContent: {},
   emojiButton: {

@@ -17,9 +17,10 @@ const styles = StyleSheet.create({
     color: "#101318",
     fontSize: 16,
     fontWeight: "400",
-    marginBottom: 15,
-    marginTop: 15,
+    marginBottom: 10,
+    // marginTop: 15,
     opacity: 0.6,
+    // paddingLeft: 5,
   },
   Text2: {
     color: "#101318",
@@ -37,6 +38,7 @@ const styles = StyleSheet.create({
     height: 58,
     borderRadius: 75,
     alignSelf: "center",
+
     marginBottom: 112,
     color: "red",
   },
@@ -55,5 +57,13 @@ const styles = StyleSheet.create({
   },
 
   tabbar: {},
+  editTittle: {
+    color: "#101318",
+    fontSize: 16,
+    fontWeight: "400",
+    marginBottom: 15,
+    marginTop: 15,
+    opacity: 0.6,
+  },
 });
 export default styles;
