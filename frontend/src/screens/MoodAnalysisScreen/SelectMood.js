@@ -77,10 +77,7 @@ const MoodAnalysis = () => {
     const currentTime = new Date().getTime();
     const lastMoodTime = await AsyncStorage.getItem("lastMoodTime");
 
-    if (
-      lastMoodTime &&
-      currentTime - parseInt(lastMoodTime, 10) < 3 * 60 * 60 * 1000
-    ) {
+    if (lastMoodTime && currentTime - parseInt(lastMoodTime, 10) < 1 * 1000) {
       Toast.show({
         type: "error",
         text1: "Set your mood After 3 hours! ",
