@@ -1,5 +1,7 @@
 import { StyleSheet, TouchableOpacity, View, Image, Text } from "react-native";
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { ListItem } from "@rneui/base";
+import { deleteAnAppointment } from "../../services/appointmentServices/AppointmentServices";
 
 const CreateCard = (props) => {
   const currentDate = new Date(props.date);
@@ -18,63 +20,106 @@ const CreateCard = (props) => {
     "December",
   ];
 
-  return (
-    <TouchableOpacity style={styles.cardBox} onPress={props.onPress}>
-      <View style={{ flexDirection: "row" }}>
-        <View style={styles.imageframe}>
-          <Image source={{ uri: props.image }} style={styles.image} />
-        </View>
+  const handleDelete = async () => {
+    try {
+      await deleteAnAppointment(props.appointmentId);
+      if (props.onDelete) {
+        props.onDelete(props.appointmentId);
+      }
+    } catch (error) {
+      console.error("Failed to delete appointment:", error);
+    }
+  };
 
-        <View style={styles.content}>
-          <View>
-            <Text style={styles.title}>Dr. {props.title}</Text>
+  const cardContent = (
+    <View style={{ flexDirection: "row" }}>
+      <View style={styles.imageframe}>
+        <Image source={{ uri: props.image }} style={styles.image} />
+      </View>
 
-            {props.cardName == "AvailableDoc" && (
-              <View>
-                <Text style={styles.description}>{props.university}</Text>
-                <Text style={styles.description}>{props.hospital}</Text>
-                <Text style={styles.description}>
-                  Contact no:-{props.contactNumber}
-                </Text>
-              </View>
-            )}
+      <View style={styles.content}>
+        <View>
+          <Text style={styles.title}>Dr. {props.title}</Text>
 
-            {props.cardName === "AppointmentStatus" && (
-              <View>
-                <Text style={styles.description}>
-                  Time: {props.time.from}-{props.time.to}
-                </Text>
-                <Text style={styles.description}>
-                  Date: {currentDate.getFullYear()}-
-                  {monthNames[currentDate.getMonth()]}-{currentDate.getDate()}
-                </Text>
-                <Text
-                  style={[
-                    styles.description,
-                    {
-                      color:
-                        props.status === "Accepted"
-                          ? "#0AC112"
-                          : props.status === "Rejected"
-                          ? "#E82519"
-                          : props.status === "Cancelled"
-                          ? "#FF5733"
-                          : props.status === "Pending"
-                          ? "#FFC107"
-                          : "black",
-                    },
-                  ]}
-                >
-                  Status: {props.status}
-                </Text>
-              </View>
-            )}
-          </View>
+          {props.cardName == "AvailableDoc" && (
+            <View>
+              <Text style={styles.description}>{props.university}</Text>
+              <Text style={styles.description}>{props.hospital}</Text>
+              <Text style={styles.description}>
+                Contact no: {props.contactNumber}
+              </Text>
+            </View>
+          )}
+
+          {props.cardName === "AppointmentStatus" && (
+            <View>
+              <Text style={styles.description}>
+                Time: {props.time.from}-{props.time.to}
+              </Text>
+              <Text style={styles.description}>
+                Date: {currentDate.getFullYear()}-
+                {monthNames[currentDate.getMonth()]}-{currentDate.getDate()}
+              </Text>
+              <Text
+                style={[
+                  styles.description,
+                  {
+                    color:
+                      props.status === "Accepted"
+                        ? "#0AC112"
+                        : props.status === "Rejected"
+                        ? "#E82519"
+                        : props.status === "Cancelled"
+                        ? "#FF5733"
+                        : props.status === "Pending"
+                        ? "#FFC107"
+                        : "black",
+                  },
+                ]}
+              >
+                Status: {props.status}
+              </Text>
+            </View>
+          )}
         </View>
       </View>
-    </TouchableOpacity>
+    </View>
+  );
+
+  return (
+    <View>
+      {props.cardName === "AvailableDoc" ? (
+        <TouchableOpacity style={styles.cardBox} onPress={props.onPress}>
+          {cardContent}
+        </TouchableOpacity>
+      ) : (
+        <ListItem.Swipeable
+          rightContent={(reset) => (
+            <View style={styles.rightContainer1}>
+              <TouchableOpacity
+                onPress={() => {
+                  handleDelete();
+                  reset();
+                }}
+                style={styles.button}
+              >
+                <Image
+                  source={require("../../assets/images/CommentSecImages/mdi_delete.png")}
+                  style={styles.delImg}
+                />
+              </TouchableOpacity>
+            </View>
+          )}
+          rightStyle={styles.deleteBtn}
+          containerStyle={styles.cardBox}
+        >
+          <ListItem.Content>{cardContent}</ListItem.Content>
+        </ListItem.Swipeable>
+      )}
+    </View>
   );
 };
+
 const styles = StyleSheet.create({
   cardBox: {
     height: 112,
@@ -113,12 +158,34 @@ const styles = StyleSheet.create({
     marginRight: 20,
     overflow: "hidden",
   },
-
   image: {
     width: "100%",
     height: "100%",
     resizeMode: "cover",
   },
+  rightContainer1: {
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "#B0B4C0",
+    borderRadius: 20,
+    height: "85%",
+  },
+  rightContainer2: {
+    backgroundColor: "transparent",
+  },
+  delImg: {
+    width: 40,
+    height: 40,
+  },
+  button: {
+    height: 45,
+    width: 120,
+    borderRadius: 10,
+    marginVertical: 2,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  deleteBtn: {},
 });
 
 export default CreateCard;

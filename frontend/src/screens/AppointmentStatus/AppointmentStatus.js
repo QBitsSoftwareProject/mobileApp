@@ -33,7 +33,7 @@ const AppointmentStatus = () => {
       const res = await getUserAppointments();
       setAppointments(res);
 
-      if (res.length == 0) {
+      if (res.length === 0) {
         setNotFound(true);
       } else {
         setNotFound(false);
@@ -47,6 +47,7 @@ const AppointmentStatus = () => {
     try {
       await deleteAllAppointments();
       setAppointments([]);
+      setNotFound(true);
     } catch (error) {
       console.log(error);
     }
@@ -65,6 +66,14 @@ const AppointmentStatus = () => {
         { text: "Delete", onPress: () => clearAppointments() },
       ],
       { cancelable: true }
+    );
+  };
+
+  const onDeleteAppoitment = (appointmentId) => {
+    setAppointments((prevappointments) =>
+      prevappointments.filter(
+        (appointments) => appointments._id !== appointmentId
+      )
     );
   };
 
@@ -114,6 +123,7 @@ const AppointmentStatus = () => {
             {appointments &&
               appointments.map((item) => (
                 <CreateCard
+                  appointmentId={item._id}
                   key={item._id}
                   image={item.doctorId.proPic}
                   title={item.doctorId.fullName}
@@ -121,6 +131,7 @@ const AppointmentStatus = () => {
                   time={item.time}
                   date={item.date}
                   status={item.status}
+                  onDelete={onDeleteAppoitment}
                 />
               ))}
           </View>

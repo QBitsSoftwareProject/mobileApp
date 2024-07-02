@@ -5,23 +5,31 @@ import DocCard from "../../components/Card/DocCard";
 import styles from "./styles";
 import { getDoctorPendingAppointments } from "../../services/appointmentServices/AppointmentServices";
 import loardingGIF from "../../assets/animation/loading.gif";
+import notFoundGif from "../../assets/animation/not-found.png";
 
 const PendingAppointment = () => {
   const [pendingData, setPendingData] = useState(null);
   const [refresh, setRefresh] = useState(false);
+  const [notFound, setNotFound] = useState(false);
+
+  useEffect(() => {
+    fetchPendAppointment();
+  }, [refresh]);
 
   const fetchPendAppointment = async () => {
     try {
       const response = await getDoctorPendingAppointments();
       setPendingData(response);
+
+      if (response.length === 0) {
+        setNotFound(true);
+      } else {
+        setNotFound(false);
+      }
     } catch (error) {
       console.log(error);
     }
   };
-
-  useEffect(() => {
-    fetchPendAppointment();
-  }, [refresh]);
 
   const handleRefresh = () => {
     setRefresh(!refresh);
@@ -66,6 +74,22 @@ const PendingAppointment = () => {
         <View style={{ marginHorizontal: 15, marginVertical: 15 }}>
           <Text style={styles.descript2}>Pending Appointment List.</Text>
         </View>
+
+        {notFound && (
+          <View
+            style={{
+              justifyContent: "center",
+              alignItems: "center",
+              width: "100%",
+              marginTop: 32,
+            }}
+          >
+            <Image
+              source={notFoundGif}
+              style={{ width: "70%", height: 250, opacity: 0.3 }}
+            />
+          </View>
+        )}
 
         {/* appointment status cards */}
         <View>

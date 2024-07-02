@@ -16,11 +16,7 @@ import {
   createComment,
   getComments,
 } from "../../services/commentServices/commentServices";
-import {
-  useFocusEffect,
-  useNavigation,
-  useRoute,
-} from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
 import CommentCard from "../../components/CFCard/CommentCard";
 import loadingGif from "../../assets/animation/loading.gif";
 import Toast from "react-native-toast-message";
@@ -120,14 +116,7 @@ const CommentPage = () => {
 
   if (!commentList) {
     return (
-      <View
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          height: "100%",
-        }}
-      >
+      <View style={styles.loadingicon}>
         <Image source={loadingGif} />
       </View>
     );
@@ -174,14 +163,7 @@ const CommentPage = () => {
           placeholder="Add a comment...."
         />
         <TouchableOpacity
-          style={{
-            backgroundColor: "white",
-            height: 45,
-            alignItems: "center",
-            justifyContent: "center",
-            borderTopRightRadius: 10,
-            borderBottomRightRadius: 10,
-          }}
+          style={styles.sentBtn}
           onPress={handleSendButtonPress}
         >
           <Image
@@ -206,6 +188,12 @@ const styles = StyleSheet.create({
     paddingHorizontal: 25,
     paddingVertical: 5,
   },
+  loadingicon: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    height: "100%",
+  },
   textinput: {
     width: "90%",
     height: 45,
@@ -221,6 +209,14 @@ const styles = StyleSheet.create({
     height: 40,
     alignSelf: "center",
     opacity: 0.8,
+  },
+  sentBtn: {
+    backgroundColor: "white",
+    height: 45,
+    alignItems: "center",
+    justifyContent: "center",
+    borderTopRightRadius: 10,
+    borderBottomRightRadius: 10,
   },
   backButton: {
     position: "absolute",
