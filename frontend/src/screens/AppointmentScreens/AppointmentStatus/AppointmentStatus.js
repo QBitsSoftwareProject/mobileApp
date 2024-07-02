@@ -8,7 +8,7 @@ import {
   TouchableOpacity,
   Alert,
 } from "react-native";
-import CreateCard from "../../../components/Card/CreateCard";
+import CreateCard from "../../../components/AppointmentCard/CreateCard";
 import styles from "./styles";
 import HeaderSub from "../../../components/HeaderSub/HeaderSub";
 import {

@@ -8,7 +8,7 @@ import {
   Image,
 } from "react-native";
 import style from "./style";
-import CreateCard from "../../../components/Card/CreateCard";
+import CreateCard from "../../../components/AppointmentCard/CreateCard";
 import { useNavigation } from "@react-navigation/native";
 import { getDoctors } from "../../../services/doctorServices/doctorService";
 import AppointmentHeader from "../../../components/AppointmentHeader/AppointmentHeader";

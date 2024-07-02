@@ -17,7 +17,6 @@ const HomeStack = () => {
       <stack.Screen name="AvailableDoctors" component={AvailableDoctors} />
       <stack.Screen name="MakeAppointment" component={MakeAppointment} />
       <stack.Screen name="AppointmentStatus" component={AppointmentStatus} />
-      {/* <stack.Screen name='search' component={SearchEngine} /> */}
     </stack.Navigator>
   );
 };

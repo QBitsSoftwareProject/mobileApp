@@ -24,7 +24,7 @@ exports.deleteAllAppointments = async (req, res) => {
 exports.deleteAnAppointment = async (req, res) => {
   try {
     const { appointmentId } = req.params;
-    // console.log("appointmentId", appointmentId);
+
     const userId = req.user.user_id;
 
     const relevantAppointment = await appointmentSchema.findById(appointmentId);
@@ -32,8 +32,7 @@ exports.deleteAnAppointment = async (req, res) => {
     if (!relevantAppointment) {
       return res.status(404).json({ message: "appointment not found" });
     }
-    // console.log("relevantAppointmentuserId", relevantAppointment.userId);
-    // console.log("userId", userId);
+
     // Finding and deleting the appointment by id
     if (relevantAppointment.userId == userId) {
       await appointmentSchema.findByIdAndDelete({ _id: appointmentId });

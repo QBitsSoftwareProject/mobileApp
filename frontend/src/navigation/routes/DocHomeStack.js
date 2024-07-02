@@ -21,7 +21,6 @@ const DocHomeStack = () => {
         headerShown: false,
       }}
     >
-      {/* <stack.Screen name='HomeScreen' component={HomeScreen} />  */}
       <stack.Screen
         name="AppointmentListsCategory"
         component={AppointmentListsCategory}

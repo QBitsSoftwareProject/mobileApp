@@ -1,6 +1,5 @@
 import React from "react";
 import { ScrollView, View, Dimensions } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
 import HeaderSub from "../../../components/HeaderSub/HeaderSub";
 import { useNavigation } from "@react-navigation/native";
 import RegularCard from "../../../components/CFCard/RegularCard";
