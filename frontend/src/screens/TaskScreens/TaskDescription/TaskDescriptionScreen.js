@@ -50,7 +50,8 @@ const TaskDescriptionScreen = () => {
         break;
 
       case "resource":
-        navigation.navigate("EducationStack", {
+        navigation.navigate("VideoScreen", {
+          screen: "AllVideoScreen",
           params: { taskId: taskId },
         });
         break;

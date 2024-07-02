@@ -6,8 +6,18 @@ exports.getNotification = async (req, res) => {
 
     //get all notifications
     const allNotifications = await notificationSchema
-      .find({ recipientId: userId })
+      .find({
+        recipientId: userId,
+        senderId: { $ne: null },
+      })
       .populate("senderId")
+      .sort({ createdAt: -1 });
+
+    const sytemNotification = await notificationSchema
+      .find({
+        recipientId: userId,
+        senderId: null,
+      })
       .sort({ createdAt: -1 });
 
     const releventData = [];
@@ -27,6 +37,17 @@ exports.getNotification = async (req, res) => {
       };
 
       releventData.push(obj);
+    });
+
+    sytemNotification.map((item) => {
+      const obj2 = {
+        _id: item._id,
+        message: item.message,
+        type: item.type,
+        status: item.status,
+        createdAt: item.createdAt,
+      };
+      releventData.push(obj2);
     });
 
     // console.log(releventData);

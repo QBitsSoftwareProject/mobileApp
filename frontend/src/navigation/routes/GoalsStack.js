@@ -1,7 +1,7 @@
 import React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import ViewGoalScreen from "../../screens/ViewGoalsScreen/ViewGoalScreen";
-import InsideGoalsScreen from "../../screens/InsideGoalsScreen/InsideGoalsScreen";
+import ViewGoalScreen from "../../screens/GoalsScreens/ViewGoalsScreen/ViewGoalScreen";
+import InsideGoalsScreen from "../../screens/GoalsScreens/InsideGoalsScreen/InsideGoalsScreen";
 
 const stack = createNativeStackNavigator();
 const GoalsStack = () => {

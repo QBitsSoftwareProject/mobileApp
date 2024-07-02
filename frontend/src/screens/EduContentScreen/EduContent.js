@@ -84,7 +84,7 @@ const EduContent = () => {
             <View style={{ marginTop: 20 }}>
               {videos.map((item, index) => (
                 <View key={index}>
-                  <VideoItem item={item} />
+                  <VideoItem item={item} screen={"allStack"} />
                 </View>
               ))}
             </View>

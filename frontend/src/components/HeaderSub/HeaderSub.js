@@ -18,6 +18,7 @@ const HeaderSub = (props) => {
   };
 
   return (
+    <SafeAreaView>
     <View style={styles.contains}>
       <ImageBackground
         source={require("../../assets/images/blueSqures.png")}
@@ -34,6 +35,7 @@ const HeaderSub = (props) => {
         </View>
       </ImageBackground>
     </View>
+    </SafeAreaView>
   );
 };
 

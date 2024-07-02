@@ -55,6 +55,12 @@ exports.createDoctor = async (req, res) => {
       bio,
     });
 
+    await adminNotification(
+      "Your registration is pending. We will notify you once registration is complete. ",
+      "system",
+      doctorId.id
+    );
+
     return res.status(201).json({ message: "User created successfully" });
   } catch (err) {
     if (err.name === "ValidationError") {
