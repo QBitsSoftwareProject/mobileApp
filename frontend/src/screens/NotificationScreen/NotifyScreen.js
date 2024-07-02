@@ -16,6 +16,7 @@ import notFoundGif from "../../assets/animation/not-found.png";
 
 const NotifyScreen = () => {
   const [notificationList, setNotificationList] = useState();
+  const [isRefresh, setIsRefresh] = useState();
 
   const navigation = useNavigation();
 
@@ -35,7 +36,7 @@ const NotifyScreen = () => {
   useFocusEffect(
     React.useCallback(() => {
       fetchNotification();
-    }, [])
+    }, [isRefresh])
   );
   if (!notificationList) {
     return (
@@ -93,6 +94,7 @@ const NotifyScreen = () => {
                 content={item.message}
                 status={item.status}
                 type={item.type}
+                isRefresh={setIsRefresh}
               />
             ))}
         </View>

@@ -9,7 +9,7 @@ const notificationSchema = new mongoose.Schema({
 
   senderId: {
     type: mongoose.Schema.Types.ObjectId,
-
+    required: false,
     refPath: "recipientModel",
   },
 
@@ -27,7 +27,7 @@ const notificationSchema = new mongoose.Schema({
   type: {
     type: String,
     required: true,
-    enum: ["appointment", "comment"],
+    enum: ["appointment", "comment", "system"],
   },
 
   referenceId: {

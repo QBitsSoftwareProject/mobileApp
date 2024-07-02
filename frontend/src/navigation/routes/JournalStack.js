@@ -1,8 +1,8 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { AddNewJournal } from "../../screens/AddNewJournalScreen/addNewJournal";
-import { EditJournal } from "../../screens/EditJournalScreen/edit";
-import { ViewJournal } from "../../screens/ViewJournalScreen/viewJournal";
-import { JournalStatistics } from "../../screens/JournalStatisticsScreen/journalStatistics";
+import { AddNewJournal } from "../../screens/JournalScreens/AddNewJournalScreen/addNewJournal";
+import { EditJournal } from "../../screens/JournalScreens/EditJournalScreen/edit";
+import { ViewJournal } from "../../screens/JournalScreens/ViewJournalScreen/viewJournal";
+import { JournalStatistics } from "../../screens/JournalScreens/JournalStatisticsScreen/journalStatistics";
 
 const stack = createNativeStackNavigator();
 

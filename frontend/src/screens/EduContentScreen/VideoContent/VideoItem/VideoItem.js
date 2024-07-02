@@ -6,7 +6,7 @@ import styles from "./VideoItemStyles";
 
 import playImg from "../../../../assets/images/icons/player/play.png";
 
-const VideoItem = ({ item, callTask }) => {
+const VideoItem = ({ item, callTask, screen }) => {
   const video = React.useRef(null);
   const [status, setStatus] = React.useState({});
   const [isFullscreen, setIsFullscreen] = useState(false);
@@ -21,7 +21,10 @@ const VideoItem = ({ item, callTask }) => {
   }, [status]);
 
   const handlePlayPress = () => {
-    callTask();
+    if (screen == "videoStack") {
+      callTask();
+    }
+
     setIsModalVisible(true);
   };
 
@@ -38,29 +41,28 @@ const VideoItem = ({ item, callTask }) => {
   return (
     <View>
       <View style={[styles.VideoItem, { paddingBottom: 20 }]}>
-        <View
+        <TouchableOpacity
+          onPress={handlePlayPress}
           style={{
+            width: "100%",
+            height: 170,
+            alignItems: "center",
+            justifyContent: "center",
             position: "absolute",
             zIndex: 100,
-            height: "100%",
-            width: "100%",
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
           }}
         >
-          <TouchableOpacity onPress={handlePlayPress}>
-            <View style={styles.imgContainer}>
-              <Image source={playImg} style={styles.image} />
-            </View>
-          </TouchableOpacity>
-        </View>
+          <View style={styles.imgContainer}>
+            <Image source={playImg} style={styles.image} />
+          </View>
+        </TouchableOpacity>
+
         <View style={{ width: "100%" }}>
           <Video
             ref={video}
             source={{ uri: item.downloadURL }}
             style={{
-              height: 200,
+              height: 170,
               borderTopLeftRadius: 10,
               borderTopRightRadius: 10,
               width: "100%",

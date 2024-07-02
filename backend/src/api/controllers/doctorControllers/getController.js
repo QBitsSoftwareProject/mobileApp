@@ -25,6 +25,7 @@ exports.getRegisteredDoctors = async (req, res) => {
     // Finding all doctors
     const getUser = await doctorModel.find({
       regStatus: true,
+      access: true,
     });
 
     // If no users are found, return a 404 error response

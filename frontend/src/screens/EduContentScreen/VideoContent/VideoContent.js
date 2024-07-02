@@ -57,8 +57,7 @@ const VideoContent = () => {
 
   //call task update if there is a task
   const callTaskUpdate = () => {
-    console.log(route.params);
-    if (route.params.taskId) {
+    if (route.params && route.params.taskId) {
       taskUpdate();
     }
   };
@@ -106,7 +105,11 @@ const VideoContent = () => {
         <View style={styles.VideoList}>
           {videos.map((item, index) => (
             <View key={index}>
-              <VideoItem item={item} callTask={() => callTaskUpdate()} />
+              <VideoItem
+                item={item}
+                callTask={() => callTaskUpdate()}
+                screen={"videoStack"}
+              />
             </View>
           ))}
         </View>

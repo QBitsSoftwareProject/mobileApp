@@ -49,6 +49,7 @@ exports.adminNotification = async (message, type, recipientId) => {
   try {
     //create a notification
     const newNotification = new notificationSchema({
+      senderId: null,
       recipientId,
       message,
       type,

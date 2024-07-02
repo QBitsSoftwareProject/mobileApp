@@ -24,11 +24,9 @@ exports.updateDoctorRegStatus = async (req, res) => {
       .status(201)
       .json({ message: "User registration status updated successfully" });
   } catch (err) {
-    res
-      .status(500)
-      .json({
-        error: "Error in updating doctor registration status",
-        details: err,
-      });
+    res.status(500).json({
+      error: "Error in updating doctor registration status",
+      details: err.message,
+    });
   }
 };

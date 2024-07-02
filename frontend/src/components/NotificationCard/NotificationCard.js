@@ -61,11 +61,13 @@ const NotificationCard = (props) => {
 
         params: { postId: props.postId, previousScreen: "ProfileScreen" },
       });
-    } else {
+    } else if (props.type == "appointment") {
       navigation.navigate("AppointmentStack", {
         screen: "AppointmentStatus",
         params: { postId: props.postId, previousScreen: "AvailableDoctors" },
       });
+    } else {
+      props.isRefresh((prev) => !prev);
     }
   };
 
@@ -77,20 +79,35 @@ const NotificationCard = (props) => {
         <TouchableOpacity
           style={[styles.content1]}
           onPress={handlePress}
-          disabled={props.status == "read" ? true : false}
+          disabled={
+            props.status == "read" && props.type == "system" ? true : false
+          }
         >
-          <View style={styles.imageframe}>
-            <Image source={{ uri: props.image }} style={styles.image} />
-          </View>
+          {props.type != "system" ? (
+            <View style={styles.imageframe}>
+              <Image source={{ uri: props.image }} style={styles.image} />
+            </View>
+          ) : (
+            <View style={styles.imageframe}>
+              <Image
+                source={require("../../assets/images/system.png")}
+                style={styles.image}
+              />
+            </View>
+          )}
 
           <View style={styles.content2}>
-            <Text>
-              {props.type == "appointment" && (
-                <Text style={styles.title}>Dr. </Text>
-              )}
-              <Text style={styles.title}>{props.title}</Text>
-              <Text style={styles.commentContent}> {props.content}</Text>
-            </Text>
+            {props.type != "system" ? (
+              <Text>
+                {props.type == "appointment" && (
+                  <Text style={styles.title}>Dr. </Text>
+                )}
+                <Text style={styles.title}>{props.title}</Text>
+                <Text style={styles.commentContent}> {props.content}</Text>
+              </Text>
+            ) : (
+              <Text>{props.content}</Text>
+            )}
 
             <View
               style={{
