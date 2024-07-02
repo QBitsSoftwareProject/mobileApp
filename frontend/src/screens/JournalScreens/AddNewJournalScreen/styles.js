@@ -11,7 +11,7 @@ const styles = StyleSheet.create({
     fontWeight: "400",
     color: "#101318",
     marginBottom: 10,
-    opacity: 0.6,
+    opacity: 0.9,
   },
   Text1: {
     color: "#101318",
@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
     fontWeight: "400",
     marginBottom: 10,
     // marginTop: 15,
-    opacity: 0.6,
+    opacity: 0.9,
     // paddingLeft: 5,
   },
   Text2: {
@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
     fontWeight: "400",
     marginBottom: 15,
     marginTop: 32,
-    opacity: 0.6,
+    opacity: 0.9,
   },
   create: {
     backgroundColor: "#ffffff",
@@ -63,7 +63,7 @@ const styles = StyleSheet.create({
     fontWeight: "400",
     marginBottom: 15,
     marginTop: 15,
-    opacity: 0.6,
+    opacity: 0.9,
   },
 });
 export default styles;
