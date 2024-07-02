@@ -1,10 +1,10 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import HomeScreen from "../../screens/HomeScreen/HomeScreen";
-import MoodAnalysis from "../../screens/MoodAnalysisScreen/SelectMood";
-import AnalysisGraph from "../../screens/AnalysisGraphScreen/AnalysisGraph";
-import SuggestioScreen from "../../screens/SuggestionsScreen/SuggestioScreen";
-import MonthAnalysis from "../../screens/MonthAnalysis/MonthAnalysis";
-import MonthlyAnalysisGraph from "../../screens/MonthlyAnalysisGraphScreen/MonthlyAnalysisGraph";
+import MoodAnalysis from "../../screens/MoodScreens/MoodAnalysisScreen/SelectMood";
+import AnalysisGraph from "../../screens/MoodScreens/AnalysisGraphScreen/AnalysisGraph";
+import SuggestioScreen from "../../screens/MoodScreens/SuggestionsScreen/SuggestioScreen";
+import MonthAnalysis from "../../screens/MoodScreens/MonthAnalysis/MonthAnalysis";
+import MonthlyAnalysisGraph from "../../screens/MoodScreens/MonthlyAnalysisGraphScreen/MonthlyAnalysisGraph";
 
 const stack = createNativeStackNavigator();
 
