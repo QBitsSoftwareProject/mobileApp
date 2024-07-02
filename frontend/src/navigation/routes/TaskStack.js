@@ -4,7 +4,7 @@ import McqScreen from "../../screens/TaskScreens/QuestionsScreens/McqScreen/McqS
 import TaskListScreen from "../../screens/TaskScreens/TaskList/TaskListScreen";
 import TaskDescriptionScreen from "../../screens/TaskScreens/TaskDescription/TaskDescriptionScreen";
 import TaskTypeScreen from "../../screens/TaskScreens/TaskTypeScreen/TaskTypeScreen";
-import { AddNewJournal } from "../../screens/AddNewJournalScreen/addNewJournal";
+import { AddNewJournal } from "../../screens/JournalScreens/AddNewJournalScreen/addNewJournal";
 
 const stack = createNativeStackNavigator();
 
