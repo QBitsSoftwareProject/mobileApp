@@ -28,10 +28,8 @@ const MakeAppointment = ({ route }) => {
   const [getTime, setGetTime] = useState();
   const [getDate, setGetDate] = useState();
   const [doctor, setDoctor] = useState();
-  const [pressDay, setPressDay] = useState(6);
+  const [pressDay, setPressDay] = useState(null);
   const [selectedDateIndex, setSelectedDateIndex] = useState(null);
-
-  const navigation = useNavigation();
 
   const dateIncrement = (number) => {
     const currentDate = new Date();
@@ -44,7 +42,15 @@ const MakeAppointment = ({ route }) => {
     currentDate.setDate(currentDate.getDate() + number);
     const day = currentDate.getDay();
 
-    const weekdays = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+    const weekdays = [
+      "Sunday",
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saturday",
+    ];
 
     return weekdays[day];
   };
@@ -67,6 +73,8 @@ const MakeAppointment = ({ route }) => {
       console.log(error);
     }
   };
+  // Hook for navigation
+  const navigation = useNavigation();
 
   const showMessage = (message) => {
     if (getTime) {
@@ -79,6 +87,7 @@ const MakeAppointment = ({ route }) => {
   const confirmMessage = async () => {
     try {
       await createAppointment(doctor._id, getDate, getTime);
+
       navigation.navigate("AppointmentStatus");
     } catch (error) {
       console.log(error);
@@ -92,7 +101,6 @@ const MakeAppointment = ({ route }) => {
         position: "top",
       });
     }
-    closeMessage();
   };
 
   const closeMessage = () => {
@@ -103,43 +111,42 @@ const MakeAppointment = ({ route }) => {
     navigation.navigate("AvailableDoctors");
   };
 
+  if (!doctor) {
+    return (
+      <View
+        style={{
+          width: "100%",
+          height: "100%",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <Image source={loardingGIF} />
+      </View>
+    );
+  }
+
   const handleDatePress = (item, value) => {
     setDateBtnPress(value);
 
-    if (item == "Mon") {
+    if (item == "Sunday") {
       setPressDay(0);
-    } else if (item == "Tue") {
+    } else if (item == "Monday") {
       setPressDay(1);
-    } else if (item == "Wed") {
+    } else if (item == "Tuesday") {
       setPressDay(2);
-    } else if (item == "Thu") {
+    } else if (item == "Wednesday") {
       setPressDay(3);
-    } else if (item == "Fri") {
+    } else if (item == "Thursday") {
       setPressDay(4);
-    } else if (item == "Sat") {
+    } else if (item == "Friday") {
       setPressDay(5);
-    } else if (item == "Sun") {
+    } else if (item == "Saturday") {
       setPressDay(6);
     } else {
       null;
     }
   };
-
-  const chunkArray = (array, chunkSize) => {
-    const result = [];
-    for (let i = 0; i < array.length; i += chunkSize) {
-      result.push(array.slice(i, i + chunkSize));
-    }
-    return result;
-  };
-
-  if (!doctor) {
-    return (
-      <View style={styles.loardingGif}>
-        <Image source={loardingGIF} />
-      </View>
-    );
-  }
   // console.log(doctor);
   return (
     <SafeAreaView style={{ margin: 25 }}>
@@ -214,29 +221,28 @@ const MakeAppointment = ({ route }) => {
         <View style={{ marginBottom: 20 }}>
           <Text style={styles.title}>Available Time Slot</Text>
 
-          <View>
-            {chunkArray(doctor.availableTimes[pressDay], 3).map(
-              (row, rowIndex) => (
-                <View
-                  key={rowIndex}
-                  style={{
-                    flexDirection: "row",
-                    justifyContent: "space-between",
-                  }}
-                >
-                  {row.map((item, index) => (
-                    <TimeButton
-                      key={index}
-                      time={item}
-                      indexKey={index}
-                      press={setTimebtnPress}
-                      change={timeBtnpress}
-                      getTime={setGetTime}
-                    />
-                  ))}
-                </View>
-              )
-            )}
+          <View
+            style={{
+              height: "auto",
+              width: "100%",
+              flexDirection: "row",
+              flexWrap: "wrap",
+              alignItems: "baseline",
+              gap: 20,
+            }}
+          >
+            {pressDay !== null &&
+              doctor.availableTimes &&
+              doctor.availableTimes[pressDay].map((item, index) => (
+                <TimeButton
+                  key={index}
+                  time={item}
+                  indexKey={index}
+                  press={setTimebtnPress}
+                  change={timeBtnpress}
+                  getTime={setGetTime}
+                />
+              ))}
           </View>
         </View>
 
@@ -258,5 +264,4 @@ const MakeAppointment = ({ route }) => {
     </SafeAreaView>
   );
 };
-
 export default MakeAppointment;
