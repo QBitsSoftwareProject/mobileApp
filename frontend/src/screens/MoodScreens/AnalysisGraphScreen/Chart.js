@@ -26,10 +26,8 @@ const MoodProgressBars = ({ selectedEmoji, barHeight }) => {
 const styles = StyleSheet.create({
   progressBarsContainer: {
     alignSelf: "flex-end",
-
     // marginLeft: 25,
-
-    marginTop: -265,
+    marginHorizontal: 10,
   },
 
   contentContainer: {
