@@ -76,7 +76,7 @@ const CFHeaderSub = (props) => {
                 <Image source={require("../../assets/images/BackWhite.png")} />
               </TouchableOpacity>
 
-              <View>
+              <View style={{ zIndex:10000 }}>
                 <TouchableOpacity onPress={navigateToProfile}>
                   <View style={styles.imageframe}>
                     <Image
@@ -105,10 +105,11 @@ const styles = StyleSheet.create({
     width: "100%",
     borderBottomLeftRadius: 40,
     borderBottomRightRadius: 40,
-
+    
     alignItems: "center",
     justifyContent: "center",
-    zIndex: 100,
+    
+     
   },
   imageframe: {
     height: 100,

@@ -56,13 +56,14 @@ const styles = StyleSheet.create({
   },
 
   input: {
-    paddingBottom: 5,
+    // paddingBottom: 5,
     borderBottomColor: "rgba(151,157,172,0.5)",
-    borderBottomWidth: 1,
-    fontSize: 24,
+    borderBottomWidth: 0.8,
+    fontSize: 17,
     fontWeight: "400",
     flex: 1,
-    marginRight: 25,
+    marginRight: 30,
+    paddingLeft: 10,
   },
 
   edit: {

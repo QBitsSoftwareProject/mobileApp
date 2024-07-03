@@ -127,7 +127,7 @@ export const AddNewJournal = ({ navigation }) => {
       />
 
       <View style={{ height: screenHeight - 250 }}>
-        <ScrollView style={{ paddingTop: 15 }}>
+        <ScrollView style={{ paddingTop: 0 }}>
           <SafeAreaView style={styles.container}>
             <Text style={styles.Text}>Select Your Mood</Text>
 

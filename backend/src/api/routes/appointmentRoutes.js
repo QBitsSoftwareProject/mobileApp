@@ -20,6 +20,7 @@ const {
 } = require("../controllers/appointmentsController/updateAppointment");
 const {
   deleteAllAppointments,
+  deleteAnAppointment,
 } = require("../controllers/appointmentsController/deleteAppointment");
 
 const router = express.Router();
@@ -46,6 +47,11 @@ router.get(
 );
 router.put("/appointment-status", auth, updateDocAppointment);
 router.delete("/delete-appointments", auth, deleteAllAppointments);
+router.delete(
+  "/delete-an-appointment/:appointmentId",
+  auth,
+  deleteAnAppointment
+);
 // router.get("/available-times/:doctorId", auth, getAvailableTimes);
 
 module.exports = router;

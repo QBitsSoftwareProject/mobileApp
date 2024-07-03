@@ -48,7 +48,7 @@ const historystyles = StyleSheet.create({
     },
 
     scrollArea: {
-      height:550,
+      height:'80%',
     },
 
     timetext: {

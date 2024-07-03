@@ -1,446 +1,312 @@
 import React, { useEffect, useState } from "react";
 import {
+  ScrollView,
   View,
   Text,
-  TouchableOpacity,
-  ScrollView,
-  Image,
   StyleSheet,
+  Button,
+  Image,
+  TouchableOpacity,
 } from "react-native";
+import DayMoodChart from "./week";
 import HeaderSubAnalysis from "./HeaderAnalysis";
-import MoodProgressBars from "./Chart";
-
-import { useRoute, useNavigation } from "@react-navigation/native";
-
 import { getMoodsByUserId } from "../../../services/moodAnalysisServices/moodAnalysisServices";
 import { getAUser } from "../../../services/userServices/userService";
-import { getSuggestedGoals } from "../../../services/goalsService/goalsService";
 import { getTime } from "../../TaskScreens/WelcomeScreen/GetTime";
 
 const AnalysisGraph = () => {
-  const [bHeight, setBHeight] = useState(0);
-  const [sadHeight, setSadHeight] = useState(0);
-  const [angryHeight, setAngryHeight] = useState(0);
-  const [worriedHeight, setWorriedHeight] = useState(0);
-  const [boringHeight, setBoringHeight] = useState(0);
-  const [neutralHeight, setNeutralHeight] = useState(0);
-  const [OverWhelmedHeight, setOverWhelmedHeight] = useState(0);
-  const [happyHeight, setHappyHeight] = useState(0);
-
   const [data, setData] = useState([]);
-  const [boringCount, setBoringCount] = useState("");
-  const [AngryCount, setAngryCount] = useState("");
-  const [sadCount, setSadCount] = useState("");
-  const [worriedCount, setWorriedCount] = useState("");
-  const [neutralCount, setNeutralCount] = useState("");
-  const [OverWhelmedCount, setOverWhelmedCount] = useState("");
-  const [happyCount, setHappyCount] = useState("");
-  const [lovelyCount, setLovelyCount] = useState("");
-  const [totalCount, setTotalCount] = useState("");
-  const [loveheight, setLoveHeight] = useState("");
-  const [lastInputData, setLastInputData] = useState(null);
-  const [lastdata, setlast] = useState("");
   const [username, setUsername] = useState("");
-  const [dateandtime, setDateAndTime] = "";
+  const [currentDayIndex, setCurrentDayIndex] = useState(0);
+  const [heights, setHeights] = useState({});
+  const [maxHeightMood, setMaxHeightMood] = useState(null);
+  const [isNextDisabled, setIsNextDisabled] = useState(true);
+  const [hasNavigatedBack, setHasNavigatedBack] = useState(false); // Track if user has navigated back
+  const [isToday, setIsToday] = useState(true); // Track if the current chart is today's chart
+  const [currentDate, setCurrentDate] = useState("");
 
-  const [distinctHeights, setDistinctHeights] = useState([]);
+  const daysOfWeek = [
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+    "Sunday",
+  ];
 
-  const getStartOfWeek = (date) => {
-    const start = new Date(date);
-    const day = start.getDay(); // 0 (Sunday) to 6 (Saturday)
-    const diff = start.getDate() + 1;
-    start.setDate(diff);
-    start.setHours(0, 0, 0, 0); // Set time to 00:00:00
-    return start;
-  };
+  const groupDataByDay = (data) => {
+    const groupedData = {
+      Monday: [],
+      Tuesday: [],
+      Wednesday: [],
+      Thursday: [],
+      Friday: [],
+      Saturday: [],
+      Sunday: [],
+    };
 
-  const getEndOfWeek = (date) => {
-    const end = new Date(date);
-    const day = end.getDay();
-    const diff = end.getDate() - 6;
-    end.setDate(diff);
-    end.setHours(23, 59, 59, 999); // Set time to 23:59:59.999
-    return end;
-  };
-
-  const filterDataByWeek = (data, dateField) => {
-    const todayDate = new Date();
-
-    const startDate = getEndOfWeek(todayDate);
-    // console.log(todayDate);
-
-    const endDate = getStartOfWeek(todayDate);
-    // console.log("end", endDate);
-
-    return data.filter((item) => {
-      const todayDate = new Date(item[dateField]);
-
-      return todayDate >= startDate && todayDate <= endDate;
+    data.forEach((item) => {
+      const date = new Date(item.date);
+      const day = date.toLocaleString("en-US", { weekday: "long" });
+      if (groupedData[day]) {
+        groupedData[day].push(item);
+      }
     });
+
+    return groupedData;
   };
 
-  useEffect(() => {
-    const dayBYWeek = filterDataByWeek(data, "date");
-    // console.log(dayBYWeek);
+  const calculateMoodStats = (data) => {
+    const moodCounts = data.reduce((acc, item) => {
+      acc[item.moodText] = (acc[item.moodText] || 0) + 1;
+      return acc;
+    }, {});
 
-    countEmoji(dayBYWeek);
-    const lastIndex = dayBYWeek.length - 1;
-    const lastInputData = dayBYWeek[lastIndex];
-    if (lastInputData) {
-      // console.log(lastInputData.moodText);
-      setLastInputData(lastInputData.moodText); // Update lastInputData state
-    }
-  }, [data]);
-
-  const countEmoji = (dataArray) => {
-    const boring = dataArray.filter((item) => item.moodText === "Boring");
-    setBoringCount(boring.length);
-
-    const angry = dataArray.filter((item) => item.moodText === "Angry");
-    setAngryCount(angry.length);
-
-    const sad = dataArray.filter((item) => item.moodText === "Sad");
-    setSadCount(sad.length);
-
-    const worried = dataArray.filter((item) => item.moodText === "Worried");
-    setWorriedCount(worried.length);
-
-    const neutral = dataArray.filter((item) => item.moodText === "Neutral");
-    setNeutralCount(neutral.length);
-
-    const oerWhelmed = dataArray.filter(
-      (item) => item.moodText === "OverWhelmed"
+    const totalCount = Object.values(moodCounts).reduce(
+      (acc, count) => acc + count,
+      0
     );
-    setOverWhelmedCount(oerWhelmed.length);
 
-    const happy = dataArray.filter((item) => item.moodText === "Happy");
-    setHappyCount(happy.length);
+    const calculatedHeights = Object.keys(moodCounts).reduce((acc, mood) => {
+      acc[mood] = (moodCounts[mood] / totalCount) * 250;
+      return acc;
+    }, {});
 
-    const lovely = dataArray.filter((item) => item.moodText === "Lovely");
-    setLovelyCount(lovely.length);
+    const maxMood = Object.keys(calculatedHeights).reduce((a, b) =>
+      calculatedHeights[a] > calculatedHeights[b] ? a : b
+    );
+
+    return { calculatedHeights, maxMood };
   };
 
-  // call the set mood function
   useEffect(() => {
-    const fetchMoodInputs = async (req) => {
+    const fetchMoodInputs = async () => {
       try {
         const moodData = await getMoodsByUserId();
-        setData(moodData);
+        const today = new Date();
+        const sevenDaysAgo = new Date();
+        sevenDaysAgo.setDate(today.getDate() - 7);
+
+        const filteredData = moodData.filter((item) => {
+          const date = new Date(item.date);
+          return date >= sevenDaysAgo && date <= today;
+        });
+
+        setData(filteredData);
       } catch (err) {
         console.log("err" + err.message);
       }
     };
 
     fetchMoodInputs();
-    // fetchUserData();
-  }, [data]);
+  }, []);
 
-  // call the getAuser function for find username
   useEffect(() => {
-    const getName = async (req) => {
+    const getName = async () => {
       try {
         const name = await getAUser();
-        // console.log("name from getAUser:", name);
         setUsername(name.userName);
       } catch (err) {
-        console.log("err" + err.messasge);
+        console.log("err" + err.message);
       }
     };
     getName();
   }, []);
 
-  // call the getTime (good morning, evening)
+  useEffect(() => {
+    const today = new Date().getDay();
+    setCurrentDayIndex(today - 1); // set current day index based on today (0: Sunday, 6: Saturday)
+  }, []);
+
+  const updateMoodStats = (dayData) => {
+    const { calculatedHeights, maxMood } = calculateMoodStats(dayData);
+    setHeights(calculatedHeights);
+    setMaxHeightMood(maxMood);
+  };
+
+  useEffect(() => {
+    if (data.length > 0) {
+      const groupedData = groupDataByDay(data);
+      const currentDayData = groupedData[daysOfWeek[currentDayIndex]];
+      updateMoodStats(currentDayData);
+
+      const nextDayIndex = (currentDayIndex + 1) % 7;
+      const nextDayData = groupedData[daysOfWeek[nextDayIndex]];
+      setIsNextDisabled(!hasNavigatedBack && isToday); // Disable next button if isToday and hasn't navigated back
+
+      // Extract and set the date for the current day
+      if (currentDayData.length > 0) {
+        const date = new Date(currentDayData[0].date);
+        date.setDate(date.getDate() + 1); // Increase the date by one day
+        setCurrentDate(date.toISOString().split("T")[0]); // Format the date as YYYY-MM-DD
+      }
+    }
+  }, [data, currentDayIndex, hasNavigatedBack, isToday]);
+
+  const handleNext = () => {
+    setCurrentDayIndex((prevIndex) => {
+      const nextIndex = (prevIndex + 1) % 7;
+      setHasNavigatedBack(false);
+      setIsToday(nextIndex === new Date().getDay() - 1);
+      return nextIndex;
+    });
+  };
+
+  const handleBack = () => {
+    setCurrentDayIndex((prevIndex) => (prevIndex - 1 + 7) % 7);
+    setHasNavigatedBack(true);
+    setIsToday(false);
+  };
+
   const dateValue = getTime();
+  const groupedData = groupDataByDay(data);
+  const currentDay = daysOfWeek[currentDayIndex];
 
-  useEffect(() => {
-    const total =
-      boringCount +
-      AngryCount +
-      sadCount +
-      neutralCount +
-      OverWhelmedCount +
-      worriedCount +
-      happyCount +
-      lovelyCount;
+  const moodToEmoji = {
+    Lovely: "😍",
+    Sad: "😭",
+    Angry: "😡",
+    Worried: "😟",
+    Boring: "🥱",
+    Neutral: "😐",
+    OverWhelmed: "😨",
+    Happy: "😄",
+  };
 
-    setTotalCount(total);
-
-    if (total !== 0) {
-      const Loveheight = parseFloat(lovelyCount / total) * 250.0;
-      setLoveHeight(Loveheight);
-
-      const sadheight = parseFloat(sadCount / total) * 250.0;
-      setSadHeight(sadheight);
-
-      const angryheight = parseFloat(AngryCount / total) * 250.0;
-      setAngryHeight(angryheight);
-
-      const worriedheight = parseFloat(worriedCount / total) * 250.0;
-      setWorriedHeight(worriedheight);
-
-      const boringheight = parseFloat(boringCount / total) * 250.0;
-      setBoringHeight(boringheight);
-
-      const neutralheight = parseFloat(neutralCount / total) * 250.0;
-      setNeutralHeight(neutralheight);
-
-      const overWhelmedheight = parseFloat(OverWhelmedCount / total) * 250.0;
-      setOverWhelmedHeight(overWhelmedheight);
-
-      const happyheight = parseFloat(happyCount / total) * 250.0;
-      setHappyHeight(happyheight);
-    }
-  }, [
-    boringCount,
-    AngryCount,
-    sadCount,
-    neutralCount,
-    OverWhelmedCount,
-    worriedCount,
-    happyCount,
-    lovelyCount,
-  ]);
-
-  const route = useRoute();
-  const { selectedEmoji, count, moodText, ImageSource, moodIndex } =
-    route.params;
-
-  const [lastMoodText, setLastMoodText] = useState(moodText ?? lastInputData);
-
-  useEffect(() => {
-    if (moodText !== undefined && moodText !== null) {
-      setLastMoodText(moodText);
-    } else if (lastInputData !== undefined && lastInputData !== null) {
-      setLastMoodText(lastInputData);
-    }
-  }, [moodText, lastInputData]);
-
-  useEffect(() => {
-    const heights = [
-      boringHeight,
-      sadHeight,
-      angryHeight,
-      worriedHeight,
-      neutralHeight,
-      OverWhelmedHeight,
-      happyHeight,
-      loveheight,
-    ];
-    const distinctHeights = [...new Set(heights)].sort((a, b) => b - a);
-    setDistinctHeights(distinctHeights);
-  }, [
-    boringHeight,
-    sadHeight,
-    angryHeight,
-    worriedHeight,
-    neutralHeight,
-    OverWhelmedHeight,
-    happyHeight,
-    loveheight,
-  ]);
-
-  // console.log("Initial lastMoodText:", lastMoodText);
-
-  const [emoji, setEmoji] = useState("");
-  const [image, setImageSource] = useState("");
-
-  useEffect(() => {
-    // Logic to set emoji and image based on lastMoodText
-    if (lastMoodText === "Happy") {
-      setEmoji("😄");
-      setImageSource(
-        require("../../../assets/images/analysisMood/happyPicture.png")
-      );
-    } else if (lastMoodText === "Lovely") {
-      setEmoji("😍");
-      setImageSource(
-        require("../../../assets/images/analysisMood/lovelyPicture.png")
-      );
-    } else if (lastMoodText === "Sad") {
-      setEmoji("😭");
-      setImageSource(
-        require("../../../assets/images/analysisMood/sadPicture.png")
-      );
-    } else if (lastMoodText === "Angry") {
-      setEmoji("😡");
-      setImageSource(
-        require("../../../assets/images/analysisMood/angryPicture.png")
-      );
-    } else if (lastMoodText === "Worried") {
-      setEmoji("😟");
-      setImageSource(
-        require("../../../assets/images/analysisMood/sickPicture.png")
-      );
-    } else if (lastMoodText === "Boring") {
-      setEmoji("🥱");
-      setImageSource(
-        require("../../../assets/images/analysisMood/sleepPicture.png")
-      );
-    } else if (lastMoodText === "Neutral") {
-      // Assuming 'Nutral' is a typo and should be 'Neutral'
-      setEmoji("😐");
-      setImageSource(
-        require("../../../assets/images/analysisMood/nutralPicture.png")
-      );
-    } else if (lastMoodText === "OverWhelmed") {
-      setEmoji("😨");
-      setImageSource(
-        require("../../../assets/images/analysisMood/scaredPicture.png")
-      );
-    } else {
-      setEmoji("");
-      setImageSource(null);
-    }
-  }, [lastMoodText]);
-
-  const navigation = useNavigation();
-
-  // const handleContinuePress = () => {
-  //   navigation.navigate("MonthAnalysisScreen", {});
-  // };
+  const moodToImage = {
+    Lovely: require("../../../assets/images/analysisMood/lovelyPicture.png"),
+    Sad: require("../../../assets/images/analysisMood/sadPicture.png"),
+    Angry: require("../../../assets/images/analysisMood/angryPicture.png"),
+    Worried: require("../../../assets/images/analysisMood/sickPicture.png"),
+    Boring: require("../../../assets/images/analysisMood/sleepPicture.png"),
+    Neutral: require("../../../assets/images/analysisMood/nutralPicture.png"),
+    OverWhelmed: require("../../../assets/images/analysisMood/scaredPicture.png"),
+    Happy: require("../../../assets/images/analysisMood/happyPicture.png"),
+  };
 
   return (
     <ScrollView>
-      <HeaderSubAnalysis
-        headLine={"Good" + " " + dateValue + " " + username}
-        subheadLine={"You are feeling " + lastMoodText + " today"}
-      />
+      <HeaderSubAnalysis headLine={"Good " + dateValue + " " + username} />
+      {maxHeightMood && (
+        <View>
+          <View style={[styles.selectedEmojiContainer, { opacity: 0.2 }]}>
+            <Text style={styles.emojiTextLeft}>
+              {moodToEmoji[maxHeightMood]}
+            </Text>
+            <Text style={styles.emojiTextRight}>
+              {moodToEmoji[maxHeightMood]}
+            </Text>
+          </View>
 
-      <View style={[styles.selectedEmojiContainer, { opacity: 0.2 }]}>
-        <Text style={styles.selectedEmojiLeft}>{emoji}</Text>
-        <Text style={styles.selectedEmojiRight}>{emoji}</Text>
-      </View>
-      <Text style={styles.selectedEmoji}>{emoji}</Text>
-      <Text style={styles.moodText}>{lastMoodText}</Text>
+          <Text style={styles.emoji}>{moodToEmoji[maxHeightMood]}</Text>
+          <Text style={styles.text}>
+            You are feeling {maxHeightMood} {currentDay}
+          </Text>
 
-      <ScrollView horizontal>
-        <View style={styles.graphContainer}>
-          <Image style={styles.image} source={image} />
-
-          <View style={styles.barWithAxis}>
-            <View style={styles.left}>
-              <Text style={{ fontSize: 10 }}>100%</Text>
-              <Text style={{ fontSize: 10, color: "#7D8597" }}>90%</Text>
-              <Text style={{ fontSize: 10, color: "#7D8597" }}>80%</Text>
-              <Text style={{ fontSize: 10, color: "#7D8597" }}>70%</Text>
-              <Text style={{ fontSize: 10, color: "#7D8597" }}>60%</Text>
-              <Text style={{ fontSize: 10 }}>50%</Text>
-              <Text style={{ fontSize: 10, color: "#7D8597" }}>40%</Text>
-              <Text style={{ fontSize: 10, color: "#7D8597" }}>30%</Text>
-              <Text style={{ fontSize: 10, color: "#7D8597" }}>20%</Text>
-              <Text style={{ fontSize: 10, color: "#7D8597" }}>10%</Text>
-              <Text style={{ fontSize: 10 }}>0%</Text>
-            </View>
-            <View style={styles.right}>
-              <MoodProgressBars selectedEmoji={"😍"} barHeight={loveheight} />
-              <MoodProgressBars selectedEmoji={"😭"} barHeight={sadHeight} />
-              <MoodProgressBars selectedEmoji={"😡"} barHeight={angryHeight} />
-              <MoodProgressBars
-                selectedEmoji={"😟"}
-                barHeight={worriedHeight}
+          <View style={styles.navigationContainer}>
+            <TouchableOpacity style={styles.button} onPress={handleBack}>
+              <Image
+                source={require("../../../assets/images/leftback.png")}
+                style={styles.buttonImage}
               />
-              <MoodProgressBars selectedEmoji={"🥱"} barHeight={boringHeight} />
-              <MoodProgressBars
-                selectedEmoji={"😐"}
-                barHeight={neutralHeight}
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={[styles.button, isNextDisabled && styles.buttonDisabled]}
+              onPress={handleNext}
+              disabled={isNextDisabled}
+            >
+              <Image
+                source={require("../../../assets/images/rightnext.png")}
+                style={styles.buttonImage}
               />
-              <MoodProgressBars
-                selectedEmoji={"😨"}
-                barHeight={OverWhelmedHeight}
-              />
-              <MoodProgressBars selectedEmoji={"😄"} barHeight={happyHeight} />
-            </View>
+            </TouchableOpacity>
           </View>
         </View>
-      </ScrollView>
+      )}
+
+      <View>
+        <Text style={styles.dateText}>{currentDate}</Text>
+        <DayMoodChart data={groupedData[currentDay]} />
+      </View>
+      <View style={styles.image}>
+        <Image source={moodToImage[maxHeightMood]} />
+      </View>
     </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
+  navigationContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    marginHorizontal: 100,
+    // marginTop: 32,
+    // backgroundColor: "yellow",
+  },
+
   selectedEmojiContainer: {
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
-    marginTop: 55,
+    marginTop: 30,
   },
-  selectedEmoji: {
-    fontSize: 130,
-    alignItems: "center",
-    // justifyContent: 'center',
-    alignSelf: "center",
-    marginTop: -180,
-  },
-  selectedEmojiLeft: {
-    fontSize: 90,
+  emojiTextLeft: {
+    fontSize: 60,
     marginRight: 20,
   },
-  selectedEmojiRight: {
-    fontSize: 90,
+  emojiTextRight: {
+    fontSize: 60,
     marginLeft: 20,
   },
-  moodText: {
-    fontSize: 23,
-    fontWeight: "300",
-    color: "#40495B",
+  emoji: {
+    fontSize: 100,
+    alignItems: "center",
     alignSelf: "center",
-    marginTop: 10,
+    marginTop: -130,
   },
-  graphContainer: {
-    marginTop: 32,
-    paddingBottom: 100,
-  },
+
   image: {
     width: 369,
     height: 280,
-    left: 15,
+    opacity: 0.8,
     alignSelf: "center",
-    marginTop: -10,
+    marginTop: -280,
   },
-
-  bar: {},
-  continueButton: {
-    backgroundColor: "#FFFFFF",
-    width: 250,
-    height: 58,
-    justifyContent: "center",
-    alignItems: "center",
-    alignSelf: "center",
-    marginBottom: 100,
-    borderRadius: 75,
-    borderColor: "#4ABFB4",
-    borderWidth: 2,
-    marginTop: 15,
-  },
-  continue: {
-    color: "#101318",
+  text: {
     fontSize: 16,
+    fontWeight: "300",
+    color: "#40495B",
+    alignSelf: "center",
+    marginTop: 30,
   },
-  // graphContent: {
-  //   flexDirection: "row",
-  //   alignItems: "flex-end",
-  //   paddingRight: 5,
-  //   paddingLeft: 15,
-  // },
+  graphContainer: {
+    marginTop: -280,
+  },
+  button: {
+    width: 60,
+    height: 40,
+    // backgroundColor: "yellow",
+  },
+  buttonImage: {
+    alignSelf: "center",
+    top: 16,
+    width: 15,
+    height: 15,
+  },
+  buttonDisabled: {
+    opacity: 0.5,
+  },
+  dateText: {
+    fontSize: 18,
+    fontWeight: "400",
+    textAlign: "center",
+    marginBottom: 10,
+    marginTop: -27,
+    // backgroundColor: "yellow",
+    width: 100,
 
-  barWithAxis: {
-    flexDirection: "row",
-    marginTop: -250,
-  },
-  left: {
-    flex: 1,
-    alignItems: "flex-end",
-    rowGap: 12,
-    paddingLeft: 5,
-    marginLeft: 15,
-  },
-  right: {
-    flex: 1,
-    columnGap: 20,
-    flexDirection: "row",
-    alignItems: "flex-end",
-    paddingRight: 15,
-    paddingLeft: 10,
+    alignSelf: "center",
   },
 });
 

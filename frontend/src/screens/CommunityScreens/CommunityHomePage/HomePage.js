@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { View, ScrollView, Dimensions, StyleSheet } from "react-native";
 import CFHeaderSub from "../../../components/ComForumHeader/CFHeader";
 import PostCard from "../../../components/CFCard/PostCard";
-import FloatingButton from "../../../components/FloatingButton/FloatingButton";
+import FloatingButton from "../../../components/CFButton/FloatingButton";
 import {
   useFocusEffect,
   useNavigation,
@@ -56,7 +56,7 @@ const HomePage = () => {
 
   return (
     <View style={styles.container}>
-      <View>
+      <View style = {{zIndex:1000}}>
         <CFHeaderSub
           subHeadLine={"Community Home Page"}
           profile={"ProfileScreen"}
@@ -69,9 +69,9 @@ const HomePage = () => {
           paddingHorizontal: 25,
         }}
       >
-        <ScrollView style={{ height: "100%", paddingTop: 15 }}>
+        <ScrollView style={{ height: "100%", paddingTop: 15  }}>
           {/* post cards list*/}
-          <View style={{ paddingBottom: 50 }}>
+          <View style={{ paddingBottom: 50, zIndex:-1 }}>
             {postList.map((item) => (
               <PostCard
                 postId={item._id}
@@ -99,6 +99,8 @@ const HomePage = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    
+    
   },
   floatingButtonContainer: {
     position: "absolute",

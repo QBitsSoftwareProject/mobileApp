@@ -134,14 +134,14 @@ export const EditJournal = ({ navigation, route }) => {
         back={"ViewJournal"}
       />
 
-      <View style={{ height: screenHeight - 190, paddingTop: 15 }}>
+      <View style={{ height: screenHeight - 190 }}>
         <ScrollView>
           <SafeAreaView style={styles.container}>
             <Text style={styles.Text}>Feeling with</Text>
 
             <EmojiPicker onEmojiPress={handleEmojiPress} value={emoji} />
 
-            <Text style={styles.Text1}>Journal Title</Text>
+            <Text style={styles.editTittle}>Journal Title</Text>
 
             <JournalTittle value={title} newText={setTitle} />
 

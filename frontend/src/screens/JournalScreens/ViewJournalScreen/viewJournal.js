@@ -49,7 +49,10 @@ export const ViewJournal = ({ navigation }) => {
       const lastShown = await AsyncStorage.getItem("lastShown");
       const currentTime = Date.now();
 
-      if (!lastShown || currentTime - parseInt(lastShown, 10) >= 2 * 1000) {
+      if (
+        !lastShown ||
+        currentTime - parseInt(lastShown, 10) >= 24 * 60 * 60 * 1000
+      ) {
         // Show the toast message
         Toast.show({
           type: "info",
