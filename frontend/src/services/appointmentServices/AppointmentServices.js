@@ -15,8 +15,6 @@ export const createAppointment = async (doctorId, date, time) => {
         headers: { authtoken: token },
       }
     );
-    // console.log(response);
-    // return response;
   } catch (error) {
     console.log(error);
     throw new Error("Error during request setup");
@@ -134,6 +132,24 @@ export const deleteAllAppointments = async () => {
       headers: { authtoken: token },
     });
     // console.log(response.data);
+    return response.data;
+  } catch (error) {
+    console.log(error);
+    throw new Error("Error during request setup");
+  }
+};
+
+export const deleteAnAppointment = async (appointmentId) => {
+  try {
+    const token = await AsyncStorage.getItem("authToken");
+
+    const response = await axios.delete(
+      URL + "/delete-an-appointment/" + appointmentId,
+      {
+        headers: { authtoken: token },
+      }
+    );
+    console.log(response.data);
     return response.data;
   } catch (error) {
     console.log(error);

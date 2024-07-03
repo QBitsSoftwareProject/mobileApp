@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { Dimensions, Image, ScrollView, View } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
 import ButtonGroup from "../../../components/Button/ButtonGroup";
 import DocAppHeader from "../../../components/DocAppHeader/DocAppHeader";
 import PendingAppointmentList from "./PendingAppointmentList";

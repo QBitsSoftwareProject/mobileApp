@@ -5,6 +5,7 @@ import {
   TouchableOpacity,
   ImageBackground,
   StyleSheet,
+  SafeAreaView
 } from "react-native";
 import React from "react";
 import SearchBar from "../SearchBar/SearchBar";
@@ -18,6 +19,7 @@ const AppointmentHeader = (props) => {
   };
 
   return (
+    <SafeAreaView>
     <View style={styles.contains}>
       <ImageBackground
         source={require("../../assets/images/blueSqures.png")}
@@ -46,6 +48,7 @@ const AppointmentHeader = (props) => {
         </View>
       </ImageBackground>
     </View>
+    </SafeAreaView>
   );
 };
 

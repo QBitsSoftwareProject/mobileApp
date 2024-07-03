@@ -122,6 +122,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "space-between",
     width: "100%",
+    
   },
   textinput: {
     height: 45,
@@ -158,6 +159,8 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     maxHeight: 230,
     elevation: 1,
+    
+    
   },
   resultItem: {
     flexDirection: "row",
@@ -165,6 +168,7 @@ const styles = StyleSheet.create({
     width: "100%",
     padding: 10,
     marginVertical: 7.5,
+    
   },
   imageframe: {
     height: 35,

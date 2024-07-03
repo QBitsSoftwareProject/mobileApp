@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Text, ScrollView, View, Image } from "react-native";
-import DocCard from "../../../components/Card/DocCard";
+import DocCard from "../../../components/AppointmentCard/DocCard";
 import DocNavDropDown from "../../../components/DropDownMenu/DocNavDropDown";
 import styles from "./styles";
 import {
@@ -9,11 +9,17 @@ import {
   getDoctorRejectedAppointments,
 } from "../../../services/appointmentServices/AppointmentServices";
 import loardingGIF from "../../../assets/animation/loading.gif";
+import notFoundGif from "../../../assets/animation/not-found.png";
 
 const CompletedAppointment = () => {
   const [completedData, setCompletedData] = useState(null);
   const [checkPage, setCheckPage] = useState("Completed");
   const [refresh, setRefresh] = useState(false);
+  const [notFound, setNotFound] = useState(false);
+
+  useEffect(() => {
+    fetchComAppointment();
+  }, [checkPage, refresh]);
 
   const fetchComAppointment = async () => {
     try {
@@ -28,14 +34,15 @@ const CompletedAppointment = () => {
       }
 
       setCompletedData(response);
+      if (response.length === 0) {
+        setNotFound(true);
+      } else {
+        setNotFound(false);
+      }
     } catch (error) {
       console.log(error);
     }
   };
-
-  useEffect(() => {
-    fetchComAppointment();
-  }, [checkPage, refresh]);
 
   const handleRefresh = () => {
     setRefresh(!refresh);
@@ -89,6 +96,22 @@ const CompletedAppointment = () => {
           <Text style={styles.descript2}>Completed List.</Text>
           <DocNavDropDown checkPage={checkPage} setCheckPage={setCheckPage} />
         </View>
+
+        {notFound && (
+          <View
+            style={{
+              justifyContent: "center",
+              alignItems: "center",
+              width: "100%",
+              marginTop: 32,
+            }}
+          >
+            <Image
+              source={notFoundGif}
+              style={{ width: "70%", height: 250, opacity: 0.3 }}
+            />
+          </View>
+        )}
 
         {/* appointment status cards */}
         <View style={{ marginBottom: 80 }}>

@@ -16,7 +16,6 @@ const CommunityHomeStack = () => {
         headerShown: false,
       }}
     >
-      {/* <stack.Screen name='HomeScreen' component={HomeScreen} />  */}
       <stack.Screen name="HomePage" component={HomePage} />
       <stack.Screen name="PostCategory" component={PostCategory} />
       <stack.Screen name="CreatePost" component={CreatePost} />
