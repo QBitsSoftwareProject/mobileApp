@@ -15,6 +15,7 @@ import { getAUser } from "../../../services/userServices/userService";
 import { getTime } from "../../TaskScreens/WelcomeScreen/GetTime";
 
 const AnalysisGraph = () => {
+  // State variables initialization
   const [data, setData] = useState([]);
   const [username, setUsername] = useState("");
   const [currentDayIndex, setCurrentDayIndex] = useState(0);
@@ -25,6 +26,7 @@ const AnalysisGraph = () => {
   const [isToday, setIsToday] = useState(true); // Track if the current chart is today's chart
   const [currentDate, setCurrentDate] = useState("");
 
+  // Array defining days of the week
   const daysOfWeek = [
     "Monday",
     "Tuesday",
@@ -35,6 +37,7 @@ const AnalysisGraph = () => {
     "Sunday",
   ];
 
+  // Function to group mood data by day
   const groupDataByDay = (data) => {
     const groupedData = {
       Monday: [],
@@ -57,6 +60,7 @@ const AnalysisGraph = () => {
     return groupedData;
   };
 
+  // Function to calculate mood statistics
   const calculateMoodStats = (data) => {
     const moodCounts = data.reduce((acc, item) => {
       acc[item.moodText] = (acc[item.moodText] || 0) + 1;
@@ -73,25 +77,26 @@ const AnalysisGraph = () => {
       return acc;
     }, {});
 
-    const maxMood = Object.keys(calculatedHeights).reduce(
-      (a, b) => (calculatedHeights[a] > calculatedHeights[b] ? a : b),
-      ""
+    // Finding the most frequent mood
+    const maxMood = Object.keys(calculatedHeights).reduce((a, b) =>
+      calculatedHeights[a] > calculatedHeights[b] ? a : b
     );
 
     return { calculatedHeights, maxMood };
   };
 
+  // Effect to fetch mood data on component mount
   useEffect(() => {
     const fetchMoodInputs = async () => {
       try {
         const moodData = await getMoodsByUserId();
         const today = new Date();
         const sevenDaysAgo = new Date();
-        sevenDaysAgo.setDate(today.getDate() - 7);
+        sevenDaysAgo.setDate(today.getDate() - 7); // Calculate date 7 days ago
 
         const filteredData = moodData.filter((item) => {
           const date = new Date(item.date);
-          return date >= sevenDaysAgo && date <= today;
+          return date >= sevenDaysAgo && date <= today; // Filter mood data for last 7 days
         });
 
         setData(filteredData);
@@ -103,6 +108,7 @@ const AnalysisGraph = () => {
     fetchMoodInputs();
   }, []);
 
+  // Effect to fetch user name on component mount
   useEffect(() => {
     const getName = async () => {
       try {
@@ -115,22 +121,25 @@ const AnalysisGraph = () => {
     getName();
   }, []);
 
+  // Effect to set current day index on component mount
   useEffect(() => {
     const today = new Date().getDay();
     setCurrentDayIndex(today - 1); // set current day index based on today (0: Sunday, 6: Saturday)
   }, []);
 
+  // Function to update mood statistics based on current day data
   const updateMoodStats = (dayData) => {
     const { calculatedHeights, maxMood } = calculateMoodStats(dayData);
     setHeights(calculatedHeights);
     setMaxHeightMood(maxMood);
   };
 
+  // Effect to update mood stats, disable next button, and set current date on data or state changes
   useEffect(() => {
     if (data.length > 0) {
       const groupedData = groupDataByDay(data);
       const currentDayData = groupedData[daysOfWeek[currentDayIndex]];
-      updateMoodStats(currentDayData);
+      updateMoodStats(currentDayData); // Update mood state based on current day data
 
       const nextDayIndex = (currentDayIndex + 1) % 7;
       const nextDayData = groupedData[daysOfWeek[nextDayIndex]];
@@ -145,6 +154,7 @@ const AnalysisGraph = () => {
     }
   }, [data, currentDayIndex, hasNavigatedBack, isToday]);
 
+  // Function to handle next button press
   const handleNext = () => {
     setCurrentDayIndex((prevIndex) => {
       const nextIndex = (prevIndex + 1) % 7;
@@ -154,6 +164,7 @@ const AnalysisGraph = () => {
     });
   };
 
+  // Function to handle back button press
   const handleBack = () => {
     setCurrentDayIndex((prevIndex) => (prevIndex - 1 + 7) % 7);
     setHasNavigatedBack(true);
@@ -164,6 +175,22 @@ const AnalysisGraph = () => {
   const groupedData = groupDataByDay(data);
   const currentDay = daysOfWeek[currentDayIndex];
 
+  function formatDate(dateString) {
+    // Parse the date string into a Date object
+    const date = new Date(dateString);
+
+    // Get the month name and day
+    const month = date.toLocaleString("default", { month: "long" });
+    const day = date.getDate();
+
+    // Format the date as "Month-DD"
+    return `${month}-${day.toString().padStart(2, "0")}`;
+  }
+
+  const formattedDate = formatDate(currentDate);
+  console.log(formattedDate); // Outputs: "July-03"
+
+  // Mappings of moods to emojis and images
   const moodToEmoji = {
     Lovely: "😍",
     Sad: "😭",
@@ -173,17 +200,6 @@ const AnalysisGraph = () => {
     Neutral: "😐",
     OverWhelmed: "😨",
     Happy: "😄",
-  };
-
-  const moodToImage = {
-    Lovely: require("../../../assets/images/analysisMood/lovelyPicture.png"),
-    Sad: require("../../../assets/images/analysisMood/sadPicture.png"),
-    Angry: require("../../../assets/images/analysisMood/angryPicture.png"),
-    Worried: require("../../../assets/images/analysisMood/sickPicture.png"),
-    Boring: require("../../../assets/images/analysisMood/sleepPicture.png"),
-    Neutral: require("../../../assets/images/analysisMood/nutralPicture.png"),
-    OverWhelmed: require("../../../assets/images/analysisMood/scaredPicture.png"),
-    Happy: require("../../../assets/images/analysisMood/happyPicture.png"),
   };
 
   return (
@@ -206,32 +222,39 @@ const AnalysisGraph = () => {
           </Text>
 
           <View style={styles.navigationContainer}>
-            <TouchableOpacity style={styles.button} onPress={handleBack}>
-              <Image
-                source={require("../../../assets/images/leftback.png")}
-                style={styles.buttonImage}
-              />
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={[styles.button, isNextDisabled && styles.buttonDisabled]}
-              onPress={handleNext}
-              disabled={isNextDisabled}
-            >
-              <Image
-                source={require("../../../assets/images/rightnext.png")}
-                style={styles.buttonImage}
-              />
-            </TouchableOpacity>
+            <View style={styles.view1}>
+              <TouchableOpacity onPress={handleBack}>
+                <Image
+                  source={require("../../../assets/images/leftback.png")}
+                  style={styles.button}
+                />
+              </TouchableOpacity>
+            </View>
+            <View style={styles.view2}>
+              <Text style={styles.dateText}>{formattedDate}</Text>
+            </View>
+
+            <View style={styles.view3}>
+              <TouchableOpacity
+                style={[styles.button, isNextDisabled && styles.buttonDisabled]}
+                onPress={handleNext}
+                disabled={isNextDisabled}
+              >
+                <Image
+                  source={require("../../../assets/images/rightnext.png")}
+                  style={styles.buttonImage}
+                />
+              </TouchableOpacity>
+            </View>
           </View>
         </View>
       )}
 
       <View>
-        <Text style={styles.dateText}>{currentDate}</Text>
-        <DayMoodChart data={groupedData[currentDay]} />
-      </View>
-      <View style={styles.image}>
-        <Image source={moodToImage[maxHeightMood]} />
+        <DayMoodChart
+          data={groupedData[currentDay]}
+          maxHeightMood={maxHeightMood}
+        />
       </View>
     </ScrollView>
   );
@@ -240,10 +263,7 @@ const AnalysisGraph = () => {
 const styles = StyleSheet.create({
   navigationContainer: {
     flexDirection: "row",
-    justifyContent: "space-between",
-    marginHorizontal: 100,
-    // marginTop: 32,
-    // backgroundColor: "yellow",
+    marginTop: 15,
   },
 
   selectedEmojiContainer: {
@@ -272,28 +292,25 @@ const styles = StyleSheet.create({
     height: 280,
     opacity: 0.8,
     alignSelf: "center",
-    marginTop: -280,
+    marginTop: "-68%",
   },
   text: {
     fontSize: 16,
     fontWeight: "300",
     color: "#40495B",
     alignSelf: "center",
-    marginTop: 30,
+    marginTop: 20,
   },
-  graphContainer: {
-    marginTop: -280,
-  },
+  // graphContainer: {
+  //   marginTop: -250,
+  // },
   button: {
-    width: 60,
-    height: 40,
-    // backgroundColor: "yellow",
+    alignSelf: "flex-end",
+    top: 13,
   },
   buttonImage: {
-    alignSelf: "center",
-    top: 16,
-    width: 15,
-    height: 15,
+    // top: 10,
+    right: 120,
   },
   buttonDisabled: {
     opacity: 0.5,
@@ -302,12 +319,19 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: "400",
     textAlign: "center",
-    marginBottom: 10,
-    marginTop: -27,
+    top: 10,
+  },
+  view1: {
+    flex: 2,
     // backgroundColor: "yellow",
-    width: 100,
-
-    alignSelf: "center",
+  },
+  view2: {
+    flex: 2,
+    // backgroundColor: "red",
+  },
+  view3: {
+    flex: 2,
+    // backgroundColor: "yellow",
   },
 });
 
