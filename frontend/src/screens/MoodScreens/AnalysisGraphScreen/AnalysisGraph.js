@@ -73,8 +73,9 @@ const AnalysisGraph = () => {
       return acc;
     }, {});
 
-    const maxMood = Object.keys(calculatedHeights).reduce((a, b) =>
-      calculatedHeights[a] > calculatedHeights[b] ? a : b
+    const maxMood = Object.keys(calculatedHeights).reduce(
+      (a, b) => (calculatedHeights[a] > calculatedHeights[b] ? a : b),
+      ""
     );
 
     return { calculatedHeights, maxMood };

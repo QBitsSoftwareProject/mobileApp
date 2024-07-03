@@ -36,7 +36,7 @@ const NotifyScreen = () => {
 
   useEffect(() => {
     fetchNotification();
-  }, []);
+  }, [isRefresh]);
 
   useWebSockets((notification) => {
     fetchNotification();
