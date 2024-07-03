@@ -324,8 +324,8 @@ const Question = () => {
           >
             <Text
               style={{
-                color: "black",
-                fontSize: 14,
+                color: !selectedOption ? "gray" : "black",
+                fontSize: 16,
                 alignSelf: "center",
               }}
             >
@@ -338,7 +338,7 @@ const Question = () => {
             onPress={handleSubmitButton}
             disabled={!selectedOption}
           >
-            <Text style={{ color: "black", fontSize: 14, alignSelf: "center" }}>
+            <Text style={{ color: !selectedOption ? "gray" : "black", fontSize: 14, alignSelf: "center" }}>
               Submit
             </Text>
           </TouchableOpacity>

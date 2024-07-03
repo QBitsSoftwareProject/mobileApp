@@ -272,7 +272,7 @@ const styles = StyleSheet.create({
     height: 280,
     opacity: 0.8,
     alignSelf: "center",
-    marginTop: -280,
+    marginTop:"-68%",
   },
   text: {
     fontSize: 16,
