@@ -24,6 +24,7 @@ import {
 import CommentCard from "../../../components/CFCard/CommentCard";
 import loadingGif from "../../../assets/animation/loading.gif";
 import Toast from "react-native-toast-message";
+import { useWebSockets } from "../../../services/socketServices/webSocket";
 
 const CommentPage = () => {
   const route = useRoute();
@@ -74,6 +75,11 @@ const CommentPage = () => {
       console.error("Error accessing AsyncStorage:", error.message);
     }
   };
+
+  //websockets
+  useWebSockets((comment) => {
+    fetchComment();
+  });
 
   const fetchComment = async () => {
     try {
@@ -136,7 +142,6 @@ const CommentPage = () => {
   return (
     <SafeAreaView
       style={{
-        paddingTop: 35,
         paddingBottom: isKeyboardVisible ? 50 : 130,
         flex: 1,
       }}
@@ -145,7 +150,7 @@ const CommentPage = () => {
         <Image source={require("../../../assets/images/BackBlack.png")} />
       </TouchableOpacity>
 
-      <ScrollView style={{ paddingHorizontal: 25, paddingTop: 80 }}>
+      <ScrollView style={{ paddingHorizontal: 25 }}>
         <View>
           {commentList.map((item) => (
             <CommentCard
@@ -204,7 +209,6 @@ const styles = StyleSheet.create({
     zIndex: 10,
     justifyContent: "space-between",
     paddingHorizontal: 25,
-    paddingVertical: 5,
   },
   textinput: {
     width: "90%",
@@ -223,8 +227,8 @@ const styles = StyleSheet.create({
     opacity: 0.8,
   },
   backButton: {
-    position: "absolute",
-    margin: 35,
+    margin: 25,
+    marginBottom: 10,
     zIndex: 20,
   },
 });

@@ -1,3 +1,4 @@
+const { broadcastObject } = require("../../../config/webSocket");
 const commentsSchema = require("../../models/comments/commentsModels");
 const notificationSchema = require("../../models/notification/notification");
 const {
@@ -30,11 +31,15 @@ exports.createComment = async (req, res) => {
       "Post"
     );
 
+    // Broadcast the notification via WebSocket
+    broadcastObject(newComment);
+
     return res.status(201).json("New comment succesfully created!");
   } catch (error) {
     console.error(error);
-    return res
-      .status(500)
-      .json({ message: "New comment created unsuccsess!", error: error });
+    return res.status(500).json({
+      message: "New comment created unsuccsess!",
+      error: error.message,
+    });
   }
 };

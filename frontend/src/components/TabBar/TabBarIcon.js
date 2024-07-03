@@ -1,5 +1,5 @@
 import { View, Text, Image } from "react-native";
-import React from "react";
+import React, { useEffect } from "react";
 
 const IconMapping = {
   home: require("../../assets/images/home.png"),
@@ -8,29 +8,34 @@ const IconMapping = {
   setting: require("../../assets/images/setting.png"),
 };
 
-const TabBarIcon = ({ focused, screenName, isNotification }) => (
-  <View style={{ justifyContent: "center", alignItems: "center" }}>
-    {focused ? (
+const TabBarIcon = ({ focused, screenName, isNotification }) => {
+  return (
+    <View style={{ justifyContent: "center", alignItems: "center" }}>
+      {focused ? (
+        <Image
+          source={require("../../assets/images/ellipse.png")}
+          style={{ position: "absolute", tintColor: "#d5e4eb" }}
+        />
+      ) : screenName == "notification" && isNotification ? (
+        <View
+          style={{
+            height: 12,
+            width: 12,
+            backgroundColor: "#FF0000",
+            borderRadius: 100,
+            position: "absolute",
+            zIndex: 100,
+            top: -16,
+            right: -2,
+          }}
+        ></View>
+      ) : null}
       <Image
-        source={require("../../assets/images/ellipse.png")}
-        style={{ position: "absolute", tintColor: "#d5e4eb" }}
+        source={IconMapping[screenName]}
+        style={{ tintColor: "#9dabb3" }}
       />
-    ) : screenName == "notification" && isNotification ? (
-      <View
-        style={{
-          height: 12,
-          width: 12,
-          backgroundColor: "#FF0000",
-          borderRadius: 100,
-          position: "absolute",
-          zIndex: 100,
-          top: -16,
-          right: -2,
-        }}
-      ></View>
-    ) : null}
-    <Image source={IconMapping[screenName]} style={{ tintColor: "#9dabb3" }} />
-  </View>
-);
+    </View>
+  );
+};
 
 export default TabBarIcon;

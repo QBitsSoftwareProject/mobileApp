@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import { View, ScrollView, Dimensions, StyleSheet } from "react-native";
 import CFHeaderSub from "../../../components/ComForumHeader/CFHeader";
 import PostCard from "../../../components/CFCard/PostCard";
-import FloatingButton from "../../../components/CFButton/FloatingButton";
+// import FloatingButton from "../../../components/CFButton/FloatingButton";
+import FloatingButton from "../../../components/floating/floatingbtn";
 import {
   useFocusEffect,
   useNavigation,

@@ -32,6 +32,7 @@ const questionRouter = require("./api/routes/question.route.js");
 const markRouter = require("./api/routes/mark.route.js");
 const currentMood = require("./api/routes/currentMoodInput.js");
 const methodRouter = require("./api/routes/method.route.js");
+const { setupWebSocket } = require("./config/webSocket.js");
 
 // app.use("/questions",questionRouter);
 //app.use("/options",optionRouter);
@@ -64,9 +65,12 @@ app.use("/api/v1/method", methodRouter);
 app.use("/api/v1/notification", notificationRouter);
 app.use("/api/v1/report", reportRoute);
 
-app.listen(PORT, () => {
+const server = app.listen(PORT, () => {
   console.log(`server is running on port ${PORT}`);
 
   //database connection
   connect();
 });
+
+// Setup WebSocket
+setupWebSocket(server);

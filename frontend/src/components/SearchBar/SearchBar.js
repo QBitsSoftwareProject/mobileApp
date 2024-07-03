@@ -16,15 +16,7 @@ const SearchBar = ({ schema, keyword }) => {
   const [userList, setUserList] = useState([]);
 
   const navigation = useNavigation();
-  // Function to fetch search results
-  const fetchSearchResult = async () => {
-    try {
-      const res = await getSearchProfile(textInputValue, schema);
-      setUserList(res);
-    } catch (error) {
-      console.error("Error searching users:", error);
-    }
-  };
+
   // Effect to fetch search results when text input value changes
   useEffect(() => {
     if (schema == "edu") {
@@ -36,15 +28,15 @@ const SearchBar = ({ schema, keyword }) => {
     }
   }, [textInputValue]);
 
-  // Reset text input and search results when navigating away from SearchBar
-  useFocusEffect(
-    React.useCallback(() => {
-      return () => {
-        setTextInputValue(""); // Clear text input value
-        setUserList([]); // Reset userList when navigating away from SearchBar
-      };
-    }, [])
-  );
+  // Function to fetch search results
+  const fetchSearchResult = async () => {
+    try {
+      const res = await getSearchProfile(textInputValue, schema);
+      setUserList(res);
+    } catch (error) {
+      console.error("Error searching users:", error);
+    }
+  };
 
   // Function to handle navigation to profile screen
   const handleNavigateToProfile = (userId) => {
@@ -54,6 +46,16 @@ const SearchBar = ({ schema, keyword }) => {
       navigation.navigate("MakeAppointment", { id: userId });
     }
   };
+
+  // Reset text input and search results when navigating away from SearchBar
+  useFocusEffect(
+    React.useCallback(() => {
+      return () => {
+        setTextInputValue(""); // Clear text input value
+        setUserList([]); // Reset userList when navigating away from SearchBar
+      };
+    }, [])
+  );
 
   return (
     <View>

@@ -3,28 +3,24 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import SettingScreen from "../../screens/SettingScreen/SettingScreen";
 import NotifyScreen from "../../screens/NotificationScreen/NotifyScreen";
 import ProfileScreen from "../../screens/ProfileScreen/ProfileScreen";
-// import HomeStack from "../../navigation/routes/HomeStack";
 import TabBarIcon from "./TabBarIcon";
 import MusicPlayer from "./BackgroundMusic";
 import { BackgroundMusicContext } from "../SettingScreen/BackgroundMusicProvider";
-import {
-  View,
-  Text,
-  StyleSheet,
-  Image,
-  ActivityIndicator,
-  Keyboard,
-} from "react-native";
-import { checkNotifiaction } from "../../services/notificationService/notificationService";
+import { View, ActivityIndicator, Keyboard } from "react-native";
+import { checkNotification } from "../../services/notificationService/notificationService";
 import { useNavigation } from "@react-navigation/native";
+import { useWebSockets } from "../../services/socketServices/webSocket";
 
 const Tab = createBottomTabNavigator();
 
 const TabBar = ({ route, user, userRole }) => {
   const [isKeyboardVisible, setKeyboardVisible] = useState(false);
   const [isNotification, setIsNotification] = useState(false);
+  const [notificationList, setNotificationList] = useState();
   const [HomeStack, setHomeStack] = useState(null);
   const navigation = useNavigation();
+
+  useEffect(() => {}, [notificationList]);
 
   useEffect(() => {
     const keyboardDidShowListener = Keyboard.addListener(
@@ -47,15 +43,12 @@ const TabBar = ({ route, user, userRole }) => {
     };
   }, []);
 
-  // Check unread notification
-  const checkNotify = async () => {
-    try {
-      const res = await checkNotifiaction();
-      setIsNotification(res.notify);
-    } catch (error) {
-      console.log(error);
+  // web socket
+  useWebSockets((notification) => {
+    if (notification) {
+      setIsNotification(true);
     }
-  };
+  });
 
   const loadHomeStack = async () => {
     const { default: loadedHomeStack } = await import(
@@ -67,7 +60,6 @@ const TabBar = ({ route, user, userRole }) => {
   useEffect(() => {
     const runEffect = async () => {
       await loadHomeStack();
-      checkNotify();
     };
 
     const unsubscribe = navigation.addListener("state", runEffect);
@@ -153,6 +145,11 @@ const TabBar = ({ route, user, userRole }) => {
         <Tab.Screen
           name="Notification"
           component={NotifyScreen}
+          listeners={{
+            tabPress: (e) => {
+              setIsNotification(false);
+            },
+          }}
           options={{
             tabBarIcon: ({ focused }) => (
               <TabBarIcon

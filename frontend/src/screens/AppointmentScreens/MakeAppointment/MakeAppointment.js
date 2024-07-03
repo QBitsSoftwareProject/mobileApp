@@ -31,6 +31,8 @@ const MakeAppointment = ({ route }) => {
   const [pressDay, setPressDay] = useState(6);
   const [selectedDateIndex, setSelectedDateIndex] = useState(null);
 
+  const navigation = useNavigation();
+
   const dateIncrement = (number) => {
     const currentDate = new Date();
     currentDate.setDate(currentDate.getDate() + number);
@@ -42,15 +44,7 @@ const MakeAppointment = ({ route }) => {
     currentDate.setDate(currentDate.getDate() + number);
     const day = currentDate.getDay();
 
-    const weekdays = [
-      "Sunday",
-      "Monday",
-      "Tuesday",
-      "Wednesday",
-      "Thursday",
-      "Friday",
-      "Saturday",
-    ];
+    const weekdays = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
     return weekdays[day];
   };
@@ -73,8 +67,6 @@ const MakeAppointment = ({ route }) => {
       console.log(error);
     }
   };
-  // Hook for navigation
-  const navigation = useNavigation();
 
   const showMessage = (message) => {
     if (getTime) {
@@ -87,7 +79,6 @@ const MakeAppointment = ({ route }) => {
   const confirmMessage = async () => {
     try {
       await createAppointment(doctor._id, getDate, getTime);
-
       navigation.navigate("AppointmentStatus");
     } catch (error) {
       console.log(error);
@@ -112,42 +103,43 @@ const MakeAppointment = ({ route }) => {
     navigation.navigate("AvailableDoctors");
   };
 
-  if (!doctor) {
-    return (
-      <View
-        style={{
-          width: "100%",
-          height: "100%",
-          alignItems: "center",
-          justifyContent: "center",
-        }}
-      >
-        <Image source={loardingGIF} />
-      </View>
-    );
-  }
-
   const handleDatePress = (item, value) => {
     setDateBtnPress(value);
 
-    if (item == "Monday") {
+    if (item == "Mon") {
       setPressDay(0);
-    } else if (item == "Tuesday") {
+    } else if (item == "Tue") {
       setPressDay(1);
-    } else if (item == "Wednesday") {
+    } else if (item == "Wed") {
       setPressDay(2);
-    } else if (item == "Thursday") {
+    } else if (item == "Thu") {
       setPressDay(3);
-    } else if (item == "Friday") {
+    } else if (item == "Fri") {
       setPressDay(4);
-    } else if (item == "Saturday") {
+    } else if (item == "Sat") {
       setPressDay(5);
-    } else if (item == "Sunday") {
+    } else if (item == "Sun") {
       setPressDay(6);
     } else {
       null;
     }
   };
+
+  const chunkArray = (array, chunkSize) => {
+    const result = [];
+    for (let i = 0; i < array.length; i += chunkSize) {
+      result.push(array.slice(i, i + chunkSize));
+    }
+    return result;
+  };
+
+  if (!doctor) {
+    return (
+      <View style={styles.loardingGif}>
+        <Image source={loardingGIF} />
+      </View>
+    );
+  }
   // console.log(doctor);
   return (
     <SafeAreaView style={{ margin: 25 }}>
@@ -222,23 +214,29 @@ const MakeAppointment = ({ route }) => {
         <View style={{ marginBottom: 20 }}>
           <Text style={styles.title}>Available Time Slot</Text>
 
-          <View
-            style={{
-              flexDirection: "row",
-              flexWrap: "wrap",
-              justifyContent: "space-between",
-            }}
-          >
-            {doctor.availableTimes[pressDay].map((item, index) => (
-              <TimeButton
-                key={index}
-                time={item}
-                indexKey={index}
-                press={setTimebtnPress}
-                change={timeBtnpress}
-                getTime={setGetTime}
-              />
-            ))}
+          <View>
+            {chunkArray(doctor.availableTimes[pressDay], 3).map(
+              (row, rowIndex) => (
+                <View
+                  key={rowIndex}
+                  style={{
+                    flexDirection: "row",
+                    justifyContent: "space-between",
+                  }}
+                >
+                  {row.map((item, index) => (
+                    <TimeButton
+                      key={index}
+                      time={item}
+                      indexKey={index}
+                      press={setTimebtnPress}
+                      change={timeBtnpress}
+                      getTime={setGetTime}
+                    />
+                  ))}
+                </View>
+              )
+            )}
           </View>
         </View>
 

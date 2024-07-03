@@ -39,20 +39,3 @@ export const notificationStatusUpdate = async (id) => {
     throw new Error("Error during request setup");
   }
 };
-
-export const checkNotifiaction = async () => {
-  try {
-    const token = await AsyncStorage.getItem("authToken");
-    const response = await axios.get(
-      URL + "/check-notification",
-
-      {
-        headers: { authtoken: token },
-      }
-    );
-
-    return response.data;
-  } catch (error) {
-    throw new Error("Error during request setup");
-  }
-};

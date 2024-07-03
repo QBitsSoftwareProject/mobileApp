@@ -48,7 +48,7 @@ const WelcomeScreen = () => {
         <View
           style={[styles.logoFrame, { height: frameHeight, width: frameWidth }]}
         >
-          <Text style={styles.logoText}>LOGO</Text>
+          <Text style={styles.logoText}>MELODI</Text>
         </View>
 
         <Text style={styles.headText}>Make a better mindset</Text>
