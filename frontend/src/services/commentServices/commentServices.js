@@ -123,7 +123,7 @@ export const deleteAComment = async (commentId) => {
     const response = await axios.delete(URL + "/delete-comment/" + commentId, {
       headers: { authtoken: token },
     });
-    console.log(response.data);
+
     return response.data;
   } catch (error) {
     console.log(error);

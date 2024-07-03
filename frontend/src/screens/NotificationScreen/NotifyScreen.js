@@ -7,12 +7,13 @@ import {
   SafeAreaView,
   Keyboard,
 } from "react-native";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigation, useFocusEffect } from "@react-navigation/native";
 import NotificationCard from "../../components/NotificationCard/NotificationCard";
 import { getNotification } from "../../services/notificationService/notificationService";
 import loadingGif from "../../assets/animation/loading.gif";
 import notFoundGif from "../../assets/animation/not-found.png";
+import { useWebSockets } from "../../services/socketServices/webSocket";
 
 const NotifyScreen = () => {
   const [notificationList, setNotificationList] = useState();
@@ -33,11 +34,14 @@ const NotifyScreen = () => {
     }
   };
 
-  useFocusEffect(
-    React.useCallback(() => {
-      fetchNotification();
-    }, [isRefresh])
-  );
+  useEffect(() => {
+    fetchNotification();
+  }, [isRefresh]);
+
+  useWebSockets((notification) => {
+    fetchNotification();
+  });
+
   if (!notificationList) {
     return (
       <View
@@ -106,6 +110,7 @@ const NotifyScreen = () => {
 const styles = StyleSheet.create({
   backButton: {
     margin: 25,
+    marginBottom: 10,
 
     zIndex: 20,
   },

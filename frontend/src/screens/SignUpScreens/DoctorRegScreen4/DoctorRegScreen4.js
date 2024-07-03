@@ -219,7 +219,13 @@ const DoctorRegScreen4 = ({ route }) => {
           <View style={{ marginBottom: 32 }}>
             <Text style={styles.privacyText}>Privacy and Policies</Text>
 
-            <TouchableOpacity>
+            <TouchableOpacity
+              onPress={() =>
+                navigation.navigate("PrivacyAndPolicy", {
+                  prevScreen: "UserRegScreen",
+                })
+              }
+            >
               <Text style={styles.privacyLink}>
                 Click here to view our Privacy Policy for more information.
               </Text>

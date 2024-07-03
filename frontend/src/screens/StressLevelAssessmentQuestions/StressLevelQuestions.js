@@ -10,6 +10,7 @@ import { submitMarksToDatabase } from "../../services/stressMarksServices/stress
 import axiosInstance from "../../api/axios.js";
 import { BackgroundMusicContext } from "../../components/SettingScreen/BackgroundMusicProvider";
 
+
 import { useFocusEffect } from "@react-navigation/native";
 import {
   fetchQuestionIds,
@@ -43,6 +44,24 @@ const Question = () => {
   const [mark, setMark] = useState("");
   const [submit, setSubmit] = useState(false);
   const [stressLevel, setStressLevel] = useState("");
+  const [hasShownToast, setHasShownToast] = useState(false);
+
+  const instruction = ()=>{
+    setTimeout(() => {
+    Toast.show({
+      type: 'instruction',
+      text1: 'Select an option and press next to continue',
+      
+    });
+  }, 1000);
+  }
+
+  useEffect(() => {
+    if (!hasShownToast) {
+      instruction();
+      setHasShownToast(true);
+    }
+  }, [hasShownToast]);
 
   useEffect(() => {
     const fetchId = async () => {
@@ -98,12 +117,19 @@ const Question = () => {
 
   const marks = [];
   const [allMarks, setAllMarks] = useState([]);
+  const [selectedAnswers, setSelectedAnswers] = useState({});
+ 
 
   const handleNextQuestion = () => {
     if (selectedOption) {
       setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
       setSelectedOption(null); // Reset selected option when moving to the next question
       setIsLoadingImage(true);
+
+      setSelectedAnswers((prevAnswers) => ({
+        ...prevAnswers,
+        [currentQuestionIndex]: selectedOption,
+      }))
 
       //to get the mark of selected option
       const selectedOptionIndex = options.indexOf(selectedOption);
@@ -117,6 +143,8 @@ const Question = () => {
       // console.log(selectedOptionMark);
       marks.push(selectedOptionMark);
       setAllMarks((prevAllMarks) => [...prevAllMarks, selectedOptionMark]);
+
+      
 
       // console.log(currentQuestionIndex);
 
@@ -144,6 +172,7 @@ const Question = () => {
   const navigation = useNavigation();
 
   const handleSubmitButton = () => {
+    
     if (selectedOption) {
       //to get the mark of selected option
       const selectedOptionIndex = options.indexOf(selectedOption);
@@ -172,6 +201,7 @@ const Question = () => {
   const handleBackButton = () => {
     if (currentQuestionIndex > 0) {
       setCurrentQuestionIndex((prevIndex) => prevIndex - 1);
+      setSelectedOption(selectedAnswers[currentQuestionIndex - 1]);
       setIsLoadingImage(true);
       allMarks.pop();
 
@@ -183,6 +213,14 @@ const Question = () => {
       navigation.navigate("HomeScreen");
     }
   };
+
+  useEffect(() => {
+    if (selectedAnswers[currentQuestionIndex] !== undefined) {
+      setSelectedOption(selectedAnswers[currentQuestionIndex]);
+    } else {
+      setSelectedOption(null);
+    }
+  }, [currentQuestionIndex, selectedAnswers]);
 
   if (!question) {
     return (
@@ -198,6 +236,8 @@ const Question = () => {
       </View>
     );
   }
+
+ 
 
   return (
     <SafeAreaView>

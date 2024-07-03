@@ -14,14 +14,31 @@ const SuccessToast = ({ text1, text2 }) => (
       text1Style={{
         fontSize: 15,
         fontWeight: '400',
-        
       }}
       text2Style={{
         fontSize: 12,
         color: 'gray'
       }}
     />
-    
+  </View>
+);
+
+const InstructionToast = ({ text1, text2 }) => (
+  <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+    <BaseToast
+      style={{ borderLeftColor: '#87CEEB', borderRadius: 15 }}
+      contentContainerStyle={{ paddingHorizontal: 15, flexDirection: 'column', alignItems: 'center' }}
+      text1={text1}
+      text2={text2}
+      text1Style={{
+        fontSize: 15,
+        fontWeight: '400',
+      }}
+      text2Style={{
+        fontSize: 12,
+        color: 'gray'
+      }}
+    />
   </View>
 );
 
@@ -44,6 +61,13 @@ const toastConfig = {
         fontSize: 13,
         color: 'red'
       }}
+    />
+  ),
+  instruction: (internalState) => (
+    <InstructionToast
+      {...internalState}
+      text1={internalState.text1}
+      text2={internalState.text2}
     />
   )
 };

@@ -4,6 +4,7 @@ import {
   Image,
   TouchableOpacity,
   ImageBackground,
+  SafeAreaView
 } from "react-native";
 import React from "react";
 import styles from "./styles";
@@ -17,6 +18,7 @@ const HeaderSub = (props) => {
   };
 
   return (
+    <SafeAreaView>
     <View style={styles.contains}>
       <ImageBackground
         source={require("../../assets/images/blueSqures.png")}
@@ -33,6 +35,7 @@ const HeaderSub = (props) => {
         </View>
       </ImageBackground>
     </View>
+    </SafeAreaView>
   );
 };
 

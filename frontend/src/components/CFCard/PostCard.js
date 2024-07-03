@@ -204,6 +204,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     padding: 10,
     justifyContent: "space-between",
+    zIndex:1000
   },
   imageframe: {
     height: 35,
