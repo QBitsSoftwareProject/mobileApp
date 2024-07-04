@@ -544,23 +544,18 @@ const ProfileScreen = () => {
         style={{
           flexDirection: "row",
           alignItems: "center",
-          marginTop: 60,
-          marginBottom: 40,
+          marginBottom: 15,
         }}
       >
-        <TouchableOpacity
-          onPress={handlebackBtn}
-          style={{ position: "absolute" }}
-        >
-          <Image
-            source={require("../../assets/images/backProfile.png")}
-            style={{ marginLeft: 25, width: 50, height: 50 }}
-          />
-        </TouchableOpacity>
+        <View style={styles.header}>
+          <TouchableOpacity onPress={handlebackBtn}>
+            <Image source={require("../../assets/images/BackBlack.png")} />
+          </TouchableOpacity>
 
-        <Text style={{ textAlign: "center", fontSize: 20, width: "100%" }}>
-          Profile
-        </Text>
+          <View style={styles.headerTextView}>
+            <Text style={styles.headerText}>Profile</Text>
+          </View>
+        </View>
       </View>
 
       <View style={styles.imageEdit}>

@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   SafeAreaView,
   Dimensions,
+  Keyboard,
 } from "react-native";
 import { EmojiPicker } from "./emoji";
 import styles from "./styles";
@@ -32,6 +33,8 @@ export const AddNewJournal = ({ navigation }) => {
   const [emoji, setEmoji] = useState("");
   const [date, setDate] = useState("");
   const [time, setTime] = useState("");
+
+  const [isKeyboardVisible, setKeyboardVisible] = useState(false);
 
   // Popup visible function
   const toggleOverlay = () => {
@@ -126,7 +129,11 @@ export const AddNewJournal = ({ navigation }) => {
         back={"ViewJournal"}
       />
 
-      <View style={{ height: screenHeight - 250 }}>
+      <View
+        style={{
+          marginBottom: 400,
+        }}
+      >
         <ScrollView style={{ paddingTop: 0 }}>
           <SafeAreaView style={styles.container}>
             <Text style={styles.Text}>Select Your Mood</Text>

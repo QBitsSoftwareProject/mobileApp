@@ -6,6 +6,7 @@ import {
   ScrollView,
   SafeAreaView,
   Keyboard,
+  Text,
 } from "react-native";
 import React, { useEffect, useState } from "react";
 import { useNavigation, useFocusEffect } from "@react-navigation/native";
@@ -17,7 +18,7 @@ import { useWebSockets } from "../../services/socketServices/webSocket";
 
 const NotifyScreen = () => {
   const [notificationList, setNotificationList] = useState();
-  const [isRefresh, setIsRefresh] = useState();
+  const [isRefresh, setIsRefresh] = useState(false);
 
   const navigation = useNavigation();
 
@@ -64,9 +65,15 @@ const NotifyScreen = () => {
         flex: 1,
       }}
     >
-      <TouchableOpacity onPress={goBackFromComment} style={styles.backButton}>
-        <Image source={require("../../assets/images/BackBlack.png")} />
-      </TouchableOpacity>
+      <View style={styles.header}>
+        <TouchableOpacity onPress={goBackFromComment}>
+          <Image source={require("../../assets/images/BackBlack.png")} />
+        </TouchableOpacity>
+
+        <View style={styles.headerTextView}>
+          <Text style={styles.headerText}>Profile</Text>
+        </View>
+      </View>
 
       <ScrollView style={{ paddingHorizontal: 25 }}>
         {notificationList.length == 0 && (
@@ -108,11 +115,27 @@ const NotifyScreen = () => {
 };
 
 const styles = StyleSheet.create({
-  backButton: {
-    margin: 25,
-    marginBottom: 10,
+  header: {
+    flexDirection: "row",
+    padding: 25,
 
     zIndex: 20,
+    alignItems: "center",
+    gap: 32,
+    width: "100%",
+  },
+
+  headerTextView: {
+    width: "100%",
+    position: "absolute",
+    marginLeft: 25,
+  },
+
+  headerText: {
+    fontSize: 24,
+    color: "#101318",
+    fontWeight: "500",
+    textAlign: "center",
   },
 });
 

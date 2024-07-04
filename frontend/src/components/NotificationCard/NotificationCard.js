@@ -66,9 +66,8 @@ const NotificationCard = (props) => {
         screen: "AppointmentStatus",
         params: { postId: props.postId, previousScreen: "AvailableDoctors" },
       });
-    } else {
-      props.isRefresh((prev) => !prev);
     }
+    props.isRefresh((prev) => !prev);
   };
 
   const formattedDate = formatTimestamp(props.Date);

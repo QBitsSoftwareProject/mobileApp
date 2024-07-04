@@ -30,7 +30,7 @@ exports.getSelectedGoals = async (req, res) => {
     await regularUser.findByIdAndUpdate(req.user.user_id, getUser);
 
     // Sending success response with status code 200 and the selected goals
-    return res.status(200).json(selectedGoals);
+    return res.status(200).json(selectedGoals.reverse());
   } catch (err) {
     res.status(500).json({ error: "fetch failed", error: err.message });
   }

@@ -15,18 +15,27 @@ import { getAUser } from "../../../services/userServices/userService";
 import { getTime } from "../../TaskScreens/WelcomeScreen/GetTime";
 
 const AnalysisGraph = () => {
-  // State variables initialization
   const [data, setData] = useState([]);
   const [username, setUsername] = useState("");
   const [currentDayIndex, setCurrentDayIndex] = useState(0);
   const [heights, setHeights] = useState({});
   const [maxHeightMood, setMaxHeightMood] = useState(null);
   const [isNextDisabled, setIsNextDisabled] = useState(true);
-  const [hasNavigatedBack, setHasNavigatedBack] = useState(false); // Track if user has navigated back
-  const [isToday, setIsToday] = useState(true); // Track if the current chart is today's chart
-  const [currentDate, setCurrentDate] = useState("");
+  const [isBackDisabled, setIsBackDisabled] = useState(false);
+  const [isToday, setIsToday] = useState(true);
+  const [startDate, setStartDate] = useState("");
+  const [startDayIndex, setStartDayIndex] = useState(0);
+  const [endDayIndex, setEndDayIndex] = useState(0);
 
-  // Array defining days of the week
+  // get current date and get minus from it
+  const today = new Date();
+  today.setDate(today.getDate() - 1); // Subtract 1 day
+
+  // set the state to current date
+  const [currentDate, setCurrentDate] = useState(
+    today.toISOString().split("T")[0]
+  );
+
   const daysOfWeek = [
     "Monday",
     "Tuesday",
@@ -37,7 +46,6 @@ const AnalysisGraph = () => {
     "Sunday",
   ];
 
-  // Function to group mood data by day
   const groupDataByDay = (data) => {
     const groupedData = {
       Monday: [],
@@ -60,7 +68,6 @@ const AnalysisGraph = () => {
     return groupedData;
   };
 
-  // Function to calculate mood statistics
   const calculateMoodStats = (data) => {
     const moodCounts = data.reduce((acc, item) => {
       acc[item.moodText] = (acc[item.moodText] || 0) + 1;
@@ -77,7 +84,6 @@ const AnalysisGraph = () => {
       return acc;
     }, {});
 
-    // Finding the most frequent mood
     const maxMood = Object.keys(calculatedHeights).reduce((a, b) =>
       calculatedHeights[a] > calculatedHeights[b] ? a : b
     );
@@ -85,18 +91,21 @@ const AnalysisGraph = () => {
     return { calculatedHeights, maxMood };
   };
 
-  // Effect to fetch mood data on component mount
   useEffect(() => {
     const fetchMoodInputs = async () => {
       try {
         const moodData = await getMoodsByUserId();
         const today = new Date();
         const sevenDaysAgo = new Date();
-        sevenDaysAgo.setDate(today.getDate() - 7); // Calculate date 7 days ago
+        sevenDaysAgo.setDate(today.getDate() - 7);
+
+        const sevenDaysAgoFormatted = sevenDaysAgo.toISOString().split("T")[0];
+        setStartDate(sevenDaysAgoFormatted);
+        // console.log("startDate", startDate);
 
         const filteredData = moodData.filter((item) => {
           const date = new Date(item.date);
-          return date >= sevenDaysAgo && date <= today; // Filter mood data for last 7 days
+          return date >= sevenDaysAgo && date <= today;
         });
 
         setData(filteredData);
@@ -108,7 +117,6 @@ const AnalysisGraph = () => {
     fetchMoodInputs();
   }, []);
 
-  // Effect to fetch user name on component mount
   useEffect(() => {
     const getName = async () => {
       try {
@@ -121,54 +129,61 @@ const AnalysisGraph = () => {
     getName();
   }, []);
 
-  // Effect to set current day index on component mount
   useEffect(() => {
     const today = new Date().getDay();
-    setCurrentDayIndex(today - 1); // set current day index based on today (0: Sunday, 6: Saturday)
+    setCurrentDayIndex(today - 1);
+    setEndDayIndex(today - 1);
   }, []);
 
-  // Function to update mood statistics based on current day data
+  useEffect(() => {
+    const startIndex = new Date(startDate).getDay();
+    setStartDayIndex(startIndex);
+  }, [startDate]);
+
   const updateMoodStats = (dayData) => {
     const { calculatedHeights, maxMood } = calculateMoodStats(dayData);
     setHeights(calculatedHeights);
     setMaxHeightMood(maxMood);
   };
 
-  // Effect to update mood stats, disable next button, and set current date on data or state changes
   useEffect(() => {
     if (data.length > 0) {
       const groupedData = groupDataByDay(data);
       const currentDayData = groupedData[daysOfWeek[currentDayIndex]];
-      updateMoodStats(currentDayData); // Update mood state based on current day data
 
-      const nextDayIndex = (currentDayIndex + 1) % 7;
-      const nextDayData = groupedData[daysOfWeek[nextDayIndex]];
-      setIsNextDisabled(!hasNavigatedBack && isToday); // Disable next button if isToday and hasn't navigated back
+      if (currentDayData.length === 0) {
+        setMaxHeightMood(null);
+        setHeights({});
+      } else {
+        updateMoodStats(currentDayData);
+      }
 
-      // Extract and set the date for the current day
       if (currentDayData.length > 0) {
         const date = new Date(currentDayData[0].date);
-        date.setDate(date.getDate() + 1); // Increase the date by one day
-        setCurrentDate(date.toISOString().split("T")[0]); // Format the date as YYYY-MM-DD
+        date.setDate(date.getDate() + 1);
+        setCurrentDate(date.toISOString().split("T")[0]);
       }
-    }
-  }, [data, currentDayIndex, hasNavigatedBack, isToday]);
 
-  // Function to handle next button press
+      setIsNextDisabled(currentDayIndex === endDayIndex);
+      // console.log("startDayIndex", startDayIndex);
+      setIsBackDisabled(currentDayIndex === startDayIndex);
+    }
+  }, [data, currentDayIndex]);
+
   const handleNext = () => {
     setCurrentDayIndex((prevIndex) => {
       const nextIndex = (prevIndex + 1) % 7;
-      setHasNavigatedBack(false);
       setIsToday(nextIndex === new Date().getDay() - 1);
       return nextIndex;
     });
   };
 
-  // Function to handle back button press
   const handleBack = () => {
-    setCurrentDayIndex((prevIndex) => (prevIndex - 1 + 7) % 7);
-    setHasNavigatedBack(true);
-    setIsToday(false);
+    setCurrentDayIndex((prevIndex) => {
+      const nextIndex = (prevIndex - 1 + 7) % 7;
+      setIsToday(false);
+      return nextIndex;
+    });
   };
 
   const dateValue = getTime();
@@ -176,21 +191,23 @@ const AnalysisGraph = () => {
   const currentDay = daysOfWeek[currentDayIndex];
 
   function formatDate(dateString) {
-    // Parse the date string into a Date object
     const date = new Date(dateString);
-
-    // Get the month name and day
     const month = date.toLocaleString("default", { month: "long" });
     const day = date.getDate();
+    return `${month}-${day.toString().padStart(2, "0")}`;
+  }
 
-    // Format the date as "Month-DD"
+  function formatNextDate(dateString) {
+    const date = new Date(dateString);
+    date.setDate(date.getDate() + 1);
+    const month = date.toLocaleString("default", { month: "long" });
+    const day = date.getDate();
     return `${month}-${day.toString().padStart(2, "0")}`;
   }
 
   const formattedDate = formatDate(currentDate);
-  console.log(formattedDate); // Outputs: "July-03"
+  const formattedNextDate = formatNextDate(currentDate);
 
-  // Mappings of moods to emojis and images
   const moodToEmoji = {
     Lovely: "😍",
     Sad: "😭",
@@ -205,33 +222,56 @@ const AnalysisGraph = () => {
   return (
     <ScrollView>
       <HeaderSubAnalysis headLine={"Good " + dateValue + " " + username} />
-      {maxHeightMood && (
-        <View>
-          <View style={[styles.selectedEmojiContainer, { opacity: 0.2 }]}>
-            <Text style={styles.emojiTextLeft}>
-              {moodToEmoji[maxHeightMood]}
-            </Text>
-            <Text style={styles.emojiTextRight}>
-              {moodToEmoji[maxHeightMood]}
-            </Text>
-          </View>
-
-          <Text style={styles.emoji}>{moodToEmoji[maxHeightMood]}</Text>
+      {data.length === 0 ? (
+        <View style={styles.emptyStateContainer}>
           <Text style={styles.text}>
-            You are feeling {maxHeightMood} {currentDay}
+            No mood data available for {currentDay}
           </Text>
+          <Text style={styles.text}>{formattedNextDate}</Text>
+        </View>
+      ) : (
+        <View>
+          {maxHeightMood ? (
+            <View>
+              <View style={[styles.selectedEmojiContainer, { opacity: 0.2 }]}>
+                <Text style={styles.emojiTextLeft}>
+                  {moodToEmoji[maxHeightMood]}
+                </Text>
+                <Text style={styles.emojiTextRight}>
+                  {moodToEmoji[maxHeightMood]}
+                </Text>
+              </View>
+
+              <Text style={styles.emoji}>{moodToEmoji[maxHeightMood]}</Text>
+              <Text style={styles.text}>
+                You are feeling {maxHeightMood} {currentDay}
+              </Text>
+            </View>
+          ) : (
+            <View style={styles.emptyStateContainer}>
+              <Text style={styles.text}>
+                No mood data available for {currentDay}
+              </Text>
+              {/* <Text style={styles.text}>{formattedNextDate}</Text> */}
+            </View>
+          )}
 
           <View style={styles.navigationContainer}>
             <View style={styles.view1}>
-              <TouchableOpacity onPress={handleBack}>
+              <TouchableOpacity
+                style={[styles.button, isBackDisabled && styles.buttonDisabled]}
+                onPress={handleBack}
+                disabled={isBackDisabled}
+              >
                 <Image
                   source={require("../../../assets/images/leftback.png")}
-                  style={styles.button}
                 />
               </TouchableOpacity>
             </View>
             <View style={styles.view2}>
-              <Text style={styles.dateText}>{formattedDate}</Text>
+              <Text style={styles.dateText}>
+                {maxHeightMood ? formattedDate : formattedNextDate}
+              </Text>
             </View>
 
             <View style={styles.view3}>
@@ -301,15 +341,11 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     marginTop: 20,
   },
-  // graphContainer: {
-  //   marginTop: -250,
-  // },
   button: {
     alignSelf: "flex-end",
     top: 13,
   },
   buttonImage: {
-    // top: 10,
     right: 120,
   },
   buttonDisabled: {
@@ -323,15 +359,16 @@ const styles = StyleSheet.create({
   },
   view1: {
     flex: 2,
-    // backgroundColor: "yellow",
   },
   view2: {
     flex: 2,
-    // backgroundColor: "red",
   },
   view3: {
     flex: 2,
-    // backgroundColor: "yellow",
+  },
+  emptyStateContainer: {
+    alignItems: "center",
+    marginTop: 50,
   },
 });
 
