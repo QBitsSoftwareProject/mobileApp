@@ -40,12 +40,50 @@ const CommentPage = () => {
     navigation.navigate(previousScreen);
   };
 
+  useEffect(() => {
+    setCommentList(null);
+    fetchComment();
+    showSwipeToastOnceADay();
+    const keyboardDidShowListener = Keyboard.addListener(
+      "keyboardDidShow",
+      () => {
+        setKeyboardVisible(true);
+      }
+    );
+
+    const keyboardDidHideListener = Keyboard.addListener(
+      "keyboardDidHide",
+      () => {
+        setKeyboardVisible(false);
+      }
+    );
+
+    return () => {
+      keyboardDidShowListener.remove();
+      keyboardDidHideListener.remove();
+    };
+  }, [postId]);
+
   const handleSendButtonPress = async () => {
     if (!comment) return;
     try {
       await createComment(postId, comment);
       setComment("");
       fetchComment();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  //websockets
+  useWebSockets((comment) => {
+    fetchComment();
+  });
+
+  const fetchComment = async () => {
+    try {
+      const res = await getComments(postId);
+      setCommentList(res);
     } catch (error) {
       console.log(error);
     }
@@ -75,44 +113,6 @@ const CommentPage = () => {
       console.error("Error accessing AsyncStorage:", error.message);
     }
   };
-
-  //websockets
-  useWebSockets((comment) => {
-    fetchComment();
-  });
-
-  const fetchComment = async () => {
-    try {
-      const res = await getComments(postId);
-      setCommentList(res);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  useEffect(() => {
-    setCommentList(null);
-    fetchComment();
-    showSwipeToastOnceADay();
-    const keyboardDidShowListener = Keyboard.addListener(
-      "keyboardDidShow",
-      () => {
-        setKeyboardVisible(true);
-      }
-    );
-
-    const keyboardDidHideListener = Keyboard.addListener(
-      "keyboardDidHide",
-      () => {
-        setKeyboardVisible(false);
-      }
-    );
-
-    return () => {
-      keyboardDidShowListener.remove();
-      keyboardDidHideListener.remove();
-    };
-  }, [postId]);
 
   const onUpdateComment = () => {
     fetchComment();

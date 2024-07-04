@@ -4,39 +4,44 @@ const appointmentModel = require("../../models/appointments/appointmentsModels")
 exports.viewADoctor = async (req, res) => {
   try {
     const { doctorId } = req.body;
-    // Finding the user by ID
     const getDoctor = await doctorModel.findById(doctorId);
     const getAppointment = await appointmentModel.find({ doctorId: doctorId });
 
-    // getAppointment.map((item) => {
-    //   const timeArray = setTimeSlot(item.date, getDoctor);
-    //   // console.log("time:", timeArray, "app", item.time);
+    const getWeekRange = (date) => {
+      const start = new Date(date);
+      start.setHours(0, 0, 0, 0);
+      start.setDate(start.getDate() - start.getDay()); // Sunday
 
-    //   timeArray.map((timeSlot,index) => {
-    //     if (JSON.stringify(timeSlot) == JSON.stringify(item.time)) {
-    //       // console.log(timeSlot);
+      const end = new Date(start);
+      end.setDate(start.getDate() + 6); // Saturday
+      end.setHours(23, 59, 59, 999);
 
-    //     }
-    //   });
-    // });
+      return { start, end };
+    };
 
-    // Function to get available time slots excluding the booked ones
     const getAvailableTimes = (availableTimes, appointments) => {
-      return availableTimes.map((dayTimes, index) => {
-        const bookedTimes = appointments
-          .filter((appointment) => {
-            const appointmentDate = new Date(appointment.date);
-            return appointmentDate.getDay() === index;
-          })
-          .map((appointment) => appointment.time);
+      const now = new Date();
+      const { start, end } = getWeekRange(now);
 
-        return dayTimes.filter(
-          (timeSlot) =>
-            !bookedTimes.some(
-              (bookedTime) =>
-                JSON.stringify(timeSlot) === JSON.stringify(bookedTime)
-            )
-        );
+      return availableTimes.map((dayTimes, index) => {
+        return dayTimes.filter((timeSlot) => {
+          return !appointments.some((appointment) => {
+            const appointmentDate = new Date(appointment.date);
+
+            // Check if the appointment is within the same week and has already passed
+            const isSameDay = appointmentDate.getDay() === index;
+            const isPastDate =
+              appointmentDate > now &&
+              appointmentDate >= start &&
+              appointmentDate <= end;
+
+            return (
+              isSameDay &&
+              isPastDate &&
+              JSON.stringify(timeSlot) == JSON.stringify(appointment.time)
+            );
+          });
+        });
       });
     };
 
@@ -62,41 +67,14 @@ exports.viewADoctor = async (req, res) => {
       qualification: getDoctor.qualification,
       contactNumber: getDoctor.contactNumber,
     };
-    // console.log(getDoctor.monday);
 
-    // If user is not found, return a 404 error response
     if (!getDoctor) {
       return res.status(404).json({ message: "Doctor not found" });
     }
 
-    // Sending success response with status code 200 and the user object
     return res.status(201).json(doctorDetails);
   } catch (err) {
     console.log(err);
     res.status(500).json({ error: "User fetch failed", err: err.message });
   }
 };
-
-// const setTimeSlot = (date, getDoctor) => {
-//   const currentDate = new Date(date);
-
-//   switch (currentDate.getDay()) {
-//     case 6:
-//       return getDoctor.saturday;
-//     case 0:
-//       return getDoctor.sunday;
-//     case 1:
-//       return getDoctor.monday;
-//     case 2:
-//       return getDoctor.tuesday;
-//     case 3:
-//       return getDoctor.wednessday;
-//     case 4:
-//       return getDoctor.thursday;
-//     case 5:
-//       return getDoctor.friday;
-
-//     default:
-//       break;
-//   }
-// };

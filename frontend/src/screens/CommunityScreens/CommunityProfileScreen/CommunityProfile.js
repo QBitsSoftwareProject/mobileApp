@@ -63,13 +63,7 @@ const ProfileScreen = () => {
 
   if (!postList || !userData) {
     return (
-      <View
-        style={{
-          justifyContent: "center",
-          alignItems: "center",
-          height: "100%",
-        }}
-      >
+      <View style={styles.loadingGif}>
         <Image source={loadingGif} />
       </View>
     );
@@ -124,6 +118,12 @@ const styles = StyleSheet.create({
   contains: {
     flex: 1,
     paddingBottom: 70,
+  },
+  loadingGif: {
+    justifyContent: "center",
+    alignItems: "center",
+    height: "100%",
+    width: "100%",
   },
   image: {
     height: 62.5,

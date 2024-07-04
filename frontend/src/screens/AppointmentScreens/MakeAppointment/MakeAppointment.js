@@ -87,7 +87,6 @@ const MakeAppointment = ({ route }) => {
   const confirmMessage = async () => {
     try {
       await createAppointment(doctor._id, getDate, getTime);
-
       navigation.navigate("AppointmentStatus");
     } catch (error) {
       console.log(error);
@@ -95,7 +94,7 @@ const MakeAppointment = ({ route }) => {
         type: "error",
         text1: "Error",
         text2: "Failed to create appointment",
-        text1Style: { fontSize: 16, fontWeight: "200" },
+        text1Style: { fontSize: 16, fontWeight: "300" },
         text2Style: { fontSize: 14, fontWeight: "200" },
         visibilityTime: 2000,
         position: "top",
@@ -110,21 +109,6 @@ const MakeAppointment = ({ route }) => {
   const goBack = () => {
     navigation.navigate("AvailableDoctors");
   };
-
-  if (!doctor) {
-    return (
-      <View
-        style={{
-          width: "100%",
-          height: "100%",
-          alignItems: "center",
-          justifyContent: "center",
-        }}
-      >
-        <Image source={loardingGIF} />
-      </View>
-    );
-  }
 
   const handleDatePress = (item, value) => {
     setDateBtnPress(value);
@@ -147,6 +131,14 @@ const MakeAppointment = ({ route }) => {
       null;
     }
   };
+
+  if (!doctor) {
+    return (
+      <View style={styles.loardingGif}>
+        <Image source={loardingGIF} />
+      </View>
+    );
+  }
   // console.log(doctor);
   return (
     <SafeAreaView style={{ margin: 25 }}>
