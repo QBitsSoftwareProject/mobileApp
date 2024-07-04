@@ -151,8 +151,8 @@ const HomeScreen = (props) => {
   }
 
   return (
-    <SafeAreaView style={{ flex: 1, paddingBottom: 65 }}>
-      <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
+    <SafeAreaView style={{ marginBottom: 65 }}>
+      <ScrollView>
         <HomeTop
           headLine={"Hi," + user.userName}
           subHeadLine={

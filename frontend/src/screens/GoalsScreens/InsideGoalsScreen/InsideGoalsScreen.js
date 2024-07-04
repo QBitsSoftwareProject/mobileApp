@@ -115,7 +115,7 @@ const InsideGoalsScreen = ({ route }) => {
 
         {/* goals rendering ..................................................................................... */}
 
-        <View style={{ height: scrollHeight - 190 }}>
+        <View style={{ marginBottom: 220 }}>
           <ScrollView>
             <View style={styles.headTextBox}>
               <Text style={styles.goalHead}>{goal.title}</Text>

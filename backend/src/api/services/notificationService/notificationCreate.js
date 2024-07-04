@@ -41,7 +41,9 @@ exports.createNotification = async (
     await newNotification.save();
 
     // Broadcast the notification via WebSocket
-    broadcastObject(newNotification);
+    if (senderId != userId) {
+      broadcastObject(newNotification);
+    }
 
     return newNotification;
   } catch (error) {
