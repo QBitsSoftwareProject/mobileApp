@@ -7,43 +7,44 @@ exports.viewADoctor = async (req, res) => {
     const getDoctor = await doctorModel.findById(doctorId);
     const getAppointment = await appointmentModel.find({ doctorId: doctorId });
 
-    const getWeekRange = (date) => {
-      const start = new Date(date);
+    const getNext7DaysRange = () => {
+      const start = new Date();
       start.setHours(0, 0, 0, 0);
-      start.setDate(start.getDate() - start.getDay()); // Sunday
 
       const end = new Date(start);
-      end.setDate(start.getDate() + 6); // Saturday
+      end.setDate(start.getDate() + 7);
       end.setHours(23, 59, 59, 999);
 
       return { start, end };
     };
 
     const getAvailableTimes = (availableTimes, appointments) => {
-      const now = new Date();
-      const { start, end } = getWeekRange(now);
+      // const now = new Date();
+      const { start, end } = getNext7DaysRange();
 
       return availableTimes.map((dayTimes, index) => {
         return dayTimes.filter((timeSlot) => {
           return !appointments.some((appointment) => {
             const appointmentDate = new Date(appointment.date);
 
-            // Check if the appointment is within the same week and has already passed
+            // Check if the appointment is within the next 7 days
             const isSameDay = appointmentDate.getDay() === index;
-            const isPastDate =
-              appointmentDate > now &&
-              appointmentDate >= start &&
-              appointmentDate <= end;
+            const isWithinNext7Days =
+              appointmentDate >= start && appointmentDate <= end;
 
             return (
               isSameDay &&
-              isPastDate &&
+              isWithinNext7Days &&
               JSON.stringify(timeSlot) == JSON.stringify(appointment.time)
             );
           });
         });
       });
     };
+
+    if (!getDoctor) {
+      return res.status(404).json({ message: "Doctor not found" });
+    }
 
     let doctorDetails = {
       _id: getDoctor._id,
@@ -67,10 +68,6 @@ exports.viewADoctor = async (req, res) => {
       qualification: getDoctor.qualification,
       contactNumber: getDoctor.contactNumber,
     };
-
-    if (!getDoctor) {
-      return res.status(404).json({ message: "Doctor not found" });
-    }
 
     return res.status(201).json(doctorDetails);
   } catch (err) {

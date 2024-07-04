@@ -48,8 +48,8 @@ const MakeAppointment = ({ route }) => {
       "Tuesday",
       "Wednesday",
       "Thursday",
-      "Friday",
-      "Saturday",
+      "Fri",
+      "Sat",
     ];
 
     return weekdays[day];
@@ -112,6 +112,7 @@ const MakeAppointment = ({ route }) => {
 
   const handleDatePress = (item, value) => {
     setDateBtnPress(value);
+    // setPressDay(index)
 
     if (item == "Sunday") {
       setPressDay(0);
@@ -123,9 +124,9 @@ const MakeAppointment = ({ route }) => {
       setPressDay(3);
     } else if (item == "Thursday") {
       setPressDay(4);
-    } else if (item == "Friday") {
+    } else if (item == "Fri") {
       setPressDay(5);
-    } else if (item == "Saturday") {
+    } else if (item == "Sat") {
       setPressDay(6);
     } else {
       null;
@@ -139,7 +140,7 @@ const MakeAppointment = ({ route }) => {
       </View>
     );
   }
-  // console.log(doctor);
+  // console.log(doctor.availableTimes);
   return (
     <SafeAreaView style={{ margin: 25 }}>
       <View style={{ marginBottom: 20 }}>
