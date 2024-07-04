@@ -27,7 +27,7 @@ const {
 
 const router = express.Router();
 
-//user operations routes
+//doctor operations routes
 router.get("/", getDoctors);
 router.get("/registered-docotors", auth, getRegisteredDoctors);
 router.get("/one-doctor", auth, getADoctor);

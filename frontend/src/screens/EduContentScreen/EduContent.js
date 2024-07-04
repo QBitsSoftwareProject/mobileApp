@@ -1,9 +1,7 @@
 import {
   View,
   Text,
-  Pressable,
   ScrollView,
-  FlatList,
   Dimensions,
   Image,
 } from "react-native";
@@ -12,10 +10,7 @@ import styles from "../EduContentScreen/AllContent/style";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 // components
-import SearchBarComponent from "../../components/SearchBar/SearchBar";
 import SearchAndCategories from "../../components/SearchAndCategories/SearchAndCategories";
-import Carousel from "../../components/Carousel/Carousel";
-import Categories from "../../components/Categories/Categories";
 import Audios from "../../components/AudioList/Audios";
 import { getVideos } from "../../services/educationalServices/educationalServices";
 import VideoItem from "./VideoContent/VideoItem/VideoItem";
@@ -79,7 +74,7 @@ const EduContent = () => {
 
             {/* <Carousel /> */}
 
-            <Text style={styles.mainHeading2}>Recent Uploaded Videos</Text>
+            <Text style={styles.mainHeading2}>Here are your favorite videos</Text>
 
             <View style={{ marginTop: 20 }}>
               {videos.map((item, index) => (
@@ -89,7 +84,7 @@ const EduContent = () => {
               ))}
             </View>
 
-            <Text style={[styles.mainHeading2]}>Listen to Calm yourself</Text>
+            <Text style={[styles.mainHeading2]}>Here are your favorite audios</Text>
 
             <Audios />
           </View>
