@@ -62,6 +62,19 @@ const styles = StyleSheet.create({
     borderColor: "#4A90BF",
     borderWidth: 4,
   },
+  addToFavBtn: {
+    height: 40,
+    width: 40,
+    borderRadius: 100 / PixelRatio.get(),
+    zIndex: 100,
+    backgroundColor: "white",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    position: "relative",
+    marginTop: 5,
+    marginRight: 7
+  },
   VideoItem: {
     marginBottom: 32,
     backgroundColor: "white",
