@@ -100,6 +100,7 @@ const MakeAppointment = ({ route }) => {
         position: "top",
       });
     }
+    closeMessage();
   };
 
   const closeMessage = () => {

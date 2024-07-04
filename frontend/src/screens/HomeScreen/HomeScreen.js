@@ -89,7 +89,7 @@ const HomeScreen = (props) => {
     return () => {
       backHandler.remove();
     };
-  }, []);
+  }, [user]);
 
   const handleStressLevelPress = async () => {
     try {
