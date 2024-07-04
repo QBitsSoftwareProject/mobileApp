@@ -32,6 +32,7 @@ const InputField = (props) => {
             fontWeight: "400",
             color: "#40495B",
             marginBottom: 7,
+            width:'100%'
           }}
         >
           {props.label}
@@ -39,7 +40,7 @@ const InputField = (props) => {
         <Text style={{ color: "#E82519" }}>{props.errMsg}</Text>
       </View>
 
-      <View style={{ flex: 1 }}>
+      <View >
         <TextInput
           placeholder={props.placeHolder}
           style={{

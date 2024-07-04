@@ -134,7 +134,7 @@ export const EditJournal = ({ navigation, route }) => {
         back={"ViewJournal"}
       />
 
-      <View style={{ height: screenHeight - 190 }}>
+      <View style={{ marginBottom: 400 }}>
         <ScrollView>
           <SafeAreaView style={styles.container}>
             <Text style={styles.Text}>Feeling with</Text>

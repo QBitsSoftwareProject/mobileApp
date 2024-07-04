@@ -35,18 +35,7 @@ const ProfileCover = (props) => {
         />
       )}
 
-      <View
-        style={{
-          width: "100%",
-          height: "100%",
-          backgroundColor: "black",
-          position: "absolute",
-          borderBottomLeftRadius: 40,
-          borderBottomRightRadius: 40,
-          opacity: 0.4,
-          zIndex: 100,
-        }}
-      ></View>
+      <View style={styles.transparantBackground}></View>
 
       <View
         style={{
@@ -81,16 +70,7 @@ const ProfileCover = (props) => {
         />
       </View>
 
-      <View
-        style={{
-          alignItems: "center",
-          zIndex: 101,
-          position: "absolute",
-          flex: 1,
-          width: "100%",
-          bottom: -50,
-        }}
-      >
+      <View style={styles.profileImgPosition}>
         <View style={styles.profileFrame}>
           <Image source={props.proPic} style={styles.profileImage} />
         </View>
@@ -119,6 +99,24 @@ const styles = StyleSheet.create({
     paddingRight: 25,
     paddingLeft: 25,
     height: 250,
+  },
+  transparantBackground: {
+    width: "100%",
+    height: "100%",
+    backgroundColor: "black",
+    position: "absolute",
+    borderBottomLeftRadius: 40,
+    borderBottomRightRadius: 40,
+    opacity: 0.4,
+    zIndex: 100,
+  },
+  profileImgPosition: {
+    alignItems: "center",
+    zIndex: 101,
+    position: "absolute",
+    flex: 1,
+    width: "100%",
+    bottom: -50,
   },
 
   profileFrame: {

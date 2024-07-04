@@ -157,7 +157,7 @@ const Feedback = () => {
     } catch (error) {
       console.log("Error saving data:", error);
       Toast.show({
-        type: "success",
+        type: "error",
         text1: "Please input your satisfication rate!!",
       });
       setSubmitTriggered(false); // Reset submitTriggered on error
@@ -165,21 +165,27 @@ const Feedback = () => {
   };
 
   return (
-    <View contentContainerStyle={styles.container}>
+    <View style={{ flex: 1 }} >
       <HeaderSub
         headLine={"Feedback"}
         subHeadLine={"Feel free to drop us your feedback."}
         back="HomeScreen"
       />
-
-      <ScrollView height={screenHeight - 190}>
+      <KeyboardAvoidingView
+      behavior={Platform.OS === "ios" ? "padding" : 'height'}
+      style={{ flex: 1 }}
+      >
+<View >
+  
+      <ScrollView  contentContainerStyle={{ flexGrow: 1 }}>
+      <View >
         <Text style={styles.question1}>
           How satisfied are you overall with the support of our mental health
           application?
         </Text>
 
         <SplitButton
-          rateFunction={setRateValue}
+          rateFunction={setRateValue} 
           submitTriggered={submitTriggered}
         />
 
@@ -208,7 +214,6 @@ const Feedback = () => {
           btnFunction={setQfive}
           key={`${resetKey}-q5`}
         />
-
         <TextInput
           style={styles.textarea}
           multiline={true}
@@ -223,7 +228,11 @@ const Feedback = () => {
             <Text style={styles.buttonText}>Send Feedback</Text>
           </TouchableOpacity>
         </View>
+        </View>
       </ScrollView>
+      
+      </View>
+      </KeyboardAvoidingView>
     </View>
   );
 };

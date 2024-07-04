@@ -67,11 +67,15 @@ app.use("/api/v1/method", methodRouter);
 app.use("/api/v1/notification", notificationRouter);
 app.use("/api/v1/report", reportRoute);
 
-const server = app.listen(PORT, () => {
+const server = app.listen(PORT, "0.0.0.0", () => {
   console.log(`server is running on port ${PORT}`);
 
   //database connection
   connect();
+});
+
+app.get("/", (req, res) => {
+  res.send("Hello World!");
 });
 
 // Setup WebSocket

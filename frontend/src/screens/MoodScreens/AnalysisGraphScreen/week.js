@@ -1,14 +1,18 @@
 import React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, Image } from "react-native";
 import MoodProgressBars from "./Chart";
 
-const DayMoodChart = ({ day, data }) => {
+const DayMoodChart = ({ day, data, maxHeightMood }) => {
+  //Counts the number of occurrences of each mood in the data.
   const countEmojis = (mood) => {
+    //Filters the data array to count the number of occurrences of each mood.
     return data.filter((item) => item.moodText === mood).length;
   };
 
+  //total number of mood entires of per day
   const total = data.length;
 
+  //get height based on total number of entries
   const getHeight = (count) => {
     return total !== 0 ? (count / total) * 250.0 : 0;
   };
@@ -24,9 +28,21 @@ const DayMoodChart = ({ day, data }) => {
     happy: getHeight(countEmojis("Happy")),
   };
 
+  const moodToImage = {
+    Lovely: require("../../../assets/images/analysisMood/lovelyPicture.png"),
+    Sad: require("../../../assets/images/analysisMood/sadPicture.png"),
+    Angry: require("../../../assets/images/analysisMood/angryPicture.png"),
+    Worried: require("../../../assets/images/analysisMood/sickPicture.png"),
+    Boring: require("../../../assets/images/analysisMood/sleepPicture.png"),
+    Neutral: require("../../../assets/images/analysisMood/nutralPicture.png"),
+    OverWhelmed: require("../../../assets/images/analysisMood/scaredPicture.png"),
+    Happy: require("../../../assets/images/analysisMood/happyPicture.png"),
+  };
+
   return (
     <View style={styles.dayContainer}>
-      <Text style={styles.dayTitle}>{day}</Text>
+      <Image style={styles.image} source={moodToImage[maxHeightMood]} />
+
       <View style={styles.barWithAxis}>
         <View style={styles.left}>
           <Text style={styles.axisText}>100%</Text>
@@ -42,25 +58,17 @@ const DayMoodChart = ({ day, data }) => {
           <Text style={styles.axisText}>0%</Text>
         </View>
         <View style={styles.right}>
-          <View style={styles.chartContainer}>
-            <MoodProgressBars selectedEmoji={"😍"} barHeight={heights.lovely} />
-            <MoodProgressBars selectedEmoji={"😭"} barHeight={heights.sad} />
-            <MoodProgressBars selectedEmoji={"😡"} barHeight={heights.angry} />
-            <MoodProgressBars
-              selectedEmoji={"😟"}
-              barHeight={heights.worried}
-            />
-            <MoodProgressBars selectedEmoji={"🥱"} barHeight={heights.boring} />
-            <MoodProgressBars
-              selectedEmoji={"😐"}
-              barHeight={heights.neutral}
-            />
-            <MoodProgressBars
-              selectedEmoji={"😨"}
-              barHeight={heights.overwhelmed}
-            />
-            <MoodProgressBars selectedEmoji={"😄"} barHeight={heights.happy} />
-          </View>
+          <MoodProgressBars selectedEmoji={"😍"} barHeight={heights.lovely} />
+          <MoodProgressBars selectedEmoji={"😭"} barHeight={heights.sad} />
+          <MoodProgressBars selectedEmoji={"😡"} barHeight={heights.angry} />
+          <MoodProgressBars selectedEmoji={"😟"} barHeight={heights.worried} />
+          <MoodProgressBars selectedEmoji={"🥱"} barHeight={heights.boring} />
+          <MoodProgressBars selectedEmoji={"😐"} barHeight={heights.neutral} />
+          <MoodProgressBars
+            selectedEmoji={"😨"}
+            barHeight={heights.overwhelmed}
+          />
+          <MoodProgressBars selectedEmoji={"😄"} barHeight={heights.happy} />
         </View>
       </View>
     </View>
@@ -69,7 +77,9 @@ const DayMoodChart = ({ day, data }) => {
 
 const styles = StyleSheet.create({
   dayContainer: {
-    // marginVertical: 10,
+    marginTop: 45,
+    paddingBottom: 100,
+    // backgroundColor: "yellow",
   },
   dayTitle: {
     fontSize: 18,
@@ -79,8 +89,7 @@ const styles = StyleSheet.create({
   },
   barWithAxis: {
     flexDirection: "row",
-    // backgroundColor: "yellow",
-    marginTop: 15,
+    marginTop: -280,
   },
   left: {
     flex: 1,
@@ -91,6 +100,7 @@ const styles = StyleSheet.create({
     // marginLeft: 5,
     // backgroundColor: "yellow",
   },
+
   axisText: {
     fontSize: 10,
     color: "#7D8597",
@@ -105,9 +115,19 @@ const styles = StyleSheet.create({
     // columnGap: 75,
     // marginHorizontal: 10,
   },
+
   chartContainer: {
     flexDirection: "row",
     justifyContent: "space-around",
+  },
+
+  image: {
+    width: 369,
+    height: 280,
+    left: 15,
+    alignSelf: "center",
+    marginTop: -10,
+    // backgroundColor: "yellow",
   },
 });
 
