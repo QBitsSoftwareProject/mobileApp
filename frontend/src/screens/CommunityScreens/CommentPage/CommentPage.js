@@ -176,7 +176,7 @@ const CommentPage = () => {
             setComment(text);
           }}
           multiline
-          placeholder="Add a comment...."
+          placeholder="Add a comment..."
         />
         <TouchableOpacity
           style={{
