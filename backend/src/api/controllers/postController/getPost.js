@@ -4,9 +4,13 @@ const doctorSchema = require("../../models/doctor/doctor");
 
 exports.getPost = async (req, res) => {
   try {
+    const { skip, limit } = req.query;
+
     const Posts = await postSchema
       .find()
       .sort({ createdAt: -1 })
+      .skip(parseInt(skip))
+      .limit(parseInt(limit))
       .populate("userId");
 
     if (!Posts) {

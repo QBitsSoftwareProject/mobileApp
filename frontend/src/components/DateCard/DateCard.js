@@ -8,12 +8,12 @@ const DateCard = (props) => {
   const handleDatePress = () => {
     if (!props.change) {
       setPressDateCard(true);
-      props.press(true);
+      // props.press(true);
       props.onPress(props.indexKey);
       props.getDate(props.date);
     } else {
       setPressDateCard(false);
-      props.press(false);
+      // props.press(false);
       props.onPress(props.indexKey);
       props.getDate(null);
     }
