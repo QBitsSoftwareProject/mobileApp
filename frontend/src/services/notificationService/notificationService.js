@@ -4,7 +4,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const URL = BACKEND_URI + "/notification";
 
-export const getNotification = async () => {
+export const getNotification = async (lastCreatedAt, limit) => {
   try {
     const token = await AsyncStorage.getItem("authToken");
     const response = await axios.get(
@@ -12,6 +12,10 @@ export const getNotification = async () => {
 
       {
         headers: { authtoken: token },
+        params: {
+          lastCreatedAt: lastCreatedAt || "",
+          limit: limit || 10,
+        },
       }
     );
 
