@@ -30,6 +30,7 @@ const MakeAppointment = ({ route }) => {
   const [doctor, setDoctor] = useState();
   const [pressDay, setPressDay] = useState(null);
   const [selectedDateIndex, setSelectedDateIndex] = useState(null);
+  const [datePressed, setDatePressed] = useState(false); // State to track if a date has been pressed
 
   const dateIncrement = (number) => {
     const currentDate = new Date();
@@ -42,16 +43,7 @@ const MakeAppointment = ({ route }) => {
     currentDate.setDate(currentDate.getDate() + number);
     const day = currentDate.getDay();
 
-    const weekdays = [
-      "Sunday",
-      "Monday",
-      "Tuesday",
-      "Wednesday",
-      "Thursday",
-      "Fri",
-      "Sat",
-    ];
-
+    const weekdays = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
     return weekdays[day];
   };
 
@@ -59,6 +51,20 @@ const MakeAppointment = ({ route }) => {
     const appointmentDate = new Date();
     appointmentDate.setDate(date);
     setGetDate(appointmentDate);
+  };
+
+  const handleDatePress = (day) => {
+    const dayMap = {
+      Sun: 0,
+      Mon: 1,
+      Tue: 2,
+      Wed: 3,
+      Thu: 4,
+      Fri: 5,
+      Sat: 6,
+    };
+    setPressDay(dayMap[day]);
+    setDatePressed(true); // Set datePressed to true when a date is pressed
   };
 
   useEffect(() => {
@@ -80,7 +86,7 @@ const MakeAppointment = ({ route }) => {
     if (getTime) {
       setPopupMessage(message);
     } else {
-      Alert.alert("Error!", "Date and Time is requied!");
+      Alert.alert("Error!", "Date and Time is required!");
     }
   };
 
@@ -110,29 +116,6 @@ const MakeAppointment = ({ route }) => {
     navigation.navigate("AvailableDoctors");
   };
 
-  const handleDatePress = (item, value) => {
-    setDateBtnPress(value);
-    // setPressDay(index)
-
-    if (item == "Sunday") {
-      setPressDay(0);
-    } else if (item == "Monday") {
-      setPressDay(1);
-    } else if (item == "Tuesday") {
-      setPressDay(2);
-    } else if (item == "Wednesday") {
-      setPressDay(3);
-    } else if (item == "Thursday") {
-      setPressDay(4);
-    } else if (item == "Fri") {
-      setPressDay(5);
-    } else if (item == "Sat") {
-      setPressDay(6);
-    } else {
-      null;
-    }
-  };
-
   if (!doctor) {
     return (
       <View style={styles.loardingGif}>
@@ -140,7 +123,7 @@ const MakeAppointment = ({ route }) => {
       </View>
     );
   }
-  // console.log(doctor.availableTimes);
+
   return (
     <SafeAreaView style={{ margin: 25 }}>
       <View style={{ marginBottom: 20 }}>
@@ -165,7 +148,6 @@ const MakeAppointment = ({ route }) => {
 
           <View style={styles.description}>
             <Text style={styles.docDetails}>{doctor.qualification}</Text>
-
             <Text style={styles.docDetails}>{doctor.workplace}</Text>
             <Text style={styles.docDetails}>
               Contact No: {doctor.contactNumber}
@@ -175,7 +157,6 @@ const MakeAppointment = ({ route }) => {
 
         <View style={{ marginBottom: 20 }}>
           <Text style={styles.title}>About</Text>
-
           <Text style={styles.titledescription}>{doctor.bio}</Text>
         </View>
 
@@ -194,16 +175,11 @@ const MakeAppointment = ({ route }) => {
                   selected={selectedDateIndex === index}
                   onPress={(idx) => {
                     setSelectedDateIndex(idx); // Update selected date index
-                    handleDatePress(dayIncrement(index), true); // Ensure only one card is selected at a time
-                  }}
-                  press={(value) => {
-                    let day = dayIncrement(index);
-                    handleDatePress(day, value);
+                    handleDatePress(dayIncrement(index)); // Ensure only one card is selected at a time
+                    setDateBtnPress(true);
                   }}
                   change={dateBtnPress && selectedDateIndex === index}
-                  getDate={(date) => {
-                    setAppointmentDate(date);
-                  }}
+                  getDate={(date) => setAppointmentDate(date)}
                 />
               </View>
             ))}
@@ -225,7 +201,8 @@ const MakeAppointment = ({ route }) => {
             }}
           >
             {pressDay !== null &&
-              doctor.availableTimes &&
+            doctor.availableTimes &&
+            doctor.availableTimes[pressDay].length > 0 ? (
               doctor.availableTimes[pressDay].map((item, index) => (
                 <TimeButton
                   key={index}
@@ -235,7 +212,10 @@ const MakeAppointment = ({ route }) => {
                   change={timeBtnpress}
                   getTime={setGetTime}
                 />
-              ))}
+              ))
+            ) : datePressed ? (
+              <Text style={styles.noTimeSlotText}>No available time slots</Text>
+            ) : null}
           </View>
         </View>
 
@@ -257,4 +237,5 @@ const MakeAppointment = ({ route }) => {
     </SafeAreaView>
   );
 };
+
 export default MakeAppointment;
