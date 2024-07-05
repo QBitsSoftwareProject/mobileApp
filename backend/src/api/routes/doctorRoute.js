@@ -37,7 +37,7 @@ router.put("/updateAccessStatus/:id", updateDoctorAccessStatus);
 router.delete("/:id", deleteDoctor);
 router.post("/view-doctor", viewADoctor);
 
-router.post("/checkExistsDoctor", auth, checkExistsDoctor);
+router.post("/checkExistsDoctor", checkExistsDoctor);
 
 //register route
 router.post("/register", createDoctor);

@@ -7,9 +7,15 @@ import TabBarIcon from "./TabBarIcon";
 import MusicPlayer from "./BackgroundMusic";
 import { BackgroundMusicContext } from "../SettingScreen/BackgroundMusicProvider";
 import { View, ActivityIndicator, Keyboard } from "react-native";
-import { checkNotification } from "../../services/notificationService/notificationService";
+import {
+  checkNotification,
+  checkUnreadNotification,
+} from "../../services/notificationService/notificationService";
 import { useNavigation } from "@react-navigation/native";
-import { useWebSockets } from "../../services/socketServices/webSocket";
+import {
+  useWebSockets,
+  useWebSocketsNotification,
+} from "../../services/socketServices/webSocket";
 
 const Tab = createBottomTabNavigator();
 
@@ -20,9 +26,21 @@ const TabBar = ({ route, user, userRole }) => {
   const [HomeStack, setHomeStack] = useState(null);
   const navigation = useNavigation();
 
-  useEffect(() => {}, [notificationList]);
+  let userId = null;
+  let role = null;
+  let routeName = "LoginStack";
+
+  if (!route || !route.params) {
+    userId = user;
+    role = userRole;
+  } else {
+    userId = route.params.userId;
+    role = route.params.role;
+    routeName = route.params.routeName;
+  }
 
   useEffect(() => {
+    checkNotification();
     const keyboardDidShowListener = Keyboard.addListener(
       "keyboardDidShow",
       () => {
@@ -43,11 +61,23 @@ const TabBar = ({ route, user, userRole }) => {
     };
   }, []);
 
-  // web socket
-  useWebSockets((notification) => {
-    if (notification) {
-      setIsNotification(true);
+  //check unread notification
+  const checkNotification = async () => {
+    try {
+      let res = [];
+      res = await checkUnreadNotification();
+
+      if (res.notify) {
+        setIsNotification(true);
+      }
+    } catch (error) {
+      console.log(error);
     }
+  };
+
+  // web socket
+  useWebSockets((obj) => {
+    checkNotification();
   });
 
   const loadHomeStack = async () => {
@@ -69,18 +99,6 @@ const TabBar = ({ route, user, userRole }) => {
 
     return unsubscribe;
   }, [navigation]);
-
-  let userId, role;
-  let routeName = "LoginStack";
-
-  if (!route || !route.params) {
-    userId = user;
-    role = userRole;
-  } else {
-    userId = route.params.userId;
-    role = route.params.role;
-    routeName = route.params.routeName;
-  }
 
   const { backgroundMusicValid, backgroundMusic, musicStop } = useContext(
     BackgroundMusicContext

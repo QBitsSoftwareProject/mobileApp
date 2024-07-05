@@ -11,10 +11,14 @@ import {
 import React, { useEffect, useState } from "react";
 import { useNavigation, useFocusEffect } from "@react-navigation/native";
 import NotificationCard from "../../components/NotificationCard/NotificationCard";
-import { getNotification } from "../../services/notificationService/notificationService";
+import {
+  deleteAllNotification,
+  getNotification,
+} from "../../services/notificationService/notificationService";
 import loadingGif from "../../assets/animation/loading.gif";
 import notFoundGif from "../../assets/animation/not-found.png";
 import { useWebSockets } from "../../services/socketServices/webSocket";
+import { deleteAllAppointments } from "../../services/appointmentServices/AppointmentServices";
 
 const NotifyScreen = () => {
   const [notificationList, setNotificationList] = useState();
@@ -42,6 +46,15 @@ const NotifyScreen = () => {
   useWebSockets((notification) => {
     fetchNotification();
   });
+
+  const handleDelete = async () => {
+    try {
+      await deleteAllNotification();
+      setIsRefresh(!isRefresh);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   if (!notificationList) {
     return (
@@ -71,8 +84,22 @@ const NotifyScreen = () => {
         </TouchableOpacity>
 
         <View style={styles.headerTextView}>
-          <Text style={styles.headerText}>Profile</Text>
+          <Text style={styles.headerText}>Notifications</Text>
         </View>
+      </View>
+
+      <View
+        style={{
+          width: "100%",
+          height: 30,
+          paddingHorizontal: 25,
+          marginBottom: 15,
+          alignItems: "flex-end",
+        }}
+      >
+        <TouchableOpacity style={styles.viewBtn} onPress={handleDelete}>
+          <Text style={styles.viewText}>Clear All</Text>
+        </TouchableOpacity>
       </View>
 
       <ScrollView style={{ paddingHorizontal: 25 }}>
@@ -136,6 +163,22 @@ const styles = StyleSheet.create({
     color: "#101318",
     fontWeight: "500",
     textAlign: "center",
+  },
+  viewBtn: {
+    height: 35,
+    width: 100,
+    borderRadius: 20,
+    elevation: 2,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "white",
+    paddingHorizontal: 20,
+  },
+  viewText: {
+    fontSize: 12,
+    fontSize: 12,
+    fontWeight: "400",
+    color: "#5C677D",
   },
 });
 
