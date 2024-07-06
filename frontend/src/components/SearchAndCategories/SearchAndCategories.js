@@ -25,17 +25,17 @@ const SearchAndCategories = ({ currentView }) => {
             style={[
               styles.NavBarElements,
               currentView === "EducationalScreen" &&
-                styles.NavBarElements_currentBtn,
+              styles.NavBarElements_currentBtn,
             ]}
           >
             <Text
               style={[
                 currentView === "EducationalScreen" &&
-                  styles.NavBarElements_currentText,
+                styles.NavBarElements_currentText,
                 styles.NavBarElementText,
               ]}
             >
-              All
+              Favs
             </Text>
           </View>
         </Pressable>
@@ -48,13 +48,13 @@ const SearchAndCategories = ({ currentView }) => {
             style={[
               styles.NavBarElements,
               currentView === "ArticleStack" &&
-                styles.NavBarElements_currentBtn,
+              styles.NavBarElements_currentBtn,
             ]}
           >
             <Text
               style={[
                 currentView === "ArticleStack" &&
-                  styles.NavBarElements_currentText,
+                styles.NavBarElements_currentText,
                 styles.NavBarElementText,
               ]}
             >
@@ -76,7 +76,7 @@ const SearchAndCategories = ({ currentView }) => {
             <Text
               style={[
                 currentView === "VideoScreen" &&
-                  styles.NavBarElements_currentText,
+                styles.NavBarElements_currentText,
                 styles.NavBarElementText,
               ]}
             >
@@ -98,7 +98,7 @@ const SearchAndCategories = ({ currentView }) => {
             <Text
               style={[
                 currentView === "AudioScreen" &&
-                  styles.NavBarElements_currentText,
+                styles.NavBarElements_currentText,
                 styles.NavBarElementText,
               ]}
             >

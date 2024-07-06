@@ -304,6 +304,12 @@ const styles = StyleSheet.create({
   navigationContainer: {
     flexDirection: "row",
     marginTop: 15,
+    justifyContent:'center',
+    
+    alignItems:'center',
+    gap:32,
+    height:30
+
   },
 
   selectedEmojiContainer: {
@@ -342,11 +348,16 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
   button: {
-    alignSelf: "flex-end",
-    top: 13,
+    // alignSelf: "flex-end",
+    // top: 13,
+    alignItems:'center',
+    width:50,
+    height:'100%',
+    justifyContent:'center'
+    
   },
   buttonImage: {
-    right: 120,
+    // right: 120,
   },
   buttonDisabled: {
     opacity: 0.5,
@@ -354,21 +365,26 @@ const styles = StyleSheet.create({
   dateText: {
     fontSize: 18,
     fontWeight: "400",
-    textAlign: "center",
-    top: 10,
+    // textAlign: "center",
+    // top: 10,
   },
   view1: {
-    flex: 2,
+    // flex: 2,
+  
+    
   },
   view2: {
-    flex: 2,
+    // flex: 2,
+    // backgroundColor:"yellow"
   },
   view3: {
-    flex: 2,
+    // flex: 2,
+    // backgroundColor:"black"
   },
   emptyStateContainer: {
     alignItems: "center",
     marginTop: 50,
+    
   },
 });
 

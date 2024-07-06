@@ -4,6 +4,7 @@ const bodyParser = require("body-parser");
 const { PORT } = require("./config/env");
 const { connect } = require("./config/database.connection.js");
 
+const adminRoute = require("./api/routes/adminRoute.js");
 const regularUserRoute = require("./api/routes/regularUserRoute.js");
 const doctorRoute = require("./api/routes/doctorRoute.js");
 const goalRoute = require("./api/routes/goalRoute.js");
@@ -45,6 +46,7 @@ app.use("/question", questionRouter);
 app.use("/currentmood", currentMood);
 
 //endpoints
+app.use("/api/v1/admin", adminRoute);
 app.use("/api/v1/user", regularUserRoute);
 app.use("/api/v1/doctor", doctorRoute);
 app.use("/api/v1/goal", goalRoute);

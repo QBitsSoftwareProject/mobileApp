@@ -6,10 +6,14 @@ import styles from "./VideoItemStyles";
 
 import playImg from "../../../../assets/images/icons/player/play.png";
 
+// favorites
+import favorite from "../../../../assets/images/favorites/favorite.png";
+import notFavorite from "../../../../assets/images/favorites/notFavorite.png";
+// favorites
+
 const VideoItem = ({ item, callTask, screen }) => {
   const video = React.useRef(null);
   const [status, setStatus] = React.useState({});
-  const [isFullscreen, setIsFullscreen] = useState(false);
   const [isModalVisible, setIsModalVisible] = useState(false);
 
   const [duration, setDuration] = useState(0);
@@ -41,6 +45,19 @@ const VideoItem = ({ item, callTask, screen }) => {
   return (
     <View>
       <View style={[styles.VideoItem, { paddingBottom: 20 }]}>
+        <View style={{ width: "100%", height: 50, position: "absolute", zIndex: 150, display: "flex", alignItems: "flex-end" }}>
+          <TouchableOpacity
+            style={{
+              height: 50,
+              alignItems: "flex-end",
+              justifyContent: "center",
+            }}
+          >
+            <View style={styles.addToFavBtn}>
+              <Image source={favorite} style={{ width: 25, height: 28 }} />
+            </View>
+          </TouchableOpacity>
+        </View>
         <TouchableOpacity
           onPress={handlePlayPress}
           style={{
@@ -56,7 +73,6 @@ const VideoItem = ({ item, callTask, screen }) => {
             <Image source={playImg} style={styles.image} />
           </View>
         </TouchableOpacity>
-
         <View style={{ width: "100%" }}>
           <Video
             ref={video}
@@ -67,10 +83,8 @@ const VideoItem = ({ item, callTask, screen }) => {
               borderTopRightRadius: 10,
               width: "100%",
             }} // Adjust height as needed
-            useNativeControls
             isMuted={false}
             resizeMode="cover"
-            isLooping
             onPlaybackStatusUpdate={(status) => setStatus(() => status)}
             onError={(e) => console.log("Video Error: ", e)}
             onFullscreenUpdate={null} // Handle fullscreen updates
@@ -91,9 +105,7 @@ const VideoItem = ({ item, callTask, screen }) => {
         <View
           style={{
             flexDirection: "row",
-
             justifyContent: "space-between",
-
             width: "95%",
             alignSelf: "center",
             marginTop: 5,
@@ -120,7 +132,7 @@ const VideoItem = ({ item, callTask, screen }) => {
         videoSource={item.downloadURL}
         name={item.title}
       />
-    </View>
+    </View >
   );
 };
 
