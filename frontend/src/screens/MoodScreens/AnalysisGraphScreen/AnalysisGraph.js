@@ -131,8 +131,8 @@ const AnalysisGraph = () => {
 
   useEffect(() => {
     const today = new Date().getDay();
-    setCurrentDayIndex(today - 1);
-    setEndDayIndex(today - 1);
+    setCurrentDayIndex(today === 0 ? 6 : today - 1); // Adjust index to start from Sunday
+    setEndDayIndex(today === 0 ? 6 : today - 1); // Adjust end day index as well
   }, []);
 
   useEffect(() => {
@@ -164,9 +164,9 @@ const AnalysisGraph = () => {
         setCurrentDate(date.toISOString().split("T")[0]);
       }
 
-      setIsNextDisabled(currentDayIndex === endDayIndex);
+      setIsNextDisabled(currentDayIndex === 6);
       // console.log("startDayIndex", startDayIndex);
-      setIsBackDisabled(currentDayIndex === startDayIndex);
+      setIsBackDisabled(currentDayIndex === 0);
     }
   }, [data, currentDayIndex]);
 

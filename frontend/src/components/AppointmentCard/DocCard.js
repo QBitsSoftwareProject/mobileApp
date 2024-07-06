@@ -106,7 +106,8 @@ const docCard = (props) => {
               }}
             >
               <Text style={styles.rejectedStatus}>Cancel</Text>
-            </TouchableOpacity>
+            </TouchableOpacity 
+            >
             <AcptComBtn
               AcptCom={"Complete"}
               appId={props.id}
@@ -154,6 +155,7 @@ const styles = StyleSheet.create({
     color: "#5C677D",
   },
   completedStatus: {
+    
     fontSize: 12,
     fontWeight: "500",
   },

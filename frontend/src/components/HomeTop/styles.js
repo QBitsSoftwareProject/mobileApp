@@ -7,6 +7,7 @@ const styles = StyleSheet.create({
     width: "100%",
     // borderBottomLeftRadius: 40,
     borderBottomRightRadius: 50,
+    
   },
 
   headlineTxt: {

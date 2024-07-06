@@ -13,6 +13,7 @@ import { LinearGradient } from "expo-linear-gradient";
 
 const HomeTop = (props) => {
   return (
+  
     <LinearGradient
       colors={["rgba(73,177,247,0.7)", "#00453E"]}
       start={{ x: 0, y: 0 }}
@@ -44,7 +45,7 @@ const HomeTop = (props) => {
           <Image source={props.proPic} style={styles.profileImage} />
         </View>
       </View>
-    </LinearGradient>
+      </LinearGradient>
   );
 };
 
