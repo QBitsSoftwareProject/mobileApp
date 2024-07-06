@@ -42,8 +42,8 @@ export const EmojiPicker = ({ onEmojiPress, value }) => {
     }
   };
 
+  //prevous emoji
   const itemEmojiString = markToEmoji(itemEmojiNumber);
-  // console.log("prev", itemEmojiString);
 
   useEffect(() => {
     if (!selectedEmoji) {

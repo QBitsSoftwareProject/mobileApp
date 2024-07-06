@@ -2,10 +2,10 @@ import React from "react";
 import { View, Text, StyleSheet, Image } from "react-native";
 import MoodProgressBars from "./Chart";
 
+// pass the mood data , max mood from main
 const DayMoodChart = ({ day, data, maxHeightMood }) => {
-  //Counts the number of occurrences of each mood in the data.
   const countEmojis = (mood) => {
-    //Filters the data array to count the number of occurrences of each mood.
+    //Filters the data array to count the number of times of each mood.
     return data.filter((item) => item.moodText === mood).length;
   };
 
@@ -14,6 +14,7 @@ const DayMoodChart = ({ day, data, maxHeightMood }) => {
 
   //get height based on total number of entries
   const getHeight = (count) => {
+    // console.log(count / total);
     return total !== 0 ? (count / total) * 250.0 : 0;
   };
 
@@ -124,7 +125,7 @@ const styles = StyleSheet.create({
   image: {
     width: 369,
     height: 280,
-    left: 15,
+    // left: -15,
     alignSelf: "center",
     marginTop: -10,
     // backgroundColor: "yellow",
