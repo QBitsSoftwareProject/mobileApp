@@ -4,6 +4,7 @@ const bodyParser = require("body-parser");
 const { PORT } = require("./config/env");
 const { connect } = require("./config/database.connection.js");
 
+const adminRoute = require("./api/routes/adminRoute.js");
 const regularUserRoute = require("./api/routes/regularUserRoute.js");
 const doctorRoute = require("./api/routes/doctorRoute.js");
 const goalRoute = require("./api/routes/goalRoute.js");
@@ -45,6 +46,7 @@ app.use("/question", questionRouter);
 app.use("/currentmood", currentMood);
 
 //endpoints
+app.use("/api/v1/admin", adminRoute);
 app.use("/api/v1/user", regularUserRoute);
 app.use("/api/v1/doctor", doctorRoute);
 app.use("/api/v1/goal", goalRoute);
@@ -65,11 +67,15 @@ app.use("/api/v1/method", methodRouter);
 app.use("/api/v1/notification", notificationRouter);
 app.use("/api/v1/report", reportRoute);
 
-const server = app.listen(PORT, () => {
+const server = app.listen(PORT, "0.0.0.0", () => {
   console.log(`server is running on port ${PORT}`);
 
   //database connection
   connect();
+});
+
+app.get("/", (req, res) => {
+  res.send("Hello World!");
 });
 
 // Setup WebSocket

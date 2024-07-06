@@ -66,9 +66,8 @@ const NotificationCard = (props) => {
         screen: "AppointmentStatus",
         params: { postId: props.postId, previousScreen: "AvailableDoctors" },
       });
-    } else {
-      props.isRefresh((prev) => !prev);
     }
+    props.isRefresh((prev) => !prev);
   };
 
   const formattedDate = formatTimestamp(props.Date);
@@ -79,9 +78,7 @@ const NotificationCard = (props) => {
         <TouchableOpacity
           style={[styles.content1]}
           onPress={handlePress}
-          disabled={
-            props.status == "read" && props.type == "system" ? true : false
-          }
+          disabled={props.status == "read"}
         >
           {props.type != "system" ? (
             <View style={styles.imageframe}>

@@ -14,7 +14,7 @@ import { useFocusEffect, useNavigation } from "@react-navigation/native";
 import { getCommentsCount } from "../../services/commentServices/commentServices";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-const PostCard = (props) => {
+const PostCard = React.memo((props) => {
   const navigation = useNavigation();
 
   const [isPress, setIsPress] = useState(false);
@@ -25,6 +25,11 @@ const PostCard = (props) => {
     const date = new Date(timestamp);
     const now = new Date();
     const diff = now - date;
+
+    const seconds = Math.floor(diff / 1000);
+    if (seconds < 60) {
+      return "just now";
+    }
 
     const minutes = Math.floor(diff / (1000 * 60));
     if (minutes < 60) {
@@ -184,7 +189,7 @@ const PostCard = (props) => {
       </View>
     </TouchableWithoutFeedback>
   );
-};
+});
 
 const styles = StyleSheet.create({
   cardBox: {
@@ -204,7 +209,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     padding: 10,
     justifyContent: "space-between",
-    zIndex:1000
+    zIndex: 1000,
   },
   imageframe: {
     height: 35,
