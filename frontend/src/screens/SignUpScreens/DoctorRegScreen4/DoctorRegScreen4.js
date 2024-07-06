@@ -222,7 +222,7 @@ const DoctorRegScreen4 = ({ route }) => {
             <TouchableOpacity
               onPress={() =>
                 navigation.navigate("PrivacyAndPolicy", {
-                  prevScreen: "UserRegScreen",
+                  prevScreen: "DoctorRegScreen4",
                 })
               }
             >

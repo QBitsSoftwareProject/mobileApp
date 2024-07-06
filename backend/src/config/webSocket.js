@@ -10,7 +10,9 @@ const setupWebSocket = (server) => {
     clients.push(ws);
 
     ws.on("message", (msg) => {
-      //   console.log(`Received: ${msg}`);
+      const message = JSON.parse(msg);
+
+      clients.push(ws);
     });
 
     ws.on("close", () => {
@@ -27,5 +29,14 @@ const broadcastObject = (object) => {
     }
   });
 };
+
+// const sendObject = (object, recipientId) => {
+//   clients.forEach((client) => {
+//     console.log(recipientId, client.userId);
+//     if (client.readyState === WebSocket.OPEN && client.userId == recipientId) {
+//       client.send(JSON.stringify(object));
+//     }
+//   });
+// };
 
 module.exports = { setupWebSocket, broadcastObject };

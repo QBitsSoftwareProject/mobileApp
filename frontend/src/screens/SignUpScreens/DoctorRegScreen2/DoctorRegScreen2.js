@@ -167,25 +167,12 @@ const DoctorRegScreen2 = () => {
               label={"Upload the doctor license back side picture"}
             />
 
-            <View>
-              <Text
-                style={{
-                  fontSize: 14,
-                  fontWeight: "400",
-                  color: "#40495B",
-                  marginBottom: 7,
-                }}
-              >
-                Workplace :
-              </Text>
-
-              <InputField
-                placeHolder={"ex_national hospital of Colombo"}
-                label={"WorkPlace :"}
-                onChangeText={selectedValue}
-                type={"textField"}
-              />
-            </View>
+            <InputField
+              placeHolder={"ex_national hospital of Colombo"}
+              label={"WorkPlace :"}
+              onChangeText={setSelectedValue}
+              type={"textField"}
+            />
 
             <InputField
               placeHolder={

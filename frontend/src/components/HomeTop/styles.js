@@ -2,28 +2,34 @@ import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
   contains: {
-    height: 250,
-    borderBottomRightRadius: 80,
+    height: 200,
     zIndex: 100,
+    width: "100%",
+    // borderBottomLeftRadius: 40,
+    borderBottomRightRadius: 50,
   },
 
   headlineTxt: {
     fontWeight: "700",
     fontSize: 32,
     color: "white",
-    marginTop: 65,
+    marginTop: 25,
   },
   subHeadlineTxt: {
     fontWeight: "400",
     fontSize: 16,
     color: "white",
     marginTop: 7,
-    maxWidth: 300,
+    maxWidth: 400,
   },
+  backImgView: {
+    position: "absolute",
+    right: 0,
+  },
+
   backImg: {
-    paddingRight: 25,
-    paddingLeft: 25,
-    height: 250,
+    height: 210,
+    width: 210,
   },
   profileFrame: {
     width: 100,

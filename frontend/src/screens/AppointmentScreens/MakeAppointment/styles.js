@@ -53,6 +53,14 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
+  noTimeSlotText: {
+    fontSize: 16,
+    fontWeight: "500",
+    color: "#FF0000",
+    opacity: 0.8,
+    marginVertical: 10,
+    marginHorizontal: 100,
+  },
 });
 
 export default styles;

@@ -1,7 +1,7 @@
 const notificationSchema = require("../../models/notification/notification");
 const postSchema = require("../../models/posts/postsModels");
 const appointmentSchema = require("../../models/appointments/appointmentsModels");
-const { broadcastObject } = require("../../../config/webSocket");
+const { sendObject, broadcastObject } = require("../../../config/webSocket");
 
 exports.createNotification = async (
   senderId,
@@ -41,9 +41,8 @@ exports.createNotification = async (
     await newNotification.save();
 
     // Broadcast the notification via WebSocket
-    if (senderId != userId) {
-      broadcastObject(newNotification);
-    }
+
+    broadcastObject(newNotification);
 
     return newNotification;
   } catch (error) {
