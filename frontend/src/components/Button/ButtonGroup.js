@@ -1,5 +1,5 @@
 import { View, Text, TouchableOpacity } from "react-native";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 const ButtonGroup = ({ tab1, tab2, tab3, select }) => {
   const [selectedTab, setSelectedTab] = useState(0);

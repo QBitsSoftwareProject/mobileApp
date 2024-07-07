@@ -1,5 +1,5 @@
 import { TouchableOpacity, View, Text, StyleSheet } from "react-native";
-import React, { useState } from "react";
+import React from "react";
 import { updateStatusAppointments } from "../../services/appointmentServices/AppointmentServices";
 
 const AcptComBtn = (props) => {

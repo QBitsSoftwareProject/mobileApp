@@ -7,11 +7,7 @@ import {
   getAUser,
   getUserById,
 } from "../../../services/userServices/userService";
-import {
-  useFocusEffect,
-  useNavigation,
-  useRoute,
-} from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
 import loadingGif from "../../../assets/animation/loading.gif";
 
 const ProfileScreen = () => {

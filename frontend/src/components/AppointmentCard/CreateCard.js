@@ -1,5 +1,5 @@
 import { StyleSheet, TouchableOpacity, View, Image, Text } from "react-native";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { ListItem } from "@rneui/base";
 import { deleteAnAppointment } from "../../services/appointmentServices/AppointmentServices";
 
