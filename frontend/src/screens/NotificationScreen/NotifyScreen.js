@@ -41,17 +41,18 @@ const NotifyScreen = () => {
 
     setIsLoading(true);
     try {
-      const res = await getNotification(last, 10, userRole);
+      const res = await getNotification();
 
-      if (last == "") {
-        setNotificationList(res);
-      } else {
-        setNotificationList((prev) => [...prev, ...res]);
-      }
+      setNotificationList(res);
+      // if (last == "") {
+      //   setNotificationList(res);
+      // } else {
+      //   setNotificationList((prev) => [...prev, ...res]);
+      // }
 
-      if (res.length > 0) {
-        setLastDate(res[res.length - 1].createdAt);
-      }
+      // if (res.length > 0) {
+      //   setLastDate(res[res.length - 1].createdAt);
+      // }
     } catch (error) {
       console.log(error);
     } finally {
