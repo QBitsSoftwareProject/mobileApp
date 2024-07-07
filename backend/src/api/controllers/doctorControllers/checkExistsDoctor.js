@@ -23,8 +23,7 @@ exports.checkExistsDoctor = async (req, res) => {
       user: checkUser._id,
     });
   } catch (error) {
-    console.log(error);
-    res
+    return res
       .status(500)
       .json({ error: "Error fetching user", message: error.message });
   }

@@ -7,7 +7,7 @@ const styles = StyleSheet.create({
   audioItem: {
     backgroundColor: "white",
     flexDirection: "row",
-    height: "auto",
+    height: 100,
     borderRadius: 15,
     marginVertical: 10,
     gap: 15,

@@ -4,17 +4,16 @@ const audio = require("../../models/audioResources/audio");
 exports.updateAudio = async (req, res) => {
   try {
     const { id } = req.params;
-    const { title, duration, tags, ifListen, listenCount, downloadURL } =
+    const { title, tags, } =
       req.body;
-      
+
     const updatedAudioDetails = {
       title,
-      duration,
       tags,
-      ifListen,
-      listenCount,
-      downloadURL,
     };
+
+    console.log("audio id:", id);
+    console.log("audio details:",updatedAudioDetails);
 
     const updatedAudio = await audio.findByIdAndUpdate(id, updatedAudioDetails);
 

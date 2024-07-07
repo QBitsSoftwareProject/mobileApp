@@ -5,8 +5,6 @@ exports.updateDoctorAccessStatus = async (req, res) => {
         const access = req.body;
         const doctorId = req.params;
 
-        console.log(doctorId.id, access.access);
-
         // Finding and updating the user by ID
         await doctorModel.findByIdAndUpdate(doctorId.id, access);
 

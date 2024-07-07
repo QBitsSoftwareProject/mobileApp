@@ -16,29 +16,7 @@ const SearchAndCategories = ({ currentView }) => {
   return (
     <View style={styles.NavContainer}>
       <View style={styles.NavBar}>
-        <Pressable
-          onPress={() => navigateToScreen("EducationalScreen")}
-          style={styles.NavBarElements}
-          android_ripple={{ borderless: true, radius: 50, color: "#7CBDE8" }}
-        >
-          <View
-            style={[
-              styles.NavBarElements,
-              currentView === "EducationalScreen" &&
-              styles.NavBarElements_currentBtn,
-            ]}
-          >
-            <Text
-              style={[
-                currentView === "EducationalScreen" &&
-                styles.NavBarElements_currentText,
-                styles.NavBarElementText,
-              ]}
-            >
-              Favs
-            </Text>
-          </View>
-        </Pressable>
+
         <Pressable
           onPress={() => navigateToScreen("ArticleStack")}
           style={styles.NavBarElements}
@@ -103,6 +81,29 @@ const SearchAndCategories = ({ currentView }) => {
               ]}
             >
               Audio
+            </Text>
+          </View>
+        </Pressable>
+        <Pressable
+          onPress={() => navigateToScreen("EducationalScreen")}
+          style={styles.NavBarElements}
+          android_ripple={{ borderless: true, radius: 50, color: "#7CBDE8" }}
+        >
+          <View
+            style={[
+              styles.NavBarElements,
+              currentView === "EducationalScreen" &&
+              styles.NavBarElements_currentBtn,
+            ]}
+          >
+            <Text
+              style={[
+                currentView === "EducationalScreen" &&
+                styles.NavBarElements_currentText,
+                styles.NavBarElementText,
+              ]}
+            >
+              Favs
             </Text>
           </View>
         </Pressable>

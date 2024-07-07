@@ -1,27 +1,43 @@
-const regularUser = require("../../models/regularUser/regularUser");
+const adminModel = require("../../models/admin/admin");
 
-exports.logAdmin = async (req, res) => {
+const bycrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
+const { ADMIN_TOKEN_KEY } = require("../../../config/env");
+
+exports.loginAdmin = async (req, res) => {
     try {
-        const { email } = req.body;
-        const checkUser = await regularUser.findOne({ email });
+        const { userName, password } = req.body;
 
-        //check email with doctor model
-        const checkDoctor = await doctorModel.findOne({ email });
-
-        if (!checkUser && !checkDoctor) {
-            return res.json({
-                message: "User with this email does not exist.",
-                user: null,
-            });
+        if (!(userName && password)) {
+            return res.status(400).send("All inputs are required");
         }
 
-        res.status(200).json({
-            message: "User with this email already exists.",
-            user: checkUser._id,
+        //find admin
+        let admin = await adminModel.findOne({ userName });
+
+        if (!admin) {
+            return res.status(404).send("Admin not found");
+        }
+
+        //password encryption
+        const isPasswordValid = await bycrypt.compare(password, admin.password);
+
+        if (!isPasswordValid) {
+            return res
+                .status(401)
+                .json({ message: "Authentication failed. Password is incorrect" });
+        }
+
+        //create a new token
+        const token = jwt.sign({ user_id: admin._id }, ADMIN_TOKEN_KEY, {
+            expiresIn: "24h",
         });
-    } catch (error) {
+
         res
-            .status(500)
-            .json({ error: "Error fetching user", message: error.message });
+            .status(201)
+            .header("authtoken", token)
+            .json({ message: "Login Successful", authtoken: token });
+    } catch (err) {
+        res.status(500).send({ error: "Login is failed", error: err.message });
     }
 };

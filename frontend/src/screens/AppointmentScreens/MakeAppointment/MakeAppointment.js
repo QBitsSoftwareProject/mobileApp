@@ -153,7 +153,6 @@ const MakeAppointment = ({ route }) => {
         <View style={styles.headerBox}>
           <Text style={styles.header}>Dr. {doctor.fullName}</Text>
         </View>
-
         <View style={styles.boxcontainer}>
           <Image
             source={{

@@ -1,4 +1,4 @@
-import { StyleSheet } from "react-native";
+import { PixelRatio, StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
   Container: {
@@ -37,9 +37,21 @@ const styles = StyleSheet.create({
     alignContent: "center",
     paddingHorizontal: 25,
   },
+  addToFavBtn: {
+    height: 40,
+    width: 40,
+    borderRadius: 100 / PixelRatio.get(),
+    zIndex: 100,
+    backgroundColor: "white",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    position: "relative",
+    marginTop: 5,
+    marginRight: 7
+  },
   authorSection2: {
     padding: 25,
-
     borderBottomWidth: 1,
     borderBottomColor: "rgba(146, 140, 140, 0.5)",
     display: "flex",

@@ -3,20 +3,18 @@ const video = require("../../models/videoResources/video");
 // update video file
 exports.updateVideo = async (req, res) => {
   try {
-    const { title, duration, tags, ifWatch, watchCount,downloadURL } = req.body;
-
-    const updatedImageDetails = {
-      title,
-      duration,
-      tags,
-      ifWatch,
-      watchCount,
-      downloadURL
-    };
-
+    const { title, tags } = req.body;
     const { id } = req.params;
 
-    const updatedVideo = await video.findByIdAndUpdate(id, updatedImageDetails);
+    const updatedVideoDetails = {
+      title,
+      tags,
+    };
+
+    console.log("video id:", id);
+    console.log("video details:", updatedVideoDetails);
+
+    const updatedVideo = await video.findByIdAndUpdate(id, updatedVideoDetails);
 
     if (!updatedVideo) {
       return res.status(404).json({ message: "video could not be found" });
@@ -29,6 +27,6 @@ exports.updateVideo = async (req, res) => {
     return res
       .status(500)
       .json({ errorMsg: "video update failed", error: err });
-      
+
   }
 };

@@ -9,8 +9,6 @@ const getSortedMarkById = asyncHandler(async (req, res) => {
 
         const mark = await markService.getMarkById(u_id);
 
-        console.log(mark);
-
         const sortmark = await markService.getMarkData(mark);
 
         if (sortmark) {

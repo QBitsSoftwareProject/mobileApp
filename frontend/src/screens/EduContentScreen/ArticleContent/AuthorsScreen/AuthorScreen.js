@@ -1,7 +1,6 @@
 import {
   View,
   SafeAreaView,
-  ScrollView,
   Text,
   Pressable,
   Image,
@@ -12,13 +11,7 @@ import styles from "../articleStyle";
 import backImg from "../../../../assets/images/icons/Back-White.png";
 import { useNavigation } from "@react-navigation/native";
 
-import profilePic from "../../../../assets/images/profilePics/img4.png";
-import profilePic2 from "../../../../assets/images/profilePics/img5.jpg";
-import profilePic3 from "../../../../assets/images/profilePics/img3.png";
-import viewIcon from "../../../../assets/images/icons/bi_eye-fill.png";
-
 // components
-import ArticleListItem from "../../../../components/AuthorScreen/ArticleListItem";
 import { getAuthorArticleCount, getAuthorArticles, getAuthorInfo } from "../../../../services/educationalServices/educationalServices";
 import Article from "../Article";
 // components
@@ -100,17 +93,6 @@ const AuthorScreen = ({ route }) => {
                     }}
                   >
                     Author name: {selectedAuthor.name}
-                  </Text>
-                </View>
-                <View>
-                  <Text
-                    style={{
-                      color: "white",
-                      fontSize: 17,
-                      width: 350,
-                    }}
-                  >
-                    Author ID: {authorData.authorId}
                   </Text>
                 </View>
                 <View>

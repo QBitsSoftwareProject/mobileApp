@@ -22,9 +22,6 @@ exports.getCategorizedArticlesBySearch = async (req, res) => {
 
         const { keyword, category } = req.params;
 
-        console.log(keyword);
-        console.log(category);
-
         const query = {
             title: new RegExp(`^${keyword}`, 'i'),
             tags: category
