@@ -50,6 +50,7 @@ const AnalysisGraph = () => {
 
   // grouping data by day
   const groupDataByDay = (data) => {
+    // initialize the object to hold the mood inputs day by day
     const groupedData = {
       Monday: [],
       Tuesday: [],
@@ -104,17 +105,20 @@ const AnalysisGraph = () => {
     const fetchMoodInputs = async () => {
       try {
         const moodData = await getMoodsByUserId();
+
         const today = new Date();
+
         const sevenDaysAgo = new Date();
+
         sevenDaysAgo.setDate(today.getDate() - 7);
 
         const sevenDaysAgoFormatted = sevenDaysAgo.toISOString().split("T")[0];
         setStartDate(sevenDaysAgoFormatted);
-        // console.log("startDate", startDate);
 
         // filter mood data according to the date
         const filteredData = moodData.filter((item) => {
           const date = new Date(item.date);
+
           return date >= sevenDaysAgo && date <= today;
         });
 
@@ -143,8 +147,8 @@ const AnalysisGraph = () => {
   // setting day indices (setting the sart day index and today index based on today date and start date of data)
   useEffect(() => {
     const today = new Date().getDay();
-    setCurrentDayIndex(today - 1);
-    setEndDayIndex(today - 1);
+    setCurrentDayIndex(today === 0 ? 6 : today - 1); // Adjust index to start from Sunday
+    setEndDayIndex(today === 0 ? 6 : today - 1); // Adjust end day index as well
   }, []);
 
   useEffect(() => {
@@ -182,9 +186,9 @@ const AnalysisGraph = () => {
         setCurrentDate(date.toISOString().split("T")[0]);
       }
 
-      setIsNextDisabled(currentDayIndex === endDayIndex);
+      setIsNextDisabled(currentDayIndex === 6);
 
-      setIsBackDisabled(currentDayIndex === startDayIndex);
+      setIsBackDisabled(currentDayIndex === 0);
     }
   }, [data, currentDayIndex]);
 
@@ -208,6 +212,7 @@ const AnalysisGraph = () => {
   // formating the dates
   const dateValue = getTime();
   const groupedData = groupDataByDay(data);
+
   // Get the name of the current day based on index
   const currentDay = daysOfWeek[currentDayIndex];
 
@@ -276,7 +281,6 @@ const AnalysisGraph = () => {
               <Text style={styles.text}>
                 No mood data available for {currentDay}
               </Text>
-              {/* <Text style={styles.text}>{formattedNextDate}</Text> */}
             </View>
           )}
 
@@ -328,6 +332,11 @@ const styles = StyleSheet.create({
   navigationContainer: {
     flexDirection: "row",
     marginTop: 15,
+    justifyContent: "center",
+
+    alignItems: "center",
+    gap: 32,
+    height: 30,
   },
 
   selectedEmojiContainer: {
@@ -366,11 +375,15 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
   button: {
-    alignSelf: "flex-end",
-    top: 13,
+    // alignSelf: "flex-end",
+    // top: 13,
+    alignItems: "center",
+    width: 50,
+    height: "100%",
+    justifyContent: "center",
   },
   buttonImage: {
-    right: 120,
+    // right: 120,
   },
   buttonDisabled: {
     opacity: 0.5,
@@ -378,18 +391,10 @@ const styles = StyleSheet.create({
   dateText: {
     fontSize: 18,
     fontWeight: "400",
-    textAlign: "center",
-    top: 10,
+    // textAlign: "center",
+    // top: 10,
   },
-  view1: {
-    flex: 2,
-  },
-  view2: {
-    flex: 2,
-  },
-  view3: {
-    flex: 2,
-  },
+
   emptyStateContainer: {
     alignItems: "center",
     marginTop: 50,

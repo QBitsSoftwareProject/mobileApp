@@ -2,19 +2,14 @@ import React from "react";
 import { View, Text, StyleSheet, Image } from "react-native";
 import MoodProgressBars from "./Chart";
 
-// pass the mood data , max mood from main
-const DayMoodChart = ({ day, data, maxHeightMood }) => {
+const DayMoodChart = ({ day, data = [], maxHeightMood }) => {
   const countEmojis = (mood) => {
-    //Filters the data array to count the number of times of each mood.
     return data.filter((item) => item.moodText === mood).length;
   };
 
-  //total number of mood entires of per day
   const total = data.length;
 
-  //get height based on total number of entries
   const getHeight = (count) => {
-    // console.log(count / total);
     return total !== 0 ? (count / total) * 250.0 : 0;
   };
 
@@ -42,7 +37,9 @@ const DayMoodChart = ({ day, data, maxHeightMood }) => {
 
   return (
     <View style={styles.dayContainer}>
-      <Image style={styles.image} source={moodToImage[maxHeightMood]} />
+      {maxHeightMood && (
+        <Image style={styles.image} source={moodToImage[maxHeightMood]} />
+      )}
 
       <View style={styles.barWithAxis}>
         <View style={styles.left}>
@@ -80,7 +77,6 @@ const styles = StyleSheet.create({
   dayContainer: {
     marginTop: 45,
     paddingBottom: 100,
-    // backgroundColor: "yellow",
   },
   dayTitle: {
     fontSize: 18,
@@ -97,11 +93,7 @@ const styles = StyleSheet.create({
     alignItems: "flex-end",
     rowGap: 12,
     marginTop: 21,
-    // paddingLeft: 5,
-    // marginLeft: 5,
-    // backgroundColor: "yellow",
   },
-
   axisText: {
     fontSize: 10,
     color: "#7D8597",
@@ -111,24 +103,16 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "flex-end",
     paddingRight: 15,
-
-    // backgroundColor: "red",
-    // columnGap: 75,
-    // marginHorizontal: 10,
   },
-
   chartContainer: {
     flexDirection: "row",
     justifyContent: "space-around",
   },
-
   image: {
     width: 369,
     height: 280,
-    // left: -15,
     alignSelf: "center",
     marginTop: -10,
-    // backgroundColor: "yellow",
   },
 });
 
