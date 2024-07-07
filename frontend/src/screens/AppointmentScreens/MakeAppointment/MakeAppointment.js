@@ -106,6 +106,7 @@ const MakeAppointment = ({ route }) => {
         position: "top",
       });
     }
+    closeMessage();
   };
 
   const closeMessage = () => {
@@ -196,8 +197,11 @@ const MakeAppointment = ({ route }) => {
               width: "100%",
               flexDirection: "row",
               flexWrap: "wrap",
-              alignItems: "baseline",
-              gap: 20,
+              alignItems: "center",
+              gap: 5,
+              
+
+              
             }}
           >
             {pressDay !== null &&

@@ -76,8 +76,8 @@ const CFHeaderSub = (props) => {
                 <Image source={require("../../assets/images/BackWhite.png")} />
               </TouchableOpacity>
 
-              <View style={{ zIndex:10000 }}>
-                <TouchableOpacity onPress={navigateToProfile}>
+              <View style={{ zIndex:10000 , marginLeft:45}}>
+                <TouchableOpacity onPress={navigateToProfile}  >
                   <View style={styles.imageframe}>
                     <Image
                       source={{ uri: userData.proPic }}

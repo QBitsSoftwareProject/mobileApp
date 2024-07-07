@@ -6,9 +6,13 @@ const URL = BACKEND_URI + "/user";
 
 export const checkExistsUser = async (email) => {
   try {
-    const response = await axios.post(`${URL}/checkExistsUser`, { email });
-
+    const token = await AsyncStorage.getItem("authToken");
+    const response = await axios.post(`${URL}/checkExistsUser`, { email },{
+      headers: { authtoken: token },
+    });
+    
     return response.data;
+    
   } catch (error) {
     console.log(error);
     throw new Error("Error during request setup");

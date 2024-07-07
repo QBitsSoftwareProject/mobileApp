@@ -41,6 +41,7 @@ const BioEditPopUp = ({
   const checkEmailExist = async (email) => {
     try {
       const checkUser = await checkExistsUser(email);
+      console.log(checkUser)
       setExistUser(checkUser);
     } catch (err) {
       console.log(err);
