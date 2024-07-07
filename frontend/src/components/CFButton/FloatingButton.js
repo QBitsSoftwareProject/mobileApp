@@ -1,9 +1,12 @@
 import React from "react";
-import { StyleSheet, TouchableOpacity, Image } from "react-native";
+import { StyleSheet, TouchableOpacity, Image, Dimensions } from "react-native";
 
 const FloatingButton = ({ addNew }) => {
+
+  const screenHeight = Dimensions.get('window').height;
+
   return (
-    <TouchableOpacity style={styles.touchableOpacity} onPress={addNew}>
+    <TouchableOpacity style={[styles.touchableOpacity,{top:screenHeight-480}]} onPress={addNew}>
       <Image
         style={styles.floatingbutton}
         source={require("../../assets/images/NavigationIcons/addNew.png")}
@@ -15,7 +18,7 @@ const FloatingButton = ({ addNew }) => {
 const styles = StyleSheet.create({
   touchableOpacity: {
     position: "absolute",
-    bottom: 50,
+    // bottom: 120,
     left: 25,
   },
   floatingbutton: {

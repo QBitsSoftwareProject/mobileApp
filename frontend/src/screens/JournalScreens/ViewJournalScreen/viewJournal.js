@@ -98,11 +98,13 @@ export const ViewJournal = ({ navigation }) => {
           alignItems: "center",
           justifyContent: "center",
           marginTop: 32,
+          
+
         }}
       >
         <CustomButtonView btnAnalysis={handleButton}></CustomButtonView>
       </View>
-      <View style={{ height: screenHeight - 320 }}>
+      <View style={{ height: screenHeight - 400 }}>
         <ScrollView
           style={{
             marginHorizontal: 25,
@@ -138,8 +140,9 @@ export const ViewJournal = ({ navigation }) => {
             ))
           )}
         </ScrollView>
-        <FloatingButton handleFlotingPointButton={handleFlotingPointButton} />
+        
       </View>
+      <FloatingButton handleFlotingPointButton={handleFlotingPointButton} />
     </View>
   );
 };
