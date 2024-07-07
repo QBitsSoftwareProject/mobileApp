@@ -91,7 +91,7 @@ const MoodInputScreen = () => {
   };
 
   return (
-    <SafeAreaView>
+    <View>
       <TouchableOpacity onPress={handleBackBtn} style={styles.backBtn}>
         <Image
           source={require("../../assets/images/backProfile.png")}
@@ -191,7 +191,7 @@ const MoodInputScreen = () => {
           </TouchableOpacity>
         </ScrollView>
       </View>
-    </SafeAreaView>
+    </View>
   );
 };
 

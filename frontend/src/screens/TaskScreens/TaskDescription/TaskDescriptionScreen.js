@@ -112,7 +112,7 @@ const TaskDescriptionScreen = () => {
 
   return (
     <View style={styles.container}>
-      <SafeAreaView>
+      
         <TouchableOpacity style={styles.backBtn} onPress={handleBackPress}>
           <Image source={require("../../../assets/images/blackBack.png")} />
         </TouchableOpacity>
@@ -197,7 +197,7 @@ const TaskDescriptionScreen = () => {
             )}
           </ScrollView>
         </View>
-      </SafeAreaView>
+      
     </View>
   );
 };

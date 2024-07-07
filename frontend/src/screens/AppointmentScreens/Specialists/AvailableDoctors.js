@@ -54,6 +54,7 @@ const AvailableDoctor = () => {
         schema={"doctor"}
       />
       <View style={{ paddingHorizontal: 25, zIndex: -1 }}>
+      <ScrollView style={{ height: screenHeight - 340 }}>
         <View style={style.content1}>
           <Text style={style.descript2}>Available Doctors.</Text>
           <TouchableOpacity
@@ -66,7 +67,7 @@ const AvailableDoctor = () => {
           </TouchableOpacity>
         </View>
 
-        <ScrollView style={{ height: screenHeight - 250 }}>
+        
           <View style={{ marginBottom: 150 }}>
             {docList.map((item) => (
               <CreateCard

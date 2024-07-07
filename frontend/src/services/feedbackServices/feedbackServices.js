@@ -38,7 +38,7 @@ export const addFeedback = async (
     // console.log(response)
     return response.data;
   } catch (error) {
-    console.log("gghj", error);
+    console.log( error.response.data);
     throw new Error("Error during request setup");
   }
 };

@@ -108,14 +108,14 @@ const InsideGoalsScreen = ({ route }) => {
 
   return (
     <View style={styles.container}>
-      <SafeAreaView>
+      
         <TouchableOpacity style={styles.backBtn} onPress={handleBackPress}>
           <Image source={require("../../../assets/images/blackBack.png")} />
         </TouchableOpacity>
 
         {/* goals rendering ..................................................................................... */}
 
-        <View style={{ marginBottom: 220 }}>
+        <View style={{ marginBottom: 140 }}>
           <ScrollView>
             <View style={styles.headTextBox}>
               <Text style={styles.goalHead}>{goal.title}</Text>
@@ -151,7 +151,7 @@ const InsideGoalsScreen = ({ route }) => {
             ))}
           </ScrollView>
         </View>
-      </SafeAreaView>
+      
     </View>
   );
 };

@@ -43,12 +43,14 @@ const historystyles = StyleSheet.create({
       },
 
     FlatList: {
-      marginTop:23,
+      paddingTop:15,
+     
       
     },
 
     scrollArea: {
-      height:'80%',
+      marginBottom:270,
+      
     },
 
     timetext: {

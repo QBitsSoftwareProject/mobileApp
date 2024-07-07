@@ -31,7 +31,7 @@ const MonthlyAnalysisGraph = () => {
         back="HomeScreen"
       />
       <Text style={styles.text}>Analysis of your past 30 days mood inputs</Text>
-      <ScrollView height={screenHeight - 300}>
+      <ScrollView height={screenHeight - 380}>
         <CustomBarChart
           positiveMoods={positiveMoods}
           negativeMoods={negativeMoods}

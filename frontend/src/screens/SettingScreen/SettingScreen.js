@@ -36,13 +36,13 @@ const SettingScreen = ({ route }) => {
   };
 
   return (
-    <SafeAreaView>
+    <View>
       <View style={{ marginRight: 25, marginLeft: 25 }}>
         <Text style={styles.SettingText}>Settings</Text>
         <SettingCard></SettingCard>
         <LogoutCard handleLogout={handleLogout} />
       </View>
-    </SafeAreaView>
+    </View>
   );
 };
 

@@ -1,9 +1,7 @@
 import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
-  backbtn: {
-    marginTop: 50,
-  },
+  
 
   question: {
     fontWeight: "400",
@@ -28,14 +26,16 @@ const styles = StyleSheet.create({
     color: "#40495B",
   },
   inputBox: {
-    height: 50,
+    height: 150,
+    paddingTop:15,
     borderRadius: 10,
     borderWidth: 1,
     borderColor: "#4ABFB4",
-    marginBottom: 100,
+    marginBottom: 64,
     paddingLeft: 15,
     paddingRight: 15,
     backgroundColor: "white",
+    
   },
 });
 
