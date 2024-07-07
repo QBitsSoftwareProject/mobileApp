@@ -4,13 +4,14 @@ const doctorSchema = require("../../models/doctor/doctor");
 
 exports.getPost = async (req, res) => {
   try {
-    const { skip, limit } = req.query;
-    console.log(skip, limit);
+    const { lastCreatedAt, limit } = req.query;
+    console.log(lastCreatedAt, limit);
 
     const Posts = await postSchema
-      .find()
+      .find({
+        ...(lastCreatedAt && { createdAt: { $lt: new Date(lastCreatedAt) } }),
+      }) // only posts with a createdAt timestamp less than ($lt) the lastCreatedAt date
       .sort({ createdAt: -1 })
-      .skip(parseInt(skip))
       .limit(parseInt(limit))
       .populate("userId");
 

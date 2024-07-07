@@ -3,8 +3,10 @@ const notificationSchema = require("../../models/notification/notification");
 exports.getNotification = async (req, res) => {
   try {
     const userId = req.user.user_id;
-    const { lastCreatedAt, limit } = req.query;
+    const { lastCreatedAt, limit, role } = req.query;
     const queryLimit = parseInt(limit);
+
+    console.log(req.query);
 
     // Build query for user notifications
     const userNotificationsQuery = {
@@ -13,12 +15,15 @@ exports.getNotification = async (req, res) => {
       ...(lastCreatedAt && { createdAt: { $lt: new Date(lastCreatedAt) } }),
     };
 
-    //get all notifications
-    const allNotifications = await notificationSchema
+    let allNotifications = [];
+
+    allNotifications = await notificationSchema
       .find(userNotificationsQuery)
       .populate("senderId")
       .sort({ createdAt: -1 }) // Sort by createdAt descending
       .limit(queryLimit);
+
+    console.log(allNotifications);
 
     const sytemNotification = await notificationSchema
       .find({

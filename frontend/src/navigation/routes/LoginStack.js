@@ -9,6 +9,7 @@ import DoctorRegScreen2 from "../../screens/SignUpScreens/DoctorRegScreen2/Docto
 import DoctorRegScreen4 from "../../screens/SignUpScreens/DoctorRegScreen4/DoctorRegScreen4";
 import DoctorRegScreen3 from "../../screens/SignUpScreens/DoctorRegScreen3/DoctorRegScreen3";
 import PrivacyAndPolicy from "../../screens/SignUpScreens/PrivacyAndPolicy/PrivacyAndPolicy";
+import PasswordRecovery from "../../screens/LoginScreen/PasswordRecovery/PasswordRecovery";
 
 const stack = createNativeStackNavigator();
 
@@ -30,6 +31,7 @@ const LoginStack = () => {
       <stack.Screen name="DoctorRegScreen3" component={DoctorRegScreen3} />
       <stack.Screen name="DoctorRegScreen4" component={DoctorRegScreen4} />
       <stack.Screen name="PrivacyAndPolicy" component={PrivacyAndPolicy} />
+      <stack.Screen name="PasswordRecovery" component={PasswordRecovery} />
     </stack.Navigator>
   );
 };

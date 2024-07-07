@@ -25,12 +25,13 @@ export const createPost = async (postCategory, caption, image) => {
   }
 };
 
-export const getPost = async () => {
+export const getPost = async (lastCreatedAt, limit) => {
   try {
     const token = await AsyncStorage.getItem("authToken");
 
     const response = await axios.get(URL + "/view-post", {
       headers: { authtoken: token },
+      params: { lastCreatedAt, limit },
     });
     return response.data;
   } catch (error) {

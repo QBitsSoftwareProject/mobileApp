@@ -17,17 +17,23 @@ import {
 import loadingGif from "../../assets/animation/loading.gif";
 import notFoundGif from "../../assets/animation/not-found.png";
 import { useWebSockets } from "../../services/socketServices/webSocket";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const NotifyScreen = () => {
   const [notificationList, setNotificationList] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [lastDate, setLastDate] = useState(null);
   const [isRefresh, setIsRefresh] = useState(false);
+  const [userRole, setUserRole] = useState("");
 
   const navigation = useNavigation();
 
   const goBackFromComment = () => {
-    navigation.navigate("HomeScreen");
+    if (userRole == "doctor") {
+      navigation.navigate("AppointmentListsCategory");
+    } else {
+      navigation.navigate("HomeScreen");
+    }
   };
 
   const fetchNotification = async (last) => {
@@ -35,7 +41,7 @@ const NotifyScreen = () => {
 
     setIsLoading(true);
     try {
-      const res = await getNotification(last, 10);
+      const res = await getNotification(last, 10, userRole);
 
       if (last == "") {
         setNotificationList(res);
@@ -53,7 +59,13 @@ const NotifyScreen = () => {
     }
   };
 
+  const fetchRole = async () => {
+    const role = await AsyncStorage.getItem("role");
+    setUserRole(role);
+  };
+
   useEffect(() => {
+    fetchRole();
     fetchNotification("");
   }, [isRefresh]);
 
@@ -167,6 +179,7 @@ const styles = StyleSheet.create({
     width: "100%",
     position: "absolute",
     marginLeft: 25,
+    zIndex: -1,
   },
   headerText: {
     fontSize: 24,

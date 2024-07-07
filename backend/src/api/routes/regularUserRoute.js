@@ -42,7 +42,7 @@ router.put("/", auth, updateRegularUser);
 router.put("/edit-user-access/:id", auth, updateUserAccessStatus);
 router.delete("/:id", auth, deleteRegularUser);
 
-router.post("/checkExistsUser", auth, checkExistsUser);
+router.post("/checkExistsUser", checkExistsUser);
 
 //register and login routes
 router.post("/login", loginUser);

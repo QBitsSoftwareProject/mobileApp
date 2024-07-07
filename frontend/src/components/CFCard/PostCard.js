@@ -14,7 +14,7 @@ import { useFocusEffect, useNavigation } from "@react-navigation/native";
 import { getCommentsCount } from "../../services/commentServices/commentServices";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-const PostCard = React.memo((props) => {
+const PostCard = (props) => {
   const navigation = useNavigation();
 
   const [isPress, setIsPress] = useState(false);
@@ -189,7 +189,7 @@ const PostCard = React.memo((props) => {
       </View>
     </TouchableWithoutFeedback>
   );
-});
+};
 
 const styles = StyleSheet.create({
   cardBox: {
