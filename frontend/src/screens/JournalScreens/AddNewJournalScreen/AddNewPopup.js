@@ -6,7 +6,6 @@ import {
   TouchableOpacity,
   Image,
 } from "react-native";
-import { createStackNavigator } from "@react-navigation/stack";
 
 // overlay fution to visible popup
 export const Overlay = ({ isVisible, onClose, ...props }) => {

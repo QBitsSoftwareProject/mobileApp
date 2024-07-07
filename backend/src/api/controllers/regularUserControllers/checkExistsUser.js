@@ -3,7 +3,9 @@ const doctorModel = require("../../models/doctor/doctor");
 
 exports.checkExistsUser = async (req, res) => {
   try {
+    
     const { email } = req.body;
+    
     const checkUser = await regularUser.findOne({ email });
 
     //check email with doctor model

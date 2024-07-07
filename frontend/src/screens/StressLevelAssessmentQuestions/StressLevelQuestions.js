@@ -69,7 +69,16 @@ const Question = () => {
         const fetchIds = await fetchQuestionIds();
 
         if (fetchIds) {
-          setIds(fetchIds);
+
+          if (fetchIds.length > 10) {
+            
+            const randomIds = fetchIds.sort(() => 0.5 - Math.random()).slice(0, 10);
+            setIds(randomIds);
+        } else {
+            
+            const randomIds = fetchIds.sort(() => 0.5 - Math.random());
+            setIds(randomIds);
+        }
         }
       } catch (error) {
         console.error("Failed to fetch question ids:", error.message);
