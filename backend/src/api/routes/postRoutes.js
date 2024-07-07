@@ -14,7 +14,7 @@ const { deletePost } = require("../controllers/postController/deletePost");
 const router = express.Router();
 
 router.post("/", auth, createPost);
-router.get("/view-post", auth, getPost);
+router.get("/view-post",getPost);
 router.get("/view-one-post/:postId", auth, getAPost);
 router.get("/view-a-post/:postId", auth, getAPost);
 router.get("/view-profile-post", auth, getProfilePost);
