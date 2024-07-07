@@ -22,31 +22,23 @@ const HomePage = () => {
   const route = useRoute();
 
   const [postList, setPostList] = useState([]);
-  const [page, setPage] = useState(0);
   const [loading, setLoading] = useState(false);
   const [refreshing, setRefreshing] = useState(false);
+  const [lastCreatedAt, setLastCreatedAt] = useState();
   const [hasMorePosts, setHasMorePosts] = useState(true);
 
   useEffect(() => {
-    fetchPostData(0);
+    fetchPostData();
   }, []);
 
-  const fetchPostData = async (newPage = 0) => {
+  const fetchPostData = async () => {
     if (loading) return; // Prevent multiple simultaneous fetches
     setLoading(true);
+
     try {
-      const res = await getPost(newPage * 8, 8); // Fetch 8 posts starting from the offset
-      if (newPage === 0) {
-        setPostList(res);
-      } else {
-        setPostList((prevPostList) => {
-          // Ensure no duplicates
-          const postMap = new Map(prevPostList.map((post) => [post._id, post]));
-          res.forEach((post) => postMap.set(post._id, post));
-          return Array.from(postMap.values());
-        });
-      }
-      setPage(newPage); // Update the current page
+      const res = await getPost(lastCreatedAt, 8); // Fetch 8 posts starting from the offset
+      setPostList((prev) => [...prev, ...res]);
+      setLastCreatedAt(res[res.length - 1].createdAt);
       setHasMorePosts(res.length === 8); // Update hasMorePosts based on the response
     } catch (error) {
       console.log(error);
@@ -57,26 +49,26 @@ const HomePage = () => {
 
   const handleLoadMore = () => {
     if (!loading && hasMorePosts) {
-      fetchPostData(page + 1); // Fetch the next page
+      fetchPostData(); // Fetch the next page
     }
   };
 
   const handleRefresh = () => {
     setRefreshing(true); // Set refreshing state to true
-    fetchPostData(0).finally(() => setRefreshing(false)); // Fetch the first page and reset refreshing state
+    fetchPostData().finally(() => setRefreshing(false)); // Fetch the first page and reset refreshing state
   };
 
   useFocusEffect(
     React.useCallback(() => {
       if (route.params?.refresh) {
-        fetchPostData(0);
+        fetchPostData();
         navigation.setParams({ refresh: false }); // Reset the refresh param
       }
     }, [route.params?.refresh])
   );
 
   const onUpdatePost = () => {
-    fetchPostData(0);
+    fetchPostData();
   };
 
   const onDeletePost = (postId) => {
