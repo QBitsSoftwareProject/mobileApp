@@ -55,7 +55,6 @@ exports.getADoctor = async (req, res) => {
     }
 
     // Sending success response with status code 200 and the user object
-    console.log(getUser);
     return res.status(201).json(getUser);
   } catch (err) {
     res.status(500).json({ error: "User fetch failed", err: err.message });

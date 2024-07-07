@@ -75,28 +75,39 @@ const AnalysisGraph = () => {
 
   // get the number of each mood inputs per day
   const calculateMoodStats = (data) => {
-    const moodCounts = data.reduce((acc, item) => {
-      acc[item.moodText] = (acc[item.moodText] || 0) + 1;
-      return acc;
-    }, {});
+    // Calculate each mood counts
+    const moodCounts = {};
+    data.forEach((item) => {
+      if (moodCounts[item.moodText]) {
+        moodCounts[item.moodText] += 1;
+      } else {
+        moodCounts[item.moodText] = 1;
+      }
+    });
 
-    // get the total count per day
-    const totalCount = Object.values(moodCounts).reduce(
-      (acc, count) => acc + count,
-      0
-    );
+    // Calculate total count of all moods
+    let totalCount = 0;
+    Object.values(moodCounts).forEach((count) => {
+      totalCount += count;
+    });
 
-    // calculate the height of a bar per each day
-    const calculatedHeights = Object.keys(moodCounts).reduce((acc, mood) => {
-      acc[mood] = (moodCounts[mood] / totalCount) * 250;
+    //Calculate heights for each mood based on totalCount
+    const calculatedHeights = {};
+    Object.keys(moodCounts).forEach((mood) => {
+      calculatedHeights[mood] = (moodCounts[mood] / totalCount) * 250;
+    });
 
-      return acc;
-    }, {});
+    //  Determine the maximum entered mood
+    let maxMood = "";
+    Object.keys(calculatedHeights).forEach((mood) => {
+      if (
+        maxMood === "" ||
+        calculatedHeights[mood] > calculatedHeights[maxMood]
+      ) {
+        maxMood = mood;
+      }
+    });
 
-    // get the maximum enterd mood
-    const maxMood = Object.keys(calculatedHeights).reduce((a, b) =>
-      calculatedHeights[a] > calculatedHeights[b] ? a : b
-    );
     return { calculatedHeights, maxMood };
   };
 

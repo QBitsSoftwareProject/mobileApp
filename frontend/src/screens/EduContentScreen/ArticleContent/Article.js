@@ -4,10 +4,51 @@ import styles from "./articleStyle";
 
 import noPreviewAvailableImg from "../../../assets/images/no-image-avaliable.jpg";
 import { useNavigation } from "@react-navigation/native";
-import { getAuthorInfo } from "../../../services/educationalServices/educationalServices";
+import { editFavoriteArticles, getAuthorInfo } from "../../../services/educationalServices/educationalServices";
 
-const Article = ({ item }) => {
+// favorites
+import favorite from "../../../assets/images/favorites/favorite.png";
+import notFavorite from "../../../assets/images/favorites/notFavorite.png";
+// favorites
+
+const Article = ({ user, item, actionStateFunction, actState }) => {
   const navigation = useNavigation();
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        // favorite video
+        if (user.favVideos && (user.favVideos).includes(item._id)) {
+          setIsFavorite(true)
+        } else {
+          setIsFavorite(false)
+        }
+        // favorite video
+      } catch (err) {
+        setError(err.message);
+      }
+    };
+    fetchUserData();
+  }, [actionState]);
+
+  const [error, setError] = useState(null);
+
+  const [Isfavorite, setIsFavorite] = useState(false);
+  const [actionState, setActionState] = useState(false);
+
+  const editFavorites = () => {
+    let newArticleFavs = [];
+    if (user.favArticles && (user.favArticles).includes(item._id)) {
+      newArticleFavs = (user.favArticles).filter(favId => favId !== item._id);
+      setIsFavorite(false);
+    } else if (user.favArticles && !(user.favArticles).includes(item._id)) {
+      newArticleFavs = [item._id, ...user.favArticles];
+      setIsFavorite(true);
+    }
+    editFavoriteArticles(user._id, newArticleFavs);
+    actionStateFunction(!actState);
+    setActionState(!actionState);
+  }
 
   const navigateToScreen = () => {
     navigation.navigate("SelectedArticleScreen", { article: item });
@@ -44,6 +85,24 @@ const Article = ({ item }) => {
 
   return (
     <View style={styles.article}>
+      <View style={{ width: "100%", height: 50, position: "absolute", zIndex: 150, display: "flex", alignItems: "flex-end" }}>
+        <TouchableOpacity
+          onPress={() => {
+            editFavorites();
+          }}
+          style={{
+            height: 50,
+            alignItems: "flex-end",
+            justifyContent: "center",
+          }}
+        >
+          <View style={styles.addToFavBtn}>
+            {
+              (Isfavorite) ? (<Image source={favorite} style={{ width: 25, height: 28 }} />) : (<Image source={notFavorite} style={{ width: 25, height: 28 }} />)
+            }
+          </View>
+        </TouchableOpacity>
+      </View>
       <View>
         {isImagePresent ? (
           <Image

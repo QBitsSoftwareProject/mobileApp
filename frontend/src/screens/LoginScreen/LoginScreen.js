@@ -123,7 +123,10 @@ const LoginScreen = () => {
               <Text style={styles.bottomText}>Sign Up</Text>
             </TouchableOpacity>
 
-            <TouchableOpacity style={{ padding: 10 }}>
+            <TouchableOpacity
+              style={{ padding: 10 }}
+              onPress={() => navigation.navigate("PasswordRecovery")}
+            >
               <Text style={styles.bottomText}>Need a Help?</Text>
             </TouchableOpacity>
           </View>

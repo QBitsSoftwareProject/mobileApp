@@ -74,10 +74,10 @@ const CustomBarChart = ({ positiveMoods, negativeMoods }) => {
           emojisByDate[formattedDate].push(entry.selectedEmoji);
         });
 
-        //get an array of unique dates
+        //get an array of according to the dates
         const uniqueDatesArray = Object.keys(emojisByDate);
 
-        // Map over the unique dates to count moods
+        // Map overcount moods according to the dates
         const emojiCounts = uniqueDatesArray.map((date) => {
           const emojis = emojisByDate[date];
           let positiveCount = 0;

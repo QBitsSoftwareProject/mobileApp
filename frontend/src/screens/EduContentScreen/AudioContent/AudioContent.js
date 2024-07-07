@@ -2,8 +2,6 @@ import {
   View,
   SafeAreaView,
   FlatList,
-  ScrollView,
-  TouchableOpacity,
   Image,
 } from "react-native";
 import React, { useState, useEffect } from "react";
@@ -11,7 +9,6 @@ import axios from "axios";
 import styles from "./audioStyle";
 
 // components
-import SearchBarComponent from "../../../components/SearchBar/SearchBar";
 import SearchAndCategories from "../../../components/SearchAndCategories/SearchAndCategories";
 import AudioCategoryItem from "../AudioContent/AudioCategories/AudioCategoryItem";
 import AudioItem from "../../../components/AudioList/AudioItem";
@@ -22,11 +19,12 @@ import {
   getAudioTags,
   getAudios,
   getAudiosBySearch,
-  getAudiosBySearchAndCategory,
   getFilteredAudios,
 } from "../../../services/educationalServices/educationalServices";
 import AppointmentHeader from "../../../components/AppointmentHeader/AppointmentHeader";
 import loadingGif from "../../../assets/animation/loading.gif";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { getAUser } from "../../../services/userServices/userService";
 // category data
 
 const AudioContent = () => {
@@ -66,6 +64,33 @@ const AudioContent = () => {
     };
     fetchAudioData();
   }, [selectedCategory, keyword]);
+
+  const [user, setUser] = useState({});
+  const [userRole, setUserRole] = useState("");
+  const [actionState, setActionState] = useState(false);
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      let userInfo;
+      try {
+        const role = await AsyncStorage.getItem("role");
+        setUserRole(role);
+        if (role === "regularUser") {
+          userInfo = await getAUser();
+          setUser(userInfo);
+        } else {
+          throw new Error("Invalid role");
+        }
+
+      } catch (err) {
+        setError(err.message);
+      }
+    };
+    fetchUserData();
+  }, [actionState]);
+
+
+  const [error, setError] = useState(null);
 
   if (!audioCategories) {
     return (
@@ -124,6 +149,9 @@ const AudioContent = () => {
               renderItem={({ item }) => {
                 return (
                   <AudioItem
+                    user={user}
+                    actionStateFunction={setActionState}
+                    actState={actionState}
                     item={item}
                     category
                     isPlaying={currentlyPlayingId === item.id}

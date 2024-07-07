@@ -4,6 +4,7 @@ import { View, Text, Image, ImageBackground, StyleSheet } from "react-native";
 
 const DocAppHeader = (props) => {
   return (
+    <View>
     <LinearGradient
       colors={["rgba(73,177,247,0.7)", "#00453E"]}
       start={{ x: 0, y: 0 }}
@@ -28,15 +29,19 @@ const DocAppHeader = (props) => {
         <Text style={styles.subHeadlineTxt}>{props.docName}</Text>
       </View>
 
-      <View>
-        <View style={styles.profileFrame}>
-          <Image source={props.proPic} style={styles.profileImage} />
-        </View>
-      </View>
       {/* <View style={styles.DDM}>
             <DocDropDown DDMtext={"Switch to"} />
           </View> */}
     </LinearGradient>
+
+    <View style = {{width:'100%',marginTop:-50, zIndex:1000}}>
+        <View style={styles.profileFrame}>
+          <Image source={props.proPic} style={styles.profileImage} />
+        </View>
+      </View>
+
+    </View>
+
   );
 };
 

@@ -23,11 +23,14 @@ import {
 import AppointmentHeader from "../../../components/AppointmentHeader/AppointmentHeader";
 import { useRoute } from "@react-navigation/native";
 import { updateTaskCompleteness } from "../../../services/taskServices/taskservice";
+import { getAUser } from "../../../services/userServices/userService";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const VideoContent = () => {
   const route = useRoute();
 
   const [videos, setVideos] = useState([]);
+
   const [loading, setLoading] = useState(true);
 
   const [keyword, setKeyWord] = useState("");
@@ -53,7 +56,34 @@ const VideoContent = () => {
       }
     };
     fetchVideos();
-  }, [keyword]);
+  }, [keyword, actionState]);
+
+
+  const [user, setUser] = useState({});
+  const [userRole, setUserRole] = useState("");
+  const [actionState, setActionState] = useState(false);
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      let userInfo;
+      try {
+        const role = await AsyncStorage.getItem("role");
+        setUserRole(role);
+        if (role === "regularUser") {
+          userInfo = await getAUser();
+          setUser(userInfo);
+        } else {
+          throw new Error("Invalid role");
+        }
+
+      } catch (err) {
+        setError(err.message);
+      }
+    };
+    fetchUserData();
+  }, [actionState]);
+
+  const [error, setError] = useState(null);
 
   //call task update if there is a task
   const callTaskUpdate = () => {
@@ -106,6 +136,9 @@ const VideoContent = () => {
           {videos.map((item, index) => (
             <View key={index}>
               <VideoItem
+                user={user}
+                actionStateFunction={setActionState}
+                actState={actionState}
                 item={item}
                 callTask={() => callTaskUpdate()}
                 screen={"videoStack"}

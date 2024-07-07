@@ -41,14 +41,20 @@ const CreatePost = ({ route }) => {
       console.log(error);
     }
     setIsLoading(false);
+    
   };
 
   const confirmMessage = async () => {
     navigation.navigate("ProfileScreen");
+    closeMessagebtn()
+  };
+  const closeMessagebtn = () => {
+    setPopupMessage("");
   };
 
   const closeMessage = () => {
     navigation.navigate("HomePage", { refresh: true });
+    closeMessagebtn()
   };
 
   const fireBaseUpload = async () => {

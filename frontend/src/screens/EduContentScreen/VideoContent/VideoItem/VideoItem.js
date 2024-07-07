@@ -9,9 +9,34 @@ import playImg from "../../../../assets/images/icons/player/play.png";
 // favorites
 import favorite from "../../../../assets/images/favorites/favorite.png";
 import notFavorite from "../../../../assets/images/favorites/notFavorite.png";
+import { editFavoriteVideos } from "../../../../services/educationalServices/educationalServices";
 // favorites
 
-const VideoItem = ({ item, callTask, screen }) => {
+const VideoItem = ({ user, item, callTask, screen, actionStateFunction, actState }) => {
+
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        // favorite video
+        if (user.favVideos && (user.favVideos).includes(item._id)) {
+          setIsFavorite(true)
+        } else {
+          setIsFavorite(false)
+        }
+        // favorite video
+      } catch (err) {
+        setError(err.message);
+      }
+    };
+    fetchUserData();
+  }, [actionState]);
+
+  const [Isfavorite, setIsFavorite] = useState(false);
+  const [actionState, setActionState] = useState(false);
+
+
   const video = React.useRef(null);
   const [status, setStatus] = React.useState({});
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -42,11 +67,28 @@ const VideoItem = ({ item, callTask, screen }) => {
     return `${minutes}:${remainingSeconds < 10 ? "0" : ""}${remainingSeconds}`;
   };
 
+  const editFavorites = () => {
+    let newVideoFavs = [];
+    if (user.favVideos && (user.favVideos).includes(item._id)) {
+      newVideoFavs = (user.favVideos).filter(favId => favId !== item._id);
+      setIsFavorite(false);
+    } else if (user.favVideos && !(user.favVideos).includes(item._id)) {
+      newVideoFavs = [item._id, ...user.favVideos];
+      setIsFavorite(true);
+    }
+    editFavoriteVideos(user._id, newVideoFavs);
+    actionStateFunction(!actState);
+    setActionState(!actionState);
+  }
+
   return (
     <View>
       <View style={[styles.VideoItem, { paddingBottom: 20 }]}>
         <View style={{ width: "100%", height: 50, position: "absolute", zIndex: 150, display: "flex", alignItems: "flex-end" }}>
           <TouchableOpacity
+            onPress={() => {
+              editFavorites();
+            }}
             style={{
               height: 50,
               alignItems: "flex-end",
@@ -54,7 +96,9 @@ const VideoItem = ({ item, callTask, screen }) => {
             }}
           >
             <View style={styles.addToFavBtn}>
-              <Image source={favorite} style={{ width: 25, height: 28 }} />
+              {
+                (Isfavorite) ? (<Image source={favorite} style={{ width: 25, height: 28 }} />) : (<Image source={notFavorite} style={{ width: 25, height: 28 }} />)
+              }
             </View>
           </TouchableOpacity>
         </View>

@@ -9,16 +9,7 @@ const storeMark = asyncHandler(async (req, res) => {
 
         const userid = req.user.user_id;
 
-        
-
-        console.log('Received Mark:', mark);
-        console.log('Received date', date);
-        console.log('Received Time', time);
-        console.log('Received id', userid);
-
         const newMark = await markService.storeMark(userid, mark, date, time);
-
-        console.log('New Mark:', newMark);
 
         res.status(201).json({
             message: "Mark added successfully",
