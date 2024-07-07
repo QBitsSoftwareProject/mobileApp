@@ -97,13 +97,13 @@ const NotifyScreen = () => {
     );
   };
 
-  // if (isLoading) {
-  //   return (
-  //     <View style={styles.loadingGif}>
-  //       <Image source={loadingGif} />
-  //     </View>
-  //   );
-  // }
+  if (isLoading) {
+    return (
+      <View style={styles.loadingGif}>
+        <Image source={loadingGif} />
+      </View>
+    );
+  }
 
   if (!notificationList.length && !isLoading) {
     return (
