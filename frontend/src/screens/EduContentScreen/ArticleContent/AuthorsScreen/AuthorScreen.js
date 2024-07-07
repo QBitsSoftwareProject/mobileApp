@@ -12,12 +12,16 @@ import backImg from "../../../../assets/images/icons/Back-White.png";
 import { useNavigation } from "@react-navigation/native";
 
 // components
-import { getAuthorArticleCount, getAuthorArticles, getAuthorInfo } from "../../../../services/educationalServices/educationalServices";
+import ArticleListItem from "../../../../components/AuthorScreen/ArticleListItem";
+import {
+  getAuthorArticleCount,
+  getAuthorArticles,
+  getAuthorInfo,
+} from "../../../../services/educationalServices/educationalServices";
 import Article from "../Article";
 // components
 
 const AuthorScreen = ({ route }) => {
-
   const authorData = route.params;
   const navigation = useNavigation();
 
@@ -35,14 +39,12 @@ const AuthorScreen = ({ route }) => {
         setArticleCount(articleCount.data);
         setSelectedAuthor(authorInfo.data);
         setAuthorArticles(authorArticlesData.data);
-
       } catch (err) {
         console.error("Error fetching author:", err);
       }
-    }
+    };
     fetchAuthorArticleData();
   }, []);
-
 
   const goBack = () => {
     navigation.goBack();
@@ -95,6 +97,7 @@ const AuthorScreen = ({ route }) => {
                     Author name: {selectedAuthor.name}
                   </Text>
                 </View>
+
                 <View>
                   <Text
                     style={{
@@ -102,7 +105,11 @@ const AuthorScreen = ({ route }) => {
                       fontSize: 18,
                     }}
                   >
-                    {(articleCount == 0) ? ("no articles") : ((articleCount == 1) ? (articleCount + " article") : (articleCount + " articles"))}
+                    {articleCount == 0
+                      ? "no articles"
+                      : articleCount == 1
+                      ? articleCount + " article"
+                      : articleCount + " articles"}
                   </Text>
                 </View>
               </View>
@@ -133,16 +140,14 @@ const AuthorScreen = ({ route }) => {
               <FlatList
                 data={authorArticles}
                 renderItem={({ item }) => {
-                  return <Article item={item} />
+                  return <Article item={item} />;
                 }}
               />
             </View>
             {/* Article list */}
           </View>
-        )
-        }
+        )}
       />
-
     </SafeAreaView>
   );
 };

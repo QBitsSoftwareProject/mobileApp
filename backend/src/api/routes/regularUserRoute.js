@@ -51,7 +51,7 @@ router.put("/edit-favorites/audio/:id", auth, editFavoriteAudios);
 router.put("/edit-favorites/article/:id", auth, editFavoriteArticles);
 router.delete("/:id", auth, deleteRegularUser);
 
-router.post("/checkExistsUser", auth, checkExistsUser);
+router.post("/checkExistsUser", checkExistsUser);
 
 //register and login routes
 router.post("/login", loginUser);

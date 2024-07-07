@@ -16,7 +16,7 @@ const BioEditPopUp = ({ isVisible, onClose, setProPic , updateFunction }) => {
             onRequestClose={onClose}
         >
             <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: 'rgba(0, 0, 0, 0.5)' }}>
-                <View style={{ backgroundColor: 'white', padding: 20, borderRadius: 10, width: '70%' }}>
+                <View style={{ backgroundColor: 'white', padding: 20, borderRadius: 10, width: '80%' }}>
                     <Text style={{ alignSelf: 'center', fontSize: 18, marginBottom: 15 }}>Update Profile</Text>
 
                     <View style={{ justifyContent: 'center',alignItems :"center"}}>

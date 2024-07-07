@@ -5,9 +5,11 @@ import { getMoodsByUserId } from "../../../services/moodAnalysisServices/moodAna
 const screenWidth = Dimensions.get("window").width;
 
 const CustomBarChart = ({ positiveMoods, negativeMoods }) => {
+  // set state variables
   const [chartData, setChartData] = useState([]);
   const [yAxisMaxValue, setYAxisMaxValue] = useState(0);
 
+  // get the start date
   const getStartDate = (daysAgo) => {
     const date = new Date();
     date.setDate(date.getDate() - daysAgo);
@@ -15,12 +17,14 @@ const CustomBarChart = ({ positiveMoods, negativeMoods }) => {
     return date;
   };
 
+  // get the end date
   const getEndDate = () => {
     const date = new Date();
     date.setHours(23, 59, 59, 999); // Set time to 23:59:59.999
     return date;
   };
 
+  // filter the data according to the range
   const filterDataByRange = (data, dateField) => {
     const endDate = getEndDate();
     const startDate = getStartDate(30);
@@ -36,6 +40,7 @@ const CustomBarChart = ({ positiveMoods, negativeMoods }) => {
     });
   };
 
+  // fetch the mood data
   useEffect(() => {
     const fetchMoodInputs = async () => {
       try {
@@ -50,7 +55,7 @@ const CustomBarChart = ({ positiveMoods, negativeMoods }) => {
         const dataByRange = filterDataByRange(moodData, "date");
         // console.log("Filtered Data by Range:", dataByRange);
 
-        // Get the mood inputs by date
+        // group the mood inputs by date
         const emojisByDate = {};
         dataByRange.forEach((entry) => {
           const formattedDate = new Date(entry.date).toLocaleDateString(
@@ -65,12 +70,14 @@ const CustomBarChart = ({ positiveMoods, negativeMoods }) => {
           if (!emojisByDate[formattedDate]) {
             emojisByDate[formattedDate] = [];
           }
-
+          // Add the moods to the corresponding date
           emojisByDate[formattedDate].push(entry.selectedEmoji);
         });
 
+        //get an array of according to the dates
         const uniqueDatesArray = Object.keys(emojisByDate);
 
+        // Map overcount moods according to the dates
         const emojiCounts = uniqueDatesArray.map((date) => {
           const emojis = emojisByDate[date];
           let positiveCount = 0;
@@ -84,11 +91,12 @@ const CustomBarChart = ({ positiveMoods, negativeMoods }) => {
             }
           });
 
+          // calculate the difference of mood count
           const netCount = positiveCount - negativeCount;
 
           return { date, netCount };
         });
-
+        // Calculate the maximum absolute value of net counts for the y-axis scale
         const maxAbsValue =
           Math.max(...emojiCounts.map((count) => Math.abs(count.netCount))) ||
           1;
@@ -102,6 +110,7 @@ const CustomBarChart = ({ positiveMoods, negativeMoods }) => {
     fetchMoodInputs();
   }, [positiveMoods, negativeMoods]);
 
+  // genarate the values for yaxis
   const yAxisLabels = Array.from(
     { length: yAxisMaxValue * 2 + 1 },
     (_, i) => i - yAxisMaxValue

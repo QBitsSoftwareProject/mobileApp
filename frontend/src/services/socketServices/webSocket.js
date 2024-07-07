@@ -6,19 +6,22 @@ import { useEffect } from "react";
 //webSocket implementation
 let ws;
 
-const connectWebSockets = async (setObjectList) => {
+const connectWebSockets = async (setObjectList, setNotification) => {
   try {
     const token = await AsyncStorage.getItem("authToken");
+    const userId = await AsyncStorage.getItem("userId");
+
     ws = new WebSocket(`${BACKEND_URI.replace(/^http/, "ws")}/ws`);
 
     ws.onopen = () => {
       //   console.log("WebSocket connected");
-      ws.send(JSON.stringify({ type: "authenticate", token }));
+      ws.send(JSON.stringify({ type: "authenticate", token, userId }));
     };
 
     ws.onmessage = (event) => {
       const object = JSON.parse(event.data);
-      setObjectList((prevList) => [object, ...prevList]);
+
+      setObjectList(object);
     };
 
     ws.onclose = () => {

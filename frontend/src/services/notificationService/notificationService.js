@@ -4,7 +4,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const URL = BACKEND_URI + "/notification";
 
-export const getNotification = async () => {
+export const getNotification = async (lastCreatedAt, limit, role) => {
   try {
     const token = await AsyncStorage.getItem("authToken");
     const response = await axios.get(
@@ -12,6 +12,11 @@ export const getNotification = async () => {
 
       {
         headers: { authtoken: token },
+        params: {
+          lastCreatedAt: lastCreatedAt || "",
+          limit: limit || 10,
+          role,
+        },
       }
     );
 
@@ -32,6 +37,34 @@ export const notificationStatusUpdate = async (id) => {
         headers: { authtoken: token },
       }
     );
+
+    return response.data;
+  } catch (error) {
+    console.log(error.response.data);
+    throw new Error("Error during request setup");
+  }
+};
+
+export const checkUnreadNotification = async (id) => {
+  try {
+    const token = await AsyncStorage.getItem("authToken");
+    const response = await axios.get(URL + "/check-notification", {
+      headers: { authtoken: token },
+    });
+
+    return response.data;
+  } catch (error) {
+    console.log(error.response.data);
+    throw new Error("Error during request setup");
+  }
+};
+
+export const deleteAllNotification = async (id) => {
+  try {
+    const token = await AsyncStorage.getItem("authToken");
+    const response = await axios.delete(URL + "/delete-notifications", {
+      headers: { authtoken: token },
+    });
 
     return response.data;
   } catch (error) {

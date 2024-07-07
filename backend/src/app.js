@@ -22,6 +22,8 @@ const audioRouter = require("./api/routes/resourcesRoute/audioRoute.js");
 const articleRouter = require("./api/routes/resourcesRoute/articleRoute.js");
 const authorRouter = require("./api/routes/resourcesRoute/authorRoute.js");
 const notificationRouter = require("./api/routes/notificationRoute.js");
+const emailRoute = require("./api/routes/emailRoute.js");
+const passwordRoute = require("./api/routes/passwordRoute.js");
 
 const reportRoute = require("./api/routes/reportRoute.js");
 const app = express();
@@ -66,6 +68,8 @@ app.use("/api/v1/resources/author", authorRouter); //author-routes
 app.use("/api/v1/method", methodRouter);
 app.use("/api/v1/notification", notificationRouter);
 app.use("/api/v1/report", reportRoute);
+app.use("/api/v1/email", emailRoute);
+app.use("/api/v1/password", passwordRoute);
 
 const server = app.listen(PORT, "0.0.0.0", () => {
   console.log(`server is running on port ${PORT}`);

@@ -4,12 +4,10 @@ const doctorModel = require("../../models/doctor/doctor");
 exports.checkExistsUser = async (req, res) => {
   try {
     const { email } = req.body;
+
     const checkUser = await regularUser.findOne({ email });
 
-    //check email with doctor model
-    const checkDoctor = await doctorModel.findOne({ email });
-
-    if (!checkUser && !checkDoctor) {
+    if (!checkUser) {
       return res.json({
         message: "User with this email does not exist.",
         user: null,
@@ -19,6 +17,7 @@ exports.checkExistsUser = async (req, res) => {
     res.status(200).json({
       message: "User with this email already exists.",
       user: checkUser._id,
+      role: "user",
     });
   } catch (error) {
     res

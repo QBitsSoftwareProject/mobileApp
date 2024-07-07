@@ -210,7 +210,7 @@ const styles = StyleSheet.create({
     gap: 2,
   },
   title: {
-    fontSize: 18,
+    fontSize: 17,
     fontWeight: "500",
     color: "#40495B",
   },

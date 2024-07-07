@@ -142,6 +142,7 @@ const ProfileScreen = () => {
       }
     }
   }, [user]);
+
   const handlebackBtn = () => {
     if (userRole == "doctor") {
       navigation.navigate("AppointmentListsCategory");
@@ -504,7 +505,7 @@ const ProfileScreen = () => {
     const imageUrl = await firebaseUpload();
     if (imageUrl) {
       console.log("Profile picture uploaded successfully:", imageUrl);
-      deleteImage(previousProPic);
+      // await deleteImage(previousProPic);
       handleUpdatePropic(imageUrl);
       setprofilePicture(imageUrl);
       togglePopupProPic();

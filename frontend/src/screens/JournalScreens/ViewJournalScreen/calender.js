@@ -13,8 +13,8 @@ import {
   Dimensions,
   TouchableOpacity,
 } from "react-native";
-import moment from "moment";
-import axios from "axios";
+import moment from "moment"; // for dates
+
 import Swiper from "react-native-swiper";
 import {
   getJournalsByDate,
@@ -35,6 +35,7 @@ export const Calendar = ({
   const [selectedDate, setSelectedDate] = useState(null);
   const [showAllJournals, setShowAllJournals] = useState(false);
 
+  // handle date select
   const handleDateSelect = useCallback(
     (formattedDate) => {
       setValue(formattedDate);
@@ -48,11 +49,13 @@ export const Calendar = ({
     [onDateSelect]
   );
 
+  // handle show all journals
   const handleAllJournalsPress = useCallback(() => {
     setShowAllJournals(true);
     setSelectedDate(null);
   }, []);
 
+  // fetch journals by date
   useEffect(() => {
     const fetchJournals = async () => {
       try {
@@ -69,6 +72,7 @@ export const Calendar = ({
     fetchJournals();
   }, [selectedDate, showAllJournals]);
 
+  // fetch all journals
   useEffect(() => {
     const fetchAllJournals = async () => {
       try {
@@ -84,6 +88,7 @@ export const Calendar = ({
     fetchAllJournals();
   }, [showAllJournals, setJournalArray]);
 
+  // genarate the weeks
   const weeks = useMemo(() => {
     const start = moment().add(week, "weeks").startOf("week");
     return [-1, 0, 1].map((adj) => {

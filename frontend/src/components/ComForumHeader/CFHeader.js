@@ -68,15 +68,14 @@ const CFHeaderSub = (props) => {
               marginTop: 25,
             }}
           >
-            <View style={{ flexDirection: "row", gap: 32 }}>
-              <TouchableOpacity
-                style={styles.backBtn}
-                onPress={handleBackPress}
-              >
-                <Image source={require("../../assets/images/BackWhite.png")} />
-              </TouchableOpacity>
+            <View style={{ flexDirection: "row", marginBottom: 15 }}>
+              <View
+                style={{
+                  position: "relative",
 
-              <View style={{ zIndex:10000 }}>
+                  width: "100%",
+                }}
+              >
                 <TouchableOpacity onPress={navigateToProfile}>
                   <View style={styles.imageframe}>
                     <Image
@@ -87,6 +86,13 @@ const CFHeaderSub = (props) => {
                 </TouchableOpacity>
                 <Text style={styles.headlineTxt}>{userData.userName}</Text>
               </View>
+
+              <TouchableOpacity
+                style={styles.backBtn}
+                onPress={handleBackPress}
+              >
+                <Image source={require("../../assets/images/BackWhite.png")} />
+              </TouchableOpacity>
             </View>
           </View>
 
@@ -105,11 +111,9 @@ const styles = StyleSheet.create({
     width: "100%",
     borderBottomLeftRadius: 40,
     borderBottomRightRadius: 40,
-    
+
     alignItems: "center",
     justifyContent: "center",
-    
-     
   },
   imageframe: {
     height: 100,
@@ -123,6 +127,10 @@ const styles = StyleSheet.create({
   image: {
     width: "100%",
     height: "100%",
+  },
+
+  backBtn: {
+    position: "absolute",
   },
   headlineTxt: {
     fontWeight: "600",
@@ -144,7 +152,7 @@ const styles = StyleSheet.create({
     width: "100%",
     flexDirection: "column",
     alignItems: "center",
-    justifyContent: "center",
+
     paddingHorizontal: 25,
     gap: 5,
   },

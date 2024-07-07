@@ -26,6 +26,11 @@ const PostCard = (props) => {
     const now = new Date();
     const diff = now - date;
 
+    const seconds = Math.floor(diff / 1000);
+    if (seconds < 60) {
+      return "just now";
+    }
+
     const minutes = Math.floor(diff / (1000 * 60));
     if (minutes < 60) {
       return `${minutes}min ago`;
@@ -204,7 +209,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     padding: 10,
     justifyContent: "space-between",
-    zIndex:1000
+    zIndex: 1000,
   },
   imageframe: {
     height: 35,

@@ -7,6 +7,7 @@ import {
   Keyboard,
   ScrollView,
   SafeAreaView,
+  Text,
 } from "react-native";
 import React, { useEffect } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -16,11 +17,7 @@ import {
   createComment,
   getComments,
 } from "../../../services/commentServices/commentServices";
-import {
-  useFocusEffect,
-  useNavigation,
-  useRoute,
-} from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
 import CommentCard from "../../../components/CFCard/CommentCard";
 import loadingGif from "../../../assets/animation/loading.gif";
 import Toast from "react-native-toast-message";
@@ -101,7 +98,7 @@ const CommentPage = () => {
         // Show the toast message
         Toast.show({
           type: "info",
-          text1: "You can swipe comment to edit and delete",
+          text1: "You can swipe the card to edit and delete",
           text1Style: { fontSize: 16, fontWeight: "400" }, // Customize text style
           visibilityTime: 4000, // 4 seconds
         });
@@ -126,14 +123,7 @@ const CommentPage = () => {
 
   if (!commentList) {
     return (
-      <View
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          height: "100%",
-        }}
-      >
+      <View style={styles.loadingGif}>
         <Image source={loadingGif} />
       </View>
     );
@@ -146,9 +136,12 @@ const CommentPage = () => {
         flex: 1,
       }}
     >
-      <TouchableOpacity onPress={goBackFromComment} style={styles.backButton}>
-        <Image source={require("../../../assets/images/BackBlack.png")} />
-      </TouchableOpacity>
+      <View style={styles.content1}>
+        <TouchableOpacity onPress={goBackFromComment} style={styles.backButton}>
+          <Image source={require("../../../assets/images/BackBlack.png")} />
+        </TouchableOpacity>
+        <Text style={styles.commentTitle}>All comments</Text>
+      </View>
 
       <ScrollView style={{ paddingHorizontal: 25 }}>
         <View>
@@ -168,7 +161,7 @@ const CommentPage = () => {
           ))}
         </View>
       </ScrollView>
-      <View style={[styles.content1, { bottom: isKeyboardVisible ? 0 : 85 }]}>
+      <View style={[styles.content2, { bottom: isKeyboardVisible ? 0 : 85 }]}>
         <TextInput
           style={styles.textinput}
           value={comment}
@@ -176,17 +169,10 @@ const CommentPage = () => {
             setComment(text);
           }}
           multiline
-          placeholder="Add a comment...."
+          placeholder="Add a comment..."
         />
         <TouchableOpacity
-          style={{
-            backgroundColor: "white",
-            height: 45,
-            alignItems: "center",
-            justifyContent: "center",
-            borderTopRightRadius: 10,
-            borderBottomRightRadius: 10,
-          }}
+          style={styles.sendBtn}
           onPress={handleSendButtonPress}
         >
           <Image
@@ -200,7 +186,23 @@ const CommentPage = () => {
 };
 
 const styles = StyleSheet.create({
+  loadingGif: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    height: "100%",
+  },
   content1: {
+    flexDirection: "row",
+  },
+  commentTitle: {
+    fontSize: 20,
+    fontWeight: "500",
+    color: "#40495B",
+    opacity: 0.8,
+    marginVertical: 40,
+  },
+  content2: {
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
@@ -218,6 +220,14 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 10,
     borderBottomLeftRadius: 10,
     padding: 10,
+  },
+  sendBtn: {
+    backgroundColor: "white",
+    height: 45,
+    alignItems: "center",
+    justifyContent: "center",
+    borderTopRightRadius: 10,
+    borderBottomRightRadius: 10,
   },
 
   sendIcon: {

@@ -15,6 +15,7 @@ import { getAUser } from "../../../services/userServices/userService";
 import { getTime } from "../../TaskScreens/WelcomeScreen/GetTime";
 
 const AnalysisGraph = () => {
+  // set useStates
   const [data, setData] = useState([]);
   const [username, setUsername] = useState("");
   const [currentDayIndex, setCurrentDayIndex] = useState(0);
@@ -36,6 +37,7 @@ const AnalysisGraph = () => {
     today.toISOString().split("T")[0]
   );
 
+  // set days of week array
   const daysOfWeek = [
     "Monday",
     "Tuesday",
@@ -46,7 +48,9 @@ const AnalysisGraph = () => {
     "Sunday",
   ];
 
+  // grouping data by day
   const groupDataByDay = (data) => {
+    // initialize the object to hold the mood inputs day by day
     const groupedData = {
       Monday: [],
       Tuesday: [],
@@ -59,52 +63,73 @@ const AnalysisGraph = () => {
 
     data.forEach((item) => {
       const date = new Date(item.date);
+
       const day = date.toLocaleString("en-US", { weekday: "long" });
       if (groupedData[day]) {
-        groupedData[day].push(item);
+        groupedData[day].push(item); // get the total count per day
       }
     });
 
     return groupedData;
   };
 
+  // get the number of each mood inputs per day
   const calculateMoodStats = (data) => {
-    const moodCounts = data.reduce((acc, item) => {
-      acc[item.moodText] = (acc[item.moodText] || 0) + 1;
-      return acc;
-    }, {});
+    // Calculate each mood counts
+    const moodCounts = {};
+    data.forEach((item) => {
+      if (moodCounts[item.moodText]) {
+        moodCounts[item.moodText] += 1;
+      } else {
+        moodCounts[item.moodText] = 1;
+      }
+    });
 
-    const totalCount = Object.values(moodCounts).reduce(
-      (acc, count) => acc + count,
-      0
-    );
+    // Calculate total count of all moods
+    let totalCount = 0;
+    Object.values(moodCounts).forEach((count) => {
+      totalCount += count;
+    });
 
-    const calculatedHeights = Object.keys(moodCounts).reduce((acc, mood) => {
-      acc[mood] = (moodCounts[mood] / totalCount) * 250;
-      return acc;
-    }, {});
+    //Calculate heights for each mood based on totalCount
+    const calculatedHeights = {};
+    Object.keys(moodCounts).forEach((mood) => {
+      calculatedHeights[mood] = (moodCounts[mood] / totalCount) * 250;
+    });
 
-    const maxMood = Object.keys(calculatedHeights).reduce((a, b) =>
-      calculatedHeights[a] > calculatedHeights[b] ? a : b
-    );
+    //  Determine the maximum entered mood
+    let maxMood = "";
+    Object.keys(calculatedHeights).forEach((mood) => {
+      if (
+        maxMood === "" ||
+        calculatedHeights[mood] > calculatedHeights[maxMood]
+      ) {
+        maxMood = mood;
+      }
+    });
 
     return { calculatedHeights, maxMood };
   };
 
+  // fetching mood data for past 7 days
   useEffect(() => {
     const fetchMoodInputs = async () => {
       try {
         const moodData = await getMoodsByUserId();
+
         const today = new Date();
+
         const sevenDaysAgo = new Date();
+
         sevenDaysAgo.setDate(today.getDate() - 7);
 
         const sevenDaysAgoFormatted = sevenDaysAgo.toISOString().split("T")[0];
         setStartDate(sevenDaysAgoFormatted);
-        // console.log("startDate", startDate);
 
+        // filter mood data according to the date
         const filteredData = moodData.filter((item) => {
           const date = new Date(item.date);
+
           return date >= sevenDaysAgo && date <= today;
         });
 
@@ -117,6 +142,7 @@ const AnalysisGraph = () => {
     fetchMoodInputs();
   }, []);
 
+  // get the user name
   useEffect(() => {
     const getName = async () => {
       try {
@@ -129,10 +155,11 @@ const AnalysisGraph = () => {
     getName();
   }, []);
 
+  // setting day indices (setting the sart day index and today index based on today date and start date of data)
   useEffect(() => {
     const today = new Date().getDay();
-    setCurrentDayIndex(today - 1);
-    setEndDayIndex(today - 1);
+    setCurrentDayIndex(today === 0 ? 6 : today - 1); // Adjust index to start from Sunday
+    setEndDayIndex(today === 0 ? 6 : today - 1); // Adjust end day index as well
   }, []);
 
   useEffect(() => {
@@ -140,15 +167,21 @@ const AnalysisGraph = () => {
     setStartDayIndex(startIndex);
   }, [startDate]);
 
+  // updating the moods current day index is changed
+  // get mood data for secific date
   const updateMoodStats = (dayData) => {
     const { calculatedHeights, maxMood } = calculateMoodStats(dayData);
     setHeights(calculatedHeights);
     setMaxHeightMood(maxMood);
   };
 
+  //update the mood data and analysis whenever data or date index  changes
   useEffect(() => {
+    // Only proceed if there is mood data available
     if (data.length > 0) {
       const groupedData = groupDataByDay(data);
+
+      // get the moods for current day based on the index
       const currentDayData = groupedData[daysOfWeek[currentDayIndex]];
 
       if (currentDayData.length === 0) {
@@ -157,19 +190,20 @@ const AnalysisGraph = () => {
       } else {
         updateMoodStats(currentDayData);
       }
-
+      // update the current date to the date of the first mood entry
       if (currentDayData.length > 0) {
         const date = new Date(currentDayData[0].date);
         date.setDate(date.getDate() + 1);
         setCurrentDate(date.toISOString().split("T")[0]);
       }
 
-      setIsNextDisabled(currentDayIndex === endDayIndex);
-      // console.log("startDayIndex", startDayIndex);
-      setIsBackDisabled(currentDayIndex === startDayIndex);
+      setIsNextDisabled(currentDayIndex === 6);
+
+      setIsBackDisabled(currentDayIndex === 0);
     }
   }, [data, currentDayIndex]);
 
+  // handling next,back navihation
   const handleNext = () => {
     setCurrentDayIndex((prevIndex) => {
       const nextIndex = (prevIndex + 1) % 7;
@@ -186,10 +220,14 @@ const AnalysisGraph = () => {
     });
   };
 
+  // formating the dates
   const dateValue = getTime();
   const groupedData = groupDataByDay(data);
+
+  // Get the name of the current day based on index
   const currentDay = daysOfWeek[currentDayIndex];
 
+  // formating
   function formatDate(dateString) {
     const date = new Date(dateString);
     const month = date.toLocaleString("default", { month: "long" });
@@ -197,6 +235,7 @@ const AnalysisGraph = () => {
     return `${month}-${day.toString().padStart(2, "0")}`;
   }
 
+  // Function to format the next day's date string(this bcz nextday is Nan)
   function formatNextDate(dateString) {
     const date = new Date(dateString);
     date.setDate(date.getDate() + 1);
@@ -208,6 +247,7 @@ const AnalysisGraph = () => {
   const formattedDate = formatDate(currentDate);
   const formattedNextDate = formatNextDate(currentDate);
 
+  // Mapping mood texts to emoji characters.
   const moodToEmoji = {
     Lovely: "😍",
     Sad: "😭",
@@ -252,7 +292,6 @@ const AnalysisGraph = () => {
               <Text style={styles.text}>
                 No mood data available for {currentDay}
               </Text>
-              {/* <Text style={styles.text}>{formattedNextDate}</Text> */}
             </View>
           )}
 
@@ -304,6 +343,11 @@ const styles = StyleSheet.create({
   navigationContainer: {
     flexDirection: "row",
     marginTop: 15,
+    justifyContent: "center",
+
+    alignItems: "center",
+    gap: 32,
+    height: 30,
   },
 
   selectedEmojiContainer: {
@@ -342,11 +386,15 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
   button: {
-    alignSelf: "flex-end",
-    top: 13,
+    // alignSelf: "flex-end",
+    // top: 13,
+    alignItems: "center",
+    width: 50,
+    height: "100%",
+    justifyContent: "center",
   },
   buttonImage: {
-    right: 120,
+    // right: 120,
   },
   buttonDisabled: {
     opacity: 0.5,
@@ -354,18 +402,10 @@ const styles = StyleSheet.create({
   dateText: {
     fontSize: 18,
     fontWeight: "400",
-    textAlign: "center",
-    top: 10,
+    // textAlign: "center",
+    // top: 10,
   },
-  view1: {
-    flex: 2,
-  },
-  view2: {
-    flex: 2,
-  },
-  view3: {
-    flex: 2,
-  },
+
   emptyStateContainer: {
     alignItems: "center",
     marginTop: 50,

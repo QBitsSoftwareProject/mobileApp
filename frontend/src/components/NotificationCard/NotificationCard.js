@@ -78,9 +78,7 @@ const NotificationCard = (props) => {
         <TouchableOpacity
           style={[styles.content1]}
           onPress={handlePress}
-          disabled={
-            props.status == "read" && props.type == "system" ? true : false
-          }
+          disabled={props.status == "read"}
         >
           {props.type != "system" ? (
             <View style={styles.imageframe}>

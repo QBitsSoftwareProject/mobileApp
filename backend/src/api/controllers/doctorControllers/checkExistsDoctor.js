@@ -8,10 +8,7 @@ exports.checkExistsDoctor = async (req, res) => {
     //check email with doctor model
     const checkDoctor = await doctorModel.findOne({ email });
 
-    //check email with user model
-    const checkUser = await userModel.findOne({ email });
-
-    if (!checkUser && !checkDoctor) {
+    if (!checkDoctor) {
       return res.json({
         message: "User with this email does not exist.",
         user: null,
@@ -21,6 +18,7 @@ exports.checkExistsDoctor = async (req, res) => {
     res.status(200).json({
       message: "User with this email already exists.",
       user: checkUser._id,
+      role: "doctor",
     });
   } catch (error) {
     return res

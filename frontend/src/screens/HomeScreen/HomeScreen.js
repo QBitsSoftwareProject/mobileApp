@@ -89,7 +89,7 @@ const HomeScreen = (props) => {
     return () => {
       backHandler.remove();
     };
-  }, []);
+  }, [user]);
 
   const handleStressLevelPress = async () => {
     try {
@@ -153,6 +153,7 @@ const HomeScreen = (props) => {
   return (
     <SafeAreaView style={{ marginBottom: 65 }}>
       <ScrollView>
+        
         <HomeTop
           headLine={"Hi," + user.userName}
           subHeadLine={
@@ -160,6 +161,7 @@ const HomeScreen = (props) => {
           }
           proPic={{ uri: user.proPic }}
         />
+        
 
         <View style={[styles.Container, { width: winWidth }]}>
           <View>
