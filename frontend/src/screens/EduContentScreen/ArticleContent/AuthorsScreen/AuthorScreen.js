@@ -19,12 +19,15 @@ import viewIcon from "../../../../assets/images/icons/bi_eye-fill.png";
 
 // components
 import ArticleListItem from "../../../../components/AuthorScreen/ArticleListItem";
-import { getAuthorArticleCount, getAuthorArticles, getAuthorInfo } from "../../../../services/educationalServices/educationalServices";
+import {
+  getAuthorArticleCount,
+  getAuthorArticles,
+  getAuthorInfo,
+} from "../../../../services/educationalServices/educationalServices";
 import Article from "../Article";
 // components
 
 const AuthorScreen = ({ route }) => {
-
   const authorData = route.params;
   const navigation = useNavigation();
 
@@ -42,14 +45,12 @@ const AuthorScreen = ({ route }) => {
         setArticleCount(articleCount.data);
         setSelectedAuthor(authorInfo.data);
         setAuthorArticles(authorArticlesData.data);
-
       } catch (err) {
         console.error("Error fetching author:", err);
       }
-    }
+    };
     fetchAuthorArticleData();
   }, []);
-
 
   const goBack = () => {
     navigation.goBack();
@@ -102,17 +103,7 @@ const AuthorScreen = ({ route }) => {
                     Author name: {selectedAuthor.name}
                   </Text>
                 </View>
-                <View>
-                  <Text
-                    style={{
-                      color: "white",
-                      fontSize: 17,
-                      width: 350,
-                    }}
-                  >
-                    Author ID: {authorData.authorId}
-                  </Text>
-                </View>
+
                 <View>
                   <Text
                     style={{
@@ -120,7 +111,11 @@ const AuthorScreen = ({ route }) => {
                       fontSize: 18,
                     }}
                   >
-                    {(articleCount == 0) ? ("no articles") : ((articleCount == 1) ? (articleCount + " article") : (articleCount + " articles"))}
+                    {articleCount == 0
+                      ? "no articles"
+                      : articleCount == 1
+                      ? articleCount + " article"
+                      : articleCount + " articles"}
                   </Text>
                 </View>
               </View>
@@ -151,16 +146,14 @@ const AuthorScreen = ({ route }) => {
               <FlatList
                 data={authorArticles}
                 renderItem={({ item }) => {
-                  return <Article item={item} />
+                  return <Article item={item} />;
                 }}
               />
             </View>
             {/* Article list */}
           </View>
-        )
-        }
+        )}
       />
-
     </SafeAreaView>
   );
 };

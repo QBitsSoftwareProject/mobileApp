@@ -39,7 +39,7 @@ router.get("/user-by-id/:userId", auth, getRegularUserById);
 router.get("/one-user-by-id/:userId", getARegularUserById);
 router.get("/get-users-by-month/", getUsersByMonth);
 router.put("/", auth, updateRegularUser);
-router.put("/edit-user-access/:id", auth, updateUserAccessStatus);
+router.put("/edit-user-access/:id", updateUserAccessStatus);
 router.delete("/:id", auth, deleteRegularUser);
 
 router.post("/checkExistsUser", checkExistsUser);

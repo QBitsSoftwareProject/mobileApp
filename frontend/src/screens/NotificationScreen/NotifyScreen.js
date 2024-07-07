@@ -158,9 +158,9 @@ const NotifyScreen = () => {
             isRefresh={setIsRefresh}
           />
         )}
-        onEndReached={() => fetchNotification(lastDate)}
-        onEndReachedThreshold={0.6}
-        ListFooterComponent={renderFooter}
+        // onEndReached={() => fetchNotification(lastDate)}
+        // onEndReachedThreshold={0.6}
+        // ListFooterComponent={renderFooter}
         contentContainerStyle={{ paddingHorizontal: 25 }}
       />
     </SafeAreaView>

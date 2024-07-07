@@ -67,19 +67,24 @@ exports.updateRegularUser = async (req, res) => {
 
 exports.updateUserAccessStatus = async (req, res) => {
   try {
-    const access = req.body;
-    const userId = req.params;
+    const { access } = req.body;
+    const userId = req.params.id;
 
     // Finding and updating the user by ID
-    await regularUser.findByIdAndUpdate(userId.id, access);
+    const user = await regularUser.findByIdAndUpdate(userId, { access });
+
+    if (!user) {
+      return res.status(404).send("User not found");
+    }
 
     // Sending success response with status code 201 and a message
     return res
       .status(201)
       .json({ message: "User access level updated successfully" });
   } catch (err) {
-    res
-      .status(500)
-      .json({ error: "Error in updating user access level", details: err });
+    res.status(500).json({
+      error: "Error in updating user access level",
+      details: err.message,
+    });
   }
 };
