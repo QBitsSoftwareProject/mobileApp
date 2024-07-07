@@ -162,6 +162,8 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: "500",
     color: "#40495B",
+    width:'80%',
+    marginBottom:10
   },
   date: {
     fontSize: 10,

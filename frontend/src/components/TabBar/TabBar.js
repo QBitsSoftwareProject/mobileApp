@@ -16,6 +16,7 @@ import {
   useWebSockets,
   useWebSocketsNotification,
 } from "../../services/socketServices/webSocket";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const Tab = createBottomTabNavigator();
 
@@ -116,7 +117,8 @@ const TabBar = ({ route, user, userRole }) => {
   }
 
   return (
-    <View style={{ flex: 1 }}>
+    
+    <SafeAreaView style={{ flex: 1 }}>
       {musicStop && (
         <MusicPlayer
           play={backgroundMusic && backgroundMusicValid}
@@ -135,6 +137,9 @@ const TabBar = ({ route, user, userRole }) => {
             borderTopRightRadius: 30,
             marginTop: 32,
             alignItems: "center",
+            justifyContent:'center',
+            paddingTop:30
+            
           },
           headerShown: false,
         }}
@@ -190,7 +195,7 @@ const TabBar = ({ route, user, userRole }) => {
           }}
         />
       </Tab.Navigator>
-    </View>
+    </SafeAreaView>
   );
 };
 

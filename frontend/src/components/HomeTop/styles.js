@@ -41,6 +41,8 @@ const styles = StyleSheet.create({
     overflow: "hidden",
     borderWidth: 4,
     borderColor: "white",
+    alignSelf: "center",
+    justifyContent: "center",
   },
   profileImage: {
     width: "100%",

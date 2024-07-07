@@ -94,10 +94,11 @@ const HomePage = () => {
         style={{
           height: screenHeight,
           paddingHorizontal: 25,
+          
         }}
       >
         <FlatList
-          style={{ height: "100%", paddingTop: 15 }}
+          style={{ height: "100%", paddingTop: 15 ,marginBottom:65}}
           data={postList}
           renderItem={({ item }) => (
             <PostCard
@@ -132,6 +133,7 @@ const HomePage = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    
   },
   floatingButtonContainer: {
     position: "absolute",
