@@ -24,7 +24,6 @@ const TaskListScreen = () => {
   const fetchUser = async () => {
     try {
       const response = await getSuggestedTasks();
-
       setTaskList(response);
     } catch (error) {
       console.log(error);

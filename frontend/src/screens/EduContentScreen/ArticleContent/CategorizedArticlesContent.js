@@ -67,7 +67,7 @@ const CategorizedArticlesContent = () => {
             <View>
               <HeaderSub
                 back={"ArticleScreen"}
-                subHeadLine={"Filtered Data"}
+                subHeadLine={"Your Choices"}
                 headLine={
                   category == "All Articles" ? category : category + " articles"
                 }

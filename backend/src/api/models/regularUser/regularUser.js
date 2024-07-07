@@ -163,6 +163,25 @@ const regularUserSchema = new schema({
     default: "short-term",
   },
 
+  // favorite resources
+  favArticles: {
+    type: [schema.Types.ObjectId],
+    ref: "Article",
+    require: false,
+  },
+
+  favVideos: {
+    type: [schema.Types.ObjectId],
+    ref: "videoResources",
+    require: false,
+  },
+  favAudios: {
+    type: [schema.Types.ObjectId],
+    ref: "audioResources",
+    require: false,
+  },
+  // favorite resources
+
   access: {
     type: Boolean,
     default: true

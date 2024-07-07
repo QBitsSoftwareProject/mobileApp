@@ -40,7 +40,13 @@ const HomeTop = (props) => {
         <Text style={styles.subHeadlineTxt}>{props.subHeadLine}</Text>
       </View>
 
-      <View style={{ alignItems: "center" }}>
+      <View style={{ alignItems: "center",
+        zIndex: 101,
+        position: "absolute",
+        flex: 1,
+        width: "100%",
+        bottom: -50,
+       }}>
         <View style={styles.profileFrame}>
           <Image source={props.proPic} style={styles.profileImage} />
         </View>

@@ -45,6 +45,9 @@ const styles = StyleSheet.create({
     width: "100%",
     position: "absolute",
     marginLeft: 25,
+
+    alignSelf: "center",
+    zIndex: -1,
   },
 
   headerText: {

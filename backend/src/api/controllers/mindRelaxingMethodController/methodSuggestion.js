@@ -50,9 +50,6 @@ const methodSuggestion = async (req, res) => {
       inputMoodWeight
     );
 
-    // console.log(suggestedAuidoCategory);
-    console.log(suggestedVideoCategory);
-
     //video----------------------------------------------------------------------------------------------
     //find all relevent videos and short it into descending order
     const suggestedVideos = await methodModel

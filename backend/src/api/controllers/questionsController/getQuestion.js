@@ -96,8 +96,7 @@ exports.userQuestion = async (req, res) => {
 
     return res.status(200).json({ questions: questions, isAnswered: false });
   } catch (error) {
-    console.log(error);
-    res
+    return res
       .status(500)
       .json({ error: "question fetch failed", error: error.message });
   }

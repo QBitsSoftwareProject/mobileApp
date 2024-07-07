@@ -4,7 +4,7 @@ const schema = mongoose.Schema;
 
 const adminSchema = new schema(
     {
-        email: {
+        userName: {
             type: String,
             required: true
         },

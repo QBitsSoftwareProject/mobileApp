@@ -58,7 +58,6 @@ exports.updateGoal = async (req, res) => {
     // Sending success response with status code 201 and a message
     return res.status(201).json({ message: "Goal updated successfully" });
   } catch (err) {
-    console.log(err.message);
     res.status(500).json({ error: "Goal update failed", details: err.message });
   }
 };

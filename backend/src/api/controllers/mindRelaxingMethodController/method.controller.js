@@ -7,12 +7,7 @@ const storeMethod = asyncHandler(async (req, res) => {
     try {
         const { methodType, category, resouceName, discription,imageURL,resourceURL } = req.body;
 
-        console.log(category);
-        
-
         const newMethod = await methodService.storeMethod(methodType, category, resouceName, discription,imageURL,resourceURL);
-
-        console.log('New Method:', newMethod);
 
         res.status(201).json({
             message: "Mark added successfully",
@@ -38,9 +33,7 @@ const getAllMethods = asyncHandler (async (req,res) => {
  const updateMethod = asyncHandler(async(req,res) => {
     
     const {id} = req.params;
-
-    console.log(req.body)
-
+    
     const checkInstance = await methodModel.findById(id);
 
     if(checkInstance){

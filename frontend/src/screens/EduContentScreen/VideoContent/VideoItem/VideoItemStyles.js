@@ -9,7 +9,6 @@ const styles = StyleSheet.create({
   VideoItem: {
     marginBottom: 40,
     backgroundColor: "white",
-
     borderRadius: 10,
   },
   VideoItemDetails: {

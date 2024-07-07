@@ -29,6 +29,8 @@ import {
   getAuthors,
 } from "../../../services/educationalServices/educationalServices.js";
 import HeaderSub from "../../../components/HeaderSub/HeaderSub.js";
+import { getAUser } from "../../../services/userServices/userService.js";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 // navigation
 
 const ArticleContent = () => {
@@ -57,6 +59,33 @@ const ArticleContent = () => {
     };
     fetchArticleContentData();
   }, []);
+
+
+  const [user, setUser] = useState({});
+  const [userRole, setUserRole] = useState("");
+  const [actionState, setActionState] = useState(false);
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      let userInfo;
+      try {
+        const role = await AsyncStorage.getItem("role");
+        setUserRole(role);
+        if (role === "regularUser") {
+          userInfo = await getAUser();
+          setUser(userInfo);
+        } else {
+          throw new Error("Invalid role");
+        }
+
+      } catch (err) {
+        setError(err.message);
+      }
+    };
+    fetchUserData();
+  }, [actionState]);
+
+  const [error, setError] = useState(null);
 
   if (!articles) {
     return (
@@ -89,7 +118,6 @@ const ArticleContent = () => {
         renderItem={() => (
           <View>
             {/* Your existing content */}
-
             <View style={styles.authorSections}>
               <View style={styles.authorSection1}>
                 <Text style={{ fontSize: 20 }}>Read articles from</Text>
@@ -130,7 +158,9 @@ const ArticleContent = () => {
               <FlatList
                 data={articles}
                 renderItem={({ item }) => {
-                  return <Article item={item} />;
+                  return <Article item={item} user={user}
+                    actionStateFunction={setActionState}
+                    actState={actionState} />;
                 }}
               />
             </View>

@@ -10,8 +10,6 @@ exports.createReport = async (req, res) => {
     const post = await postsModel.findById(reportedPostId);
     const reportedUserId = post.userId;
 
-    console.log(reportedUserId);
-
     const newReport = new reportSchema({
       ReportingUser: reportingUserId,
       ReportedUser: reportedUserId,

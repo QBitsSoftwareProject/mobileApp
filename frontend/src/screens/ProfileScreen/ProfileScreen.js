@@ -107,8 +107,6 @@ const ProfileScreen = () => {
   const [availableDays, setavailableDays] = useState([]);
 
   useEffect(() => {
-
-
     if (user != null) {
       setFullName(user.fullName);
       setUserName(user.userName);
@@ -145,7 +143,6 @@ const ProfileScreen = () => {
     }
   }, [user]);
 
-  
   const handlebackBtn = () => {
     if (userRole == "doctor") {
       navigation.navigate("AppointmentListsCategory");
@@ -505,7 +502,6 @@ const ProfileScreen = () => {
   };
 
   const handleProPicUpload = async () => {
-    
     const imageUrl = await firebaseUpload();
     if (imageUrl) {
       console.log("Profile picture uploaded successfully:", imageUrl);

@@ -8,6 +8,8 @@ const styles = StyleSheet.create({
     // borderBottomLeftRadius: 40,
     borderBottomRightRadius: 50,
     
+    
+    
   },
 
   headlineTxt: {
@@ -44,6 +46,7 @@ const styles = StyleSheet.create({
     width: "100%",
     height: "100%",
     resizeMode: "cover",
+    
   },
 });
 export default styles;
