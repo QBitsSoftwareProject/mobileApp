@@ -99,7 +99,14 @@ const NotifyScreen = () => {
 
   if (isLoading) {
     return (
-      <View style={styles.loadingGif}>
+      <View
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          height: "100%",
+        }}
+      >
         <Image source={loadingGif} />
       </View>
     );
