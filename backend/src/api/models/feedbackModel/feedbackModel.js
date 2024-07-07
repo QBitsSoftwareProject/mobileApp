@@ -12,38 +12,41 @@ const FeedBackScheema = mongoose.Schema({
     required: true,
   },
   finterface: {
-    type: String,
+    type: Boolean,
     required: true,
   },
   privacy: {
-    type: String,
+    type: Boolean,
     required: true,
   },
   speed: {
-    type: String,
+    type: Boolean,
     required: true,
   },
   consumption: {
-    type: String,
+    type: Boolean,
     required: true,
   },
   design: {
-    type: String,
+    type: Boolean,
     required: true,
   },
   comment: {
     type: String,
   },
 
-  date: {
-    type: String,
-    required: true,
-  },
+  // date: {
+  //   type: Date,
+  //   required: true,
+  // },
 
-  time: {
-    type: String,
-    required: true,
-  },
+  // time: {
+  //   type: String,
+  //   required: true,
+  // },
+},
+{
+  timestamps:true
 });
 
 module.exports = mongoose.model("FeedBack", FeedBackScheema);

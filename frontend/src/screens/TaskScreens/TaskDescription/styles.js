@@ -7,7 +7,7 @@ export default styles = StyleSheet.create({
     marginHorizontal: 25,
   },
   backBtn: {
-    marginTop: 50,
+    // marginTop: 50,
   },
   headTextBox: {
     alignItems: "center",

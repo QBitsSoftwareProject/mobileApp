@@ -91,7 +91,7 @@ const ExpandableCard = (props) => {
     id = props.methodId;
   } else {
     mimg = require("../../assets/images/MindRelaxingMethod/breathing.png");
-    mtitle = "Breathing Exercise";
+    mtitle = "Watch a Video";
     ibtn = require("../../assets/images/MindRelaxingMethod/mp3playbutton.png");
     btnfunction = toggleVideoModal;
     videoSource = props.rUrl;
@@ -167,13 +167,24 @@ const ExpandableCard = (props) => {
             <View
               style={{
                 height: 160,
-                paddingHorizontal: 80,
+                paddingHorizontal: 10,
                 marginTop: 10,
                 marginBottom: 10,
+                
+                
               }}
               onLayout={onImageLayout}
             >
-              <View style={{ flex: 1, borderRadius: 15, overflow: "hidden" }}>
+              <Image source={{ uri: imglink }} style={styles.contentImage}/>
+
+              <TouchableOpacity 
+              style={{position:'absolute', width:'100%', height:'100%',marginLeft:10,alignItems:'center',justifyContent:'center', backgroundColor:'rgba(0,0,0,0.3)',borderRadius:15}}
+              onPress={btnfunction}>
+                    <Image source={ibtn} />
+                  </TouchableOpacity>
+
+              
+              {/* <View style={{  borderRadius: 15, overflow: "hidden"}}>
                 <ImageBackground
                   source={{ uri: imglink }}
                   style={styles.contentImage}
@@ -182,7 +193,7 @@ const ExpandableCard = (props) => {
                     <Image source={ibtn} />
                   </TouchableOpacity>
                 </ImageBackground>
-              </View>
+              </View> */}
             </View>
             <View onLayout={onTextLayout}>
               <Text style={styles.contentText}>{props.contentText}</Text>
@@ -253,9 +264,15 @@ const styles = StyleSheet.create({
   },
 
   contentImage: {
-    flex: 1,
+    flex:1,
+    width:"100%",
     alignItems: "center",
     justifyContent: "center",
+    resizeMode:'stretch', 
+    borderRadius:15
+    
+    
+   
   },
 
   contentText: {

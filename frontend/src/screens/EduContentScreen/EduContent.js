@@ -104,7 +104,7 @@ const EduContent = () => {
   }
 
   return (
-    <SafeAreaView>
+    <View>
       <HeaderSub
         back={"HomeScreen"}
         headLine={"Educational content"}
@@ -149,7 +149,7 @@ const EduContent = () => {
           </View>
         </ScrollView>
       </View>
-    </SafeAreaView>
+    </View>
   );
 };
 

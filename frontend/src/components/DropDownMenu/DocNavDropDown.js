@@ -26,7 +26,11 @@ const DocDropDown = ({ checkPage, setCheckPage }) => {
         </View>
       </TouchableOpacity>
       {isPress && (
+        <>
+        
         <DocNavPop selectedMenu={setCheckPage} setIsPress={setIsPress} />
+        
+        </>
       )}
     </View>
   );

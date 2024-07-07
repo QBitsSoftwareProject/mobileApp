@@ -93,8 +93,17 @@ const CompletedAppointment = () => {
             justifyContent: "space-between",
           }}
         >
-          <Text style={styles.descript2}>Completed List.</Text>
-          <DocNavDropDown checkPage={checkPage} setCheckPage={setCheckPage} />
+          {checkPage === 'Completed' ? (
+            <Text style={styles.descript2}>Completed List.</Text>
+          ): checkPage === 'Rejected'? 
+          (
+            <Text style={styles.descript2}>Rejected List.</Text>
+          ):(
+            <Text style={styles.descript2}>Canceled List.</Text>
+          )}
+          <View style = {{zIndex:100}}>
+          <DocNavDropDown checkPage={checkPage} setCheckPage={setCheckPage}/>
+          </View>
         </View>
 
         {notFound && (
@@ -104,6 +113,7 @@ const CompletedAppointment = () => {
               alignItems: "center",
               width: "100%",
               marginTop: 32,
+              zIndex:-1
             }}
           >
             <Image
@@ -114,7 +124,7 @@ const CompletedAppointment = () => {
         )}
 
         {/* appointment status cards */}
-        <View style={{ marginBottom: 80 }}>
+        <View style={{ marginBottom: 80 , zIndex:-1}}>
           {completedData.map((item) => (
             <DocCard
               key={item._id}

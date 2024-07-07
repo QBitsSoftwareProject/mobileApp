@@ -11,10 +11,13 @@ import {
 
 const { width: SCREEN_WIDTH, height: SCREEN_HEIGHT } = Dimensions.get("window");
 
+const screenHeight = Dimensions.get('window').height;
+
+
 export const FloatingButton = (props) => {
   return (
     <TouchableOpacity
-      style={styles.touchableOpacity}
+      style={[styles.touchableOpacity,{top:screenHeight-220}]}
       onPress={props.handleFlotingPointButton} // Handle button press
     >
       <Image
@@ -28,7 +31,7 @@ export const FloatingButton = (props) => {
 const styles = StyleSheet.create({
   touchableOpacity: {
     position: "absolute",
-    bottom: 50,
+    // bottom: 90,
     left: 25,
     zIndex: 100,
   },

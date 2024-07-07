@@ -8,6 +8,8 @@ const styles = StyleSheet.create({
     // borderBottomLeftRadius: 40,
     borderBottomRightRadius: 50,
     
+    
+    
   },
 
   headlineTxt: {
@@ -39,11 +41,14 @@ const styles = StyleSheet.create({
     overflow: "hidden",
     borderWidth: 4,
     borderColor: "white",
+    alignSelf: "center",
+    justifyContent: "center",
   },
   profileImage: {
     width: "100%",
     height: "100%",
     resizeMode: "cover",
+    
   },
 });
 export default styles;

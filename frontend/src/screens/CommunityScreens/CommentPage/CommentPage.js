@@ -143,7 +143,7 @@ const CommentPage = () => {
         <Text style={styles.commentTitle}>All comments</Text>
       </View>
 
-      <ScrollView style={{ paddingHorizontal: 25 }}>
+      <ScrollView style={{ paddingHorizontal: 25, marginBottom:130 }}>
         <View>
           {commentList.map((item) => (
             <CommentCard
@@ -211,6 +211,7 @@ const styles = StyleSheet.create({
     zIndex: 10,
     justifyContent: "space-between",
     paddingHorizontal: 25,
+    
   },
   textinput: {
     width: "90%",

@@ -249,7 +249,7 @@ const Question = () => {
  
 
   return (
-    <SafeAreaView>
+    <View>
       <TouchableOpacity onPress={handleBackButton}>
         <Image
           source={require("../../assets/images/backProfile.png")}
@@ -353,7 +353,7 @@ const Question = () => {
           </TouchableOpacity>
         )}
       </ScrollView>
-    </SafeAreaView>
+    </View>
   );
 };
 

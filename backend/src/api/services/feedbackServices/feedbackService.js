@@ -13,19 +13,7 @@ const storeFeedback = (
   time
 ) => {
   try {
-    if (
-      !userid ||
-      !satisfication ||
-      !finterface ||
-      !privacy ||
-      !speed ||
-      !consumption ||
-      !design ||
-      !date ||
-      !time
-    ) {
-      throw new Error("not completed!!!");
-    }
+    
 
     const newFeedBack = feedBack.create({
       userId: userid,

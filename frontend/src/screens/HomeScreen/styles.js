@@ -4,7 +4,7 @@ import { StyleSheet } from 'react-native'
 const styles = StyleSheet.create({
   Container : {
     marginHorizontal:25,
-    marginTop:64,
+    marginTop:15,
     
   },
 

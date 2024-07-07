@@ -13,7 +13,7 @@ const ButtonGroup = ({ tab1, tab2, tab3, select }) => {
         flexDirection: "row",
         alignSelf: "center",
 
-        marginTop: 48,
+        marginTop: 20,
       }}
     >
       <TouchableOpacity

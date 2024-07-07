@@ -94,6 +94,7 @@ const AppointmentStatus = () => {
       />
 
       <View style={{ paddingHorizontal: 25 }}>
+      <ScrollView style={{ height: screenHeight - 340 }}>
         <View style={styles.content1}>
           <Text style={styles.descript2}>Appointment Status.</Text>
           <TouchableOpacity style={styles.viewBtn} onPress={displayDeleteAlert}>
@@ -117,7 +118,7 @@ const AppointmentStatus = () => {
           </View>
         )}
 
-        <ScrollView style={{ height: screenHeight - 250 }}>
+        
           {/* appointment status card  */}
           <View style={{ marginBottom: 120 }}>
             {appointments &&

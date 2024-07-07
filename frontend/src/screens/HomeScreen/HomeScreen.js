@@ -151,7 +151,7 @@ const HomeScreen = (props) => {
   }
 
   return (
-    <SafeAreaView style={{ marginBottom: 65 }}>
+    <View style={{ marginBottom: 32 }}>
       <ScrollView>
         
         <HomeTop
@@ -312,7 +312,7 @@ const HomeScreen = (props) => {
           </View>
         </View>
       </ScrollView>
-    </SafeAreaView>
+    </View>
   );
 };
 
