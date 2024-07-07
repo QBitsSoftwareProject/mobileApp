@@ -12,7 +12,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 // components
 import SearchAndCategories from "../../components/SearchAndCategories/SearchAndCategories";
 import Audios from "../../components/AudioList/Audios";
-import { getFavoriteArticles, getFavoriteAudios, getFavoriteVideos } from "../../services/educationalServices/educationalServices";
+import { getFavoriteArticles, getFavoriteVideos } from "../../services/educationalServices/educationalServices";
 import VideoItem from "./VideoContent/VideoItem/VideoItem";
 import HeaderSub from "../../components/HeaderSub/HeaderSub";
 import loadingGif from "../../assets/animation/loading.gif";
@@ -115,21 +115,21 @@ const EduContent = () => {
           <View style={{ paddingHorizontal: 25, marginTop: 15 }}>
 
             {/* articles */}
-            <Text style={styles.mainHeading2}>Here are your favorite articles</Text>
+            {/* <Text style={styles.mainHeading2}>Here are your favorite articles</Text>
             <View style={{ marginTop: 20 }}>
-              {articles.map((item, index) => (
+              {articles && articles.map((item, index) => (
                 <View key={index}>
                   <Article item={item} user={user}
                     actionStateFunction={setActionState}
                     actState={actionState} />
                 </View>
               ))}
-            </View>
+            </View> */}
 
             {/* videos */}
             <Text style={styles.mainHeading2}>Here are your favorite videos</Text>
             <View style={{ marginTop: 20 }}>
-              {videos.map((item, index) => (
+              {videos && videos.map((item, index) => (
                 <View key={index}>
                   <VideoItem item={item} screen={"allStack"} user={user}
                     actionStateFunction={setActionState}
@@ -139,8 +139,8 @@ const EduContent = () => {
             </View>
 
             {/* audios */}
-            <Text style={[styles.mainHeading2]}>Here are your favorite audios</Text>
-            <Audios />
+            {/* <Text style={[styles.mainHeading2]}>Here are your favorite audios</Text>
+            <Audios /> */}
 
           </View>
         </ScrollView>
