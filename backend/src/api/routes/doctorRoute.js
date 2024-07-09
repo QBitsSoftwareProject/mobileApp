@@ -31,18 +31,23 @@ const {
 const router = express.Router();
 
 //doctor operations routes
-router.get("/", getDoctors);
+router.get("/", auth, getDoctors);
 router.get("/registered-docotors", auth, getRegisteredDoctors);
 router.get("/one-doctor", auth, getADoctor);
 router.put("/", auth, updateDoctor);
-router.put("/updateRegStatus/:id", adminAuth, updateDoctorRegStatus);
-router.put("/updateAccessStatus/:id", adminAuth, updateDoctorAccessStatus);
-router.delete("/:id", deleteDoctor);
-router.post("/view-doctor", viewADoctor);
+router.put("/updateRegStatus/:id", auth, adminAuth, updateDoctorRegStatus);
+router.put(
+  "/updateAccessStatus/:id",
+  auth,
+  adminAuth,
+  updateDoctorAccessStatus
+);
+router.delete("/:id", auth, adminAuth, deleteDoctor);
+router.post("/view-doctor", auth, adminAuth, viewADoctor);
 
 router.post("/checkExistsDoctor", checkExistsDoctor);
 
 //register route
-router.post("/register",createDoctor);
+router.post("/register", createDoctor);
 
 module.exports = router;

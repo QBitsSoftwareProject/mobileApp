@@ -1,4 +1,7 @@
 const express = require("express");
+const auth = require("../middlewares/auth");
+const adminAuth = require("../middlewares/adminAuth");
+
 const {
   createRegularUser,
 } = require("../controllers/regularUserControllers/createController");
@@ -26,26 +29,29 @@ const {
   checkExistsUser,
 } = require("../controllers/regularUserControllers/checkExistsUser");
 
-const auth = require("../middlewares/auth");
-const adminAuth = require("../middlewares/adminAuth");
-
 const {
   getUsersByMonth,
 } = require("../controllers/regularUserControllers/getUsersByMonth");
-const { editFavoriteVideos } = require("../controllers/regularUserControllers/editFavoriteVideos");
-const { editFavoriteAudios } = require("../controllers/regularUserControllers/editFavoriteAudios");
-const { editFavoriteArticles } = require("../controllers/regularUserControllers/editFavoriteArticles");
+const {
+  editFavoriteVideos,
+} = require("../controllers/regularUserControllers/editFavoriteVideos");
+const {
+  editFavoriteAudios,
+} = require("../controllers/regularUserControllers/editFavoriteAudios");
+const {
+  editFavoriteArticles,
+} = require("../controllers/regularUserControllers/editFavoriteArticles");
 
 const router = express.Router();
 
 //user operations routes
-router.get("/", getRegularUsers);
+router.get("/", auth, adminAuth, getRegularUsers);
 router.get("/one-user", auth, getARegularUser);
 router.get("/user-by-id/:userId", auth, getRegularUserById);
 router.get("/one-user-by-id/:userId", getARegularUserById);
-router.get("/get-users-by-month/", getUsersByMonth);
+router.get("/get-users-by-month/", auth, adminAuth, getUsersByMonth);
 router.put("/", auth, updateRegularUser);
-router.put("/edit-user-access/:id", adminAuth, updateUserAccessStatus);
+router.put("/edit-user-access/:id", auth, adminAuth, updateUserAccessStatus);
 router.put("/edit-favorites/video/:id", auth, editFavoriteVideos);
 router.put("/edit-favorites/audio/:id", auth, editFavoriteAudios);
 router.put("/edit-favorites/article/:id", auth, editFavoriteArticles);

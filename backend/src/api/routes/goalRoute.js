@@ -1,4 +1,8 @@
 const express = require("express");
+
+const auth = require("../middlewares/auth");
+const adminAuth = require("../middlewares/adminAuth");
+
 const {
   createGoal,
 } = require("../controllers/goalsControllers/createController");
@@ -13,7 +17,6 @@ const {
   getAGoal,
 } = require("../controllers/goalsControllers/getController");
 
-const auth = require("../middlewares/auth");
 const {
   addSelectedGoal,
 } = require("../controllers/goalsControllers/addSelectedGoal");
@@ -38,11 +41,11 @@ const {
 
 const router = express.Router();
 
-router.post("/create", createGoal);
+router.post("/create", auth, adminAuth, createGoal);
 router.put("/update/:id", auth, updateGoal);
-router.delete("/delete/:id", deleteGoal);
-router.get("/get-all", getGoals);
-router.get("/get-goal/:id", getAGoal);
+router.delete("/delete/:id", auth, adminAuth, deleteGoal);
+router.get("/get-all", auth, getGoals);
+router.get("/get-goal/:id", auth, getAGoal);
 
 router.post("/add-goal", auth, addSelectedGoal);
 router.get("/selected-goals", auth, getSelectedGoals);

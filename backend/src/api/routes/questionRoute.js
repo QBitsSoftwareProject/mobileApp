@@ -1,6 +1,8 @@
 const express = require("express");
 
 const auth = require("../middlewares/auth");
+const adminAuth = require("../middlewares/adminAuth");
+
 const {
   createQuestion,
 } = require("../controllers/questionsController/createQuestions");
@@ -20,11 +22,11 @@ const {
 const router = express.Router();
 
 //Motivation operations routes
-router.post("/create", createQuestion);
-router.get("/get-all", getQuestion);
-router.get("/get-one/:id", getAQuestion);
-router.put("/update/:id", updateQuestion);
-router.delete("/delete/:id", deleteQuestion);
+router.post("/create", auth, adminAuth, createQuestion);
+router.get("/get-all", auth, adminAuth, getQuestion);
+router.get("/get-one/:id", auth, adminAuth, getAQuestion);
+router.put("/update/:id", auth, adminAuth, updateQuestion);
+router.delete("/delete/:id", auth, adminAuth, deleteQuestion);
 
 router.get("/get-daily-questions", auth, userQuestion);
 router.post("/update-answer", auth, updateAnswer);
