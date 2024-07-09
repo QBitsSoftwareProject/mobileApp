@@ -31,8 +31,6 @@ const Article = ({ user, item, actionStateFunction, actState }) => {
     fetchUserData();
   }, [actionState]);
 
-  const [error, setError] = useState(null);
-
   const [Isfavorite, setIsFavorite] = useState(false);
   const [actionState, setActionState] = useState(false);
 

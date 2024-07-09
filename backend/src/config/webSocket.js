@@ -7,7 +7,7 @@ const setupWebSocket = (server) => {
 
   wss.on("connection", (ws) => {
     // console.log("client connected");
-    clients.push(ws);
+    clients.push(ws); // adds the new WebSocket connection to the clients array
 
     ws.on("message", (msg) => {
       const message = JSON.parse(msg);

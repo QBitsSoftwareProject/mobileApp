@@ -7,11 +7,7 @@ import {
   getAUser,
   getUserById,
 } from "../../../services/userServices/userService";
-import {
-  useFocusEffect,
-  useNavigation,
-  useRoute,
-} from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
 import loadingGif from "../../../assets/animation/loading.gif";
 
 const ProfileScreen = () => {
@@ -83,6 +79,7 @@ const ProfileScreen = () => {
           style={{
             paddingHorizontal: 25,
             paddingTop: 15,
+            paddingBottom: 60, //new
           }}
         >
           <View style={styles.contains2}>
@@ -117,7 +114,7 @@ const ProfileScreen = () => {
 const styles = StyleSheet.create({
   contains: {
     flex: 1,
-    paddingBottom: 70,
+    // paddingBottom: 70,
   },
   loadingGif: {
     justifyContent: "center",

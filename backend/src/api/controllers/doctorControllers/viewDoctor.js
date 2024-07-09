@@ -8,10 +8,10 @@ exports.viewADoctor = async (req, res) => {
     const getAppointment = await appointmentModel.find({ doctorId: doctorId });
 
     const getNext7DaysRange = () => {
-      const start = new Date();
+      const start = new Date(); //Creates a new date object representing the current date
       start.setHours(0, 0, 0, 0);
 
-      const end = new Date(start);
+      const end = new Date(start); //Creates a new date object based on the start date
       end.setDate(start.getDate() + 7);
       end.setHours(23, 59, 59, 999);
 
@@ -19,19 +19,22 @@ exports.viewADoctor = async (req, res) => {
     };
 
     const getAvailableTimes = (availableTimes, appointments) => {
-      // const now = new Date();
-      const { start, end } = getNext7DaysRange();
+      const { start, end } = getNext7DaysRange(); //destructures the returned object
 
+      // Iterates over the availableTimes array using the map method.
       return availableTimes.map((dayTimes, index) => {
+        //filters out the time slots that are already booked.
         return dayTimes.filter((timeSlot) => {
+          //checks if there is any appointment that matches the current time slot.
           return !appointments.some((appointment) => {
             const appointmentDate = new Date(appointment.date);
 
-            // Check if the appointment is within the next 7 days
             const isSameDay = appointmentDate.getDay() === index;
+            // Check if the appointment is within the next 7 days
             const isWithinNext7Days =
               appointmentDate >= start && appointmentDate <= end;
 
+            // returns true if the appointment is on the same day, within the next 7 days, and at the same time slot
             return (
               isSameDay &&
               isWithinNext7Days &&

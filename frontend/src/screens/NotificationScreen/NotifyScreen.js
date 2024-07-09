@@ -131,7 +131,7 @@ const NotifyScreen = () => {
   }
 
   return (
-    <SafeAreaView style={{ flex: 1 , marginBottom:65}}>
+    <SafeAreaView style={{ flex: 1, marginBottom: 65 }}>
       <View style={styles.header}>
         <TouchableOpacity onPress={goBackFromComment}>
           <Image source={require("../../assets/images/BackBlack.png")} />

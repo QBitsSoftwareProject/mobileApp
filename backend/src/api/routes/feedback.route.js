@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 
 const auth = require("../middlewares/auth");
+const adminAuth = require("../middlewares/adminAuth");
 
 const {
   storeFeedback,
@@ -17,7 +18,7 @@ const {
 
 router.post("/add-feedback", auth, storeFeedback);
 
-router.get("/getAll-feedback", auth, getAllFeedback);
+router.get("/getAll-feedback", adminAuth, getAllFeedback);
 
 router.delete("/delete-feedback/:id", auth, deleteFeedback);
 

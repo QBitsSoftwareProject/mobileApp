@@ -1,5 +1,5 @@
 import React from "react";
-import { Text, ScrollView, View, Image, Dimensions } from "react-native";
+import { Text, ScrollView, View, Image } from "react-native";
 import { useEffect, useState } from "react";
 import DocCard from "../../../components/AppointmentCard/DocCard";
 import styles from "./styles";
