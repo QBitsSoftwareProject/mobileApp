@@ -103,7 +103,7 @@ const HomePage = () => {
         }}
       >
         <FlatList
-          style={{ height: "100%", paddingTop: 15 }} //,marginBottom:65
+          style={{ height: "100%", paddingTop: 15, marginBottom: 65 }} //bottomCut
           data={postList}
           renderItem={({ item }) => (
             <PostCard
