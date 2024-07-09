@@ -195,9 +195,11 @@ const MakeAppointment = ({ route }) => {
               height: "auto",
               width: "100%",
               flexDirection: "row",
-              flexWrap: "wrap",
+              // flexWrap: "wrap",
               alignItems: "center",
-              gap: 5,
+              justifyContent: "space-between",
+              // justifyContent: "center",
+              // gap: 25,
             }}
           >
             {pressDay !== null &&

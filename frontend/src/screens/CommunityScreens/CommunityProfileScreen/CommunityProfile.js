@@ -79,6 +79,7 @@ const ProfileScreen = () => {
           style={{
             paddingHorizontal: 25,
             paddingTop: 15,
+            paddingBottom: 60, //new
           }}
         >
           <View style={styles.contains2}>
@@ -113,7 +114,7 @@ const ProfileScreen = () => {
 const styles = StyleSheet.create({
   contains: {
     flex: 1,
-    paddingBottom: 70,
+    // paddingBottom: 70,
   },
   loadingGif: {
     justifyContent: "center",

@@ -49,7 +49,7 @@ const HomePage = () => {
 
   const handleLoadMore = () => {
     if (!loading && hasMorePosts) {
-      fetchPostData(); // Fetch the next page
+      fetchPostData();
     }
   };
 
@@ -94,11 +94,10 @@ const HomePage = () => {
         style={{
           height: screenHeight,
           paddingHorizontal: 25,
-          
         }}
       >
         <FlatList
-          style={{ height: "100%", paddingTop: 15 ,marginBottom:65}}
+          style={{ height: "100%", paddingTop: 15 }} //,marginBottom:65
           data={postList}
           renderItem={({ item }) => (
             <PostCard
@@ -133,7 +132,6 @@ const HomePage = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    
   },
   floatingButtonContainer: {
     position: "absolute",
