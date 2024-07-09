@@ -4,7 +4,7 @@ import { SplitButton } from "../../screens/FeedbackScreen/ProgressBar";
 import { updateMethodRatingById } from "../../services/mindRelaxingMethodService/mindRelaxingMethodService";
 
 
-const RatingPopUp = ({ message, onClose, methodId, title ,visible, close}) => {
+const RatingPopUp = ({ message, onClose, methodId, title ,visible, close, ratedUsers, currentRating }) => {
   const [select, setSelect] = useState();
   const [rateValue, setRateValue] = useState(0);
 
@@ -12,7 +12,7 @@ const RatingPopUp = ({ message, onClose, methodId, title ,visible, close}) => {
 
   const handleSaveButtonPress = async () => {
     try {
-      await updateMethodRatingById(methodId,rateValue)
+      await updateMethodRatingById(methodId,rateValue,ratedUsers,currentRating)
       close()
       onClose("Your rate is invaluable. Thank you!");
     } catch (error) {

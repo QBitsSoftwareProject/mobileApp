@@ -37,12 +37,15 @@ export const fetchMindRelaxingMethod = async () => {
       };
 
 
-      export const updateMethodRatingById = async (id, currentRating) => {
+      export const updateMethodRatingById = async (id, rateValue,ratedUsers,currentRating) => {
         try {
       
           // Send PUT request using axiosInstance
+          const newRateValue = ratedUsers + 1;
+          const newCurrentRating = ((currentRating * ratedUsers) + rateValue) / newRateValue
           const response = await axiosInstance.put(`/api/v1/method/update-method/${id}`, {
-            currentRating:currentRating
+            currentRating:newCurrentRating,
+            ratedUsers:newRateValue
           }
           );
       

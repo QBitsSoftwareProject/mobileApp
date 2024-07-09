@@ -26,7 +26,7 @@ const style = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: "white",
-    paddingHorizontal: 10,
+    paddingHorizontal: 20,
   },
   viewText: {
     fontSize: 12,

@@ -5,15 +5,21 @@ import PdfReader from './PdfReader';
 import RatingPopUp from "./MindRelaxingMethodRatingPopUp"
 import Toast from "react-native-toast-message";
 
-const PdfReaderModal = ({ visible, onClose, pdfSource,name ,id}) => {
+const PdfReaderModal = ({ visible, onClose, pdfSource,name ,id,currentRating,ratedUsers,isRated,setIsRated}) => {
 
   
 
   const [isPopUpVisible, setIsPopUpVisible] = useState(false)
 
-    const handleButtonClick = () => {
-      setIsPopUpVisible(true);
-    };
+  const handleButtonClick = () => {
+    if(!isRated){
+    setIsPopUpVisible(true);
+    setIsRated(true)
+    }
+    else{
+      onClose();
+    }
+  };
   
     const handleClosePopUp = (text2) => {
       setIsPopUpVisible(false);
@@ -52,6 +58,8 @@ const PdfReaderModal = ({ visible, onClose, pdfSource,name ,id}) => {
         title="Rate this PDF"
         visible={isPopUpVisible}
         close = {onClose}
+        ratedUsers={ratedUsers}
+        currentRating={currentRating}
         >
 
         </RatingPopUp>

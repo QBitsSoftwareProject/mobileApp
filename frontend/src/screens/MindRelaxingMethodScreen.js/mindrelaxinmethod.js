@@ -165,6 +165,8 @@ const Mindrelaxinmethod = () => {
             imgLink={item.imageURL}
             methodType={item.methodType}
             rUrl={item.resourceURL}
+            currentRating={item.currentRating}
+            ratedUsers={item.ratedUsers}
           />
         ))}
       </ScrollView>
