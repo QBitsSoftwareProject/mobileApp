@@ -24,26 +24,41 @@ const HomePage = () => {
   const [postList, setPostList] = useState([]);
   const [loading, setLoading] = useState(false);
   const [refreshing, setRefreshing] = useState(false);
-  const [lastCreatedAt, setLastCreatedAt] = useState();
+  const [lastCreatedAt, setLastCreatedAt] = useState(null);
   const [hasMorePosts, setHasMorePosts] = useState(true);
 
   useEffect(() => {
-    fetchPostData();
+    fetchPostData(true); // Initial fetch with refresh
   }, []);
 
-  const fetchPostData = async () => {
+  useFocusEffect(
+    React.useCallback(() => {
+      if (route.params?.refresh) {
+        fetchPostData(true);
+        navigation.setParams({ refresh: false }); // Reset the refresh param
+      }
+    }, [route.params?.refresh])
+  );
+
+  const fetchPostData = async (refresh = false) => {
     if (loading) return; // Prevent multiple simultaneous fetches
     setLoading(true);
 
     try {
-      const res = await getPost(lastCreatedAt, 8); // Fetch 8 posts starting from the offset
-      setPostList((prev) => [...prev, ...res]);
-      setLastCreatedAt(res[res.length - 1].createdAt);
+      const res = await getPost(refresh ? null : lastCreatedAt, 8); // Fetch 8 posts starting from the offset or from the beginning if refreshing
+      if (refresh) {
+        setPostList(res);
+        setLastCreatedAt(res[res.length - 1]?.createdAt);
+      } else {
+        setPostList((prev) => [...prev, ...res]);
+        setLastCreatedAt(res[res.length - 1]?.createdAt);
+      }
       setHasMorePosts(res.length === 8); // Update hasMorePosts based on the response
     } catch (error) {
       console.log(error);
     } finally {
       setLoading(false);
+      if (refresh) setRefreshing(false);
     }
   };
 
@@ -55,20 +70,11 @@ const HomePage = () => {
 
   const handleRefresh = () => {
     setRefreshing(true); // Set refreshing state to true
-    fetchPostData().finally(() => setRefreshing(false)); // Fetch the first page and reset refreshing state
+    fetchPostData(true); // Fetch the first page and reset refreshing state
   };
 
-  useFocusEffect(
-    React.useCallback(() => {
-      if (route.params?.refresh) {
-        fetchPostData();
-        navigation.setParams({ refresh: false }); // Reset the refresh param
-      }
-    }, [route.params?.refresh])
-  );
-
   const onUpdatePost = () => {
-    fetchPostData();
+    fetchPostData(true);
   };
 
   const onDeletePost = (postId) => {
@@ -78,7 +84,7 @@ const HomePage = () => {
   };
 
   const addNew = () => {
-    navigation.navigate("PostCategory");
+    navigation.navigate("PostCategory", { refresh: true });
   };
 
   return (
