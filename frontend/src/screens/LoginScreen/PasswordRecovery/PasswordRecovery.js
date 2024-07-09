@@ -62,6 +62,7 @@ const PasswordRecovery = () => {
         setUserRole(user.role);
         setNextPage(1);
         setIsValid(true);
+        setEmail("");
       }
     } catch (error) {
       console.log(error);
@@ -72,6 +73,7 @@ const PasswordRecovery = () => {
     if (pin == generatedPin) {
       setNextPage(2);
       setIsValid(true);
+      setPin("");
     } else {
       setIsValid(false);
     }
@@ -120,7 +122,7 @@ const PasswordRecovery = () => {
       <TouchableOpacity onPress={handleBackPress}>
         <Image
           source={require("../../../assets/images/blackBack.png")}
-          style={{ marginTop: 55 }}
+          style={{ marginTop: 25 }}
         />
       </TouchableOpacity>
 
@@ -167,6 +169,7 @@ const PasswordRecovery = () => {
               </Text>
 
               <TextInput
+                defaultValue=""
                 placeholder="Pin"
                 style={styles.inputField}
                 onChangeText={(text) => setPin(text)}
@@ -193,6 +196,7 @@ const PasswordRecovery = () => {
               </Text>
 
               <TextInput
+                defaultValue=""
                 placeholder="New Password"
                 style={styles.inputField}
                 onChangeText={(text) => setNewPassword(text)}

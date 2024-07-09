@@ -43,7 +43,7 @@ router.put(
   updateDoctorAccessStatus
 );
 router.delete("/:id", auth, adminAuth, deleteDoctor);
-router.post("/view-doctor", auth, adminAuth, viewADoctor);
+router.post("/view-doctor", auth, viewADoctor);
 
 router.post("/checkExistsDoctor", checkExistsDoctor);
 

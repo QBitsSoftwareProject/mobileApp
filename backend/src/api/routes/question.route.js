@@ -17,8 +17,8 @@ const {
 } = require("../../api/controllers/stressQuestionsController/question.controller");
 
 router.post("/create-question", auth, adminAuth, createQuestionWithOptions);
-router.get("/get-all-questions", auth, adminAuth, getAllQuestions);
-router.get("/get-all-options", auth, adminAuth, getAllOptions);
+router.get("/get-all-questions", auth, getAllQuestions);
+router.get("/get-all-options", auth, getAllOptions);
 router.get("/get-option/:id", auth, getOptionDetailsById);
 router.get("/get-question/:id", auth, getQuestionById);
 router.get("/get-all-question-ids", auth, getAllQuestionIds);

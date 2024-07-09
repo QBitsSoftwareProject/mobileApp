@@ -11,11 +11,11 @@ const fs = require("fs");
 const path = require("path");
 const morgan = require("morgan");
 
-const logStream = fs.createWriteStream(path.join(__dirname, "access.log"), {
-  flags: "a",
-});
+// const logStream = fs.createWriteStream(path.join(__dirname, "access.log"), {
+//   flags: "a",
+// });
 
-app.use(morgan("combined", { stream: logStream }));
+// app.use(morgan("combined", { stream: logStream }));
 
 const adminRoute = require("./api/routes/adminRoute.js");
 const regularUserRoute = require("./api/routes/regularUserRoute.js");

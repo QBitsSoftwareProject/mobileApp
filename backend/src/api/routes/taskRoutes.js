@@ -22,7 +22,7 @@ const router = express.Router();
 //Task operations routes
 router.post("/create", auth, adminAuth, createTask);
 router.get("/get-all", auth, adminAuth, getTasks);
-router.get("/get-one/:id", auth, adminAuth, getATask);
+router.get("/get-one/:id", auth, getATask);
 router.put("/update/:id", auth, adminAuth, updateTask);
 router.delete("/delete/:id", auth, adminAuth, deleteTask);
 

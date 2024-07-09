@@ -2,28 +2,24 @@ import axiosInstance from "../../api/axios";
 
 //fetch question ids
 export const fetchQuestionIds = async () => {
-        try {
-          const response = await axiosInstance.get('/question/get-all-question-ids');
-          
-          return response.data;
+  try {
+    const response = await axiosInstance.get("/question/get-all-question-ids");
 
-        } catch (err) {
-          console.log(err);
-        }
-      };
+    return response.data;
+  } catch (err) {
+    console.log(err);
+  }
+};
 
+//get question by id
+export const fetchData = async (id) => {
+  try {
+    const response = await axiosInstance.get(`/question/get-question/${id}`);
 
-      //get question by id
-      export const fetchData = async(id) => {
-        try {
-        const response = await axiosInstance.get(`/question/get-question/${id}`);
+    const data = response.data;
 
-          const data=  response.data;
-
-          return data;
-
-        } catch (err) {
-          console.log(err);
-        }
-      };
-      
+    return data;
+  } catch (err) {
+    console.log(err);
+  }
+};
