@@ -27,7 +27,7 @@ const MakeAppointment = ({ route }) => {
   const [popupMessage, setPopupMessage] = useState(""); // State for popup message
   const [getTime, setGetTime] = useState();
   const [getDate, setGetDate] = useState();
-  const [doctor, setDoctor] = useState();
+  const [doctor, setDoctor] = useState(); // state to get the doctor details
   const [pressDay, setPressDay] = useState(null);
   const [selectedDateIndex, setSelectedDateIndex] = useState(null);
   const [datePressed, setDatePressed] = useState(false); // State to track if a date has been pressed
@@ -195,12 +195,11 @@ const MakeAppointment = ({ route }) => {
               height: "auto",
               width: "100%",
               flexDirection: "row",
-              flexWrap: "wrap",
+              // flexWrap: "wrap",
               alignItems: "center",
-              gap: 5,
-              
-
-              
+              justifyContent: "space-between",
+              // justifyContent: "center",
+              // gap: 25,
             }}
           >
             {pressDay !== null &&

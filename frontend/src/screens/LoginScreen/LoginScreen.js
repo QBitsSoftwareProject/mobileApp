@@ -81,7 +81,7 @@ const LoginScreen = () => {
       <TouchableOpacity onPress={handleBackPress}>
         <Image
           source={require("../../assets/images/blackBack.png")}
-          style={{ marginTop: 55 }}
+          style={{ marginTop: 25 }}
         />
       </TouchableOpacity>
 

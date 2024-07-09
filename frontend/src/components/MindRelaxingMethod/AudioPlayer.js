@@ -7,7 +7,7 @@ import { useFocusEffect } from '@react-navigation/native';
 import RatingPopUp from "./MindRelaxingMethodRatingPopUp"
 import Toast from "react-native-toast-message";
 
-const AudioPlayer = ({ audioSource, onStop, imglink ,title,id}) => {
+const AudioPlayer = ({ audioSource, onStop, imglink ,title,id,currentRating,ratedUsers,isRated,setIsRated}) => {
   const [soundObject, setSoundObject] = useState(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [duration, setDuration] = useState(0);
@@ -17,9 +17,16 @@ const AudioPlayer = ({ audioSource, onStop, imglink ,title,id}) => {
 
   const [isPopUpVisible, setIsPopUpVisible] = useState(false)
 
-    const handleButtonClick = () => {
-      setIsPopUpVisible(true);
-    };
+  const handleButtonClick = () => {
+    if(!isRated){
+    setIsPopUpVisible(true);
+    setIsRated(true)
+    }else{
+      onStop()
+      stopAudio()
+    }
+    
+  };
   
     const handleClosePopUp = (text2) => {
       setIsPopUpVisible(false);
@@ -151,6 +158,7 @@ const AudioPlayer = ({ audioSource, onStop, imglink ,title,id}) => {
         value={position}
         onValueChange={onSeek}
         disabled={!soundObject}
+        
       />
 
 
@@ -188,6 +196,8 @@ const AudioPlayer = ({ audioSource, onStop, imglink ,title,id}) => {
         title="Rate this audio"
         visible={isPopUpVisible}
         close = {stopAudio}
+        ratedUsers={ratedUsers}
+        currentRating={currentRating}
         >
 
         </RatingPopUp>

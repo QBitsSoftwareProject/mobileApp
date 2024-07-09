@@ -70,7 +70,7 @@ const PostCategory = () => {
       >
         <ScrollView
           ScrollView
-          style={{ height: "100%", marginBottom: 25, paddingTop: 15 }}
+          style={{ height: "100%", paddingTop: 15, marginBottom: 25 }}
         >
           <View>
             {postCategoryList.map((item) => (
@@ -90,3 +90,8 @@ const PostCategory = () => {
 };
 
 export default PostCategory;
+
+{
+  /* <ScrollView ScrollView style={{ height: "100%", paddingTop: 15, }}>
+    <View style=={{marginBottom: 25 }}>  */
+}

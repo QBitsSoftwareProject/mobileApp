@@ -18,7 +18,7 @@ const {
 
 router.post("/add-feedback", auth, storeFeedback);
 
-router.get("/getAll-feedback", adminAuth, getAllFeedback);
+router.get("/getAll-feedback", auth, adminAuth, getAllFeedback);
 
 router.delete("/delete-feedback/:id", auth, deleteFeedback);
 

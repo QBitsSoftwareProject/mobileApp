@@ -22,11 +22,11 @@ const PostCard = (props) => {
   const [checkUser, setCheckUser] = useState(false);
 
   const formatTimestamp = (timestamp) => {
-    const date = new Date(timestamp);
-    const now = new Date();
-    const diff = now - date;
+    const date = new Date(timestamp); // Convert timestamp to a Date object
+    const now = new Date(); // Get the current date/time
+    const diff = now - date; // Calculate the difference in milliseconds between now and the timestamp
 
-    const seconds = Math.floor(diff / 1000);
+    const seconds = Math.floor(diff / 1000); //Math.floor(): Rounds down the result of diff / 1000 to the nearest integer
     if (seconds < 60) {
       return "just now";
     }

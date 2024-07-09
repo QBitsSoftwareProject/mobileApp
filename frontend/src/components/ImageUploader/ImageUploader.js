@@ -7,7 +7,7 @@ import {
   Platform,
   Alert,
 } from "react-native";
-import * as ImagePicker from "expo-image-picker";
+import * as ImagePicker from "expo-image-picker"; //module from expo-image-picker for accessing the device’s media library.
 import styles from "./styles";
 
 const ImageUploader = (props) => {
@@ -19,6 +19,7 @@ const ImageUploader = (props) => {
     }
   }, [selectedImage]);
 
+  //triggered when the user attempts to pick an image
   const pickImage = async () => {
     if (Platform.OS !== "web") {
       const { status } =
