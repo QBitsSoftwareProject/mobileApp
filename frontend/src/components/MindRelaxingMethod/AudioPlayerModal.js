@@ -4,7 +4,7 @@ import AudioPlayer from './AudioPlayer';
 import RatingPopUp from "./MindRelaxingMethodRatingPopUp"
 
 
-const AudioPlayerModal = ({ visible, onClose, audioSource,img, name ,id}) => {
+const AudioPlayerModal = ({ visible, onClose, audioSource,img, name ,id,currentRating,ratedUsers,isRated,setIsRated}) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [soundObject, setSoundObject] = useState(null);
   const [imgLink, setImgLink] = useState(img);
@@ -40,7 +40,7 @@ const AudioPlayerModal = ({ visible, onClose, audioSource,img, name ,id}) => {
     >
       <View style={styles.modalContainer}>
         <View style={styles.modalContent}>
-          <AudioPlayer audioSource={audioSource} onStop={handleStopAndClose}imglink = {img} title = {name} id = {id} />
+          <AudioPlayer audioSource={audioSource} onStop={handleStopAndClose}imglink = {img} title = {name} id = {id} currentRating = {currentRating} ratedUsers = {ratedUsers} isRated ={isRated} setIsRated = {setIsRated} onClose = {onClose} />
           <View style={styles.buttonContainer} >
             {/* <Button title="Stopp and Close" onPress={handleStopAndClose} /> */}
           </View>

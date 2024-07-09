@@ -105,7 +105,7 @@ const TabBar = ({ route, user, userRole }) => {
     BackgroundMusicContext
   );
   const firebaseAudioUrl =
-    "https://firebasestorage.googleapis.com/v0/b/uploadingfile-9e556.appspot.com/o/music%2FBlue%20Sky%20-%20Anime%20Piano%20%20Relaxation%20and%20Inspiration.mp3?alt=media&token=63f0612a-cfaf-41c7-ac6c-a001512b5369";
+    "https://firebasestorage.googleapis.com/v0/b/mental-health-and-wellne-9f050.appspot.com/o/backgroundMusic%2F10%20Minutes%20water%20meditation%20music-%5BAudioTrimmer.com%5D.mp3?alt=media&token=425125ee-42f9-4df0-bf52-c42ee03b8f4a";
 
   if (!HomeStack) {
     // Return a loading indicator or placeholder until HomeStack is loaded

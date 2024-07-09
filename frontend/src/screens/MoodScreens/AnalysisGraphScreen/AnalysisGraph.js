@@ -197,9 +197,9 @@ const AnalysisGraph = () => {
         setCurrentDate(date.toISOString().split("T")[0]);
       }
 
-      setIsNextDisabled(currentDayIndex === 6);
+      setIsNextDisabled(currentDayIndex === 0);
 
-      setIsBackDisabled(currentDayIndex === 0);
+      setIsBackDisabled(currentDayIndex === 1);
     }
   }, [data, currentDayIndex]);
 

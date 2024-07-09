@@ -106,10 +106,11 @@ const Mindrelaxinmethod = () => {
   }, [currentMood]);
 
   useEffect(() => {
-    let combinedArray = video.concat( audio, pdf);
+    let combinedArray = pdf.concat( audio, video);
     setSuggestion(combinedArray);
   }, [pdf, video, audio]);
-
+ 
+ 
   if (!suggestion) {
     return (
       <View
@@ -166,6 +167,8 @@ const Mindrelaxinmethod = () => {
             imgLink={item.imageURL}
             methodType={item.methodType}
             rUrl={item.resourceURL}
+            currentRating={item.currentRating}
+            ratedUsers={item.ratedUsers}
           />
         ))}
       </ScrollView>
