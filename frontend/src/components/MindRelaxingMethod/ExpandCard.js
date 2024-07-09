@@ -21,6 +21,7 @@ const ExpandableCard = (props) => {
   const [imageHeight, setImageHeight] = useState(0);
   const [textHeight, setTextHeight] = useState(0);
   const [modalVisible, setModalVisible] = useState(false);
+  const [isRated,setIsRated] = useState(false);
 
   const toggleModal = () => {
     console.log(resource);
@@ -72,6 +73,10 @@ const ExpandableCard = (props) => {
 
   let id;
 
+  let currentRating;
+
+  let ratedUsers;
+
   if (methodtype === "audio") {
     mimg = require("../../assets/images/MindRelaxingMethod/mp3.png");
     mtitle = "Listen to Music";
@@ -81,6 +86,8 @@ const ExpandableCard = (props) => {
     img = props.imgLink;
     name = props.methodname;
     id = props.methodId;
+    currentRating = props.currentRating;
+    ratedUsers = props.ratedUsers;
   } else if (methodtype === "pdf") {
     mimg = require("../../assets/images/MindRelaxingMethod/story.png");
     mtitle = "Read a Story";
@@ -89,6 +96,8 @@ const ExpandableCard = (props) => {
     pdfSource = props.rUrl;
     name = props.methodname;
     id = props.methodId;
+    currentRating = props.currentRating;
+    ratedUsers = props.ratedUsers;
   } else {
     mimg = require("../../assets/images/MindRelaxingMethod/breathing.png");
     mtitle = "Watch a Video";
@@ -97,6 +106,8 @@ const ExpandableCard = (props) => {
     videoSource = props.rUrl;
     name = props.methodname;
     id = props.methodId;
+    currentRating = props.currentRating;
+    ratedUsers = props.ratedUsers;
   }
 
   useEffect(() => {
@@ -208,6 +219,11 @@ const ExpandableCard = (props) => {
         videoSource={videoSource}
         name={name}
         id={id}
+        currentRating={currentRating}
+        ratedUsers={ratedUsers}
+        isRated={isRated}
+        setIsRated={setIsRated}
+
       />
       <AudioPlayerModal
         visible={audioModalVisible}
@@ -216,6 +232,10 @@ const ExpandableCard = (props) => {
         img={props.imgLink}
         name={name}
         id={id}
+        currentRating={currentRating}
+        ratedUsers={ratedUsers}
+        isRated={isRated}
+        setIsRated={setIsRated}
       />
       <PDFViewerModal
         visible={pdfModalVisible}
@@ -223,6 +243,10 @@ const ExpandableCard = (props) => {
         pdfSource={pdfSource}
         name={name}
         id={id}
+        currentRating={currentRating}
+        ratedUsers={ratedUsers}
+        isRated={isRated}
+        setIsRated={setIsRated}
       />
     </View>
   );

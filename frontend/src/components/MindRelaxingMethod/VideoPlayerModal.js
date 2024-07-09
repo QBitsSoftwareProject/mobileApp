@@ -4,12 +4,18 @@ import VideoPlayer from './VideoPlayer';
 import RatingPopUp from "./MindRelaxingMethodRatingPopUp"
 import Toast from "react-native-toast-message";
 
-const VideoPlayerModal = ({ visible, onClose, videoSource ,name,id}) => {
+const VideoPlayerModal = ({ visible, onClose, videoSource ,name,id,currentRating,ratedUsers,isRated,setIsRated}) => {
 
   const [isPopUpVisible, setIsPopUpVisible] = useState(false)
 
     const handleButtonClick = () => {
+      if(!isRated){
       setIsPopUpVisible(true);
+      setIsRated(true)
+      }
+      else{
+        onClose();
+      }
     };
   
     const handleClosePopUp = (text2) => {
@@ -21,11 +27,14 @@ const VideoPlayerModal = ({ visible, onClose, videoSource ,name,id}) => {
           text2: text2,
         });
       }, 200);
+
+      
     };
 
   const handleRating = () => {
     handleButtonClick()
   }
+
 
   return (
     <Modal
@@ -44,6 +53,7 @@ const VideoPlayerModal = ({ visible, onClose, videoSource ,name,id}) => {
           </TouchableOpacity>
         </View>
 
+        
         <RatingPopUp
         message="Rate your experience"
         onClose={handleClosePopUp}
@@ -51,6 +61,8 @@ const VideoPlayerModal = ({ visible, onClose, videoSource ,name,id}) => {
         title="Rate this Video"
         visible={isPopUpVisible}
         close = {onClose}
+        ratedUsers={ratedUsers}
+        currentRating={currentRating}
         >
 
         </RatingPopUp>

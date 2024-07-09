@@ -42,6 +42,10 @@ const MethodSchema = mongoose.Schema({
     type: Number,
     default: 10.0,
   },
+  ratedUsers: {
+    type: Number,
+    default: 1.0,
+  },
 });
 
 module.exports = mongoose.model("Methods", MethodSchema);
