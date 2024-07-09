@@ -45,35 +45,35 @@ const Feedback = () => {
   //useEffect to upadte the values based on questions
   useEffect(() => {
     if (qOne !== null) {
-      const value = qOne === 0 ? "False" : "True";
+      const value = qOne === 0 ? false : true;
       setFinterfaceValue(value);
     }
   }, [qOne]);
 
   useEffect(() => {
     if (qTwo !== null) {
-      const value = qTwo === 0 ? "False" : "True";
+      const value = qTwo === 0 ? false : true;
       setPrivacy(value);
     }
   }, [qTwo]);
 
   useEffect(() => {
     if (qThree !== null) {
-      const value = qThree === 0 ? "False" : "True";
+      const value = qThree === 0 ? false : true;
       setSpeed(value);
     }
   }, [qThree]);
 
   useEffect(() => {
     if (qFour !== null) {
-      const value = qFour === 0 ? "False" : "True";
+      const value = qFour === 0 ? false : true;
       setConsumption(value);
     }
   }, [qFour]);
 
   useEffect(() => {
     if (qFive !== null) {
-      const value = qFive === 0 ? "False" : "True";
+      const value = qFive === 0 ? false : true;
       setDesign(value);
     }
   }, [qFive]);
@@ -136,6 +136,8 @@ const Feedback = () => {
   //store data to the database, called the addFeedback
   const storeData = async () => {
     try {
+
+      console.log(userRate)
       await addFeedback(
         userRate,
         finterfaceValue,

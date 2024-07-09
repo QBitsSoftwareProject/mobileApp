@@ -66,11 +66,15 @@ const EduContent = () => {
         favVideos = await getFavoriteVideos(favVideoIds);
         favArticles = await getFavoriteArticles(favArticleIds);
         if (favVideos) {
+          console.log("fav video ids:", favVideoIds);
+          console.log("videos:", favVideos.data);
           setVideos(favVideos.data);
         } else {
           setVideos([]);
         }
         if (favArticles) {
+          console.log("fav article ids:", favArticleIds);
+          console.log("articles:", favArticles.data);
           setArticles(favArticles.data);
         } else {
           setArticles([]);
@@ -100,7 +104,7 @@ const EduContent = () => {
   }
 
   return (
-    <SafeAreaView>
+    <View>
       <HeaderSub
         back={"HomeScreen"}
         headLine={"Educational content"}
@@ -145,7 +149,7 @@ const EduContent = () => {
           </View>
         </ScrollView>
       </View>
-    </SafeAreaView>
+    </View>
   );
 };
 

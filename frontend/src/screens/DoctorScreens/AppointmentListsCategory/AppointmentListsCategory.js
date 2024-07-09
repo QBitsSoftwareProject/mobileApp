@@ -56,7 +56,7 @@ const AppointmentList = () => {
         style={{
           height: screenHeight,
           paddingHorizontal: 25,
-          paddingTop: 15,
+          // paddingTop: 15,
           // backgroundColor: "red",
         }}
       >

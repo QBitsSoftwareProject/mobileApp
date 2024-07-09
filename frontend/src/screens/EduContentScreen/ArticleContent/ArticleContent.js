@@ -17,7 +17,6 @@ import Article from "./Article.js";
 // data imports
 
 // components
-import SearchBarComponent from "../../../components/SearchBar/SearchBar.js";
 import SearchAndCategories from "../../../components/SearchAndCategories/SearchAndCategories.js";
 // components
 
@@ -50,7 +49,7 @@ const ArticleContent = () => {
         const articleList = await getArticles();
         const articleTags = await getArticleTags();
         const authors = await getAuthors();
-        setArticles(articleList.data.slice(0, 5));
+        setArticles(articleList.data);
         setAuthorList(authors.data.slice(0, 4));
         setArticleTagList(["All Articles", ...articleTags.data.tags]);
       } catch (error) {

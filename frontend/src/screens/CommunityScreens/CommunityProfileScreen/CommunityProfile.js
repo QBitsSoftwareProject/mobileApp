@@ -67,7 +67,7 @@ const ProfileScreen = () => {
 
   return (
     <View style={styles.contains}>
-      <ScrollView>
+      <ScrollView >
         <ProfileCover
           coverImage={{ uri: userData.coverImage }}
           proPic={{ uri: userData.proPic }}

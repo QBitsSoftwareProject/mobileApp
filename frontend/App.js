@@ -9,9 +9,10 @@ const Stack = createNativeStackNavigator();
 
 export default function App() {
   return (
-    <SafeAreaView style={{ flex: 1 }}>
+    
+    <View style={{ flex: 1 }}>
       <StatusBar backgroundColor="black" height={500} />
       <NavContainer />
-    </SafeAreaView>
+    </View>
   );
 }

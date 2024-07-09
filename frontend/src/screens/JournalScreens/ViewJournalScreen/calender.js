@@ -126,7 +126,7 @@ export const Calendar = ({
           >
             {weeks.map((dates, index) => (
               <View
-                style={[styles.itemRow, { paddingHorizontal: 15 }]}
+                style={[styles.itemRow, ]}
                 key={index}
               >
                 {dates.map((item, dateIndex) => {
@@ -200,8 +200,9 @@ const styles = StyleSheet.create({
   item: {
     height: 80,
     width: 38,
-    marginLeft: 8,
-    marginRight: 8,
+    // marginLeft: 14,
+    // gap:14,
+    // marginRight: 8,
     borderWidth: 2,
     borderRadius: 25,
     borderColor: "white",
@@ -212,13 +213,21 @@ const styles = StyleSheet.create({
   itemRow: {
     width: width,
     flexDirection: "row",
-    alignItems: "flex-start",
-    justifyContent: "space-between",
+    alignItems: "center",
+    // justifyContent: "space-between",
+    gap:14,
+    
+    
+    
+
+    
+    
   },
   itemWeekday: {
     fontSize: 14,
     fontWeight: "600",
     color: "#5C677D",
+    
   },
   itemDate: {
     fontSize: 13,

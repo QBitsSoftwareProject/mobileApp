@@ -106,7 +106,7 @@ const Mindrelaxinmethod = () => {
   }, [currentMood]);
 
   useEffect(() => {
-    let combinedArray = pdf.concat(video, audio);
+    let combinedArray = video.concat( audio, pdf);
     setSuggestion(combinedArray);
   }, [pdf, video, audio]);
 
@@ -146,7 +146,7 @@ const Mindrelaxinmethod = () => {
         back="HomeScreen"
       />
 
-      <ScrollView style={{ height: screenHeight - 280 }}>
+      <ScrollView style={{ height: screenHeight - 350 }}>
         <Text
           style={{
             margin: 25,

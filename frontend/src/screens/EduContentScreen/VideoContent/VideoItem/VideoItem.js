@@ -16,6 +16,9 @@ const VideoItem = ({ user, item, callTask, screen, actionStateFunction, actState
 
   const [error, setError] = useState(null);
 
+  const [Isfavorite, setIsFavorite] = useState(false);
+  const [actionState, setActionState] = useState(false);
+
   useEffect(() => {
     const fetchUserData = async () => {
       try {
@@ -32,9 +35,6 @@ const VideoItem = ({ user, item, callTask, screen, actionStateFunction, actState
     };
     fetchUserData();
   }, [actionState]);
-
-  const [Isfavorite, setIsFavorite] = useState(false);
-  const [actionState, setActionState] = useState(false);
 
 
   const video = React.useRef(null);

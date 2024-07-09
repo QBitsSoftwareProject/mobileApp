@@ -126,7 +126,7 @@ const MakeAppointment = ({ route }) => {
   }
 
   return (
-    <SafeAreaView style={{ margin: 25 }}>
+    <View style={{ margin: 25 }}>
       <View style={{ marginBottom: 20 }}>
         <TouchableOpacity style={styles.backBtn} onPress={goBack}>
           <Image source={require("../../../assets/images/blackBack.png")} />
@@ -236,7 +236,7 @@ const MakeAppointment = ({ route }) => {
           <Toast />
         </View>
       </ScrollView>
-    </SafeAreaView>
+    </View>
   );
 };
 
