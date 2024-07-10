@@ -1,8 +1,6 @@
 import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
-  
-
   question: {
     fontWeight: "400",
     fontSize: 24,
@@ -27,15 +25,14 @@ const styles = StyleSheet.create({
   },
   inputBox: {
     height: 150,
-    paddingTop:15,
+    paddingTop: 15,
     borderRadius: 10,
     borderWidth: 1,
     borderColor: "#4ABFB4",
-    marginBottom: 64,
+    // marginBottom: 64,
     paddingLeft: 15,
     paddingRight: 15,
     backgroundColor: "white",
-    
   },
 });
 

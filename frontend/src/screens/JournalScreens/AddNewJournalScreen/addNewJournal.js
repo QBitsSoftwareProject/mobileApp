@@ -60,6 +60,7 @@ export const AddNewJournal = ({ navigation }) => {
     const month = currentDate.toLocaleString("default", { month: "long" });
     const day = currentDate.getDate().toString().padStart(2, "0");
 
+
     const formattedDate = `${day}, ${month}, ${year}`;
     const formattedTime = currentDate.toLocaleTimeString();
 
@@ -121,8 +122,29 @@ export const AddNewJournal = ({ navigation }) => {
     }
   };
 
+  useEffect(() => {
+    const keyboardDidShowListener = Keyboard.addListener(
+      "keyboardDidShow",
+      () => {
+        setKeyboardVisible(true);
+      }
+    );
+
+    const keyboardDidHideListener = Keyboard.addListener(
+      "keyboardDidHide",
+      () => {
+        setKeyboardVisible(false);
+      }
+    );
+
+    return () => {
+      keyboardDidShowListener.remove();
+      keyboardDidHideListener.remove();
+    };
+  })
+
   return (
-    <View>
+    <View style ={{flex:1}}>
       <HeaderSub
         headLine={"Add New Journal"}
         subHeadLine={"Welcome to our mindful haven"}
@@ -131,7 +153,7 @@ export const AddNewJournal = ({ navigation }) => {
 
       <View
         style={{
-          marginBottom: 400,
+          marginBottom: isKeyboardVisible ? 420 : 275,
         }}
       >
         <ScrollView style={{ paddingTop: 0 }}>

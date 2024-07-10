@@ -49,14 +49,13 @@ const TaskTypeScreen = () => {
   }
 
   return (
-    <View style={{ flex: 1, paddingBottom: 85 }}>
-      <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
-        <HeaderSub
-          headLine={"Task Types"}
-          subHeadLine={"Here you can select the task type"}
-          back={"HomeScreen"}
-        />
-
+    <View style={{ flex: 1 }}>
+      <HeaderSub
+        headLine={"Task Types"}
+        subHeadLine={"Here you can select the task type"}
+        back={"HomeScreen"}
+      />
+      <ScrollView style={{ marginBottom: 65 }}>
         <View style={{ flex: 1, marginTop: 32, paddingHorizontal: 25 }}>
           <TaskTypeCard
             headText={"Short Term Tasks"}

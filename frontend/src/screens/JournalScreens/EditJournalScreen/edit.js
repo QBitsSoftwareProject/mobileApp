@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   SafeAreaView,
   Dimensions,
+  Keyboard,
 } from "react-native";
 import { EmojiPicker } from "../AddNewJournalScreen/emoji";
 import styles from "../AddNewJournalScreen/styles";
@@ -30,6 +31,7 @@ export const EditJournal = ({ navigation, route }) => {
   const [emoji, setEmoji] = useState(itemEmojiString);
   const [date, setDate] = useState("");
   const [time, setTime] = useState("");
+  const [isKeyboardVisible, setKeyboardVisible] = useState(false);
 
   // console.log("pre", itemEmoji);
   // console.log("now", emoji);
@@ -126,15 +128,36 @@ export const EditJournal = ({ navigation, route }) => {
     navigation.navigate("ViewJournal");
   };
 
+  useEffect(() => {
+    const keyboardDidShowListener = Keyboard.addListener(
+      "keyboardDidShow",
+      () => {
+        setKeyboardVisible(true);
+      }
+    );
+
+    const keyboardDidHideListener = Keyboard.addListener(
+      "keyboardDidHide",
+      () => {
+        setKeyboardVisible(false);
+      }
+    );
+
+    return () => {
+      keyboardDidShowListener.remove();
+      keyboardDidHideListener.remove();
+    };
+  })
+
   return (
-    <View>
+    <View style={{flex:1}}>
       <HeaderSub
         headLine={"Edit Journal"}
         subHeadLine={"Edit your journals"}
         back={"ViewJournal"}
       />
 
-      <View style={{ marginBottom: 400 }}>
+      <View style={{ marginBottom: isKeyboardVisible ? 420 : 275,}}>
         <ScrollView>
           <SafeAreaView style={styles.container}>
             <Text style={styles.Text}>Feeling with</Text>

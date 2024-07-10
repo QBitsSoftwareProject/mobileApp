@@ -85,29 +85,32 @@ export const ViewJournal = ({ navigation }) => {
   }
 
   return (
-    <View>
+    <View style={{flex:1}}>
       <HeaderSub
         headLine={"My Journals"}
         subHeadLine={"View your past journals"}
         back="HomeScreen"
       />
+
       <View
         style={{
           flexDirection: "row",
           width: "100%",
           alignItems: "center",
           justifyContent: "center",
+          marginTop:32
         }}
       >
         <CustomButtonView btnAnalysis={handleButton}></CustomButtonView>
       </View>
-      <View style={{ marginBottom: 65 }}>
+      <View>
         <ScrollView
           style={{
             marginHorizontal: 25,
+            marginBottom: 350 
           }}
         >
-          {/* <Calendar setJournalArray={setJournalArray} /> */}
+          <Calendar setJournalArray={setJournalArray} />
           {journalArray.length == 0 ? (
             <View
               style={{
@@ -133,11 +136,12 @@ export const ViewJournal = ({ navigation }) => {
                 journal={item}
                 setIsRefresh={setIsRefresh}
               />
+              
             ))
           )}
         </ScrollView>
       </View>
-      {/* <FloatingButton handleFlotingPointButton={handleFlotingPointButton} /> */}
+      <FloatingButton handleFlotingPointButton={handleFlotingPointButton} />
     </View>
   );
 };
