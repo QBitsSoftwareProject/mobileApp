@@ -105,6 +105,8 @@ const TaskDescriptionScreen = () => {
 
       setIsDisabled(true);
       await updateTaskCompleteness(taskId);
+
+      navigation.navigate("TaskListScreen", { refresh: true });
     } catch (error) {
       console.log(error);
     }

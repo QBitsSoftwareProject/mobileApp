@@ -33,6 +33,7 @@ const styles = StyleSheet.create({
     paddingLeft: 15,
     paddingRight: 15,
     backgroundColor: "white",
+    textAlignVertical: "top",
   },
 });
 
