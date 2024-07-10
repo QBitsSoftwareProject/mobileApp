@@ -1,10 +1,10 @@
 import { View, Text ,StyleSheet,Image,TouchableOpacity} from 'react-native'
-import React, {useContext}from 'react'
+import React, {useContext,useState}from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 
 
 
-const SettingScreen = ({handleLogout}) => {
+const SettingScreen = ({handleLogout, text,img}) => {
 
  
 
@@ -14,13 +14,13 @@ const SettingScreen = ({handleLogout}) => {
 
         <View style = {styles.first}>
             <Image 
-            source={require('../../assets/images/Settings/Logout.png')}
+            source={img}
             style = {styles.image}
             />
         </View>
 
         <View style = {styles.second}>
-            <Text style = {styles.text}>Logout</Text>
+            <Text style = {styles.text}>{text}</Text>
         </View>
 
         <View style = {styles.third}>
@@ -40,7 +40,8 @@ const styles = StyleSheet.create({
     alignSelf:'center',
     flexDirection: 'row',
     backgroundColor:'white',
-    borderRadius:15
+    borderRadius:15,
+    marginBottom:10
   },
 
   first:{
