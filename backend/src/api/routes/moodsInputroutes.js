@@ -22,6 +22,6 @@ router.post("/mood-create", auth, storeMoodEntry);
 router.get("/mood-entries-get", auth, getMoodEntryByUserId);
 
 // Route to update mood entry by id
-router.post("/mood-entries-update/:id", updateMoodEntry);
+router.post("/mood-entries-update/:id", auth, updateMoodEntry);
 
 module.exports = router;

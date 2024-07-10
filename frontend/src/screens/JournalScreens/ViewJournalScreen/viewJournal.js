@@ -97,21 +97,17 @@ export const ViewJournal = ({ navigation }) => {
           width: "100%",
           alignItems: "center",
           justifyContent: "center",
-          marginTop: 32,
-          
-
         }}
       >
         <CustomButtonView btnAnalysis={handleButton}></CustomButtonView>
       </View>
-      <View style={{ height: screenHeight - 400 }}>
+      <View style={{ marginBottom: 65 }}>
         <ScrollView
           style={{
             marginHorizontal: 25,
-            marginBottom: 30,
           }}
         >
-          <Calendar setJournalArray={setJournalArray} />
+          {/* <Calendar setJournalArray={setJournalArray} /> */}
           {journalArray.length == 0 ? (
             <View
               style={{
@@ -140,9 +136,8 @@ export const ViewJournal = ({ navigation }) => {
             ))
           )}
         </ScrollView>
-        
       </View>
-      <FloatingButton handleFlotingPointButton={handleFlotingPointButton} />
+      {/* <FloatingButton handleFlotingPointButton={handleFlotingPointButton} /> */}
     </View>
   );
 };

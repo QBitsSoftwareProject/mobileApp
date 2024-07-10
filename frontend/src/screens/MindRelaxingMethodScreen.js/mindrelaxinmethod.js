@@ -7,7 +7,7 @@ import {
   ScrollView,
   Image,
   Dimensions,
-  SafeAreaView
+  SafeAreaView,
 } from "react-native";
 import HeaderSub from "../../components/HeaderSub/HeaderSub";
 import ExpandableCard from "../../components/MindRelaxingMethod/ExpandCard";
@@ -106,11 +106,10 @@ const Mindrelaxinmethod = () => {
   }, [currentMood]);
 
   useEffect(() => {
-    let combinedArray = pdf.concat( audio, video);
+    let combinedArray = pdf.concat(audio, video);
     setSuggestion(combinedArray);
   }, [pdf, video, audio]);
- 
- 
+
   if (!suggestion) {
     return (
       <View
@@ -139,7 +138,6 @@ const Mindrelaxinmethod = () => {
   };
 
   return (
-    
     <View>
       <HeaderSub
         headLine={"Suggestions"}

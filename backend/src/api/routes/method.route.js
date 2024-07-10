@@ -2,25 +2,26 @@ const express = require("express");
 const router = express.Router();
 
 const auth = require("../middlewares/auth");
+const adminAuth = require("../middlewares/adminAuth");
 
 const {
   storeMethod,
   getAllMethods,
   updateMethod,
   getMethodById,
-  deleteMethodById
+  deleteMethodById,
 } = require("../controllers/mindRelaxingMethodController/method.controller");
 const {
   methodSuggestion,
 } = require("../controllers/mindRelaxingMethodController/methodSuggestion");
 
-router.post("/add-method", storeMethod);
-router.get("/get-method", getAllMethods);
-router.put("/update-method/:id", updateMethod);
-router.get("/get-methodbyid/:id", getMethodById);
-router.delete("/delete-methodbyid/:id", deleteMethodById);
+router.post("/add-method", auth, adminAuth, storeMethod);
+router.get("/get-method", auth, adminAuth, getAllMethods);
+router.put("/update-method/:id", auth, adminAuth, updateMethod);
+router.get("/get-methodbyid/:id", auth, getMethodById);
+router.delete("/delete-methodbyid/:id", auth, adminAuth, deleteMethodById);
 
-//method suggestion 
+//method suggestion
 router.post("/video-suggestion", auth, methodSuggestion);
 
 module.exports = router;

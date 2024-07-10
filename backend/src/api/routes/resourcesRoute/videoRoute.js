@@ -20,27 +20,33 @@ const {
   updateVideo,
 } = require("../../controllers/videoController/updateVideo");
 
-const { getAllFilteredVideos } = require("../../controllers/videoController/getFilteredVideos");
+const {
+  getAllFilteredVideos,
+} = require("../../controllers/videoController/getFilteredVideos");
 
-const { getVideosBySearch } = require("../../controllers/videoController/getVideosBySearch");
-const { getFavoriteVideos } = require("../../controllers/videoController/getFavoriteVideos");
+const {
+  getVideosBySearch,
+} = require("../../controllers/videoController/getVideosBySearch");
+const {
+  getFavoriteVideos,
+} = require("../../controllers/videoController/getFavoriteVideos");
 
 const router = express.Router();
 
-router.post("/", adminAuth, createVideo); // create video
+router.post("/", auth, adminAuth, createVideo); // create video
 
-router.get("/", getAllVideos); // get all videos
+router.get("/", auth, getAllVideos); // get all videos
 
 router.get("/search/:keyword", auth, getVideosBySearch); // get all videos
 
 router.get("/getFilteredVideos/:category", auth, getAllFilteredVideos); // get all videos
 
-router.post("/getFavoriteVideos/", auth, getFavoriteVideos);// get favorite videos
+router.post("/getFavoriteVideos/", auth, getFavoriteVideos); // get favorite videos
 
-router.get("/:id", getAVideo); // get a video
+router.get("/:id", auth, getAVideo); // get a video
 
-router.put("/edit-video/:id", adminAuth, updateVideo); // update video 
+router.put("/edit-video/:id", auth, adminAuth, updateVideo); // update video
 
-router.delete("/:id", adminAuth, deleteVideo); // delete a video
+router.delete("/:id", auth, adminAuth, deleteVideo); // delete a video
 
 module.exports = router;

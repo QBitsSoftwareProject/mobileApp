@@ -13,18 +13,21 @@ export const getSuggestedGoals = async () => {
     // console.log(response);
     return response.data;
   } catch (error) {
-    console.log(error);
+    console.log(error.response.data);
     throw new Error("Error during request setup");
   }
 };
 
 export const getAGoal = async (id) => {
   try {
-    const response = await axios.get(`${URL}/get-goal/${id}`);
+    const token = await AsyncStorage.getItem("authToken");
+    const response = await axios.get(`${URL}/get-goal/${id}`, {
+      headers: { authtoken: token },
+    });
 
     return response.data;
   } catch (error) {
-    console.log(error);
+    console.log(error.response.data);
     throw new Error("Error during request setup");
   }
 };
@@ -56,7 +59,7 @@ export const addAGoal = async (goalId) => {
     // console.log(response);
     // return response;
   } catch (error) {
-    console.log(error);
+    console.log(error.response.data);
     throw new Error("Error during request setup");
   }
 };
@@ -70,7 +73,7 @@ export const updateCompleteness = async (data) => {
 
     // return response;
   } catch (error) {
-    console.log(error);
+    console.log(error.response.data);
     throw new Error("Error during request setup");
   }
 };
@@ -84,7 +87,7 @@ export const deleteASelectedGoal = async (goalId) => {
 
     // return response;
   } catch (error) {
-    console.log(error);
+    console.log(error.response.data);
     throw new Error("Error during request setup");
   }
 };
@@ -98,7 +101,7 @@ export const getCompletedGoals = async () => {
     // console.log(response.data);
     return response.data;
   } catch (error) {
-    console.log(error);
+    console.log(error.response.data);
     throw new Error("Error during request setup");
   }
 };
@@ -112,7 +115,7 @@ export const updateAGoal = async (goalId, data) => {
     // console.log(response.data);
     return response.data;
   } catch (error) {
-    console.log(error);
+    console.log(error.response.data);
     throw new Error("Error during request setup");
   }
 };

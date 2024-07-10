@@ -68,8 +68,11 @@ const PostCategory = () => {
           paddingHorizontal: 25,
         }}
       >
-        <ScrollView ScrollView style={{ height: "100%", paddingTop: 15 }}>
-          <View style={{ marginBottom: 25 }}>
+        <ScrollView
+          ScrollView
+          style={{ height: "100%", paddingTop: 15, marginBottom: 25 }}
+        >
+          <View>
             {postCategoryList.map((item) => (
               <RegularCard
                 key={item.id}
@@ -89,6 +92,6 @@ const PostCategory = () => {
 export default PostCategory;
 
 {
-  /* <ScrollView ScrollView style={{ height: "100%", paddingTop: 15, marginBottom: 25 }}>
-    <View>  */
+  /* <ScrollView ScrollView style={{ height: "100%", paddingTop: 15, }}>
+    <View style=={{marginBottom: 25 }}>  */
 }

@@ -12,17 +12,13 @@ const styles = StyleSheet.create({
     paddingLeft: 25,
   },
   backbtn: {
-    position: "absolute",
-    marginTop: 25,
-    marginLeft: 25,
-    
+    marginVertical: 25,
   },
   headertxt: {
     color: "white",
     fontSize: 32,
     fontWeight: "600",
     textAlign: "center",
-    marginTop: 64,
   },
   daytxt: {
     color: "white",

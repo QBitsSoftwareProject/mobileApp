@@ -1,4 +1,7 @@
 const express = require("express");
+const auth = require("../middlewares/auth");
+const adminAuth = require("../middlewares/adminAuth");
+
 const {
   getTasks,
   getATask,
@@ -9,7 +12,6 @@ const { createTask } = require("../controllers/taskControllers/taskCreate");
 const {
   getOrAssignTask,
 } = require("../controllers/taskControllers/selectedTask");
-const auth = require("../middlewares/auth");
 const { checkTheTerm } = require("../controllers/taskControllers/checkTheTerm");
 const {
   taskCompletenessUpdate,
@@ -18,11 +20,11 @@ const {
 const router = express.Router();
 
 //Task operations routes
-router.post("/create", createTask);
-router.get("/get-all", getTasks);
-router.get("/get-one/:id", getATask);
-router.put("/update/:id", updateTask);
-router.delete("/delete/:id", deleteTask);
+router.post("/create", auth, adminAuth, createTask);
+router.get("/get-all", auth, adminAuth, getTasks);
+router.get("/get-one/:id", auth, getATask);
+router.put("/update/:id", auth, adminAuth, updateTask);
+router.delete("/delete/:id", auth, adminAuth, deleteTask);
 
 router.get("/suggested-task", auth, getOrAssignTask);
 router.get("/check-term", auth, checkTheTerm);
