@@ -5,7 +5,6 @@ import { getAUser, updateAUser } from "../../services/userServices/userService";
 import {getADoctor} from "../../services/doctorServices/doctorService";
 import {passwordUpdate} from "../../services/passwordServices/passwordUpdate"
 
-
 const BioEditPopUp = ({ isVisible, onClose }) => {
 
     const [newPassword, setNewPassword] = useState("");
@@ -66,7 +65,7 @@ const BioEditPopUp = ({ isVisible, onClose }) => {
         console.log(confirmPassword);
        
         const update = await passwordUpdate(confirmPassword,userId,userRole)
-        
+       
         
     }
 
