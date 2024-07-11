@@ -1,9 +1,7 @@
 import { View, Text, TouchableOpacity } from "react-native";
-import React, { useState } from "react";
+import React from "react";
 
-const ButtonGroup = ({ tab1, tab2, tab3, select }) => {
-  const [selectedTab, setSelectedTab] = useState(0);
-
+const ButtonGroup = ({ tab1, tab2, tab3, select, change }) => {
   return (
     <View
       style={{
@@ -12,7 +10,6 @@ const ButtonGroup = ({ tab1, tab2, tab3, select }) => {
         borderRadius: 25,
         flexDirection: "row",
         alignSelf: "center",
-
         marginTop: 20,
       }}
     >
@@ -20,21 +17,18 @@ const ButtonGroup = ({ tab1, tab2, tab3, select }) => {
         style={{
           width: 113.5,
           height: 40,
-          backgroundColor: selectedTab == 0 ? "#5296C5" : "#fff",
+          backgroundColor: change === 0 ? "#5296C5" : "#fff",
           borderRadius: 25,
           justifyContent: "center",
           alignItems: "center",
         }}
-        onPress={() => {
-          setSelectedTab(0);
-          select(0);
-        }}
+        onPress={() => select(0)}
       >
         <Text
           style={{
-            color: selectedTab == 0 ? "#fff" : "#5C677D",
+            color: change === 0 ? "#fff" : "#5C677D",
             fontSize: 14,
-            fontWeight: 500,
+            fontWeight: "500",
           }}
         >
           {tab1}
@@ -45,21 +39,18 @@ const ButtonGroup = ({ tab1, tab2, tab3, select }) => {
         style={{
           width: 113.5,
           height: 40,
-          backgroundColor: selectedTab == 1 ? "#5296C5" : "#fff",
+          backgroundColor: change === 1 ? "#5296C5" : "#fff",
           borderRadius: 25,
           justifyContent: "center",
           alignItems: "center",
         }}
-        onPress={() => {
-          setSelectedTab(1);
-          select(1);
-        }}
+        onPress={() => select(1)}
       >
         <Text
           style={{
-            color: selectedTab == 1 ? "#fff" : "#5C677D",
+            color: change === 1 ? "#fff" : "#5C677D",
             fontSize: 14,
-            fontWeight: 500,
+            fontWeight: "500",
           }}
         >
           {tab2}
@@ -70,21 +61,18 @@ const ButtonGroup = ({ tab1, tab2, tab3, select }) => {
         style={{
           width: 113.5,
           height: 40,
-          backgroundColor: selectedTab == 2 ? "#5296C5" : "#fff",
+          backgroundColor: change === 2 ? "#5296C5" : "#fff",
           borderRadius: 25,
           justifyContent: "center",
           alignItems: "center",
         }}
-        onPress={() => {
-          setSelectedTab(2);
-          select(2);
-        }}
+        onPress={() => select(2)}
       >
         <Text
           style={{
-            color: selectedTab == 2 ? "#fff" : "#5C677D",
+            color: change === 2 ? "#fff" : "#5C677D",
             fontSize: 14,
-            fontWeight: 500,
+            fontWeight: "500",
           }}
         >
           {tab3}

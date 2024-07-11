@@ -115,7 +115,7 @@ const ViewGoalScreen = () => {
           }
           back={"HomeScreen"}
         />
-        <View style={{ marginTop: 5 }}>
+        <View style={{ marginTop: 5, marginBottom: 15 }}>
           <ButtonGroup
             tab1={"Your Goals"}
             tab2={"Suggested"}
@@ -162,7 +162,7 @@ const ViewGoalScreen = () => {
               <View
                 style={{
                   marginHorizontal: 25,
-                  paddingTop: 32,
+                  paddingTop: 15,
                   marginBottom: index === resultSelected.length - 1 ? 32 : 0,
                 }}
               >
@@ -187,7 +187,7 @@ const ViewGoalScreen = () => {
               <View
                 style={{
                   marginHorizontal: 25,
-                  paddingTop: 32,
+                  paddingTop: 15,
                   marginBottom: index === resultSuggested.length - 1 ? 32 : 0,
                 }}
               >
@@ -210,7 +210,7 @@ const ViewGoalScreen = () => {
               <View
                 style={{
                   marginHorizontal: 25,
-                  paddingTop: 32,
+                  paddingTop: 15,
                   marginBottom: index === resultCompleted.length - 1 ? 32 : 0,
                 }}
               >

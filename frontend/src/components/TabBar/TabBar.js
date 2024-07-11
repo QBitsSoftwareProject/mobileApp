@@ -117,7 +117,6 @@ const TabBar = ({ route, user, userRole }) => {
   }
 
   return (
-    
     <SafeAreaView style={{ flex: 1 }}>
       {musicStop && (
         <MusicPlayer
@@ -137,9 +136,8 @@ const TabBar = ({ route, user, userRole }) => {
             borderTopRightRadius: 30,
             marginTop: 32,
             alignItems: "center",
-            justifyContent:'center',
-            paddingTop:30
-            
+            justifyContent: "center",
+            // paddingTop:30
           },
           headerShown: false,
         }}

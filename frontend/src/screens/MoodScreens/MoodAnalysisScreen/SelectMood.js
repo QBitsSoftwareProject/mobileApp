@@ -68,7 +68,7 @@ const MoodAnalysis = () => {
   const handlePressButton = async () => {
     if (!selectedEmoji) {
       Toast.show({
-        type: "success",
+        type: "error",
         text1: "Select your current mood!",
       });
       return;

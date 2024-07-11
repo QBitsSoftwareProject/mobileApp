@@ -105,6 +105,8 @@ const TaskDescriptionScreen = () => {
 
       setIsDisabled(true);
       await updateTaskCompleteness(taskId);
+
+      navigation.navigate("TaskListScreen", { refresh: true });
     } catch (error) {
       console.log(error);
     }
@@ -112,92 +114,88 @@ const TaskDescriptionScreen = () => {
 
   return (
     <View style={styles.container}>
-      
-        <TouchableOpacity style={styles.backBtn} onPress={handleBackPress}>
-          <Image source={require("../../../assets/images/blackBack.png")} />
-        </TouchableOpacity>
+      <TouchableOpacity style={styles.backBtn} onPress={handleBackPress}>
+        <Image source={require("../../../assets/images/blackBack.png")} />
+      </TouchableOpacity>
 
-        {/* task step rendering ..................................................................................... */}
+      {/* task step rendering ..................................................................................... */}
 
-        <View style={{ height: scrollHeight - 190, alignItems: "center" }}>
-          <ScrollView>
-            <View style={styles.headTextBox}>
-              <Text style={styles.task}>Task {index}</Text>
-              <Text style={styles.taskHead}>Take today meditation</Text>
+      <View style={{ flex: 1, marginBottom: 65, alignItems: "center" }}>
+        <ScrollView>
+          <View style={styles.headTextBox}>
+            <Text style={styles.task}>Task {index}</Text>
+            <Text style={styles.taskHead}>Take today meditation</Text>
+          </View>
+
+          <View onLayout={onBoxLayout} style={{ paddingTop: 32 }}>
+            <View
+              style={{
+                width: 55,
+                alignItems: "center",
+                position: "absolute",
+              }}
+            >
+              <View style={[styles.bar, { height: boxHeight }]}></View>
             </View>
 
-            <View onLayout={onBoxLayout} style={{ paddingTop: 32 }}>
-              <View
-                style={{
-                  width: 55,
-                  alignItems: "center",
-                  position: "absolute",
-                }}
-              >
-                <View style={[styles.bar, { height: boxHeight }]}></View>
-              </View>
-
-              {taskDetails.steps.map((item, index) => (
-                <View key={index}>
-                  <View style={[styles.stepContainer]}>
+            {taskDetails.steps.map((item, index) => (
+              <View key={index}>
+                <View style={[styles.stepContainer]}>
+                  <View style={{ flexDirection: "column", justifyContent: "" }}>
                     <View
-                      style={{ flexDirection: "column", justifyContent: "" }}
+                      style={[
+                        styles.stepBox,
+                        {
+                          backgroundColor:
+                            index % 2 === 0 ? "#4ABFB4" : "#4A90BF",
+                        },
+                      ]}
                     >
-                      <View
-                        style={[
-                          styles.stepBox,
-                          {
-                            backgroundColor:
-                              index % 2 === 0 ? "#4ABFB4" : "#4A90BF",
-                          },
-                        ]}
-                      >
-                        <Text style={styles.stepText}>Step 0{index + 1}</Text>
-                      </View>
-                    </View>
-
-                    <View style={styles.stepDescription}>
-                      <Text style={styles.descrptionText}>{item}</Text>
+                      <Text style={styles.stepText}>Step 0{index + 1}</Text>
                     </View>
                   </View>
+
+                  <View style={styles.stepDescription}>
+                    <Text style={styles.descrptionText}>{item}</Text>
+                  </View>
                 </View>
-              ))}
-            </View>
-
-            {/* btn ......................................................................................................................... */}
-
-            {!completeness && (
-              <View
-                style={{
-                  flexDirection: "row",
-                  justifyContent: "center",
-                  marginVertical: 32,
-                }}
-              >
-                {type === "none" ? (
-                  <TouchableOpacity
-                    style={[styles.btn, bgColor]}
-                    onPress={taskUpdate}
-                    disabled={isDisabled}
-                  >
-                    {!isDisabled ? (
-                      <Text style={[styles.btnText]}>Mark As completed</Text>
-                    ) : (
-                      <Text style={[styles.btnText, { color: bgColor.color }]}>
-                        completed
-                      </Text>
-                    )}
-                  </TouchableOpacity>
-                ) : (
-                  <TouchableOpacity style={styles.btn} onPress={taskNavigation}>
-                    <Text style={styles.btnText}>Start</Text>
-                  </TouchableOpacity>
-                )}
               </View>
-            )}
-          </ScrollView>
-        </View>
-      
+            ))}
+          </View>
+
+          {/* btn ......................................................................................................................... */}
+
+          {!completeness && (
+            <View
+              style={{
+                flexDirection: "row",
+                justifyContent: "center",
+                marginVertical: 32,
+              }}
+            >
+              {type === "none" ? (
+                <TouchableOpacity
+                  style={[styles.btn, bgColor]}
+                  onPress={taskUpdate}
+                  disabled={isDisabled}
+                >
+                  {!isDisabled ? (
+                    <Text style={[styles.btnText]}>Mark As completed</Text>
+                  ) : (
+                    <Text style={[styles.btnText, { color: bgColor.color }]}>
+                      completed
+                    </Text>
+                  )}
+                </TouchableOpacity>
+              ) : (
+                <TouchableOpacity style={styles.btn} onPress={taskNavigation}>
+                  <Text style={styles.btnText}>Start</Text>
+                </TouchableOpacity>
+              )}
+            </View>
+          )}
+        </ScrollView>
+      </View>
     </View>
   );
 };

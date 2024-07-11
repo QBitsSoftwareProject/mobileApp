@@ -71,7 +71,7 @@ const WelcomeScreen = ({ route }) => {
         source={require("../../../assets/images/squreBg.png")}
         style={styles.background}
       >
-        <SafeAreaView style={styles.content}>
+        <View style={styles.content}>
           <TouchableOpacity
             style={styles.backbtn}
             onPress={() => {
@@ -119,7 +119,7 @@ const WelcomeScreen = ({ route }) => {
               </View>
             </ScrollView>
           </View>
-        </SafeAreaView>
+        </View>
       </ImageBackground>
     </LinearGradient>
   );

@@ -4,6 +4,19 @@ const bodyParser = require("body-parser");
 const { PORT } = require("./config/env");
 const { connect } = require("./config/database.connection.js");
 
+const app = express();
+
+//access log
+const fs = require("fs");
+const path = require("path");
+const morgan = require("morgan");
+
+// const logStream = fs.createWriteStream(path.join(__dirname, "access.log"), {
+//   flags: "a",
+// });
+
+// app.use(morgan("combined", { stream: logStream }));
+
 const adminRoute = require("./api/routes/adminRoute.js");
 const regularUserRoute = require("./api/routes/regularUserRoute.js");
 const doctorRoute = require("./api/routes/doctorRoute.js");
@@ -26,7 +39,6 @@ const emailRoute = require("./api/routes/emailRoute.js");
 const passwordRoute = require("./api/routes/passwordRoute.js");
 
 const reportRoute = require("./api/routes/reportRoute.js");
-const app = express();
 
 app.use(cors());
 app.use(bodyParser.json());

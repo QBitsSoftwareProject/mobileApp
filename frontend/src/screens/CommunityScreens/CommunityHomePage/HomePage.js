@@ -118,7 +118,13 @@ const HomePage = () => {
         />
       </View>
 
-      <View style={{ height: screenHeight, paddingHorizontal: 25 }}>
+      <View
+        style={{
+          height: screenHeight,
+          paddingHorizontal: 25,
+          marginBottom: 272, //iso
+        }}
+      >
         <FlatList
           style={styles.flatList}
           data={postList}
@@ -133,8 +139,8 @@ const HomePage = () => {
           onRefresh={handleRefresh}
           contentContainerStyle={{ paddingBottom: 50 }}
         />
-        <FloatingButton addNew={addNew} />
       </View>
+      <FloatingButton addNew={addNew} />
     </View>
   );
 };
@@ -146,7 +152,7 @@ const styles = StyleSheet.create({
   flatList: {
     height: "100%",
     paddingTop: 15,
-    marginBottom: 65,
+    // marginBottom: 65,
   },
   floatingButtonContainer: {
     position: "absolute",

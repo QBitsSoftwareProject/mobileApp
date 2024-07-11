@@ -1,10 +1,11 @@
 import { View, FlatList, Image } from "react-native";
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import HeaderSub from "../../../components/HeaderSub/HeaderSub";
 import TaskCard from "../../../components/TaskCards/TaskCard";
 import { getSuggestedTasks } from "../../../services/taskServices/taskservice";
 import loadingGif from "../../../assets/animation/loading.gif";
 import notFoundGif from "../../../assets/animation/not-found.png";
+import { useFocusEffect, useRoute } from "@react-navigation/native";
 
 // Importing images for task icons
 const images = {
@@ -16,12 +17,15 @@ const images = {
 
 const TaskListScreen = () => {
   const [taskList, setTaskList] = useState(null);
+  const [refresh, setRefresh] = useState(false);
 
-  useEffect(() => {
-    fetchUser();
-  }, []);
+  useFocusEffect(
+    useCallback(() => {
+      fetchTasks();
+    }, [])
+  );
 
-  const fetchUser = async () => {
+  const fetchTasks = async () => {
     try {
       const response = await getSuggestedTasks();
       setTaskList(response);

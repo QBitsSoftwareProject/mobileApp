@@ -132,18 +132,25 @@ const CommentPage = () => {
   return (
     <SafeAreaView
       style={{
-        paddingBottom: isKeyboardVisible ? 50 : 130,
         flex: 1,
       }}
     >
-      <View style={styles.content1}>
-        <TouchableOpacity onPress={goBackFromComment} style={styles.backButton}>
+      <View style={styles.header}>
+        <TouchableOpacity onPress={goBackFromComment}>
           <Image source={require("../../../assets/images/BackBlack.png")} />
         </TouchableOpacity>
-        <Text style={styles.commentTitle}>All comments</Text>
+
+        <View style={styles.headerTextView}>
+          <Text style={styles.headerText}>All Comments</Text>
+        </View>
       </View>
 
-      <ScrollView style={{ paddingHorizontal: 25, marginBottom:130 }}>
+      <ScrollView
+        style={{
+          paddingHorizontal: 25,
+          marginBottom: isKeyboardVisible ? 45 : 130,
+        }}
+      >
         <View>
           {commentList.map((item) => (
             <CommentCard
@@ -195,12 +202,25 @@ const styles = StyleSheet.create({
   content1: {
     flexDirection: "row",
   },
-  commentTitle: {
-    fontSize: 20,
-    fontWeight: "500",
-    color: "#40495B",
-    opacity: 0.8,
-    marginVertical: 40,
+  header: {
+    flexDirection: "row",
+    padding: 25,
+    zIndex: 20,
+    alignItems: "center",
+    gap: 32,
+    width: "100%",
+  },
+  headerTextView: {
+    width: "100%",
+    position: "absolute",
+    marginLeft: 25,
+    zIndex: -1,
+  },
+  headerText: {
+    fontSize: 24,
+    color: "#101318",
+    fontWeight: "400",
+    textAlign: "center",
   },
   content2: {
     flexDirection: "row",
@@ -211,7 +231,6 @@ const styles = StyleSheet.create({
     zIndex: 10,
     justifyContent: "space-between",
     paddingHorizontal: 25,
-    
   },
   textinput: {
     width: "90%",
@@ -239,6 +258,7 @@ const styles = StyleSheet.create({
   },
   backButton: {
     margin: 25,
+
     marginBottom: 10,
     zIndex: 20,
   },

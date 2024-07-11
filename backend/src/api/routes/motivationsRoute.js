@@ -15,15 +15,16 @@ const {
 } = require("../controllers/motivationsController/deleteController");
 
 const auth = require("../middlewares/auth");
+const adminAuth = require("../middlewares/adminAuth");
 
 const router = express.Router();
 
 //Motivation operations routes
-router.post("/create", createMotivation);
-router.get("/get-all", getMotivation);
-router.get("/get-one/:id", getAMotivation);
-router.put("/update/:id", updateMotivation);
-router.delete("/delete/:id", deleteMotivation);
+router.post("/create", auth, adminAuth, createMotivation);
+router.get("/get-all", auth, adminAuth, getMotivation);
+router.get("/get-one/:id", auth, getAMotivation);
+router.put("/update/:id", auth, adminAuth, updateMotivation);
+router.delete("/delete/:id", auth, adminAuth, deleteMotivation);
 
 router.get("/get-one-by-day", auth, getAMotivationByDay);
 

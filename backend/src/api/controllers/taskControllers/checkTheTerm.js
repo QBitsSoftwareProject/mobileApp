@@ -7,24 +7,29 @@ exports.checkTheTerm = async (req, res) => {
     const user = await userModel.findById(userId);
     if (!user) return { error: true, status: 404, message: "User not found" };
 
-    if (
-      user.currentTaskType === "short-term" &&
-      user.currentShortTermDay >= 7
-    ) {
-      user.currentTaskType = "medium-term";
-      user.currentShortTermDay = 0;
-    } else if (
-      user.currentTaskType === "medium-term" &&
-      user.currentMediumTermDay >= 14
-    ) {
-      user.currentTaskType = "long-term";
-      user.currentMediumTermDay = 0;
-    } else if (
-      user.currentTaskType === "long-term" &&
-      user.currentLongTermDay >= 30
-    ) {
-      user.currentTaskType = "short-term";
-      user.currentLongTermDay = 0;
+    const currentDate = new Date();
+    const taskTakenDate = new Date(user.taskTakenDate);
+
+    if (currentDate.getDate() > taskTakenDate.getDate()) {
+      if (
+        user.currentTaskType === "short-term" &&
+        user.currentShortTermDay >= 7
+      ) {
+        user.currentTaskType = "medium-term";
+        user.currentShortTermDay = 0;
+      } else if (
+        user.currentTaskType === "medium-term" &&
+        user.currentMediumTermDay >= 14
+      ) {
+        user.currentTaskType = "long-term";
+        user.currentMediumTermDay = 0;
+      } else if (
+        user.currentTaskType === "long-term" &&
+        user.currentLongTermDay >= 30
+      ) {
+        user.currentTaskType = "short-term";
+        user.currentLongTermDay = 0;
+      }
     }
 
     await userModel.findByIdAndUpdate(userId, user);

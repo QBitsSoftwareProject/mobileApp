@@ -35,15 +35,7 @@ const Article = ({ user, item, actionStateFunction, actState }) => {
   const [actionState, setActionState] = useState(false);
 
   const editFavorites = () => {
-    let newArticleFavs = [];
-    if (user.favArticles && (user.favArticles).includes(item._id)) {
-      newArticleFavs = (user.favArticles).filter(favId => favId !== item._id);
-      setIsFavorite(false);
-    } else if (user.favArticles && !(user.favArticles).includes(item._id)) {
-      newArticleFavs = [item._id, ...user.favArticles];
-      setIsFavorite(true);
-    }
-    editFavoriteArticles(user._id, newArticleFavs);
+    editFavoriteArticles(user._id, item._id);
     actionStateFunction(!actState);
     setActionState(!actionState);
   }
