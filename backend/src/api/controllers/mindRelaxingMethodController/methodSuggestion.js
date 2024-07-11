@@ -18,10 +18,10 @@ const methodSuggestion = async (req, res) => {
   try {
     const { inputMood } = req.body;
 
-    console.log(inputMood)
+    // console.log(inputMood)
 
     if (!inputMood) {
-      return res.status(400).send("Mood is required"); 
+      return res.status(400).send("Mood is required");
     }
 
     //get average mood weight
@@ -120,8 +120,6 @@ const topRatingMethod = (arr) => {
   });
 };
 
-
 module.exports = {
-  methodSuggestion
-  
+  methodSuggestion,
 };
