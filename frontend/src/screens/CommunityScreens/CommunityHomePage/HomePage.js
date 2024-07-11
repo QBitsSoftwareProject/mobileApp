@@ -1,11 +1,10 @@
-import React, { useEffect, useState, useCallback, useMemo } from "react";
+import React, { useEffect, useState } from "react";
 import {
   View,
   FlatList,
   StyleSheet,
   ActivityIndicator,
   Dimensions,
-  Alert,
 } from "react-native";
 import CFHeaderSub from "../../../components/ComForumHeader/CFHeader";
 import PostCard from "../../../components/CFCard/PostCard";
@@ -33,7 +32,7 @@ const HomePage = () => {
   }, []);
 
   useFocusEffect(
-    useCallback(() => {
+    React.useCallback(() => {
       if (route.params?.refresh) {
         fetchPostData(true);
         navigation.setParams({ refresh: false }); // Reset the refresh param
@@ -56,8 +55,7 @@ const HomePage = () => {
       }
       setHasMorePosts(res.length === 8); // Update hasMorePosts based on the response
     } catch (error) {
-      console.error(error);
-      Alert.alert("Error", "Failed to fetch posts. Please try again later.");
+      console.log(error);
     } finally {
       setLoading(false);
       if (refresh) setRefreshing(false);
@@ -89,29 +87,9 @@ const HomePage = () => {
     navigation.navigate("PostCategory", { refresh: true });
   };
 
-  const renderItem = useMemo(
-    () =>
-      ({ item }) =>
-        (
-          <PostCard
-            postId={item._id}
-            cardName={"HomePageCard"}
-            relevantUserId={item.userId._id}
-            image={item.userId.proPic}
-            title={item.userId.userName}
-            Date={item.createdAt}
-            description={item.description}
-            postImage={item.image}
-            onDelete={onDeletePost}
-            onUpdate={onUpdatePost}
-          />
-        ),
-    []
-  );
-
   return (
     <View style={styles.container}>
-      <View style={{ zIndex: 1000 }}>
+      <View>
         <CFHeaderSub
           subHeadLine={"Community Home Page"}
           profile={"ProfileScreen"}
@@ -120,15 +98,27 @@ const HomePage = () => {
 
       <View
         style={{
-          height: screenHeight,
           paddingHorizontal: 25,
-          marginBottom: 272, //iso
+          marginBottom: 272,
         }}
       >
         <FlatList
-          style={styles.flatList}
+          style={{ height: "100%", paddingTop: 15 }} //bottomCut
           data={postList}
-          renderItem={renderItem}
+          renderItem={({ item }) => (
+            <PostCard
+              postId={item._id}
+              cardName={"HomePageCard"}
+              relevantUserId={item.userId._id}
+              image={item.userId.proPic}
+              title={item.userId.userName}
+              Date={item.createdAt}
+              description={item.description}
+              postImage={item.image}
+              onDelete={onDeletePost}
+              onUpdate={onUpdatePost}
+            />
+          )}
           keyExtractor={(item) => item._id} //provides a unique key for each item in the list
           onEndReached={handleLoadMore} // triggers handleLoadMore to fetch more posts.
           onEndReachedThreshold={0.5}
@@ -148,11 +138,6 @@ const HomePage = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-  },
-  flatList: {
-    height: "100%",
-    paddingTop: 15,
-    // marginBottom: 65,
   },
   floatingButtonContainer: {
     position: "absolute",
