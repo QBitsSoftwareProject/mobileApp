@@ -138,14 +138,14 @@ const Mindrelaxinmethod = () => {
   };
 
   return (
-    <View>
+    <View >
       <HeaderSub
         headLine={"Suggestions"}
         subHeadLine={"Explore personalized recommendations"}
         back="HomeScreen"
       />
 
-      <ScrollView style={{ height: screenHeight - 350 }}>
+      <ScrollView style={{ marginBottom:275}}>
         <Text
           style={{
             margin: 25,

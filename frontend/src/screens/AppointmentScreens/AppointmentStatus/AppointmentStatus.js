@@ -94,31 +94,33 @@ const AppointmentStatus = () => {
       />
 
       <View style={{ paddingHorizontal: 25 }}>
-      <ScrollView style={{ height: screenHeight - 340 }}>
-        <View style={styles.content1}>
-          <Text style={styles.descript2}>Appointment Status.</Text>
-          <TouchableOpacity style={styles.viewBtn} onPress={displayDeleteAlert}>
-            <Text style={styles.viewText}>Clear All</Text>
-          </TouchableOpacity>
-        </View>
-
-        {notFound && (
-          <View
-            style={{
-              justifyContent: "center",
-              alignItems: "center",
-              width: "100%",
-              marginTop: 32,
-            }}
-          >
-            <Image
-              source={notFoundGif}
-              style={{ width: "70%", height: 250, opacity: 0.3 }}
-            />
+        <ScrollView style={{ height: screenHeight - 340 }}>
+          <View style={styles.content1}>
+            <Text style={styles.descript2}>Appointment Status.</Text>
+            {/* <TouchableOpacity
+              style={styles.viewBtn}
+              onPress={displayDeleteAlert}
+            >
+              <Text style={styles.viewText}>Clear All</Text>
+            </TouchableOpacity> */}
           </View>
-        )}
 
-        
+          {notFound && (
+            <View
+              style={{
+                justifyContent: "center",
+                alignItems: "center",
+                width: "100%",
+                marginTop: 32,
+              }}
+            >
+              <Image
+                source={notFoundGif}
+                style={{ width: "70%", height: 250, opacity: 0.3 }}
+              />
+            </View>
+          )}
+
           {/* appointment status card  */}
           <View style={{ marginBottom: 120 }}>
             {appointments &&

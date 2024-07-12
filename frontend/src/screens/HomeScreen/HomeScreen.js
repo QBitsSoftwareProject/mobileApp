@@ -60,11 +60,6 @@ const images = [
 const HomeScreen = (props) => {
   const { setMusicStop } = useContext(BackgroundMusicContext);
 
-  useEffect(() => {
-    // Set musicStop to true when the component mounts
-    setMusicStop(true);
-  }, []);
-
   const navigation = useNavigation();
 
   const { role } = props.route.params;
@@ -72,6 +67,11 @@ const HomeScreen = (props) => {
   const [user, setUser] = useState(null);
 
   const winWidth = Dimensions.get("window").width - 60;
+
+  useEffect(() => {
+    // Set musicStop to true when the component mounts
+    setMusicStop(true);
+  }, []);
 
   useEffect(() => {
     fetchUser(role);
@@ -151,7 +151,7 @@ const HomeScreen = (props) => {
   }
 
   return (
-    <View style={{ marginBottom: 32 }}>
+    <View style={{ marginBottom: 64 }}>
       <ScrollView>
         <HomeTop
           headLine={"Hi," + user.userName}

@@ -5,7 +5,7 @@ const doctorSchema = require("../../models/doctor/doctor");
 exports.getPost = async (req, res) => {
   try {
     const { lastCreatedAt, limit } = req.query;
-    console.log(lastCreatedAt, limit);
+    // console.log(lastCreatedAt, limit);
 
     const Posts = await postSchema
       .find({

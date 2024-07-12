@@ -89,7 +89,7 @@ const HomePage = () => {
 
   return (
     <View style={styles.container}>
-      <View style={{ zIndex: 1000 }}>
+      <View>
         <CFHeaderSub
           subHeadLine={"Community Home Page"}
           profile={"ProfileScreen"}
@@ -98,12 +98,12 @@ const HomePage = () => {
 
       <View
         style={{
-          height: screenHeight,
           paddingHorizontal: 25,
+          marginBottom: 272,
         }}
       >
         <FlatList
-          style={{ height: "100%", paddingTop: 15, marginBottom: 65 }} //bottomCut
+          style={{ height: "100%", paddingTop: 15 }} //bottomCut
           data={postList}
           renderItem={({ item }) => (
             <PostCard
@@ -129,8 +129,8 @@ const HomePage = () => {
           onRefresh={handleRefresh}
           contentContainerStyle={{ paddingBottom: 50 }}
         />
-        <FloatingButton addNew={addNew} />
       </View>
+      <FloatingButton addNew={addNew} />
     </View>
   );
 };

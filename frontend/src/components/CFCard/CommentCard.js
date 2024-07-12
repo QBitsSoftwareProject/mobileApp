@@ -83,6 +83,11 @@ const CommentCard = (props) => {
     const now = new Date();
     const diff = now - date;
 
+    const seconds = Math.floor(diff / 1000); //Math.floor(): Rounds down the result of diff / 1000 to the nearest integer
+    if (seconds < 60) {
+      return "just now";
+    }
+
     const minutes = Math.floor(diff / (1000 * 60));
     if (minutes < 60) {
       return `${minutes}min ago`;

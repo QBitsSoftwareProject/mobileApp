@@ -12,11 +12,13 @@ exports.updatePassword = async (req, res) => {
 
     if (role == "user") {
       await userModel.findByIdAndUpdate(id, { password: encryptedPwd });
+      return res.status(201).json({ message: "password update successfully" });
     } else if (role == "doctor") {
       await doctorModel.findByIdAndUpdate(id, { password: encryptedPwd });
+      return res.status(201).json({ message: "password update successfully" });
     }
 
-    res.status(201).json({ message: "password update successfully" });
+    return res.status(201).json({ message: "password update failed" });
   } catch (error) {
     res.status(500).send({ error: error.message });
   }

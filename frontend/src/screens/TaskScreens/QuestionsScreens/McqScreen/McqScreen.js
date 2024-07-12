@@ -73,78 +73,74 @@ const McqScreen = ({ navigation, route }) => {
   }, [qNumber, currentQuestion]);
 
   return (
-    <View style={{ flex: 1, backgroundColor: "#F2F3F5" }}>
-      <View style={{ marginLeft: 25, marginRight: 25 }}>
-        <TouchableOpacity onPress={backHandler}>
-          <Image source={require("../../../../assets/images/blackBack.png")} />
-        </TouchableOpacity>
+    <View style={{ flex: 1, marginLeft: 25, marginRight: 25 }}>
+      <TouchableOpacity onPress={backHandler} style={{ marginTop: 25 }}>
+        <Image source={require("../../../../assets/images/blackBack.png")} />
+      </TouchableOpacity>
 
-        <ProgressBar qNumber={qNumber} length={questions.length} />
+      <ProgressBar qNumber={qNumber} length={questions.length} />
 
-        {/* answers list */}
-        <ScrollView>
-          {currentQuestion ? (
-            <>
-              <Text style={styles.question}>
-                {currentQuestion.questionText}
-              </Text>
+      {/* answers list */}
+      <ScrollView style={{ marginBottom: 65 }}>
+        {currentQuestion ? (
+          <>
+            <Text style={styles.question}>{currentQuestion.questionText}</Text>
 
-              <View style={{ paddingBottom: 393 }}>
-                <View style={{ marginTop: 32 }}>
-                  {currentQuestion.questionType === "mcq" &&
-                    currentQuestion.options.map((item, index) => (
-                      <AnswerBtns
-                        key={index}
-                        button={item}
-                        index={index}
-                        active={selectedButtonIndex}
-                        onPress={() => pressHandlerBtns(item, index)}
-                      />
-                    ))}
-
-                  {currentQuestion.questionType === "input" && (
-                    <TextInput
-                      placeholder="Input your text here"
-                      style={styles.inputBox}
-                      value={answer}
-                      onChangeText={setAnswer}
-                      multiline
+            <View>
+              <View style={{ marginTop: 32 }}>
+                {currentQuestion.questionType === "mcq" &&
+                  currentQuestion.options.map((item, index) => (
+                    <AnswerBtns
+                      key={index}
+                      button={item}
+                      index={index}
+                      active={selectedButtonIndex}
+                      onPress={() => pressHandlerBtns(item, index)}
                     />
-                  )}
-                </View>
+                  ))}
 
-                {/* next btn */}
-                <View
-                  style={{
-                    flex: 1,
-                    flexDirection: "row",
-                    marginTop: 70,
-                    justifyContent: "center",
-                  }}
-                >
-                  <TouchableOpacity
-                    style={styles.nextBtn}
-                    onPress={pressHandlerNext}
-                  >
-                    <Text style={styles.nextBtnTxt}>Next</Text>
-                  </TouchableOpacity>
-                </View>
+                {currentQuestion.questionType === "input" && (
+                  <TextInput
+                    placeholder="Input your text here"
+                    style={styles.inputBox}
+                    value={answer}
+                    onChangeText={setAnswer}
+                    multiline
+                  />
+                )}
               </View>
-            </>
-          ) : (
-            <View
-              style={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                height: "100%",
-              }}
-            >
-              <Image source={loadingGif} />
+
+              {/* next btn */}
+              <View
+                style={{
+                  flex: 1,
+                  flexDirection: "row",
+                  marginTop: 70,
+                  justifyContent: "center",
+                }}
+              >
+                <TouchableOpacity
+                  style={styles.nextBtn}
+                  onPress={pressHandlerNext}
+                >
+                  <Text style={styles.nextBtnTxt}>Next</Text>
+                </TouchableOpacity>
+              </View>
             </View>
-          )}
-        </ScrollView>
-      </View>
+          </>
+        ) : (
+          <View
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              height: "100%",
+            }}
+          >
+            <Image source={loadingGif} />
+          </View>
+        )}
+      </ScrollView>
     </View>
   );
 };
