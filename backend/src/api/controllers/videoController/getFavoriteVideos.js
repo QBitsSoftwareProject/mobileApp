@@ -4,7 +4,7 @@ const video = require("../../models/videoResources/video");
 exports.getFavoriteVideos = async (req, res) => {
     try {
         // Check if videoIds array is provided in the request body
-        const  videoIds  = req.body;
+        const videoIds = req.body;
 
         console.log("video ids backend:", videoIds);
 

@@ -249,12 +249,12 @@ export const getAuthorArticleCount = async (authorId) => {
   }
 };
 
-export const editFavoriteVideos = async (userId, favoriteVideos) => {
+export const editFavoriteVideos = async (videoId) => {
   try {
     const token = await AsyncStorage.getItem("authToken");
     const response = await axios.put(
-      `${BACKEND_URI}/user/edit-favorites/video/` + userId,
-      favoriteVideos,
+      `${BACKEND_URI}/user/edit-favorites/video/`,
+      { videoId },
       {
         headers: { authtoken: token },
       }
@@ -265,12 +265,12 @@ export const editFavoriteVideos = async (userId, favoriteVideos) => {
   }
 };
 
-export const editFavoriteAudios = async (userId, favoriteAudios) => {
+export const editFavoriteAudios = async (audioId) => {
   try {
     const token = await AsyncStorage.getItem("authToken");
     const response = await axios.put(
-      `${BACKEND_URI}/user/edit-favorites/audio/` + userId,
-      favoriteAudios,
+      `${BACKEND_URI}/user/edit-favorites/audio/`,
+      { audioId },
       {
         headers: { authtoken: token },
       }
@@ -281,12 +281,12 @@ export const editFavoriteAudios = async (userId, favoriteAudios) => {
   }
 };
 
-export const editFavoriteArticles = async (userId, favoriteArticles) => {
+export const editFavoriteArticles = async (articleId) => {
   try {
     const token = await AsyncStorage.getItem("authToken");
     const response = await axios.put(
-      `${BACKEND_URI}/user/edit-favorites/article/` + userId,
-      favoriteArticles,
+      `${BACKEND_URI}/user/edit-favorites/article`,
+      { articleId },
       {
         headers: { authtoken: token },
       }

@@ -4,7 +4,9 @@ const article = require("../../models/articleResources/article");
 exports.getFavoriteArticles = async (req, res) => {
     try {
         // Check if articleIds array is provided in the request body
-        const { articleIds } = req.body;
+        const articleIds = req.body;
+
+        console.log("article ids backend:", articleIds);
 
         // Query to fetch all articles or specific articles based on IDs
         let query = {};

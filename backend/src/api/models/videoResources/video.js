@@ -33,7 +33,11 @@ const videoSchema = new schema({
   },
   downloadURL: {
     type: String,
-    // required:true,
+    // required: true,
+  },
+  thumbnailURL: {
+    type: String,
+    // required: true,
   },
   rating: {
     type: Number,

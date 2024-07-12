@@ -17,13 +17,13 @@ const Article = ({ user, item, actionStateFunction, actState }) => {
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        // favorite video
-        if (user.favVideos && (user.favVideos).includes(item._id)) {
+        // favorite article
+        if (user.favArticles && (user.favArticles).includes(item._id)) {
           setIsFavorite(true)
         } else {
           setIsFavorite(false)
         }
-        // favorite video
+        // favorite article
       } catch (err) {
         setError(err.message);
       }
@@ -35,9 +35,10 @@ const Article = ({ user, item, actionStateFunction, actState }) => {
   const [actionState, setActionState] = useState(false);
 
   const editFavorites = () => {
-    editFavoriteArticles(user._id, item._id);
+    editFavoriteArticles(item._id);
     actionStateFunction(!actState);
     setActionState(!actionState);
+    setIsFavorite((prev) => !prev); // Directly toggle the state
   }
 
   const navigateToScreen = () => {

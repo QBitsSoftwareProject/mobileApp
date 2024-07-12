@@ -3,11 +3,11 @@ const regularUser = require("../../models/regularUser/regularUser");
 
 exports.editFavoriteArticles = async (req, res) => {
     try {
-        const { favoriteArticles } = req.body;
-        const userId = req.params;
+        const { articleId } = req.body;
+        const userId = req.user.user_id;
 
         // Finding and updating the user by ID
-        const user = await regularUser.findById(userId.id);
+        const user = await regularUser.findById(userId);
 
         if (!user) {
             return res.status(404).json({ message: "user not found" });
@@ -16,10 +16,8 @@ exports.editFavoriteArticles = async (req, res) => {
         let updateArticles = [];
         let count = 0;
 
-        // user.favArticles.push(favoriteArticles);
-        console.log("user favArticles:", user.favArticles);
         user.favArticles.map((item) => {
-            if (item != favoriteArticles) {
+            if (item != articleId) {
                 updateArticles.push(item);
             } else {
                 count++;
@@ -27,17 +25,22 @@ exports.editFavoriteArticles = async (req, res) => {
         });
 
         if (count == 0) {
-            updateArticles.push(favoriteArticles);
+            updateArticles.push(articleId);
         }
-        console.log("user updated articles:",updateArticles);
 
         user.favArticles = updateArticles;
-        await user.save();
+        await regularUser.findByIdAndUpdate(userId, user);
 
-        // Sending success response with status code 201 and a message
-        return res
-            .status(201)
-            .json({ message: "Favorites pool updated" });
+        if (count == 0) {
+            return res
+                .status(201)
+                .json({ message: "Favorite article added", articleArray: user.favArticles });
+        } else {
+            return res
+                .status(201)
+                .json({ message: "Article has been removed", articleArray: user.favArticles });
+        }
+
     } catch (err) {
         res
             .status(500)

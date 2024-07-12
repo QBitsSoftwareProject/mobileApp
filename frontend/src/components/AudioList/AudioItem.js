@@ -20,13 +20,13 @@ function AudioItem({ user, actionStateFunction, actState, item, onPlayPause }) {
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        // favorite video
-        if (user.favVideos && (user.favVideos).includes(item._id)) {
+        // favorite audio
+        if (user.favAudios && (user.favAudios).includes(item._id)) {
           setIsFavorite(true)
         } else {
           setIsFavorite(false)
         }
-        // favorite video
+        // favorite audio
       } catch (err) {
         setError(err.message);
       }
@@ -34,23 +34,13 @@ function AudioItem({ user, actionStateFunction, actState, item, onPlayPause }) {
     fetchUserData();
   }, [actionState]);
 
-
   const [error, setError] = useState(null);
 
   const editFavorites = () => {
-    let newAudioFavs = [];
-    if (user.favAudios && (user.favAudios).includes(item._id)) {
-      console.log("present", newAudioFavs);
-      newAudioFavs = (user.favAudios).filter(favId => favId !== item._id);
-      setIsFavorite(false);
-    } else if (user.favAudios && !(user.favAudios).includes(item._id)) {
-      console.log("absent", newAudioFavs);
-      newAudioFavs = [item._id, ...user.favAudios];
-      setIsFavorite(true);
-    }
-    editFavoriteAudios(user._id, newAudioFavs);
+    editFavoriteAudios(item._id);
     actionStateFunction(!actState);
     setActionState(!actionState);
+    setIsFavorite((prev) => !prev); // Directly toggle the state
   }
 
   const [Isfavorite, setIsFavorite] = useState(false);
