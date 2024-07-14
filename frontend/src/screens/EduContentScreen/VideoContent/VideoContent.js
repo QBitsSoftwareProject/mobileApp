@@ -4,16 +4,13 @@ import {
   SafeAreaView,
   Text,
   FlatList,
-  ActivityIndicator,
   ScrollView,
   Image,
 } from "react-native";
 import styles from "./videoStyle";
-import SearchBarComponent from "../../../components/SearchBar/SearchBar";
 import VideoItem from "./VideoItem/VideoItem";
 import SearchAndCategories from "../../../components/SearchAndCategories/SearchAndCategories";
 import VideoCategoryItem from "./VideoCategoryItem/VideoCategoryItem";
-import HeaderSub from "../../../components/HeaderSub/HeaderSub";
 import loadingGif from "../../../assets/animation/loading.gif";
 import VideoCategoryData from "./VideoCategoryData";
 import {

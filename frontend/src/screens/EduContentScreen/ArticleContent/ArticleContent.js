@@ -157,9 +157,11 @@ const ArticleContent = () => {
               <FlatList
                 data={articles}
                 renderItem={({ item }) => {
-                  return <Article item={item} user={user}
+                  return <Article
+                    item={item} user={user}
                     actionStateFunction={setActionState}
-                    actState={actionState} />;
+                    actState={actionState}
+                  />;
                 }}
               />
             </View>

@@ -142,7 +142,7 @@ const AudioContent = () => {
           </View>
           {/* audio categories */}
           {/* audio items */}
-          <View style={[styles.AudioItemContainer, { paddingHorizontal: 25 }]}>
+          <View style={[styles.AudioItemContainer, { paddingHorizontal: 25,paddingBottom:30 }]}>
             <FlatList
               data={audioData}
               key={(index) => index} // Ensure to add a key extractor

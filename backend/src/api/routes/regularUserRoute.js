@@ -52,9 +52,9 @@ router.get("/one-user-by-id/:userId", getARegularUserById);
 router.get("/get-users-by-month/", auth, adminAuth, getUsersByMonth);
 router.put("/", auth, updateRegularUser);
 router.put("/edit-user-access/:id", auth, adminAuth, updateUserAccessStatus);
-router.put("/edit-favorites/video/:id", auth, editFavoriteVideos);
-router.put("/edit-favorites/audio/:id", auth, editFavoriteAudios);
-router.put("/edit-favorites/article/:id", auth, editFavoriteArticles);
+router.put("/edit-favorites/video", auth, editFavoriteVideos);
+router.put("/edit-favorites/audio", auth, editFavoriteAudios);
+router.put("/edit-favorites/article", auth, editFavoriteArticles);
 router.delete("/:id", auth, deleteRegularUser);
 
 router.post("/checkExistsUser", checkExistsUser);
