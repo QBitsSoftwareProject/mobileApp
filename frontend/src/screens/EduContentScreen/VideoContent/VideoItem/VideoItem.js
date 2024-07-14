@@ -106,11 +106,12 @@ const VideoItem = ({ user, item, callTask, screen, actionStateFunction, actState
           }}
         >
           <View style={styles.imgContainer}>
-            <Image source={playImg} style={styles.image} />
+            <Image source={playImg} />
           </View>
         </TouchableOpacity>
-        <View style={{ width: "100%" }}>
-          <Image source={item.thumbnailURL} style={{ width: "150px", height: "50px" }} />
+        <View style={{ width: "100%", height: 180 }}>
+          <Image source={{ uri: item.thumbnailURL }} style={{ width: "100%", height: "100%" }} />
+          {/* <View style={{ width: "100%", height: "100%", backgroundColor: "orange" }}></View> */}
         </View>
         <View
           style={{

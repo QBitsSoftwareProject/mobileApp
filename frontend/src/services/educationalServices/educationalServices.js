@@ -277,7 +277,7 @@ export const editFavoriteAudios = async (audioId) => {
     );
     return response;
   } catch (err) {
-    console.log("error in adding to favorites , error:" + err.message);
+    console.log("error in adding to favorites , error:" + err.response.data);
   }
 };
 
@@ -293,7 +293,7 @@ export const editFavoriteArticles = async (articleId) => {
     );
     return response;
   } catch (err) {
-    console.log("error in adding to favorites , error:" + err.message);
+    console.log("error in adding to favorites , error:" + err.response.data);
   }
 };
 
@@ -310,7 +310,7 @@ export const getFavoriteVideos = async (favoriteVideoIds) => {
     );
     return response;
   } catch (err) {
-    console.log("error video fetch , error:" + err.message);
+    console.log("error video fetch , error:" + err);
   }
 };
 
@@ -319,7 +319,7 @@ export const getFavoriteAudios = async (favoriteAudioIds) => {
     console.log("audio ids service:", favoriteAudioIds);
     const token = await AsyncStorage.getItem("authToken");
     const response = await axios.post(
-      URL + "/audio/getFavoriteArticles/",
+      URL + "/audio/getFavoriteAudios/",
       favoriteAudioIds,
       {
         headers: { authtoken: token },
@@ -327,7 +327,7 @@ export const getFavoriteAudios = async (favoriteAudioIds) => {
     );
     return response;
   } catch (err) {
-    console.log("error audio fetch , error:" + err.message);
+    console.log("error audio fetch , error:" + err.response.data);
   }
 };
 
@@ -344,6 +344,6 @@ export const getFavoriteArticles = async (favoriteArticleIds) => {
     );
     return response;
   } catch (err) {
-    console.log("error article fetch , error:" + err.message);
+    console.log("error article fetch , error:" + err.response.data);
   }
 };
