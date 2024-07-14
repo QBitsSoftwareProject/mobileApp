@@ -24,14 +24,14 @@ const MonthlyAnalysisGraph = () => {
   };
 
   return (
-    <View>
+    <View style={{ flex: 1 }}>
       <HeaderSubSug
         headLine="Monthly Analysis"
         subHeadLine="Track your monthly mood inputs"
         back="HomeScreen"
       />
       <Text style={styles.text}>Analysis of your past 30 days mood inputs</Text>
-      <ScrollView height={screenHeight - 380}>
+      <ScrollView height={screenHeight - 65}>
         <CustomBarChart
           positiveMoods={positiveMoods}
           negativeMoods={negativeMoods}

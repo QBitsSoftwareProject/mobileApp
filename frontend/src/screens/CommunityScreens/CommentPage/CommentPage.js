@@ -8,6 +8,7 @@ import {
   ScrollView,
   SafeAreaView,
   Text,
+  Platform,
 } from "react-native";
 import React, { useEffect } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -30,6 +31,7 @@ const CommentPage = () => {
   const [comment, setComment] = useState();
   const [commentList, setCommentList] = useState();
   const [isKeyboardVisible, setKeyboardVisible] = useState(false);
+  const [keyboardHeight, setKeyboardHeight] = useState(0);
 
   const navigation = useNavigation();
 
@@ -37,29 +39,41 @@ const CommentPage = () => {
     navigation.navigate(previousScreen);
   };
 
+  const bottomPadding = isKeyboardVisible
+    ? Platform.OS === "ios"
+      ? keyboardHeight - 25
+      : 10
+    : 80;
+
   useEffect(() => {
     setCommentList(null);
     fetchComment();
     showSwipeToastOnceADay();
+
+    const onKeyboardShow = (e) => {
+      setKeyboardHeight(e.endCoordinates.height);
+      setKeyboardVisible(true);
+    };
+
+    const onKeyboardHide = () => {
+      setKeyboardVisible(false);
+      setKeyboardHeight(0);
+    };
+
     const keyboardDidShowListener = Keyboard.addListener(
       "keyboardDidShow",
-      () => {
-        setKeyboardVisible(true);
-      }
+      onKeyboardShow
     );
-
     const keyboardDidHideListener = Keyboard.addListener(
       "keyboardDidHide",
-      () => {
-        setKeyboardVisible(false);
-      }
+      onKeyboardHide
     );
 
     return () => {
       keyboardDidShowListener.remove();
       keyboardDidHideListener.remove();
     };
-  }, [postId]);
+  }, [postId, fetchComment]);
 
   const handleSendButtonPress = async () => {
     if (!comment) return;
@@ -168,7 +182,7 @@ const CommentPage = () => {
           ))}
         </View>
       </ScrollView>
-      <View style={[styles.content2, { bottom: isKeyboardVisible ? 0 : 85 }]}>
+      <View style={[styles.content2, { bottom: bottomPadding }]}>
         <TextInput
           style={styles.textinput}
           value={comment}

@@ -7,6 +7,7 @@ import {
   SafeAreaView,
   Dimensions,
   Keyboard,
+  Platform,
 } from "react-native";
 import { EmojiPicker } from "./emoji";
 import styles from "./styles";
@@ -59,7 +60,6 @@ export const AddNewJournal = ({ navigation }) => {
     const year = currentDate.getFullYear();
     const month = currentDate.toLocaleString("default", { month: "long" });
     const day = currentDate.getDate().toString().padStart(2, "0");
-
 
     const formattedDate = `${day}, ${month}, ${year}`;
     const formattedTime = currentDate.toLocaleTimeString();
@@ -141,10 +141,10 @@ export const AddNewJournal = ({ navigation }) => {
       keyboardDidShowListener.remove();
       keyboardDidHideListener.remove();
     };
-  })
+  });
 
   return (
-    <View style ={{flex:1}}>
+    <View style={{ flex: 1 }}>
       <HeaderSub
         headLine={"Add New Journal"}
         subHeadLine={"Welcome to our mindful haven"}
@@ -153,7 +153,11 @@ export const AddNewJournal = ({ navigation }) => {
 
       <View
         style={{
-          marginBottom: isKeyboardVisible ? 420 : 275,
+          marginBottom: isKeyboardVisible
+            ? Platform.OS === "ios"
+              ? 420
+              : 200
+            : 0,
         }}
       >
         <ScrollView style={{ paddingTop: 0 }}>

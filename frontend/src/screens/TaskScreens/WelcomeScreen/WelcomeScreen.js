@@ -81,7 +81,13 @@ const WelcomeScreen = ({ route }) => {
             <Image source={require("../../../assets/images/BackWhite.png")} />
           </TouchableOpacity>
 
-          <View style={{ height: screenHeight - 110 }}>
+          <View
+            style={{
+              height: screenHeight - 110,
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
             <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
               <Text style={styles.headertxt}>Welcome</Text>
 
