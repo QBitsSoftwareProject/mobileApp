@@ -12,6 +12,7 @@ import AudioPlayerModal from "../../screens/EduContentScreen/MediaComponents/Res
 import favorite from "../../assets/images/favorites/favorite.png";
 import notFavorite from "../../assets/images/favorites/notFavorite.png";
 import { editFavoriteAudios } from "../../services/educationalServices/educationalServices.js";
+import Toast from "react-native-toast-message";
 // favorites
 
 function AudioItem({ user, actionStateFunction, actState, item, onPlayPause }) {
@@ -36,11 +37,27 @@ function AudioItem({ user, actionStateFunction, actState, item, onPlayPause }) {
 
   const [error, setError] = useState(null);
 
-  const editFavorites = () => {
-    editFavoriteAudios(item._id);
-    actionStateFunction(!actState);
-    setActionState(!actionState);
-    setIsFavorite((prev) => !prev); // Directly toggle the state
+
+  const editFavorites = async () => {
+    try {
+      await editFavoriteAudios(item._id);
+      if (Isfavorite) {
+        Toast.show({
+          type: "success",
+          text1: "Audio removed from favorites",
+        });
+      } else {
+        Toast.show({
+          type: "success",
+          text1: "Audio added to favorites",
+        });
+      }
+      actionStateFunction(!actState);
+      setActionState(!actionState);
+      setIsFavorite((prev) => !prev); // Directly toggle the state
+    } catch (err) {
+      console.log("failed to add to favorites,error:", err.response.data)
+    }
   }
 
   const [Isfavorite, setIsFavorite] = useState(false);
@@ -89,7 +106,7 @@ function AudioItem({ user, actionStateFunction, actState, item, onPlayPause }) {
             >
               <View style={styles.addToFavBtn}>
                 {
-                  (Isfavorite) ? (<Image source={favorite} style={{ width: 25, height: 28 }} />) : (<Image source={notFavorite} style={{ width: 25, height: 28 }} />)
+                  (Isfavorite) ? (<Image source={favorite} style={{ width: 21, height: 18 }} />) : (<Image source={notFavorite} style={{ width: 19, height: 17 }} />)
                 }
               </View>
             </TouchableOpacity>

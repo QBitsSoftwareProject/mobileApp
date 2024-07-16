@@ -10,9 +10,10 @@ import playImg from "../../../../assets/images/icons/player/play.png";
 import favorite from "../../../../assets/images/favorites/favorite.png";
 import notFavorite from "../../../../assets/images/favorites/notFavorite.png";
 import { editFavoriteVideos } from "../../../../services/educationalServices/educationalServices";
+import Toast from "react-native-toast-message";
 // favorites
 
-const VideoItem = ({ user, item, callTask, screen, actionStateFunction, actState }) => {
+const VideoItem = ({ user, item, callTask, screen, actionStateFunction, actState, section }) => {
   const [isModalVisible, setIsModalVisible] = useState(false);
 
   const video = React.useRef(null);
@@ -36,6 +37,8 @@ const VideoItem = ({ user, item, callTask, screen, actionStateFunction, actState
   useEffect(() => {
     const fetchUserData = async () => {
       try {
+        console.log("video item fav videos:", user.favVideos)
+        console.log("video item fav videos ids:", item._id)
         // favorite video
         if (user.favVideos && (user.favVideos).includes(item._id)) {
           setIsFavorite(true);
@@ -55,11 +58,28 @@ const VideoItem = ({ user, item, callTask, screen, actionStateFunction, actState
   const [Isfavorite, setIsFavorite] = useState(false);
   const [actionState, setActionState] = useState(false);
 
-  const editFavorites = () => {
-    editFavoriteVideos(item._id);
-    actionStateFunction(!actState);
-    setActionState(!actionState);
-    setIsFavorite((prev) => !prev); // Directly toggle the state
+  const editFavorites = async () => {
+    try {
+      await editFavoriteVideos(item._id);
+      if (Isfavorite) {
+        Toast.show({
+          type: "success",
+          text1: "Video removed from favorites",
+        });
+      } else {
+        Toast.show({
+          type: "success",
+          text1: "Video added to favorites",
+        });
+      }
+      actionStateFunction((prev) => !prev);
+      setActionState(!actionState);
+      if (section != "fav") {
+        setIsFavorite((prev) => !prev); // Directly toggle the state
+      }
+    } catch (err) {
+      console.log("failed to add to favorites,error:", err.response.data)
+    }
   }
 
   const handlePlayPress = () => {
@@ -89,7 +109,7 @@ const VideoItem = ({ user, item, callTask, screen, actionStateFunction, actState
           >
             <View style={styles.addToFavBtn}>
               {
-                (Isfavorite) ? (<Image source={favorite} style={{ width: 25, height: 28 }} />) : (<Image source={notFavorite} style={{ width: 25, height: 28 }} />)
+                (Isfavorite) ? (<Image source={favorite} style={{ width: 21, height: 18, resizeMode: "cover" }} />) : (<Image source={notFavorite} style={{ width: 19, height: 17, resizeMode: "cover" }} />)
               }
             </View>
           </TouchableOpacity>
@@ -111,7 +131,6 @@ const VideoItem = ({ user, item, callTask, screen, actionStateFunction, actState
         </TouchableOpacity>
         <View style={{ width: "100%", height: 180 }}>
           <Image source={{ uri: item.thumbnailURL }} style={{ width: "100%", height: "100%" }} />
-          {/* <View style={{ width: "100%", height: "100%", backgroundColor: "orange" }}></View> */}
         </View>
         <View
           style={{

@@ -5,7 +5,7 @@ import {
   Dimensions,
   Image,
 } from "react-native";
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import styles from "../EduContentScreen/AllContent/style";
 
 // components
@@ -17,6 +17,7 @@ import loadingGif from "../../assets/animation/loading.gif";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { getAUser } from "../../services/userServices/userService";
 import Article from "./ArticleContent/Article";
+import { useFocusEffect } from "@react-navigation/native";
 // components
 
 const EduContent = () => {
@@ -29,6 +30,12 @@ const EduContent = () => {
   const [userRole, setUserRole] = useState("");
   const [actionState, setActionState] = useState(false);
   const [error, setError] = useState(null);
+
+  useFocusEffect(
+    useCallback(() => {
+      fetchUserDataAndFavorites();
+    }, [actionState])
+  )
 
   const fetchUserDataAndFavorites = async () => {
     try {
@@ -64,11 +71,9 @@ const EduContent = () => {
     }
   };
 
-  useEffect(() => {
-    fetchUserDataAndFavorites();
-  }, [actionState]);
 
-  if (!videos.length && !articles.length) {
+
+  if (!videos && !articles) {
     return (
       <View
         style={{
@@ -96,38 +101,40 @@ const EduContent = () => {
         </View>
         <ScrollView>
           <Text style={styles.mainHeading2}>Here are your favorite videos</Text>
-          <View>
-            {/* videos */}
-            <View style={{ marginTop: 20 }}>
-              {videos.map((item, index) => (
-                <View key={index}>
-                  <VideoItem
-                    item={item}
-                    screen={"allStack"}
-                    user={user}
-                    actionStateFunction={setActionState}
-                    actState={actionState}
-                  />
-                </View>
-              ))}
-            </View>
+
+          {/* videos */}
+          <View style={{ marginTop: 20 }}>
+            {videos.length != 0 && videos.map((item, index) => (
+              <View key={index}>
+                <VideoItem
+                  item={item}
+                  screen={"allStack"}
+                  user={user}
+                  actionStateFunction={setActionState}
+                  actState={actionState}
+                  section={"fav"}
+                />
+              </View>
+            ))}
           </View>
+
           <Text style={styles.mainHeading2}>Here are your favorite articles</Text>
-          <View>
-            {/* articles */}
-            <View style={{ marginTop: 20 }}>
-              {articles.map((item, index) => (
-                <View key={index}>
-                  <Article
-                    item={item}
-                    user={user}
-                    actionStateFunction={setActionState}
-                    actState={actionState}
-                  />
-                </View>
-              ))}
-            </View>
+
+          {/* articles */}
+          <View style={{ marginTop: 20 }}>
+            {articles.length != 0 && articles.map((item, index) => (
+              <View key={index}>
+                <Article
+                  item={item}
+                  user={user}
+                  actionStateFunction={setActionState}
+                  actState={actionState}
+                  section={"fav"}
+                />
+              </View>
+            ))}
           </View>
+
         </ScrollView>
       </View>
     </View>

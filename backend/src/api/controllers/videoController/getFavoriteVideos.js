@@ -4,19 +4,23 @@ const video = require("../../models/videoResources/video");
 exports.getFavoriteVideos = async (req, res) => {
     try {
         // Check if videoIds array is provided in the request body
-        const {videoIds} = req.body;
+        const  videoIds  = req.body;
 
         console.log("video ids backend:", videoIds);
 
         // Query to fetch all videos or specific videos based on IDs
         let query = {};
 
-        if (videoIds && Array.isArray(videoIds)) {
+        if (videoIds ) {
+            console.log("abc")
             query = { _id: { $in: videoIds } };
         }
+        console.log(query)
 
         // Fetch videos based on the query
         const allVideos = await video.find(query).sort({ createdAt: -1 });
+
+        console.log("controller fav videos:", allVideos)
 
         if (!allVideos || allVideos.length === 0) {
             return res.status(404).json({ msg: "videos not found" });

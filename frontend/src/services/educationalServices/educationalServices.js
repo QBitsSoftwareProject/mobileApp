@@ -299,7 +299,7 @@ export const editFavoriteArticles = async (articleId) => {
 
 export const getFavoriteVideos = async (favoriteVideoIds) => {
   try {
-    console.log("video ids service:", favoriteVideoIds);
+    console.log("video favorite ids service:", favoriteVideoIds);
     const token = await AsyncStorage.getItem("authToken");
     const response = await axios.post(
       URL + "/video/getFavoriteVideos/",
@@ -310,7 +310,7 @@ export const getFavoriteVideos = async (favoriteVideoIds) => {
     );
     return response;
   } catch (err) {
-    console.log("error video fetch , error:" + err);
+    console.log("error video fetch , error:" + err.response.data);
   }
 };
 
