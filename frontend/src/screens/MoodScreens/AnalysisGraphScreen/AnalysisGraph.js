@@ -21,12 +21,13 @@ const AnalysisGraph = () => {
   const [currentDayIndex, setCurrentDayIndex] = useState(0);
   const [heights, setHeights] = useState({});
   const [maxHeightMood, setMaxHeightMood] = useState(null);
-  const [isNextDisabled, setIsNextDisabled] = useState(true);
-  const [isBackDisabled, setIsBackDisabled] = useState(false);
+  const [isNextDisabled, setIsNextDisabled] = useState("");
+  const [isBackDisabled, setIsBackDisabled] = useState("");
   const [isToday, setIsToday] = useState(true);
   const [startDate, setStartDate] = useState("");
   const [startDayIndex, setStartDayIndex] = useState(0);
   const [endDayIndex, setEndDayIndex] = useState(0);
+  const [next, setNext] = useState(7);
 
   // get current date and get minus from it
   const today = new Date();
@@ -158,8 +159,8 @@ const AnalysisGraph = () => {
   // setting day indices (setting the sart day index and today index based on today date and start date of data)
   useEffect(() => {
     const today = new Date().getDay();
-    setCurrentDayIndex(today === 0 ? 6 : today - 1); // Adjust index to start from Sunday
-    setEndDayIndex(today === 0 ? 6 : today - 1); // Adjust end day index as well
+    setCurrentDayIndex(today - 1); // Adjust index to start from Sunday
+    setEndDayIndex(today - 1); // Adjust end day index as well
   }, []);
 
   useEffect(() => {
@@ -191,28 +192,37 @@ const AnalysisGraph = () => {
         updateMoodStats(currentDayData);
       }
       // update the current date to the date of the first mood entry
+      let day;
+
       if (currentDayData.length > 0) {
         const date = new Date(currentDayData[0].date);
+
         date.setDate(date.getDate() + 1);
+
         setCurrentDate(date.toISOString().split("T")[0]);
       }
 
-      setIsNextDisabled(currentDayIndex === 0);
-
-      setIsBackDisabled(currentDayIndex === 1);
+      setIsNextDisabled(next == 7);
+      setIsBackDisabled(next == 1);
     }
-  }, [data, currentDayIndex]);
+  }, [data, currentDayIndex, next]);
 
   // handling next,back navihation
   const handleNext = () => {
+    const index = next + 1;
+    setNext(index);
+
     setCurrentDayIndex((prevIndex) => {
       const nextIndex = (prevIndex + 1) % 7;
-      setIsToday(nextIndex === new Date().getDay() - 1);
+      setIsToday(nextIndex === nextIndex - 1);
       return nextIndex;
     });
   };
 
   const handleBack = () => {
+    const index = next - 1;
+    setNext(index);
+
     setCurrentDayIndex((prevIndex) => {
       const nextIndex = (prevIndex - 1 + 7) % 7;
       setIsToday(false);

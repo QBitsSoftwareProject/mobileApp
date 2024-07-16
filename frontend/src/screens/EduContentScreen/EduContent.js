@@ -7,7 +7,6 @@ import {
 } from "react-native";
 import React, { useEffect, useState } from "react";
 import styles from "../EduContentScreen/AllContent/style";
-import { SafeAreaView } from "react-native-safe-area-context";
 
 // components
 import SearchAndCategories from "../../components/SearchAndCategories/SearchAndCategories";
