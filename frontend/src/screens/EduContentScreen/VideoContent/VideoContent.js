@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import {
   View,
   SafeAreaView,
@@ -18,7 +18,7 @@ import {
   getVideosBySearch,
 } from "../../../services/educationalServices/educationalServices";
 import AppointmentHeader from "../../../components/AppointmentHeader/AppointmentHeader";
-import { useRoute } from "@react-navigation/native";
+import { useFocusEffect, useRoute } from "@react-navigation/native";
 import { updateTaskCompleteness } from "../../../services/taskServices/taskservice";
 import { getAUser } from "../../../services/userServices/userService";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -26,39 +26,41 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 const VideoContent = () => {
   const route = useRoute();
 
-  const [videos, setVideos] = useState([]);
+  const [videos, setVideos] = useState();
 
   const [loading, setLoading] = useState(true);
 
   const [keyword, setKeyWord] = useState("");
-
-  useEffect(() => {
-    const fetchVideos = async () => {
-      try {
-        let response;
-        if (keyword == "") {
-          response = await getVideos();
-        } else {
-          response = await getVideosBySearch(keyword);
-        }
-        if (response) {
-          setVideos(response.data);
-        } else {
-          setVideos([]);
-        }
-      } catch (error) {
-        console.error("Error fetching videos:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchVideos();
-  }, [keyword, actionState]);
-
-
-  const [user, setUser] = useState({});
+  const [user, setUser] = useState();
   const [userRole, setUserRole] = useState("");
   const [actionState, setActionState] = useState(false);
+
+  useFocusEffect(
+    useCallback(() => {
+      console.log(actionState)
+      fetchVideos()
+    }, [keyword, actionState])
+  );
+
+  const fetchVideos = async () => {
+    try {
+      let response;
+      if (keyword == "") {
+        response = await getVideos();
+      } else {
+        response = await getVideosBySearch(keyword);
+      }
+      if (response) {
+        setVideos(response.data);
+      } else {
+        setVideos([]);
+      }
+    } catch (error) {
+      console.error("Error fetching videos:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -130,7 +132,7 @@ const VideoContent = () => {
         style={{ paddingHorizontal: 25, zIndex: -1, marginBottom: 110 }}
       >
         <View style={styles.VideoList}>
-          {videos.map((item, index) => (
+          {user && videos && videos.map((item, index) => (
             <View key={index}>
               <VideoItem
                 user={user}
@@ -139,6 +141,7 @@ const VideoContent = () => {
                 item={item}
                 callTask={() => callTaskUpdate()}
                 screen={"videoStack"}
+
               />
             </View>
           ))}
