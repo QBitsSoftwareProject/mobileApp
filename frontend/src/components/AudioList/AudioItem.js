@@ -22,10 +22,10 @@ function AudioItem({ user, actionStateFunction, actState, item, onPlayPause }) {
     const fetchUserData = async () => {
       try {
         // favorite audio
-        if (user.favAudios && (user.favAudios).includes(item._id)) {
-          setIsFavorite(true)
+        if (user.favAudios && user.favAudios.includes(item._id)) {
+          setIsFavorite(true);
         } else {
-          setIsFavorite(false)
+          setIsFavorite(false);
         }
         // favorite audio
       } catch (err) {
@@ -36,7 +36,6 @@ function AudioItem({ user, actionStateFunction, actState, item, onPlayPause }) {
   }, [actionState]);
 
   const [error, setError] = useState(null);
-
 
   const editFavorites = async () => {
     try {
@@ -56,16 +55,16 @@ function AudioItem({ user, actionStateFunction, actState, item, onPlayPause }) {
       setActionState(!actionState);
       setIsFavorite((prev) => !prev); // Directly toggle the state
     } catch (err) {
-      console.log("failed to add to favorites,error:", err.response.data)
+      console.log("failed to add to favorites,error:", err.response.data);
     }
-  }
+  };
 
   const [Isfavorite, setIsFavorite] = useState(false);
   const [actionState, setActionState] = useState(false);
 
   const handlePlayPause = () => {
     setModalVisible(true);
-    onPlayPause();
+    // onPlayPause();
   };
 
   const handleCloseModal = () => {
@@ -105,9 +104,14 @@ function AudioItem({ user, actionStateFunction, actState, item, onPlayPause }) {
               }}
             >
               <View style={styles.addToFavBtn}>
-                {
-                  (Isfavorite) ? (<Image source={favorite} style={{ width: 21, height: 18 }} />) : (<Image source={notFavorite} style={{ width: 19, height: 17 }} />)
-                }
+                {Isfavorite ? (
+                  <Image source={favorite} style={{ width: 21, height: 18 }} />
+                ) : (
+                  <Image
+                    source={notFavorite}
+                    style={{ width: 19, height: 17 }}
+                  />
+                )}
               </View>
             </TouchableOpacity>
           </View>

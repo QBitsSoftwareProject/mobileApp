@@ -1,16 +1,14 @@
-import {
-  View,
-  Text,
-  ScrollView,
-  Dimensions,
-  Image,
-} from "react-native";
+import { View, Text, ScrollView, Dimensions, Image } from "react-native";
 import React, { useCallback, useEffect, useState } from "react";
 import styles from "../EduContentScreen/AllContent/style";
 
 // components
 import SearchAndCategories from "../../components/SearchAndCategories/SearchAndCategories";
-import { getFavoriteArticles, getFavoriteAudios, getFavoriteVideos } from "../../services/educationalServices/educationalServices";
+import {
+  getFavoriteArticles,
+  getFavoriteAudios,
+  getFavoriteVideos,
+} from "../../services/educationalServices/educationalServices";
 import VideoItem from "./VideoContent/VideoItem/VideoItem";
 import HeaderSub from "../../components/HeaderSub/HeaderSub";
 import loadingGif from "../../assets/animation/loading.gif";
@@ -36,7 +34,7 @@ const EduContent = () => {
     useCallback(() => {
       fetchUserDataAndFavorites();
     }, [actionState])
-  )
+  );
 
   const fetchUserDataAndFavorites = async () => {
     try {
@@ -62,7 +60,7 @@ const EduContent = () => {
 
         if (favAudioIds.length > 0) {
           const favAudios = await getFavoriteAudios(favAudioIds);
-          console.log("fav audios:",audios)
+          console.log("fav audios:", audios);
           setAudios(favAudios.data);
         }
       } else {
@@ -72,8 +70,6 @@ const EduContent = () => {
       setError(err.message);
     }
   };
-
-
 
   if (!videos && !articles && !audios) {
     return (
@@ -97,7 +93,12 @@ const EduContent = () => {
         headLine={"Educational content"}
         subHeadLine={"Enjoy featured resource to up your mood"}
       />
-      <View style={[styles.Container, { height: screenHeight - 190, paddingBottom: 90 }]}>
+      <View
+        style={[
+          styles.Container,
+          { height: screenHeight - 340, paddingBottom: 20 },
+        ]}
+      >
         <View>
           <SearchAndCategories currentView={"EducationalScreen"} />
         </View>
@@ -106,52 +107,57 @@ const EduContent = () => {
 
           {/* videos */}
           <View style={{ marginTop: 15 }}>
-            {videos.length != 0 && videos.map((item, index) => (
-              <View key={index}>
-                <VideoItem
-                  item={item}
-                  screen={"allStack"}
-                  user={user}
-                  actionStateFunction={setActionState}
-                  actState={actionState}
-                  section={"fav"}
-                />
-              </View>
-            ))}
+            {videos.length != 0 &&
+              videos.map((item, index) => (
+                <View key={index}>
+                  <VideoItem
+                    item={item}
+                    screen={"allStack"}
+                    user={user}
+                    actionStateFunction={setActionState}
+                    actState={actionState}
+                    section={"fav"}
+                  />
+                </View>
+              ))}
           </View>
 
-          <Text style={styles.mainHeading2}>Here are your favorite articles</Text>
+          <Text style={styles.mainHeading2}>
+            Here are your favorite articles
+          </Text>
 
           {/* articles */}
           <View style={{ marginTop: 15 }}>
-            {articles.length != 0 && articles.map((item, index) => (
-              <View key={index}>
-                <Article
-                  item={item}
-                  user={user}
-                  actionStateFunction={setActionState}
-                  actState={actionState}
-                  section={"fav"}
-                />
-              </View>
-            ))}
+            {articles.length != 0 &&
+              articles.map((item, index) => (
+                <View key={index}>
+                  <Article
+                    item={item}
+                    user={user}
+                    actionStateFunction={setActionState}
+                    actState={actionState}
+                    section={"fav"}
+                  />
+                </View>
+              ))}
           </View>
 
           <Text style={styles.mainHeading2}>Here are your favorite audios</Text>
 
           <View style={{ marginTop: 15 }}>
-            {audios.length != 0 && audios.map((item, index) => (
-              <View key={index}>
-                {console.log("fav audios map :", index, item)}
-                <AudioItem
-                  item={item}
-                  user={user}
-                  actionStateFunction={setActionState}
-                  actState={actionState}
-                  section={"fav"}
-                />
-              </View>
-            ))}
+            {audios.length != 0 &&
+              audios.map((item, index) => (
+                <View key={index}>
+                  {console.log("fav audios map :", index, item)}
+                  <AudioItem
+                    item={item}
+                    user={user}
+                    actionStateFunction={setActionState}
+                    actState={actionState}
+                    section={"fav"}
+                  />
+                </View>
+              ))}
           </View>
         </ScrollView>
       </View>

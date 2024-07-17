@@ -4,7 +4,10 @@ import styles from "./articleStyle";
 
 import noPreviewAvailableImg from "../../../assets/images/no-image-avaliable.jpg";
 import { useNavigation, useRoute } from "@react-navigation/native";
-import { editFavoriteArticles, getAuthorInfo } from "../../../services/educationalServices/educationalServices";
+import {
+  editFavoriteArticles,
+  getAuthorInfo,
+} from "../../../services/educationalServices/educationalServices";
 
 // favorites
 import favorite from "../../../assets/images/favorites/favorite.png";
@@ -21,10 +24,10 @@ const Article = ({ user, item, actionStateFunction, actState, section }) => {
     const fetchUserData = async () => {
       try {
         // favorite article
-        if (user.favArticles && (user.favArticles).includes(item._id)) {
-          setIsFavorite(true)
+        if (user.favArticles && user.favArticles.includes(item._id)) {
+          setIsFavorite(true);
         } else {
-          setIsFavorite(false)
+          setIsFavorite(false);
         }
         // favorite article
       } catch (err) {
@@ -57,12 +60,15 @@ const Article = ({ user, item, actionStateFunction, actState, section }) => {
         setIsFavorite((prev) => !prev); // Directly toggle the state
       }
     } catch (err) {
-      console.log("failed to add to favorites,error:", err.response.data)
+      console.log("failed to add to favorites,error:", err.response.data);
     }
-  }
+  };
 
   const navigateToScreen = () => {
-    navigation.navigate("SelectedArticleScreen", { article: item });
+    navigation.navigate("ArticleStack", {
+      screen: "SelectedArticleScreen",
+      params: { article: item },
+    });
   };
 
   const [isImagePresent, setIsImagePresent] = useState(false);
@@ -96,7 +102,16 @@ const Article = ({ user, item, actionStateFunction, actState, section }) => {
 
   return (
     <View style={styles.article}>
-      <View style={{ width: "100%", height: 50, position: "absolute", zIndex: 150, display: "flex", alignItems: "flex-end" }}>
+      <View
+        style={{
+          width: "100%",
+          height: 50,
+          position: "absolute",
+          zIndex: 150,
+          display: "flex",
+          alignItems: "flex-end",
+        }}
+      >
         <TouchableOpacity
           onPress={() => {
             editFavorites();
@@ -108,9 +123,11 @@ const Article = ({ user, item, actionStateFunction, actState, section }) => {
           }}
         >
           <View style={styles.addToFavBtn}>
-            {
-              (Isfavorite) ? (<Image source={favorite} style={{ width: 21, height: 18 }} />) : (<Image source={notFavorite} style={{ width: 19, height: 17 }} />)
-            }
+            {Isfavorite ? (
+              <Image source={favorite} style={{ width: 21, height: 18 }} />
+            ) : (
+              <Image source={notFavorite} style={{ width: 19, height: 17 }} />
+            )}
           </View>
         </TouchableOpacity>
       </View>
