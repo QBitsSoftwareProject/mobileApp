@@ -23,6 +23,8 @@ const ResetPasswordPopUp = ({ isVisible, onClose }) => {
   const [user, setUser] = useState(null);
   const [role, setRole] = useState("");
 
+  const [error, setError] = useState(false);
+
   useEffect(() => {
     setIsPasswordMatch(newPassword !== "" && newPassword === confirmPassword);
   }, [newPassword, confirmPassword]);

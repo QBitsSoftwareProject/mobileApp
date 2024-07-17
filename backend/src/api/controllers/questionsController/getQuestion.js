@@ -12,6 +12,8 @@ exports.getQuestion = async (req, res) => {
       return res.status(404).json({ message: "Question not found" });
     }
 
+    console.log(question)
+
     // Sending success response with status code 200 and the list of Question
     return res.status(201).json(question);
   } catch (err) {

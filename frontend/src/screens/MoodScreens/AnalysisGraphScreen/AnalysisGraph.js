@@ -21,8 +21,8 @@ const AnalysisGraph = () => {
   const [currentDayIndex, setCurrentDayIndex] = useState(0);
   const [heights, setHeights] = useState({});
   const [maxHeightMood, setMaxHeightMood] = useState(null);
-  const [isNextDisabled, setIsNextDisabled] = useState("");
-  const [isBackDisabled, setIsBackDisabled] = useState("");
+  const [isNextDisabled, setIsNextDisabled] = useState(true);
+  const [isBackDisabled, setIsBackDisabled] = useState(false);
   const [isToday, setIsToday] = useState(true);
   const [startDate, setStartDate] = useState("");
   const [startDayIndex, setStartDayIndex] = useState(0);

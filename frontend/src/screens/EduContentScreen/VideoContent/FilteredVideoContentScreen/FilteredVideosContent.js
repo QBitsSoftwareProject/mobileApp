@@ -3,10 +3,8 @@ import {
   View,
   SafeAreaView,
   FlatList,
-  ActivityIndicator,
   Image,
 } from "react-native";
-import axios from "axios";
 import styles from "../videoStyle";
 import loadingGif from "../../../../assets/animation/loading.gif";
 

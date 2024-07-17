@@ -3,7 +3,9 @@ import axiosInstance from "../../api/axios";
 //fetch question ids
 export const fetchQuestionIds = async () => {
   try {
-    const response = await axiosInstance.get("/question/get-all-question-ids");
+    const response = await axiosInstance.get(
+      "/api/v1/question/get-all-question-ids"
+    );
 
     return response.data;
   } catch (err) {
@@ -14,7 +16,9 @@ export const fetchQuestionIds = async () => {
 //get question by id
 export const fetchData = async (id) => {
   try {
-    const response = await axiosInstance.get(`/question/get-question/${id}`);
+    const response = await axiosInstance.get(
+      `/api/v1/question/get-question/${id}`
+    );
 
     const data = response.data;
 
