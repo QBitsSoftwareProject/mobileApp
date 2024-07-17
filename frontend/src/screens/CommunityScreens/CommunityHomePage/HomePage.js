@@ -17,7 +17,7 @@ import {
 import { getPost } from "../../../services/postServices/postServices";
 
 const HomePage = () => {
-  const screenHeight = Dimensions.get("window").height - 275;
+  // const screenHeight = Dimensions.get("window").height - 275;
   const navigation = useNavigation();
   const route = useRoute();
 
@@ -84,7 +84,7 @@ const HomePage = () => {
   };
 
   const addNew = () => {
-    navigation.navigate("PostCategory", { refresh: true });
+    navigation.navigate("CreatePost", { refresh: true });
   };
 
   return (

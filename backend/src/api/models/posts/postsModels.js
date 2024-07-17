@@ -9,19 +9,19 @@ const postSchema = new Schema(
       ref: "RegularUser",
       required: true,
     },
-    postCategory: {
-      type: String,
+    // postCategory: {
+    //   type: String,
 
-      enum: [
-        "Stories",
-        "Self Care",
-        "Mindfulness",
-        "Creative",
-        "Supportive",
-        "Stress",
-      ],
-      default: "",
-    },
+    //   enum: [
+    //     "Stories",
+    //     "Self Care",
+    //     "Mindfulness",
+    //     "Creative",
+    //     "Supportive",
+    //     "Stress",
+    //   ],
+    //   default: "",
+    // },
 
     description: {
       type: String,
