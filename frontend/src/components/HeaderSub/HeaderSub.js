@@ -14,7 +14,7 @@ const HeaderSub = (props) => {
   const navigation = useNavigation();
 
   const handleBackPress = () => {
-    navigation.navigate(props.back);
+    navigation.navigate(props.back,{refresh:true});
   };
 
   return (

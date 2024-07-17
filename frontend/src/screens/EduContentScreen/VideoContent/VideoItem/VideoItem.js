@@ -72,8 +72,11 @@ const VideoItem = ({ user, item, callTask, screen, actionStateFunction, actState
           text1: "Video added to favorites",
         });
       }
-      actionStateFunction((prev) => !prev);
+      actionStateFunction((prev) => {!prev
+    
+      });
       setActionState(!actionState);
+      
       if (section != "fav") {
         setIsFavorite((prev) => !prev); // Directly toggle the state
       }

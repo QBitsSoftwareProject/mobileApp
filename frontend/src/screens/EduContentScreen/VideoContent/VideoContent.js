@@ -34,10 +34,11 @@ const VideoContent = () => {
   const [user, setUser] = useState();
   const [userRole, setUserRole] = useState("");
   const [actionState, setActionState] = useState(false);
+  const [actionState2, setActionState2] = useState(false);
+  
 
   useFocusEffect(
     useCallback(() => {
-      console.log(actionState)
       fetchVideos()
     }, [keyword, actionState])
   );
@@ -141,7 +142,6 @@ const VideoContent = () => {
                 item={item}
                 callTask={() => callTaskUpdate()}
                 screen={"videoStack"}
-
               />
             </View>
           ))}
