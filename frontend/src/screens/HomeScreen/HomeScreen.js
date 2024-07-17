@@ -25,7 +25,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 
 // const proPic = require('../../assets/images/doc.jpg')
 
-const medImg = require("../../assets/images/HomeCards/meditation.png");
+const medImg = require("../../assets/images/HomeCards/mindful.png");
 const mindImg = require("../../assets/images/HomeCards/mind.png");
 const moodImg = require("../../assets/images/HomeCards/mood.png");
 const storyImg = require("../../assets/images/HomeCards/story.png");
