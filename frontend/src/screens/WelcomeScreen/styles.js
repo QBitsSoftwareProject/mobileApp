@@ -25,7 +25,7 @@ export default styles = StyleSheet.create({
     justifyContent: "center",
   },
   logoText: {
-    fontSize: 48,
+    fontSize: 42,
     fontWeight: "400",
     color: "white",
   },
