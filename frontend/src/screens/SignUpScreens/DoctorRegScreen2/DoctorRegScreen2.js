@@ -6,6 +6,7 @@ import {
   ScrollView,
   Dimensions,
   Keyboard,
+  SafeAreaView,
 } from "react-native";
 import React, { useEffect, useState } from "react";
 import styles from "./styles";
@@ -140,7 +141,7 @@ const DoctorRegScreen2 = () => {
   };
 
   return (
-    <View style={styles.conatiner}>
+    <SafeAreaView style={styles.conatiner}>
       <TouchableOpacity onPress={handleBackPress}>
         <Image
           source={require("../../../assets/images/blackBack.png")}
@@ -184,7 +185,7 @@ const DoctorRegScreen2 = () => {
             />
           </View>
 
-          {isEmpty && selectedValue != "default" && (
+          {isEmpty && (
             <View style={{ alignItems: "center", marginTop: 15 }}>
               <Text style={{ color: "#E82519" }}>
                 Input fields cannot be empty!
@@ -212,7 +213,7 @@ const DoctorRegScreen2 = () => {
           )}
         </ScrollView>
       </View>
-    </View>
+    </SafeAreaView>
   );
 };
 

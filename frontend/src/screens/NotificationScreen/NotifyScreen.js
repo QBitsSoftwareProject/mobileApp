@@ -39,6 +39,9 @@ const NotifyScreen = () => {
   const fetchNotification = async (last) => {
     if (isLoading) return;
 
+    const role = await AsyncStorage.getItem("role");
+    setUserRole(role);
+
     setIsLoading(true);
     try {
       const res = await getNotification();

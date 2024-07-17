@@ -33,6 +33,9 @@ exports.getSuggestedGoals = async (req, res) => {
       stressLevelData.score,
       averageMoodWeight
     );
+    console.log(averageMoodWeight);
+    console.log(stressLevelData);
+    console.log(suggestedGoalList);
 
     // Find goals in the goals collection that do not match the extracted goal IDs
     const unselectedGoals = await goals

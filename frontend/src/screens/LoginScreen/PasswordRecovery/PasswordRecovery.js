@@ -5,6 +5,7 @@ import {
   TextInput,
   TouchableOpacity,
   Keyboard,
+  SafeAreaView,
 } from "react-native";
 import React, { useEffect, useState } from "react";
 import { useNavigation } from "@react-navigation/native";
@@ -50,7 +51,7 @@ const PasswordRecovery = () => {
           setIsValid(false);
           return;
         }
-
+        setEmail("");
         const pin = Math.floor(100000 + Math.random() * 900000).toString();
         console.log(pin);
         setGeneratedPin(pin);
@@ -62,7 +63,6 @@ const PasswordRecovery = () => {
         setUserRole(user.role);
         setNextPage(1);
         setIsValid(true);
-        setEmail("");
       }
     } catch (error) {
       console.log(error);
@@ -118,7 +118,7 @@ const PasswordRecovery = () => {
   }, []);
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <TouchableOpacity onPress={handleBackPress}>
         <Image
           source={require("../../../assets/images/blackBack.png")}
@@ -169,7 +169,7 @@ const PasswordRecovery = () => {
               </Text>
 
               <TextInput
-                defaultValue=""
+                value={pin}
                 placeholder="Pin"
                 style={styles.inputField}
                 onChangeText={(text) => setPin(text)}
@@ -196,7 +196,7 @@ const PasswordRecovery = () => {
               </Text>
 
               <TextInput
-                defaultValue=""
+                value={newPassword}
                 placeholder="New Password"
                 style={styles.inputField}
                 onChangeText={(text) => setNewPassword(text)}
@@ -224,7 +224,7 @@ const PasswordRecovery = () => {
           </View>
         )}
       </View>
-    </View>
+    </SafeAreaView>
   );
 };
 

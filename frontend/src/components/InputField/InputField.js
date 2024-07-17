@@ -24,7 +24,7 @@ const InputField = (props) => {
   };
 
   return (
-    <View style={{ marginBottom: 32}}>
+    <View style={{ marginBottom: 32, width: "100%" }}>
       <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
         <Text
           style={{
@@ -32,15 +32,15 @@ const InputField = (props) => {
             fontWeight: "400",
             color: "#40495B",
             marginBottom: 7,
-            width:'100%'
           }}
         >
           {props.label}
         </Text>
+
         <Text style={{ color: "#E82519" }}>{props.errMsg}</Text>
       </View>
 
-      <View >
+      <View>
         <TextInput
           placeholder={props.placeHolder}
           style={{

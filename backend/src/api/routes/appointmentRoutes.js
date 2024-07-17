@@ -32,6 +32,7 @@ router.get("/doctor-accepted-appointment", auth, getDoctorAcceptedAppointments);
 router.get("/doctor-appointments/:id", auth, getDoctorAppointmentCount);
 router.get(
   "/doctor-completed-appointments/:id",
+  auth,
   getDoctorCompletedAppointmentCount
 );
 router.get(

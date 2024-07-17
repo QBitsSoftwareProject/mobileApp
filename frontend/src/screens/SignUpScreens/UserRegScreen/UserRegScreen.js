@@ -7,6 +7,7 @@ import {
   Dimensions,
   KeyboardAvoidingView,
   Platform,
+  SafeAreaView,
 } from "react-native";
 import React, { useState } from "react";
 import styles from "./styles";
@@ -124,13 +125,14 @@ const UserRegScreen = () => {
     } else if (!validatePhoneNumber(contactNo)) {
       setIsPhoneNumValid(false);
       setIsEmailValid(true);
+      setEmailExist(false);
       setIsEmpty(false);
     } else {
       setIsEmpty(false);
       setIsPhoneNumValid(true);
       setUnCheckedColor("#40495B");
+      setEmailExist(false);
 
-      console.log("click");
       const checkUser = await checkExistsUser(email);
 
       if (checkUser.user != null) {
@@ -150,7 +152,6 @@ const UserRegScreen = () => {
 
   const sendUser = async (imageUrl) => {
     try {
-      console.log("12");
       const userData = await userRegistration(
         name,
         userName,
@@ -172,7 +173,7 @@ const UserRegScreen = () => {
   };
 
   return (
-    <View style={styles.conatiner}>
+    <SafeAreaView style={styles.conatiner}>
       <TouchableOpacity onPress={handleBackPress}>
         <Image
           source={require("../../../assets/images/blackBack.png")}
@@ -317,7 +318,7 @@ const UserRegScreen = () => {
           </ScrollView>
         </KeyboardAvoidingView>
       </View>
-    </View>
+    </SafeAreaView>
   );
 };
 

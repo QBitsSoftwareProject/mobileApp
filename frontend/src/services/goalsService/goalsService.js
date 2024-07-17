@@ -109,7 +109,7 @@ export const getCompletedGoals = async () => {
 export const updateAGoal = async (goalId, data) => {
   try {
     const token = await AsyncStorage.getItem("authToken");
-    const response = await axios.put(URL + "/update/" + goalId, data, {
+    const response = await axios.put(URL + "/update-rate/" + goalId, data, {
       headers: { authtoken: token },
     });
     // console.log(response.data);

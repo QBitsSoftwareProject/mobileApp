@@ -33,7 +33,7 @@ const SelectionBars = (props) => {
   }, [isChecked, times]);
 
   return (
-    <View>
+    <View style={{ width: "100%" }}>
       {isChecked && (
         <Text
           style={{

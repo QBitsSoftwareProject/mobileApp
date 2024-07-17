@@ -16,7 +16,7 @@ export const doctorRegistration = async (
   country,
   licenseSide1,
   licenseSide2,
-  specialization,
+  workplace,
   qualification,
   availableDays,
   monday,
@@ -41,7 +41,7 @@ export const doctorRegistration = async (
       country,
       licenseSide1,
       licenseSide2,
-      specialization,
+      workplace,
       qualification,
       availableDays,
       monday,
@@ -57,7 +57,7 @@ export const doctorRegistration = async (
     // console.log(response)
     return response.data;
   } catch (error) {
-    console.log(error);
+    console.log(error.response.data);
     throw new Error("Error during request setup");
   }
 };
@@ -99,7 +99,7 @@ export const viewADoctor = async (doctorId) => {
     // console.log(response.data);
     return response.data;
   } catch (error) {
-    console.log(error);
+    console.log(error.response.data);
     throw new Error("Error during request ");
   }
 };

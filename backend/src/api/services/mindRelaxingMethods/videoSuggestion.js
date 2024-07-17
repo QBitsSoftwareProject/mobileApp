@@ -34,6 +34,7 @@ exports.findSuggestedVideo = async (
   try {
     const combinedMoodWeight = averageMoodWeight * 0.25 + inputMood * 0.75;
 
+    console.log(combinedMoodWeight, stressLevel);
     suggestionTable.meditation =
       videoRatingTable[0].meditation * stressLevel * decayValue +
       videoRatingTable[1].meditation * combinedMoodWeight;

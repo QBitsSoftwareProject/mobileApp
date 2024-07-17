@@ -195,9 +195,9 @@ const MakeAppointment = ({ route }) => {
               height: "auto",
               width: "100%",
               flexDirection: "row",
-              // flexWrap: "wrap",
+              flexWrap: "wrap",
               alignItems: "center",
-              justifyContent: "space-between",
+              justifyContent: "space-evenly",
               // justifyContent: "center",
               // gap: 25,
             }}

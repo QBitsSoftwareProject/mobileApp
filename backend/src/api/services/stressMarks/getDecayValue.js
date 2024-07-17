@@ -3,9 +3,9 @@ const markModel = require("../../models/stressMark/mark.model");
 exports.getStressData = async (userId) => {
   try {
     //sort stress levels by recent taken
-    const stressLevels = await markModel
-      .find({ userid: userId })
-      .sort({ date: -1 });
+    const stressLevels = await markModel.find({ userid: userId });
+    stressLevels.reverse();
+    // console.log(stressLevels[0]);
 
     if (!stressLevels[0]) {
       return {

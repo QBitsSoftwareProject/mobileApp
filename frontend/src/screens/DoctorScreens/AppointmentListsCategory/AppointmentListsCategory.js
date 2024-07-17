@@ -65,6 +65,7 @@ const AppointmentList = () => {
           tab2={"Accepted"}
           tab3={"History"}
           select={setSelectedTab}
+          change={selectedTab}
         />
         <ScrollView style={{ height: "100%", paddingTop: 15 }}>
           {/* appointment status cards */}

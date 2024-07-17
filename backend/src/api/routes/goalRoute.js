@@ -8,6 +8,7 @@ const {
 } = require("../controllers/goalsControllers/createController");
 const {
   updateGoal,
+  updateGoalRating,
 } = require("../controllers/goalsControllers/updateController");
 const {
   deleteGoal,
@@ -42,7 +43,8 @@ const {
 const router = express.Router();
 
 router.post("/create", auth, adminAuth, createGoal);
-router.put("/update/:id", auth, updateGoal);
+router.put("/update/:id", auth, adminAuth, updateGoal);
+router.put("/update-rate/:id", auth, updateGoalRating);
 router.delete("/delete/:id", auth, adminAuth, deleteGoal);
 router.get("/get-all", auth, getGoals);
 router.get("/get-goal/:id", auth, getAGoal);

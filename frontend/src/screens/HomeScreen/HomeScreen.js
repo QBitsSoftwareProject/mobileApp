@@ -75,6 +75,7 @@ const HomeScreen = (props) => {
 
   useEffect(() => {
     fetchUser(role);
+    console.log("fetching");
 
     //back navigation
     const backHandler = BackHandler.addEventListener(
@@ -177,7 +178,7 @@ const HomeScreen = (props) => {
                   navigation.navigate("EducationalStack");
                 }}
               >
-                <Text style={styles.viewText}>View All</Text>
+                <Text style={styles.viewText}>Favourites</Text>
               </TouchableOpacity>
             </View>
 

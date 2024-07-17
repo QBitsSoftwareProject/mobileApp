@@ -17,7 +17,7 @@ exports.checkExistsDoctor = async (req, res) => {
 
     res.status(200).json({
       message: "User with this email already exists.",
-      user: checkUser._id,
+      user: checkDoctor._id,
       role: "doctor",
     });
   } catch (error) {

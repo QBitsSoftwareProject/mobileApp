@@ -5,6 +5,7 @@ import {
   TextInput,
   TouchableOpacity,
   Keyboard,
+  SafeAreaView,
 } from "react-native";
 import React, { useEffect, useState } from "react";
 import styles from "./styles";
@@ -77,7 +78,7 @@ const LoginScreen = () => {
   }, []);
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <TouchableOpacity onPress={handleBackPress}>
         <Image
           source={require("../../assets/images/blackBack.png")}
@@ -132,7 +133,7 @@ const LoginScreen = () => {
           </View>
         )}
       </View>
-    </View>
+    </SafeAreaView>
   );
 };
 

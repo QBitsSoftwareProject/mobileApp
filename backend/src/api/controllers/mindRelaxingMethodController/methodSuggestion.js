@@ -42,6 +42,8 @@ const methodSuggestion = async (req, res) => {
       inputMoodWeight
     );
 
+    console.log(suggestedVideoCategory);
+
     //find suggested auido category
     const suggestedAuidoCategory = await findSuggestedAudio(
       stressLevelData.decayValue,

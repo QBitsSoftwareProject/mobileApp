@@ -1,4 +1,10 @@
-import { View, Text, TouchableOpacity, Image } from "react-native";
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  Image,
+  SafeAreaView,
+} from "react-native";
 import React from "react";
 import styles from "./styles";
 import { useNavigation } from "@react-navigation/native";
@@ -17,7 +23,7 @@ const SelectionScreen = () => {
   };
 
   return (
-    <View style={styles.conatiner}>
+    <SafeAreaView style={styles.conatiner}>
       <TouchableOpacity onPress={handleBackPress}>
         <Image
           source={require("../../../assets/images/blackBack.png")}
@@ -38,7 +44,7 @@ const SelectionScreen = () => {
           <Text style={styles.btnText}>Doctor</Text>
         </TouchableOpacity>
       </View>
-    </View>
+    </SafeAreaView>
   );
 };
 

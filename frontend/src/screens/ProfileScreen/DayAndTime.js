@@ -13,7 +13,7 @@ const DayAndTime = ({ day, setTimeSlots, timeSlots }) => {
   const [textEnd, setTextEnd] = useState("");
 
   const isValidTimeFormat = (time) => {
-    const regex = /^(0[1-9]|1[0-2])\.[0-5][0-9]\s?(AM|PM)$/i;
+    const regex = /^(0[0-9]|1[0-2])\.[0-5][0-9]\s?(AM|PM)$/i;
     return regex.test(time);
   };
 
@@ -36,8 +36,6 @@ const DayAndTime = ({ day, setTimeSlots, timeSlots }) => {
       alert("Please fill in both time slots");
     }
   };
-
-  
 
   return (
     <View>
@@ -68,10 +66,7 @@ const DayAndTime = ({ day, setTimeSlots, timeSlots }) => {
           </View>
 
           <View style={styles.rightRight}>
-            <TouchableOpacity
-              style={styles.addButton}
-              onPress={handleOkBtn}
-            >
+            <TouchableOpacity style={styles.addButton} onPress={handleOkBtn}>
               <Image
                 source={require("../../assets/images/TimeSlot/add.png")}
                 style={styles.addImage}
@@ -96,9 +91,7 @@ const DayAndTime = ({ day, setTimeSlots, timeSlots }) => {
           ))
         ) : (
           <View style={{ paddingHorizontal: 15 }}>
-            <Text style={styles.noTimeSlotText}>
-              Not Available Time Slot
-            </Text>
+            <Text style={styles.noTimeSlotText}>Not Available Time Slot</Text>
           </View>
         )}
       </View>

@@ -7,6 +7,7 @@ import {
   Dimensions,
   Keyboard,
   KeyboardAvoidingView,
+  SafeAreaView,
 } from "react-native";
 import React, { useEffect, useRef, useState } from "react";
 import styles from "./styles";
@@ -152,7 +153,7 @@ const DoctorRegScreen = () => {
   };
 
   return (
-    <View style={styles.conatiner}>
+    <SafeAreaView style={styles.conatiner}>
       <TouchableOpacity onPress={handleBackPress}>
         <Image
           source={require("../../../assets/images/blackBack.png")}
@@ -235,7 +236,7 @@ const DoctorRegScreen = () => {
           </View>
         </ScrollView>
       </View>
-    </View>
+    </SafeAreaView>
   );
 };
 

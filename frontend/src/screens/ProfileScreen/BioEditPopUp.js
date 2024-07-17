@@ -11,6 +11,7 @@ import { checkExistsUser } from "../../services/userServices/checkExistsUser";
 import { countries } from "../../components/InputField/Countries";
 import { Picker } from "@react-native-picker/picker";
 import Toast from "react-native-toast-message";
+import { checkExistsDoctor } from "../../services/doctorServices/checkExistsDoctor";
 
 const BioEditPopUp = ({
   isVisible,
@@ -23,6 +24,7 @@ const BioEditPopUp = ({
   const [text, setText] = useState("");
   const [emailExist, setEmailExist] = useState(0);
   const [existUser, setExistUser] = useState("");
+  const [existDoctor, setExistDoctor] = useState("");
 
   useEffect(() => {
     setText(previousText);
@@ -42,8 +44,10 @@ const BioEditPopUp = ({
   const checkEmailExist = async (email) => {
     try {
       const checkUser = await checkExistsUser(email);
+      const checkDoctor = await checkExistsDoctor(email);
       // console.log(checkUser)
       setExistUser(checkUser);
+      setExistDoctor(checkDoctor);
     } catch (err) {
       console.log(err);
     }
@@ -54,12 +58,15 @@ const BioEditPopUp = ({
       checkEmailExist(text);
     }
 
-    if (existUser.user != null && text !== previousText) {
+    if (
+      (existUser.user != null || existDoctor.user != null) &&
+      text !== previousText
+    ) {
       setEmailExist(1);
     } else {
       setEmailExist(0);
     }
-  }, [text, previousText, title, existUser.user]);
+  }, [text, previousText, title, existUser.user, existDoctor.user]);
 
   const handleConfirm = async () => {
     if (!text.trim()) {
