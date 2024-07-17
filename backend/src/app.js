@@ -56,7 +56,7 @@ const { setupWebSocket } = require("./config/webSocket.js");
 app.use("/mark", markRouter);
 
 //set router to question router
-app.use("/question", questionRouter);
+app.use("/api/v1/question", questionRouter);
 app.use("/currentmood", currentMood);
 
 //endpoints

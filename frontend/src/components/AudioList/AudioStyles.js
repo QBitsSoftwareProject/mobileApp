@@ -27,12 +27,14 @@ const styles = StyleSheet.create({
     alignItems: "center",
     borderRadius: "1000" / PixelRatio.get(),
   },
-
+  addToFavBtn: {
+    marginRight: 20,
+  },
   descriptionSection: {
     width: "70%",
   },
   audioTxt1: {
-    fontSize: 16,
+    fontSize: 14,
     fontWeight: "500",
     color: "#40495B",
   },

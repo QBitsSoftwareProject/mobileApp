@@ -18,6 +18,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { getAUser } from "../../services/userServices/userService";
 import Article from "./ArticleContent/Article";
 import { useFocusEffect } from "@react-navigation/native";
+import AudioItem from "../../components/AudioList/AudioItem";
 // components
 
 const EduContent = () => {
@@ -61,6 +62,7 @@ const EduContent = () => {
 
         if (favAudioIds.length > 0) {
           const favAudios = await getFavoriteAudios(favAudioIds);
+          console.log("fav audios:",audios)
           setAudios(favAudios.data);
         }
       } else {
@@ -73,7 +75,7 @@ const EduContent = () => {
 
 
 
-  if (!videos && !articles) {
+  if (!videos && !articles && !audios) {
     return (
       <View
         style={{
@@ -103,7 +105,7 @@ const EduContent = () => {
           <Text style={styles.mainHeading2}>Here are your favorite videos</Text>
 
           {/* videos */}
-          <View style={{ marginTop: 20 }}>
+          <View style={{ marginTop: 15 }}>
             {videos.length != 0 && videos.map((item, index) => (
               <View key={index}>
                 <VideoItem
@@ -121,7 +123,7 @@ const EduContent = () => {
           <Text style={styles.mainHeading2}>Here are your favorite articles</Text>
 
           {/* articles */}
-          <View style={{ marginTop: 20 }}>
+          <View style={{ marginTop: 15 }}>
             {articles.length != 0 && articles.map((item, index) => (
               <View key={index}>
                 <Article
@@ -135,6 +137,22 @@ const EduContent = () => {
             ))}
           </View>
 
+          <Text style={styles.mainHeading2}>Here are your favorite audios</Text>
+
+          <View style={{ marginTop: 15 }}>
+            {audios.length != 0 && audios.map((item, index) => (
+              <View key={index}>
+                {console.log("fav audios map :", index, item)}
+                <AudioItem
+                  item={item}
+                  user={user}
+                  actionStateFunction={setActionState}
+                  actState={actionState}
+                  section={"fav"}
+                />
+              </View>
+            ))}
+          </View>
         </ScrollView>
       </View>
     </View>

@@ -6,8 +6,6 @@ exports.getFavoriteVideos = async (req, res) => {
         // Check if videoIds array is provided in the request body
         const  videoIds  = req.body;
 
-        console.log("video ids backend:", videoIds);
-
         // Query to fetch all videos or specific videos based on IDs
         let query = {};
 
@@ -15,7 +13,6 @@ exports.getFavoriteVideos = async (req, res) => {
             console.log("abc")
             query = { _id: { $in: videoIds } };
         }
-        console.log(query)
 
         // Fetch videos based on the query
         const allVideos = await video.find(query).sort({ createdAt: -1 });
