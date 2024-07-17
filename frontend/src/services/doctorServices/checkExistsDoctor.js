@@ -8,7 +8,7 @@ export const checkExistsDoctor = async (email) => {
     const response = await axios.post(`${URL}/checkExistsDoctor`, { email });
     return response.data;
   } catch (error) {
-    console.log(error);
+    console.log(error.response.data);
     throw new Error("Error during request setup");
   }
 };

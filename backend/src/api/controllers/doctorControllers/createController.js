@@ -1,5 +1,8 @@
 const doctorModel = require("../../models/doctor/doctor");
 const bcrypt = require("bcryptjs");
+const {
+  adminNotification,
+} = require("../../services/notificationService/notificationCreate");
 
 exports.createDoctor = async (req, res) => {
   try {
@@ -28,6 +31,8 @@ exports.createDoctor = async (req, res) => {
       bio,
     } = req.body;
 
+    console.log(req.body);
+
     const encryptedPwd = await bcrypt.hash(password, 10);
 
     const newUser = await doctorModel.create({
@@ -55,11 +60,11 @@ exports.createDoctor = async (req, res) => {
       bio,
     });
 
-    await adminNotification(
-      "Your registration is pending. We will notify you once registration is complete. ",
-      "system",
-      doctorId.id
-    );
+    // await adminNotification(
+    //   "Your registration is pending. We will notify you once registration is complete. ",
+    //   "system",
+    //   doctorId.id
+    // );
 
     return res.status(201).json({ message: "User created successfully" });
   } catch (err) {

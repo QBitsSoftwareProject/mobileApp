@@ -15,7 +15,7 @@ exports.getStressData = async (userId) => {
     }
 
     const mostRecentStressLevelDate = new Date(stressLevels[0].date);
-    
+
     const currentDate = new Date();
 
     //difference in milli seconds
@@ -26,6 +26,7 @@ exports.getStressData = async (userId) => {
     //get difference in days
     const differenceInDays = Math.floor(difference / millisecondsPerDay);
 
+    //value need to decrese with the time
     const decayFactor = -0.1;
 
     const decayValue = Math.exp(decayFactor * differenceInDays);

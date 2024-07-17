@@ -6,7 +6,7 @@ import ProfileScreen from "../../screens/ProfileScreen/ProfileScreen";
 import TabBarIcon from "./TabBarIcon";
 import MusicPlayer from "./BackgroundMusic";
 import { BackgroundMusicContext } from "../SettingScreen/BackgroundMusicProvider";
-import { View, ActivityIndicator, Keyboard } from "react-native";
+import { View, ActivityIndicator, Keyboard, Platform } from "react-native";
 import {
   checkNotification,
   checkUnreadNotification,
