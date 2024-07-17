@@ -15,6 +15,7 @@ import Toast from "react-native-toast-message";
 const Article = ({ user, item, actionStateFunction, actState, section }) => {
   const navigation = useNavigation();
 
+  const [error, setError] = useState(false);
 
   useEffect(() => {
     const fetchUserData = async () => {

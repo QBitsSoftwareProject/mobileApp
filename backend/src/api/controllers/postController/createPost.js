@@ -8,7 +8,7 @@ exports.createPost = async (req, res) => {
 
     const newPost = new PostSchema({
       userId,
-      postCategory,
+      // postCategory,
       description,
       createdAt: createdAt,
       image,

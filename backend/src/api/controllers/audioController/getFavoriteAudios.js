@@ -4,7 +4,7 @@ const audio = require("../../models/audioResources/audio");
 exports.getFavoriteAudios = async (req, res) => {
     try {
         // Check if audioIds array is provided in the request body
-        const { audioIds } = req.body;
+        const audioIds = req.body;
 
         // Query to fetch all audios or specific audios based on IDs
         let query = {};
