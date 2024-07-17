@@ -50,12 +50,17 @@ const historystyles = StyleSheet.create({
     color: "#40495B",
     fontSize: 14,
     fontWeight: "400",
+    // backgroundColor: "yellow",
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: 5,
   },
 
   markText: {
     fontSize: 20,
     // marginBottom:-3,
     color: "#40495B",
+    // backgroundColor: "yellow",
   },
 
   verticalbar: {
@@ -80,12 +85,7 @@ const historystyles = StyleSheet.create({
   },
 
   markview: {
-    // alignSelf:'flex-end',
-    // backgroundColor:"red",
-    // alignItems:"flex-end",
-    display: "flex",
-    justifyContent: "flex-end",
-    marginLeft: "38%",
+    marginRight: "37%",
   },
 });
 

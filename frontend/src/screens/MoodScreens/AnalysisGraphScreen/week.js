@@ -37,8 +37,12 @@ const DayMoodChart = ({ day, data = [], maxHeightMood }) => {
 
   return (
     <View style={styles.dayContainer}>
-      {maxHeightMood && (
+      {maxHeightMood ? (
         <Image style={styles.image} source={moodToImage[maxHeightMood]} />
+      ) : (
+        <View style={styles.emptyChart}>
+          <View style={[styles.emptybox, { width: 369, height: 280 }]} />
+        </View>
       )}
 
       <View style={styles.barWithAxis}>
@@ -113,6 +117,15 @@ const styles = StyleSheet.create({
     height: 280,
     alignSelf: "center",
     marginTop: -10,
+  },
+  emptyChart: {
+    justifyContent: "center",
+    alignItems: "center",
+    width: 369,
+    height: 280,
+  },
+  emptybox: {
+    justifyContent: "center",
   },
 });
 

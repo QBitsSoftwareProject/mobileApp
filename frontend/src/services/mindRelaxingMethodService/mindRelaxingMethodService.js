@@ -3,58 +3,66 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 
 //fetch stress level
 export const fetchMindRelaxingMethod = async () => {
-        try {
+  try {
+    const response = await axiosInstance.get(`/method/get-method`);
 
-            const response = await axiosInstance.get(`/method/get-method`);
-          
-          return response.data;
+    return response.data;
+  } catch (err) {
+    console.log(err);
+  }
+};
 
-        } catch (err) {
-          console.log(err);
-        }
-      };
+export const fetchMindRelaxingMethodSuggestion = async (inputMood) => {
+  try {
+    const token = await AsyncStorage.getItem("authToken");
 
-      export const fetchMindRelaxingMethodSuggestion = async (inputMood) => {
-        try {
+    const response = await axiosInstance.post(
+      `api/v1/method/video-suggestion`,
+      {
+        inputMood: inputMood,
+      },
+      {
+        headers: { authtoken: token },
+      }
+    );
 
-          const token = await AsyncStorage.getItem("authToken");
+    return response.data;
+  } catch (err) {
+    console.log(err);
+  }
+};
 
-          
+export const updateMethodRatingById = async (
+  id,
+  rateValue,
+  ratedUsers,
+  currentRating
+) => {
+  try {
+    // Send PUT request using axiosInstance
+    const token = await AsyncStorage.getItem("authToken");
+    const newRateValue = ratedUsers + 1;
+    const newCurrentRating =
+      (currentRating * ratedUsers + rateValue) / newRateValue;
+    const response = await axiosInstance.put(
+      `/api/v1/method/update-method-rate/${id}`,
+      {
+        currentRating: newCurrentRating,
+        ratedUsers: newRateValue,
+      },
+      {
+        headers: { authtoken: token },
+      }
+    );
 
-            const response = await axiosInstance.post(`api/v1/method/video-suggestion`,
-              {
-                inputMood:inputMood
-              },{
-              headers: { authtoken: token }
-            }
-            );
-          
-          return response.data;
-
-        } catch (err) {
-          console.log(err);
-        }
-      };
-
-
-      export const updateMethodRatingById = async (id, rateValue,ratedUsers,currentRating) => {
-        try {
-      
-          // Send PUT request using axiosInstance
-          const newRateValue = ratedUsers + 1;
-          const newCurrentRating = ((currentRating * ratedUsers) + rateValue) / newRateValue
-          const response = await axiosInstance.put(`/api/v1/method/update-method/${id}`, {
-            currentRating:newCurrentRating,
-            ratedUsers:newRateValue
-          }
-          );
-      
-          if (response.status >= 200 && response.status < 300) {
-            console.log("Data updated successfully");
-          } else {
-            console.error(`Failed to update data on the server. Status: ${response.status}`);
-          }
-        } catch (error) {
-          console.error('Error updating method:', error.message);
-        }
-      };
+    if (response.status >= 200 && response.status < 300) {
+      console.log("Data updated successfully");
+    } else {
+      console.error(
+        `Failed to update data on the server. Status: ${response.status}`
+      );
+    }
+  } catch (error) {
+    console.error("Error updating method:", error.message);
+  }
+};

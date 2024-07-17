@@ -89,7 +89,7 @@ const HomePage = () => {
 
   return (
     <View style={styles.container}>
-      <View>
+      <View style={{ zIndex: 1000 }}>
         <CFHeaderSub
           subHeadLine={"Community Home Page"}
           profile={"ProfileScreen"}
