@@ -249,12 +249,12 @@ export const getAuthorArticleCount = async (authorId) => {
   }
 };
 
-export const editFavoriteVideos = async (userId, favoriteVideos) => {
+export const editFavoriteVideos = async (videoId) => {
   try {
     const token = await AsyncStorage.getItem("authToken");
     const response = await axios.put(
-      `${BACKEND_URI}/user/edit-favorites/video/` + userId,
-      favoriteVideos,
+      `${BACKEND_URI}/user/edit-favorites/video/`,
+      { videoId },
       {
         headers: { authtoken: token },
       }
@@ -265,41 +265,41 @@ export const editFavoriteVideos = async (userId, favoriteVideos) => {
   }
 };
 
-export const editFavoriteAudios = async (userId, favoriteAudios) => {
+export const editFavoriteAudios = async (audioId) => {
   try {
     const token = await AsyncStorage.getItem("authToken");
     const response = await axios.put(
-      `${BACKEND_URI}/user/edit-favorites/audio/` + userId,
-      favoriteAudios,
+      `${BACKEND_URI}/user/edit-favorites/audio/`,
+      { audioId },
       {
         headers: { authtoken: token },
       }
     );
     return response;
   } catch (err) {
-    console.log("error in adding to favorites , error:" + err.message);
+    console.log("error in adding to favorites , error:" + err.response.data);
   }
 };
 
-export const editFavoriteArticles = async (userId, favoriteArticles) => {
+export const editFavoriteArticles = async (articleId) => {
   try {
     const token = await AsyncStorage.getItem("authToken");
     const response = await axios.put(
-      `${BACKEND_URI}/user/edit-favorites/article/` + userId,
-      favoriteArticles,
+      `${BACKEND_URI}/user/edit-favorites/article`,
+      { articleId },
       {
         headers: { authtoken: token },
       }
     );
     return response;
   } catch (err) {
-    console.log("error in adding to favorites , error:" + err.message);
+    console.log("error in adding to favorites , error:" + err.response.data);
   }
 };
 
 export const getFavoriteVideos = async (favoriteVideoIds) => {
   try {
-    console.log("video ids service:", favoriteVideoIds);
+    console.log("video favorite ids service:", favoriteVideoIds);
     const token = await AsyncStorage.getItem("authToken");
     const response = await axios.post(
       URL + "/video/getFavoriteVideos/",
@@ -310,7 +310,7 @@ export const getFavoriteVideos = async (favoriteVideoIds) => {
     );
     return response;
   } catch (err) {
-    console.log("error video fetch , error:" + err.message);
+    console.log("error video fetch , error:" + err.response.data);
   }
 };
 
@@ -319,7 +319,7 @@ export const getFavoriteAudios = async (favoriteAudioIds) => {
     console.log("audio ids service:", favoriteAudioIds);
     const token = await AsyncStorage.getItem("authToken");
     const response = await axios.post(
-      URL + "/audio/getFavoriteArticles/",
+      URL + "/audio/getFavoriteAudios/",
       favoriteAudioIds,
       {
         headers: { authtoken: token },
@@ -327,7 +327,7 @@ export const getFavoriteAudios = async (favoriteAudioIds) => {
     );
     return response;
   } catch (err) {
-    console.log("error audio fetch , error:" + err.message);
+    console.log("error audio fetch , error:" + err.response.data);
   }
 };
 
@@ -344,6 +344,6 @@ export const getFavoriteArticles = async (favoriteArticleIds) => {
     );
     return response;
   } catch (err) {
-    console.log("error article fetch , error:" + err.message);
+    console.log("error article fetch , error:" + err.response.data);
   }
 };

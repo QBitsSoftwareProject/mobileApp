@@ -12,6 +12,7 @@ import AudioPlayerModal from "../../screens/EduContentScreen/MediaComponents/Res
 import favorite from "../../assets/images/favorites/favorite.png";
 import notFavorite from "../../assets/images/favorites/notFavorite.png";
 import { editFavoriteAudios } from "../../services/educationalServices/educationalServices.js";
+import Toast from "react-native-toast-message";
 // favorites
 
 function AudioItem({ user, actionStateFunction, actState, item, onPlayPause }) {
@@ -20,13 +21,13 @@ function AudioItem({ user, actionStateFunction, actState, item, onPlayPause }) {
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        // favorite video
-        if (user.favVideos && (user.favVideos).includes(item._id)) {
+        // favorite audio
+        if (user.favAudios && (user.favAudios).includes(item._id)) {
           setIsFavorite(true)
         } else {
           setIsFavorite(false)
         }
-        // favorite video
+        // favorite audio
       } catch (err) {
         setError(err.message);
       }
@@ -34,23 +35,29 @@ function AudioItem({ user, actionStateFunction, actState, item, onPlayPause }) {
     fetchUserData();
   }, [actionState]);
 
-
   const [error, setError] = useState(null);
 
-  const editFavorites = () => {
-    let newAudioFavs = [];
-    if (user.favAudios && (user.favAudios).includes(item._id)) {
-      console.log("present", newAudioFavs);
-      newAudioFavs = (user.favAudios).filter(favId => favId !== item._id);
-      setIsFavorite(false);
-    } else if (user.favAudios && !(user.favAudios).includes(item._id)) {
-      console.log("absent", newAudioFavs);
-      newAudioFavs = [item._id, ...user.favAudios];
-      setIsFavorite(true);
+
+  const editFavorites = async () => {
+    try {
+      await editFavoriteAudios(item._id);
+      if (Isfavorite) {
+        Toast.show({
+          type: "success",
+          text1: "Audio removed from favorites",
+        });
+      } else {
+        Toast.show({
+          type: "success",
+          text1: "Audio added to favorites",
+        });
+      }
+      actionStateFunction(!actState);
+      setActionState(!actionState);
+      setIsFavorite((prev) => !prev); // Directly toggle the state
+    } catch (err) {
+      console.log("failed to add to favorites,error:", err.response.data)
     }
-    editFavoriteAudios(user._id, newAudioFavs);
-    actionStateFunction(!actState);
-    setActionState(!actionState);
   }
 
   const [Isfavorite, setIsFavorite] = useState(false);
@@ -99,7 +106,7 @@ function AudioItem({ user, actionStateFunction, actState, item, onPlayPause }) {
             >
               <View style={styles.addToFavBtn}>
                 {
-                  (Isfavorite) ? (<Image source={favorite} style={{ width: 25, height: 28 }} />) : (<Image source={notFavorite} style={{ width: 25, height: 28 }} />)
+                  (Isfavorite) ? (<Image source={favorite} style={{ width: 21, height: 18 }} />) : (<Image source={notFavorite} style={{ width: 19, height: 17 }} />)
                 }
               </View>
             </TouchableOpacity>

@@ -137,7 +137,7 @@ const TabBar = ({ route, user, userRole }) => {
             marginTop: 32,
             alignItems: "center",
             justifyContent: "center",
-            // paddingTop:30
+            paddingTop: 30,
           },
           headerShown: false,
         }}

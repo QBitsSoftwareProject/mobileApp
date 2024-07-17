@@ -3,27 +3,29 @@ import React, { useState, useEffect } from "react";
 import styles from "./articleStyle";
 
 import noPreviewAvailableImg from "../../../assets/images/no-image-avaliable.jpg";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
 import { editFavoriteArticles, getAuthorInfo } from "../../../services/educationalServices/educationalServices";
 
 // favorites
 import favorite from "../../../assets/images/favorites/favorite.png";
 import notFavorite from "../../../assets/images/favorites/notFavorite.png";
+import Toast from "react-native-toast-message";
 // favorites
 
-const Article = ({ user, item, actionStateFunction, actState }) => {
+const Article = ({ user, item, actionStateFunction, actState, section }) => {
   const navigation = useNavigation();
+
 
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        // favorite video
-        if (user.favVideos && (user.favVideos).includes(item._id)) {
+        // favorite article
+        if (user.favArticles && (user.favArticles).includes(item._id)) {
           setIsFavorite(true)
         } else {
           setIsFavorite(false)
         }
-        // favorite video
+        // favorite article
       } catch (err) {
         setError(err.message);
       }
@@ -34,10 +36,28 @@ const Article = ({ user, item, actionStateFunction, actState }) => {
   const [Isfavorite, setIsFavorite] = useState(false);
   const [actionState, setActionState] = useState(false);
 
-  const editFavorites = () => {
-    editFavoriteArticles(user._id, item._id);
-    actionStateFunction(!actState);
-    setActionState(!actionState);
+  const editFavorites = async () => {
+    try {
+      await editFavoriteArticles(item._id);
+      if (Isfavorite) {
+        Toast.show({
+          type: "success",
+          text1: "Article removed from favorites",
+        });
+      } else {
+        Toast.show({
+          type: "success",
+          text1: "Article added to favorites",
+        });
+      }
+      actionStateFunction((prev) => !prev);
+      setActionState(!actionState);
+      if (section != "fav") {
+        setIsFavorite((prev) => !prev); // Directly toggle the state
+      }
+    } catch (err) {
+      console.log("failed to add to favorites,error:", err.response.data)
+    }
   }
 
   const navigateToScreen = () => {
@@ -88,7 +108,7 @@ const Article = ({ user, item, actionStateFunction, actState }) => {
         >
           <View style={styles.addToFavBtn}>
             {
-              (Isfavorite) ? (<Image source={favorite} style={{ width: 25, height: 28 }} />) : (<Image source={notFavorite} style={{ width: 25, height: 28 }} />)
+              (Isfavorite) ? (<Image source={favorite} style={{ width: 21, height: 18 }} />) : (<Image source={notFavorite} style={{ width: 19, height: 17 }} />)
             }
           </View>
         </TouchableOpacity>

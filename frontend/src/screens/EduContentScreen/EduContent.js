@@ -5,90 +5,75 @@ import {
   Dimensions,
   Image,
 } from "react-native";
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import styles from "../EduContentScreen/AllContent/style";
-import { SafeAreaView } from "react-native-safe-area-context";
 
 // components
 import SearchAndCategories from "../../components/SearchAndCategories/SearchAndCategories";
-import Audios from "../../components/AudioList/Audios";
-import { getFavoriteArticles, getFavoriteVideos } from "../../services/educationalServices/educationalServices";
+import { getFavoriteArticles, getFavoriteAudios, getFavoriteVideos } from "../../services/educationalServices/educationalServices";
 import VideoItem from "./VideoContent/VideoItem/VideoItem";
 import HeaderSub from "../../components/HeaderSub/HeaderSub";
 import loadingGif from "../../assets/animation/loading.gif";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { getAUser } from "../../services/userServices/userService";
 import Article from "./ArticleContent/Article";
+import { useFocusEffect } from "@react-navigation/native";
 // components
 
 const EduContent = () => {
   const screenHeight = Dimensions.get("window").height;
 
-  const [videos, setVideos] = useState();
-  const [articles, setArticles] = useState();
-
+  const [videos, setVideos] = useState([]);
+  const [articles, setArticles] = useState([]);
+  const [audios, setAudios] = useState([]);
   const [user, setUser] = useState({});
   const [userRole, setUserRole] = useState("");
   const [actionState, setActionState] = useState(false);
-
-  const [favVideoIds, setFavVideoIds] = useState([]);
-  const [favArticleIds, setFavArticleIds] = useState([]);
-
-  useEffect(() => {
-    const fetchUserData = async () => {
-      let userInfo;
-      try {
-        const role = await AsyncStorage.getItem("role");
-        setUserRole(role);
-        if (role === "regularUser") {
-          userInfo = await getAUser();
-          setUser(userInfo);
-          setFavVideoIds(user.favVideos);
-          setFavArticleIds(user.favArticles);
-        } else {
-          throw new Error("Invalid role");
-        }
-      } catch (err) {
-        setError(err.message);
-      }
-    };
-    fetchUserData();
-  }, [actionState]);
-
   const [error, setError] = useState(null);
 
-  //fetch favorites
-  useEffect(() => {
-    const fetchFavorites = async () => {
-      try {
-        let favVideos;
-        let favArticles;
-        favVideos = await getFavoriteVideos(favVideoIds);
-        favArticles = await getFavoriteArticles(favArticleIds);
-        if (favVideos) {
-          console.log("fav video ids:", favVideoIds);
-          console.log("videos:", favVideos.data);
+  useFocusEffect(
+    useCallback(() => {
+      fetchUserDataAndFavorites();
+    }, [actionState])
+  )
+
+  const fetchUserDataAndFavorites = async () => {
+    try {
+      const role = await AsyncStorage.getItem("role");
+      setUserRole(role);
+
+      if (role === "regularUser") {
+        const userInfo = await getAUser();
+        setUser(userInfo);
+        const favVideoIds = userInfo.favVideos;
+        const favArticleIds = userInfo.favArticles;
+        const favAudioIds = userInfo.favAudios;
+
+        if (favVideoIds.length > 0) {
+          const favVideos = await getFavoriteVideos(favVideoIds);
           setVideos(favVideos.data);
-        } else {
-          setVideos([]);
         }
-        if (favArticles) {
-          console.log("fav article ids:", favArticleIds);
-          console.log("articles:", favArticles.data);
+
+        if (favArticleIds.length > 0) {
+          const favArticles = await getFavoriteArticles(favArticleIds);
           setArticles(favArticles.data);
-        } else {
-          setArticles([]);
         }
-      } catch (error) {
-        console.error("Error fetching favorites:", error);
+
+        if (favAudioIds.length > 0) {
+          const favAudios = await getFavoriteAudios(favAudioIds);
+          setAudios(favAudios.data);
+        }
+      } else {
+        throw new Error("Invalid role");
       }
-    };
-    fetchFavorites();
-  }, []);
-  // fetch favorites
+    } catch (err) {
+      setError(err.message);
+    }
+  };
 
 
-  if (!videos) {
+
+  if (!videos && !articles) {
     return (
       <View
         style={{
@@ -110,43 +95,46 @@ const EduContent = () => {
         headLine={"Educational content"}
         subHeadLine={"Enjoy featured resource to up your mood"}
       />
-      <View style={[styles.Container, { height: screenHeight - 190 }]}>
+      <View style={[styles.Container, { height: screenHeight - 190, paddingBottom: 90 }]}>
         <View>
           <SearchAndCategories currentView={"EducationalScreen"} />
         </View>
-
         <ScrollView>
-          <View style={{ paddingHorizontal: 25, marginTop: 15 }}>
+          <Text style={styles.mainHeading2}>Here are your favorite videos</Text>
 
-            {/* articles */}
-            {/* <Text style={styles.mainHeading2}>Here are your favorite articles</Text>
-            <View style={{ marginTop: 20 }}>
-              {articles && articles.map((item, index) => (
-                <View key={index}>
-                  <Article item={item} user={user}
-                    actionStateFunction={setActionState}
-                    actState={actionState} />
-                </View>
-              ))}
-            </View> */}
-
-            {/* videos */}
-            <Text style={styles.mainHeading2}>Here are your favorite videos</Text>
-            <View style={{ marginTop: 20 }}>
-              {videos && videos.map((item, index) => (
-                <View key={index}>
-                  <VideoItem item={item} screen={"allStack"} user={user}
-                    actionStateFunction={setActionState}
-                    actState={actionState} />
-                </View>
-              ))}
-            </View>
-
-            {/* audios */}
-            {/* <Text style={[styles.mainHeading2]}>Here are your favorite audios</Text>
-            <Audios /> */}
-
+          {/* videos */}
+          <View style={{ marginTop: 20 }}>
+            {videos.length != 0 && videos.map((item, index) => (
+              <View key={index}>
+                <VideoItem
+                  item={item}
+                  screen={"allStack"}
+                  user={user}
+                  actionStateFunction={setActionState}
+                  actState={actionState}
+                  section={"fav"}
+                />
+              </View>
+            ))}
           </View>
+
+          <Text style={styles.mainHeading2}>Here are your favorite articles</Text>
+
+          {/* articles */}
+          <View style={{ marginTop: 20 }}>
+            {articles.length != 0 && articles.map((item, index) => (
+              <View key={index}>
+                <Article
+                  item={item}
+                  user={user}
+                  actionStateFunction={setActionState}
+                  actState={actionState}
+                  section={"fav"}
+                />
+              </View>
+            ))}
+          </View>
+
         </ScrollView>
       </View>
     </View>

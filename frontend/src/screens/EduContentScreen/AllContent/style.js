@@ -4,7 +4,7 @@ import { Font } from "expo-font";
 const styles = StyleSheet.create({
   Container: {
     backgroundColor: "#F2F3F5",
-    alignItems: "center",
+    paddingHorizontal: 20
   },
   NavContainer: {
     position: "absolute",
@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: "400",
     color: "#101318",
-    marginTop: 10,
+    marginTop: 20,
     marginLeft: 10,
   },
 });

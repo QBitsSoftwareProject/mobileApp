@@ -10,6 +10,7 @@ import {
 import { checkExistsUser } from "../../services/userServices/checkExistsUser";
 import { countries } from "../../components/InputField/Countries";
 import { Picker } from "@react-native-picker/picker";
+import Toast from "react-native-toast-message";
 
 const BioEditPopUp = ({
   isVisible,
@@ -41,7 +42,7 @@ const BioEditPopUp = ({
   const checkEmailExist = async (email) => {
     try {
       const checkUser = await checkExistsUser(email);
-      console.log(checkUser)
+      // console.log(checkUser)
       setExistUser(checkUser);
     } catch (err) {
       console.log(err);
@@ -63,6 +64,11 @@ const BioEditPopUp = ({
   const handleConfirm = async () => {
     if (!text.trim()) {
       alert("cannot set as empty");
+
+      // Toast.show({
+      //   type: "error",
+      //   text1: "cannot set as empty",
+      // });
       return;
     }
 

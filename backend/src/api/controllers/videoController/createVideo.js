@@ -3,9 +3,9 @@ const video = require("../../models/videoResources/video");
 // create new video file
 exports.createVideo = async (req, res) => {
   try {
-    
-    const { title, duration, tags, ifWatch, watchCount,downloadURL } = req.body;
-    
+
+    const { title, duration, tags, ifWatch, watchCount, downloadURL, thumbnailURL } = req.body;
+
     const newVideo = new video({
       title,
       duration,
@@ -13,7 +13,10 @@ exports.createVideo = async (req, res) => {
       ifWatch,
       watchCount,
       downloadURL,
+      thumbnailURL,
     });
+
+    console.log("new video:", newVideo);
 
     await newVideo.save();
 
@@ -22,6 +25,6 @@ exports.createVideo = async (req, res) => {
   } catch (err) {
 
     return res.status(500).json({ errorMsg: "video save failed", error: err });
-    
+
   }
 };

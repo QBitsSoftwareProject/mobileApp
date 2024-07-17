@@ -72,7 +72,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     position: "relative",
     marginTop: 5,
-    marginRight: 7
+    marginRight: 7,
   },
   VideoItem: {
     marginBottom: 32,

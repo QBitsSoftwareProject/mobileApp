@@ -10,36 +10,15 @@ import playImg from "../../../../assets/images/icons/player/play.png";
 import favorite from "../../../../assets/images/favorites/favorite.png";
 import notFavorite from "../../../../assets/images/favorites/notFavorite.png";
 import { editFavoriteVideos } from "../../../../services/educationalServices/educationalServices";
+import Toast from "react-native-toast-message";
 // favorites
 
-const VideoItem = ({ user, item, callTask, screen, actionStateFunction, actState }) => {
-
-  const [error, setError] = useState(null);
-
-  const [Isfavorite, setIsFavorite] = useState(false);
-  const [actionState, setActionState] = useState(false);
-
-  useEffect(() => {
-    const fetchUserData = async () => {
-      try {
-        // favorite video
-        if (user.favVideos && (user.favVideos).includes(item._id)) {
-          setIsFavorite(true)
-        } else {
-          setIsFavorite(false)
-        }
-        // favorite video
-      } catch (err) {
-        setError(err.message);
-      }
-    };
-    fetchUserData();
-  }, [actionState]);
-
+const VideoItem = ({ user, item, callTask, screen, actionStateFunction, actState, section }) => {
+  const [isModalVisible, setIsModalVisible] = useState(false);
 
   const video = React.useRef(null);
+
   const [status, setStatus] = React.useState({});
-  const [isModalVisible, setIsModalVisible] = useState(false);
 
   const [duration, setDuration] = useState(0);
 
@@ -49,37 +28,73 @@ const VideoItem = ({ user, item, callTask, screen, actionStateFunction, actState
     }
   }, [status]);
 
-  const handlePlayPress = () => {
-    if (screen == "videoStack") {
-      callTask();
-    }
-
-    setIsModalVisible(true);
-  };
-
-  const handleModalClose = () => {
-    setIsModalVisible(false);
-  };
-
   const formatDuration = (seconds) => {
     const minutes = Math.floor(seconds / 60);
     const remainingSeconds = Math.floor(seconds % 60);
     return `${minutes}:${remainingSeconds < 10 ? "0" : ""}${remainingSeconds}`;
   };
 
-  const editFavorites = () => {
-    let newVideoFavs = [];
-    if (user.favVideos && (user.favVideos).includes(item._id)) {
-      newVideoFavs = (user.favVideos).filter(favId => favId !== item._id);
-      setIsFavorite(false);
-    } else if (user.favVideos && !(user.favVideos).includes(item._id)) {
-      newVideoFavs = [item._id, ...user.favVideos];
-      setIsFavorite(true);
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        console.log("video item fav videos:", user.favVideos)
+        console.log("video item fav videos ids:", item._id)
+        // favorite video
+        if (user.favVideos && (user.favVideos).includes(item._id)) {
+          setIsFavorite(true);
+        } else {
+          setIsFavorite(false);
+        }
+        // favorite video
+      } catch (err) {
+        setError(err.message);
+      }
+    };
+    fetchUserData();
+  }, [actionState]);
+
+  const [error, setError] = useState(null);
+
+  const [Isfavorite, setIsFavorite] = useState(false);
+  const [actionState, setActionState] = useState(false);
+
+  const editFavorites = async () => {
+    try {
+      await editFavoriteVideos(item._id);
+      if (Isfavorite) {
+        Toast.show({
+          type: "success",
+          text1: "Video removed from favorites",
+        });
+      } else {
+        Toast.show({
+          type: "success",
+          text1: "Video added to favorites",
+        });
+      }
+      actionStateFunction((prev) => {!prev
+    
+      });
+      setActionState(!actionState);
+      
+      if (section != "fav") {
+        setIsFavorite((prev) => !prev); // Directly toggle the state
+      }
+    } catch (err) {
+      console.log("failed to add to favorites,error:", err.response.data)
     }
-    editFavoriteVideos(user._id, newVideoFavs);
-    actionStateFunction(!actState);
-    setActionState(!actionState);
   }
+
+  const handlePlayPress = () => {
+    if (screen == "videoStack") {
+      callTask();
+    }
+    setIsModalVisible(true);
+  };
+
+  const handleModalClose = () => {
+    setIsModalVisible(false);
+  };
 
   return (
     <View>
@@ -97,7 +112,7 @@ const VideoItem = ({ user, item, callTask, screen, actionStateFunction, actState
           >
             <View style={styles.addToFavBtn}>
               {
-                (Isfavorite) ? (<Image source={favorite} style={{ width: 25, height: 28 }} />) : (<Image source={notFavorite} style={{ width: 25, height: 28 }} />)
+                (Isfavorite) ? (<Image source={favorite} style={{ width: 21, height: 18, resizeMode: "cover" }} />) : (<Image source={notFavorite} style={{ width: 19, height: 17, resizeMode: "cover" }} />)
               }
             </View>
           </TouchableOpacity>
@@ -114,37 +129,11 @@ const VideoItem = ({ user, item, callTask, screen, actionStateFunction, actState
           }}
         >
           <View style={styles.imgContainer}>
-            <Image source={playImg} style={styles.image} />
+            <Image source={playImg} />
           </View>
         </TouchableOpacity>
-        <View style={{ width: "100%" }}>
-          <Video
-            ref={video}
-            source={{ uri: item.downloadURL }}
-            style={{
-              height: 170,
-              borderTopLeftRadius: 10,
-              borderTopRightRadius: 10,
-              width: "100%",
-            }} // Adjust height as needed
-            isMuted={false}
-            resizeMode="cover"
-            onPlaybackStatusUpdate={(status) => setStatus(() => status)}
-            onError={(e) => console.log("Video Error: ", e)}
-            onFullscreenUpdate={null} // Handle fullscreen updates
-          />
-          {status.isLoaded ? null : (
-            <Text
-              style={{
-                position: "absolute",
-                top: "50%",
-                left: "50%",
-                transform: [{ translateX: -50 }, { translateY: -50 }],
-              }}
-            >
-              Loading...
-            </Text>
-          )}
+        <View style={{ width: "100%", height: 180 }}>
+          <Image source={{ uri: item.thumbnailURL }} style={{ width: "100%", height: "100%" }} />
         </View>
         <View
           style={{

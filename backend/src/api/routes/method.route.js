@@ -18,6 +18,7 @@ const {
 router.post("/add-method", auth, adminAuth, storeMethod);
 router.get("/get-method", auth, adminAuth, getAllMethods);
 router.put("/update-method/:id", auth, adminAuth, updateMethod);
+router.put("/update-method-rate/:id", auth, updateMethod);
 router.get("/get-methodbyid/:id", auth, getMethodById);
 router.delete("/delete-methodbyid/:id", auth, adminAuth, deleteMethodById);
 

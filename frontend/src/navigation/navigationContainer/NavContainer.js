@@ -50,7 +50,6 @@ const NavContainer = () => {
   return (
     <BackgroundMusicProvider>
       <NavigationContainer>
-        {/* Use the navigationRef here */}
         {!userId ? (
           <>
             <LoginStack />

@@ -21,7 +21,7 @@ const ExpandableCard = (props) => {
   const [imageHeight, setImageHeight] = useState(0);
   const [textHeight, setTextHeight] = useState(0);
   const [modalVisible, setModalVisible] = useState(false);
-  const [isRated,setIsRated] = useState(false);
+  const [isRated, setIsRated] = useState(false);
 
   const toggleModal = () => {
     console.log(resource);
@@ -181,20 +181,27 @@ const ExpandableCard = (props) => {
                 paddingHorizontal: 10,
                 marginTop: 10,
                 marginBottom: 10,
-                
-                
               }}
               onLayout={onImageLayout}
             >
-              <Image source={{ uri: imglink }} style={styles.contentImage}/>
+              <Image source={{ uri: imglink }} style={styles.contentImage} />
 
-              <TouchableOpacity 
-              style={{position:'absolute', width:'100%', height:'100%',marginLeft:10,alignItems:'center',justifyContent:'center', backgroundColor:'rgba(0,0,0,0.3)',borderRadius:15}}
-              onPress={btnfunction}>
-                    <Image source={ibtn} />
-                  </TouchableOpacity>
+              <TouchableOpacity
+                style={{
+                  position: "absolute",
+                  width: "100%",
+                  height: "100%",
+                  marginLeft: 10,
+                  alignItems: "center",
+                  justifyContent: "center",
+                  backgroundColor: "rgba(0,0,0,0.3)",
+                  borderRadius: 15,
+                }}
+                onPress={btnfunction}
+              >
+                <Image source={ibtn} />
+              </TouchableOpacity>
 
-              
               {/* <View style={{  borderRadius: 15, overflow: "hidden"}}>
                 <ImageBackground
                   source={{ uri: imglink }}
@@ -223,7 +230,6 @@ const ExpandableCard = (props) => {
         ratedUsers={ratedUsers}
         isRated={isRated}
         setIsRated={setIsRated}
-
       />
       <AudioPlayerModal
         visible={audioModalVisible}
@@ -288,15 +294,12 @@ const styles = StyleSheet.create({
   },
 
   contentImage: {
-    flex:1,
-    width:"100%",
+    flex: 1,
+    width: "100%",
     alignItems: "center",
     justifyContent: "center",
-    resizeMode:'stretch', 
-    borderRadius:15
-    
-    
-   
+    resizeMode: "stretch",
+    borderRadius: 15,
   },
 
   contentText: {
