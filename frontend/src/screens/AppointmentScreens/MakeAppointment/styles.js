@@ -59,7 +59,7 @@ const styles = StyleSheet.create({
     color: "#FF0000",
     opacity: 0.8,
     marginVertical: 10,
-    marginHorizontal: 100,
+    marginHorizontal: 95,
   },
 });
 

@@ -63,7 +63,6 @@ const CustomBarChart = ({ positiveMoods, negativeMoods }) => {
             {
               day: "numeric",
               month: "short",
-              year: "numeric",
             }
           );
 
@@ -219,14 +218,15 @@ const styles = StyleSheet.create({
   },
   xAxis: {
     flexDirection: "row",
-    justifyContent: "space-around",
+    justifyContent: "flex-start",
     marginTop: -20,
     marginLeft: 0,
   },
   label: {
     fontSize: 10,
+    alignSelf: "self",
     color: "#5C677D",
-    marginHorizontal: 5,
+    marginHorizontal: 17.5,
   },
 });
 

@@ -6,7 +6,7 @@ const asyncHandler = require("express-async-handler");
 // Controller to create a new mood entry
 const storeMoodEntry = asyncHandler(async (req, res) => {
   try {
-    const { selectedEmoji, moodText, time, date, count } = req.body;
+    const { selectedEmoji, moodText, time, date } = req.body;
 
     const userId = req.user.user_id;
     console.log(userId);
@@ -23,8 +23,7 @@ const storeMoodEntry = asyncHandler(async (req, res) => {
       selectedEmoji,
       moodText,
       time,
-      date,
-      count
+      date
     );
 
     res.status(201).json({

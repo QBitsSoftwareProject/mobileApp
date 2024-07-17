@@ -24,10 +24,10 @@ const MoodEntrySchema = new mongoose.Schema({
     type: Date,
     required: true,
   },
-  count: {
-    type: Number,
-    required: true,
-  },
+  // count: {
+  //   type: Number,
+  //   required: true,
+  // },
 });
 
 module.exports = mongoose.model("MoodEntry", MoodEntrySchema);

@@ -1,16 +1,9 @@
 const MoodEntry = require("../../models/moodAnalysisModel/moodInputmodels");
 
 // Service function to create a new mood entry
-const createMoodEntry = (
-  userId,
-  selectedEmoji,
-  moodText,
-  time,
-  date,
-  count
-) => {
+const createMoodEntry = (userId, selectedEmoji, moodText, time, date) => {
   try {
-    if (!userId || !selectedEmoji || !moodText || !time || !date || !count) {
+    if (!userId || !selectedEmoji || !moodText || !time || !date) {
       throw new Error("Incomplete data provided");
     }
     //create new model and save data to it
@@ -20,7 +13,6 @@ const createMoodEntry = (
       moodText: moodText,
       time: time,
       date: date,
-      count: count,
     });
 
     return newMoodEntry;
@@ -45,4 +37,3 @@ module.exports = {
   createMoodEntry,
   getMoodEntryByUserId,
 };
-
